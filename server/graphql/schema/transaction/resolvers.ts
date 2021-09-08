@@ -46,7 +46,11 @@ export const Query: TTransactionQuery = {
       where: { id: paymentId },
     });
     const objHtp = JSON.parse(htp.howToPay);
-    return htp.howToPay;
+    if (Array.isArray(objHtp)) {
+      return objHtp;
+    } else {
+      return null;
+    }
   },
 };
 

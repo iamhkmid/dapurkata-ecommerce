@@ -3,7 +3,7 @@ import { gql } from "graphql-tag";
 const typeDefs = gql`
   type Query {
     paymentType(isEnabled: Boolean): [paymentType] @auth(requires: AUTH)
-    howToPay(paymentId: String): [howToPay]
+    howToPay(paymentId: String!): [howToPay]
   }
 
   type Mutation {
