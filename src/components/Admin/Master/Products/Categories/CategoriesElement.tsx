@@ -1,0 +1,16 @@
+import styled from "styled-components";
+import { motion } from "framer-motion";
+
+export const Container = styled(motion.div)`
+  font-family: "Roboto", sans-serif;
+  width: 100%;
+  transition: 0.4s all ease;
+`;
+
+export const Navigation = styled.ul`
+  list-style: none;
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.2rem 0;
+  transition: 0.4s all ease;
+`;

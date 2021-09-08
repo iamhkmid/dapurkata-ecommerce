@@ -1,0 +1,67 @@
+import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
+import { useContext } from "react";
+import { AuthContext } from "../../../../contexts/AuthCtx";
+import { UserNavCtx } from "../../../../contexts/UserNavCtx";
+import { GET_BOOK_ATC } from "../../../../graphql/book/queries";
+import { ADD_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
+import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
+import { TGQLGetBookATC } from "../../../../types/book";
+import { TGQLCreateShoppingCart } from "../../../../types/shoppingCart";
+
+export const useGQLGetbook = ({ bookId }) => {
+  const { data, loading, error } = useQuery<TGQLGetBookATC>(GET_BOOK_ATC, {
+    skip: !bookId,
+    variables: { bookId },
+    fetchPolicy: "cache-first",
+    errorPolicy: "all",
+  });
+
+  return { dataGB: data?.book, loadGB: loading, errorGB: error };
+};
+
+export const useGQLAddSC = () => {
+  const { push, pathname } = useRouter();
+  const { user, cart } = useContext(AuthContext);
+  const { setShowPopUp, showPopUp } = useContext(UserNavCtx);
+  const [updateShoppingCart, { data, loading, error }] =
+    useMutation<TGQLCreateShoppingCart>(ADD_SHOPPING_CART, {
+      errorPolicy: "all",
+    });
+
+  type TAddSC = {
+    bookId: string;
+    amount: number;
+    weight: number;
+  };
+  const updateSC = async ({ bookId, amount }: TAddSC) => {
+    if (!user) {
+      push(`/auth/signin?next=${pathname}`);
+      setShowPopUp({
+        name: null,
+        value: null,
+      });
+    } else {
+      try {
+        await updateShoppingCart({
+          variables: { userId: user.id, bookId, amount },
+          refetchQueries: [
+            { query: SHOPPINGCART, variables: { userId: user.id } },
+          ],
+          awaitRefetchQueries: true,
+        });
+      } catch (error) {
+        setShowPopUp({
+          name: "message",
+          value: error.message,
+        });
+      }
+    }
+  };
+  return {
+    updateShoppingCart: updateSC,
+    dataASC: data,
+    errorASC: error,
+    loadingASC: loading,
+  };
+};

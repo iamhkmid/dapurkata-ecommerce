@@ -1,0 +1,80 @@
+import styled, { css } from "styled-components";
+import { motion } from "framer-motion";
+
+export const Main = styled(motion.div)`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: ${({ theme }) => theme.popUp.background};
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+`;
+export const Section = styled(motion.div)`
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: 90vw;
+  height: 90vh;
+  overflow: hidden;
+  background: ${({ theme }) => theme.section.background};
+  color: ${({ theme }) => theme.section.color};
+  border-radius: ${({ theme }) => theme.section.borderRadius};
+  flex-direction: column;
+  position: relative;
+
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    max-width: 90vw;
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    margin: 0.2rem;
+    width: 100vw;
+    max-width: 100vw;
+  }
+`;
+export const Body = styled.div`
+  display: flex;
+  height: 100%;
+  max-height: 85vh;
+  position: relative;
+`;
+
+type TContent = {
+  withSidebar: boolean;
+};
+export const Content = styled.div<TContent>`
+  display: flex;
+  margin-left: 10rem;
+  overflow-x: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.scrollbar.v1.track};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.scrollbar.v1.thumb};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+  }
+  ${({ withSidebar }) =>
+    withSidebar &&
+    css`
+      margin-left: 0rem;
+    `}
+
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    margin-left: 0;
+  }
+
+  transition: 0.4s all ease;
+`;

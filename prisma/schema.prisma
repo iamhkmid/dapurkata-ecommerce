@@ -1,0 +1,260 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// datasource db {
+//   provider = "mysql"
+//   url      = env("DATABASE_URL")
+// }
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String         @id @default(cuid())
+  firstName    String         @map("first_name")
+  lastName     String?        @map("last_name")
+  username     String         @unique
+  email        String         @unique
+  password     String
+  role         String
+  phone        String         @unique
+  createdAt    DateTime       @default(now()) @map("created_at")
+  updatedAt    DateTime       @updatedAt @map("updated_at")
+  imgDir       String         @map("img_dir")
+  Recipient    Recipient[]
+  UserPicture  UserPicture?
+  ShoppingCart ShoppingCart[]
+  Order        Order[]
+
+  @@map("user")
+}
+
+model Recipient {
+  id           String   @id @default(cuid())
+  firstName    String   @map("first_name")
+  lastName     String?  @map("last_name")
+  email        String?
+  phone        String
+  provinceId   String   @map("province_id")
+  provinceName String   @map("province_name")
+  cityId       String   @map("city_id")
+  cityName     String   @map("city_name")
+  postalCode   String   @map("postal_Code")
+  address      String
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  userId       String
+  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("recipient")
+}
+
+model UserPicture {
+  id        String   @id @default(cuid())
+  url       String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  userId    String   @map("user_id")
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("user_picture")
+}
+
+model ShoppingCart {
+  id        String   @id @default(cuid())
+  userId    String   @map("user_id")
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookId    String   @map("book_id")
+  Book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+  amount    Int
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+
+  @@unique([bookId, userId], name: "bookId_userId_unique")
+  @@map("shoppingcart")
+}
+
+model Courier {
+  code      String   @id @default(cuid())
+  name      String
+  isEnabled Boolean
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("courier")
+}
+
+model PaymentService {
+  id            String       @id @default(cuid())
+  name          String
+  isEnabled     Boolean
+  iconURL       String       @map("icon_url")
+  description   String
+  howToPay      String       @map("how_to_pay")
+  paymentTypeId String?
+  PaymentType   PaymentType? @relation(fields: [paymentTypeId], references: [id], onDelete: Cascade)
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+
+  @@map("payment_service")
+}
+
+model PaymentType {
+  id             String           @id @default(cuid())
+  name           String
+  description    String
+  PaymentService PaymentService[]
+  isEnabled      Boolean
+  createdAt      DateTime         @default(now()) @map("created_at")
+  updatedAt      DateTime         @updatedAt @map("updated_at")
+
+  @@map("payment_type")
+}
+
+model Order {
+  id                String           @id @default(cuid())
+  userId            String?          @map("user_id")
+  User              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
+  grossAmount       Int              @map("gross_amount")
+  currency          String
+  transactionTime   DateTime         @map("transaction_time")
+  transactionStatus String           @map("transaction_status")
+  expirationTime    DateTime         @map("expiration_time")
+  fraudStatus       String           @map("fraud_status")
+  ItemDetails       ItemDetail[]
+  createdAt         DateTime         @default(now()) @map("created_at")
+  updatedAt         DateTime         @updatedAt @map("updated_at")
+  PaymentInfo       PaymentInfo[]
+  CustomerDetails   CustomerDetails?
+
+  @@map("order")
+}
+
+model PaymentInfo {
+  id        String   @id @default(cuid())
+  name      String
+  value     String
+  orderId   String   @map("order_id")
+  Order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("payment_info")
+}
+
+model ItemDetail {
+  id        String   @id @default(cuid())
+  itemId    String
+  price     Float
+  quantity  Int
+  name      String
+  orderId   String   @map("order_id")
+  Order     Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("item_detail")
+}
+
+model CustomerDetails {
+  id              String           @id @default(cuid())
+  firstName       String           @map("first_name")
+  lastName        String           @map("last_name")
+  email           String
+  phone           String
+  orderId         String
+  Order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  ShippingAddress ShippingAddress?
+
+  @@map("customer_details")
+}
+
+model ShippingAddress {
+  id                String          @id @default(cuid())
+  firstName         String          @map("first_name")
+  lastName          String          @map("last_name")
+  email             String
+  phone             String
+  address           String
+  city              String
+  postalCode        String          @map("postal_Code")
+  countryCode       String          @map("country_code")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
+  customerDetailsId String
+  CustomerDetails   CustomerDetails @relation(fields: [customerDetailsId], references: [id], onDelete: Cascade)
+
+  @@map("shipping_address")
+}
+
+model Book {
+  id            String         @id @default(cuid())
+  title         String
+  // synopsis      String     @db.VarChar(2000)
+  synopsis      String
+  edition       String
+  series        String
+  releaseYear   String         @map("release_year")
+  numberOfPages Int            @map("number_of_pages")
+  height        Int
+  weight        Int
+  stock         Int
+  price         Float
+  rating        String
+  imgDir        String
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
+  authorId      String?        @map("author_id")
+  Author        Author?        @relation(fields: [authorId], references: [id], onDelete: SetNull)
+  Category      Category[]
+  BookPicture   BookPicture[]
+  ShoppingCart  ShoppingCart[]
+
+  @@map("book")
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  group     String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Book      Book[]
+
+  @@map("category")
+}
+
+model Author {
+  id        String   @id @default(cuid())
+  name      String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  Book      Book[]
+
+  @@map("author")
+}
+
+model BookPicture {
+  id        String   @id @default(cuid())
+  url       String
+  type      String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  bookId    String   @map("book_id")
+  Book      Book     @relation(fields: [bookId], references: [id], onDelete: Cascade)
+
+  @@unique([type, bookId], name: "type_bookId_unique")
+  @@map("book_picture")
+}
+
+// enum UserRole {
+//   USER
+//   ADMIN
+// }
