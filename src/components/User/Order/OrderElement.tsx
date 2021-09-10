@@ -19,10 +19,10 @@ export const Main = styled.main`
 export const Delivery = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   min-width: 30rem;
   max-width: 40rem;
   overflow: hidden;
@@ -36,10 +36,10 @@ export const Delivery = styled.div`
 export const OrderSummary = styled.div`
   display: flex;
   flex-direction: column;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   min-width: 27rem;
   max-width: 27rem;
   overflow: hidden;
@@ -55,7 +55,7 @@ export const SectionHead = styled.div`
   height: fit-content;
   color: ${({ theme }) => theme.button.primary.background};
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.section.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   transition: 0.4s all ease;
 `;
 export const SectionName = styled.h1`
