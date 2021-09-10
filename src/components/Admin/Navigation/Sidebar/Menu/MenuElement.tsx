@@ -26,14 +26,14 @@ export const Item = styled.li<TNavItem>`
   height: 2.5rem;
   margin: 0 0.5rem;
   padding: 0 0.5rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  color: ${({ theme }) => theme.section.color};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  color: ${({ theme }) => theme.color[1]};
   ::before {
     content: "";
     height: 2.5rem;
     width: 1rem;
     position: absolute;
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
     right: -2rem;
     z-index: 10;
   }

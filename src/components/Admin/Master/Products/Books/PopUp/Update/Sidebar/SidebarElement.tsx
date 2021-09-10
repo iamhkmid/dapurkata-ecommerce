@@ -13,7 +13,7 @@ export const Sidebar = styled.div<TSidebar>`
   left: 0;
   top: 0;
   z-index: 12;
-  background: ${({ theme }) => theme.section.background};
+  background: ${({ theme }) => theme.background[2]};
   overflow: hidden;
   ${({ active }) =>
     active &&
@@ -48,8 +48,8 @@ export const Item = styled.li<TItem>`
   height: 2.5rem;
   width: 9rem;
   padding: 0 0.5rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  color: ${({ theme }) => theme.section.color};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  color: ${({ theme }) => theme.color[1]};
   ::before {
     content: "";
     height: 2.5rem;

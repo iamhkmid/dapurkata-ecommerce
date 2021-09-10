@@ -7,9 +7,9 @@ export const Main = styled(motion.div)`
   flex-direction: column;
   margin-top: 1rem;
   padding: 1rem;
-  background: ${({ theme }) => theme.section.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   position: relative;
   transition: 0.4s all ease;
   transition-property: width, height;

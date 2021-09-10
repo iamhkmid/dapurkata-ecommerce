@@ -17,7 +17,7 @@ const InputRadio = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding: 0.5rem 1rem;
   cursor: pointer;
   border: 1px solid ${({ theme }) => theme.input.border};
@@ -60,7 +60,7 @@ const Detail = styled.div`
 
   .image {
     background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
     height: 40px;
     width: 30%;
     position: relative;

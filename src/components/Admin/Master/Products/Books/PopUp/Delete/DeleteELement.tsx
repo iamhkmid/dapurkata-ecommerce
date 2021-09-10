@@ -8,7 +8,7 @@ export const Main = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -20,9 +20,9 @@ export const Section = styled(motion.div)`
   max-width: 80vw;
   max-height: 90vh;
   min-width: 30vw;
-  background: ${(props) => props.theme.section.background};
-  color: ${(props) => props.theme.section.color};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
@@ -61,8 +61,8 @@ export const TextWrapper = styled.div`
   display: flex;
   padding: 0.5rem 1rem;
   flex-direction: column;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  background: ${({ theme }) => theme.input.background};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.background[1]};
 `;
 
 export const TextGroup = styled.div`
@@ -95,25 +95,9 @@ export const TextGroup = styled.div`
 type TErrorMessage = {
   status: string;
 };
-export const ErrorMessage = styled.h1<TErrorMessage>`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 300;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  color: ${({ theme }) => theme.message.success.color};
-  ${({ status }) =>
-    status === "success"
-      ? css`
-          background: ${({ theme }) => theme.message.success.background};
-        `
-      : css`
-          background: ${({ theme }) => theme.message.error.background};
-        `}
-`;
 export const Text1 = styled.h1`
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
   font-weight: 400;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;

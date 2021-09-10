@@ -9,11 +9,11 @@ export const Main = styled.div`
   cursor: pointer;
   overflow: hidden;
   border: 1px solid transparent;
-  background: ${({ theme }) => theme.section.background};
+  background: ${({ theme }) => theme.background[2]};
 
   :hover {
     border-color: ${({ theme }) => theme.button.primary.background};
-    box-shadow: ${({ theme }) => theme.section.boxShadow};
+    box-shadow: ${({ theme }) => theme.boxShadow};
     .group-1 {
       text-decoration: underline;
       text-decoration-color: white;
@@ -116,7 +116,7 @@ export const Stock = styled.h1`
 export const ItemPrice = styled.h1`
   font-size: 0.8rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.7rem;
   }

@@ -11,12 +11,10 @@ export const Main = styled(motion.div)`
 export const Container = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
   width: 70vw;
   padding: 2rem 2rem;
   margin: 1rem 15vw;
-  background: ${({ theme }) => theme.section.background};
-  border: 1px solid ${({ theme }) => theme.section.border};
+  background: ${({ theme }) => theme.background[1]};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     width: 90vw;
     padding: 2rem 1rem;
@@ -77,7 +75,7 @@ export const CompTittle = styled.h1`
   font-weight: 500;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;
 export const SpanGroupGrid2 = styled.div`
   display: grid;

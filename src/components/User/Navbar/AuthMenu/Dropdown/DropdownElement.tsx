@@ -8,10 +8,10 @@ export const Main = styled(motion.div)`
   flex-direction: column;
   gap: 1rem;
   position: absolute;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
-  border: 1px solid  ${({ theme }) => theme.section.border};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   top: 95%;
   right: -20%;
   padding: 0.5rem 1rem 1rem 1rem;
@@ -26,8 +26,8 @@ export const Main = styled(motion.div)`
     margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent transparent
-      ${({ theme }) => theme.navbar.dropdown.border} transparent;
+    border-color: transparent transparent ${({ theme }) => theme.border[2]}
+      transparent;
   }
 `;
 
@@ -41,13 +41,13 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   height: 5rem;
   width: 5rem;
   position: relative;
   margin: 0.5rem;
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.color[1]};
   border: 1px solid ${({ theme }) => theme.button.primary.background};
 `;
 export const FullName = styled.h1`
@@ -73,7 +73,7 @@ export const Li = styled.li`
   font-weight: 300;
   height: 100%;
   width: 100%;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   text-align: start;
   :hover {
     color: ${({ theme }) => theme.button.hover.list.color};

@@ -6,7 +6,7 @@ export const Main = styled.div`
   flex-direction: column;
   min-height: 100vh;
   max-height: 100vh;
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.background[2]};
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 10px;
@@ -47,8 +47,8 @@ export const Nav = styled.nav`
 `;
 
 export const NavbarContainer = styled.div`
-  background: ${({ theme }) => theme.section.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
+  background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   align-items: center;
   display: flex;
   justify-content: space-between;

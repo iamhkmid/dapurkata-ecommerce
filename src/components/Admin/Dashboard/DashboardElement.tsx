@@ -10,7 +10,7 @@ export const Container = styled(motion.div)`
 export const Title = styled.h1`
   font-size: 2rem;
   font-weight: 500;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme["color"][1]};
 `;
 
 export const Navigation = styled.ul`

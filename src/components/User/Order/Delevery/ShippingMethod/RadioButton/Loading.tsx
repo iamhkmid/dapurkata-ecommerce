@@ -17,7 +17,7 @@ const InputRadio = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding: 0.5rem 1rem;
   cursor: pointer;
   border: 1px solid ${({ theme }) => theme.input.border};
@@ -31,10 +31,10 @@ const InputRadio = styled.div`
     width: 100%;
     background-image: linear-gradient(
       to right,
-      ${({ theme }) => theme.loading.background1} 0%,
+      ${({ theme }) => theme.loading[1]} 0%,
       ${({ theme }) => theme.loading.background2} 20%,
-      ${({ theme }) => theme.loading.background1} 40%,
-      ${({ theme }) => theme.loading.background1} 100%
+      ${({ theme }) => theme.loading[1]} 40%,
+      ${({ theme }) => theme.loading[1]} 100%
     );
     background-repeat: no-repeat;
     background-size: 450px 400px;
@@ -61,24 +61,24 @@ const Detail = styled.div`
   width: 100%;
 
   .text-service {
-    background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: ${({ theme }) => theme.borderRadius};
     height: 0.8rem;
     width: 30%;
     position: relative;
     overflow: hidden;
   }
   .text-description {
-    background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: ${({ theme }) => theme.borderRadius};
     height: 0.7rem;
     width: 30%;
     position: relative;
     overflow: hidden;
   }
   .text-cost {
-    background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: ${({ theme }) => theme.borderRadius};
     height: 0.9rem;
     width: 20%;
     position: relative;

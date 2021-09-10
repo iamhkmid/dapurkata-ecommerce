@@ -3,12 +3,12 @@ import Router, { useRouter } from "next/router";
 import NProgress from "nprogress"; //nprogress module
 import "nprogress/nprogress.css"; //styles of nprogress
 import Head from "next/head";
-import { AppProps } from "next/dist/next-server/lib/router/router";
 import ThemeContextProvider from "../src/contexts/ThemeCtx";
 import "../styles/font.css";
 import ApolloClientProvider from "../src/contexts/ApolloClientCtx";
 import { WithAuth } from "../src/services/WithAuth";
 import { CookiesProvider } from "react-cookie";
+import { AppProps } from "next/dist/shared/lib/router/router";
 
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());

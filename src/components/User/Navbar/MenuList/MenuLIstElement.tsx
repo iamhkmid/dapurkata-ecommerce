@@ -46,7 +46,7 @@ export const Anchor = styled.a<TAnchor>`
   width: 100%;
   padding: 0 0.5rem;
   cursor: pointer;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   :hover {
     .active-line {
       background: ${({ theme }) => theme.button.hover.primary.background};
@@ -83,7 +83,7 @@ export const DropdownBtn = styled.div<TDropdownBtn>`
   padding: 0 0.5rem;
   background: transparent;
   cursor: pointer;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   :hover {
     .active-line {
       background: ${({ theme }) => theme.button.hover.primary.background};
@@ -140,7 +140,7 @@ export const IconButton = styled.div<TIconButton>`
   cursor: pointer;
   position: relative;
   background: none;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   :hover {
     color: ${({ theme }) => theme.navbar.menu.active.color};
   }

@@ -6,6 +6,7 @@ import AddCart from "../Cart/AddCart";
 import CreateRecipient from "../Order/Delevery/PopUp/CreateRecipient";
 import ChangeRecipient from "../Order/Delevery/PopUp/ChangeRecipient";
 import UpdateRecipient from "../Order/Delevery/PopUp/UpdateRecipient";
+import OrderDetail from "../Order/PopUp";
 
 const PopUpControl = () => {
   const {
@@ -20,6 +21,7 @@ const PopUpControl = () => {
       {showPopUp.name === "MESSAGE" && <PopUpMessage />}
       {showPopUp.name === "ADD_SHOPPINGCART" && <AddCart />}
       {showPopUp.name === "AUTH_ERROR" && <PopUpMessage />}
+      {/* <OrderDetail /> */}
     </AnimatePresence>
   );
 };

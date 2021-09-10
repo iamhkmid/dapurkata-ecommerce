@@ -40,7 +40,7 @@ export const Li = styled.li`
   align-items: center;
   height: 100%;
   width: 100%;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   text-align: start;
 
@@ -57,7 +57,7 @@ export const Anchor = styled.a`
   padding: 0.5rem;
   height: 100%;
   width: 100%;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   :hover {
     color: ${({ theme }) => theme.button.hover.list.color};
     background: ${({ theme }) => theme.button.hover.list.background};

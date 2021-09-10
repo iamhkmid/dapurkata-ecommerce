@@ -144,7 +144,7 @@ const SignUp = () => {
               isLoading={loading}
               disabled={!isDirty || !isValid || loading}
             />
-            <ButtonLink name="Just sign in" link="/auth/signin" />
+            <ButtonLink name="Masuk" link="/auth/signin" />
           </El.SubmitWrapper>
         </El.Form>
       </El.Container>

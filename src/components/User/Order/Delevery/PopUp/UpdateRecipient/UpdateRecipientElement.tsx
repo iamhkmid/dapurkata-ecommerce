@@ -8,7 +8,7 @@ export const Main = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -17,9 +17,9 @@ export const Main = styled(motion.div)`
 export const Section = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  background: ${(props) => props.theme.section.background};
-  color: ${(props) => props.theme.section.color};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
   position: relative;
   max-width: 50%;
@@ -79,23 +79,4 @@ export const SubmitWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
-`;
-type TErrorMessage = {
-  status?: string;
-};
-export const ErrorMessage = styled.h1<TErrorMessage>`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 300;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  padding: 0.5rem 1rem;
-  color: ${({ theme }) => theme.message.success.color};
-  ${({ status }) =>
-    status === "success"
-      ? css`
-          background: ${({ theme }) => theme.message.success.background};
-        `
-      : css`
-          background: ${({ theme }) => theme.message.error.background};
-        `}
 `;

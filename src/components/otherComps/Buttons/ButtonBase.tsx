@@ -10,7 +10,7 @@ const ButtonElement = styled.button<TButtonElement>`
   font-family: "Poppins", sans-serif;
   display: flex;
   border-radius: ${({ theme }) => theme.button.borderRadius};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   cursor: pointer;
   align-items: center;
   justify-content: center;
@@ -52,7 +52,7 @@ const ButtonElement = styled.button<TButtonElement>`
     height: 0;
     aspect-ratio: 1/1;
     left: 0.5rem;
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
     background: ${({ theme }) => theme.button.focus.base.border};
     transition: 0.4s all ease;
   }

@@ -29,9 +29,11 @@ export const LoadingWrapper = styled.div`
 type TBookCover = {
   url: string;
   quality: number;
+  height: number;
+  width: number;
 };
 
-const BookCover: FC<TBookCover> = ({ url, quality }) => {
+const BookCover: FC<TBookCover> = ({ url, quality, height, width }) => {
   const defaultCover = "/uploads/books/default.svg";
   const [cover, setCover] = useState<string>(defaultCover);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -50,9 +52,9 @@ const BookCover: FC<TBookCover> = ({ url, quality }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
           alt="Cover"
-          layout="fill"
-          objectFit="cover"
-          objectPosition="center"
+          layout="fixed"
+          width={width}
+          height={height}
           quality={quality}
           onLoad={() => setIsLoading(false)}
           onError={() => defaultImgSrc()}

@@ -8,26 +8,20 @@ export const Container = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
 `;
 
-export const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-  color: ${(props) => props.theme.section.color};
-`;
 export const Section = styled.div`
   font-family: "Poppins", sans-serif;
   display: flex;
   max-width: 80vw;
   max-height: 90vh;
   min-width: 30vw;
-  background: ${(props) => props.theme.section.background};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
   position: relative;
 
@@ -72,22 +66,6 @@ export const Form = styled.form`
 type TErrorMessage = {
   status: string;
 };
-export const ErrorMessage = styled.h1<TErrorMessage>`
-  text-align: center;
-  font-size: 0.8rem;
-  font-weight: 300;
-  border-radius: 5px;
-  padding: 0.5rem 1rem;
-  color: ${({ theme }) => theme.message.success.color};
-  ${({ status }) =>
-    status === "success"
-      ? css`
-          background: ${({ theme }) => theme.message.success.background};
-        `
-      : css`
-          background: ${({ theme }) => theme.message.error.background};
-        `}
-`;
 
 export const SubmitWrapper = styled.div`
   display: flex;

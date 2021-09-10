@@ -84,7 +84,7 @@ export const paymentType = async () => {
   const cs1 = await prisma.paymentService.create({
     data: {
       id: "INDOMARET_CSTORE",
-      name: "Permata",
+      name: "Indomaret",
       isEnabled: true,
       howToPay: htp_indomaret_cstore,
       description: "Bayar dari Indomaret",
@@ -95,7 +95,7 @@ export const paymentType = async () => {
   const cs2 = await prisma.paymentService.create({
     data: {
       id: "ALFAMART_CSTORE",
-      name: "Permata",
+      name: "Alfamart",
       isEnabled: true,
       howToPay: htp_alfamart_cstore,
       description: "Bayar dari Alfamart",

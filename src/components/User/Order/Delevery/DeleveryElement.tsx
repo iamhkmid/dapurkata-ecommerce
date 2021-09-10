@@ -23,13 +23,13 @@ export const ContentHeader = styled.div<TContentName>`
   cursor: pointer;
   position: relative;
   height: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.section.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   color: ${({ theme }) => theme.button.base.color};
   ${({ disabled }) =>
     disabled &&
     css`
       cursor: default;
-      color: ${({ theme }) => theme.section.disabled.color};
+      color: ${({ theme }) => theme.input.disabled.color};
     `}
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.9rem;

@@ -43,7 +43,7 @@ export const Info = styled.div`
     text-transform: uppercase;
     font-size: 0.8rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.7rem;
     }
@@ -69,7 +69,7 @@ export const Info2 = styled.div`
   > h1:nth-child(1) {
     font-size: 0.8rem;
     font-weight: 300;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.7rem;
     }
@@ -78,7 +78,7 @@ export const Info2 = styled.div`
   > h1:nth-child(2) {
     font-size: 0.8rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.7rem;
     }
@@ -110,7 +110,7 @@ export const DetailPrice = styled.div`
     justify-content: space-between;
   }
   > div.group > h1.key {
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
   }
   > div.group > h1.value {
     color: ${({ theme }) => theme.content.cart.color.total};
@@ -123,7 +123,7 @@ export const DetailPrice = styled.div`
 export const TotalName = styled.h1`
   font-size: 1rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.9rem;
   }

@@ -21,10 +21,10 @@ const Main = styled.div`
     width: 100%;
     background-image: linear-gradient(
       to right,
-      ${({ theme }) => theme.loading.background1} 0%,
+      ${({ theme }) => theme.loading[1]} 0%,
       ${({ theme }) => theme.loading.background2} 20%,
-      ${({ theme }) => theme.loading.background1} 40%,
-      ${({ theme }) => theme.loading.background1} 100%
+      ${({ theme }) => theme.loading[1]} 40%,
+      ${({ theme }) => theme.loading[1]} 100%
     );
     background-repeat: no-repeat;
     background-size: 450px 400px;
@@ -47,29 +47,29 @@ const DetailPrice = styled.div`
     }
   }
   > div.group > div.key1 {
-    background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: ${({ theme }) => theme.borderRadius};
     width: 4rem;
     position: relative;
     overflow: hidden;
   }
   > div.group > div.key2 {
-    background: ${({ theme }) => theme.loading.background1};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: ${({ theme }) => theme.borderRadius};
     width: 5rem;
     position: relative;
     overflow: hidden;
   }
   > div.group > div.value1 {
-    border-radius: ${({ theme }) => theme.section.borderRadius};
-    background: ${({ theme }) => theme.loading.background1};
+    border-radius: ${({ theme }) => theme.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
     width: 6rem;
     position: relative;
     overflow: hidden;
   }
   > div.group > div.value2 {
-    border-radius: ${({ theme }) => theme.section.borderRadius};
-    background: ${({ theme }) => theme.loading.background1};
+    border-radius: ${({ theme }) => theme.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
     width: 5rem;
     position: relative;
     overflow: hidden;
@@ -83,16 +83,16 @@ const TotalPrice = styled.div`
   margin-top: 1rem;
   padding-top: 0.3rem;
   > div:nth-child(1) {
-    border-radius: ${({ theme }) => theme.section.borderRadius};
-    background: ${({ theme }) => theme.loading.background1};
+    border-radius: ${({ theme }) => theme.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
     height: 1.4rem;
     width: 6rem;
     position: relative;
     overflow: hidden;
   }
   > div:nth-child(2) {
-    border-radius: ${({ theme }) => theme.section.borderRadius};
-    background: ${({ theme }) => theme.loading.background1};
+    border-radius: ${({ theme }) => theme.borderRadius};
+    background: ${({ theme }) => theme.loading[1]};
     height: 1.4rem;
     width: 6rem;
     position: relative;

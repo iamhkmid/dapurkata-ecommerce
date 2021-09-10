@@ -26,15 +26,14 @@ export const Logo = styled.img`
 `;
 
 export const Container = styled(motion.div)`
-  background: ${({ theme }) => theme.section.background};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   width: 30rem;
   flex-direction: column;
   padding: 2rem;
+  gap: 1rem;
   justify-content: space-around;
   position: relative;
-  border: 1px solid ${({ theme }) => theme.section.border};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     width: 30rem;
   }
@@ -69,5 +68,5 @@ export const CompTittle = styled.h1`
   font-weight: 500;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;

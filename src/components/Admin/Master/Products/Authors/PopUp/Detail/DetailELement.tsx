@@ -8,7 +8,7 @@ export const Container = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -20,8 +20,8 @@ export const Section = styled.div`
   max-width: 80vw;
   max-height: 90vh;
   min-width: 30vw;
-  background: ${(props) => props.theme.section.background};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
@@ -48,14 +48,12 @@ export const Body = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   gap: 1rem;
-  background: ${({ theme }) => theme.section.background};
 `;
 
 export const Text1 = styled.h1`
   font-family: "Roboto", sans-serif;
   font-size: 1.5rem;
   font-weight: 600;
-  color: ${({ theme }) => theme.section.color};
 `;
 
 export const Table = styled.table`
@@ -65,19 +63,9 @@ export const Table = styled.table`
   width: 100%;
 
   tr {
-    border: 1px solid ${({ theme }) => theme.table.border};
-    th {
-      position: relative;
-      padding: 0.4rem 0.5rem;
-      border: 1px solid ${({ theme }) => theme.table.border};
-      background: ${({ theme }) => theme.table.th.background};
-      color: ${({ theme }) => theme.table.th.color};
-      transition: 0.4s all ease;
-    }
     td {
-      background: ${({ theme }) => theme.table.td.background};
       padding: 0.4rem 0.5rem;
-      border: 1px solid ${({ theme }) => theme.table.border};
+      border-bottom: 1px solid ${({ theme }) => theme.table.border};
       color: ${({ theme }) => theme.table.td.color};
       transition: 0.4s all ease;
     }

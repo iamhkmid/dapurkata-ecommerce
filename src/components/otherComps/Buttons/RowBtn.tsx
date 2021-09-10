@@ -9,7 +9,7 @@ const IconWrapper = styled.button<TIconWrapper>`
   display: flex;
   cursor: pointer;
   align-items: center;
-  border-radius: 100%;
+  border-radius: 0.2rem;
   aspect-ratio: 1/1;
   height: fit-content;
   outline: none;

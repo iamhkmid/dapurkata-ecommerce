@@ -8,7 +8,7 @@ export const Main = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -20,9 +20,9 @@ export const Section = styled(motion.div)`
   max-width: 50%;
   max-height: 90%;
   min-width: 30%;
-  background: ${(props) => props.theme.section.background};
-  color: ${(props) => props.theme.section.color};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
@@ -52,7 +52,7 @@ export const BtnWrapper = styled.div`
   margin: 0 0.5rem;
   gap: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid ${(props) => props.theme.section.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 `;
 export const Ul = styled.ul`
   display: flex;
@@ -60,8 +60,8 @@ export const Ul = styled.ul`
   overflow-y: auto;
   gap: 1rem;
   max-height: 40vh;
-  border: 1px solid ${({ theme }) => theme.section.border};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding: 0.2rem 0.5rem;
   width: 100%;
   ::-webkit-scrollbar {

@@ -9,14 +9,14 @@ export const Main = styled(motion.div)`
   gap: 1rem;
   position: absolute;
   cursor: default;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
   top: 95%;
   right: -3%;
   padding: 1rem 1rem 1rem 1rem;
   min-width: 17rem;
-  border: 1px solid  ${({ theme }) => theme.section.border};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   width: max-content;
   z-index: 10;
   ::after {
@@ -27,8 +27,8 @@ export const Main = styled(motion.div)`
     margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent transparent
-      ${({ theme }) => theme.navbar.dropdown.border} transparent;
+    border-color: transparent transparent ${({ theme }) => theme.border[2]}
+      transparent;
   }
 `;
 
@@ -48,7 +48,7 @@ export const Li = styled.li`
   height: 100%;
   width: 100%;
   text-align: start;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius};
   :hover {
     color: ${({ theme }) => theme.button.hover.list.color};
     background: ${({ theme }) => theme.button.hover.list.background};

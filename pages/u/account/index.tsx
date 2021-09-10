@@ -1,17 +1,17 @@
-import { GetStaticProps } from "next";
+import { NextPage } from "next";
+import Head from "next/head";
+import AccountComp from "../../../src/components/User/Account";
 
-// export const getStaticProps: GetStaticProps = async (context) => {
-//   return {
-//     redirect: {
-//       destination: "/auth",
-//       permanent: false,
-//     },
-//     // props: {},
-//     // revalidate: 1,
-//   };
-// };
-const account = () => {
-  return <div>account</div>;
+const Account: NextPage = () => {
+  return (
+    <>
+      <Head>
+        <title>Account</title>
+        <link rel="icon" href="/icons/dklogo.svg" />
+      </Head>
+      <AccountComp />
+    </>
+  );
 };
 
-export default account;
+export default Account;

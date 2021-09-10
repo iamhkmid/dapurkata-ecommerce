@@ -4,14 +4,18 @@ export const Main = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 0.5rem 0;
 `;
 
 export const TableHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 0.5rem;
 `;
+
+export const TableFooter = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
 export const TableElement = styled.table`
   font-family: "Poppins", sans-serif;
   font-size: 0.9rem;
@@ -31,12 +35,12 @@ export const TableElement = styled.table`
       }
       width: 2%;
     }
-    border: 1px solid ${({ theme }) => theme.table.border};
     th {
       font-weight: 500;
       position: relative;
-      padding: 0.4rem 0.5rem;
+      padding: 0.7rem 0.5rem;
       background: ${({ theme }) => theme.table.th.background};
+      border-bottom: 1px solid ${({ theme }) => theme.table.border};
       color: ${({ theme }) => theme.table.th.color};
       transition: 0.4s all ease;
     }
@@ -63,9 +67,9 @@ export const TableElement = styled.table`
 `;
 
 export const TableWrapper = styled.div`
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  background: ${({ theme }) => theme.section.background};
+  background: ${({ theme }) => theme.background[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   padding: 0.5rem;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
@@ -109,7 +113,7 @@ type TThIcon = {
   isShowed: boolean;
 };
 export const ThIcon = styled.div<TThIcon>`
-  color: ${({ theme }) => theme.button.background};
+  color: ${({ theme }) => theme.table.td.color};
   > svg {
     height: 1.2rem;
   }

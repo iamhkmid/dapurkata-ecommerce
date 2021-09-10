@@ -8,13 +8,13 @@ export const Main = styled(motion.div)`
   flex-direction: column;
   position: absolute;
   cursor: default;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
   top: 95%;
   right: 0%;
-  min-width: 26rem;
-  border: 1px solid  ${({ theme }) => theme.section.border};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  min-width: 35rem;
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   ::after {
     content: "";
     position: absolute;
@@ -23,7 +23,7 @@ export const Main = styled(motion.div)`
     margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent transparent
-      ${({ theme }) => theme.navbar.dropdown.border} transparent;
+    border-color: transparent transparent ${({ theme }) => theme.border[2]}
+      transparent;
   }
 `;

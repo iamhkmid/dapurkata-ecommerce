@@ -2,7 +2,7 @@ import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
 export const Main = styled.div`
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.background[1]};
   transition: 0.4s all ease;
 `;
 export const AdminContainer = styled(motion.div)`
@@ -62,7 +62,7 @@ export const AdminWrapper = styled.div<TAdminWrapper>`
 
 export const Footer = styled.div`
   font-family: "Roboto", sans-serif;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 300;
   font-size: 1rem;
   height: 3rem;
@@ -71,7 +71,7 @@ export const Footer = styled.div`
   align-items: center;
   text-align: center;
   justify-content: center;
-  background: ${({ theme }) => theme.footer.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  color: ${({ theme }) => theme.footer.color};
+  background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  color: ${({ theme }) => theme.color[1]};
 `;

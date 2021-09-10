@@ -74,7 +74,9 @@ const OrderSummary = () => {
                             (img) => img.type === "COVER"
                           )?.url
                         }
-                        quality={5}
+                        quality={75}
+                        height={55}
+                        width={37}
                       />
                     </El.CoverWrapper>
                     <El.InfoWrapper>
@@ -112,7 +114,9 @@ const OrderSummary = () => {
                         <El.CoverWrapper>
                           <BookCover
                             url={cover.length > 0 && cover[0].url}
-                            quality={5}
+                            quality={75}
+                            height={55}
+                            width={37}
                           />
                         </El.CoverWrapper>
                         <El.InfoWrapper>

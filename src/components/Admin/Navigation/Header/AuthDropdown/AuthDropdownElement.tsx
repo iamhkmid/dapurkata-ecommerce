@@ -4,14 +4,14 @@ import styled from "styled-components";
 
 export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   flex-direction: column;
   gap: 1rem;
   position: absolute;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
   top: 110%;
   right: 0.2%;
   z-index: 12;
@@ -31,8 +31,8 @@ export const Main = styled(motion.div)`
     margin-left: -10px;
     border-width: 10px;
     border-style: solid;
-    border-color: transparent transparent
-      ${({ theme }) => theme.navbar.dropdown.border} transparent;
+    border-color: transparent transparent ${({ theme }) => theme.border[1]}
+      transparent;
   }
   transition: 0.4s all ease;
   transition-property: width, height;
@@ -53,8 +53,8 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.body.background};
-  border: 1px solid ${({ theme }) => theme.section.border};
+  background: ${({ theme }) => theme.background[1]};
+  border: 1px solid ${({ theme }) => theme.border[3]};
   height: 5rem;
   width: 5rem;
   position: relative;
@@ -75,7 +75,7 @@ export const Ul = styled.ul`
   align-items: center;
   gap: 0.1rem;
   padding-top: 0.5rem;
-  border-top: 1px solid ${({ theme }) => theme.section.border};
+  border-top: 1px solid ${({ theme }) => theme.border[2]};
 `;
 
 export const Li = styled.li`
@@ -83,7 +83,7 @@ export const Li = styled.li`
   cursor: pointer;
   align-items: center;
   font-size: 0.9rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 300;
   height: 100%;
   width: 100%;

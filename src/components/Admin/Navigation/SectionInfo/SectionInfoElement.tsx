@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const Main = styled.div`
   display: flex;
   padding: 1rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.sidebar.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   margin-bottom: 0.5rem;
 `;
 
@@ -17,7 +17,7 @@ export const TextInfo = styled.div`
   > h1.title {
     font-size: 1.1rem;
     font-weight: 500;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 1rem;
     }
@@ -26,7 +26,7 @@ export const TextInfo = styled.div`
   > h1.desc {
     font-size: 0.9rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.section.color2};
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.9rem;
     }
@@ -36,12 +36,12 @@ export const TextInfo = styled.div`
 export const IconWrapper = styled.div`
   aspect-ratio: 1/1;
   align-items: center;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   justify-content: center;
   margin-right: 0.5rem;
   padding: 0.2rem;
-  background: ${({ theme }) => theme.sidebar.iconPage.background};
-  color: ${({ theme }) => theme.sidebar.iconPage.color};
+  background: ${({ theme }) => theme.button.hover.list.background};
+  color: ${({ theme }) => theme.button.hover.list.color};
   > svg {
     height: 2rem;
     stroke-width: 1.5px;

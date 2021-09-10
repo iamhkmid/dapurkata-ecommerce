@@ -8,7 +8,7 @@ const Wrapper = styled(motion.div)`
   height: 100%;
   width: 100%;
   position: absolute;
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.background[1]};
   left: 0;
   top: 0;
   z-index: 100;

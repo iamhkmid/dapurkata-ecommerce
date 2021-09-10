@@ -7,7 +7,6 @@ import data from "../src/data/content";
 export const getStaticProps: GetStaticProps = async (context) => {
   return {
     props: { data },
-    revalidate: 1,
   };
 };
 type THome = {

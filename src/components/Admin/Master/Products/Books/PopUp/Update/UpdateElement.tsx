@@ -8,7 +8,7 @@ export const Main = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -21,9 +21,9 @@ export const Section = styled(motion.div)`
   width: 90vw;
   height: 90vh;
   overflow: hidden;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
   position: relative;
 

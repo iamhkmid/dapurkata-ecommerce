@@ -9,7 +9,7 @@ export const Main = styled(motion.main)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: ${({ theme }) => theme.popUp.background};
+  background: ${({ theme }) => theme.popup};
   z-index: 100;
   align-items: center;
   justify-content: center;
@@ -18,7 +18,7 @@ export const Main = styled(motion.main)`
 export const Header = styled.div`
   display: flex;
   justify-content: flex-end;
-  border-bottom: 1px solid ${({ theme }) => theme.section.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[1]};
   transition: 0.4s all ease;
 `;
 
@@ -52,9 +52,9 @@ export const CloseBtn = styled.button`
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-  background: ${({ theme }) => theme.section.background};
+  background: ${({ theme }) => theme.background[2]};
   width: 30rem;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
@@ -112,7 +112,7 @@ export const Info = styled.div`
     overflow: hidden;
     font-size: 0.9rem;
     font-weight: 500;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.8rem;
     }
@@ -132,7 +132,7 @@ export const Info = styled.div`
   > h1:nth-child(3) {
     font-size: 0.9rem;
     font-weight: 500;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.8rem;
     }

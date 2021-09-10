@@ -47,13 +47,6 @@ export const FormInput = styled.div`
     flex-direction: column;
   }
 `;
-export const CompTittle = styled.h1`
-  font-size: 2rem;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
-  color: ${({ theme }) => theme.section.color};
-`;
 
 export const SubmitWrapper = styled.div`
   display: flex;

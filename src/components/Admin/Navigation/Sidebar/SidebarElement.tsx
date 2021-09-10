@@ -15,8 +15,8 @@ export const Main = styled.div<TMain>`
   height: 100vh;
   padding-top: 3rem;
   width: 15rem;
-  background: ${({ theme }) => theme.sidebar.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
+  background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow-x: hidden;
   overflow-y: scroll;
   z-index: 21;
@@ -62,7 +62,7 @@ export const Sidebar = styled.nav`
   transition: 0.4s all ease;
 `;
 export const SidebarHead = styled.div`
-  border-bottom: 1px solid ${({ theme }) => theme.sidebar.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,7 +81,7 @@ export const Logo = styled.img`
 
 export const ItemGroup = styled.div`
   padding: 1rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.sidebar.border};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   transition: 0.4s all ease;
 `;
 
@@ -90,6 +90,6 @@ export const GroupName = styled.h1`
   font-weight: 500;
   padding: 0 1rem;
   margin-bottom: 0.5rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[2]};
   transition: 0.4s all ease;
 `;

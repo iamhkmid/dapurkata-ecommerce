@@ -44,19 +44,19 @@ const Dropdown = () => {
       </El.UserInfo>
       <El.Ul onClick={() => dispatch({ type: "CLOSE_MENU" })}>
         <El.Li>
-          <El.NLink href="/">
-            <El.Anchor>My Profile</El.Anchor>
+          <El.NLink href="/u/account">
+            <El.Anchor>Akun Saya</El.Anchor>
           </El.NLink>
         </El.Li>
         {user.role === "ADMIN" && (
           <El.Li>
             <El.NLink href="/admin">
-              <El.Anchor>Adminpage</El.Anchor>
+              <El.Anchor>Admin Page</El.Anchor>
             </El.NLink>
           </El.Li>
         )}
         <El.Li onClick={async () => await logOut()}>
-          <El.Item>Sign out</El.Item>
+          <El.Item>Keluar</El.Item>
         </El.Li>
       </El.Ul>
     </El.Main>

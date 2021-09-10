@@ -17,7 +17,7 @@ export const PageInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   justify-content: center;
 `;
 export const Text1 = styled.h1`
@@ -35,7 +35,7 @@ export const ButtonElement = styled.button`
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  border-radius: ${({ theme }) => theme.input.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   font-weight: 300;
   font-size: 0.9rem;
   height: 2.3rem;

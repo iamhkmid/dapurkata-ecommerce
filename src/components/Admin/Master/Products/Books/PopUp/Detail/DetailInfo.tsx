@@ -13,7 +13,9 @@ const DetailInfo = ({ data }: { data: TGetBook }) => {
         <El.CoverWrapper>
           <BookCover
             url={coverData.length > 0 && coverData[0].url}
-            quality={25}
+            quality={75}
+            height={240}
+            width={160}
           />
         </El.CoverWrapper>
       </El.Section>

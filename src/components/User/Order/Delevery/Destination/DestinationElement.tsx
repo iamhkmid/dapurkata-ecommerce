@@ -29,7 +29,7 @@ export const Scroll = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    color: ${({ theme }) => theme.section.borderRadius};
+    color: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -65,5 +65,5 @@ export const ButtonWrapper = styled.div`
 
 export const Info = styled.h1`
   font-size: 0.9rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;

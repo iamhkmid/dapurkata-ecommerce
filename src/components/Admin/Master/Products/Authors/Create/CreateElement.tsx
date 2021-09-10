@@ -5,13 +5,12 @@ export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
   padding: 1rem;
   min-width: 50%;
   max-width: max-content;
-  background: ${({ theme }) => theme.section.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   position: relative;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     min-width: 100%;
@@ -19,18 +18,12 @@ export const Main = styled(motion.div)`
   transition: 0.4s all ease;
   transition-property: width, height;
 `;
-export const Title = styled.h1`
-  font-size: 1.5rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-  color: ${(props) => props.theme.section.color};
-`;
+
 export const FormContainer = styled.div`
   position: relative;
   display: flex;
   width: 100%;
   flex-direction: column;
-  background: ${(props) => props.theme.section.background};
 `;
 
 export const Form = styled.form`

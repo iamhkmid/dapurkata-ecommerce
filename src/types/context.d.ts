@@ -164,6 +164,7 @@ type TUserPopUpVal =
   | "EDIT_RECIPIENT"
   | "MESSAGE"
   | "AUTH_ERROR"
+  | "ORDER_DETAIL"
   | "ADD_SHOPPINGCART";
 type TUserPopUp = {
   name: TUserPopUpVal;

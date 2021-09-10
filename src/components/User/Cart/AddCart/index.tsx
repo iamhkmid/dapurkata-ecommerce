@@ -75,7 +75,7 @@ const AddCart = () => {
           <PopUpHeader close={() => dispatch({ type: "CLOSE_POPUP" })} />
           <El.BookWrapper>
             <El.CoverWrapper>
-              <BookCover url={coverURL} quality={15} />
+              <BookCover url={coverURL} quality={10} height={160} width={110} />
             </El.CoverWrapper>
             <El.InfoWrapper>
               <El.Info>

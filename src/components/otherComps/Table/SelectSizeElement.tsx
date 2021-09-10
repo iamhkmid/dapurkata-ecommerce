@@ -109,8 +109,8 @@ export const InputWrapper = styled.div`
   position: relative;
   color: ${({ theme }) => theme.input.color};
   background: ${({ theme }) => theme.input.base.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
   width: 4.5rem;
   :focus {
     background: ${({ theme }) => theme.input.base.focus.background};

@@ -33,14 +33,13 @@ export const Item = styled.div<TItem>`
   margin: 0.1rem 0;
   min-height: 1.8rem;
   width: 100%;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   ::before {
     content: "";
     position: absolute;
-    height: 5px;
+    height: 4px;
     aspect-ratio: 1/1;
-    transform: rotate(-180deg);
-    border: 1px solid transparent;
+    border: 2px solid transparent;
     left: 0.1rem;
     background: transparent;
   }
@@ -48,7 +47,7 @@ export const Item = styled.div<TItem>`
     active &&
     css`
       ::before {
-        transform: rotate(0);
+        transform: rotate(180deg);
         border-color: ${({ theme }) => theme.button.focus.sidebar.color};
         transition: 1s all ease;
       }

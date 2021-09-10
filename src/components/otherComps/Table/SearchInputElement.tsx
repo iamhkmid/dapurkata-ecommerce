@@ -46,8 +46,8 @@ export const InputElement = styled.input`
   font-weight: 400;
   color: ${({ theme }) => theme.input.color};
   background: ${({ theme }) => theme.input.base.background};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border: 1px solid transparent;
   text-decoration: none;
   padding: 0 0.5rem 0 2.2rem;

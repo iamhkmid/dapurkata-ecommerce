@@ -13,7 +13,7 @@ export const Title = styled.h1`
   height: 100%;
   padding: 0.2rem 1rem;
   font-weight: 400;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   transition: 0.4s all ease;
 `;
 
@@ -58,7 +58,7 @@ type TSidebarButton = {
 export const IconWrapper = styled.div<TSidebarButton>`
   display: flex;
   align-items: center;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   justify-content: center;
   height: 2rem;
   aspect-ratio: 1/1;

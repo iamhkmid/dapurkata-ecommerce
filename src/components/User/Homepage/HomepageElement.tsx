@@ -24,7 +24,7 @@ export const Main = styled.main<TSection>`
 export const Section = styled.div`
   display: grid;
   gap: 0.5rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[2]};
   grid-template-columns: 1.3fr 1fr;
   gap: 2rem;
   align-items: center;

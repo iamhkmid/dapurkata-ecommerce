@@ -36,7 +36,6 @@ const AddCartInput: FC<TAddCartInput> = ({ setAmount, amount }) => {
   };
   return (
     <El.Main>
-      <El.InputLabel>Jumlah</El.InputLabel>
       <El.InputWrapper>
         <El.AmountBtn
           onClick={() =>

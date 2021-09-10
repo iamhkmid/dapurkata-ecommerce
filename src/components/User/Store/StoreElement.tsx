@@ -6,7 +6,7 @@ export const Main = styled.main`
   flex-direction: column;
   padding: 5rem 0;
   font-family: "Poppins", sans-serif;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   padding: calc(2vw + 5em) calc(14vw - 3em) 0 calc(14vw - 3em);
   transition: 0.4s all ease;
 `;

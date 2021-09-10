@@ -7,7 +7,7 @@ export const Main = styled.div`
   justify-content: center;
   top: 0;
   left: 0;
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.background[1]};
   min-height: 100vh;
   min-width: 100vw;
   position: fixed;
@@ -27,7 +27,7 @@ export const ErrorText = styled.h1`
   font-size: 2.5rem;
   font-weight: 600;
   padding: 0 0.2rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[2]};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     font-size: 2rem;
   }
@@ -56,10 +56,10 @@ export const TextGroup = styled.div`
 
 export const Text1 = styled.h1`
   font-weight: 300;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;
 
 export const Text2 = styled.h1`
   font-weight: 400;
-  color: ${({ theme }) => theme.message.error.background};
+  color: ${({ theme }) => theme.color[5]};
 `;

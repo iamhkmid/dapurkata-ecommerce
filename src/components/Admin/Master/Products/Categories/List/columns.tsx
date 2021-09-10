@@ -8,7 +8,7 @@ import {
   ActionColumn,
   DefaultColumn,
   NumberColumn,
-} from "./ListELement";
+} from "./ListElement";
 export const columns = [
   {
     Header: "id",

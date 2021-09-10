@@ -14,9 +14,9 @@ export const Main = styled(motion.div)`
   margin-top: 0.2rem;
   overflow: hidden;
   padding: 1rem 0.5rem 2rem 0.5rem;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
-  border: 1px solid ${({ theme }) => theme.section.border};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
+  border: 1px solid ${({ theme }) => theme.border[1]};
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;
@@ -64,7 +64,7 @@ export const PhotoWrapper = styled.div`
   width: 5rem;
   aspect-ratio: 1/1;
   position: relative;
-  background: ${({ theme }) => theme.body.background};
+  background: ${({ theme }) => theme.background[1]};
   border: 1px solid ${({ theme }) => theme.button.primary.background};
 `;
 export const UserInfo = styled.div`
@@ -124,7 +124,7 @@ export const Anchor = styled.a<TAnchor>`
   align-items: center;
   height: 100%;
   width: 100%;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   padding: 0.5rem 1rem;
   cursor: pointer;
   color: ${({ theme }) => theme.navbar.color};
@@ -150,7 +150,7 @@ export const DropdownBtn = styled.button<TDropdownBtn>`
   font-size: 0.9rem;
   font-weight: 400;
   display: flex;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: row;
   gap: 0.2rem;
   align-items: center;
@@ -160,7 +160,7 @@ export const DropdownBtn = styled.button<TDropdownBtn>`
   padding: 0.5rem 1rem;
   background: transparent;
   cursor: pointer;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   position: relative;
   z-index: 2;
   :hover {

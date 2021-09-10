@@ -92,7 +92,6 @@ const UpdateCartInput: FC<TUpdateCart> = ({ cartProps }) => {
 
   return (
     <El.Main>
-      <El.InputLabel>Jumlah</El.InputLabel>
       <El.InputWrapper>
         <El.AmountBtn
           onClick={() =>

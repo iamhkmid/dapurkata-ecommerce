@@ -10,7 +10,7 @@ export const Main = styled.div<TMain>`
   align-items: center;
   justify-content: center;
   position: relative;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   width: 100%;
   max-height: 0;
   padding: 0 1.5rem;

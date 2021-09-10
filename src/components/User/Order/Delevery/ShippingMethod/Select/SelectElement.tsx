@@ -217,7 +217,7 @@ export const OptionWrapper = styled.div<TOptionWrapper>`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {

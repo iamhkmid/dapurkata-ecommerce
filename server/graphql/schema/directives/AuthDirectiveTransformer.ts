@@ -24,7 +24,6 @@ const AuthDirectiveTransformer = (
         if (requires) {
           const { resolve = defaultFieldResolver } = fieldConfig;
           fieldConfig.resolve = async (source, args, context, info) => {
-            console.log(args);
             const { user } = await authDirective({
               db: context["db"],
               req: context["req"],

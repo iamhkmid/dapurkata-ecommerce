@@ -7,25 +7,25 @@ export const Main = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.2rem;
-  border-radius: 100%;
+  border-radius: 0.1rem;
   > svg {
-    height: 1.3rem;
-    stroke-width: 2px;
+    height: 1.2rem;
+    stroke-width: 1.5px;
   }
-  background: ${({ theme }) => theme.button.danger.background};
-  color: ${({ theme }) => theme.button.danger.color};
+  background: transparent;
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  color: ${({ theme }) => theme.color[2]};
+  overflow: hidden;
   :hover {
-    background: ${({ theme }) => theme.button.hover.danger.background};
-    color: ${({ theme }) => theme.button.hover.danger.color};
+    background: ${({ theme }) => theme.button.danger.background};
+    color: ${({ theme }) => theme.button.danger.color};
   }
 
   :disabled {
     cursor: default;
-    background: ${({ theme }) => theme.button.disabled.background};
     color: ${({ theme }) => theme.button.disabled.color};
     border-color: ${({ theme }) => theme.button.disabled.background};
     :hover {
-      background: ${({ theme }) => theme.button.disabled.background};
       color: ${({ theme }) => theme.button.disabled.color};
       border-color: ${({ theme }) => theme.button.disabled.background};
     }

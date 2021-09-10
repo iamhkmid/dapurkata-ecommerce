@@ -16,8 +16,8 @@ export const MobileIcon = styled.div<TMobileIcon>`
   cursor: pointer;
   border-radius: 100%;
   aspect-ratio: 1/1;
-  background: ${({ theme }) => theme.section.mobileIcon.background};
-  color: ${({ theme }) => theme.section.mobileIcon.color};
+  background: ${({ theme }) => theme.button.primary.background};
+  color: ${({ theme }) => theme.button.primary.color};
   :hover {
     color: ${({ theme }) => theme.button.hover.primary.color};
     background: ${({ theme }) => theme.button.hover.primary.background};
@@ -57,7 +57,7 @@ export const IconButton = styled.div<TIconButton>`
   padding: 0.4rem;
   cursor: pointer;
   position: relative;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   ${({ active }) =>
     active &&
     css`

@@ -110,7 +110,9 @@ const Table = ({ columns, data }) => {
           </tbody>
         </El.TableElement>
       </El.TableWrapper>
-      <Pagination paginationProps={paginationProps} />
+      <El.TableFooter>
+        <Pagination paginationProps={paginationProps} />
+      </El.TableFooter>
     </El.Main>
   );
 };

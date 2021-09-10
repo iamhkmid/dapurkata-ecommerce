@@ -66,7 +66,7 @@ const SignIn = () => {
             control="checkbox"
             name="rememberMe"
             register={register}
-            label="Remember me"
+            label="Ingat saya"
             error={false}
             disabled={loading}
             message={errors.rememberMe ? errors.rememberMe.message : null}
@@ -74,11 +74,11 @@ const SignIn = () => {
           <El.SubmitWrapper>
             <Button
               type="submit"
-              name="Sign in"
+              name="Masuk"
               disabled={!isDirty || !isValid || loading}
               isLoading={loading}
             />
-            <ButtonLink name="Create an account" link="/auth/signup" />
+            <ButtonLink name="Buat akun" link="/auth/signup" />
           </El.SubmitWrapper>
         </El.Form>
       </El.Container>

@@ -9,12 +9,12 @@ export const Main = styled(motion.div)`
   gap: 1rem;
   max-height: 80vh;
   width: 100%;
-  border: 1px solid  ${({ theme }) => theme.section.border};
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border: 1px solid ${({ theme }) => theme.border[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   margin-top: 0.2rem;
   padding: 1rem 0.5rem 0.5rem 0.5rem;
-  background: ${({ theme }) => theme.section.background};
-  color: ${({ theme }) => theme.section.color};
+  background: ${({ theme }) => theme.background[2]};
+  color: ${({ theme }) => theme.color[1]};
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;

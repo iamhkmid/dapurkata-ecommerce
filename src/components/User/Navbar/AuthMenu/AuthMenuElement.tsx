@@ -11,7 +11,7 @@ export const Main = styled.div`
   font-family: "Roboto", sans-serif;
   font-weight: 400;
   align-items: center;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   cursor: default;
   position: relative;
 `;
@@ -34,7 +34,7 @@ export const Anchor = styled.a<TAnchor>`
   padding: 0 0.5rem;
   border: none;
   cursor: pointer;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   border-bottom: 3px solid transparent;
   :hover {
     .active-line {
@@ -66,10 +66,10 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-  background: ${({ theme }) => theme.body.background};
-  border: 1px solid ${({ theme }) => theme.section.border};
+  background: ${({ theme }) => theme.color[1]};
+  border: 1px solid ${({ theme }) => theme.border[2]};
   width: 2.5rem;
   height: 2.5rem;
   position: relative;
@@ -91,7 +91,7 @@ export const AccountBtn = styled.div<TAccountBtn>`
   height: 100%;
   border: none;
   background: transparent;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   :hover {
     color: ${({ theme }) => theme.navbar.menu.active.color};
     .profile {

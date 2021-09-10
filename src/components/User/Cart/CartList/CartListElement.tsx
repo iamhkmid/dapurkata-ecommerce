@@ -5,21 +5,27 @@ export const Main = styled.div`
   font-family: "Poppins", sans-serif;
   width: 100%;
   display: flex;
+  padding: 1rem;
+  gap: 0.5rem;
   flex-direction: column;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   cursor: default;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 0rem;
+  }
 `;
 
-export const Ul = styled.ul`
+export const list = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  padding: 1rem;
   max-height: 15rem;
   width: 100%;
   overflow-y: auto;
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -31,7 +37,7 @@ export const Ul = styled.ul`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -46,15 +52,22 @@ export const Li = styled.li`
   font-size: 0.9rem;
   font-weight: 300;
   padding: 0.3rem 0;
-  border-bottom: 1px solid ${({ theme }) => theme.navbar.dropdown.border};
   transition: 0.4s all ease;
 `;
 export const CoverWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   position: relative;
-  height: 5.3rem;
-  aspect-ratio: 1/1.5;
+  border-radius: 100%;
+  min-height: 3rem;
+  min-width: 3rem;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  > div {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 export const InfoWrapper = styled.div`
   display: flex;
@@ -66,22 +79,21 @@ export const InfoWrapper = styled.div`
 
 export const BtnWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: max-content;
 `;
 export const Info = styled.div`
   text-align: start;
   > h1:nth-child(1) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
+    -webkit-line-clamp: 2;
     overflow: hidden;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.section.color};
+    color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.8rem;
+      font-size: 0.7rem;
     }
     transition: 0.4s all ease;
   }
@@ -98,23 +110,13 @@ export const Info = styled.div`
     }
     transition: 0.4s all ease;
   }
-  > h1:nth-child(3) {
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: ${({ theme }) => theme.section.color};
-    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.7rem;
-    }
-    transition: 0.4s all ease;
-  }
 `;
 
 export const Footer = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   gap: 1rem;
-  padding: 1rem;
-  border-top: 1px solid ${({ theme }) => theme.navbar.dropdown.border};
+  padding: 0.5rem 1rem;
   > button {
     font-size: 0.9rem;
     height: 2.5rem;
@@ -124,16 +126,18 @@ export const Footer = styled.div`
 
 export const AmountPrice = styled.div`
   display: flex;
+  flex-direction: column;
   font-family: "Roboto", sans-serif;
   text-align: start;
   justify-content: space-between;
-  font-size: 1.1rem;
   font-weight: 600;
   > h1:nth-child(1) {
-    color: ${({ theme }) => theme.section.color};
+    font-size: 0.8rem;
+    color: ${({ theme }) => theme.color[1]};
   }
   > h1:nth-child(2) {
-    color: ${({ theme }) => theme.content.cart.color.total};
+    font-size: 1.1rem;
+    color: ${({ theme }) => theme.color[3]};
   }
 `;
 
@@ -142,4 +146,68 @@ export const EmptyCart = styled.h1`
   font-size: 0.9rem;
   font-weight: 300;
   width: 100%;
+`;
+
+export const TableInfo = styled.table`
+  width: 100%;
+  border-collapse: collapse;
+  th {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    height: 100%;
+    background: ${({ theme }) => theme.background[2]};
+    color: ${({ theme }) => theme.color[2]};
+    z-index: 5;
+  }
+  > thead {
+    th {
+      font-size: 0.85rem;
+      text-align: start;
+      padding: 0.2rem 0.5rem;
+      ::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+      }
+    }
+  }
+  > tbody {
+    td {
+      padding: 0.8rem 0.5rem;
+      border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+    }
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > thead {
+      th {
+        font-size: 0.8rem;
+      }
+    }
+    > tbody {
+      td {
+        padding: 0.8rem 0.5rem;
+        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+      }
+    }
+  }
+`;
+
+export const Product = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 15rem;
+`;
+export const Price = styled.h1`
+  font-size: 0.8rem;
+  font-weight: 500;
+  border-color: ${({ theme }) => theme.button.disabled.background};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.7rem;
+  }
+  transition: 0.4s all ease;
 `;

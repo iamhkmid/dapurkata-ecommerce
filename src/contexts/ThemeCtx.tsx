@@ -6,18 +6,28 @@ import { useCookies } from "react-cookie";
 
 const themeConf = {
   light: {
-    body: { background: "#e9edf3" },
-    section: {
-      background: "#fdfeff",
-      color: "#263b55",
-      color2: "#435e7e",
-      border: "#d1d9e2",
-      boxShadow: "0 0 2px 1px #1d2e4225",
-      borderRadius: "0.2rem",
-      opacity: { background: "rgba(232, 238, 247, 0.781)" },
-      disabled: { color: "#95a3b9" },
-      mobileIcon: { background: "#b9c6d62f", color: "#2d486a" },
+    name: "light",
+    background: {
+      1: "#F3F4F6",
+      2: "#fdfeff",
+      3: "#0a0c18",
     },
+    color: {
+      1: "#2b3544",
+      2: "#434e5f",
+      3: "#d34fa2",
+      4: "#F3F4F6",
+      5: "#ff5757",
+      6: "#0da159",
+    },
+    border: {
+      1: "#D1D5DB",
+      2: "#acb3be",
+      3: "#3f74c0",
+    },
+    boxShadow: "0 0 2px 1px #1d2e4225",
+    borderRadius: "0.2rem",
+    popup: "rgba(6, 13, 20, 0.877)",
     content: {
       cart: { color: { total: "#e94aaf" } },
       bookCard: {
@@ -104,19 +114,13 @@ const themeConf = {
       },
       disabled: { background: "#b3c0d2", color: "#e9ecf1" },
     },
-    loading: { background1: "#dee7f4", background2: "#bbc9db" },
+    loading: { 1: "#dee7f4", 2: "#bbc9db" },
     navbar: {
       menu: {
         hover: { background: "#3f75c013" },
         active: { color: "#2f5994" },
       },
       dropdown: { border: "#ced6de" },
-    },
-    sidebar: {
-      background: "#fdfeff",
-      border: "#9eb0ce",
-      iconPage: { background: "#4d7de649", color: "#3b4f7c" },
-      header: { background: "#0f1522", color: "#fdfeff" },
     },
     scrollbar: {
       v1: {
@@ -131,32 +135,38 @@ const themeConf = {
       },
     },
     footer: { background: "#f9fafb", color: "#263b55" },
-    message: {
-      error: { background: "#ff5757", color: "#c6d0e0" },
-      success: { background: "#0da159", color: "#c6d0e0" },
-    },
+
     table: {
       hover: { background: "#e2eaf5", color: "#263b55", border: "#6f9ad1" },
-      th: { background: "#e9eff7", color: "#263b55" },
-      td: { background: "#f4f7fb", color: "#263b55" },
+      th: { background: "#fdfeff", color: "#263b55" },
+      td: { background: "#fdfeff", color: "#263b55" },
       border: "#c8d0db",
     },
-    popUp: { background: "rgba(6, 13, 20, 0.877)" },
     screen: { sm: "540px", md: "960px", lg: "1025px" },
   },
   dark: {
-    body: { background: "#171d26" },
-    section: {
-      background: "#232c3a",
-      color: "#c6d0e0",
-      color2: "#9fadc4",
-      border: "#1c222c",
-      boxShadow: "0 0 2px 1px #0f13188e",
-      borderRadius: "0.2rem",
-      opacity: { background: "rgba(24, 28, 36, 0.808)" },
-      disabled: { color: "#4b586e" },
-      mobileIcon: { background: "#161a213d", color: "#c6d0e0" },
+    name: "dark",
+    background: {
+      1: "#151d29",
+      2: "#1F2937",
+      3: "#0a0c18",
     },
+    color: {
+      1: "#D1D5DB",
+      2: "#a7b1c0",
+      3: "#f06ec0",
+      4: "#F3F4F6",
+      5: "#ff5757",
+      6: "#0da159",
+    },
+    border: {
+      1: "#161c25",
+      2: "#364155",
+      3: "#545dba",
+    },
+    boxShadow: "0 0 2px 1px #0f13188e",
+    borderRadius: "0.2rem",
+    popup: "rgba(6, 13, 20, 0.877)",
     content: {
       cart: { color: { total: "#f06ec0" } },
       bookCard: {
@@ -246,7 +256,7 @@ const themeConf = {
       },
       disabled: { background: "#1e2531", color: "#404e62" },
     },
-    loading: { background1: "#1e2330", background2: "#141a24" },
+    loading: { 1: "#1e2330", 2: "#141a24" },
     navbar: {
       menu: {
         hover: { background: "#3b445482" },
@@ -254,28 +264,18 @@ const themeConf = {
       },
       dropdown: { border: "#1c222c" },
     },
-    sidebar: {
-      background: "#1a212c",
-      border: "#838cec28",
-      iconPage: { background: "#8194ff37", color: "#e9ecff" },
-      header: { background: "#0a0c18", color: "#eaebf3" },
-    },
+
     scrollbar: {
       v1: { track: "#1c202e", thumb: "#1f2530", hover: { thumb: "#161b24" } },
       v2: { track: "#222733", thumb: "#0f1116", hover: { thumb: "#07090c" } },
     },
     footer: { background: "#222731", color: "#c6d0e0" },
-    message: {
-      error: { background: "#ff5757", color: "#c6d0e0" },
-      success: { background: "#0da159", color: "#c6d0e0" },
-    },
     table: {
       hover: { background: "#232935", color: "#c6d0e0", border: "#8086c8" },
-      th: { background: "#222731", color: "#c6d0e0" },
-      td: { background: "#272d38", color: "#c6d0e0" },
+      th: { background: "#1F2937", color: "#c6d0e0" },
+      td: { background: "#1F2937", color: "#c6d0e0" },
       border: "#424957",
     },
-    popUp: { background: "rgba(6, 13, 20, 0.877)" },
     screen: { sm: "540px", md: "960px", lg: "1025px" },
   },
 };

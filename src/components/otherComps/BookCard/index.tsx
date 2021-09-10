@@ -13,7 +13,7 @@ const BookCard: FC<{ book: TBookCard }> = ({ book }) => {
   return (
     <El.Main>
       <El.CoverWrapper>
-        <BookCover url={book.coverUrl} quality={10} />
+        <BookCover url={book.coverUrl} quality={75} height={200} width={145} />
       </El.CoverWrapper>
       <El.InfoWrapper>
         <El.InfoGroup1 className="group-1">

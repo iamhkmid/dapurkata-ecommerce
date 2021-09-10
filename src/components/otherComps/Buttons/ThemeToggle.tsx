@@ -24,7 +24,7 @@ export const IconWrapper = styled(motion.div)`
     stroke-width: 2px;
   }
   padding: 0.2rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;
 export const IconWrapper2 = styled(motion.div)`
   > svg {
@@ -32,7 +32,7 @@ export const IconWrapper2 = styled(motion.div)`
     stroke-width: 2px;
   }
   padding: 0.2rem;
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
 `;
 
 const containerVariant = {

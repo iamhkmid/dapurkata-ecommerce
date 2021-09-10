@@ -5,9 +5,9 @@ export const Main = styled.div`
   align-items: center;
   justify-content: space-between;
   font-family: "Poppins", sans-serif;
-  background: ${({ theme }) => theme.sidebar.header.background};
-  box-shadow: ${({ theme }) => theme.section.boxShadow};
-  color: ${({ theme }) => theme.sidebar.header.color};
+  background: ${({ theme }) => theme.background[3]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  color: ${({ theme }) => theme.color[1]};
   position: fixed;
   width: 100vw;
   top: 0;
@@ -22,13 +22,13 @@ type TSidebarButton = {
 export const IconWrapper = styled.div<TSidebarButton>`
   display: flex;
   align-items: center;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
   justify-content: center;
   height: 2rem;
   aspect-ratio: 1/1;
   cursor: pointer;
   border: none;
-  color: ${({ theme }) => theme.sidebar.header.color};
+  color: ${({ theme }) => theme.color[4]};
+  border: 1px solid transparent;
   > svg {
     height: 1.5rem;
   }
@@ -42,8 +42,8 @@ export const IconWrapper = styled.div<TSidebarButton>`
         `}
 
   :hover {
-    background: ${({ theme }) => theme.button.hover.sidebar.background};
-    color: ${({ theme }) => theme.sidebar.header.color};
+    color: ${({ theme }) => theme.color[4]};
+    border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
   transition: 0.4s all ease;
 `;
@@ -63,8 +63,8 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme.body.background};
-  border: 1px solid ${({ theme }) => theme.section.border};
+  background: ${({ theme }) => theme["color"][1]};
+  border: 1px solid ${({ theme }) => theme.border[3]};
   width: 2rem;
   aspect-ratio: 1/1;
   position: relative;
@@ -81,11 +81,11 @@ export const ButtonGroup = styled.div`
   padding: 0 0.5rem;
   width: max-content;
   > div > div {
-    color: ${({ theme }) => theme.sidebar.header.color};
-    background: ${({ theme }) => theme.sidebar.header.background};
+    color: ${({ theme }) => theme.color[4]};
+    background: ${({ theme }) => theme.background[3]};
     :hover {
-      background: ${({ theme }) => theme.sidebar.header.background};
-      color: ${({ theme }) => theme.sidebar.header.color};
+      background: ${({ theme }) => theme.background[3]};
+      color: ${({ theme }) => theme.color[4]};
     }
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
