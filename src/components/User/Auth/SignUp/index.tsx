@@ -137,15 +137,7 @@ const SignUp = () => {
               />
             </El.InputGroup>
           </El.FormWrapper>
-          <El.SubmitWrapper>
-            <Button
-              type="submit"
-              name="Sign up"
-              isLoading={loading}
-              disabled={!isDirty || !isValid || loading}
-            />
-            <ButtonLink name="Masuk" link="/auth/signin" />
-          </El.SubmitWrapper>
+          <El.SubmitWrapper></El.SubmitWrapper>
         </El.Form>
       </El.Container>
     </El.Main>
