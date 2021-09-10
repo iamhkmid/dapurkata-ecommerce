@@ -2,6 +2,7 @@ import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthCtx";
+import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_BOOK_ATC } from "../../../../graphql/book/queries";
 import { ADD_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
@@ -22,8 +23,8 @@ export const useGQLGetbook = ({ bookId }) => {
 
 export const useGQLAddSC = () => {
   const { push, pathname } = useRouter();
-  const { user, cart } = useContext(AuthContext);
-  const { setShowPopUp, showPopUp } = useContext(UserNavCtx);
+  const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(UserNavCtx);
   const [updateShoppingCart, { data, loading, error }] =
     useMutation<TGQLCreateShoppingCart>(ADD_SHOPPING_CART, {
       errorPolicy: "all",
@@ -37,10 +38,7 @@ export const useGQLAddSC = () => {
   const updateSC = async ({ bookId, amount }: TAddSC) => {
     if (!user) {
       push(`/auth/signin?next=${pathname}`);
-      setShowPopUp({
-        name: null,
-        value: null,
-      });
+      dispatch({ type: "CLOSE_POPUP" });
     } else {
       try {
         await updateShoppingCart({
@@ -51,9 +49,9 @@ export const useGQLAddSC = () => {
           awaitRefetchQueries: true,
         });
       } catch (error) {
-        setShowPopUp({
-          name: "message",
-          value: error.message,
+        dispatch({
+          type: "SHOW_POPUP",
+          value: { name: "MESSAGE", value: error.message },
         });
       }
     }
