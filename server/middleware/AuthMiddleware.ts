@@ -1,12 +1,12 @@
 import jwt from "jsonwebtoken";
-import prisma from "../graphql/db";
 import { Request, Response, NextFunction } from "express";
+import { db } from "../graphql/db";
 
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.AuthToken;
   const usePrisma = async (decoded) => {
     try {
-      const user = await prisma.user.findUnique({
+      const user = await db.user.findUnique({
         where: {
           id: decoded.id,
         },
