@@ -111,7 +111,7 @@ export const ImagePreview = styled.img`
   border-radius: ${({ theme }) => theme.input.borderRadius};
 `;
 export const FileName = styled.h1`
-  color: ${({ theme }) => theme.section.color};
+  color: ${({ theme }) => theme.color[1]};
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
