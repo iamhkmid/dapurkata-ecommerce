@@ -40,7 +40,7 @@ export const InputRadio = styled.div<TInputRadio>`
   border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0.5rem;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.section.border};
+  border: 1px solid ${({ theme }) => theme.input.border};
   :hover {
     border: 1px solid ${({ theme }) => theme.input.focus.border};
   }

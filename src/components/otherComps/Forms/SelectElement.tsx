@@ -129,7 +129,7 @@ export const Dropdown = styled.div<TDropdown>`
   ${({ isFocus }) =>
     isFocus &&
     css`
-      box-shadow: ${({ theme }) => theme.section.boxShadow};
+      box-shadow: ${({ theme }) => theme.boxShadow};
       max-height: 15rem;
     `}
   transition: 0.4s all ease;
