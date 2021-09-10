@@ -1,5 +1,3 @@
-import { TFormCategory } from "./Forms";
-
 export type TInput = {
   childRef?: (ref: HTMLInputElement) => void;
   control: "input";
