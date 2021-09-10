@@ -50,7 +50,7 @@ const MobileShowMenu = () => {
                 />
               </El.PhotoWrapper>
               <El.UserInfo>
-                <El.FullName>{user.fullName}</El.FullName>
+                <El.FullName>{`${user.firstName} ${user.lastName}`}</El.FullName>
                 <El.Email>{user.email}</El.Email>
               </El.UserInfo>
             </div>

@@ -3,13 +3,12 @@ import { UserNavCtx } from "../../../../../../../../contexts/UserNavCtx";
 import * as El from "./ServicesElement";
 
 const Services = ({ active }) => {
-  const { setShowDdown, setShowNav } = useContext(UserNavCtx);
+  const { dispatch } = useContext(UserNavCtx);
   return (
     <El.Main onClick={(e) => e.stopPropagation()} active={active}>
       <El.Ul
         onClick={() => {
-          setShowNav(null);
-          setShowDdown(null);
+          dispatch({ type: "CLOSE_MENU" });
         }}
       >
         <El.Li>
