@@ -8,7 +8,6 @@ const SignUp = () => {
         <title>Sign up</title>
         <link rel="icon" href="/icons/dklogo.svg" />
       </Head>
-      <SignUpComp />
     </>
   );
 };

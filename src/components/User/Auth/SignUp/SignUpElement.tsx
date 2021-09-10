@@ -75,7 +75,7 @@ export const CompTittle = styled.h1`
   font-weight: 500;
   margin-top: 0.5rem;
   margin-bottom: 1rem;
-  color: white;
+  color: ${({ theme }) => theme.color[1]};
 `;
 export const SpanGroupGrid2 = styled.div`
   display: grid;
