@@ -16,7 +16,7 @@ const AuthLoading = dynamic(
 );
 
 export const WithAuth: FC = ({ children }) => {
-  const { loading, user, error } = useContext(AuthContext);
+  const { loading, user } = useContext(AuthContext);
   const { pathname, replace, query } = useRouter();
   const isMounted = useRef(false);
   const isAuthPath = pathname.slice(0, 6) === "/auth/";

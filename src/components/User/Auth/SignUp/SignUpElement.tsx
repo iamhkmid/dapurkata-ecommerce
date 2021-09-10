@@ -77,6 +77,7 @@ export const CompTittle = styled.h1`
   margin-bottom: 1rem;
   color: ${({ theme }) => theme.color[1]};
 `;
+
 export const SpanGroupGrid2 = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;
