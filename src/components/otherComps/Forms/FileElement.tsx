@@ -133,7 +133,7 @@ export const NoImage = styled.div`
   justify-content: center;
   margin: 0 0 0.5rem 1rem;
   border: 1px solid ${({ theme }) => theme.input.border};
-  color: ${({ theme }) => theme.section.color};
-  background: ${({ theme }) => theme.section.background};
+  color: ${({ theme }) => theme.color[1]};
+  background: ${({ theme }) => theme.background[2]};
   transition: 0.4s all ease;
 `;
