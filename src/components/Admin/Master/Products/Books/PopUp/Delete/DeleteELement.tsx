@@ -54,7 +54,6 @@ export const Content = styled.div`
 export const ButtonWrapper = styled.div`
   display: flex;
   gap: 1rem;
-  background: ${({ theme }) => theme.section.background};
 `;
 
 export const TextWrapper = styled.div`
