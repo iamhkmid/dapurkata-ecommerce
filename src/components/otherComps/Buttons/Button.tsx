@@ -4,7 +4,7 @@ import IconsControl from "../../IconsControl";
 import Loading2 from "../Loading/Loading2";
 import TextLoading from "../Loading/TextLoading";
 type TButtonElement = {
-  color: string;
+  color?: string;
   isLoading?: boolean;
 };
 const ButtonElement = styled.button<TButtonElement>`
