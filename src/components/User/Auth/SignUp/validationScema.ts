@@ -15,7 +15,8 @@ export const customValidation = (
 };
 
 export const validationSchema = yup.object({
-  fullName: yup.string().required("Required"),
+  FirstName: yup.string().required("Required"),
+  lastName: yup.string(),
   username: yup
     .string()
     .required("Required")

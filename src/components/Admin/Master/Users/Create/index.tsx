@@ -44,13 +44,24 @@ const Create = () => {
             <FormsControl
               control="input"
               type="text"
-              name="fullName"
+              name="firstName"
               ref={htmlElRef}
               register={register}
-              label="Nama Lengkap"
-              error={errors.fullName ? true : false}
+              label="Nama Depan"
+              error={errors.firstName ? true : false}
               disabled={loading}
-              message={errors.fullName ? errors.fullName.message : null}
+              message={errors.firstName ? errors.firstName.message : null}
+            />
+            <FormsControl
+              control="input"
+              type="text"
+              name="lastName"
+              ref={htmlElRef}
+              register={register}
+              label="Nama Belakang"
+              error={errors.lastName ? true : false}
+              disabled={loading}
+              message={errors.lastName ? errors.lastName.message : null}
             />
             <FormsControl
               control="input"
