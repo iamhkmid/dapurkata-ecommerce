@@ -6,6 +6,6 @@ module.exports = withImages({
     return config;
   },
   images: {
-    domains: ["localhost", "e-dapurkata.herokuapp.com"],
+    domains: ["localhost", "penerbitdapurkata.herokuapp.com"],
   },
 });
