@@ -109,13 +109,13 @@ const Create = () => {
           <El.InputGroup>
             <FormsControl
               control="input"
-              type="phoneNumber"
-              name="phoneNumber"
+              type="number"
+              name="phone"
               register={register}
-              label="Nomer HP"
-              error={errors.phoneNumber ? true : false}
+              label="Phone"
+              error={errors.phone ? true : false}
               disabled={loading}
-              message={errors.phoneNumber ? errors.phoneNumber.message : null}
+              message={errors.phone ? errors.phone.message : null}
             />
             <FormsControl
               control="file"

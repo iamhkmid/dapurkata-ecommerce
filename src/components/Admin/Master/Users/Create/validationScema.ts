@@ -25,7 +25,7 @@ export const validationSchema = yup.object({
       "Minimum 5 characters, start with Alphabet"
     ),
   email: yup.string().required("Required").email("Incorrect E-mail format"),
-  phoneNumber: yup
+  phone: yup
     .string()
     .typeError("Must be a 'number' type")
     .required("Required")

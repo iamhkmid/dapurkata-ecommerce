@@ -116,7 +116,7 @@ const SignUp = () => {
             <El.InputGroup>
               <FormsControl
                 control="input"
-                type="phone"
+                type="number"
                 name="Phone"
                 register={register}
                 label="Phone"
