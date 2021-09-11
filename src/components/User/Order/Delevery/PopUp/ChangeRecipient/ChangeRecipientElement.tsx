@@ -42,7 +42,7 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  gap: 1rem;
+  gap: 0.5rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0.5rem;
   }
@@ -52,7 +52,6 @@ export const BtnWrapper = styled.div`
   margin: 0 0.5rem;
   gap: 1rem;
   padding-bottom: 0.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 `;
 export const Ul = styled.ul`
   display: flex;
@@ -60,9 +59,9 @@ export const Ul = styled.ul`
   overflow-y: auto;
   gap: 1rem;
   max-height: 40vh;
-  border: 1px solid ${({ theme }) => theme.border[2]};
-  border-radius: ${({ theme }) => theme.borderRadius};
-  padding: 0.2rem 0.5rem;
+  border-top: 1px solid ${({ theme }) => theme.border[2]};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  padding: 0.5rem 0.5rem;
   width: 100%;
   ::-webkit-scrollbar {
     width: 10px;
@@ -74,7 +73,7 @@ export const Ul = styled.ul`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
@@ -100,23 +99,18 @@ export const Info = styled.div<TInfo>`
   width: 100%;
   color: ${({ theme }) => theme.button.base.color};
   padding: 0.5rem 1rem;
-  border-radius: ${({ theme }) => theme.section.borderRadius};
-  border: 1px solid ${({ theme }) => theme.input.focus.border};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border: 1px solid ${({ theme }) => theme.border[2]};
 
   :hover {
-    color: ${({ theme }) => theme.button.hover.base.color};
-    box-shadow: ${({ theme }) => theme.input.focus.boxShadow};
+    border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
   ${({ active }) =>
     active &&
     css`
-      border: 1px solid transparent;
-      background: ${({ theme }) => theme.button.primary.background};
-      color: ${({ theme }) => theme.button.primary.color};
-      :hover {
-        background: ${({ theme }) => theme.button.hover.primary.background};
-        color: ${({ theme }) => theme.button.hover.primary.color};
-      }
+      border: 1px solid ${({ theme }) => theme.input.focus.border};
+      background: ${({ theme }) => theme.button.hover.list.background};
+      color: ${({ theme }) => theme.button.hover.list.color};
     `};
   > h1 :nth-child(1) {
     display: -webkit-box;

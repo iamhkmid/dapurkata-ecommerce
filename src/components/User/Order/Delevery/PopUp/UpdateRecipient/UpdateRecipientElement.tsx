@@ -56,7 +56,7 @@ export const Body = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    border-radius: ${({ theme }) => theme.section.borderRadius};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
