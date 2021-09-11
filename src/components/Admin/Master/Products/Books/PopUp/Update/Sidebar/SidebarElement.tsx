@@ -13,6 +13,7 @@ export const Sidebar = styled.div<TSidebar>`
   left: 0;
   top: 0;
   z-index: 12;
+  border-right: 1px solid ${({ theme }) => theme.border[2]};
   background: ${({ theme }) => theme.background[2]};
   overflow: hidden;
   ${({ active }) =>
