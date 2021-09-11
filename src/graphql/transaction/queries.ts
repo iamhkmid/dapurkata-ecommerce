@@ -5,10 +5,13 @@ export const PAYMENT_TYPE_ISACTIVE = gql`
     paymentType(isEnabled: $isEnabled) {
       id
       name
+      description
+      icon
       PaymentService {
         id
         name
-        iconURL
+        description
+        icon
       }
     }
   }

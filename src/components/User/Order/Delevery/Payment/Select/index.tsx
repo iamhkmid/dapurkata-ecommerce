@@ -20,8 +20,10 @@ const Select = () => {
     setIsFocus(false);
     selectRef.current.blur();
   };
-  const changeSelected = (value: { code: string }) => {
-    dispatch({ type: "SET_PAYMENT_TYPE_ID", value: value.code });
+  type TChangeSelected = { paymentTypeId: string; paymentServiceId: string };
+  const changeSelected = (value: TChangeSelected) => {
+    dispatch({ type: "SET_PAYMENT_TYPE_ID", value: value.paymentTypeId });
+    dispatch({ type: "SET_PAYMENT_SERVICE_ID", value: value.paymentServiceId });
     close();
   };
   useEffect(() => {
@@ -121,9 +123,21 @@ const Select = () => {
                       val.id === order.payment.selected?.paymentTypeId
                     }
                     key={val.id}
-                    onClick={() => changeSelected({ code: val.id })}
+                    onClick={() =>
+                      changeSelected({
+                        paymentTypeId: val.id,
+                        paymentServiceId: val.PaymentService[0].id,
+                      })
+                    }
                   >
-                    {val.name}
+                    <El.TextInfo
+                      isSelected={
+                        val.id === order.payment.selected?.paymentTypeId
+                      }
+                    >
+                      <h1>{val.name}</h1>
+                      <h1>{val.description}</h1>
+                    </El.TextInfo>
                   </El.Options>
                 ))}
             </El.OptionWrapper>

@@ -14,6 +14,7 @@ export const paymentType = async () => {
     data: {
       id: "BANK_TRANSFER",
       name: "ATM/Bank Transfer",
+      icon: "/img/payments/bank_transfer/bank_transfer.svg",
       description: "Bayar dari ATM atau Internet Banking",
       isEnabled: true,
     },
@@ -26,7 +27,7 @@ export const paymentType = async () => {
       howToPay: htp_bca_bank_transfer,
       description: "Bayar dari ATM BCA atau Internet Banking",
       PaymentType: { connect: { id: bankTransfer.id } },
-      iconURL: "/img/payments/bank_transfer/bca.svg",
+      icon: "/img/payments/bank_transfer/bca.svg",
     },
   });
   const bt2 = await prisma.paymentService.create({
@@ -37,7 +38,7 @@ export const paymentType = async () => {
       howToPay: htp_bni_bank_transfer,
       description: "Bayar dari ATM BNI atau Internet Banking",
       PaymentType: { connect: { id: bankTransfer.id } },
-      iconURL: "/img/payments/bank_transfer/bni.svg",
+      icon: "/img/payments/bank_transfer/bni.svg",
     },
   });
   const bt3 = await prisma.paymentService.create({
@@ -48,7 +49,7 @@ export const paymentType = async () => {
       howToPay: htp_bri_bank_transfer,
       description: "Bayar dari ATM BRI atau Internet Banking",
       PaymentType: { connect: { id: bankTransfer.id } },
-      iconURL: "/img/payments/bank_transfer/bri.svg",
+      icon: "/img/payments/bank_transfer/bri.svg",
     },
   });
   const bt4 = await prisma.paymentService.create({
@@ -59,7 +60,7 @@ export const paymentType = async () => {
       howToPay: htp_mandiri_bank_transfer,
       description: "Bayar dari ATM Mandiri atau Internet Banking",
       PaymentType: { connect: { id: bankTransfer.id } },
-      iconURL: "/img/payments/bank_transfer/mandiri.svg",
+      icon: "/img/payments/bank_transfer/mandiri.svg",
     },
   });
   const bt5 = await prisma.paymentService.create({
@@ -70,13 +71,14 @@ export const paymentType = async () => {
       howToPay: htp_permata_bank_transfer,
       description: "Bayar dari ATM Permata atau Internet Banking",
       PaymentType: { connect: { id: bankTransfer.id } },
-      iconURL: "/img/payments/bank_transfer/permata.svg",
+      icon: "/img/payments/bank_transfer/permata.svg",
     },
   });
   const cstore = await prisma.paymentType.create({
     data: {
       id: "CSTORE",
       name: "Convenience Store",
+      icon: "/img/payments/cstore/cstore.svg",
       description: "Pembayaran dari Indomaret atau Alfamart",
       isEnabled: true,
     },
@@ -89,7 +91,7 @@ export const paymentType = async () => {
       howToPay: htp_indomaret_cstore,
       description: "Bayar dari Indomaret",
       PaymentType: { connect: { id: cstore.id } },
-      iconURL: "/img/payments/cstore/indomaret.svg",
+      icon: "/img/payments/cstore/indomaret.svg",
     },
   });
   const cs2 = await prisma.paymentService.create({
@@ -100,7 +102,7 @@ export const paymentType = async () => {
       howToPay: htp_alfamart_cstore,
       description: "Bayar dari Alfamart",
       PaymentType: { connect: { id: cstore.id } },
-      iconURL: "/img/payments/cstore/alfamart.svg",
+      icon: "/img/payments/cstore/alfamart.svg",
     },
   });
 

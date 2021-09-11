@@ -78,7 +78,7 @@ const RadioButton = () => {
                 />
               </h1>
             </El.Detail>
-            <El.Estimation>{`${val.cost[0].etd
+            <El.Estimation className="estimation">{`${val.cost[0].etd
               .toLowerCase()
               .replace("hari", "")} Hari`}</El.Estimation>
           </El.InputRadio>

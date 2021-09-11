@@ -37,14 +37,17 @@ export type TGQLPaymentService = {
   id: string;
   name: string;
   isEnabled: boolean;
-  iconURL: string;
+  icon: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
 };
 export type TGQLPaymentType = {
   id: string;
   name: string;
+  icon: string;
   isEnabled: boolean;
+  description: string;
   PaymentService: TGQLPaymentService[];
   createdAt: Date;
   updatedAt: Date;

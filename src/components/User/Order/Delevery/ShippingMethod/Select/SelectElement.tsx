@@ -135,8 +135,7 @@ export const DropdownWrapper = styled.div`
   flex-direction: column;
   padding: 0.5rem;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.input.border};
-  border-radius: ${({ theme }) => theme.input.borderRadius};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 
   transition: 0.4s all ease;
 `;
@@ -247,12 +246,12 @@ export const Options = styled.div<TOptions>`
   ${({ isSelected }) =>
     isSelected &&
     css`
-      background: ${({ theme }) => theme.button.primary.background};
-      color: ${({ theme }) => theme.button.primary.color};
+      background: ${({ theme }) => theme.button.hover.list.background};
+      color: ${({ theme }) => theme.button.hover.list.color};
+      border: 1px solid ${({ theme }) => theme.input.focus.border};
     `}
   :hover {
-    background: ${({ theme }) => theme.button.primary.background};
-    color: ${({ theme }) => theme.button.primary.color};
+    border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.8rem;

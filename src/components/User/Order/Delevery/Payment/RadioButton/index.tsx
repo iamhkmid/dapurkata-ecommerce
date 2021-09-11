@@ -11,12 +11,12 @@ type TImgSize = { h: number; w: number };
 const RadioButton = () => {
   const { order, dispatch } = useContext(OrderCtx);
   const { loading, error } = order.payment;
-  const initialImgSize = { h: 40, w: 120 };
+  const initialImgSize = { h: 50, w: 50 };
   const [imgSize, setImgSize] = useState<TImgSize>(initialImgSize);
   const { width } = useWindowSize();
   useEffect(() => {
     width > 540 && setImgSize(initialImgSize);
-    width <= 540 && setImgSize({ h: 30, w: 90 });
+    width <= 540 && setImgSize({ h: 50, w: 50 });
   }, [width]);
   type TCS = { id: string };
   const changeSelected = ({ id }: TCS) => {
@@ -50,13 +50,21 @@ const RadioButton = () => {
             onClick={() => changeSelected({ id: val.id })}
           >
             <El.Detail>
-              <Image
-                src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${val.iconURL}`}
-                height={imgSize.h}
-                width={imgSize.w}
-                alt={val.name}
-                layout="fixed"
-              />
+              <El.ImgWrapper>
+                <Image
+                  src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${val.icon}`}
+                  height={imgSize.h}
+                  width={imgSize.w}
+                  alt={val.name}
+                  layout="fixed"
+                />
+              </El.ImgWrapper>
+              <El.TextInfo
+                isSelected={order.payment.selected.paymentServiceId === val.id}
+              >
+                <h1>{val.name}</h1>
+                <h1>{val.description}</h1>
+              </El.TextInfo>
             </El.Detail>
           </El.InputRadio>
         ))}

@@ -15,6 +15,8 @@ const typeDefs = gql`
     name: String
     PaymentService: [PaymentService]
     isEnabled: Boolean
+    icon: String
+    description: String
     createdAt: Date
     updatedAt: Date
   }
@@ -22,7 +24,8 @@ const typeDefs = gql`
   type PaymentService {
     id: ID
     name: String
-    iconURL: String
+    icon: String
+    description: String
     isEnabled: Boolean
     createdAt: Date
     updatedAt: Date

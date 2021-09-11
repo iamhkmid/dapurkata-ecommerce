@@ -95,7 +95,7 @@ model PaymentService {
   id            String       @id @default(cuid())
   name          String
   isEnabled     Boolean
-  iconURL       String       @map("icon_url")
+  icon          String
   description   String
   howToPay      String       @map("how_to_pay")
   paymentTypeId String?
@@ -109,6 +109,7 @@ model PaymentService {
 model PaymentType {
   id             String           @id @default(cuid())
   name           String
+  icon           String
   description    String
   PaymentService PaymentService[]
   isEnabled      Boolean

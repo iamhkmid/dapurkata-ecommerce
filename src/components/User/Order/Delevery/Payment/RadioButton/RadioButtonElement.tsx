@@ -18,12 +18,12 @@ export const Main = styled.div`
   }
 
   ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.scrollbar.v1.thumb};
+    background: ${({ theme }) => theme.scrollbar.v2.thumb};
     border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+    background: ${({ theme }) => theme.scrollbar.v2.hover.thumb};
   }
 `;
 
@@ -37,42 +37,66 @@ export const InputRadio = styled.div<TInputRadio>`
   position: relative;
   gap: 1rem;
   border-radius: ${({ theme }) => theme.input.borderRadius};
-  padding: 0.5rem;
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.input.border};
+  border: 1px solid ${({ theme }) => theme.border[2]};
   :hover {
     border: 1px solid ${({ theme }) => theme.input.focus.border};
-  }
-  ::before {
-    content: "";
-    position: absolute;
-    left: 1rem;
-    height: 0.4rem;
-    aspect-ratio: 1/1;
-    border-radius: 100%;
-    background: ${({ theme }) => theme.input.background};
-    border: 5px solid transparent;
-    transition: 0.4s all ease;
   }
 
   ${({ isSelected }) =>
     isSelected &&
     css`
+      background: ${({ theme }) => theme.button.hover.list.background};
       border: 1px solid ${({ theme }) => theme.input.focus.border};
-      ::before {
-        border: 5px solid ${({ theme }) => theme.button.primary.background};
-        background: transparent;
-      }
     `}
-  transition: 0.4s border ease;
+  transition: 0.4s all ease;
+  transition-property: background, border, color;
 `;
 
 export const Detail = styled.div`
   display: flex;
-  margin-left: 2.5rem;
-  flex-direction: column;
-  background: #ffffffc5;
-  padding: 0 0.5rem;
-  border-radius: ${({ theme }) => theme.input.borderRadius};
   gap: 0.5rem;
+`;
+
+export const ImgWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  border: 1px solid transparent;
+  background: #ffffffc5;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
+`;
+type TTextInfo = {
+  isSelected: boolean;
+};
+export const TextInfo = styled.div<TTextInfo>`
+  display: flex;
+  flex-direction: column;
+  > h1 :nth-child(1) {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.8rem;
+    }
+  }
+  > h1 :nth-child(2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 0.7rem;
+    color: ${({ theme }) => theme.color[2]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.6rem;
+    }
+  }
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      > h1 :nth-child(1),
+      > h1 :nth-child(2) {
+        color: ${({ theme }) => theme.button.hover.list.color};
+      }
+    `}
 `;

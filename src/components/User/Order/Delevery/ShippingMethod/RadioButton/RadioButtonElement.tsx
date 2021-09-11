@@ -40,7 +40,7 @@ export const InputRadio = styled.div<TInputRadio>`
   border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0.5rem;
   cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.input.border};
+  border: 1px solid ${({ theme }) => theme.border[2]};
   :hover {
     border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
@@ -59,15 +59,26 @@ export const InputRadio = styled.div<TInputRadio>`
   ${({ isSelected }) =>
     isSelected &&
     css`
+      background: ${({ theme }) => theme.button.hover.list.background};
       border: 1px solid ${({ theme }) => theme.input.focus.border};
+      ${({ isSelected }) =>
+        isSelected &&
+        css`
+          .text-service,
+          .text-description,
+          .text-cost,
+          .estimation {
+            color: ${({ theme }) => theme.button.hover.list.color};
+          }
+        `}
       ::before {
         border: 5px solid ${({ theme }) => theme.button.primary.background};
         background: transparent;
       }
     `}
-  transition: 0.4s border ease;
+  transition: 0.4s all ease;
+  transition-property: border, color;
 `;
-
 export const Detail = styled.div`
   display: flex;
   margin-left: 2.5rem;
@@ -90,6 +101,7 @@ export const Detail = styled.div`
     font-weight: 600;
     transition: none;
   }
+
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     gap: 0.3rem;
     .text-service {

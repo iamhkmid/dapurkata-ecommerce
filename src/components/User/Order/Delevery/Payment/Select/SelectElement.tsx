@@ -117,7 +117,6 @@ export const Dropdown = styled.div<TDropdown>`
   width: 100%;
   top: 100%;
   left: 0;
-  margin-top: 0.1rem;
   max-height: 0;
   overflow: hidden;
   z-index: 9;
@@ -135,8 +134,7 @@ export const DropdownWrapper = styled.div`
   flex-direction: column;
   padding: 0.5rem;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.input.border};
-  border-radius: ${({ theme }) => theme.input.borderRadius};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 
   transition: 0.4s all ease;
 `;
@@ -234,26 +232,29 @@ export const Options = styled.div<TOptions>`
   overflow: hidden;
   padding: 0 1rem;
   width: 100%;
-  border: 1px solid ${({ theme }) => theme.input.border};
+  border: 1px solid ${({ theme }) => theme.border[2]};
   border-radius: ${({ theme }) => theme.input.borderRadius};
   color: ${({ theme }) => theme.input.color};
   ${({ isShowed }) =>
     isShowed &&
     css`
-      padding: 0.5rem 1rem;
+      padding: 1rem;
       overflow: visible;
-      max-height: 3rem;
+      max-height: 4rem;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        padding: 0.5rem 1rem;
+      }
     `}
   ${({ isSelected }) =>
     isSelected &&
     css`
-      background: ${({ theme }) => theme.button.primary.background};
-      color: ${({ theme }) => theme.button.primary.color};
+      background: ${({ theme }) => theme.button.hover.list.background};
+      border: 1px solid ${({ theme }) => theme.input.focus.border};
     `}
   :hover {
-    background: ${({ theme }) => theme.button.primary.background};
     color: ${({ theme }) => theme.button.primary.color};
   }
+
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.8rem;
   }
@@ -321,5 +322,40 @@ export const DropdownIconWrapper = styled.div<TDropdownIconWrapper>`
     css`
       color: ${({ theme }) => theme.input.error.border};
     `}
+  
   transition: 0.4s all ease;
+`;
+type TTextInfo = {
+  isSelected: boolean;
+};
+export const TextInfo = styled.div<TTextInfo>`
+  display: flex;
+  flex-direction: column;
+  > h1 :nth-child(1) {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.8rem;
+    }
+  }
+  > h1 :nth-child(2) {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+    font-size: 0.7rem;
+    color: ${({ theme }) => theme.color[2]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.6rem;
+    }
+  }
+  ${({ isSelected }) =>
+    isSelected &&
+    css`
+      > h1 :nth-child(1),
+      > h1 :nth-child(2) {
+        color: ${({ theme }) => theme.button.hover.list.color};
+      }
+    `}
 `;
