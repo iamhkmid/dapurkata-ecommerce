@@ -56,11 +56,11 @@ export const Content = styled.div<TContent>`
   }
 
   ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.scrollbar.v1.track};
   }
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
+    border-radius: ${({ theme }) => theme.input.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {

@@ -54,6 +54,7 @@ export const Item = styled.li<TItem>`
   ::before {
     content: "";
     height: 2.5rem;
+    border-radius: ${({ theme }) => theme.borderRadius};
     width: 1rem;
     position: absolute;
     right: -2rem;

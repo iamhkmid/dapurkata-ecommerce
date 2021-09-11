@@ -5,15 +5,18 @@ type TSelected = {
 };
 
 export const Selected = styled.div<TSelected>`
-  font-family: "Roboto", sans-serif;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  font-family: "Poppins", sans-serif;
   font-size: 0.9rem;
   font-weight: 300;
   border-radius: ${({ theme }) => theme.input.borderRadius};
   max-width: 0;
-  overflow: hidden;
   background: ${({ theme }) => theme.button.primary.background};
   color: ${({ theme }) => theme.button.primary.color};
-  height: fit-content;
+  height: 100%;
   padding: 0.3rem 0;
   z-index: 12;
 
@@ -69,10 +72,6 @@ type TSelectStyled = {
 };
 
 export const SelectStyled = styled.div<TSelectStyled>`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
   cursor: pointer;
   font-family: "Roboto", sans-serif;
   display: flex;

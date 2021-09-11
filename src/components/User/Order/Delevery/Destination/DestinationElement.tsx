@@ -29,7 +29,7 @@ export const Scroll = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    color: ${({ theme }) => theme.borderRadius};
+    border-radius: ${({ theme }) => theme.input.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
