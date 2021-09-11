@@ -38,7 +38,7 @@ const SignIn = () => {
   return (
     <El.Main>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <El.CompTittle>Sign in</El.CompTittle>
+        <El.CompTittle>Log In</El.CompTittle>
         <ShowMessage message={error?.message} color="danger" />
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <FormsControl

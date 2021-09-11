@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 
 export const Main = styled.div`
   font-family: "Poppins", sans-serif;
+  background: ${({ theme }) => theme.background[1]};
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -27,11 +28,12 @@ export const Logo = styled.img`
 
 export const Container = styled(motion.div)`
   border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
   display: flex;
+  gap: 1rem;
   width: 30rem;
   flex-direction: column;
   padding: 2rem;
-  gap: 1rem;
   justify-content: space-around;
   position: relative;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
@@ -39,6 +41,7 @@ export const Container = styled(motion.div)`
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 100%;
+    padding: 2rem 1rem;
   }
   transition: 0.4s all ease;
 `;
@@ -63,10 +66,7 @@ export const ToggleWrapper = styled.div`
   right: 0;
 `;
 export const CompTittle = styled.h1`
-  text-align: center;
   font-size: 2rem;
   font-weight: 500;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
   color: ${({ theme }) => theme.color[1]};
 `;

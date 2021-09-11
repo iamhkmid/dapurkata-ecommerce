@@ -50,10 +50,10 @@ export const useLogOut = () => {
     setIsLoggin(false);
     localStorage.removeItem("authToken");
     sessionStorage.removeItem("authToken");
-    Router.replace("/auth/signin");
-    setUser(null);
     sc?.dispatch({ type: "CLEAR_SCART" });
     order?.dispatch({ type: "CLEAR_ORDER" });
+    Router.replace("/auth/signin");
+    setUser(null);
   };
   return { logOut };
 };

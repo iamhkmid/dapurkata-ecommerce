@@ -4,24 +4,23 @@ import { motion } from "framer-motion";
 export const Main = styled(motion.div)`
   margin-top: 4rem;
   font-family: "Poppins", sans-serif;
+  background: ${({ theme }) => theme.background[1]};
   display: flex;
   align-items: center;
   justify-content: center;
 `;
 export const Container = styled(motion.div)`
   display: flex;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.background[2]};
+  gap: 1rem;
   flex-direction: column;
-  width: 70vw;
+  width: 35rem;
   padding: 2rem 2rem;
-  margin: 1rem 15vw;
-  background: ${({ theme }) => theme.background[1]};
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    width: 90vw;
-    padding: 2rem 1rem;
-    margin: 1rem 10vw;
-  }
+  margin: 1rem;
+
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    width: 100vw;
+    width: 100%;
     padding: 1rem 1rem;
     margin: 1rem 1vw;
   }
@@ -30,7 +29,7 @@ export const Container = styled(motion.div)`
 export const FormWrapper = styled.div`
   display: flex;
   gap: 1rem;
-  flex-direction: row;
+  flex-direction: column;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     flex-direction: column;
   }
@@ -70,11 +69,8 @@ export const ToggleWrapper = styled.div`
   right: 0;
 `;
 export const CompTittle = styled.h1`
-  text-align: center;
   font-size: 2rem;
   font-weight: 500;
-  margin-top: 0.5rem;
-  margin-bottom: 1rem;
   color: ${({ theme }) => theme.color[1]};
 `;
 

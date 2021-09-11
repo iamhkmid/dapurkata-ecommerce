@@ -3,7 +3,7 @@ export type TFormCreateUser = {
   email: string;
   password: string;
   confirmPassword: string;
-  phoneNumber: string;
+  phone: string;
   firstName: string;
   lastName: string;
   userPic: any;

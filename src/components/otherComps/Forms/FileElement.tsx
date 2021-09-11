@@ -1,16 +1,13 @@
 import styled from "styled-components";
 
 export const Label = styled.label`
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: ${({ theme }) => theme.input.label};
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    font-size: 0.9rem;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   transition: 0.3s all ease;
 `;

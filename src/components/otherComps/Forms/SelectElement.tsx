@@ -275,7 +275,7 @@ export const InputContainer = styled.div`
 `;
 
 export const Label = styled.label`
-  font-family: "Roboto", sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: ${({ theme }) => theme.input.label};

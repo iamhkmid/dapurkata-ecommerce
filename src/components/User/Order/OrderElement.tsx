@@ -2,16 +2,16 @@ import styled, { css } from "styled-components";
 
 export const Main = styled.main`
   display: flex;
+  background: ${({ theme }) => theme.background[1]};
   width: 100%;
   align-items: flex-start;
   justify-content: center;
   font-family: "Poppins", sans-serif;
-  margin-top: 5rem;
-  padding: 1rem;
+  padding: 5rem 1rem 1rem 1rem;
   gap: 1rem;
   flex-wrap: wrap;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    padding: 0.2rem;
+    padding: 5rem 0.2rem 0.2rem 0.2rem;
   }
   transition: 0.4s all ease;
 `;
@@ -21,13 +21,14 @@ export const Delivery = styled.div`
   flex-direction: column;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  padding: 0 0.5rem;
   border-radius: ${({ theme }) => theme.borderRadius};
   min-width: 30rem;
   max-width: 40rem;
   overflow: hidden;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 100%;
+    padding: 0;
     min-width: 100%;
   }
   transition: 0.4s all ease;
@@ -38,13 +39,14 @@ export const OrderSummary = styled.div`
   flex-direction: column;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  padding: 0 0.5rem;
   border-radius: ${({ theme }) => theme.borderRadius};
   min-width: 27rem;
   max-width: 27rem;
   overflow: hidden;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 100%;
+    padding: 0;
     min-width: 100%;
   }
   transition: 0.4s all ease;

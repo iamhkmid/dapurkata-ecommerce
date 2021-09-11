@@ -16,11 +16,12 @@ export const MobileIcon = styled.div<TMobileIcon>`
   cursor: pointer;
   border-radius: 100%;
   aspect-ratio: 1/1;
-  background: ${({ theme }) => theme.button.primary.background};
-  color: ${({ theme }) => theme.button.primary.color};
+  border: 1px solid transparent;
+  background: ${({ theme }) => theme.button.list.background};
+  color: ${({ theme }) => theme.button.section.color};
   :hover {
-    color: ${({ theme }) => theme.button.hover.primary.color};
-    background: ${({ theme }) => theme.button.hover.primary.background};
+    background: ${({ theme }) => theme.button.hover.list.background};
+    color: ${({ theme }) => theme.button.hover.list.color};
   }
 
   > svg {
@@ -31,8 +32,9 @@ export const MobileIcon = styled.div<TMobileIcon>`
   ${({ active }) =>
     active &&
     css`
-      color: ${({ theme }) => theme.button.primary.color};
-      background: ${({ theme }) => theme.button.primary.background};
+      box-shadow: ${({ theme }) => theme.button.focus.list.boxShadow};
+      background: ${({ theme }) => theme.button.hover.section.background};
+      color: ${({ theme }) => theme.button.hover.section.color};
     `}
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

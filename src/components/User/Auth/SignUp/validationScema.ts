@@ -15,7 +15,7 @@ export const customValidation = (
 };
 
 export const validationSchema = yup.object({
-  FirstName: yup.string().required("Required"),
+  firstName: yup.string().required("Required"),
   lastName: yup.string(),
   username: yup
     .string()
@@ -25,7 +25,7 @@ export const validationSchema = yup.object({
       "Minimum 5 characters, start with Alphabet"
     ),
   email: yup.string().required("Required").email("Incorrect E-mail format"),
-  phoneNumber: yup
+  phone: yup
     .string()
     .typeError("Must be a 'number' type")
     .required("Required")

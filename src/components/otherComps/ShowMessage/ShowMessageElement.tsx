@@ -58,7 +58,7 @@ export const BtnWrapper = styled.div`
   justify-content: center;
   border-radius: 100%;
   margin: 0.2rem;
-  height: 2rem;
+  height: 100%;
   aspect-ratio: 1/1;
   right: 0;
   :hover {

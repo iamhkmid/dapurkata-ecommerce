@@ -6,7 +6,7 @@ export const Main = styled.div`
   flex-direction: column;
   min-height: 100vh;
   max-height: 100vh;
-  background: ${({ theme }) => theme.background[2]};
+  background: ${({ theme }) => theme.background[1]};
   overflow-y: scroll;
   ::-webkit-scrollbar {
     width: 10px;
@@ -32,7 +32,10 @@ export const Main = styled.div`
   transition-property: background;
 `;
 
-export const Nav = styled.nav`
+type TNavbar = {
+  showNav: boolean;
+};
+export const Nav = styled.nav<TNavbar>`
   height: auto;
   display: flex;
   flex-direction: column;
@@ -40,15 +43,22 @@ export const Nav = styled.nav`
   align-items: center;
   font-size: 1rem;
   position: fixed;
+  top: -4rem;
   width: 100vw;
   z-index: 10;
-  transition: 0.4s all ease;
-  transition-property: background-color, border-color;
-`;
 
+  ${({ showNav }) =>
+    showNav &&
+    css`
+      top: 0;
+    `}
+
+  transition: 0.4s all ease;
+  transition-property: top, background-color, border-color;
+`;
 export const NavbarContainer = styled.div`
   background: ${({ theme }) => theme.background[2]};
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -57,6 +67,7 @@ export const NavbarContainer = styled.div`
   width: 100%;
   z-index: 12;
   position: relative;
+
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     padding: 0 3rem;
   }

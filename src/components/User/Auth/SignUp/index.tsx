@@ -55,7 +55,7 @@ const SignUp = () => {
                 name="firstName"
                 ref={htmlElRef}
                 register={register}
-                label="Nama Depam"
+                label="Nama Depan"
                 error={errors.firstName ? true : false}
                 disabled={loading}
                 message={errors.firstName ? errors.firstName.message : null}
@@ -64,7 +64,6 @@ const SignUp = () => {
                 control="input"
                 type="text"
                 name="lastName"
-                ref={htmlElRef}
                 register={register}
                 label="Nama Belakang"
                 error={errors.lastName ? true : false}
@@ -117,13 +116,13 @@ const SignUp = () => {
             <El.InputGroup>
               <FormsControl
                 control="input"
-                type="phoneNumber"
-                name="phoneNumber"
+                type="phone"
+                name="Phone"
                 register={register}
-                label="Nomer HP"
-                error={errors.phoneNumber ? true : false}
+                label="Phone"
+                error={errors.phone ? true : false}
                 disabled={loading}
-                message={errors.phoneNumber ? errors.phoneNumber.message : null}
+                message={errors.phone ? errors.phone.message : null}
               />
               <FormsControl
                 control="file"

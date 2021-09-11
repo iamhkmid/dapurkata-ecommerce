@@ -9,9 +9,14 @@ export const Label = styled.label`
 `;
 
 export const TextLabel = styled.span`
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
   padding-left: 0.5rem;
   color: ${({ theme }) => theme.input.label};
-  font-size: 0.9rem;
+  font-size: 0.8rem;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.7rem;
+  }
 `;
 export const IconWrapper = styled.div`
   display: flex;
@@ -45,8 +50,8 @@ export const StyledCheckbox = styled.div<TStyledCheckbox>`
   width: 1.2rem;
   height: 1.2rem;
   border: 1px solid ${({ theme }) => theme.input.border};
-  ${(props) =>
-    props.checked
+  ${({ checked }) =>
+    checked
       ? css`
           background: ${({ theme }) => theme.button.primary.background};
           border: 1px solid transparent;
@@ -57,7 +62,7 @@ export const StyledCheckbox = styled.div<TStyledCheckbox>`
   transition: all 150ms;
 
   ${HiddenCheckbox}:focus + & {
-    box-shadow: 0 0 0 3px ${({ theme }) => theme.input.focus.border};
+    box-shadow: ${({ theme }) => theme.button.focus.primary.boxShadow};
   }
 
   ${IconWrapper} {

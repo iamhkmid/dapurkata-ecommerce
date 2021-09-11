@@ -1,11 +1,11 @@
 import styled, { css } from "styled-components";
 
 export const Label = styled.label`
+  font-family: "Poppins", sans-serif;
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
   overflow: hidden;
-  font-family: "Roboto", sans-serif;
   font-size: 0.8rem;
   font-weight: 500;
   color: ${({ theme }) => theme.input.label};
