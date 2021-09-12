@@ -32,7 +32,7 @@ const InputRadio = styled.div`
     background-image: linear-gradient(
       to right,
       ${({ theme }) => theme.loading[1]} 0%,
-      ${({ theme }) => theme.loading.background2} 20%,
+      ${({ theme }) => theme.loading[2]} 20%,
       ${({ theme }) => theme.loading[1]} 40%,
       ${({ theme }) => theme.loading[1]} 100%
     );
