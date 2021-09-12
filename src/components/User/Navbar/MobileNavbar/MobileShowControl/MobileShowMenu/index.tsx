@@ -55,7 +55,7 @@ const MobileShowMenu = () => {
               </El.UserInfo>
             </div>
             <div>
-              <El.NLink href="/u/my-account">
+              <El.NLink href="/u/account">
                 <El.Anchor onClick={() => dispatch({ type: "CLOSE_MENU" })}>
                   Akun Saya
                 </El.Anchor>
