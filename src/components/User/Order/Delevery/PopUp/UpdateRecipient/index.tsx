@@ -76,12 +76,16 @@ const UpdateRecipient = () => {
       recipientId: userNav.showPopUp.value,
       ...rest,
     };
-    updateRecipient({ data: nData })
-      .then(() => {
-        close();
-      })
-      .catch(() => {});
+    await updateRecipient({ data: nData });
   };
+  useEffect(() => {
+    const checkData = async () => {
+      if (data) {
+        close();
+      }
+    };
+    checkData();
+  }, [data]);
 
   useEffect(() => {
     setFocus();

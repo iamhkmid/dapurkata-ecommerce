@@ -60,11 +60,11 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 5rem;
-  width: 5rem;
   aspect-ratio: 1/1;
   position: relative;
+  overflow: hidden;
   background: ${({ theme }) => theme.background[1]};
+  border-radius: ${({ theme }) => theme.borderRadius};
   border: 1px solid ${({ theme }) => theme.button.primary.background};
 `;
 export const UserInfo = styled.div`

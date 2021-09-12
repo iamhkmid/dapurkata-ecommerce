@@ -41,6 +41,7 @@ import {
   THowToPay,
 } from "./transaction";
 import {
+  TArgsChangePassword,
   TArgsCreateUser,
   TArgsUpdateUser,
   TGQLArgsUser,
@@ -187,6 +188,11 @@ export type TUserMutation = {
     args: { userId: string },
     context: TCtx
   ) => Promise<TGQLUser>;
+  changePassword: (
+    parent: any,
+    args: TArgsChangePassword,
+    context: TCtx
+  ) => Promise<{ message: string }>;
 };
 
 export type TUser = {

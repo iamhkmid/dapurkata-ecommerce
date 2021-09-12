@@ -42,9 +42,9 @@ const MobileShowMenu = () => {
                 <Image
                   src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
                   alt="Profile Pic"
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center"
+                  layout="fixed"
+                  height={70}
+                  width={70}
                   quality={50}
                   onError={() => defaultImgSrc()}
                 />
@@ -55,7 +55,7 @@ const MobileShowMenu = () => {
               </El.UserInfo>
             </div>
             <div>
-              <El.NLink href="/u/account">
+              <El.NLink href="/u/account?menu=my-account">
                 <El.Anchor onClick={() => dispatch({ type: "CLOSE_MENU" })}>
                   Akun Saya
                 </El.Anchor>

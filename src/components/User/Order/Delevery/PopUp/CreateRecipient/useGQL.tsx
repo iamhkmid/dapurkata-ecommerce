@@ -18,7 +18,7 @@ export const useGQLGetFormData = ({ watchProvId }: { watchProvId: string }) => {
     loading: loadProvs,
     error: errorProvs,
   } = useQuery<TGQLProvinces>(PROVINCES, {
-    errorPolicy: "none",
+    errorPolicy: "all",
     fetchPolicy: "cache-first",
   });
 
@@ -29,7 +29,7 @@ export const useGQLGetFormData = ({ watchProvId }: { watchProvId: string }) => {
     refetch,
   } = useQuery<TGQLCities>(CITIES_BY_PROV_ID, {
     skip: !watchProvId,
-    errorPolicy: "none",
+    errorPolicy: "all",
     fetchPolicy: "cache-first",
     variables: { province_id: watchProvId },
   });
@@ -46,7 +46,7 @@ export const useGQLGetFormData = ({ watchProvId }: { watchProvId: string }) => {
 export const useGQLCreateRecipient = ({ userId }: { userId: string }) => {
   const [createRecipient, { data, loading, error }] =
     useMutation<TGQLCreateRecipient>(CREATE_RECIPIENT, {
-      errorPolicy: "none",
+      errorPolicy: "all",
     });
   const createRcpt = async (variables: TCreateRcptVar) => {
     return await createRecipient({

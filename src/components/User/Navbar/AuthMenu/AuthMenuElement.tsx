@@ -68,11 +68,10 @@ export const PhotoWrapper = styled.div`
   justify-content: center;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-  background: ${({ theme }) => theme.color[1]};
   border: 1px solid ${({ theme }) => theme.border[2]};
-  width: 2.5rem;
-  height: 2.5rem;
   position: relative;
+  height: max-content;
+  width: max-content;
   transition: 0.4s all ease;
 `;
 

@@ -21,7 +21,7 @@ import {
 export const useGQLInitData = ({ recipientId }: { recipientId: string }) => {
   const [ndata, setNdata] = useState<TUpdateRcptDefVal>(null);
   const { data, loading, error } = useQuery<TGQLRecipient>(RECIPIENT, {
-    errorPolicy: "none",
+    errorPolicy: "all",
     fetchPolicy: "network-only",
     skip: !recipientId,
     variables: { recipientId },

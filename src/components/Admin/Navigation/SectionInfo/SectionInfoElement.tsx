@@ -13,6 +13,7 @@ export const PageInfo = styled.div`
 export const TextInfo = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
   font-family: "Roboto", sans-serif;
   > h1.title {
     font-size: 1.1rem;

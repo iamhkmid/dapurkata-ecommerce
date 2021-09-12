@@ -1,7 +1,8 @@
 import { AuthenticationError, ValidationError } from "apollo-server-errors";
 import { TAuthMutation, TAuthQuery } from "../../../types/graphql";
-import { checkPassword, createToken } from "./utils";
+import { createToken } from "./utils";
 import jwt from "jsonwebtoken";
+import bcrypt from "bcrypt";
 
 export const Query: TAuthQuery = {
   checkUser: async (_, __, { db, req }) => {
@@ -35,8 +36,7 @@ export const Mutation: TAuthMutation = {
     if (!findUser)
       throw new AuthenticationError("Username or Password incorrect");
 
-    const comparePw = { password, DbPassword: findUser.password };
-    const checkPw = await checkPassword(comparePw);
+    const checkPw = await bcrypt.compare(password, findUser.password);
     if (!checkPw)
       throw new AuthenticationError("Username or Password incorrect");
 

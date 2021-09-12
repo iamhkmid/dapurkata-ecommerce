@@ -49,10 +49,10 @@ const AuthMenu = () => {
               <Image
                 src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
                 alt="Profile Pic"
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center"
-                quality={50}
+                layout="fixed"
+                height={40}
+                width={40}
+                quality={75}
                 onError={() => defaultImgSrc()}
               />
             </El.PhotoWrapper>

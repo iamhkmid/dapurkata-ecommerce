@@ -117,7 +117,7 @@ const SignUp = () => {
               <FormsControl
                 control="input"
                 type="number"
-                name="Phone"
+                name="phone"
                 register={register}
                 label="Phone"
                 error={errors.phone ? true : false}

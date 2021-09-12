@@ -165,7 +165,8 @@ type TUserPopUpVal =
   | "MESSAGE"
   | "AUTH_ERROR"
   | "ORDER_DETAIL"
-  | "ADD_SHOPPINGCART";
+  | "ADD_SHOPPINGCART"
+  | "CHANGE_PASSWORD";
 type TUserPopUp = {
   name: TUserPopUpVal;
   value?: string;

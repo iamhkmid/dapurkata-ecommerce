@@ -232,7 +232,7 @@ const themeConf = {
       warning: { background: "#fad843", color: "#e5eaf1" },
       list: { background: "#354058", color: "#c6d0e0" },
       base: { background: "#262f3d", color: "#c6d0e0" },
-      section: { background: "#1c2430", color: "#c6d0e0" },
+      section: { background: "#161d27", color: "#c6d0e0" },
       sidebar: { background: "#7b83dd18", color: "#c6d0e0" },
       hover: {
         primary: { background: "#42499d", color: "#c6d0e0" },
@@ -241,7 +241,7 @@ const themeConf = {
         warning: { background: "#fad843", color: "#e5eaf1" },
         list: { background: "#7b83dd18", color: "#8992ee" },
         base: { background: "#1d2430", color: "#c6d0e0" },
-        section: { background: "#253141", color: "#c6d0e0" },
+        section: { background: "#0d121a", color: "#c6d0e0" },
         sidebar: { background: "#7b83dd18", color: "#808afc" },
       },
       focus: {

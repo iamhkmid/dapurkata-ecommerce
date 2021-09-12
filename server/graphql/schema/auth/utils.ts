@@ -1,4 +1,3 @@
-import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 export const createToken = ({ id, role }) => {
@@ -7,7 +6,3 @@ export const createToken = ({ id, role }) => {
     expiresIn: maxAge,
   });
 };
-
-type TCheckPassword = { password: string; DbPassword: string };
-export const checkPassword = async ({ password, DbPassword }: TCheckPassword) =>
-  await bcrypt.compare(password, DbPassword);

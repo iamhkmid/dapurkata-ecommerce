@@ -20,6 +20,7 @@ const Dropdown = () => {
       if (user.UserPicture.url) setUserPic(user.UserPicture.url);
     }
   }, [user]);
+
   return (
     <El.Main
       initial={{ opacity: 0 }}
@@ -32,10 +33,10 @@ const Dropdown = () => {
           <Image
             src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
             alt="Profile Pic"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            quality={50}
+            layout="fixed"
+            quality={75}
+            height={80}
+            width={80}
             onError={() => defaultImgSrc()}
           />
         </El.PhotoWrapper>
@@ -44,7 +45,7 @@ const Dropdown = () => {
       </El.UserInfo>
       <El.Ul onClick={() => dispatch({ type: "CLOSE_MENU" })}>
         <El.Li>
-          <El.NLink href="/u/account">
+          <El.NLink href="/u/account?menu=my-account">
             <El.Anchor>Akun Saya</El.Anchor>
           </El.NLink>
         </El.Li>

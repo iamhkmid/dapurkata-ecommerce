@@ -67,3 +67,11 @@ export const DELETE_USER = gql`
     }
   }
 `;
+
+export const CHANGE_PASSWORD = gql`
+  mutation changePassword($data: cPData!) {
+    changePassword(data: $data) {
+      message
+    }
+  }
+`;

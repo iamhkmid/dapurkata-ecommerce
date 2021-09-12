@@ -1,8 +1,10 @@
-import { ValidationError } from "apollo-server-errors";
+import { AuthenticationError, ValidationError } from "apollo-server-errors";
+import { ApolloError } from "apollo-server-express";
 import { TUser, TUserMutation, TUserQuery } from "../../../types/graphql";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
 import { validateUser } from "../../utils/validateUser";
 import { checkUser, hashPassword, saveUserPic } from "./utils";
+import bcrypt from "bcrypt";
 
 export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
@@ -49,8 +51,7 @@ export const Mutation: TUserMutation = {
   },
 
   updateUser: async (_, { userId, data }, { user, db }) => {
-    const { username, email, password, role, phone, firstName, lastName } =
-      data;
+    const { username, email, role, phone, firstName, lastName } = data;
     const findUser = await db.user.findUnique({ where: { id: userId } });
     validateUser({
       targetRole: "USER",
@@ -63,7 +64,6 @@ export const Mutation: TUserMutation = {
       lastName: lastName || undefined,
       username,
       email,
-      password: await hashPassword(password),
       role,
       phone,
     };
@@ -74,6 +74,32 @@ export const Mutation: TUserMutation = {
   },
   deleteUser: async (_, { userId }, { db }) => {
     return await db.user.delete({ where: { id: userId } });
+  },
+  changePassword: async (_, { data }, { db, user }) => {
+    const { newPassword, oldPassword } = data;
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { id: true, password: true },
+    });
+    if (!!findUser) {
+      if (findUser.id !== user.id)
+        throw new AuthenticationError(
+          "Cannot change password from different user"
+        );
+      const checkPw = await bcrypt.compare(oldPassword, findUser.password);
+      if (!checkPw) {
+        throw new ApolloError("Password incorrect");
+      } else {
+        const updatePass = await db.user.update({
+          where: { id: user.id },
+          data: { password: await hashPassword(newPassword) },
+        });
+        if (updatePass) return { message: "Password change successful" };
+      }
+    } else {
+      throw new ApolloError("User not found");
+    }
+    return null;
   },
 };
 

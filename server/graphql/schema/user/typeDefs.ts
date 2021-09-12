@@ -10,6 +10,16 @@ const typeDefs = gql`
     createUser(data: cUserData!, userPic: Upload): User
     updateUser(userId: ID!, data: uUserData!): User @auth(requires: AUTH)
     deleteUser(userId: ID!): User @auth(requires: ADMIN)
+    changePassword(data: cPData!): changePassword @auth(requires: USER)
+  }
+
+  input cPData {
+    oldPassword: String!
+    newPassword: String!
+  }
+
+  type changePassword {
+    message: String
   }
 
   input cUserData {
@@ -27,7 +37,6 @@ const typeDefs = gql`
     lastName: String
     username: String!
     email: String!
-    password: String!
     role: EnumRole!
     phone: String!
   }

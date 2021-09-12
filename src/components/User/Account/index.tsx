@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { useWindowSize } from "react-use";
 import { accountMenu } from "../../../data/accountMenu";
@@ -7,9 +8,15 @@ import ContentState from "./ContentState";
 import SideMenu from "./SideMenu";
 
 const Account = () => {
+  const { query } = useRouter();
   const [menuId, setMenuId] = useState(accountMenu[1].id);
   const [showSideMenu, setShowSideMenu] = useState(true);
 
+  useEffect(() => {
+    if (accountMenu.find((val) => val.id === query["menu"])) {
+      setMenuId(query["menu"] as string);
+    }
+  }, [query]);
   const { width } = useWindowSize();
   useEffect(() => {
     width > 960 && setShowSideMenu(true);
@@ -19,12 +26,18 @@ const Account = () => {
   const changeMenu = (id: string) => {
     setMenuId(id);
   };
+  const sideMenuToggle = (p: boolean) => {
+    if (width <= 960) setShowSideMenu(p);
+  };
   return (
-    <El.Main>
+    <El.Main onClick={() => width <= 960 && setShowSideMenu(false)}>
       <El.Section>
         <El.PageInfo>
           <El.IconWrapper
-            onClick={() => setShowSideMenu(!showSideMenu)}
+            onClick={(e) => {
+              e.stopPropagation();
+              setShowSideMenu(!showSideMenu);
+            }}
             showSideMenu={showSideMenu}
           >
             {IconsControl("chevron-left")}
@@ -41,6 +54,7 @@ const Account = () => {
             changeMenu={changeMenu}
             menuId={menuId}
             showSideMenu={showSideMenu}
+            sideMenuToggle={sideMenuToggle}
           />
           <ContentState menuId={menuId} />
         </El.Content>

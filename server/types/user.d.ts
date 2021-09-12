@@ -22,6 +22,16 @@ export type TCreateUserData = {
   imgDir: string;
 };
 
+export type TUpdateUserData = {
+  firstName: string;
+  lastName?: string;
+  username: string;
+  email: string;
+  role: string;
+  phone: string;
+  imgDir: string;
+};
+
 export type TArgsCreateUser = {
   data: TCreateUserData;
   userPic?: any;
@@ -29,7 +39,11 @@ export type TArgsCreateUser = {
 
 export type TArgsUpdateUser = {
   userId: string;
-  data: TCreateUserData;
+  data: TUpdateUserData;
+};
+
+export type TArgsChangePassword = {
+  data: { oldPassword: string; newPassword: string };
 };
 
 export type TGQLUser = {

@@ -33,3 +33,21 @@ export type TGQLUserAdminList = {
     lastName: string;
   };
 };
+
+export type TFormMyAccount = {
+  username: string;
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+};
+
+export type TChangePassVar = {
+  newPassword: string;
+  oldPassword: string;
+};
+export type TFormChangePass = {
+  newPassword: string;
+  oldPassword: string;
+  confirmPassword: string;
+};

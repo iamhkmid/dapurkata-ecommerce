@@ -15,13 +15,15 @@ export const Message = styled.label<TMessage>`
     isShowed &&
     css`
       overflow: visible;
-      max-height: 1rem;
+      max-height: 3rem;
+      transition: 0.4s all ease;
     `}
   ${({ theme, color }) => css`
     color: ${theme.button[color || "primary"].background};
     > svg {
       color: ${theme.button[color || "primary"].background};
     }
+    transition: 0.4s all ease;
   `}
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
@@ -34,9 +36,13 @@ export const Message = styled.label<TMessage>`
 
 type TProps = { message: string; color: string };
 const TextError: FC<TProps> = ({ message, color }) => {
+  const [msg, setMsg] = useState("");
+  useEffect(() => {
+    if (message) setMsg(message);
+  }, [message]);
   return (
     <Message isShowed={!!message} color={color}>
-      {message}
+      {msg}
     </Message>
   );
 };
