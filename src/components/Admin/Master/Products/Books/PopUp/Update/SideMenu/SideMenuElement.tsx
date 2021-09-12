@@ -1,10 +1,10 @@
 import styled, { css } from "styled-components";
 
-type TSidebar = {
+type TSideMenu = {
   active: boolean;
 };
 
-export const Sidebar = styled.div<TSidebar>`
+export const SideMenu = styled.div<TSideMenu>`
   display: flex;
   height: 100%;
   padding: 0.5rem;
@@ -16,10 +16,11 @@ export const Sidebar = styled.div<TSidebar>`
   border-right: 1px solid ${({ theme }) => theme.border[2]};
   background: ${({ theme }) => theme.background[2]};
   overflow: hidden;
+  transform: translateX(-10rem);
   ${({ active }) =>
     active &&
     css`
-      transform: translateX(-10rem);
+      transform: translateX(0);
     `}
 
   transition: 0.4s all ease;

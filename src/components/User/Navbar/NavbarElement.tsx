@@ -7,9 +7,10 @@ export const Main = styled.div`
   min-height: 100vh;
   max-height: 100vh;
   background: ${({ theme }) => theme.background[1]};
-  overflow-y: scroll;
+  overflow-y: auto;
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 0.7rem;
+    height: 0.7rem;
   }
 
   ::-webkit-scrollbar-track {
@@ -18,10 +19,12 @@ export const Main = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v2.thumb};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {
     background: ${({ theme }) => theme.scrollbar.v2.hover.thumb};
+    border-radius: ${({ theme }) => theme.borderRadius};
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     ::-webkit-scrollbar {

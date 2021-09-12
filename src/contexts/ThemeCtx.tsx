@@ -8,7 +8,7 @@ const themeConf = {
   light: {
     name: "light",
     background: {
-      1: "#F3F4F6",
+      1: "#e8ebf1",
       2: "#fdfeff",
       3: "#0a0c18",
     },
@@ -266,7 +266,7 @@ const themeConf = {
     },
 
     scrollbar: {
-      v1: { track: "#1c202e", thumb: "#1f2530", hover: { thumb: "#161b24" } },
+      v1: { track: "#1c202e", thumb: "#191e27", hover: { thumb: "#161b24" } },
       v2: { track: "#222733", thumb: "#0f1116", hover: { thumb: "#07090c" } },
     },
     footer: { background: "#222731", color: "#c6d0e0" },

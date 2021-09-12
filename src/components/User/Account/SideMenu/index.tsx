@@ -2,10 +2,14 @@ import { FC } from "react";
 import { accountMenu } from "../../../../data/accountMenu";
 import * as El from "./SideMenuElement";
 
-type TSideMenu = { changeMenu: (p: string) => void; menuId: string };
-const SideMenu: FC<TSideMenu> = ({ changeMenu, menuId }) => {
+type TSideMenu = {
+  changeMenu: (p: string) => void;
+  menuId: string;
+  showSideMenu: boolean;
+};
+const SideMenu: FC<TSideMenu> = ({ changeMenu, menuId, showSideMenu }) => {
   return (
-    <El.Main>
+    <El.Main active={showSideMenu}>
       <El.Ul>
         {accountMenu.map((val) => (
           <El.Li

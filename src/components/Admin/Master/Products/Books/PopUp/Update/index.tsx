@@ -2,13 +2,13 @@ import { useContext, useState } from "react";
 import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 import FormData from "./FormData";
-import Sidebar from "./Sidebar";
+import SideMenu from "./SideMenu";
 import * as El from "./UpdateElement";
 
 const Update = ({ id }) => {
   const { dispatch } = useContext(AdminContext);
   const [navState, setNavState] = useState(0);
-  const [showSidebar, setShowSidebar] = useState(true);
+  const [showSideMenu, setShowSideMenu] = useState(true);
 
   return (
     <El.Main
@@ -20,15 +20,16 @@ const Update = ({ id }) => {
         <PopUpHeader
           title="Update"
           close={() => dispatch({ type: "CLOSE_POPUP" })}
-          withSidebar={{ showSidebar, setShowSidebar }}
+          withSideMenu={{ showSideMenu, setShowSideMenu }}
+          themeToggle={true}
         />
         <El.Body>
-          <Sidebar
+          <SideMenu
             navState={navState}
             setNavState={setNavState}
-            showSidebar={showSidebar}
+            showSideMenu={showSideMenu}
           />
-          <El.Content withSidebar={showSidebar}>
+          <El.Content showSideMenu={showSideMenu}>
             {navState === 0 && <FormData bookId={id} />}
           </El.Content>
         </El.Body>

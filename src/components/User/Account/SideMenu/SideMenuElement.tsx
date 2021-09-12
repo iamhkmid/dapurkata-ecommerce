@@ -1,14 +1,37 @@
 import styled, { css } from "styled-components";
 
-export const Main = styled.div`
+type TSideMenu = {
+  active: boolean;
+};
+
+export const Main = styled.div<TSideMenu>`
   display: flex;
   font-family: "Poppins", sans-serif;
-  border-right: 1px solid ${({ theme }) => theme.border[3]};
   height: 100%;
+  max-width: 0;
+  min-width: 0;
+  overflow: hidden;
+  background: ${({ theme }) => theme.background[2]};
+  border-radius: ${({ theme }) => theme.borderRadius};
+  ${({ active }) =>
+    active &&
+    css`
+      max-width: 13.5rem;
+      min-width: 13.5rem;
+      box-shadow: ${({ theme }) => theme.boxShadow};
+    `}
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+  }
+  transition: 0.4s all ease;
+  transition-property: max-width, min-width;
 `;
-
 export const Ul = styled.ul`
   display: flex;
+  width: 100%;
   gap: 0.2rem;
   padding: 1rem 0.5rem;
   flex-direction: column;
@@ -21,7 +44,7 @@ export const Li = styled.li<TLi>`
   display: flex;
   position: relative;
   height: 3rem;
-  width: 13rem;
+  width: 12rem;
   padding-left: 1.5rem;
   align-items: center;
   font-size: 1rem;
@@ -40,7 +63,7 @@ export const Li = styled.li<TLi>`
     background: transparent;
     border-radius: ${({ theme }) => theme.borderRadius};
     position: absolute;
-    right: -2rem;
+    right: -1.2rem;
     transition: 0.4s all ease;
   }
   ${({ isActive, theme }) =>
@@ -49,7 +72,6 @@ export const Li = styled.li<TLi>`
       color: ${theme.color[3]};
       ::before {
         background: ${({ theme }) => theme.button.primary.background};
-        right: -0.75rem;
       }
     `}
   &.logout {

@@ -1,11 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useWindowSize } from "react-use";
 import { accountMenu } from "../../../data/accountMenu";
+import IconsControl from "../../IconsControl";
 import * as El from "./AccountElement";
 import ContentState from "./ContentState";
 import SideMenu from "./SideMenu";
 
 const Account = () => {
   const [menuId, setMenuId] = useState(accountMenu[1].id);
+  const [showSideMenu, setShowSideMenu] = useState(true);
+
+  const { width } = useWindowSize();
+  useEffect(() => {
+    width > 960 && setShowSideMenu(true);
+    width <= 960 && setShowSideMenu(false);
+  }, [width]);
+
   const changeMenu = (id: string) => {
     setMenuId(id);
   };
@@ -13,6 +23,12 @@ const Account = () => {
     <El.Main>
       <El.Section>
         <El.PageInfo>
+          <El.IconWrapper
+            onClick={() => setShowSideMenu(!showSideMenu)}
+            showSideMenu={showSideMenu}
+          >
+            {IconsControl("chevron-left")}
+          </El.IconWrapper>
           <El.TextInfo>
             <h1 className="navigation">U / Account /&nbsp;</h1>
             <h1 className="state">
@@ -21,8 +37,12 @@ const Account = () => {
           </El.TextInfo>
         </El.PageInfo>
         <El.Content>
-          <SideMenu changeMenu={changeMenu} menuId={menuId} />
-          <ContentState />
+          <SideMenu
+            changeMenu={changeMenu}
+            menuId={menuId}
+            showSideMenu={showSideMenu}
+          />
+          <ContentState menuId={menuId} />
         </El.Content>
       </El.Section>
     </El.Main>

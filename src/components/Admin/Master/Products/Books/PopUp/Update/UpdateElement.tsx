@@ -44,11 +44,11 @@ export const Body = styled.div`
 `;
 
 type TContent = {
-  withSidebar: boolean;
+  showSideMenu: boolean;
 };
 export const Content = styled.div<TContent>`
   display: flex;
-  margin-left: 10rem;
+  margin-left: 0rem;
   overflow-x: auto;
 
   ::-webkit-scrollbar {
@@ -66,10 +66,10 @@ export const Content = styled.div<TContent>`
   ::-webkit-scrollbar-thumb:hover {
     background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
   }
-  ${({ withSidebar }) =>
-    withSidebar &&
+  ${({ showSideMenu }) =>
+    showSideMenu &&
     css`
-      margin-left: 0rem;
+      margin-left: 10rem;
     `}
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {

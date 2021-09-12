@@ -53,7 +53,7 @@ export const ButtonGroup = styled.div`
   }
 `;
 type TSidebarButton = {
-  withSidebar: boolean;
+  showSideMenu: boolean;
 };
 export const IconWrapper = styled.div<TSidebarButton>`
   display: flex;
@@ -68,8 +68,8 @@ export const IconWrapper = styled.div<TSidebarButton>`
   > svg {
     height: 1.5rem;
   }
-  ${({ withSidebar }) =>
-    !withSidebar
+  ${({ showSideMenu }) =>
+    showSideMenu
       ? css`
           transform: rotate(0);
         `

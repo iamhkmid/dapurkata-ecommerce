@@ -23,6 +23,7 @@ export const Delivery = styled.div`
   color: ${({ theme }) => theme.color[1]};
   padding: 0 0.5rem;
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   min-width: 30rem;
   max-width: 40rem;
   overflow: hidden;
@@ -41,6 +42,7 @@ export const OrderSummary = styled.div`
   color: ${({ theme }) => theme.color[1]};
   padding: 0 0.5rem;
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   min-width: 27rem;
   max-width: 27rem;
   overflow: hidden;

@@ -7,15 +7,20 @@ import * as El from "./PopUpHeaderElement";
 type TPopUpHeader = {
   title?: string;
   close: () => void;
-  withSidebar?: { setShowSidebar: (p: boolean) => void; showSidebar: boolean };
+  withSideMenu?: {
+    setShowSideMenu: (p: boolean) => void;
+    showSideMenu: boolean;
+  };
+  themeToggle?: boolean;
 };
 
-const PopUpHeader: FC<TPopUpHeader> = ({ close, title, withSidebar: ws }) => {
+const PopUpHeader: FC<TPopUpHeader> = (props) => {
+  const { close, title, withSideMenu: ws, themeToggle } = props;
   const { width } = useWindowSize();
   useEffect(() => {
     if (ws) {
-      width > 960 && ws.setShowSidebar(false);
-      width <= 960 && ws.setShowSidebar(true);
+      width > 960 && ws.setShowSideMenu(true);
+      width <= 960 && ws.setShowSideMenu(false);
     }
   }, [width]);
   return (
@@ -25,12 +30,12 @@ const PopUpHeader: FC<TPopUpHeader> = ({ close, title, withSidebar: ws }) => {
         {ws && (
           <El.ButtonGroup>
             <El.IconWrapper
-              withSidebar={ws.showSidebar}
-              onClick={() => ws.setShowSidebar(!ws.showSidebar)}
+              showSideMenu={ws.showSideMenu}
+              onClick={() => ws.setShowSideMenu(!ws.showSideMenu)}
             >
               {IconsControl("chevron-left")}
             </El.IconWrapper>
-            <ThemeToggle />
+            {themeToggle && <ThemeToggle />}
           </El.ButtonGroup>
         )}
       </El.Left>

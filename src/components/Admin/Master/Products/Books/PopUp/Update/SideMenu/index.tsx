@@ -1,10 +1,11 @@
 import { useState } from "react";
-import * as El from "./SidebarElement";
+import * as El from "./SideMenuElement";
 
-const Sidebar = ({ navState, setNavState, showSidebar }) => {
+const Sidebar = ({ navState, setNavState, showSideMenu }) => {
   const sidebar = ["Data", "Images"];
+  console.log(showSideMenu);
   return (
-    <El.Sidebar active={showSidebar}>
+    <El.SideMenu active={showSideMenu}>
       <El.Menu>
         {sidebar.map((val, i) => (
           <El.Item
@@ -16,7 +17,7 @@ const Sidebar = ({ navState, setNavState, showSidebar }) => {
           </El.Item>
         ))}
       </El.Menu>
-    </El.Sidebar>
+    </El.SideMenu>
   );
 };
 
