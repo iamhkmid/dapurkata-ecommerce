@@ -57,7 +57,7 @@ const MobileShowMenu = () => {
             <div>
               <El.NLink href="/u/my-account">
                 <El.Anchor onClick={() => dispatch({ type: "CLOSE_MENU" })}>
-                  My Account
+                  Akun Saya
                 </El.Anchor>
               </El.NLink>
               <El.Anchor
@@ -66,7 +66,7 @@ const MobileShowMenu = () => {
                   logOut();
                 }}
               >
-                Logout
+                Keluar
               </El.Anchor>
             </div>
           </El.Account>
@@ -79,7 +79,7 @@ const MobileShowMenu = () => {
                   dispatch({ type: "CLOSE_MENU" });
                 }}
               >
-                Signin
+                Masuk
               </El.Anchor>
             </El.NLink>
           </El.NoAccount>
