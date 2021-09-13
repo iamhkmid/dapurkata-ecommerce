@@ -204,7 +204,7 @@ export const Product = styled.div`
 `;
 export const Price = styled.h1`
   font-size: 0.8rem;
-  font-weight: 500;
+  font-weight: 400;
   border-color: ${({ theme }) => theme.button.disabled.background};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.7rem;

@@ -16,3 +16,17 @@ export const PAYMENT_TYPE_ISACTIVE = gql`
     }
   }
 `;
+
+export const ORDERS_FILTER_BY_USER = gql`
+  query ($userId: ID, $filterBy: orderFilter!) {
+    orders(userId: $userId, filterBy: $filterBy) {
+      id
+      grossAmount
+      currency
+      expirationTime
+      transactionTime
+      transactionStatus
+      fraudStatus
+    }
+  }
+`;

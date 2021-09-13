@@ -24,7 +24,7 @@ export const Main = styled.div<TSideMenu>`
     position: absolute;
     left: 0;
     top: 0;
-    z-index: 2;
+    z-index: 6;
   }
   transition: 0.4s all ease;
   transition-property: max-width, min-width;
@@ -47,7 +47,7 @@ export const Li = styled.li<TLi>`
   width: 12rem;
   padding-left: 1.5rem;
   align-items: center;
-  font-size: 1rem;
+  font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
   color: ${({ theme }) => theme.color[2]};

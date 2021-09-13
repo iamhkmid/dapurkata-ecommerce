@@ -34,7 +34,7 @@ const CartList = () => {
               <thead>
                 <tr>
                   <th>Produk</th>
-                  <th>Harga</th>
+                  <th>Harga (IDR)</th>
                   <th>Jumlah</th>
                   <th></th>
                 </tr>
@@ -95,7 +95,7 @@ const CartList = () => {
             <El.AmountPrice>
               <h1>Total Harga</h1>
               <h1>
-                {`Rp `}
+                {`IDR `}
                 <NumberFormat
                   value={amountPrice}
                   displayType={"text"}

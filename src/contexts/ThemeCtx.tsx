@@ -28,6 +28,9 @@ const themeConf = {
     boxShadow: "0 0 2px 1px #1d2e4225",
     borderRadius: "0.2rem",
     popup: "rgba(6, 13, 20, 0.877)",
+    transactionStatus: {
+      pending: { background: "#c0cfe47f", color: "#424953", border: "#97a2b3" },
+    },
     content: {
       cart: { color: { total: "#e94aaf" } },
       bookCard: {
@@ -167,6 +170,9 @@ const themeConf = {
     boxShadow: "0 0 2px 1px #0f13188e",
     borderRadius: "0.2rem",
     popup: "rgba(6, 13, 20, 0.877)",
+    transactionStatus: {
+      pending: { background: "#3b4458", color: "#c6d0e0", border: "#545d6b" },
+    },
     content: {
       cart: { color: { total: "#f06ec0" } },
       bookCard: {
