@@ -19,7 +19,6 @@ export type TCreateRcptVar = {
     email: string;
     phone: string;
     cityId: string;
-    userId: string;
     address: string;
   };
 };

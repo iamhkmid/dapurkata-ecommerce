@@ -1,15 +1,12 @@
-import { useMutation, useQuery } from "@apollo/client";
 import { useContext, useEffect, useRef, useState } from "react";
 import { GET_BOOKS_SORT_NEW } from "../../../graphql/book/queries";
-import { ADD_SHOPPING_CART } from "../../../graphql/shoppingCart/mutations";
 import { AuthContext } from "../../../contexts/AuthCtx";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import { TBookCard, TGQLGetBookCards } from "../../../types/book";
 import BookCard from "../../otherComps/BookCard";
 import * as El from "./StoreElement";
-import { OrderCtx } from "../../../contexts/OrderCtx";
-import useScroll from "../../../hooks/useScroll";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
+import { useQuery } from "@apollo/client";
 
 const Store = () => {
   const { user } = useContext(AuthContext);
@@ -21,16 +18,6 @@ const Store = () => {
       errorPolicy: "none",
     }
   );
-  const [addShoppingCart, { data: data2 }] = useMutation(ADD_SHOPPING_CART, {
-    errorPolicy: "none",
-  });
-  const addSChart = async ({ bookId }) => {
-    try {
-      await addShoppingCart({
-        variables: { userId: user.id, bookId, amount: 1 },
-      });
-    } catch (err) {}
-  };
   const [books, setBooks] = useState([]);
   useEffect(() => {
     if (data) {

@@ -8,8 +8,6 @@ export const ORDER = gql`
       grossAmount
       transactionTime
       expirationTime
-      paymentId
-      paymentType
       PaymentInfo {
         name
         value

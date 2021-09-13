@@ -65,7 +65,7 @@ const CreateRecipient = () => {
 
   const onSubmit = async (values: TFormAddRecipient) => {
     const { city, province, ...rest } = values;
-    const nData = { cityId: city, userId: user.id, ...rest };
+    const nData = { cityId: city, ...rest };
     await createRecipient({ data: nData });
   };
 

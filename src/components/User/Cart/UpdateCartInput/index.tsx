@@ -3,7 +3,7 @@ import { FC, useContext, useEffect, useRef, useState } from "react";
 import { SIGNIN } from "../../../../graphql/auth/mutations";
 import { EDIT_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
 import { AuthContext } from "../../../../contexts/AuthCtx";
-import { useGQLEditSCart } from "./useGQL";
+import { useGQLUpdateSCart } from "./useGQL";
 import { client } from "../../../../contexts/ApolloClientCtx";
 import IconsControl from "../../../IconsControl";
 import * as El from "./UpdateCartInputElement";
@@ -23,7 +23,7 @@ const UpdateCartInput: FC<TUpdateCart> = ({ cartProps }) => {
   const [accAmount, setAccAmount] = useState(amount);
   const { shoppingCart, dispatch: dispatchSCart } = useContext(ShoppingCartCtx);
   const inputRef = useRef<HTMLInputElement>(null);
-  const { editSCart, data, error, loading } = useGQLEditSCart();
+  const { updateSCart, data, error, loading } = useGQLUpdateSCart();
   const { userNav, dispatch } = useContext(UserNavCtx);
 
   let timeout = undefined;
@@ -31,7 +31,7 @@ const UpdateCartInput: FC<TUpdateCart> = ({ cartProps }) => {
     if (val === accAmount) {
       inputRef.current.value = String(accAmount);
     } else {
-      await editSCart({ cartId, amount: val });
+      await updateSCart({ cartId, amount: val });
     }
   };
   const withWait = (val: number, wait: boolean) => {

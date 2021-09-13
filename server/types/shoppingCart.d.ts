@@ -11,7 +11,6 @@ export type TGQLSCart = {
 };
 
 type TArgsCreateSChart = {
-  userId: string;
   bookId: string;
   amount: number;
 };

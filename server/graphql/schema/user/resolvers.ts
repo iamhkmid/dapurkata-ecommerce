@@ -10,9 +10,9 @@ export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
     const findUser = await db.user.findUnique({ where: { id: userId } });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER_OR_ADMIN",
       targetId: findUser?.id,
+      currRole: user.role,
       currId: user.id,
     });
     return findUser;
@@ -54,9 +54,9 @@ export const Mutation: TUserMutation = {
     const { username, email, role, phone, firstName, lastName } = data;
     const findUser = await db.user.findUnique({ where: { id: userId } });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER_OR_ADMIN",
       targetId: findUser?.id,
+      currRole: user.role,
       currId: user.id,
     });
     const userFields = {

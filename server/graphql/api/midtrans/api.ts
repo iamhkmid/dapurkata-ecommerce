@@ -1,6 +1,7 @@
 import Axios from "axios";
 import { encode } from "js-base64";
-import { TAPIMidtrans, TPaymentInfo } from "../../../types/api";
+import { TAPIMidtrans } from "../../../types/api";
+import { TPaymentInfo } from "../../../types/transaction";
 import { bankTransfer } from "./bankTransfer";
 const serverKey = encode(`${process.env.MIDTRANS_SERVER_KEY}:`);
 
@@ -29,7 +30,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "bank", value: "BCA" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
-      return { ...rest, paymentInfo, paymentId: props.type };
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
     }
     case "BNI_BANK_TRANSFER": {
       const { item_details, customer_details, transaction_details } =
@@ -44,7 +45,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "bank", value: "BNI" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
-      return { ...rest, paymentInfo, paymentId: props.type };
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
     }
     case "BRI_BANK_TRANSFER": {
       const { item_details, customer_details, transaction_details } =
@@ -59,7 +60,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "bank", value: "BRI" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
-      return { ...rest, paymentInfo, paymentId: props.type };
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
     }
     case "MANDIRI_BILL_BANK_TRANSFER": {
       const { item_details, customer_details, transaction_details } =
@@ -77,7 +78,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "bill_key", value: bill_key },
         { name: "biller_code", value: biller_code },
       ];
-      return { ...rest, paymentInfo, paymentId: props.type };
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
     }
     case "PERMATA_BANK_TRANSFER": {
       const { item_details, customer_details, transaction_details } =
@@ -92,7 +93,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "bank", value: "Permata" },
         { name: "va_number", value: permata_va_number },
       ];
-      return { ...rest, paymentInfo, paymentId: props.type };
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
     }
   }
 };

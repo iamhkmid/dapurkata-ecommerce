@@ -36,9 +36,9 @@ import {
   TDBPaymentType,
   TGQLArgsOrder,
   TGQLArgsPaymentType,
+  TGQLHowToPay,
   TGQLOrder,
   TGQLPaymentType,
-  THowToPay,
 } from "./transaction";
 import {
   TArgsChangePassword,
@@ -322,7 +322,17 @@ export type TTransactionQuery = {
     parent: any,
     args: { paymentId: string },
     context: TCtx
-  ) => Promise<THowToPay[]>;
+  ) => Promise<TGQLHowToPay[]>;
+  order: (
+    parent: any,
+    args: { orderId: string },
+    context: TCtx
+  ) => Promise<TGQLOrder>;
+  orders: (
+    parent: any,
+    args: { userId: string; filterBy: string },
+    context: TCtx
+  ) => Promise<TGQLOrder[]>;
 };
 
 export type TTransactionMutation = {

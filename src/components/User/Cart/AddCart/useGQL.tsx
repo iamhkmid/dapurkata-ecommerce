@@ -5,7 +5,7 @@ import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_BOOK_ATC } from "../../../../graphql/book/queries";
-import { ADD_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
+import { CREATE_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
 import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
 import { TGQLGetBookATC } from "../../../../types/book";
 import { TGQLCreateShoppingCart } from "../../../../types/shoppingCart";
@@ -21,28 +21,28 @@ export const useGQLGetbook = ({ bookId }) => {
   return { dataGB: data?.book, loadGB: loading, errorGB: error };
 };
 
-export const useGQLAddSC = () => {
+export const useGQLCreateSC = () => {
   const { push, pathname } = useRouter();
   const { user } = useContext(AuthContext);
   const { dispatch } = useContext(UserNavCtx);
-  const [updateShoppingCart, { data, loading, error }] =
-    useMutation<TGQLCreateShoppingCart>(ADD_SHOPPING_CART, {
+  const [createShoppingCart, { data, loading, error }] =
+    useMutation<TGQLCreateShoppingCart>(CREATE_SHOPPING_CART, {
       errorPolicy: "all",
     });
 
-  type TAddSC = {
+  type TCreateSC = {
     bookId: string;
     amount: number;
     weight: number;
   };
-  const updateSC = async ({ bookId, amount }: TAddSC) => {
+  const createSC = async ({ bookId, amount }: TCreateSC) => {
     if (!user) {
       push(`/auth/signin?next=${pathname}`);
       dispatch({ type: "CLOSE_POPUP" });
     } else {
       try {
-        await updateShoppingCart({
-          variables: { userId: user.id, bookId, amount },
+        await createShoppingCart({
+          variables: { bookId, amount },
           refetchQueries: [
             { query: SHOPPINGCART, variables: { userId: user.id } },
           ],
@@ -57,9 +57,9 @@ export const useGQLAddSC = () => {
     }
   };
   return {
-    updateShoppingCart: updateSC,
-    dataASC: data,
-    errorASC: error,
-    loadingASC: loading,
+    createShoppingCart: createSC,
+    data: data?.createShoppingCart,
+    error,
+    loading,
   };
 };

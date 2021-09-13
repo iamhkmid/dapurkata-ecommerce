@@ -1,6 +1,7 @@
 import { boolean, string } from "yup/lib/locale";
-import { TAPI, TPaymentInfo } from "./api";
+import { TAPI } from "./api";
 import { TDB } from "./gContext";
+import { TGQLUser } from "./user";
 
 export type TGQLBankTransfer = {
   status_code: "201";
@@ -123,17 +124,8 @@ export type TTransactionDetails = {
   order_id: string;
   gross_amount: number;
 };
-export type THowToPay = { name: string; stages: string[] };
-export type TGQLOrder = {
-  id: string;
-  currency: string;
-  grossAmount: number;
-  transactionTime: Date;
-  expirationTime: Date;
-  paymentType: string;
-  paymentId: string;
-  PaymentInfo: TPaymentInfo[];
-};
+export type TGQLHowToPay = { name: string; stages: string[] };
+
 export type TPSCartItems = {
   shoppingCart: TOrderSCart[];
   courier: { code: string; service: string; cost: number };
@@ -150,4 +142,62 @@ export type TPBuyNowItems = {
 export type TBuyNowItems = (p: TPBuyNowItems) => {
   item_details: TItemDetails[];
   gross_amount: number;
+};
+
+export type TGQLOrder = {
+  id: string;
+  paymentServiceId: string;
+  PaymentService?: TGQLPaymentService;
+  userId: string;
+  User?: TGQLUser;
+  grossAmount: number;
+  currency: string;
+  transactionTime: Date;
+  expirationTime: Date;
+  transactionStatus: string;
+  fraudStatus: string;
+  ItemDetails?: TItemDetail[];
+  PaymentInfo?: TPaymentInfo[];
+  CustomerDetails?: TCustomerDetails;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type TPaymentInfo = { name: string; value: string };
+
+type TItemDetail = {
+  id: string;
+  name: string;
+  price: number;
+  quantity: number;
+  orderId: string;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type TCustomerDetails = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  orderId: string;
+  ShippingAddress: TShippingAddress;
+  createdAt: Date;
+  updatedAt: Date;
+};
+
+type TShippingAddress = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  address: string;
+  city: string;
+  postalCode: string;
+  countryCode: string;
+  customerDetailsId: string;
+  createdAt: Date;
+  updatedAt: Date;
 };

@@ -12,9 +12,9 @@ export const Query: TSChartQuery = {
       },
     });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER_OR_ADMIN",
       targetId: findUser?.id,
+      currRole: user.role,
       currId: user.id,
     });
     return findUser.ShoppingCart;
@@ -23,17 +23,12 @@ export const Query: TSChartQuery = {
 
 export const Mutation: TSChartMutation = {
   createShoppingCart: async (_, args, { user, db }) => {
-    const { amount, bookId, userId } = args;
+    const { amount, bookId } = args;
     const findUser = await db.user.findUnique({
-      where: { id: userId },
+      where: { id: user.id },
       select: { id: true, ShoppingCart: { include: { Book: true } } },
     });
-    validateUser({
-      targetRole: "USER",
-      currRole: user.role,
-      targetId: findUser?.id,
-      currId: user.id,
-    });
+
     const findBook = await db.book.findUnique({ where: { id: bookId } });
     const maxWeight = Number(process.env.MAX_COURIER_WEIGHT);
     const cartWeight = findUser.ShoppingCart.reduce(
@@ -45,7 +40,7 @@ export const Mutation: TSChartMutation = {
       return await db.shoppingCart.create({
         data: {
           amount,
-          User: { connect: { id: userId } },
+          User: { connect: { id: user.id } },
           Book: { connect: { id: bookId } },
         },
       });
@@ -59,9 +54,9 @@ export const Mutation: TSChartMutation = {
       where: { id: cartId },
     });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER",
       targetId: findSCart?.userId,
+      currRole: user.role,
       currId: user.id,
     });
     const findUser = await db.user.findUnique({
@@ -94,9 +89,9 @@ export const Mutation: TSChartMutation = {
       select: { userId: true },
     });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER",
       targetId: findSCart?.userId,
+      currRole: user.role,
       currId: user.id,
     });
     return await db.shoppingCart.delete({ where: { id: cartId } });

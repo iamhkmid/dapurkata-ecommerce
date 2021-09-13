@@ -58,7 +58,6 @@ export type TAPIBankTransfer = {
   MandiriBill: (data: TAPIParamsBTMandiriBill) => Promise<TAPIResBTMandiriBill>;
   Permata: (data: TAPIParamsBTPermata) => Promise<TAPIResBTPermata>;
 };
-export type TPaymentInfo = { name: string; value: string };
 type TRMidtrans = {
   status_code: string;
   status_message: string;
@@ -71,7 +70,7 @@ type TRMidtrans = {
   transaction_time: string;
   transaction_status: string;
   fraud_status: string;
-  paymentId: string;
+  paymentServiceId: string;
   paymentInfo: TPaymentInfo[];
 };
 

@@ -98,6 +98,7 @@ model PaymentService {
   icon          String
   description   String
   howToPay      String       @map("how_to_pay")
+  Order         Order[]
   paymentTypeId String?
   PaymentType   PaymentType? @relation(fields: [paymentTypeId], references: [id], onDelete: Cascade)
   createdAt     DateTime     @default(now()) @map("created_at")
@@ -134,6 +135,8 @@ model Order {
   updatedAt         DateTime         @updatedAt @map("updated_at")
   PaymentInfo       PaymentInfo[]
   CustomerDetails   CustomerDetails?
+  paymentServiceId  String?
+  PaymentService    PaymentService?  @relation(fields: [paymentServiceId], references: [id], onDelete: SetNull)
 
   @@map("order")
 }

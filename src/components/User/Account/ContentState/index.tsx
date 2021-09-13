@@ -2,6 +2,7 @@ import { AnimatePresence } from "framer-motion";
 import AddressList from "./AddressList";
 import * as El from "./ContentStateElement";
 import MyAccount from "./MyAccount";
+import Orders from "./Orders";
 
 const ContentState = ({ menuId }) => {
   return (
@@ -10,7 +11,7 @@ const ContentState = ({ menuId }) => {
         <AnimatePresence>
           {menuId === "my-account" && <MyAccount />}
           {menuId === "address-list" && <AddressList />}
-          {menuId === "orders" && <AddressList />}
+          {menuId === "orders" && <Orders />}
         </AnimatePresence>
       </El.Section>
     </El.Main>

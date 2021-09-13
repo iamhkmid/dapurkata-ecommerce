@@ -14,6 +14,7 @@ import {
   sCartWeight,
 } from "./utils";
 import util from "util";
+import { validateUser } from "../../utils/validateUser";
 
 export const Query: TTransactionQuery = {
   paymentType: async (_, { isEnabled }, { db }) => {
@@ -52,6 +53,41 @@ export const Query: TTransactionQuery = {
       return null;
     }
   },
+  order: async (_, { orderId }, { db, user }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id: orderId },
+    });
+    validateUser({
+      target: "SPECIFIC_USER_OR_ADMIN",
+      targetId: findOrder?.userId,
+      currRole: user.role,
+      currId: user.id,
+    });
+    return findOrder;
+  },
+  orders: async (_, { userId, filterBy }, { db, user }) => {
+    if (filterBy === "USER") {
+      const findUser = await db.user.findUnique({
+        where: { id: user.id },
+        select: { id: true, Order: true },
+      });
+      validateUser({
+        target: "SPECIFIC_USER",
+        targetId: findUser?.id,
+        currRole: user.role,
+        currId: user.id,
+      });
+      return findUser.Order;
+    } else if (filterBy === "ALL") {
+      validateUser({
+        target: "ADMIN_ONLY",
+        currRole: user.role,
+      });
+      return await db.order.findMany();
+    } else {
+      throw new ApolloError("Invalid orderFilter");
+    }
+  },
 };
 
 export const Mutation: TTransactionMutation = {
@@ -61,8 +97,15 @@ export const Mutation: TTransactionMutation = {
       where: { id: data.recipientId },
       include: { User: true },
     });
-    if (user.id !== recipient.User.id)
-      throw new AuthenticationError("Different user account");
+    console.log(data);
+
+    validateUser({
+      target: "SPECIFIC_USER",
+      targetId: recipient.User.id,
+      currRole: user.role,
+      currId: user.id,
+    });
+
     const orderId = cuid();
 
     switch (data.orderType) {
@@ -157,25 +200,8 @@ export const Mutation: TTransactionMutation = {
             },
             PaymentInfo: { create: charge.paymentInfo },
           },
-          select: {
-            id: true,
-            currency: true,
-            grossAmount: true,
-            transactionTime: true,
-            expirationTime: true,
-            PaymentInfo: true,
-          },
         });
-        return {
-          id: order.id,
-          currency: order.currency,
-          grossAmount: order.grossAmount,
-          expirationTime: order.expirationTime,
-          transactionTime: order.transactionTime,
-          paymentId: charge.paymentId,
-          paymentType: charge.payment_type,
-          PaymentInfo: order.PaymentInfo,
-        };
+        return order;
       }
       case "buy-now": {
         const book = await db.book.findUnique({
@@ -267,25 +293,8 @@ export const Mutation: TTransactionMutation = {
             },
             PaymentInfo: { create: charge.paymentInfo },
           },
-          select: {
-            id: true,
-            currency: true,
-            grossAmount: true,
-            transactionTime: true,
-            expirationTime: true,
-            PaymentInfo: true,
-          },
         });
-        return {
-          id: order.id,
-          currency: order.currency,
-          grossAmount: order.grossAmount,
-          expirationTime: order.expirationTime,
-          transactionTime: order.transactionTime,
-          paymentId: charge.paymentId,
-          paymentType: charge.payment_type,
-          PaymentInfo: order.PaymentInfo,
-        };
+        return order;
       }
       default:
         throw new ApolloError(`Order type not found`);

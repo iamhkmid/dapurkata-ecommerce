@@ -93,6 +93,7 @@ export type TOrderState = {
 type TOrderAction =
   | { type: "SET_ORDER_TYPE"; value: TOrderType }
   | { type: "SET_RECIPIENT_ID"; value: string }
+  | { type: "SET_ORDER_LOADING"; value: boolean }
   | { type: "SET_RECIPIENTS"; value: TRecipient[] }
   | { type: "SET_RECIPIENT_LOADING"; value: boolean }
   | { type: "SET_COURIER_CODE"; value: string }

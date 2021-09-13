@@ -12,7 +12,7 @@ import AddCartInput from "../AddCartInput";
 import DeleteCart from "../DeleteCart";
 import UpdateCartInput from "../UpdateCartInput";
 import * as El from "./AddCartElement";
-import { useGQLAddSC, useGQLGetbook } from "./useGQL";
+import { useGQLCreateSC, useGQLGetbook } from "./useGQL";
 
 type TCover = {
   id: string;
@@ -32,9 +32,10 @@ const AddCart = () => {
   const { dataGB, loadGB, errorGB } = useGQLGetbook({
     bookId: userNav.showPopUp.value,
   });
-  const { updateShoppingCart, dataASC, errorASC, loadingASC } = useGQLAddSC();
+  const { createShoppingCart, data, error, loading } = useGQLCreateSC();
 
-  const isDisabled = (user && user.role !== "USER") || (currCart && true);
+  const isDisabled =
+    loading || loadGB || (user && user.role !== "USER") || !!currCart;
   type TbuyNowHandler = { amount: number; bookId: string };
   const buyNowHandler = (props: TbuyNowHandler) => {
     const { amount, bookId } = props;
@@ -112,7 +113,7 @@ const AddCart = () => {
             <button
               type="button"
               onClick={() =>
-                updateShoppingCart({
+                createShoppingCart({
                   bookId: dataGB.id,
                   weight: dataGB.weight,
                   amount,

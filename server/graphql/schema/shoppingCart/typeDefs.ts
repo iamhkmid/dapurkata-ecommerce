@@ -6,14 +6,11 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createShoppingCart(
-      userId: String!
-      bookId: String!
-      amount: Int!
-    ): ShoppingCart @auth(requires: AUTH)
+    createShoppingCart(bookId: String!, amount: Int!): ShoppingCart
+      @auth(requires: USER)
     updateShoppingCart(cartId: String!, amount: Int!): ShoppingCart
-      @auth(requires: AUTH)
-    deleteShoppingCart(cartId: ID!): ShoppingCart @auth(requires: AUTH)
+      @auth(requires: USER)
+    deleteShoppingCart(cartId: ID!): ShoppingCart @auth(requires: USER)
   }
 
   type ShoppingCart {

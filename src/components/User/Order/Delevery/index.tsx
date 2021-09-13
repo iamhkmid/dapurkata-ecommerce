@@ -45,13 +45,23 @@ const Delevery = () => {
   const isBuyNow =
     order.order.type === "buy-now" &&
     !!order.order.book &&
-    !!order.order.amount;
+    !!order.order.amount &&
+    !order.order.loading;
   const isSCart =
-    order.order.type === "shoppingcart" && shoppingCart.data.length > 0;
+    order.order.type === "shoppingcart" &&
+    !order.order.loading &&
+    shoppingCart.data.length > 0;
+  const isEmpty =
+    (order.order.type === "shoppingcart" && shoppingCart.data.length === 0) ||
+    (order.order.type === "buy-now" &&
+      (!order.order.book || !order.order.amount));
+  useEffect(() => {
+    console.log(order.order.type === "buy-now");
+  }, [order.order]);
 
   return (
     <El.Main>
-      {!isBuyNow && !isSCart && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}
+      {isEmpty && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}
       {(isBuyNow || isSCart) && (
         <div>
           <Content

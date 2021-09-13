@@ -6,9 +6,9 @@ const typeDefs = gql`
     recipients(userId: ID!): [Recipient] @auth(requires: AUTH)
   }
   type Mutation {
-    createRecipient(data: cRcptData!): Recipient @auth(requires: AUTH)
-    updateRecipient(data: uRcptData!): Recipient @auth(requires: AUTH)
-    deleteRecipient(recipientId: ID!): Recipient @auth(requires: AUTH)
+    createRecipient(data: cRcptData!): Recipient @auth(requires: USER)
+    updateRecipient(data: uRcptData!): Recipient @auth(requires: USER)
+    deleteRecipient(recipientId: ID!): Recipient @auth(requires: USER)
   }
 
   type Recipient {
@@ -30,7 +30,6 @@ const typeDefs = gql`
   }
 
   input cRcptData {
-    userId: String!
     firstName: String!
     lastName: String
     email: String!

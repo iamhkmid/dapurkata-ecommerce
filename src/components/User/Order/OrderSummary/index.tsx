@@ -52,10 +52,6 @@ const OrderSummary = () => {
     order.order.type === "buy-now" && order.order.book,
   ]);
 
-  useEffect(() => {
-    if (data) console.log(data);
-    if (error) console.log(error);
-  }, [data, error]);
   return (
     <El.Main>
       {!isBuyNow && !isSCart && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}

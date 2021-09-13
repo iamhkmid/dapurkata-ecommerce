@@ -2,26 +2,37 @@ import { TRecipientMutation, TRecipientQuery } from "../../../types/graphql";
 import { validateUser } from "../../utils/validateUser";
 
 export const Query: TRecipientQuery = {
-  recipient: async (_, { recipientId }, { db }) =>
-    await db.recipient.findUnique({ where: { id: recipientId } }),
-  recipients: async (_, { userId }, { db }) => {
-    const user = await db.user.findUnique({
-      where: { id: userId },
-      select: { Recipient: true },
+  recipient: async (_, { recipientId }, { db, user }) => {
+    const recipient = await db.recipient.findUnique({
+      where: { id: recipientId },
     });
-    return user.Recipient;
+    validateUser({
+      target: "SPECIFIC_USER_OR_ADMIN",
+      targetId: recipient?.userId,
+      currRole: user.role,
+      currId: user.id,
+    });
+    return recipient;
+  },
+  recipients: async (_, { userId }, { db, user }) => {
+    const findUser = await db.user.findUnique({
+      where: { id: userId },
+      select: { id: true, Recipient: true },
+    });
+    validateUser({
+      target: "SPECIFIC_USER_OR_ADMIN",
+      targetId: findUser?.id,
+      currRole: user.role,
+      currId: user.id,
+    });
+    return findUser.Recipient;
   },
 };
 
 export const Mutation: TRecipientMutation = {
   createRecipient: async (_, { data }, { api, user, db }) => {
-    const { cityId, address, firstName, lastName, phone, userId, email } = data;
-    validateUser({
-      targetRole: "USER",
-      currRole: user.role,
-      targetId: userId,
-      currId: user.id,
-    });
+    const { cityId, address, firstName, lastName, phone, email } = data;
+
     const resApi = await api.rajaOngkir.getCity({
       city_id: cityId,
     });
@@ -37,7 +48,7 @@ export const Mutation: TRecipientMutation = {
         cityName: resApi.city_name,
         postalCode: resApi.postal_code,
         address,
-        User: { connect: { id: userId } },
+        User: { connect: { id: user.id } },
       },
     });
   },
@@ -48,9 +59,9 @@ export const Mutation: TRecipientMutation = {
       where: { id: recipientId },
     });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER",
       targetId: findRcpt?.userId,
+      currRole: user.role,
       currId: user.id,
     });
     const resApi = await api.rajaOngkir.getCity({
@@ -77,9 +88,9 @@ export const Mutation: TRecipientMutation = {
       where: { id: recipientId },
     });
     validateUser({
-      targetRole: "USER",
-      currRole: user.role,
+      target: "SPECIFIC_USER",
       targetId: findRcpt?.userId,
+      currRole: user.role,
       currId: user.id,
     });
     return await db.recipient.delete({ where: { id: recipientId } });

@@ -38,6 +38,13 @@ const MakePayment: FC = () => {
     }
   }, [query.type, data]);
 
+  useEffect(() => {
+    dispatch({
+      type: "SET_ORDER_LOADING",
+      value: loading,
+    });
+  }, [loading]);
+
   return (
     <El.Main>
       <El.Delivery>

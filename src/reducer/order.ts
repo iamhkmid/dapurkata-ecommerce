@@ -53,6 +53,12 @@ export const reducer: TOrderRdcr = (state, action) => {
         };
       }
     }
+    case "SET_ORDER_LOADING": {
+      return {
+        ...state,
+        order: { ...order, loading: action.value },
+      };
+    }
     case "SET_RECIPIENT_ID": {
       const { data } = recipient;
       if (data.recipients.length > 0 && !!action.value) {

@@ -11,16 +11,20 @@ type TProps = {
 
 const ShowMessage: FC<TProps> = ({ color, message }) => {
   const [isShowed, setIsShowed] = useState<boolean>(false);
+  const [msg, setMsg] = useState<string>("");
 
   useEffect(() => {
     if (message) {
       setIsShowed(true);
+      setMsg(message);
+    } else {
+      setIsShowed(false);
     }
   }, [message]);
 
   return (
     <El.Main isShowed={isShowed} color={color}>
-      <El.Message>{message}</El.Message>
+      <El.Message>{msg}</El.Message>
       <El.BtnWrapper onClick={() => setIsShowed(false)}>
         {IconsControl("x")}
       </El.BtnWrapper>
