@@ -24,8 +24,10 @@ export const Main = styled.button`
   :disabled {
     cursor: default;
     color: ${({ theme }) => theme.button.disabled.color};
+    background: ${({ theme }) => theme.button.disabled.background};
     border-color: ${({ theme }) => theme.button.disabled.background};
     :hover {
+      background: ${({ theme }) => theme.button.disabled.background};
       color: ${({ theme }) => theme.button.disabled.color};
       border-color: ${({ theme }) => theme.button.disabled.background};
     }

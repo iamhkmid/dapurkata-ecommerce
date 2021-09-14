@@ -21,15 +21,13 @@ export const Main = styled.div`
       text-decoration-color: ${({ theme }) => theme.color[2]};
     }
   }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    width: 8rem;
-  }
   transition: 0.4s all ease;
 `;
 export const CoverWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  width: max-content;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
 
@@ -54,13 +52,15 @@ export const BookTitleWrapper = styled.div`
   max-height: 3rem;
   margin-top: 0.5rem;
 `;
-
-export const InfoGroup1 = styled.div`
+type TInfoGroup1 = {
+  width: number;
+};
+export const InfoGroup1 = styled.div<TInfoGroup1>`
   display: flex;
   flex-direction: column;
   text-align: start;
   height: 3rem;
-  width: 100%;
+  max-width: ${({ width }) => `${width - 10}px`};
 
   > h1 :nth-child(1) {
     display: -webkit-box;
