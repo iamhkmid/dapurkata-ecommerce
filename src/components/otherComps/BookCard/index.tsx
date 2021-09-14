@@ -13,11 +13,18 @@ const BookCard: FC<{ book: TBookCard }> = ({ book }) => {
   return (
     <El.Main>
       <El.CoverWrapper>
-        <BookCover url={book.coverUrl} quality={75} height={200} width={145} />
+        <div>
+          <BookCover
+            url={book.coverUrl}
+            quality={75}
+            height={190}
+            width={130}
+          />
+        </div>
       </El.CoverWrapper>
       <El.InfoWrapper>
         <El.InfoGroup1 className="group-1">
-          <h1>{book.title.toUpperCase()}</h1>
+          <h1>{book.title}</h1>
           <h1>{book.Author.name}</h1>
         </El.InfoGroup1>
       </El.InfoWrapper>

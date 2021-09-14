@@ -12,12 +12,12 @@ export const Main = styled.button`
     height: 1.2rem;
     stroke-width: 1.5px;
   }
-  background: transparent;
-  border: 1px solid ${({ theme }) => theme.border[2]};
-  color: ${({ theme }) => theme.color[2]};
+  background: ${({ theme }) => theme.button.danger.background};
+  color: ${({ theme }) => theme.button.danger.color};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
   :hover {
-    background: ${({ theme }) => theme.button.danger.background};
+    background: ${({ theme }) => theme.button.hover.danger.background};
     color: ${({ theme }) => theme.button.danger.color};
   }
 

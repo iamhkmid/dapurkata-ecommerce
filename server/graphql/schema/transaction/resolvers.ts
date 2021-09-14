@@ -4,6 +4,7 @@ import { TMidtransPayType, TMidtransProps } from "../../../types/api";
 import {
   TTransactionQuery,
   TTransactionMutation,
+  TOrder,
 } from "../../../types/graphql";
 import { TGQLPaymentType, TPaymentBT } from "../../../types/transaction";
 import {
@@ -97,8 +98,6 @@ export const Mutation: TTransactionMutation = {
       where: { id: data.recipientId },
       include: { User: true },
     });
-    console.log(data);
-
     validateUser({
       target: "SPECIFIC_USER",
       targetId: recipient.User.id,
@@ -199,6 +198,7 @@ export const Mutation: TTransactionMutation = {
               },
             },
             PaymentInfo: { create: charge.paymentInfo },
+            PaymentService: { connect: { id: charge.paymentServiceId } },
           },
         });
         return order;
@@ -292,6 +292,7 @@ export const Mutation: TTransactionMutation = {
               },
             },
             PaymentInfo: { create: charge.paymentInfo },
+            PaymentService: { connect: { id: charge.paymentServiceId } },
           },
         });
         return order;
@@ -299,5 +300,43 @@ export const Mutation: TTransactionMutation = {
       default:
         throw new ApolloError(`Order type not found`);
     }
+  },
+};
+
+export const Order: TOrder = {
+  PaymentService: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { PaymentService: { include: { PaymentType: true } } },
+    });
+    return findOrder.PaymentService;
+  },
+  User: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { User: true },
+    });
+    return findOrder.User;
+  },
+  ItemDetails: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { ItemDetails: true },
+    });
+    return findOrder.ItemDetails;
+  },
+  CustomerDetails: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { CustomerDetails: { include: { ShippingAddress: true } } },
+    });
+    return findOrder.CustomerDetails;
+  },
+  PaymentInfo: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { PaymentInfo: true },
+    });
+    return findOrder.PaymentInfo;
   },
 };

@@ -55,7 +55,8 @@ export const Section = styled.div`
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   background: ${({ theme }) => theme.background[2]};
-  width: 30rem;
+  min-width: 80%;
+  min-height: 70%;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     width: 30rem;
@@ -66,30 +67,51 @@ export const Section = styled.div`
   transition: 0.4s all ease;
 `;
 
+export const Content = styled.div`
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 2rem;
+`;
+
+export const ActionBtn = styled.div`
+  display: flex;
+  gap: 1rem;
+`;
+
 export const MessageWrapper = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 1rem;
 `;
-export const BookWrapper = styled.div`
+export const Images = styled.div`
   display: flex;
   gap: 1rem;
-  padding: 1rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 1rem 0.5rem;
   }
   transition: 0.4s all ease;
 `;
 
-export const CoverWrapper = styled.div`
+export const ImageWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  height: 10rem;
-  aspect-ratio: 1/1.5;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    height: 9rem;
+  overflow: hidden;
+  min-height: 15rem;
+  min-width: 15rem;
+  background: ${({ theme }) => theme.content.bookCard.cover.background};
+  border-radius: ${({ theme }) => theme.borderRadius};
+
+  > div {
+    overflow: hidden;
+    border: 1px solid ${({ theme }) => theme.border[2]};
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px,
+      rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
+      rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   }
+
   transition: 0.4s all ease;
 `;
 
@@ -110,8 +132,8 @@ export const Info = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 2rem;
+    font-weight: 700;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.8rem;
@@ -122,16 +144,16 @@ export const Info = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 1.2rem;
+    font-weight: 500;
     color: ${({ theme }) => theme.content.bookCard.color.author};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.6rem;
     }
   }
   > h1:nth-child(3) {
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 1.5rem;
+    font-weight: 300;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.8rem;
@@ -213,8 +235,7 @@ export const ButtonWrapper = styled.div`
   }
 `;
 
-export const BtnWrapper = styled.div`
+export const CartBtn = styled.div`
   display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
+  gap: 1rem;
 `;

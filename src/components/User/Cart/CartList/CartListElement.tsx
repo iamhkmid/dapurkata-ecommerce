@@ -158,7 +158,7 @@ export const TableInfo = styled.table`
     height: 100%;
     background: ${({ theme }) => theme.background[2]};
     color: ${({ theme }) => theme.color[2]};
-    z-index: 5;
+    z-index: 3;
   }
   > thead {
     th {
@@ -210,4 +210,10 @@ export const Price = styled.h1`
     font-size: 0.7rem;
   }
   transition: 0.4s all ease;
+`;
+
+export const ActionBtn = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
 `;

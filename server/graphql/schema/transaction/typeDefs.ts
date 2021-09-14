@@ -2,7 +2,7 @@ import { gql } from "graphql-tag";
 
 const typeDefs = gql`
   type Query {
-    paymentType(isEnabled: Boolean): [paymentType] @auth(requires: AUTH)
+    paymentType(isEnabled: Boolean): [PaymentType] @auth(requires: AUTH)
     howToPay(paymentId: ID!): [HowToPay]
     order(orderId: ID!): Order @auth(requires: AUTH)
     orders(userId: ID, filterBy: orderFilter!): [Order] @auth(requires: AUTH)
@@ -17,7 +17,7 @@ const typeDefs = gql`
     USER
   }
 
-  type paymentType {
+  type PaymentType {
     id: ID
     name: String
     PaymentService: [PaymentService]
@@ -34,6 +34,7 @@ const typeDefs = gql`
     icon: String
     description: String
     isEnabled: Boolean
+    PaymentType: PaymentType
     createdAt: Date
     updatedAt: Date
   }

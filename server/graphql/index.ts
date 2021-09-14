@@ -8,6 +8,17 @@ const graphql = async ({ app, httpServer }) => {
   const apolloServer = new ApolloServer({
     schema,
     context,
+    plugins: [
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              subscriptionServer.close();
+            },
+          };
+        },
+      },
+    ],
   });
   await apolloServer.start();
   apolloServer.applyMiddleware({ app, cors: false });
@@ -26,9 +37,6 @@ const graphql = async ({ app, httpServer }) => {
     },
     { server: httpServer, path: apolloServer.graphqlPath }
   );
-  ["SIGINT", "SIGTERM"].forEach((signal) => {
-    process.on(signal, () => subscriptionServer.close());
-  });
 };
 
 export default graphql;

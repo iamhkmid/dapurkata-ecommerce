@@ -23,7 +23,9 @@ const Orders = () => {
             {data?.map((val) => {
               return (
                 <tr key={val.id}>
-                  <td>{val.id}</td>
+                  <td>
+                    <El.OrderId>{val.id}</El.OrderId>
+                  </td>
                   <td>
                     <El.GrossAmount>
                       {`${val.currency} `}
@@ -35,7 +37,12 @@ const Orders = () => {
                       />
                     </El.GrossAmount>
                   </td>
-                  <td>{""}</td>
+                  <td>
+                    <El.Payment>
+                      <div>{val.PaymentService?.PaymentType?.name}</div>
+                      <div>{val.PaymentService?.name}</div>
+                    </El.Payment>
+                  </td>
                   <td>
                     <El.TransactionStatus status={val.transactionStatus}>
                       {val.transactionStatus[0].toUpperCase() +

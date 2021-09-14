@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { encode } from "js-base64";
 import { TAPIMidtrans } from "../../../types/api";
-import { TPaymentInfo } from "../../../types/transaction";
+import { TGQLPaymentInfo } from "../../../types/transaction";
 import { bankTransfer } from "./bankTransfer";
 const serverKey = encode(`${process.env.MIDTRANS_SERVER_KEY}:`);
 
@@ -26,7 +26,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         transaction_details,
       });
       const { va_numbers, ...rest } = charge;
-      const paymentInfo: TPaymentInfo[] = [
+      const paymentInfo: TGQLPaymentInfo[] = [
         { name: "bank", value: "BCA" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
@@ -41,7 +41,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         transaction_details,
       });
       const { va_numbers, ...rest } = charge;
-      const paymentInfo: TPaymentInfo[] = [
+      const paymentInfo: TGQLPaymentInfo[] = [
         { name: "bank", value: "BNI" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
@@ -56,7 +56,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         transaction_details,
       });
       const { va_numbers, ...rest } = charge;
-      const paymentInfo: TPaymentInfo[] = [
+      const paymentInfo: TGQLPaymentInfo[] = [
         { name: "bank", value: "BRI" },
         { name: "va_number", value: va_numbers[0].va_number },
       ];
@@ -73,7 +73,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         echannel: { bill_info1: "payment for", bill_info2: "book" },
       });
       const { bill_key, biller_code, ...rest } = charge;
-      const paymentInfo: TPaymentInfo[] = [
+      const paymentInfo: TGQLPaymentInfo[] = [
         { name: "bank", value: "Mandiri" },
         { name: "bill_key", value: bill_key },
         { name: "biller_code", value: biller_code },
@@ -89,7 +89,7 @@ export const midtrans: TAPIMidtrans = async (props) => {
         transaction_details,
       });
       const { permata_va_number, ...rest } = charge;
-      const paymentInfo: TPaymentInfo[] = [
+      const paymentInfo: TGQLPaymentInfo[] = [
         { name: "bank", value: "Permata" },
         { name: "va_number", value: permata_va_number },
       ];

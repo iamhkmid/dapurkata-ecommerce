@@ -4,19 +4,21 @@ export const Main = styled.div`
   font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
-  width: 9rem;
-  aspect-ratio: 1/1.8;
   cursor: pointer;
-  overflow: hidden;
+  position: relative;
   border: 1px solid transparent;
-  background: ${({ theme }) => theme.background[2]};
+  padding: 0.2rem;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.content.bookCard.background};
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
 
   :hover {
-    border-color: ${({ theme }) => theme.button.primary.background};
-    box-shadow: ${({ theme }) => theme.boxShadow};
+    border: 1px solid ${({ theme }) => theme.content.bookCard.hover.border};
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+      rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
     .group-1 {
       text-decoration: underline;
-      text-decoration-color: white;
+      text-decoration-color: ${({ theme }) => theme.color[2]};
     }
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -28,8 +30,7 @@ export const CoverWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  aspect-ratio: 1/1.5;
-  padding: 0.1rem;
+  border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
 
   transition: 0.4s all ease;
@@ -37,7 +38,9 @@ export const CoverWrapper = styled.div`
 
 export const InfoWrapper = styled.div`
   display: flex;
+  font-family: "Poppins", sans-serif;
   flex-direction: column;
+  width: 100%;
   gap: 0.5rem;
   padding: 0.3rem 0.3rem 0.5rem 0.3rem;
   aspect-ratio: 1/0.3;
@@ -64,11 +67,12 @@ export const InfoGroup1 = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    font-size: 0.8rem;
-    font-weight: 400;
+    line-height: 1.2;
+    font-size: 0.75rem;
+    font-weight: 500;
     color: ${({ theme }) => theme.content.bookCard.color.title};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
     }
   }
   > h1 :nth-child(2) {
@@ -76,11 +80,11 @@ export const InfoGroup1 = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
     font-weight: 400;
     color: ${({ theme }) => theme.content.bookCard.color.author};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.6rem;
+      font-size: 0.55rem;
     }
   }
 `;

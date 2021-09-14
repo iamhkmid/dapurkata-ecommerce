@@ -1,5 +1,6 @@
 import { Prisma, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
+import { PubSub } from "graphql-subscriptions";
 import { TAPI } from "./api";
 import { TUserCtx } from "./user";
 
@@ -15,6 +16,7 @@ type TCtx = {
   user?: TUserCtx;
   api: TAPI;
   db: TDB;
+  pubsub: PubSub;
 };
 type TDecoded = {
   id: string;

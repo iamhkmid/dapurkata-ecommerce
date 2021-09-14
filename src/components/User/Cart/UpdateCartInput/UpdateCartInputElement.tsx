@@ -13,8 +13,9 @@ export const InputLabel = styled.label`
 
 export const InputWrapper = styled.div`
   display: flex;
-  border: 1px solid ${({ theme }) => theme.border[2]};
   border-radius: 0.1rem;
+  box-shadow: ${({ theme }) => theme.boxShadow};
+  background: ${({ theme }) => theme.input.focus.background};
   overflow: hidden;
 `;
 

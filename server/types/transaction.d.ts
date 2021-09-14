@@ -156,16 +156,16 @@ export type TGQLOrder = {
   expirationTime: Date;
   transactionStatus: string;
   fraudStatus: string;
-  ItemDetails?: TItemDetail[];
-  PaymentInfo?: TPaymentInfo[];
-  CustomerDetails?: TCustomerDetails;
+  ItemDetails?: TGQLItemDetail[];
+  PaymentInfo?: TGQLPaymentInfo[];
+  CustomerDetails?: TGQLCustomerDetails;
   createdAt: Date;
   updatedAt: Date;
 };
 
-type TPaymentInfo = { name: string; value: string };
+type TGQLPaymentInfo = { name: string; value: string };
 
-type TItemDetail = {
+type TGQLItemDetail = {
   id: string;
   name: string;
   price: number;
@@ -175,19 +175,19 @@ type TItemDetail = {
   updatedAt: Date;
 };
 
-type TCustomerDetails = {
+type TGQLCustomerDetails = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   orderId: string;
-  ShippingAddress: TShippingAddress;
+  ShippingAddress: TGQLShippingAddress;
   createdAt: Date;
   updatedAt: Date;
 };
 
-type TShippingAddress = {
+type TGQLShippingAddress = {
   id: string;
   firstName: string;
   lastName: string;

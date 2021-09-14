@@ -8,9 +8,9 @@ const Main = styled.main`
 `;
 
 const Loader = styled.div`
-  --color: ${({ theme }) => theme.content.bookCard.noImage.color};
+  --color: ${({ theme }) => theme.loading.img};
   --size-mid: 6vmin;
-  --size-dot: 1.5vmin;
+  --size-dot: 2vmin;
   --size-bar: 0.4vmin;
   --size-square: 3vmin;
   display: flex;
@@ -31,7 +31,7 @@ const Loader = styled.div`
     width: var(--size-dot);
     height: var(--size-dot);
     background-color: var(--color);
-    border-radius: 50%;
+    border-radius: 100%;
     opacity: 0;
     animation: loader-2 0.8s cubic-bezier(0.2, 0.32, 0, 0.87) infinite;
   }

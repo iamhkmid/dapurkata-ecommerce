@@ -75,15 +75,19 @@ const CartList = () => {
                         </El.Price>
                       </td>
                       <td>
-                        <UpdateCartInput
-                          cartProps={{
-                            cartId: val.id,
-                            amount: val.amount,
-                          }}
-                        />
+                        <El.ActionBtn>
+                          <UpdateCartInput
+                            cartProps={{
+                              cartId: val.id,
+                              amount: val.amount,
+                            }}
+                          />
+                        </El.ActionBtn>
                       </td>
                       <td>
-                        <DeleteCart cartId={val.id} />
+                        <El.ActionBtn>
+                          <DeleteCart cartId={val.id} />
+                        </El.ActionBtn>
                       </td>
                     </tr>
                   );

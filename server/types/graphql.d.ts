@@ -36,8 +36,12 @@ import {
   TDBPaymentType,
   TGQLArgsOrder,
   TGQLArgsPaymentType,
+  TGQLCustomerDetails,
   TGQLHowToPay,
+  TGQLItemDetail,
   TGQLOrder,
+  TGQLPaymentInfo,
+  TGQLPaymentService,
   TGQLPaymentType,
 } from "./transaction";
 import {
@@ -341,4 +345,28 @@ export type TTransactionMutation = {
     args: TGQLArgsOrder,
     context: TCtx
   ) => Promise<TGQLOrder>;
+};
+
+export type TOrder = {
+  PaymentService: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLPaymentService>;
+  User: (parent: TGQLOrder, args: null, context: TCtx) => Promise<TGQLUser>;
+  ItemDetails: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLItemDetail[]>;
+  PaymentInfo: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLPaymentInfo[]>;
+  CustomerDetails: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLCustomerDetails>;
 };

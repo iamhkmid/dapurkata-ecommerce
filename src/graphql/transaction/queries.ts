@@ -27,6 +27,14 @@ export const ORDERS_FILTER_BY_USER = gql`
       transactionTime
       transactionStatus
       fraudStatus
+      PaymentService {
+        id
+        name
+        PaymentType {
+          id
+          name
+        }
+      }
     }
   }
 `;

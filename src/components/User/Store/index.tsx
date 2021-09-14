@@ -53,7 +53,7 @@ const Store = () => {
                   onClick={() =>
                     dispatch({
                       type: "SHOW_POPUP",
-                      value: { name: "ADD_SHOPPINGCART", value: book.id },
+                      value: { name: "BOOK_DETAIL", value: book.id },
                     })
                   }
                 >

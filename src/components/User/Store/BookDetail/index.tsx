@@ -7,11 +7,12 @@ import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { TCart } from "../../../../types/shoppingCart";
 import IconsControl from "../../../IconsControl";
 import BookCover from "../../../otherComps/BookCard/BookCover";
+import Button from "../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../otherComps/PopUpHeader";
-import AddCartInput from "../AddCartInput";
-import DeleteCart from "../DeleteCart";
-import UpdateCartInput from "../UpdateCartInput";
-import * as El from "./AddCartElement";
+import AddCartInput from "../../Cart/AddCartInput";
+import DeleteCart from "../../Cart/DeleteCart";
+import UpdateCartInput from "../../Cart/UpdateCartInput";
+import * as El from "./BookDetailElement";
 import { useGQLCreateSC, useGQLGetbook } from "./useGQL";
 
 type TCover = {
@@ -20,7 +21,7 @@ type TCover = {
   url: string;
 };
 
-const AddCart = () => {
+const BookDetail = () => {
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { user } = useContext(AuthContext);
   const { shoppingCart } = useContext(ShoppingCartCtx);
@@ -74,16 +75,25 @@ const AddCart = () => {
       {dataGB && (
         <El.Section>
           <PopUpHeader close={() => dispatch({ type: "CLOSE_POPUP" })} />
-          <El.BookWrapper>
-            <El.CoverWrapper>
-              <BookCover url={coverURL} quality={10} height={160} width={110} />
-            </El.CoverWrapper>
+          <El.Content>
+            <El.Images>
+              <El.ImageWrapper>
+                <div>
+                  <BookCover
+                    url={coverURL}
+                    quality={75}
+                    height={225}
+                    width={150}
+                  />
+                </div>
+              </El.ImageWrapper>
+            </El.Images>
             <El.InfoWrapper>
               <El.Info>
-                <h1>{dataGB.title.toUpperCase()}</h1>
+                <h1>{dataGB.title}</h1>
                 <h1>{dataGB.Author.name}</h1>
                 <h1>
-                  {`Rp `}
+                  {`IDR `}
                   <NumberFormat
                     value={dataGB.price}
                     displayType={"text"}
@@ -96,7 +106,7 @@ const AddCart = () => {
                 <AddCartInput amount={amount} setAmount={setAmount} />
               )}
               {currCart && (
-                <El.BtnWrapper>
+                <El.CartBtn>
                   <UpdateCartInput
                     cartProps={{
                       cartId: currCart.id,
@@ -104,37 +114,45 @@ const AddCart = () => {
                     }}
                   />
                   <DeleteCart cartId={currCart.id} />
-                </El.BtnWrapper>
+                </El.CartBtn>
               )}
+              <El.ActionBtn>
+                <Button
+                  type="button"
+                  name="Masukan Keranjang"
+                  color="section"
+                />
+                <Button type="button" name="Beli" color="primary" />
+              </El.ActionBtn>
             </El.InfoWrapper>
-          </El.BookWrapper>
-          <El.ButtonWrapper>
-            <button type="button">Detail</button>
-            <button
-              type="button"
-              onClick={() =>
-                createShoppingCart({
-                  bookId: dataGB.id,
-                  weight: dataGB.weight,
-                  amount,
-                })
-              }
-              disabled={isDisabled}
-            >
-              {IconsControl("CartAdd")}
-            </button>
-            <button
-              type="button"
-              onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
-              disabled={isDisabled}
-            >
-              Beli Sekarang
-            </button>
-          </El.ButtonWrapper>
+            {/* <El.ButtonWrapper>
+              <button type="button">Detail</button>
+              <button
+                type="button"
+                onClick={() =>
+                  createShoppingCart({
+                    bookId: dataGB.id,
+                    weight: dataGB.weight,
+                    amount,
+                  })
+                }
+                disabled={isDisabled}
+              >
+                {IconsControl("CartAdd")}
+              </button>
+              <button
+                type="button"
+                onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
+                disabled={isDisabled}
+              >
+                Beli Sekarang
+              </button>
+            </El.ButtonWrapper> */}
+          </El.Content>
         </El.Section>
       )}
     </El.Main>
   );
 };
 
-export default AddCart;
+export default BookDetail;

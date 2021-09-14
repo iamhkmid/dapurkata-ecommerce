@@ -8,7 +8,7 @@ const themeConf = {
   light: {
     name: "light",
     background: {
-      1: "#e8ebf1",
+      1: "#eef1f7",
       2: "#fdfeff",
       3: "#0a0c18",
     },
@@ -29,13 +29,13 @@ const themeConf = {
     borderRadius: "0.2rem",
     popup: "rgba(6, 13, 20, 0.877)",
     transactionStatus: {
-      pending: { background: "#c0cfe47f", color: "#424953", border: "#97a2b3" },
+      pending: { background: "#c0cfe47f", color: "#424953", border: "#bdc7d6" },
     },
     content: {
       cart: { color: { total: "#e94aaf" } },
       bookCard: {
-        background: { info1: "#263b55a0", cart: "#10143d" },
-        noImage: { background: "#a4b4d7", color: "#eff2f8" },
+        cover: { background: "#d2dcf1" },
+        background: "#f7f9fc",
         color: {
           title: "#263b55",
           author: "#d34fa2",
@@ -44,7 +44,7 @@ const themeConf = {
         },
         hover: {
           background: { cart: "#10143d" },
-          color: { cart: "#27599fb3" },
+          border: "#a5bfe4",
         },
         active: { background: { cart: "#10143d" }, color: { cart: "#3f74c0" } },
       },
@@ -117,7 +117,7 @@ const themeConf = {
       },
       disabled: { background: "#b3c0d2", color: "#e9ecf1" },
     },
-    loading: { 1: "#dee7f4", 2: "#bbc9db" },
+    loading: { 1: "#dee7f4", 2: "#bbc9db", img: "#9facbe" },
     navbar: {
       menu: {
         hover: { background: "#3f75c013" },
@@ -176,7 +176,8 @@ const themeConf = {
     content: {
       cart: { color: { total: "#f06ec0" } },
       bookCard: {
-        background: { info1: "#263b55c1", cart: "#10143d" },
+        cover: { background: "#465366" },
+        background: "#2e3949",
         noImage: { background: "#1c2430", color: "#a8b8d1" },
         color: {
           title: "#f5f8fc",
@@ -186,7 +187,7 @@ const themeConf = {
         },
         hover: {
           background: { cart: "#10143d" },
-          color: { cart: "#949cf6c1" },
+          border: "#71849e",
         },
         active: {
           background: { cart: "#10143d" },
@@ -262,7 +263,7 @@ const themeConf = {
       },
       disabled: { background: "#1e2531", color: "#404e62" },
     },
-    loading: { 1: "#1e2330", 2: "#141a24" },
+    loading: { 1: "#1e2330", 2: "#141a24", img: "#a7b1c0" },
     navbar: {
       menu: {
         hover: { background: "#3b445482" },

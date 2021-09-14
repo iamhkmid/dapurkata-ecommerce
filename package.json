@@ -37,6 +37,7 @@
     "express-useragent": "^1.0.15",
     "framer-motion": "^3.10.0",
     "graphql": "^15.5.3",
+    "graphql-subscriptions": "^1.2.1",
     "graphql-tools": "^4.0.8",
     "graphql-upload": "^12.0.0",
     "js-base64": "^3.6.1",
