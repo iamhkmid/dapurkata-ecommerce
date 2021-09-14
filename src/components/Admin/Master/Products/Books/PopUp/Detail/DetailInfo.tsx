@@ -3,7 +3,7 @@ import { TGetBook } from "../../../../../../../types/book";
 import * as El from "./DetailInfoElement";
 import Image from "next/image";
 import { useState } from "react";
-import BookCover from "../../../../../../otherComps/BookCard/BookCover";
+import BookCover from "../../../../../../User/Store/Cover/CoverFixed";
 
 const DetailInfo = ({ data }: { data: TGetBook }) => {
   const coverData = data.BookPicture.filter((img) => img.type === "COVER");

@@ -6,7 +6,7 @@ import { AuthContext } from "../../../../contexts/AuthCtx";
 import { OrderCtx } from "../../../../contexts/OrderCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { ORDER } from "../../../../graphql/transaction/mutations";
-import BookCover from "../../../otherComps/BookCard/BookCover";
+import BookCover from "../../Store/Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import Loading from "./Loading";
 import * as El from "./OrderSummaryElement";

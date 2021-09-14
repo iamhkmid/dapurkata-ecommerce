@@ -7,7 +7,7 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { TCart } from "../../../../types/shoppingCart";
 import IconsControl from "../../../IconsControl";
-import BookCover from "../../../otherComps/BookCard/BookCover";
+import BookCover from "../Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../otherComps/PopUpHeader";
 import AddCartInput from "../../Cart/AddCartInput";

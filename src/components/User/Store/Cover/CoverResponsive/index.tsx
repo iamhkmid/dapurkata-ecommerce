@@ -1,9 +1,8 @@
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import IconsControl from "../../../IconsControl";
-import Loading2 from "../../Loading/Loading2";
-import LoadingBookCover from "../../Loading/LoadingBookCover";
+import IconsControl from "../../../../IconsControl";
+import LoadingBookCover from "../../../../otherComps/Loading/LoadingBookCover";
 
 export const Main = styled.div`
   display: flex;
@@ -56,12 +55,9 @@ export const DefImg = styled.div`
 
 type TBookCover = {
   url: string;
-  quality: number;
-  height: number;
-  width: number;
 };
 
-const BookCover: FC<TBookCover> = ({ url, quality, height, width }) => {
+const Cover: FC<TBookCover> = ({ url }) => {
   const defaultCover = "/uploads/books/default.svg";
   const [cover, setCover] = useState<string>(defaultCover);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -83,10 +79,8 @@ const BookCover: FC<TBookCover> = ({ url, quality, height, width }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
           alt="Cover"
-          layout="fixed"
-          width={width}
-          height={height}
-          quality={quality}
+          layout="fill"
+          quality={75}
           onLoad={() => setIsLoading(false)}
           onError={() => defaultImgSrc()}
         />
@@ -100,4 +94,4 @@ const BookCover: FC<TBookCover> = ({ url, quality, height, width }) => {
   );
 };
 
-export default BookCover;
+export default Cover;

@@ -4,7 +4,7 @@ import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import BookCover from "../../../otherComps/BookCard/BookCover";
+import BookCover from "../../Store/Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import DeleteCart from "../DeleteCart";
 import UpdateCartInput from "../UpdateCartInput";

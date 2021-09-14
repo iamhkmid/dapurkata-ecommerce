@@ -3,10 +3,10 @@ import { GET_BOOKS_SORT_NEW } from "../../../graphql/book/queries";
 import { AuthContext } from "../../../contexts/AuthCtx";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import { TBookCard, TGQLGetBookCards } from "../../../types/book";
-import BookCard from "../../otherComps/BookCard";
 import * as El from "./StoreElement";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
+import Cover from "./Cover/CoverResponsive";
 
 const Store = () => {
   const { user } = useContext(AuthContext);
@@ -27,9 +27,8 @@ const Store = () => {
 
   return (
     <El.Main>
-      <El.Section1>
-        <El.SectionTitle>Terbaru</El.SectionTitle>
-        <El.ItemGroup>
+      <El.Section>
+        <El.Cards>
           {books &&
             books.map((book, index) => {
               const cover = book.BookPicture.filter(
@@ -48,7 +47,7 @@ const Store = () => {
                 inCart: inCart ? true : false,
               };
               return (
-                <div
+                <El.Card
                   key={book.id}
                   onClick={() =>
                     dispatch({
@@ -57,41 +56,18 @@ const Store = () => {
                     })
                   }
                 >
-                  <BookCard book={bookData} />
-                </div>
+                  <El.CoverWrapper>
+                    <Cover url={coverUrl} />
+                  </El.CoverWrapper>
+                  <El.BookInfo>
+                    <h1 className="title">{book.title}</h1>
+                    <h1 className="author">{book.Author.name}</h1>
+                  </El.BookInfo>
+                </El.Card>
               );
             })}
-        </El.ItemGroup>
-      </El.Section1>
-      <El.Section2>
-        <El.SectionTitle>Pilihan Editor</El.SectionTitle>
-        <El.ItemGroup>
-          {books &&
-            books.map((book, index) => {
-              const cover = book.BookPicture.filter(
-                (img) => img.type === "COVER"
-              );
-              const coverUrl = cover.length > 0 && cover[0].url;
-              const inCart = shoppingCart.data.find(
-                (val) => val.Book.id === book.id
-              );
-              const bookData: TBookCard = {
-                id: book.id,
-                Author: book.Author,
-                coverUrl,
-                price: book.price,
-                title: book.title,
-                inCart: inCart ? true : false,
-              };
-              return (
-                <div key={book.id}>
-                  <BookCard book={bookData} />
-                </div>
-              );
-            })}
-        </El.ItemGroup>
-      </El.Section2>
-      <El.Section3></El.Section3>
+        </El.Cards>
+      </El.Section>
     </El.Main>
   );
 };
