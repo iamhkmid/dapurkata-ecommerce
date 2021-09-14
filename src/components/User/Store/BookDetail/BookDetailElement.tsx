@@ -71,6 +71,10 @@ export const Content = styled.div`
   display: flex;
   gap: 1rem;
   padding: 1rem 2rem;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    flex-direction: column;
+    padding: 1rem;
+  }
 `;
 
 export const ActionBtn = styled.div`
@@ -85,22 +89,23 @@ export const MessageWrapper = styled.div`
 `;
 export const Images = styled.div`
   display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
   gap: 1rem;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    padding: 1rem 0.5rem;
-  }
   transition: 0.4s all ease;
 `;
 
-export const ImageWrapper = styled.div`
+export const CoverWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
-  min-height: 15rem;
-  min-width: 15rem;
+  padding: 20px;
+  height: 260px;
+  aspect-ratio: 1/1;
   background: ${({ theme }) => theme.content.bookCard.cover.background};
   border-radius: ${({ theme }) => theme.borderRadius};
 
@@ -111,7 +116,11 @@ export const ImageWrapper = styled.div`
       rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px,
       rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px;
   }
-
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    height: 100%;
+    aspect-ratio: unset;
+    width: 100%;
+  }
   transition: 0.4s all ease;
 `;
 

@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
+import { useWindowSize } from "react-use";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
@@ -29,6 +30,14 @@ const BookDetail = () => {
   const [coverURL, setCoverURL] = useState<string>(null);
   const [amount, setAmount] = useState<number>(1);
   const [currCart, setCurrCart] = useState<TCart>(null);
+
+  const initialImgSize = { h: 220, w: 150 };
+  const [imgSize, setImgSize] = useState(initialImgSize);
+  const { width } = useWindowSize();
+  useEffect(() => {
+    width > 540 && setImgSize(initialImgSize);
+    width <= 540 && setImgSize({ h: 200, w: 135 });
+  }, [width]);
 
   const { dataGB, loadGB, errorGB } = useGQLGetbook({
     bookId: userNav.showPopUp.value,
@@ -77,16 +86,16 @@ const BookDetail = () => {
           <PopUpHeader close={() => dispatch({ type: "CLOSE_POPUP" })} />
           <El.Content>
             <El.Images>
-              <El.ImageWrapper>
+              <El.CoverWrapper>
                 <div>
                   <BookCover
                     url={coverURL}
                     quality={75}
-                    height={225}
-                    width={150}
+                    height={imgSize.h}
+                    width={imgSize.w}
                   />
                 </div>
-              </El.ImageWrapper>
+              </El.CoverWrapper>
             </El.Images>
             <El.InfoWrapper>
               <El.Info>

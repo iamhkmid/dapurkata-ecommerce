@@ -17,7 +17,7 @@ const BookCard: FC<{ book: TBookCard }> = ({ book }) => {
           <BookCover
             url={book.coverUrl}
             quality={75}
-            height={190}
+            height={180}
             width={130}
           />
         </div>
