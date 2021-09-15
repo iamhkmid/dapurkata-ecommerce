@@ -9,7 +9,7 @@ import { OrderCtx } from "../../../contexts/OrderCtx";
 import { useEffect } from "react";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 
-const MakePayment: FC = () => {
+const Order: FC = () => {
   const { query } = useRouter();
   const { order, dispatch } = useContext(OrderCtx);
   const { shoppingCart } = useContext(ShoppingCartCtx);
@@ -17,7 +17,6 @@ const MakePayment: FC = () => {
     bookId:
       (query.type as string) === "buy-now" && (query["book-id"] as string),
   });
-  useGQLGetRecipients();
   useEffect(() => {
     if (data && (query.type as string) === "buy-now") {
       dispatch({
@@ -63,4 +62,4 @@ const MakePayment: FC = () => {
   );
 };
 
-export default MakePayment;
+export default Order;
