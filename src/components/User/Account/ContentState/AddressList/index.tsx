@@ -40,7 +40,6 @@ const AddressList = () => {
               })
             }
             color="success"
-            icon="Plus"
           />
         </El.BtnWrapper>
         <El.Ul>

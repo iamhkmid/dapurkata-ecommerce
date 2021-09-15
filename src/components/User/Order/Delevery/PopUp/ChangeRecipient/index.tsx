@@ -53,7 +53,6 @@ const ChangeRecipient: FC = () => {
                 })
               }
               color="success"
-              icon="Plus"
             />
             <Button
               name="Simpan"
