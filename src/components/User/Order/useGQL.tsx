@@ -22,7 +22,7 @@ export const useGQLGetRecipients = () => {
   const { order, dispatch } = useContext(OrderCtx);
   const { user } = useContext(AuthContext);
   const { data, loading, error } = useQuery<TRecipients>(RECIPIENTS, {
-    skip: !user?.id,
+    skip: !user,
     errorPolicy: "all",
     variables: { userId: user.id },
   });
