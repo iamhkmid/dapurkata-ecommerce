@@ -24,7 +24,7 @@ export const useGQLGetRecipients = () => {
   const { data, loading, error } = useQuery<TRecipients>(RECIPIENTS, {
     skip: !user,
     errorPolicy: "all",
-    variables: { userId: user.id },
+    variables: { userId: user?.id },
   });
   useEffect(() => {
     const { recipient } = order;

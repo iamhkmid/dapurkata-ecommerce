@@ -16,6 +16,7 @@ export const MobileIcon = styled.div<TMobileIcon>`
   cursor: pointer;
   border-radius: 100%;
   aspect-ratio: 1/1;
+  overflow: hidden;
   border: 1px solid transparent;
   background: ${({ theme }) => theme.button.list.background};
   color: ${({ theme }) => theme.button.section.color};
