@@ -76,9 +76,7 @@ const BookCover: FC<TBookCover> = ({ url, quality, height, width }) => {
   }, [url]);
   return (
     <Main>
-      {cover === defaultCover && (
-        <DefImg>{IconsControl("DAPURKATA_WHITE")}</DefImg>
-      )}
+      {cover === defaultCover && <DefImg>{IconsControl("dapurkata")}</DefImg>}
       {cover && (
         <Image
           src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}

@@ -71,7 +71,6 @@ export const IconButton = styled.div<TIconButton>`
 
   > svg {
     height: 1.5rem;
-    background: transparent;
   }
 
   transition: 0.4s all ease;

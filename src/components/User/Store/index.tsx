@@ -6,7 +6,7 @@ import { TBookCard, TGQLGetBookCards } from "../../../types/book";
 import * as El from "./StoreElement";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
-import Cover from "./Cover/CoverResponsive";
+import CoverResponsive from "./Cover/CoverResponsive";
 
 const Store = () => {
   const { user } = useContext(AuthContext);
@@ -57,7 +57,7 @@ const Store = () => {
                   }
                 >
                   <El.CoverWrapper>
-                    <Cover url={coverUrl} />
+                    <CoverResponsive url={coverUrl} />
                   </El.CoverWrapper>
                   <El.BookInfo>
                     <h1 className="title">{book.title}</h1>

@@ -7,7 +7,7 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { TCart } from "../../../../types/shoppingCart";
 import IconsControl from "../../../IconsControl";
-import BookCover from "../Cover/CoverFixed";
+import CoverFixed from "../Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../otherComps/PopUpHeader";
 import AddCartInput from "../../Cart/AddCartInput";
@@ -88,7 +88,7 @@ const BookDetail = () => {
             <El.Images>
               <El.CoverWrapper>
                 <div>
-                  <BookCover
+                  <CoverFixed
                     url={coverURL}
                     quality={75}
                     height={imgSize.h}
@@ -127,11 +127,26 @@ const BookDetail = () => {
               )}
               <El.ActionBtn>
                 <Button
-                  type="button"
-                  name="Masukan Keranjang"
+                  type="icon"
+                  name=""
+                  icon="BAG-ADD-OUTLINE"
                   color="section"
+                  disabled={isDisabled}
+                  onClick={() =>
+                    createShoppingCart({
+                      bookId: dataGB.id,
+                      weight: dataGB.weight,
+                      amount,
+                    })
+                  }
                 />
-                <Button type="button" name="Beli" color="primary" />
+                <Button
+                  type="button"
+                  name="Beli"
+                  color="primary"
+                  onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
+                  disabled={isDisabled}
+                />
               </El.ActionBtn>
             </El.InfoWrapper>
             {/* <El.ButtonWrapper>

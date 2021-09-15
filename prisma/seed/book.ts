@@ -4,12 +4,12 @@ import { category } from "./category";
 
 export const book = async () => {
   const { cat1, cat2, cat3, cat4 } = await category();
-  const { author1, author2, author5 } = await author();
+  const { author1, author2, author5, author13 } = await author();
   const book1 = await prisma.book.create({
     data: {
       title: `Nebula`,
       synopsis:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "SELENA dan NEBULA adalah buku ke-8 dan ke-9 yang menceritakan siapa orangtua Raib dalam serial petualangan dunia paralel. Dua buku ini sebaiknya dibaca berurutan.Kedua buku ini juga bercerita tentang Akademi Bayangan Tingkat Tinggi, sekolah terbaik di seluruh Klan Bulan. Tentang persahabatan tiga mahasiswa, yang diam-diam memiliki rencana bertualang ke tempat-tempat jauh. Tapi petualangan itu berakhir buruk, saat persahabatan mereka diuji dengan rasa suka, egoisme, dan pengkhianatan. Ada banyak karakter baru, tempat-tempat baru, juga sejarah dunia paralel yang diungkap. Di dua buku ini kalian akan berkenalan dengan salah satu karakter paling kuat di dunia paralel sejauh ini. Tapi itu jika kalian bisa menebaknya. Dua buku ini bukan akhir. Justru awal terbukanya kembali portal menuju Klan Aldebaran.",
       edition: "new",
       series: "new",
       releaseYear: "2012",
@@ -41,7 +41,7 @@ export const book = async () => {
     data: {
       title: `Selena`,
       synopsis:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        "SELENA dan NEBULA adalah buku ke-8 dan ke-9 yang menceritakan siapa orangtua Raib dalam serial petualangan dunia paralel. Dua buku ini sebaiknya dibaca berurutan. Kedua buku ini juga bercerita tentang Akademi Bayangan Tingkat Tinggi, sekolah terbaik di seluruh Klan Bulan. Tentang persahabatan tiga mahasiswa, yang diam-diam memiliki rencana bertualang ke tempat-tempat jauh. Tapi petualangan itu berakhir buruk, saat persahabatan mereka diuji dengan rasa suka, egoisme, dan pengkhianatan. Ada banyak karakter baru, tempat-tempat baru, juga sejarah dunia paralel yang diungkap. Di dua buku ini kalian akan berkenalan dengan salah satu karakter paling kuat di dunia paralel sejauh ini. Tapi itu jika kalian bisa menebaknya. Dua buku ini bukan akhir. Justru awal terbukanya kembali portal menuju Klan Aldebaran.",
       edition: "new",
       series: "new",
       releaseYear: "2012",
@@ -102,6 +102,37 @@ export const book = async () => {
   });
   const book4 = await prisma.book.create({
     data: {
+      title: `Concerto Al Malioboro`,
+      synopsis:
+        "Lima anak muda menuntut ilmu di sebuah universitas swasta di Yogyakarta. Mereka seangkatan dan mengambil jurusan yang sama. Mereka adalah Kardiv asal Surabaya, Wawan asal Kediri, Astrid dan Vera sama-sama orang Solo, serta Widya yang asli Yogyakarta. Persahabatan mereka berawal ketika mereka berlima tergabung dalam sebuah kelompok tugas di salah satu kelas yang mereka ambil pada semester pertama.",
+      edition: "new",
+      series: "new",
+      releaseYear: "2012",
+      numberOfPages: 116,
+      height: 42,
+      weight: 100,
+      price: 50000,
+      stock: 43,
+      rating: "4.7",
+      imgDir: "/uploads/books/concerto-al-malioboro/",
+      Category: {
+        connect: [{ id: cat3.id }, { id: cat4.id }],
+      },
+      Author: {
+        connect: { id: author13.id },
+      },
+      BookPicture: {
+        create: [
+          {
+            type: "COVER",
+            url: "/uploads/books/concerto-al-malioboro/concerto-al-malioboro.jpg",
+          },
+        ],
+      },
+    },
+  });
+  const book5 = await prisma.book.create({
+    data: {
       title: `Example book1`,
       synopsis:
         "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
@@ -123,7 +154,7 @@ export const book = async () => {
       },
     },
   });
-  const book5 = await prisma.book.create({
+  const book6 = await prisma.book.create({
     data: {
       title: `Example book2`,
       synopsis:
@@ -146,7 +177,7 @@ export const book = async () => {
       },
     },
   });
-  const book6 = await prisma.book.create({
+  const book7 = await prisma.book.create({
     data: {
       title: `Example book3`,
       synopsis:
@@ -169,7 +200,7 @@ export const book = async () => {
       },
     },
   });
-  const book7 = await prisma.book.create({
+  const book8 = await prisma.book.create({
     data: {
       title: `Example book4`,
       synopsis:
@@ -192,7 +223,7 @@ export const book = async () => {
       },
     },
   });
-  const book8 = await prisma.book.create({
+  const book9 = await prisma.book.create({
     data: {
       title: `Example book5`,
       synopsis:
@@ -215,7 +246,7 @@ export const book = async () => {
       },
     },
   });
-  const book9 = await prisma.book.create({
+  const book10 = await prisma.book.create({
     data: {
       title: `Example book6`,
       synopsis:
@@ -238,7 +269,7 @@ export const book = async () => {
       },
     },
   });
-  const book10 = await prisma.book.create({
+  const book11 = await prisma.book.create({
     data: {
       title: `Example book7`,
       synopsis:
@@ -261,7 +292,7 @@ export const book = async () => {
       },
     },
   });
-  const book11 = await prisma.book.create({
+  const book12 = await prisma.book.create({
     data: {
       title: `Example book8`,
       synopsis:
@@ -296,5 +327,6 @@ export const book = async () => {
     book9,
     book10,
     book11,
+    book12,
   });
 };

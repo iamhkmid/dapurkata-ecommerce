@@ -28,7 +28,7 @@ const Content: FC<TContent> = (Props) => {
       >
         <El.ContentTitle>{name}</El.ContentTitle>
         <El.DropdownIconWrapper isShowed={isShowed} disabled={disabled}>
-          {IconsControl("chevron-up")}
+          {IconsControl("chevron-up-outline")}
         </El.DropdownIconWrapper>
       </El.ContentHeader>
       <El.ContentBody isShowed={isShowed}>

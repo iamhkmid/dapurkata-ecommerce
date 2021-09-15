@@ -4,7 +4,7 @@ export const Main = styled.main`
   display: flex;
   gap: 2rem;
   flex-direction: column;
-  padding-top: 5rem;
+  padding: 5rem 0;
   align-items: center;
   justify-content: center;
   font-family: "Poppins", sans-serif;
@@ -35,7 +35,7 @@ export const Cards = styled.div`
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
   gap: 20px;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -79,6 +79,7 @@ export const BookInfo = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
+    line-height: 1.2;
     font-size: 0.8rem;
     font-weight: 500;
     color: ${({ theme }) => theme.color[1]};

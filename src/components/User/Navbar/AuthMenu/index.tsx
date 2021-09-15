@@ -57,7 +57,7 @@ const AuthMenu = () => {
               />
             </El.PhotoWrapper>
             <El.MenuIconWrapper>
-              {IconsControl("chevron-down")}
+              {IconsControl("chevron-down-outline")}
             </El.MenuIconWrapper>
             <AnimatePresence>
               {userNav.showMenu === "MENU" && <Dropdown />}

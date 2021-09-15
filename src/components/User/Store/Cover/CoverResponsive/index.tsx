@@ -72,18 +72,26 @@ const Cover: FC<TBookCover> = ({ url }) => {
   }, [url]);
   return (
     <Main>
-      {cover === defaultCover && (
-        <DefImg>{IconsControl("DAPURKATA_WHITE")}</DefImg>
-      )}
+      {cover === defaultCover && <DefImg>{IconsControl("dapurkata")}</DefImg>}
       {cover && (
-        <Image
-          src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
-          alt="Cover"
-          layout="fill"
-          quality={75}
-          onLoad={() => setIsLoading(false)}
-          onError={() => defaultImgSrc()}
-        />
+        <div
+          style={{
+            position: "relative",
+            display: "flex",
+            height: "100%",
+            width: "100%",
+          }}
+        >
+          <Image
+            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
+            alt="Cover"
+            layout="fill"
+            objectFit="fill"
+            quality={75}
+            onLoad={() => setIsLoading(false)}
+            onError={() => defaultImgSrc()}
+          />
+        </div>
       )}
       {cover && isLoading && (
         <LoadingWrapper>

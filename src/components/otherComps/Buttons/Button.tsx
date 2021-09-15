@@ -85,6 +85,7 @@ const LoadingWrapper = styled.div`
   width: 100%;
   transition: 0.4s all ease;
 `;
+
 const ButtonIcon = styled.button<TButtonElement>`
   display: flex;
   cursor: pointer;
@@ -92,9 +93,11 @@ const ButtonIcon = styled.button<TButtonElement>`
   justify-content: center;
   border: none;
   outline: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: ${({ theme }) => theme.button.borderRadius};
   > svg {
-    height: 2rem;
-    padding: 0.3rem;
+    height: 1.3rem;
+    stroke-width: 48;
   }
   ${({ theme, color }) => css`
     background: ${theme.button[color || "primary"].background};
@@ -108,23 +111,45 @@ const ButtonIcon = styled.button<TButtonElement>`
     `}
   }
 
+  ${({ isLoading, disabled }) =>
+    (isLoading || disabled) &&
+    css`
+      background: ${({ theme }) => theme.button.disabled.background};
+      color: ${({ theme }) => theme.button.disabled.color};
+      cursor: default;
+      :hover {
+        background: ${({ theme }) => theme.button.disabled.background};
+        color: ${({ theme }) => theme.button.disabled.color};
+      }
+      :focus {
+        border: 1px solid transparent;
+        box-shadow: none;
+      }
+    `}
   transition: 0.4s all ease;
 `;
 
-type TButton = {
-  name: string;
-  disabled?: boolean;
-  type: "submit" | "button" | "buttonIcon";
-  color?: "primary" | "danger" | "success" | "base" | "section" | "list";
-  onClick?: any;
-  icon?: string;
-  isLoading?: boolean;
-};
+type TButton =
+  | {
+      name: string;
+      disabled?: boolean;
+      color?: "primary" | "danger" | "success" | "base" | "section" | "list";
+      onClick?: any;
+      isLoading?: boolean;
+    } & (
+      | {
+          type: "submit" | "button";
+        }
+      | {
+          type: "icon";
+          icon: string;
+        }
+    );
 
-const Button: FC<TButton> = (Props) => {
-  const { name, disabled, type, onClick, color, icon, isLoading } = Props;
-  switch (type) {
-    case "submit":
+const Button: FC<TButton> = (props) => {
+  switch (props.type) {
+    case "submit": {
+      const { name, disabled, type, onClick, color, isLoading } = props;
       return (
         <ButtonElement
           type="submit"
@@ -132,7 +157,6 @@ const Button: FC<TButton> = (Props) => {
           color={color}
           isLoading={!!isLoading}
         >
-          {icon && IconsControl(icon)}
           {name}
           {!!isLoading && (
             <LoadingWrapper>
@@ -141,7 +165,9 @@ const Button: FC<TButton> = (Props) => {
           )}
         </ButtonElement>
       );
-    case "button":
+    }
+    case "button": {
+      const { name, disabled, type, onClick, color, isLoading } = props;
       return (
         <ButtonElement
           type="button"
@@ -150,7 +176,6 @@ const Button: FC<TButton> = (Props) => {
           disabled={disabled}
           color={color}
         >
-          {icon && IconsControl(icon)}
           {name}
           {!!isLoading && (
             <LoadingWrapper>
@@ -159,12 +184,20 @@ const Button: FC<TButton> = (Props) => {
           )}
         </ButtonElement>
       );
-    case "buttonIcon":
+    }
+    case "icon": {
+      const { name, disabled, type, onClick, color, icon, isLoading } = props;
       return (
-        <ButtonIcon onClick={onClick} color="danger">
-          {IconsControl("x")}
+        <ButtonIcon
+          onClick={onClick}
+          color={color}
+          disabled={disabled}
+          isLoading={isLoading}
+        >
+          {IconsControl(icon)}
         </ButtonIcon>
       );
+    }
     default:
       return null;
   }

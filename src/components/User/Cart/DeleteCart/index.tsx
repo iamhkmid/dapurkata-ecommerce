@@ -29,7 +29,7 @@ const DeleteCart = ({ cartId }) => {
 
   return (
     <El.Main onClick={() => handler()} disabled={shoppingCart.loading}>
-      {IconsControl("delete")}
+      {IconsControl("BAG-REMOVE-OUTLINE")}
     </El.Main>
   );
 };

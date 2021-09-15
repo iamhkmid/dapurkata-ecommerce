@@ -295,9 +295,13 @@ type TDropdownIconWrapper = {
 export const DropdownIconWrapper = styled.div<TDropdownIconWrapper>`
   position: absolute;
   right: 0.5rem;
+  justify-content: center;
+  align-items: center;
   color: ${({ theme }) => theme.input.dropdown.icon};
   > svg {
-    height: 1.5rem;
+    display: flex;
+    height: 16px;
+    stroke-width: 50;
   }
   ${({ isFocus }) =>
     isFocus &&

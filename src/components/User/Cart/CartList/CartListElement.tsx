@@ -165,6 +165,7 @@ export const TableInfo = styled.table`
       font-size: 0.85rem;
       text-align: start;
       padding: 0.2rem 0.5rem;
+      max-height: 2rem;
       ::before {
         content: "";
         position: absolute;

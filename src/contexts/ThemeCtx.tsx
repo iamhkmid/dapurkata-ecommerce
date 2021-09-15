@@ -115,12 +115,13 @@ const themeConf = {
         section: { border: "#a3b5ca", boxShadow: "0 0 0 3px #c6d5e5" },
         sidebar: { background: "#c0cfe47f", color: "#3f74c0" },
       },
-      disabled: { background: "#b3c0d2", color: "#e9ecf1" },
+      disabled: { background: "#c8d3e4", color: "#e9ecf1" },
     },
     loading: { 1: "#dee7f4", 2: "#bbc9db", img: "#9facbe" },
     navbar: {
       menu: {
-        hover: { background: "#3f75c013" },
+        fill: "#404e61",
+        hover: { background: "#3f75c013", fill: "#667ea3" },
         active: { color: "#2f5994" },
       },
       dropdown: { border: "#ced6de" },
@@ -266,7 +267,8 @@ const themeConf = {
     loading: { 1: "#1e2330", 2: "#141a24", img: "#a7b1c0" },
     navbar: {
       menu: {
-        hover: { background: "#3b445482" },
+        fill: "#dedff0",
+        hover: { background: "#3b445482", fill: "#8e9db3" },
         active: { color: "#9198e7" },
       },
       dropdown: { border: "#1c222c" },

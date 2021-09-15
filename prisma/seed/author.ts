@@ -37,6 +37,9 @@ export const author = async () => {
   const author12 = await prisma.author.create({
     data: { name: "Example Author10" },
   });
+  const author13 = await prisma.author.create({
+    data: { name: "Ansel Watra" },
+  });
 
   console.log({
     author1,
@@ -51,6 +54,7 @@ export const author = async () => {
     author10,
     author11,
     author12,
+    author13,
   });
   return {
     author1,
@@ -64,6 +68,6 @@ export const author = async () => {
     author9,
     author10,
     author11,
-    author12,
+    author13,
   };
 };

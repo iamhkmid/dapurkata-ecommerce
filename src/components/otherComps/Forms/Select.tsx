@@ -111,7 +111,7 @@ const Select = forwardRef<any, props>((props, ref) => {
             isFocus={isFocus || isFocusFilter}
             disabled={disabled}
           >
-            {IconsControl("chevron-up")}
+            {IconsControl("chevron-up-outline")}
           </El.DropdownIconWrapper>
         </El.SelectStyled>
         <El.Dropdown

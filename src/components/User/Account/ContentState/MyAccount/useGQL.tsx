@@ -20,6 +20,7 @@ type TInitData = {
 export const useGQLInitData = () => {
   const { user } = useContext(AuthContext);
   const { data, error, loading } = useQuery<TInitData>(INIT_DATA_MY_ACCOUNT, {
+    skip: !user?.id,
     variables: { userId: user.id },
     fetchPolicy: "cache-first",
     errorPolicy: "all",

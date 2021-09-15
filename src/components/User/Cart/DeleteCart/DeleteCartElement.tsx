@@ -7,10 +7,11 @@ export const Main = styled.button`
   border: none;
   cursor: pointer;
   padding: 0.2rem;
+  aspect-ratio: 1/1;
   border-radius: 0.1rem;
   > svg {
     height: 1.2rem;
-    stroke-width: 1.5px;
+    stroke-width: 40px;
   }
   background: ${({ theme }) => theme.button.danger.background};
   color: ${({ theme }) => theme.button.danger.color};

@@ -89,6 +89,7 @@ export const DropdownIconWrapper = styled.div<TDropdownIconWrapper>`
   color: ${({ theme }) => theme.input.dropdown.icon};
   > svg {
     height: 1.5rem;
+    stroke-width: 40;
   }
   ${({ isShowed }) =>
     isShowed &&

@@ -4,7 +4,7 @@ import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import BookCover from "../../Store/Cover/CoverFixed";
+import CoverFixed from "../../Store/Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import DeleteCart from "../DeleteCart";
 import UpdateCartInput from "../UpdateCartInput";
@@ -50,7 +50,7 @@ const CartList = () => {
                         <El.Product>
                           <El.CoverWrapper>
                             <div>
-                              <BookCover
+                              <CoverFixed
                                 url={cover.length > 0 && cover[0].url}
                                 quality={75}
                                 height={75}

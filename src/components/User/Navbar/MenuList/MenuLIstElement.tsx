@@ -122,6 +122,7 @@ export const IconWrapper = styled.div`
 
 export const IconGroup = styled.div`
   display: flex;
+  height: 100%;
   margin: 0 1rem;
   height: 100%;
 `;
@@ -140,8 +141,10 @@ export const IconButton = styled.div<TIconButton>`
   cursor: pointer;
   position: relative;
   background: none;
+  fill: ${({ theme }) => theme.navbar.menu.fill};
   color: ${({ theme }) => theme.color[1]};
   :hover {
+    fill: ${({ theme }) => theme.navbar.menu.hover.fill};
     color: ${({ theme }) => theme.navbar.menu.active.color};
   }
   ${({ active }) =>
@@ -150,8 +153,7 @@ export const IconButton = styled.div<TIconButton>`
       color: ${({ theme }) => theme.button.primary.background};
     `}
   > svg {
-    width: 1.3rem;
-    background: transparent;
+    height: 1.3rem;
   }
 
   transition: 0.4s all ease;
