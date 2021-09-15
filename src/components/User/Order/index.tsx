@@ -17,6 +17,7 @@ const Order: FC = () => {
     bookId:
       (query.type as string) === "buy-now" && (query["book-id"] as string),
   });
+  useGQLGetRecipients();
   useEffect(() => {
     if (data && (query.type as string) === "buy-now") {
       dispatch({

@@ -68,7 +68,7 @@ export const WithAuth: FC = ({ children }) => {
       )}
       {isNotAdmin && <RoleNotMatch role="ADMIN" />}
       {isNotUser && <RoleNotMatch role="USER" />}
-      {(isUser || !isAdminPath) && (
+      {(isUser || (!isAdminPath && !isUserPath)) && (
         <ShoppingCartCtxProvider>
           <UserNavCtxProvider>
             <PaymentCtxProvider>

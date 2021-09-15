@@ -149,7 +149,7 @@ const OrderSummary = () => {
                   </tr>
                   <tr>
                     <td>Nama</td>
-                    <td>{`${order.recipient.data.recipient?.firstName} ${
+                    <td>{`${order.recipient.data.recipient?.firstName || ""} ${
                       order.recipient.data.recipient?.lastName || ""
                     }`}</td>
                   </tr>
