@@ -43,7 +43,7 @@ const Header = () => {
             active={adminNav.showSidebar}
             onClick={() => dispatch({ type: "SIDEBAR_TOGGLER" })}
           >
-            {IconsControl("chevron-left")}
+            {IconsControl("chevron-back-outline")}
           </El.IconWrapper>
           <ThemeToggle />
         </El.ButtonGroup>

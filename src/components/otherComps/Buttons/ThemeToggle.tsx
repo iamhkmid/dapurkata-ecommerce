@@ -7,9 +7,13 @@ import { motion, AnimatePresence } from "framer-motion";
 const Container = styled.div`
   cursor: pointer;
   display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid transparent;
   overflow: hidden;
   aspect-ratio: 1/1;
+  min-width: 2rem;
+  width: 2rem;
   :hover {
     color: ${({ theme }) => theme.button.color};
     background: ${({ theme }) => theme.input.focus.background};
@@ -19,20 +23,28 @@ const Container = styled.div`
 `;
 
 export const IconWrapper = styled(motion.div)`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
   > svg {
-    height: 1.5rem;
-    stroke-width: 2px;
+    height: 20px;
+    fill: ${({ theme }) => theme.color[1]};
   }
   padding: 0.2rem;
-  color: ${({ theme }) => theme.color[1]};
 `;
 export const IconWrapper2 = styled(motion.div)`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
   > svg {
-    height: 1.5rem;
-    stroke-width: 2px;
+    height: 18px;
+    fill: ${({ theme }) => theme.color[1]};
   }
   padding: 0.2rem;
-  color: ${({ theme }) => theme.color[1]};
 `;
 
 const containerVariant = {
@@ -69,7 +81,7 @@ const ThemeToggle = () => {
             initial="hidden"
             animate="visible"
           >
-            {IconsControl("sun")}
+            {IconsControl("sunny")}
           </IconWrapper>
         )}
         {theme === "dark" && (

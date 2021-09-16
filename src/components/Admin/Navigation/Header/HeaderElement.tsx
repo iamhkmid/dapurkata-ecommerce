@@ -30,7 +30,9 @@ export const IconWrapper = styled.div<TSidebarButton>`
   color: ${({ theme }) => theme.color[4]};
   border: 1px solid transparent;
   > svg {
-    height: 1.5rem;
+    display: flex;
+    height: 16px;
+    stroke-width: 68;
   }
   ${(props) =>
     props.active
@@ -81,11 +83,15 @@ export const ButtonGroup = styled.div`
   padding: 0 0.5rem;
   width: max-content;
   > div > div {
-    color: ${({ theme }) => theme.color[4]};
+    > svg {
+      fill: ${({ theme }) => theme.color[4]};
+    }
     background: ${({ theme }) => theme.background[3]};
     :hover {
       background: ${({ theme }) => theme.background[3]};
-      color: ${({ theme }) => theme.color[4]};
+      > svg {
+        fill: ${({ theme }) => theme.color[4]};
+      }
     }
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -97,8 +103,9 @@ export const MenuIconWrapper = styled.div`
   display: flex;
   align-items: center;
   > svg {
+    display: flex;
     height: 16px;
-    stroke-width: 48;
+    stroke-width: 58;
   }
 `;
 export const AccountBtn = styled.button`

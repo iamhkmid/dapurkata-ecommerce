@@ -33,7 +33,7 @@ const PopUpHeader: FC<TPopUpHeader> = (props) => {
               showSideMenu={ws.showSideMenu}
               onClick={() => ws.setShowSideMenu(!ws.showSideMenu)}
             >
-              {IconsControl("chevron-left")}
+              {IconsControl("chevron-back-outline")}
             </El.IconWrapper>
             {themeToggle && <ThemeToggle />}
           </El.ButtonGroup>

@@ -25,7 +25,7 @@ const Menu = ({ group }: props) => {
               {menu.name}
               {menu.subMenu.length > 0 && (
                 <El.DropdownIcon active={active}>
-                  {IconsControl("chevron-up")}
+                  {IconsControl("chevron-forward-outline")}
                 </El.DropdownIcon>
               )}
             </El.Item>

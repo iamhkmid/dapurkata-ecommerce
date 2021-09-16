@@ -66,7 +66,8 @@ export const IconWrapper = styled.div<TSidebarButton>`
   border: none;
   color: ${({ theme }) => theme.button.base.color};
   > svg {
-    height: 1.5rem;
+    height: 18px;
+    stroke-width: 58;
   }
   ${({ showSideMenu }) =>
     showSideMenu

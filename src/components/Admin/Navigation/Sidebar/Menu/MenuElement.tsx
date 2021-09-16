@@ -73,14 +73,17 @@ type TDropdownIcon = {
   active: boolean;
 };
 export const DropdownIcon = styled.div<TDropdownIcon>`
-  height: 1.5rem;
-  width: 1.5rem;
   position: absolute;
   right: 0.5rem;
+  > svg {
+    display: flex;
+    height: 16px;
+    stroke-width: 58;
+  }
   ${(props) =>
     props.active &&
     css`
-      transform: rotate(180deg);
+      transform: rotate(90deg);
     `}
   transition: 0.4s all ease;
 `;
