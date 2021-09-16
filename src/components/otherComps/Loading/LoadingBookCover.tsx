@@ -8,9 +8,9 @@ const Main = styled.main`
 `;
 
 const Loader = styled.div`
-  --color: ${({ theme }) => theme.loading.img};
+  --color: ${({ theme }) => theme.color[2]};
   --size-mid: 6vmin;
-  --size-dot: 2vmin;
+  --size-dot: 0.8rem;
   --size-bar: 0.4vmin;
   --size-square: 3vmin;
   display: flex;

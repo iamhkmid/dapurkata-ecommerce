@@ -118,7 +118,7 @@ const themeConf = {
       },
       disabled: { background: "#c8d3e4", color: "#e9ecf1" },
     },
-    loading: { 1: "#dee7f4", 2: "#bbc9db", img: "#9facbe" },
+    loading: { 1: "#dee7f4", 2: "#bbc9db" },
     navbar: {
       menu: {
         fill: "#404e61",
@@ -265,7 +265,7 @@ const themeConf = {
       },
       disabled: { background: "#1e2531", color: "#404e62" },
     },
-    loading: { 1: "#1e2330", 2: "#141a24", img: "#a7b1c0" },
+    loading: { 1: "#1e2330", 2: "#141a24" },
     navbar: {
       menu: {
         fill: "#dedff0",

@@ -15,7 +15,7 @@ const Loader = styled.div`
   --size-square: 3vmin;
   display: flex;
   position: relative;
-  width: 100%;
+  width: 5rem;
   display: grid;
   place-items: center;
 
