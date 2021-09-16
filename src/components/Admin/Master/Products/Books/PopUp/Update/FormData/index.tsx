@@ -53,7 +53,7 @@ const FormData = ({ bookId }) => {
     if (dataGFI && dataForm) {
       setValue("title", dataGFI.title);
       setValue("author", dataGFI.Author.id);
-      setValue("synopsis", dataGFI.synopsis);
+      setValue("description", dataGFI.description);
       setValue("edition", dataGFI.edition);
       setValue("series", dataGFI.series);
       setValue("numberOfPages", dataGFI.numberOfPages);
@@ -122,13 +122,13 @@ const FormData = ({ bookId }) => {
             />
             <FormsControl
               control="textarea"
-              name="synopsis"
+              name="description"
               register={register}
               label="Sinopsis / subject"
-              error={errors.synopsis ? true : false}
+              error={errors.description ? true : false}
               disabled={loading || loadGFI}
               isLoading={loadGFI}
-              message={errors.synopsis ? errors.synopsis.message : null}
+              message={errors.description ? errors.description.message : null}
             />
             <El.SpanGroup>
               <FormsControl
