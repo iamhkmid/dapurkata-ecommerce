@@ -23,7 +23,7 @@ const typeDefs = gql`
     height: Int
     weight: Int
     stock: Int!
-    price: Float!
+    price: Int!
     rating: String
     Category: [categoryInput]
     Author: authorInput

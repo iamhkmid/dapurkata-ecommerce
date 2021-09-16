@@ -4,14 +4,14 @@ import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import { GET_BOOK_ATC } from "../../../../graphql/book/queries";
+import { GET_BOOK_DETAIL } from "../../../../graphql/book/queries";
 import { CREATE_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
 import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
-import { TGQLGetBookATC } from "../../../../types/book";
+import { TGQLBookDetail } from "../../../../types/book";
 import { TGQLCreateShoppingCart } from "../../../../types/shoppingCart";
 
 export const useGQLGetbook = ({ bookId }) => {
-  const { data, loading, error } = useQuery<TGQLGetBookATC>(GET_BOOK_ATC, {
+  const { data, loading, error } = useQuery<TGQLBookDetail>(GET_BOOK_DETAIL, {
     skip: !bookId,
     variables: { bookId },
     fetchPolicy: "cache-first",

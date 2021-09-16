@@ -7,6 +7,7 @@ import * as El from "./StoreElement";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
 import CoverResponsive from "./Cover/CoverResponsive";
+import IconsControl from "../../IconsControl";
 
 const Store = () => {
   const { user } = useContext(AuthContext);
@@ -18,19 +19,13 @@ const Store = () => {
       errorPolicy: "none",
     }
   );
-  const [books, setBooks] = useState([]);
-  useEffect(() => {
-    if (data) {
-      setBooks(data.books);
-    }
-  }, [data]);
 
   return (
     <El.Main>
       <El.Section>
         <El.Cards>
-          {books &&
-            books.map((book, index) => {
+          {!!data?.books &&
+            data?.books.map((book, index) => {
               const cover = book.BookPicture.filter(
                 (img) => img.type === "COVER"
               );
@@ -60,8 +55,20 @@ const Store = () => {
                     <CoverResponsive url={coverUrl} />
                   </El.CoverWrapper>
                   <El.BookInfo>
-                    <h1 className="title">{book.title}</h1>
-                    <h1 className="author">{book.Author.name}</h1>
+                    <div className="info1">
+                      <h1 className="title">{book.title}</h1>
+                      <h1 className="author">{book.Author.name}</h1>
+                    </div>
+                    <div className="info2">
+                      <h1 className="price">
+                        {`IDR `}
+                        {book.price}
+                      </h1>
+                      <div className="star">
+                        {IconsControl("star")}
+                        <h1>{book.rating}</h1>
+                      </div>
+                    </div>
                   </El.BookInfo>
                 </El.Card>
               );

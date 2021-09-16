@@ -10,7 +10,7 @@ export const useGQLOrders = () => {
     ORDERS_FILTER_BY_USER,
     {
       variables: { userId: user.id, filterBy: "USER" },
-      fetchPolicy: "cache-first",
+      fetchPolicy: "network-only",
       errorPolicy: "all",
     }
   );

@@ -145,12 +145,23 @@ type TGQLUpdateBook = {
   };
 };
 
-type TGetBookATC = {
+type TBookDetail = {
   id: string;
   title: string;
+  synopsis: string;
+  edition: string;
+  series: string;
+  releaseYear: string;
+  numberOfPages: number;
+  weight: number;
+  height: number;
   stock: number;
   price: number;
-  weight: number;
+  rating: string;
+  Category: {
+    id: string;
+    name: string;
+  };
   Author: {
     id: string;
     name: string;
@@ -162,11 +173,11 @@ type TGetBookATC = {
   }[];
 };
 
-type TGQLGetBookATC = {
-  book: TGetBookATC;
+type TGQLBookDetail = {
+  book: TBookDetail;
 };
 type TGQLGetBooksATC = {
-  book: TGetBookATC[];
+  book: TBookDetail[];
 };
 
 type TGQLGetBookCards = {
@@ -174,6 +185,7 @@ type TGQLGetBookCards = {
     id: string;
     title: string;
     price: string;
+    rating: string;
     BookPicture: {
       type: string;
       url: string;

@@ -81,10 +81,13 @@ export const CoverWrapper = styled.div`
 
 export const BookInfo = styled.div`
   display: flex;
-  position: relative;
-  top: -0.5rem;
-  padding: 0.5rem 0;
   flex-direction: column;
+  position: relative;
+  width: 100%;
+  justify-content: space-between;
+  top: -0.5rem;
+  gap: 5px;
+  overflow: hidden;
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -95,7 +98,7 @@ export const BookInfo = styled.div`
     font-weight: 500;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.7rem;
+      font-size: 12px;
     }
   }
   .author {
@@ -107,7 +110,45 @@ export const BookInfo = styled.div`
     font-weight: 400;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.6rem;
+      font-size: 9px;
+    }
+  }
+  .price {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-size: 14px;
+    height: 100%;
+    font-weight: 400;
+    color: ${({ theme }) => theme.color[2]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+  }
+  .info2 {
+    display: flex;
+    justify-content: space-between;
+  }
+  .star {
+    > h1 {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
+      font-size: 12px;
+      font-weight: 700;
+      color: ${({ theme }) => theme.color[2]};
+    }
+    display: flex;
+    height: 100%;
+    align-items: center;
+    > svg {
+      height: 0.9rem;
+      fill: ${({ theme }) => theme.color[7]};
+    }
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
     }
   }
 `;

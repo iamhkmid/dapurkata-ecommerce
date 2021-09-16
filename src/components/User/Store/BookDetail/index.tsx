@@ -99,9 +99,9 @@ const BookDetail = () => {
             </El.Images>
             <El.InfoWrapper>
               <El.Info>
-                <h1>{dataGB.title}</h1>
-                <h1>{dataGB.Author.name}</h1>
-                <h1>
+                <h1 className="title">{dataGB.title}</h1>
+                <h1 className="author">{dataGB.Author.name}</h1>
+                <h1 className="price">
                   {`IDR `}
                   <NumberFormat
                     value={dataGB.price}
@@ -127,10 +127,9 @@ const BookDetail = () => {
               )}
               <El.ActionBtn>
                 <Button
-                  type="icon"
-                  name=""
-                  icon="BAG-ADD-OUTLINE"
-                  color="section"
+                  type="button"
+                  name="Masukan Keranjang"
+                  color="success"
                   disabled={isDisabled}
                   onClick={() =>
                     createShoppingCart({
@@ -148,30 +147,32 @@ const BookDetail = () => {
                   disabled={isDisabled}
                 />
               </El.ActionBtn>
+              <El.AdditionalInfo>
+                <div>
+                  <h1 className="ai-name">Berat</h1>
+                  <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Tinggi</h1>
+                  <h1 className="ai-value">{`${dataGB.height} cm`}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Halaman</h1>
+                  <h1 className="ai-value">{dataGB.numberOfPages}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Tahun Terbit</h1>
+                  <h1 className="ai-value">{dataGB.releaseYear}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Rating</h1>
+                  <div className="ai-star">
+                    {IconsControl("star")}
+                    <h1>{dataGB.rating}</h1>
+                  </div>
+                </div>
+              </El.AdditionalInfo>
             </El.InfoWrapper>
-            {/* <El.ButtonWrapper>
-              <button type="button">Detail</button>
-              <button
-                type="button"
-                onClick={() =>
-                  createShoppingCart({
-                    bookId: dataGB.id,
-                    weight: dataGB.weight,
-                    amount,
-                  })
-                }
-                disabled={isDisabled}
-              >
-                {IconsControl("CartAdd")}
-              </button>
-              <button
-                type="button"
-                onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
-                disabled={isDisabled}
-              >
-                Beli Sekarang
-              </button>
-            </El.ButtonWrapper> */}
           </El.Content>
         </El.Section>
       )}

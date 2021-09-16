@@ -129,124 +129,114 @@ export const CoverWrapper = styled.div`
 export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   width: 100%;
+  gap: 1rem;
   transition: 0.4s all ease;
 `;
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   text-align: start;
-  > h1:nth-child(1) {
+  .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 700;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
     }
   }
-  > h1:nth-child(2) {
+  .author {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 1.2rem;
+    font-size: 1rem;
     font-weight: 500;
     color: ${({ theme }) => theme.content.bookCard.color.author};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.6rem;
+      font-size: 0.9rem;
     }
   }
-  > h1:nth-child(3) {
-    font-size: 1.5rem;
-    font-weight: 300;
-    color: ${({ theme }) => theme.color[1]};
+  .price {
+    font-family: "Mulish", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.8rem;
+      font-size: 1.2rem;
     }
-  }
-`;
-
-export const ButtonWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 0.5fr 5rem 1fr;
-  width: 100%;
-
-  > button :nth-child(1) {
-    background: ${({ theme }) => theme.button.base.background};
-    color: ${({ theme }) => theme.button.base.color};
-    border-color: ${({ theme }) => theme.button.hover.base.background};
-    :hover {
-      background: ${({ theme }) => theme.button.hover.base.background};
-      color: ${({ theme }) => theme.button.hover.base.color};
-      border-color: ${({ theme }) => theme.button.hover.base.background};
-    }
-  }
-  > button :nth-child(2) {
-    padding: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    > svg {
-      height: 1.5rem;
-      stroke-width: 1.5px;
-    }
-    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      > svg {
-        height: 1.2rem;
-      }
-    }
-    background: ${({ theme }) => theme.button.base.background};
-    color: ${({ theme }) => theme.button.base.color};
-    border-color: ${({ theme }) => theme.button.hover.base.background};
-    :hover {
-      background: ${({ theme }) => theme.button.hover.base.background};
-      color: ${({ theme }) => theme.button.hover.base.color};
-      border-color: ${({ theme }) => theme.button.hover.base.background};
-    }
-  }
-  > button :nth-child(3) {
-    background: ${({ theme }) => theme.button.primary.background};
-    color: ${({ theme }) => theme.button.primary.color};
-    border-color: ${({ theme }) => theme.button.primary.background};
-    :hover {
-      background: ${({ theme }) => theme.button.hover.primary.background};
-      color: ${({ theme }) => theme.button.hover.primary.color};
-    }
-  }
-
-  > button {
-    font-family: "Poppins", sans-serif;
-    font-size: 0.9rem;
-    outline: none;
-    border: none;
-    height: 2.5rem;
-    cursor: pointer;
-    border: 1px solid;
-    :disabled {
-      cursor: default;
-      background: ${({ theme }) => theme.button.disabled.background};
-      color: ${({ theme }) => theme.button.disabled.color};
-      border-color: ${({ theme }) => theme.button.disabled.background};
-      :hover {
-        background: ${({ theme }) => theme.button.disabled.background};
-        color: ${({ theme }) => theme.button.disabled.color};
-        border-color: ${({ theme }) => theme.button.disabled.background};
-      }
-    }
-    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.8rem;
-    }
-    transition: 0.4s all ease;
   }
 `;
 
 export const CartBtn = styled.div`
   display: flex;
   gap: 1rem;
+`;
+
+export const AdditionalInfo = styled.div`
+  display: grid;
+  width: 100%;
+  max-width: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
+  grid-gap: 8px;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+  }
+  > div {
+    border-radius: ${({ theme }) => theme.borderRadius};
+    padding: 0.2rem 1rem;
+    overflow: hidden;
+    min-width: max-content;
+    display: flex;
+    flex-direction: column;
+    background: ${({ theme }) => theme.button.hover.base.background};
+    color: ${({ theme }) => theme.button.list.color};
+    .ai-name {
+      font-size: 0.9rem;
+      font-weight: 500;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 0.7rem;
+      }
+    }
+    .ai-value {
+      font-family: "Mulish", sans-serif;
+      font-size: 0.9rem;
+      font-weight: 400;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 0.7rem;
+      }
+    }
+    .ai-star {
+      > h1 {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        overflow: hidden;
+        font-size: 0.8rem;
+        font-family: "Mulish", sans-serif;
+        font-weight: 400;
+        color: ${({ theme }) => theme.color[2]};
+      }
+      display: flex;
+      height: 100%;
+      align-items: center;
+      > svg {
+        height: 0.9rem;
+        fill: ${({ theme }) => theme.color[7]};
+      }
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        > svg {
+          height: 0.8rem;
+          fill: ${({ theme }) => theme.color[7]};
+        }
+        > h1 {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
 `;

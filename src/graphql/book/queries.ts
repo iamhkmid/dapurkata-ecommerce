@@ -107,6 +107,7 @@ export const GET_BOOKS_SORT_NEW = gql`
       id
       title
       price
+      rating
       BookPicture {
         type
         url
@@ -119,14 +120,25 @@ export const GET_BOOKS_SORT_NEW = gql`
   }
 `;
 
-export const GET_BOOK_ATC = gql`
+export const GET_BOOK_DETAIL = gql`
   query ($bookId: ID!) {
     book(bookId: $bookId) {
       id
       title
+      synopsis
+      edition
+      series
+      releaseYear
+      numberOfPages
+      weight
+      height
       stock
       price
-      weight
+      rating
+      Category {
+        id
+        name
+      }
       Author {
         id
         name

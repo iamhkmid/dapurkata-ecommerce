@@ -16,14 +16,6 @@ export const Main = styled.div`
   background: ${({ theme }) => theme.content.bookCard.cover.background};
 `;
 
-const shimmer = keyframes`0%{
-  background-position: -450px 0;
-}
-100%{
-  background-position: 450px 0;
-}
-`;
-
 export const LoadingWrapper = styled.div`
   display: flex;
   top: 0;
@@ -74,24 +66,15 @@ const Cover: FC<TBookCover> = ({ url }) => {
     <Main>
       {cover === defaultCover && <DefImg>{IconsControl("dapurkata")}</DefImg>}
       {cover && (
-        <div
-          style={{
-            position: "relative",
-            display: "flex",
-            height: "100%",
-            width: "100%",
-          }}
-        >
-          <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
-            alt="Cover"
-            layout="fill"
-            objectFit="fill"
-            quality={75}
-            onLoad={() => setIsLoading(false)}
-            onError={() => defaultImgSrc()}
-          />
-        </div>
+        <Image
+          src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
+          alt="Cover"
+          layout="fill"
+          objectFit="fill"
+          quality={75}
+          onLoad={() => setIsLoading(false)}
+          onError={() => defaultImgSrc()}
+        />
       )}
       {cover && isLoading && (
         <LoadingWrapper>
