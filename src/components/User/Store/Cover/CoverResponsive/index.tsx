@@ -69,7 +69,7 @@ const Cover: FC<TBookCover> = ({ url }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
           alt="Cover"
-          layout="intrinsic"
+          layout="responsive"
           objectFit="fill"
           width={200}
           height={290}
