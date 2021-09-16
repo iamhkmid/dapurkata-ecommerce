@@ -3,10 +3,10 @@ import { AuthContext } from "../../../../../contexts/AuthCtx";
 import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import ThemeToggle from "../../../../otherComps/Buttons/ThemeToggle";
 import IconsControl from "../../../../IconsControl";
-import UserLoading from "../../../../otherComps/Loading/EllipsisLoading";
 import * as El from "./MobileMenuBtnElement";
 import { TUserMenu } from "../../../../../types/context";
 import { ShoppingCartCtx } from "../../../../../contexts/ShoppingCartCtx";
+import Loading2 from "../../../../otherComps/Loading/Loading2";
 
 const MobileMenuBtn = () => {
   const { user, loading } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const MobileMenuBtn = () => {
   }, [shoppingCart]);
   return (
     <El.Main onClick={(e) => e.stopPropagation()}>
-      {loading && <UserLoading />}
+      {loading && <Loading2 />}
       {user &&
         user.role === "USER" &&
         ["CART", "MAIL"].map((value) => (

@@ -8,14 +8,14 @@ const Main = styled.main`
 `;
 
 const Loader = styled.div`
-  --color: ${({ theme }) => theme.button.primary.background};
+  --color: ${({ theme }) => theme.color[2]};
   --size-mid: 6vmin;
-  --size-dot: 1.5vmin;
+  --size-dot: 0.6rem;
   --size-bar: 0.4vmin;
   --size-square: 3vmin;
   display: flex;
   position: relative;
-  width: 5rem;
+  width: 100%;
   display: grid;
   place-items: center;
 
