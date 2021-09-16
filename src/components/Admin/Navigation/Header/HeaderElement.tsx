@@ -97,8 +97,8 @@ export const MenuIconWrapper = styled.div`
   display: flex;
   align-items: center;
   > svg {
-    height: 1rem;
-    stroke-width: 2.5px;
+    height: 16px;
+    stroke-width: 48;
   }
 `;
 export const AccountBtn = styled.button`

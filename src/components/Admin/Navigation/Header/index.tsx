@@ -67,7 +67,9 @@ const Header = () => {
             onError={() => defaultImgSrc()}
           />
         </El.PhotoWrapper>
-        <El.MenuIconWrapper>{IconsControl("chevron-down")}</El.MenuIconWrapper>
+        <El.MenuIconWrapper>
+          {IconsControl("chevron-down-outline")}
+        </El.MenuIconWrapper>
       </El.AccountBtn>
     </El.Main>
   );

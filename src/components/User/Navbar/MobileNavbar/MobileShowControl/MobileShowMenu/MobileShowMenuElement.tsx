@@ -184,14 +184,22 @@ export const DropdownName = styled.div`
   height: 100%;
   padding: 0 0.5rem 0 1rem;
 `;
-
-export const IconWrapper = styled.div`
+type TIconWrapper = {
+  active: boolean;
+};
+export const IconWrapper = styled.div<TIconWrapper>`
   display: flex;
   align-items: center;
   width: 1rem;
   height: 100%;
+  ${({ active }) =>
+    active &&
+    css`
+      transform: rotate(90deg);
+    `}
   > svg {
-    height: 1rem;
-    stroke-width: 2.5px;
+    height: 16px;
+    stroke-width: 48;
   }
+  transition: 0.4s all ease;
 `;

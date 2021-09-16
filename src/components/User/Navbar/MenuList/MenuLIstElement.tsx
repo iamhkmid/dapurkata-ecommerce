@@ -75,7 +75,6 @@ export const DropdownBtn = styled.div<TDropdownBtn>`
   font-weight: 500;
   display: flex;
   flex-direction: row;
-  gap: 0.2rem;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -112,11 +111,12 @@ export const DropdownName = styled.div`
 export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
-  width: 1rem;
   height: 100%;
+  position: relative;
+  right: 0.2rem;
   > svg {
-    height: 1rem;
-    stroke-width: 2.5px;
+    height: 16px;
+    stroke-width: 48;
   }
 `;
 

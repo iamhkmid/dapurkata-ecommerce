@@ -100,11 +100,15 @@ const MobileShowMenu = () => {
             )}
             {value.type === "dropdown" && (
               <El.DropdownBtn
-                active={pathname === value.link ? true : false}
+                active={pathname === value.link}
                 onClick={() => setShowDropdown(!showDropdown ? value.id : null)}
               >
                 {value.name}
-                <El.IconWrapper>{IconsControl("chevron-down")}</El.IconWrapper>
+                <El.IconWrapper
+                  active={showDropdown && showDropdown === value.id}
+                >
+                  {IconsControl("chevron-forward-outline")}
+                </El.IconWrapper>
               </El.DropdownBtn>
             )}
             <DropdownControl

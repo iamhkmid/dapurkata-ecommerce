@@ -15,10 +15,10 @@ export const Main = styled.div<TMain>`
   position: relative;
   max-height: 0;
   width: 100%;
-  padding-bottom: 0.3rem;
   ${({ active }) =>
     active &&
     css`
+      padding-bottom: 0.3rem;
       max-height: 15rem;
     `}
   transition: 0.4s all ease;

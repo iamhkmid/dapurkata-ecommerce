@@ -48,7 +48,9 @@ const MenuList = () => {
               >
                 <El.ActiveLine className="active-line" />
                 <El.DropdownName>{value.name}</El.DropdownName>
-                <El.IconWrapper>{IconsControl("chevron-down")}</El.IconWrapper>
+                <El.IconWrapper>
+                  {IconsControl("chevron-down-outline")}
+                </El.IconWrapper>
                 <AnimatePresence>
                   {userNav.showMenu === value.id && (
                     <DropdownControl name={value.id} />
