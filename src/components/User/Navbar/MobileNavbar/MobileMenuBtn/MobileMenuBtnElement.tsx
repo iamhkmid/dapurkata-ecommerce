@@ -60,14 +60,17 @@ export const IconButton = styled.div<TIconButton>`
   padding: 0.4rem;
   cursor: pointer;
   position: relative;
-  color: ${({ theme }) => theme.color[1]};
+  fill: ${({ theme }) => theme.navbar.menu.fill};
+  color: ${({ theme }) => theme.navbar.menu.fill};
   ${({ active }) =>
     active &&
     css`
-      color: ${({ theme }) => theme.button.primary.background};
+      fill: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   :hover {
-    color: ${({ theme }) => theme.navbar.menu.active.color};
+    fill: ${({ theme }) => theme.navbar.menu.hover.fill};
+    color: ${({ theme }) => theme.navbar.menu.hover.fill};
   }
 
   > svg {

@@ -37,6 +37,7 @@ export const InputRadio = styled.div<TInputRadio>`
   position: relative;
   justify-content: space-between;
   gap: 1rem;
+  min-width: max-content;
   border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0.5rem;
   cursor: pointer;

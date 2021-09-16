@@ -7,7 +7,6 @@ export const Main = styled.main`
   padding: 5rem 0;
   align-items: center;
   justify-content: center;
-  font-family: "Poppins", sans-serif;
   background: ${({ theme }) => theme.background[1]};
   color: ${({ theme }) => theme.color[1]};
 
@@ -33,6 +32,7 @@ export const SectionTitle = styled.h1`
 
 export const Cards = styled.div`
   margin: 0 auto;
+  padding-top: 2rem;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -45,17 +45,19 @@ export const Cards = styled.div`
 
 export const Card = styled.div`
   display: flex;
+  font-family: "Mulish", sans-serif;
   flex-direction: column;
-  padding: 0.2rem;
+  position: relative;
+  margin-top: 1rem;
+  padding: 0rem 0.5rem;
   background: ${({ theme }) => theme.background[2]};
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: ${({ theme }) => theme.borderRadius};
-  overflow: hidden;
   border: 1px solid transparent;
   cursor: pointer;
   :hover {
     border-color: ${({ theme }) => theme.content.bookCard.hover.border};
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
+    box-shadow: rgba(31, 31, 58, 0.164) 0px 13px 27px -5px,
       rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   }
   transition: 0.4s all ease;
@@ -63,24 +65,33 @@ export const Card = styled.div`
 
 export const CoverWrapper = styled.div`
   display: flex;
+  position: relative;
+  top: -1rem;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 100%;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   aspect-ratio: 2.2/3;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-  position: relative;
 `;
 
 export const BookInfo = styled.div`
   display: flex;
+  position: relative;
+  top: -0.5rem;
+  padding: 0.5rem 0;
   flex-direction: column;
-  min-height: 3rem;
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 1;
     overflow: hidden;
     line-height: 1.2;
-    font-size: 0.8rem;
+    font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -92,7 +103,8 @@ export const BookInfo = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 0.7rem;
+    font-size: 11px;
+    font-weight: 400;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.6rem;

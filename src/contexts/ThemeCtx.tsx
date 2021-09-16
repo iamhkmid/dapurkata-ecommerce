@@ -122,7 +122,6 @@ const themeConf = {
       menu: {
         fill: "#404e61",
         hover: { background: "#3f75c013", fill: "#667ea3" },
-        active: { color: "#2f5994" },
       },
       dropdown: { border: "#ced6de" },
     },
@@ -269,7 +268,6 @@ const themeConf = {
       menu: {
         fill: "#dedff0",
         hover: { background: "#3b445482", fill: "#8e9db3" },
-        active: { color: "#9198e7" },
       },
       dropdown: { border: "#1c222c" },
     },

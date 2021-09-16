@@ -106,11 +106,12 @@ export const CoverWrapper = styled.div`
   padding: 20px;
   height: 260px;
   aspect-ratio: 1/1;
-  background: ${({ theme }) => theme.content.bookCard.cover.background};
   border-radius: ${({ theme }) => theme.borderRadius};
+  background: ${({ theme }) => theme.content.bookCard.cover.background};
 
   > div {
     overflow: hidden;
+    border-radius: ${({ theme }) => theme.borderRadius};
     box-shadow: rgba(13, 18, 29, 0.158) 0px 1px 2px,
       rgba(13, 18, 29, 0.158) 0px 2px 4px, rgba(13, 18, 29, 0.158) 0px 4px 8px,
       rgba(13, 18, 29, 0.158) 0px 8px 16px,

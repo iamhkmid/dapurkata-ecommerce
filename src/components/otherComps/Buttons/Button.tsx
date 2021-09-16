@@ -18,6 +18,7 @@ const ButtonElement = styled.button<TButtonElement>`
   font-size: 0.9rem;
   min-height: 2.3rem;
   max-height: max-content;
+  min-width: max-content;
   padding: 0.2rem 1rem;
   border: 1px solid transparent;
   outline: none;

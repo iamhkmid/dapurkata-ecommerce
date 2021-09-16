@@ -60,7 +60,7 @@ export const Anchor = styled.a<TAnchor>`
         background: ${({ theme }) => theme.button.primary.background};
         width: 1.5rem;
       }
-      color: ${({ theme }) => theme.navbar.menu.active.color};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   transition: 0.4s all ease;
 `;
@@ -97,7 +97,7 @@ export const DropdownBtn = styled.div<TDropdownBtn>`
         background: ${({ theme }) => theme.button.primary.background};
         width: 1.3rem;
       }
-      color: ${({ theme }) => theme.navbar.menu.active.color};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   transition: 0.4s all ease;
 `;
@@ -142,15 +142,16 @@ export const IconButton = styled.div<TIconButton>`
   position: relative;
   background: none;
   fill: ${({ theme }) => theme.navbar.menu.fill};
-  color: ${({ theme }) => theme.color[1]};
+  color: ${({ theme }) => theme.navbar.menu.fill};
   :hover {
     fill: ${({ theme }) => theme.navbar.menu.hover.fill};
-    color: ${({ theme }) => theme.navbar.menu.active.color};
+    color: ${({ theme }) => theme.navbar.menu.hover.fill};
   }
   ${({ active }) =>
     active &&
     css`
-      color: ${({ theme }) => theme.button.primary.background};
+      fill: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   > svg {
     height: 1.3rem;
@@ -167,14 +168,14 @@ export const AmountNum = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 15%;
+  top: 20%;
   right: -5%;
-  border-radius: 100%;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0 0.2rem;
   height: 1rem;
   aspect-ratio: 1/1;
-  background: ${({ theme }) => theme.button.primary.background};
-  color: ${({ theme }) => theme.button.primary.color};
+  background: ${({ theme }) => theme.button.list.background};
+  color: ${({ theme }) => theme.button.list.color};
 `;
 
 export const ActiveLine = styled.div`

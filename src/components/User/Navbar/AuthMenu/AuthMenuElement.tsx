@@ -49,7 +49,7 @@ export const Anchor = styled.a<TAnchor>`
         background: ${({ theme }) => theme.button.primary.background};
         width: 1.3rem;
       }
-      color: ${({ theme }) => theme.navbar.menu.active.color};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   transition: 0.4s all ease;
 `;
@@ -92,18 +92,18 @@ export const AccountBtn = styled.div<TAccountBtn>`
   background: transparent;
   color: ${({ theme }) => theme.color[1]};
   :hover {
-    color: ${({ theme }) => theme.navbar.menu.active.color};
+    color: ${({ theme }) => theme.navbar.menu.hover.fill};
     .profile {
-      border: 1px solid ${({ theme }) => theme.navbar.menu.active.color};
+      border: 1px solid ${({ theme }) => theme.navbar.menu.hover.fill};
     }
   }
 
   ${({ active }) =>
     active &&
     css`
-      color: ${({ theme }) => theme.navbar.menu.active.color};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
       .profile {
-        border: 1px solid ${({ theme }) => theme.navbar.menu.active.color};
+        border: 1px solid ${({ theme }) => theme.navbar.menu.hover.fill};
       }
     `}
   transition: 0.4s all ease;
