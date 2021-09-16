@@ -105,8 +105,9 @@ const BookDetail = () => {
                 </El.MainInfo>
                 <El.OrderInfo>
                   <h1 className="price">
-                    {`IDR `}
                     <NumberFormat
+                      prefix="Rp"
+                      suffix=",00"
                       value={dataGB.price}
                       displayType={"text"}
                       thousandSeparator={"."}

@@ -82,8 +82,9 @@ const OrderSummary = () => {
                       </El.Info>{" "}
                       <El.Info2>
                         <h1>
-                          {`Rp `}
                           <NumberFormat
+                            prefix="Rp"
+                            suffix=",00"
                             value={order.order.book?.price}
                             displayType={"text"}
                             thousandSeparator={"."}
@@ -119,11 +120,12 @@ const OrderSummary = () => {
                           <El.Info>
                             <h1>{val.Book.title}</h1>
                             <h1>{val.Book.Author.name}</h1>
-                          </El.Info>{" "}
+                          </El.Info>
                           <El.Info2>
                             <h1>
-                              {`Rp `}
                               <NumberFormat
+                                prefix="Rp"
+                                suffix=",00"
                                 value={val.Book.price}
                                 displayType={"text"}
                                 thousandSeparator={"."}
@@ -243,8 +245,9 @@ const OrderSummary = () => {
                   <tr>
                     <td>Subtotal</td>
                     <td>
-                      {`Rp `}
                       <NumberFormat
+                        prefix="Rp"
+                        suffix=",00"
                         value={amountPrice}
                         displayType={"text"}
                         thousandSeparator={"."}
@@ -255,8 +258,9 @@ const OrderSummary = () => {
                   <tr>
                     <td>Biaya Kirim</td>
                     <td>
-                      {`Rp `}
                       <NumberFormat
+                        prefix="Rp"
+                        suffix=",00"
                         value={order.courier.selected.courier?.cost || 0}
                         displayType={"text"}
                         thousandSeparator={"."}
@@ -270,8 +274,9 @@ const OrderSummary = () => {
                     </td>
                     <td>
                       <El.TotalValue>
-                        {`Rp `}
                         <NumberFormat
+                          prefix="Rp"
+                          suffix=",00"
                           value={
                             amountPrice +
                               order.courier.selected.courier?.cost || 0

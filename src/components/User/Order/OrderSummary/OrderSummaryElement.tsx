@@ -56,7 +56,7 @@ export const Info = styled.div`
     overflow: hidden;
     font-size: 0.7rem;
     font-weight: 400;
-    color: ${({ theme }) => theme.content.bookCard.color.author};
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.6rem;
     }
@@ -69,7 +69,7 @@ export const Info2 = styled.div`
   > h1:nth-child(1) {
     font-size: 0.8rem;
     font-weight: 300;
-    color: ${({ theme }) => theme.color[1]};
+    color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.7rem;
     }

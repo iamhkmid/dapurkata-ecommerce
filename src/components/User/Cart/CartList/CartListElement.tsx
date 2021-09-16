@@ -83,17 +83,17 @@ export const BtnWrapper = styled.div`
 `;
 export const Info = styled.div`
   text-align: start;
+  font-family: "Mulish", sans-serif;
   > h1:nth-child(1) {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    text-transform: uppercase;
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 0.9rem;
+    font-weight: 500;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
     }
     transition: 0.4s all ease;
   }
@@ -102,11 +102,11 @@ export const Info = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 0.7rem;
-    font-weight: 400;
-    color: ${({ theme }) => theme.content.bookCard.color.author};
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.6rem;
+      font-size: 0.7rem;
     }
     transition: 0.4s all ease;
   }
@@ -200,15 +200,16 @@ export const TableInfo = styled.table`
 export const Product = styled.div`
   display: flex;
   align-items: center;
-  gap: 0.2rem;
+  gap: 0.4rem;
   min-width: 15rem;
 `;
 export const Price = styled.h1`
-  font-size: 0.8rem;
-  font-weight: 400;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: ${({ theme }) => theme.color[3]};
   border-color: ${({ theme }) => theme.button.disabled.background};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.7rem;
+    font-size: 0.75rem;
   }
   transition: 0.4s all ease;
 `;

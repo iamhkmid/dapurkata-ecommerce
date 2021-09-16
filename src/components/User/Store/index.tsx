@@ -8,6 +8,7 @@ import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
 import CoverResponsive from "./Cover/CoverResponsive";
 import IconsControl from "../../IconsControl";
+import NumberFormat from "react-number-format";
 
 const Store = () => {
   const { user } = useContext(AuthContext);
@@ -61,8 +62,14 @@ const Store = () => {
                     </div>
                     <div className="info2">
                       <h1 className="price">
-                        {`IDR `}
-                        {book.price}
+                        <NumberFormat
+                          prefix="Rp"
+                          suffix=",00"
+                          value={book.price}
+                          displayType={"text"}
+                          thousandSeparator={"."}
+                          decimalSeparator={","}
+                        />
                       </h1>
                       <div className="star">
                         {IconsControl("star")}

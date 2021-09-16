@@ -34,7 +34,7 @@ const CartList = () => {
               <thead>
                 <tr>
                   <th>Produk</th>
-                  <th>Harga (IDR)</th>
+                  <th>Harga</th>
                   <th>Jumlah</th>
                   <th></th>
                 </tr>
@@ -67,6 +67,8 @@ const CartList = () => {
                       <td>
                         <El.Price>
                           <NumberFormat
+                            prefix="Rp"
+                            suffix=",00"
                             value={val.Book.price}
                             displayType={"text"}
                             thousandSeparator={"."}
@@ -99,8 +101,9 @@ const CartList = () => {
             <El.AmountPrice>
               <h1>Total Harga</h1>
               <h1>
-                {`IDR `}
                 <NumberFormat
+                  prefix="Rp"
+                  suffix=",00"
                   value={amountPrice}
                   displayType={"text"}
                   thousandSeparator={"."}
