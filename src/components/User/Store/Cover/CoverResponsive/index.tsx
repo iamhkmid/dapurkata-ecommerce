@@ -5,7 +5,7 @@ import IconsControl from "../../../../IconsControl";
 import LoadingBookCover from "../../../../otherComps/Loading/LoadingBookCover";
 
 export const Main = styled.div`
-  display: flex;
+  display: block;
   position: relative;
   align-items: center;
   justify-content: center;
@@ -69,8 +69,10 @@ const Cover: FC<TBookCover> = ({ url }) => {
         <Image
           src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
           alt="Cover"
-          layout="fill"
+          layout="intrinsic"
           objectFit="fill"
+          width={200}
+          height={290}
           quality={75}
           onLoad={() => setIsLoading(false)}
           onError={() => defaultImgSrc()}
