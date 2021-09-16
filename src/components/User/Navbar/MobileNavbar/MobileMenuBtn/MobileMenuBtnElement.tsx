@@ -88,12 +88,12 @@ export const AmountNum = styled.div`
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 15%;
+  top: 20%;
   right: -5%;
-  border-radius: 100%;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
   padding: 0 0.2rem;
   height: 1rem;
   aspect-ratio: 1/1;
-  color: ${({ theme }) => theme.button.primary.color};
-  background: ${({ theme }) => theme.button.primary.background};
+  background: ${({ theme }) => theme.button.list.background};
+  color: ${({ theme }) => theme.button.list.color};
 `;
