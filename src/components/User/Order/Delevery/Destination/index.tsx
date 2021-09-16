@@ -65,7 +65,7 @@ const Destination = () => {
                   type: "SHOW_POPUP",
                   value: {
                     name: "EDIT_RECIPIENT",
-                    value: recipient.id,
+                    value: recipient?.id,
                   },
                 })
               }

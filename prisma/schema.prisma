@@ -203,8 +203,8 @@ model ShippingAddress {
 model Book {
   id            String         @id @default(cuid())
   title         String
-  // synopsis      String     @db.VarChar(2000)
-  synopsis      String
+  // description      String     @db.VarChar(2000)
+  description   String
   edition       String
   series        String
   releaseYear   String         @map("release_year")

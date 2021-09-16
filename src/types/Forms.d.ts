@@ -2,7 +2,7 @@ import { date, number, string } from "yup/lib/locale";
 import { NestedValue } from "react-hook-form";
 export type TAddBook = {
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;
@@ -21,7 +21,7 @@ export type TAddBook = {
 
 export type TFormCreateBook = {
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;
@@ -42,7 +42,7 @@ export type TFormCreateBook = {
 export type TFormUpdateBook = {
   bookId: string;
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;

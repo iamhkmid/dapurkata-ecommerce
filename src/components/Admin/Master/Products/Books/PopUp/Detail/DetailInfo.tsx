@@ -34,8 +34,8 @@ const DetailInfo = ({ data }: { data: TGetBook }) => {
           <El.Value>{data.Author.name}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Synopsis</El.Label>
-          <El.Value>{data.synopsis}</El.Value>
+          <El.Label>description</El.Label>
+          <El.Value>{data.description}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
           <El.Label>Edition</El.Label>

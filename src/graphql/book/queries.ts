@@ -27,7 +27,7 @@ export const GET_BOOK = gql`
     book(bookId: $bookId) {
       id
       title
-      synopsis
+      description
       edition
       series
       releaseYear
@@ -125,7 +125,7 @@ export const GET_BOOK_DETAIL = gql`
     book(bookId: $bookId) {
       id
       title
-      synopsis
+      description
       edition
       series
       releaseYear

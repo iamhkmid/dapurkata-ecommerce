@@ -13,40 +13,7 @@ export const Main = styled(motion.main)`
   z-index: 100;
   align-items: center;
   justify-content: center;
-`;
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  border-bottom: 1px solid ${({ theme }) => theme.border[1]};
-  transition: 0.4s all ease;
-`;
-
-export const CloseBtn = styled.button`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  aspect-ratio: 1/1;
-  border-radius: 100%;
-  margin: 0.2rem 0.4rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  > svg {
-    height: 1rem;
-  }
-  background: ${({ theme }) => theme.button.base.background};
-  color: ${({ theme }) => theme.button.base.color};
-  :hover {
-    background: ${({ theme }) => theme.button.hover.danger.background};
-    color: ${({ theme }) => theme.button.hover.danger.color};
-  }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    > svg {
-      height: 0.9rem;
-    }
-  }
-  transition: 0.4s all ease;
+  padding: 1rem 0.2rem;
 `;
 
 export const Section = styled.div`
@@ -56,23 +23,64 @@ export const Section = styled.div`
   overflow: hidden;
   background: ${({ theme }) => theme.background[2]};
   min-width: 80%;
+  width: 90%;
   min-height: 70%;
+  height: 90%;
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    width: 30rem;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    width: 98%;
+    height: 100%;
+    width: 100%;
   }
   transition: 0.4s all ease;
 `;
 
+export const ContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  overflow-x: auto;
+  gap: 2rem;
+  padding: 1rem 2rem 3rem 2rem;
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.scrollbar.v1.thumb};
+    border-radius: ${({ theme }) => theme.input.borderRadius};
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+  }
+
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 0.5rem 0.5rem 2rem 0.5rem;
+    gap: 1rem;
+  }
+`;
+
 export const Content = styled.div`
   display: flex;
-  gap: 1rem;
-  padding: 1rem 2rem;
+  gap: 2rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     flex-direction: column;
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 1rem;
+    gap: 1rem;
+  }
+`;
+
+export const Content2 = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     padding: 1rem;
   }
 `;
@@ -104,7 +112,8 @@ export const CoverWrapper = styled.div`
   position: relative;
   overflow: hidden;
   padding: 20px;
-  height: 260px;
+  min-height: 260px;
+  min-width: 260px;
   aspect-ratio: 1/1;
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.content.bookCard.cover.background};
@@ -131,18 +140,20 @@ export const InfoWrapper = styled.div`
   flex-direction: column;
   width: 100%;
   gap: 1rem;
+  justify-content: space-between;
   transition: 0.4s all ease;
 `;
-export const Info = styled.div`
+export const MainInfo = styled.div`
   display: flex;
   flex-direction: column;
   text-align: start;
+  padding-bottom: 1rem;
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -156,16 +167,22 @@ export const Info = styled.div`
     overflow: hidden;
     font-size: 1rem;
     font-weight: 500;
-    color: ${({ theme }) => theme.content.bookCard.color.author};
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.9rem;
     }
   }
+`;
+
+export const OrderInfo = styled.div`
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
   .price {
     font-family: "Mulish", sans-serif;
-    font-size: 1.2rem;
-    font-weight: 500;
-    color: ${({ theme }) => theme.color[2]};
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 1.2rem;
     }
@@ -181,8 +198,8 @@ export const AdditionalInfo = styled.div`
   display: grid;
   width: 100%;
   max-width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(7rem, 1fr));
-  grid-gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(7rem, auto));
+  grid-gap: 8px 2%;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
   }
@@ -237,6 +254,31 @@ export const AdditionalInfo = styled.div`
           font-size: 0.7rem;
         }
       }
+    }
+  }
+`;
+
+export const AboutBook = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  gap: 0.5rem;
+  .about-book {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.9rem;
+    }
+  }
+  .description {
+    font-family: "Mulish", sans-serif;
+    font-size: 1rem;
+    text-align: justify;
+    font-weight: 400;
+    color: ${({ theme }) => theme.color[2]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.9rem;
     }
   }
 `;

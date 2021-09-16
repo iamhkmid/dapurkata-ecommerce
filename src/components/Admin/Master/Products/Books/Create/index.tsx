@@ -80,12 +80,12 @@ const Create = () => {
             />
             <FormsControl
               control="textarea"
-              name="synopsis"
+              name="description"
               register={register}
               label="Sinopsis / subject"
-              error={errors.synopsis ? true : false}
+              error={errors.description ? true : false}
               disabled={loading}
-              message={errors.synopsis ? errors.synopsis.message : null}
+              message={errors.description ? errors.description.message : null}
             />
             <El.SpanGroup>
               <FormsControl

@@ -5,7 +5,7 @@ import { TGQLBookPic } from "./picture";
 export type TGQLBook = {
   id: string;
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;
@@ -27,7 +27,7 @@ export type TGQLBook = {
 export type TArgsCreateBook = {
   data: {
     title: string;
-    synopsis: string;
+    description: string;
     edition: string;
     series: string;
     releaseYear: string;
@@ -46,7 +46,7 @@ export type TArgsCreateBook = {
 
 type TDBCreateBook = {
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;
@@ -64,7 +64,7 @@ type TDBCreateBook = {
 
 export type TDBUpdateBook = {
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;
@@ -83,7 +83,7 @@ export type TArgsUpdateBook = {
   data: {
     bookId: string;
     title: string;
-    synopsis: string;
+    description: string;
     edition: string;
     series: string;
     releaseYear: string;

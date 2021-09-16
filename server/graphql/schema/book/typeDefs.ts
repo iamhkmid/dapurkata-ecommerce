@@ -15,7 +15,7 @@ const typeDefs = gql`
 
   input cBookData {
     title: String!
-    synopsis: String
+    description: String
     edition: String
     series: String
     releaseYear: String
@@ -32,7 +32,7 @@ const typeDefs = gql`
   input uBookData {
     bookId: ID!
     title: String
-    synopsis: String
+    description: String
     edition: String
     series: String
     releaseYear: String
@@ -57,7 +57,7 @@ const typeDefs = gql`
   type Book {
     id: ID
     title: String
-    synopsis: String
+    description: String
     edition: String
     series: String
     releaseYear: String

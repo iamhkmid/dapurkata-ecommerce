@@ -1,7 +1,7 @@
 export type TGetBook = {
   id: string;
   title: string;
-  synopsis;
+  description;
   edition: string;
   series: string;
   releaseYear: string;
@@ -55,7 +55,7 @@ type TGQLGetFormBookInit = {
   book: {
     id: string;
     title: string;
-    synopsis;
+    description;
     edition: string;
     series: string;
     releaseYear: string;
@@ -148,7 +148,7 @@ type TGQLUpdateBook = {
 type TBookDetail = {
   id: string;
   title: string;
-  synopsis: string;
+  description: string;
   edition: string;
   series: string;
   releaseYear: string;

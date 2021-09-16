@@ -108,7 +108,7 @@ export const BookInfo = styled.div`
     overflow: hidden;
     font-size: 11px;
     font-weight: 400;
-    color: ${({ theme }) => theme.color[3]};
+    color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 9px;
     }
@@ -120,8 +120,8 @@ export const BookInfo = styled.div`
     overflow: hidden;
     font-size: 14px;
     height: 100%;
-    font-weight: 400;
-    color: ${({ theme }) => theme.color[2]};
+    font-weight: 800;
+    color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 12px;
     }

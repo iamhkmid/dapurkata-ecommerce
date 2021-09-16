@@ -22,7 +22,7 @@ export const Mutation: TBookMutation = {
       }));
     const newData: TDBCreateBook = {
       title: data.title,
-      synopsis: data.synopsis || undefined,
+      description: data.description || undefined,
       edition: data.edition || undefined,
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,
@@ -53,7 +53,7 @@ export const Mutation: TBookMutation = {
   updateBook: async (_, { data }, { db }) => {
     const newData: TDBUpdateBook = {
       title: data.title || undefined,
-      synopsis: data.synopsis || undefined,
+      description: data.description || undefined,
       edition: data.edition || undefined,
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,

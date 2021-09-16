@@ -81,72 +81,80 @@ const BookDetail = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      {dataGB && (
-        <El.Section>
-          <PopUpHeader close={() => dispatch({ type: "CLOSE_POPUP" })} />
-          <El.Content>
-            <El.Images>
-              <El.CoverWrapper>
-                <div>
-                  <CoverFixed
-                    url={coverURL}
-                    quality={75}
-                    height={imgSize.h}
-                    width={imgSize.w}
-                  />
-                </div>
-              </El.CoverWrapper>
-            </El.Images>
-            <El.InfoWrapper>
-              <El.Info>
-                <h1 className="title">{dataGB.title}</h1>
-                <h1 className="author">{dataGB.Author.name}</h1>
-                <h1 className="price">
-                  {`IDR `}
-                  <NumberFormat
-                    value={dataGB.price}
-                    displayType={"text"}
-                    thousandSeparator={"."}
-                    decimalSeparator={","}
-                  />
-                </h1>
-              </El.Info>
-              {!currCart && (
-                <AddCartInput amount={amount} setAmount={setAmount} />
-              )}
-              {currCart && (
-                <El.CartBtn>
-                  <UpdateCartInput
-                    cartProps={{
-                      cartId: currCart.id,
-                      amount: currCart.amount,
-                    }}
-                  />
-                  <DeleteCart cartId={currCart.id} />
-                </El.CartBtn>
-              )}
-              <El.ActionBtn>
-                <Button
-                  type="button"
-                  name="Masukan Keranjang"
-                  color="success"
-                  disabled={isDisabled}
-                  onClick={() =>
-                    createShoppingCart({
-                      bookId: dataGB.id,
-                      weight: dataGB.weight,
-                      amount,
-                    })
-                  }
-                />
-                <Button
-                  type="button"
-                  name="Beli"
-                  color="primary"
-                  onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
-                  disabled={isDisabled}
-                />
-              </El.ActionBtn>
+      <El.Section>
+        <PopUpHeader close={() => dispatch({ type: "CLOSE_POPUP" })} />
+        {dataGB && (
+          <El.ContentWrapper>
+            <El.Content>
+              <El.Images>
+                <El.CoverWrapper>
+                  <div>
+                    <CoverFixed
+                      url={coverURL}
+                      quality={75}
+                      height={imgSize.h}
+                      width={imgSize.w}
+                    />
+                  </div>
+                </El.CoverWrapper>
+              </El.Images>
+              <El.InfoWrapper>
+                <El.MainInfo>
+                  <h1 className="title">{dataGB.title}</h1>
+                  <h1 className="author">{dataGB.Author.name}</h1>
+                </El.MainInfo>
+                <El.OrderInfo>
+                  <h1 className="price">
+                    {`IDR `}
+                    <NumberFormat
+                      value={dataGB.price}
+                      displayType={"text"}
+                      thousandSeparator={"."}
+                      decimalSeparator={","}
+                    />
+                  </h1>
+                  {!currCart && (
+                    <AddCartInput amount={amount} setAmount={setAmount} />
+                  )}
+                  {currCart && (
+                    <El.CartBtn>
+                      <UpdateCartInput
+                        cartProps={{
+                          cartId: currCart.id,
+                          amount: currCart.amount,
+                        }}
+                      />
+                      <DeleteCart cartId={currCart.id} />
+                    </El.CartBtn>
+                  )}
+                  <El.ActionBtn>
+                    <Button
+                      type="button"
+                      name="Masukan Keranjang"
+                      color="success"
+                      disabled={isDisabled}
+                      onClick={() =>
+                        createShoppingCart({
+                          bookId: dataGB.id,
+                          weight: dataGB.weight,
+                          amount,
+                        })
+                      }
+                    />
+                    <Button
+                      type="button"
+                      name="Beli"
+                      color="primary"
+                      onClick={() =>
+                        buyNowHandler({ amount, bookId: dataGB.id })
+                      }
+                      disabled={isDisabled}
+                    />
+                  </El.ActionBtn>
+                </El.OrderInfo>
+              </El.InfoWrapper>
+            </El.Content>
+            <El.Content2>
               <El.AdditionalInfo>
                 <div>
                   <h1 className="ai-name">Berat</h1>
@@ -172,10 +180,14 @@ const BookDetail = () => {
                   </div>
                 </div>
               </El.AdditionalInfo>
-            </El.InfoWrapper>
-          </El.Content>
-        </El.Section>
-      )}
+              <El.AboutBook>
+                <h1 className="about-book">Tentang Buku</h1>
+                <h1 className="description">{dataGB.description}</h1>
+              </El.AboutBook>
+            </El.Content2>
+          </El.ContentWrapper>
+        )}
+      </El.Section>
     </El.Main>
   );
 };

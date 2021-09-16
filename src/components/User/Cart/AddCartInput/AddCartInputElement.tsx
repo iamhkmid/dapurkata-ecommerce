@@ -5,18 +5,11 @@ export const Main = styled.div`
   gap: 0.5rem;
 `;
 
-export const InputLabel = styled.label`
-  font-weight: 400;
-  font-size: 0.8rem;
-  color: ${({ theme }) => theme.color[1]};
-`;
-
 export const InputWrapper = styled.div`
   display: flex;
   border-radius: 0.1rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
   background: ${({ theme }) => theme.input.focus.background};
-  overflow: hidden;
 `;
 
 export const Input = styled.input`
@@ -27,6 +20,7 @@ export const Input = styled.input`
   background-color: transparent;
   outline: none;
   border: none;
+  min-width: 2.2rem;
   width: 2.2rem;
   ::-webkit-outer-spin-button,
   ::-webkit-inner-spin-button {
@@ -47,6 +41,7 @@ export const AmountBtn = styled.button`
   justify-content: center;
   aspect-ratio: 1/1;
   padding: 0.4rem;
+  width: 1.5rem;
   outline: none;
   border: none;
   background: transparent;
