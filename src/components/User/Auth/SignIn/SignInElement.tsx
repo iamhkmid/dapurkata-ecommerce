@@ -10,24 +10,16 @@ export const Main = styled.div`
   align-items: center;
   padding: 3rem 0;
   justify-content: center;
-  transition: 0.4s all ease;
-`;
 
-export const Logo = styled.img`
-  height: 4rem;
-  margin-bottom: 1.5rem;
-
-  @media screen and (max-width: 960px) {
-    height: 3.5rem;
-  }
-  @media screen and (max-width: 540px) {
-    height: 3rem;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 3rem 0.2rem;
   }
   transition: 0.4s all ease;
 `;
 
 export const Container = styled(motion.div)`
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   background: ${({ theme }) => theme.background[2]};
   display: flex;
   gap: 1rem;
@@ -41,7 +33,8 @@ export const Container = styled(motion.div)`
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 100%;
-    padding: 2rem 1rem;
+    gap: 0.5rem;
+    padding: 1rem;
   }
   transition: 0.4s all ease;
 `;
