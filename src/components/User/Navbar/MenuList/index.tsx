@@ -52,7 +52,7 @@ const MenuList = () => {
                   {IconsControl("chevron-down-outline")}
                 </El.IconWrapper>
                 <AnimatePresence>
-                  {userNav.showMenu === value.id && (
+                  {userNav.menu === value.id && (
                     <DropdownControl name={value.id} />
                   )}
                 </AnimatePresence>
@@ -66,7 +66,7 @@ const MenuList = () => {
           {["CART", "MAIL"].map((value) => (
             <El.IconButton
               key={value}
-              active={userNav.showMenu === value}
+              active={userNav.menu === value}
               onClick={() =>
                 dispatch({ type: "SHOW_MENU", value: value as TUserMenu })
               }
@@ -76,7 +76,7 @@ const MenuList = () => {
                 <El.AmountNum>{totalItems}</El.AmountNum>
               )}
               <AnimatePresence>
-                {userNav.showMenu === value && <DropdownControl name={value} />}
+                {userNav.menu === value && <DropdownControl name={value} />}
               </AnimatePresence>
             </El.IconButton>
           ))}

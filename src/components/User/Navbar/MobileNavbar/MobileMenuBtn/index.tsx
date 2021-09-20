@@ -25,7 +25,7 @@ const MobileMenuBtn = () => {
         ["CART", "MAIL"].map((value) => (
           <El.IconButton
             key={value}
-            active={userNav.showMenu === value || false}
+            active={userNav.menu === value || false}
             onClick={() =>
               dispatch({ type: "SHOW_MENU", value: value as TUserMenu })
             }
@@ -38,7 +38,7 @@ const MobileMenuBtn = () => {
         ))}
       <ThemeToggle />
       <El.MobileIcon
-        active={userNav.showMenu === "MENU"}
+        active={userNav.menu === "MENU"}
         onClick={() => {
           dispatch({ type: "SHOW_MENU", value: "MENU" });
         }}
