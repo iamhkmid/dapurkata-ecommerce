@@ -2,7 +2,6 @@ import Table from "../../../../../otherComps/Table";
 import * as El from "./ListElement";
 import { columns } from "./columns";
 import { useGQLCategories } from "../useGQLCategory";
-import { useState } from "react";
 
 const List = () => {
   const { data, loading, error } = useGQLCategories();

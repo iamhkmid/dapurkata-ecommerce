@@ -2,7 +2,6 @@ import { useContext } from "react";
 import Table from "../../../../../otherComps/Table";
 import * as El from "./ListELement";
 import { columns } from "./columns";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
 import { useGQLAuthors } from "../useGQLAuthor";
 
 const List = () => {
