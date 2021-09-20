@@ -1,13 +1,13 @@
 import * as El from "./DeleteELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext, useEffect } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import { useGQLDeleteBook, useGQLGetBookDel } from "../../useGQLBook";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 import FormMessage from "../../../../../../otherComps/ShowMessage";
 
 const Delete = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { dataGBD, errorGBD, loadGBD } = useGQLGetBookDel({ bookId: id });
   const { deleteBook, data, loading, error } = useGQLDeleteBook();
   return (
@@ -24,10 +24,10 @@ const Delete = ({ id }) => {
         <El.Body>
           <FormMessage message={error?.message} color="danger" />
           <El.Content>
-            <El.Text1>Are you sure you want to delete?</El.Text1>
+            <El.Text1>KONFIRMASI HAPUS DATA</El.Text1>
             <El.TextWrapper>
               <El.TextGroup>
-                <h1 className="key">id</h1>
+                <h1 className="key">ID</h1>
                 <h1 className="separator">:</h1>
                 <h1 className="value">{dataGBD?.id}</h1>
               </El.TextGroup>

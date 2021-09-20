@@ -5,21 +5,12 @@ import { AuthContext } from "../../../../../contexts/AuthCtx";
 import { useLogOut } from "../../../../../hooks/useGQLAuth";
 import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import * as El from "./DropdownElement";
+import ImageResponsive from "../../../../otherComps/ImageResponsive";
 
 const Dropdown = () => {
   const { logOut } = useLogOut();
   const { user } = useContext(AuthContext);
   const { dispatch } = useContext(UserNavCtx);
-  const defUserPic = `/uploads/profile/default/defProfilePic.svg`;
-  const [userPic, setUserPic] = useState(defUserPic);
-  const defaultImgSrc = () => {
-    setUserPic(defUserPic);
-  };
-  useEffect(() => {
-    if (user?.UserPicture) {
-      if (user.UserPicture.url) setUserPic(user.UserPicture.url);
-    }
-  }, [user]);
 
   return (
     <El.Main
@@ -30,17 +21,16 @@ const Dropdown = () => {
     >
       <El.UserInfo>
         <El.PhotoWrapper>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
+          <ImageResponsive
+            src={user?.userPicture}
             alt="Profile Pic"
-            layout="fixed"
-            quality={75}
             height={80}
             width={80}
-            onError={() => defaultImgSrc()}
+            defaultIcon="person"
+            quality={75}
           />
         </El.PhotoWrapper>
-        <El.FullName>{`${user.firstName} ${user.lastName}`}</El.FullName>
+        <El.FullName>{`${user.firstName} ${user.lastName || ""}`}</El.FullName>
         <El.Email>{user.email}</El.Email>
       </El.UserInfo>
       <El.Ul onClick={() => dispatch({ type: "CLOSE_MENU" })}>

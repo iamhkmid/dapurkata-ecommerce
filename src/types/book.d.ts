@@ -6,17 +6,23 @@ export type TGetBook = {
   series: string;
   releaseYear: string;
   numberOfPages: number;
-  height: number;
+  lenght: number;
+  width: number;
   weight: number;
   stock: number;
   price: number;
-  rating: string;
-  imgDir: string;
+  language: string;
+  isbn: string;
+  pictureDir: string;
   Category: {
     id: string;
     name: string;
   }[];
   Author: {
+    id: string;
+    name: string;
+  };
+  Publisher: {
     id: string;
     name: string;
   };
@@ -60,18 +66,23 @@ type TGQLGetFormBookInit = {
     series: string;
     releaseYear: string;
     numberOfPages: number;
-    height: number;
+    lenght: number;
+    width: number;
     weight: number;
     stock: number;
     price: number;
-    rating: string;
-    imgDir: string;
+    language: string;
+    isbn: string;
     Category: {
       id: string;
       name: string;
       group: string;
     }[];
     Author: {
+      id: string;
+      name: string;
+    };
+    Publisher: {
       id: string;
       name: string;
     };
@@ -91,11 +102,7 @@ type TGQLGetBooks = {
     title: string;
     price: number;
     stock: string;
-    Category: {
-      id: string;
-      name: string;
-      group: string;
-    };
+    isbn: string;
     Author: {
       id: string;
       name: string;
@@ -154,15 +161,21 @@ type TBookDetail = {
   releaseYear: string;
   numberOfPages: number;
   weight: number;
-  height: number;
+  lenght: number;
+  width: number;
   stock: number;
   price: number;
-  rating: string;
+  language: string;
+  isbn: string;
   Category: {
     id: string;
     name: string;
   };
   Author: {
+    id: string;
+    name: string;
+  };
+  Publisher: {
     id: string;
     name: string;
   };
@@ -185,7 +198,7 @@ type TGQLGetBookCards = {
     id: string;
     title: string;
     price: string;
-    rating: string;
+
     BookPicture: {
       type: string;
       url: string;
@@ -209,6 +222,10 @@ export type TBookCard = {
 
 type TGQLGetFormBook = {
   authors: {
+    id: string;
+    name: string;
+  }[];
+  publishers: {
     id: string;
     name: string;
   }[];

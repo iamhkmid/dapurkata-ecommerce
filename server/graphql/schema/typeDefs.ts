@@ -1,5 +1,6 @@
 import { mergeTypeDefs } from "@graphql-tools/merge";
 import author from "./author/typeDefs";
+import publisher from "./publisher/typeDefs";
 import category from "./category/typeDefs";
 import book from "./book/typeDefs";
 import user from "./user/typeDefs";
@@ -14,6 +15,7 @@ import * as scalar from "./scalar";
 const typeDefs = [
   scalar.typeDefs,
   author,
+  publisher,
   category,
   book,
   user,

@@ -1,13 +1,10 @@
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
-import { useWindowSize } from "react-use";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { TCart } from "../../../../types/shoppingCart";
-import IconsControl from "../../../IconsControl";
-import CoverFixed from "../Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../otherComps/PopUpHeader";
 import AddCartInput from "../../Cart/AddCartInput";
@@ -15,14 +12,13 @@ import DeleteCart from "../../Cart/DeleteCart";
 import UpdateCartInput from "../../Cart/UpdateCartInput";
 import * as El from "./BookDetailElement";
 import { useGQLCreateSC, useGQLGetbook } from "./useGQL";
+import ImageResponsive from "../../../otherComps/ImageResponsive";
 
-type TCover = {
-  id: string;
-  type: string;
-  url: string;
+type TBookDetail = {
+  bookId: string;
 };
 
-const BookDetail = () => {
+const BookDetail: FC<TBookDetail> = ({ bookId }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { user } = useContext(AuthContext);
   const { shoppingCart } = useContext(ShoppingCartCtx);
@@ -31,17 +27,7 @@ const BookDetail = () => {
   const [amount, setAmount] = useState<number>(1);
   const [currCart, setCurrCart] = useState<TCart>(null);
 
-  const initialImgSize = { h: 220, w: 150 };
-  const [imgSize, setImgSize] = useState(initialImgSize);
-  const { width } = useWindowSize();
-  useEffect(() => {
-    width > 540 && setImgSize(initialImgSize);
-    width <= 540 && setImgSize({ h: 200, w: 135 });
-  }, [width]);
-
-  const { dataGB, loadGB, errorGB } = useGQLGetbook({
-    bookId: userNav.showPopUp.value,
-  });
+  const { dataGB, loadGB, errorGB } = useGQLGetbook({ bookId });
   const { createShoppingCart, data, error, loading } = useGQLCreateSC();
 
   const isDisabled =
@@ -69,9 +55,7 @@ const BookDetail = () => {
 
   useEffect(() => {
     const findCart =
-      shoppingCart.data.find(
-        (val) => val.Book.id === userNav.showPopUp.value
-      ) || null;
+      shoppingCart.data.find((val) => val.Book.id === bookId) || null;
     setCurrCart(findCart);
   }, [shoppingCart]);
 
@@ -89,11 +73,12 @@ const BookDetail = () => {
               <El.Images>
                 <El.CoverWrapper>
                   <div>
-                    <CoverFixed
-                      url={coverURL}
+                    <ImageResponsive
+                      src={coverURL}
+                      alt={dataGB.title}
+                      height={220}
+                      width={150}
                       quality={75}
-                      height={imgSize.h}
-                      width={imgSize.w}
                     />
                   </div>
                 </El.CoverWrapper>
@@ -158,12 +143,24 @@ const BookDetail = () => {
             <El.Content2>
               <El.AdditionalInfo>
                 <div>
+                  <h1 className="ai-name">Edisi</h1>
+                  <h1 className="ai-value">{dataGB.edition}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Seri</h1>
+                  <h1 className="ai-value">{dataGB.series}</h1>
+                </div>
+                <div>
                   <h1 className="ai-name">Berat</h1>
                   <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
                 </div>
                 <div>
-                  <h1 className="ai-name">Tinggi</h1>
-                  <h1 className="ai-value">{`${dataGB.height} cm`}</h1>
+                  <h1 className="ai-name">Panjang</h1>
+                  <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Lebar</h1>
+                  <h1 className="ai-value">{`${dataGB.width} cm`}</h1>
                 </div>
                 <div>
                   <h1 className="ai-name">Halaman</h1>
@@ -174,11 +171,12 @@ const BookDetail = () => {
                   <h1 className="ai-value">{dataGB.releaseYear}</h1>
                 </div>
                 <div>
-                  <h1 className="ai-name">Rating</h1>
-                  <div className="ai-star">
-                    {IconsControl("star")}
-                    <h1>{dataGB.rating}</h1>
-                  </div>
+                  <h1 className="ai-name">Bahasa</h1>
+                  <h1 className="ai-value">{dataGB.language}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">ISBN</h1>
+                  <h1 className="ai-value">{dataGB.isbn}</h1>
                 </div>
               </El.AdditionalInfo>
               <El.AboutBook>

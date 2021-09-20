@@ -3,21 +3,13 @@ import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../contexts/AuthCtx";
 import { useLogOut } from "../../../../../hooks/useGQLAuth";
+import ImageResponsive from "../../../../otherComps/ImageResponsive";
 import * as El from "./AuthDropdownElement";
 
 const AuthDropdown = ({ setIsShowed }) => {
   const { logOut } = useLogOut();
   const { user } = useContext(AuthContext);
-  const defUserPic = `/uploads/profile/default/defProfilePic.svg`;
-  const [userPic, setUserPic] = useState(defUserPic);
-  const defaultImgSrc = () => {
-    setUserPic(defUserPic);
-  };
-  useEffect(() => {
-    if (user) {
-      if (user.UserPicture.url) setUserPic(user.UserPicture.url);
-    }
-  }, [user]);
+
   return (
     <El.Main
       initial={{ opacity: 0 }}
@@ -27,14 +19,12 @@ const AuthDropdown = ({ setIsShowed }) => {
     >
       <El.UserInfo>
         <El.PhotoWrapper>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
-            alt="Profile Pic"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            quality={65}
-            onError={() => defaultImgSrc()}
+          <ImageResponsive
+            src={user?.userPicture}
+            alt="Profil Pic"
+            width={32}
+            height={32}
+            quality={75}
           />
         </El.PhotoWrapper>
         <El.Info>

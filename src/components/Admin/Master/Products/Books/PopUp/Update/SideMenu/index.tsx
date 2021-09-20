@@ -3,7 +3,6 @@ import * as El from "./SideMenuElement";
 
 const Sidebar = ({ navState, setNavState, showSideMenu }) => {
   const sidebar = ["Data", "Images"];
-  console.log(showSideMenu);
   return (
     <El.SideMenu active={showSideMenu}>
       <El.Menu>

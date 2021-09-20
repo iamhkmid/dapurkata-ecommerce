@@ -64,14 +64,12 @@ export const MenuIconWrapper = styled.div`
 `;
 export const PhotoWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.border[2]};
   position: relative;
-  height: max-content;
-  width: max-content;
+  height: 40px;
+  aspect-ratio: 1/1;
   transition: 0.4s all ease;
 `;
 

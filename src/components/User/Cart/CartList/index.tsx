@@ -4,8 +4,8 @@ import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import CoverFixed from "../../Store/Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
+import ImageResponsive from "../../../otherComps/ImageResponsive";
 import DeleteCart from "../DeleteCart";
 import UpdateCartInput from "../UpdateCartInput";
 import * as El from "./CartListElement";
@@ -41,7 +41,7 @@ const CartList = () => {
               </thead>
               <tbody>
                 {shoppingCart.data.map((val) => {
-                  const cover = val.Book.BookPicture.filter(
+                  const cover = val.Book.BookPicture.find(
                     (img) => img.type === "COVER"
                   );
                   return (
@@ -49,14 +49,14 @@ const CartList = () => {
                       <td>
                         <El.Product>
                           <El.CoverWrapper>
-                            <div>
-                              <CoverFixed
-                                url={cover.length > 0 && cover[0].url}
-                                quality={75}
-                                height={75}
-                                width={50}
-                              />
-                            </div>
+                            <ImageResponsive
+                              src={cover?.url}
+                              alt={val.Book.title}
+                              height={75}
+                              width={50}
+                              quality={75}
+                              defaultIcon="dapurkata"
+                            />
                           </El.CoverWrapper>
                           <El.Info>
                             <h1>{val.Book.title}</h1>

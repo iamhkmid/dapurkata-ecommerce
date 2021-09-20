@@ -1,30 +1,22 @@
 import { AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { useContext, useEffect, useState } from "react";
-import { AdminContext } from "../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../contexts/AdminNavCtx";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import ThemeToggle from "../../../otherComps/Buttons/ThemeToggle";
 import IconsControl from "../../../IconsControl";
 import AuthDropdown from "./AuthDropdown";
 import * as El from "./HeaderElement";
+import ImageResponsive from "../../../otherComps/ImageResponsive";
 
 const Header = () => {
   const [isShowed, setIsShowed] = useState(false);
-  const { adminNav, dispatch } = useContext(AdminContext);
+  const { adminNav, dispatch } = useContext(AdminNavCtx);
   const { user } = useContext(AuthContext);
   const HandleAccountBtn = () => {
     setIsShowed(!isShowed);
   };
-  const defUserPic = `/uploads/profile/default/defProfilePic.svg`;
-  const [userPic, setUserPic] = useState(defUserPic);
-  const defaultImgSrc = () => {
-    setUserPic(defUserPic);
-  };
-  useEffect(() => {
-    if (user) {
-      if (user.UserPicture.url) setUserPic(user.UserPicture.url);
-    }
-  }, [user]);
+
   return (
     <El.Main>
       <El.Left>
@@ -57,14 +49,12 @@ const Header = () => {
         </AnimatePresence>
         <El.ProfileName>{user?.firstName}</El.ProfileName>
         <El.PhotoWrapper className="profile">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
-            alt="Profile Pic"
-            layout="fill"
-            objectFit="cover"
-            objectPosition="center"
-            quality={65}
-            onError={() => defaultImgSrc()}
+          <ImageResponsive
+            src={user?.userPicture}
+            alt="Profil Pic"
+            width={32}
+            height={32}
+            quality={75}
           />
         </El.PhotoWrapper>
         <El.MenuIconWrapper>

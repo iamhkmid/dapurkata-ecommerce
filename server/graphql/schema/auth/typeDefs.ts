@@ -7,7 +7,6 @@ const typeDefs = gql`
 
   type Mutation {
     signin(username: String!, password: String!, rememberMe: Boolean!): signin
-    logout: message @auth(requires: AUTH)
   }
 
   type signin {
@@ -23,11 +22,7 @@ const typeDefs = gql`
     email: String
     role: EnumRole
     phone: String
-    UserPicture: UserPicture
-  }
-
-  type message {
-    message: String
+    userPicture: String
   }
 `;
 

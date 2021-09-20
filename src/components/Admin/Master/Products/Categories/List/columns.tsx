@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { useContext } from "react";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 
 import RowBtn from "../../../../../otherComps/Buttons/RowBtn";
 import {
@@ -40,7 +40,7 @@ export const columns = [
     Header: "Action",
     className: "actions",
     Cell: (d) => {
-      const { dispatch } = useContext(AdminContext);
+      const { dispatch } = useContext(AdminNavCtx);
       return (
         <ActionColumn>
           <RowBtn
@@ -48,7 +48,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "categoryDetail", value: d.row.values.id },
+                value: { name: "CATEGORY_DETAIL", value: d.row.values.id },
               })
             }
           />
@@ -57,7 +57,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "categoryUpdate", value: d.row.values.id },
+                value: { name: "CATEGORY_UPDATE", value: d.row.values.id },
               })
             }
           />
@@ -66,7 +66,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "categoryDelete", value: d.row.values.id },
+                value: { name: "CATEGORY_DELETE", value: d.row.values.id },
               })
             }
           />

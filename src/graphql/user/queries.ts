@@ -13,14 +13,13 @@ export const USERS_ADMIN_LIST = gql`
   }
 `;
 
-export const GET_USER = gql`
+export const USER_DEL_DATA = gql`
   query user($userId: ID!) {
     user(userId: $userId) {
       id
       firstName
       lastName
       username
-      email
       role
     }
   }
@@ -35,10 +34,20 @@ export const INIT_DATA_MY_ACCOUNT = gql`
       username
       email
       phone
-      UserPicture {
-        id
-        url
-      }
+      userPicture
+    }
+  }
+`;
+
+export const INIT_DATA_UPDATE_USER = gql`
+  query user($userId: ID!) {
+    user(userId: $userId) {
+      id
+      firstName
+      lastName
+      username
+      email
+      phone
     }
   }
 `;

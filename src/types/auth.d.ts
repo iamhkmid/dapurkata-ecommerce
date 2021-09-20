@@ -8,10 +8,7 @@ export type TUser = {
   firstName: string;
   lastName: string;
   phone: string;
-  UserPicture: {
-    id: string;
-    url: string;
-  };
+  userPicture: string;
 };
 export type TGqlSignin = {
   signin: { jwt: string; user: TUser };

@@ -1,21 +1,21 @@
 import Moment from "moment";
 import { TGetBook } from "../../../../../../../types/book";
 import * as El from "./DetailInfoElement";
-import Image from "next/image";
-import { useState } from "react";
-import BookCover from "../../../../../../User/Store/Cover/CoverFixed";
+import ImageResponsive from "../../../../../../otherComps/ImageResponsive";
 
 const DetailInfo = ({ data }: { data: TGetBook }) => {
-  const coverData = data.BookPicture.filter((img) => img.type === "COVER");
+  const coverData = data.BookPicture.find((img) => img.type === "COVER");
   return (
     <El.Container>
       <El.Section>
         <El.CoverWrapper>
-          <BookCover
-            url={coverData.length > 0 && coverData[0].url}
+          <ImageResponsive
+            src={coverData?.url}
+            alt={data.title}
+            height={290}
+            width={200}
             quality={75}
-            height={240}
-            width={160}
+            defaultIcon="dapurkata"
           />
         </El.CoverWrapper>
       </El.Section>
@@ -26,52 +26,60 @@ const DetailInfo = ({ data }: { data: TGetBook }) => {
           <El.Value>{data.id}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Title</El.Label>
+          <El.Label>Judul</El.Label>
           <El.Value>{data.title}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Author</El.Label>
+          <El.Label>Pengarang</El.Label>
           <El.Value>{data.Author.name}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>description</El.Label>
+          <El.Label>Deskripsi</El.Label>
           <El.Value>{data.description}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Edition</El.Label>
+          <El.Label>Edisi</El.Label>
           <El.Value>{data.edition}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Price</El.Label>
+          <El.Label>Harga</El.Label>
           <El.Value>{data.price}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Series</El.Label>
+          <El.Label>Seri</El.Label>
           <El.Value>{data.series}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Release Year</El.Label>
+          <El.Label>Tahun Rilis</El.Label>
           <El.Value>{data.releaseYear}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Number Of Pages</El.Label>
+          <El.Label>Halaman</El.Label>
           <El.Value>{data.numberOfPages}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Book Height</El.Label>
-          <El.Value>{data.height}</El.Value>
+          <El.Label>Panjang</El.Label>
+          <El.Value>{data.lenght}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Book Weight</El.Label>
+          <El.Label>Lebar</El.Label>
+          <El.Value>{data.width}</El.Value>
+        </El.TextWrapper>
+        <El.TextWrapper>
+          <El.Label>Berat</El.Label>
           <El.Value>{data.weight}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Stock</El.Label>
+          <El.Label>Stok</El.Label>
           <El.Value>{data.stock}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
-          <El.Label>Rating</El.Label>
-          <El.Value>{data.rating}</El.Value>
+          <El.Label>Bahasa</El.Label>
+          <El.Value>{data.language}</El.Value>
+        </El.TextWrapper>
+        <El.TextWrapper>
+          <El.Label>ISBN</El.Label>
+          <El.Value>{data.isbn}</El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
           <El.Label>Kategori </El.Label>

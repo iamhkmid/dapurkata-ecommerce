@@ -83,10 +83,13 @@ export const PhotoWrapper = styled.div`
   align-items: center;
   justify-content: center;
   border-radius: ${({ theme }) => theme.borderRadius};
-  min-width: 70px;
+  width: 90px;
   aspect-ratio: 1/1;
   overflow: hidden;
   border: 1px solid ${({ theme }) => theme.button.primary.background};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    width: 80px;
+  }
 `;
 
 export const ButtonWrapper = styled.div`

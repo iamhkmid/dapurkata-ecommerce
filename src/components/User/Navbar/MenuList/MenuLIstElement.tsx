@@ -154,7 +154,7 @@ export const IconButton = styled.div<TIconButton>`
       color: ${({ theme }) => theme.navbar.menu.hover.fill};
     `}
   > svg {
-    height: 1.3rem;
+    height: 1.4rem;
   }
 
   transition: 0.4s all ease;

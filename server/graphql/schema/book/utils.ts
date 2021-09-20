@@ -1,18 +1,18 @@
 import { TSaveBookPic } from "../../../types/picture";
 import { saveImg } from "../../utils/uploadFIle";
 
-const addCover = async ({ cover, imgDir }) => {
-  const { pathFile } = await saveImg({ imgDir, file: cover });
+const addCover = async ({ cover, pictureDir }) => {
+  const { pathFile } = await saveImg({ pictureDir, file: cover });
   return { type: "COVER", url: pathFile.split("static")[1] };
 };
 
 type TAddBookPics = {
   bookPics: any[];
-  imgDir: string;
+  pictureDir: string;
 };
-const addBookPics = async ({ bookPics, imgDir }: TAddBookPics) => {
+const addBookPics = async ({ bookPics, pictureDir }: TAddBookPics) => {
   return bookPics.map(async (img, index) => {
-    const { pathFile } = await saveImg({ imgDir, file: img });
+    const { pathFile } = await saveImg({ pictureDir, file: img });
     return {
       type: `OTHER${new Date().getTime()}`,
       url: pathFile.split("static")[1],
@@ -21,30 +21,30 @@ const addBookPics = async ({ bookPics, imgDir }: TAddBookPics) => {
 };
 
 export const saveBookPic = async (options: TSaveBookPic) => {
-  const { cover, bookPics, imgDir } = options;
+  const { cover, bookPics, pictureDir } = options;
   if (cover && bookPics) {
-    const img1 = await addCover({ cover, imgDir });
-    const img2 = await Promise.all(await addBookPics({ bookPics, imgDir }));
+    const img1 = await addCover({ cover, pictureDir });
+    const img2 = await Promise.all(await addBookPics({ bookPics, pictureDir }));
     return [img1, ...img2];
   } else if (cover) {
-    return [await addCover({ cover, imgDir })];
+    return [await addCover({ cover, pictureDir })];
   } else if (bookPics) {
-    return await Promise.all(await addBookPics({ bookPics, imgDir }));
+    return await Promise.all(await addBookPics({ bookPics, pictureDir }));
   } else {
     return null;
   }
 };
 
 // export const saveImgEditBook = async (options: TSaveImg) => {
-//   const { image, imgDir, db } = options;
+//   const { image, pictureDir, db } = options;
 //   const currImg =
 //     image && image.id
 //       ? await db.Image.getImage({ where: { id: image.id } })
 //       : null;
 //   //save file
-//   const { pathFile } = await saveFile({ imgDir, image }).catch((err) => {
+//   const { pathFile } = await saveFile({ pictureDir, image }).catch((err) => {
 //     //delete dir if error
-//     removeDir(imgDir);
+//     removeDir(pictureDir);
 //     throw err;
 //   });
 //   //delete old file

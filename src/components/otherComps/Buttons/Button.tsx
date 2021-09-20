@@ -134,7 +134,14 @@ type TButton =
   | {
       name: string;
       disabled?: boolean;
-      color?: "primary" | "danger" | "success" | "base" | "section" | "list";
+      color?:
+        | "primary"
+        | "danger"
+        | "success"
+        | "base"
+        | "section"
+        | "list"
+        | "warning";
       onClick?: any;
       isLoading?: boolean;
     } & (

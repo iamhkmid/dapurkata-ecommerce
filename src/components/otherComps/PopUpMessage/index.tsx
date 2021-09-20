@@ -1,11 +1,22 @@
+import { useEffect, useState } from "react";
 import { FC, useContext } from "react";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import Button from "../Buttons/Button";
 import PopUpHeader from "../PopUpHeader";
 import * as El from "./PopUpMessageElement";
 
-const PopUpMessage: FC = () => {
+type TPopupMessage = {
+  message: string;
+};
+
+const PopUpMessage: FC<TPopupMessage> = ({ message }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
+  const [msg, setMsg] = useState<string>();
+
+  useEffect(() => {
+    if (message) setMsg(message);
+  }, [message]);
+
   return (
     <El.Main
       initial={{ opacity: 0 }}
@@ -26,7 +37,7 @@ const PopUpMessage: FC = () => {
           }
         />
         <El.Body>
-          <El.Message>{userNav.showPopUp.value}</El.Message>
+          <El.Message>{msg}</El.Message>
           <El.ButtonWrapper>
             <Button
               type="button"

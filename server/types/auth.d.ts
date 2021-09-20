@@ -17,7 +17,7 @@ export type TGQLSignin = {
     phone: string;
     firstName: string;
     lastName?: string;
-    UserPicture: TDBGetUserPic;
+    userPicture: TDBGetUserPic;
   };
 };
 export type TGQLCheckUser = {
@@ -29,5 +29,5 @@ export type TGQLCheckUser = {
   role: string;
   password: string;
   phone: string;
-  UserPicture: TGQLUserPic;
+  userPicture: string;
 };

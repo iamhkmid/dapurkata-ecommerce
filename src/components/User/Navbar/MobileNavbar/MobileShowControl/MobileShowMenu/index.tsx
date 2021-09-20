@@ -9,6 +9,7 @@ import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import IconsControl from "../../../../../IconsControl";
 import DropdownControl from "./DropdownControl";
 import * as El from "./MobileShowMenuElement";
+import ImageResponsive from "../../../../../otherComps/ImageResponsive";
 
 const MobileShowMenu = () => {
   const { pathname } = useRouter();
@@ -22,8 +23,8 @@ const MobileShowMenu = () => {
     setUserPic(defUserPic);
   };
   useEffect(() => {
-    if (user?.UserPicture) {
-      if (user.UserPicture.url) setUserPic(user.UserPicture.url);
+    if (user?.userPicture) {
+      if (user.userPicture) setUserPic(user.userPicture);
     }
   }, [user]);
   return (
@@ -39,18 +40,19 @@ const MobileShowMenu = () => {
           <El.Account>
             <div>
               <El.PhotoWrapper>
-                <Image
-                  src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
+                <ImageResponsive
+                  src={user?.userPicture}
                   alt="Profile Pic"
-                  layout="fixed"
                   height={70}
                   width={70}
-                  quality={50}
-                  onError={() => defaultImgSrc()}
+                  defaultIcon="person"
+                  quality={75}
                 />
               </El.PhotoWrapper>
               <El.UserInfo>
-                <El.FullName>{`${user.firstName} ${user.lastName}`}</El.FullName>
+                <El.FullName>{`${user.firstName} ${
+                  user.lastName || ""
+                }`}</El.FullName>
                 <El.Email>{user.email}</El.Email>
               </El.UserInfo>
             </div>

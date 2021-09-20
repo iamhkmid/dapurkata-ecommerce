@@ -65,11 +65,11 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background: ${({ theme }) => theme["color"][1]};
   border: 1px solid ${({ theme }) => theme.border[3]};
   width: 2rem;
   aspect-ratio: 1/1;
   position: relative;
+  overflow: hidden;
   transition: 0.4s all ease;
 `;
 

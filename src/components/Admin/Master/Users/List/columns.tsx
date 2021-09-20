@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { useContext } from "react";
-import { AdminContext } from "../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
 
 import RowBtn from "../../../../otherComps/Buttons/RowBtn";
 import * as El from "./ListELement";
@@ -51,7 +51,7 @@ export const columns = [
     Header: "Action",
     className: "actions",
     Cell: (d) => {
-      const { dispatch } = useContext(AdminContext);
+      const { dispatch } = useContext(AdminNavCtx);
       return (
         <El.ActionColumn>
           <RowBtn
@@ -63,8 +63,24 @@ export const columns = [
               })
             }
           />
-          <RowBtn type="edit" onClick={() => {}} />
-          <RowBtn type="delete" onClick={() => {}} />
+          <RowBtn
+            type="edit"
+            onClick={() =>
+              dispatch({
+                type: "SHOW_POPUP",
+                value: { name: "USER_UPDATE", value: d.row.values.id },
+              })
+            }
+          />
+          <RowBtn
+            type="delete"
+            onClick={() =>
+              dispatch({
+                type: "SHOW_POPUP",
+                value: { name: "USER_DELETE", value: d.row.values.id },
+              })
+            }
+          />
         </El.ActionColumn>
       );
     },

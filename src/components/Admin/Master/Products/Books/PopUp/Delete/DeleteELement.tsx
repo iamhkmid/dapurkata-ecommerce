@@ -17,9 +17,7 @@ export const Main = styled(motion.div)`
 export const Section = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  max-width: 80vw;
-  max-height: 90vh;
-  min-width: 30vw;
+  width: 30rem;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -27,13 +25,9 @@ export const Section = styled(motion.div)`
   flex-direction: column;
   position: relative;
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    max-width: 90vw;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     margin: 0.2rem;
     width: 100%;
-    max-width: 100%;
   }
 `;
 
@@ -97,6 +91,6 @@ type TErrorMessage = {
 export const Text1 = styled.h1`
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color[1]};
+  font-weight: 600;
+  color: ${({ theme }) => theme.color[2]};
 `;

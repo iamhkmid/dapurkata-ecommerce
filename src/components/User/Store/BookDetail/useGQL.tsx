@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
@@ -40,22 +41,26 @@ export const useGQLCreateSC = () => {
       push(`/auth/signin?next=${pathname}`);
       dispatch({ type: "CLOSE_POPUP" });
     } else {
-      try {
-        await createShoppingCart({
-          variables: { bookId, amount },
-          refetchQueries: [
-            { query: SHOPPINGCART, variables: { userId: user.id } },
-          ],
-          awaitRefetchQueries: true,
-        });
-      } catch (error) {
-        dispatch({
-          type: "SHOW_POPUP",
-          value: { name: "MESSAGE", value: error.message },
-        });
-      }
+      await createShoppingCart({
+        variables: { bookId, amount },
+        refetchQueries: [
+          { query: SHOPPINGCART, variables: { userId: user.id } },
+        ],
+        awaitRefetchQueries: true,
+      });
     }
   };
+
+  useEffect(() => {
+    if (error)
+      dispatch({
+        type: "SHOW_POPUP",
+        value: {
+          name: "MESSAGE",
+          message: error.message,
+        },
+      });
+  }, [error]);
   return {
     createShoppingCart: createSC,
     data: data?.createShoppingCart,

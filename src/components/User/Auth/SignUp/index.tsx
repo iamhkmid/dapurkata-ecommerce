@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { customValidation, validationSchema } from "./validationScema";
+import { validationSchema } from "./validationScema";
 import { useEffect, useRef } from "react";
 import { TFormCreateUser } from "../../../../types/user";
 import FormsControl from "../../../otherComps/Forms/FormsControl";
@@ -31,14 +31,17 @@ const SignUp = () => {
   const { isDirty, isValid, errors } = formState;
   const { createUser, data, error, loading } = useGQLCreateUser();
   const onSubmit = async (values: TFormCreateUser) => {
-    createUser(values)
-      .then(() => Router.replace("/auth/signin"))
-      .catch(() => {});
+    createUser(values);
   };
 
   useEffect(() => {
     setFocus();
   }, []);
+
+  useEffect(() => {
+    if (data) Router.replace("/auth/signin");
+    console.log(error);
+  }, [data, error]);
 
   return (
     <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -82,7 +85,7 @@ const SignUp = () => {
               />
               <FormsControl
                 control="input"
-                type="email"
+                type="text"
                 name="email"
                 register={register}
                 label="Email"

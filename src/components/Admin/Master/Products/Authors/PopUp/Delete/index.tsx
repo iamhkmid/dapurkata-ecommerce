@@ -1,7 +1,7 @@
 import * as El from "./DeleteELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext, useEffect } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import { useGQLAuthor, useGQLDeleteAuthor } from "../../useGQLAuthor";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 import ShowMessage from "../../../../../../otherComps/ShowMessage";
@@ -12,7 +12,7 @@ const Delete = ({ id }) => {
     error: errorInit,
     loading: loadingInit,
   } = useGQLAuthor({ authorId: id });
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   return (
     <El.Container
       initial={{ opacity: 0 }}
@@ -27,11 +27,11 @@ const Delete = ({ id }) => {
         <El.Body>
           <ShowMessage message={error?.message} color="danger" />
           <El.Content>
-            <El.Text1>Are you sure you want to delete?</El.Text1>
+            <El.Text1>KONFIRMASI HAPUS DATA</El.Text1>
             {dataInit && (
               <El.TextWrapper>
                 <El.TextGroup>
-                  <h1 className="key">id</h1>
+                  <h1 className="key">ID</h1>
                   <h1 className="separator">:</h1>
                   <h1 className="value">{dataInit.id}</h1>
                 </El.TextGroup>

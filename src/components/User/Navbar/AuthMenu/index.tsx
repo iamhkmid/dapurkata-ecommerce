@@ -1,5 +1,4 @@
 import { AnimatePresence, motion } from "framer-motion";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import { signinBtn } from "../../../../data/navbar";
@@ -11,21 +10,12 @@ import UserLoading from "../../../otherComps/Loading/EllipsisLoading";
 import * as El from "./AuthMenuElement";
 import Dropdown from "./Dropdown";
 import Loading2 from "../../../otherComps/Loading/Loading2";
+import ImageResponsive from "../../../otherComps/ImageResponsive";
 
 const AuthMenu = () => {
   const { user, loading } = useContext(AuthContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { pathname } = useRouter();
-  const defUserPic = `/uploads/profile/default/defProfilePic.svg`;
-  const [userPic, setUserPic] = useState(defUserPic);
-  const defaultImgSrc = () => {
-    setUserPic(defUserPic);
-  };
-  useEffect(() => {
-    if (user?.UserPicture) {
-      if (user.UserPicture.url) setUserPic(user.UserPicture.url);
-    }
-  }, [user]);
 
   return (
     <El.Main>
@@ -46,14 +36,13 @@ const AuthMenu = () => {
             active={userNav.showMenu === "MENU"}
           >
             <El.PhotoWrapper className="profile">
-              <Image
-                src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
+              <ImageResponsive
+                src={user?.userPicture}
                 alt="Profile Pic"
-                layout="fixed"
                 height={40}
                 width={40}
+                defaultIcon="person"
                 quality={75}
-                onError={() => defaultImgSrc()}
               />
             </El.PhotoWrapper>
             <El.MenuIconWrapper>

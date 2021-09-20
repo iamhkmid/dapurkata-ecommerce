@@ -5,25 +5,25 @@ import util from "util";
 export const makeDirFile = async ({ dirLoc }) => {
   const fsMkdir = util.promisify(fs.mkdir);
   const folderName = changeStr(`${new Date().getTime()}`);
-  const imgDir = `${dirLoc}/${folderName}/`;
-  const dir = path.join(process.cwd(), imgDir);
+  const pictureDir = `${dirLoc}/${folderName}/`;
+  const dir = path.join(process.cwd(), pictureDir);
   if (!fs.existsSync(dir))
     await fsMkdir(dir, { recursive: true }).catch((err) => {
       throw new Error("Failed make directory");
     });
-  return { imgDir };
+  return { pictureDir };
 };
 
-export const removeDir = async (imgDir) => {
+export const removeDir = async (pictureDir) => {
   const fsRmdir = util.promisify(fs.rm);
-  const dir = path.join(process.cwd(), imgDir);
+  const dir = path.join(process.cwd(), pictureDir);
   if (fs.existsSync(dir)) await fsRmdir(dir, { recursive: true });
 };
 
 export const changeStr = (str: string) =>
   str.replace(/([^a-z0-9 ]+)/gi, "_").replace(/\s/g, "_");
 
-export const saveImg = async ({ file, imgDir }) => {
+export const saveImg = async ({ file, pictureDir }) => {
   const { filename, mimetype, encoding, createReadStream } = await file;
   //validate file type
   if (!["image/png", "image/jpeg"].includes(mimetype))
@@ -35,7 +35,7 @@ export const saveImg = async ({ file, imgDir }) => {
   name = changeStr(name);
   const pathFile = path.join(
     process.cwd(),
-    `${imgDir}${new Date().getTime()}_${name}${ext}`
+    `${pictureDir}${new Date().getTime()}_${name}${ext}`
   );
 
   //write every stream buffer that comes

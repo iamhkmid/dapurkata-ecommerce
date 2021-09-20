@@ -24,7 +24,7 @@ export const rajaOngkir: TAPIRajaOngkir = {
       );
       return provinces.data.rajaongkir.results;
     } catch (error) {
-      throw new ApolloError(`error fetch data on server`);
+      throw new ApolloError(`Error fetch data on server`);
     }
   },
   getProvince: async ({ province_id }) => {
@@ -39,7 +39,7 @@ export const rajaOngkir: TAPIRajaOngkir = {
       );
       return province.data.rajaongkir.results;
     } catch (error) {
-      throw new ApolloError(`error fetch data on server`);
+      throw new ApolloError(`Error fetch data on server`);
     }
   },
   getCities: async ({ province_id }) => {
@@ -52,7 +52,7 @@ export const rajaOngkir: TAPIRajaOngkir = {
       });
       return cities.data.rajaongkir.results;
     } catch (error) {
-      throw new ApolloError(`error fetch data on server`);
+      throw new ApolloError(`Error fetch data on server`);
     }
   },
   getCity: async ({ city_id, province_id }) => {
@@ -67,7 +67,7 @@ export const rajaOngkir: TAPIRajaOngkir = {
       });
       return city.data.rajaongkir.results;
     } catch (error) {
-      throw new ApolloError(`error fetch data on server`);
+      throw new ApolloError(`Error fetch data on server`);
     }
   },
   getCost: async (args) => {
@@ -80,7 +80,7 @@ export const rajaOngkir: TAPIRajaOngkir = {
       });
       return cost.data.rajaongkir.results[0];
     } catch (error) {
-      throw new ApolloError(`error fetch data on server`);
+      throw new ApolloError(`Error fetch data on server`);
     }
   },
 };

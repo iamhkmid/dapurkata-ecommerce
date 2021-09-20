@@ -18,10 +18,15 @@ const PopUpControl = () => {
     <AnimatePresence>
       {showPopUp.name === "CHANGE_RECIPIENT" && <ChangeRecipient />}
       {showPopUp.name === "ADD_RECIPIENT" && <CreateRecipient />}
-      {showPopUp.name === "EDIT_RECIPIENT" && <UpdateRecipient />}
-      {showPopUp.name === "MESSAGE" && <PopUpMessage />}
-      {showPopUp.name === "BOOK_DETAIL" && <BookDetail />}
-      {showPopUp.name === "AUTH_ERROR" && <PopUpMessage />}
+      {showPopUp.name === "UPDATE_RECIPIENT" && (
+        <UpdateRecipient recipientId={showPopUp.recipientId} />
+      )}
+      {showPopUp.name === "MESSAGE" && (
+        <PopUpMessage message={showPopUp.message} />
+      )}
+      {showPopUp.name === "BOOK_DETAIL" && (
+        <BookDetail bookId={showPopUp.bookId} />
+      )}
       {showPopUp.name === "CHANGE_PASSWORD" && <ChangePassword />}
       {/* <OrderDetail /> */}
     </AnimatePresence>

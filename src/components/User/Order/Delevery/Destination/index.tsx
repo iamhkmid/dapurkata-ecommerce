@@ -64,8 +64,8 @@ const Destination = () => {
                 dispatch({
                   type: "SHOW_POPUP",
                   value: {
-                    name: "EDIT_RECIPIENT",
-                    value: recipient?.id,
+                    name: "UPDATE_RECIPIENT",
+                    recipientId: recipient?.id,
                   },
                 })
               }

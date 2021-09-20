@@ -4,16 +4,11 @@ export const CREATE_USER = gql`
   mutation ($data: cUserData!, $userPic: Upload) {
     createUser(data: $data, userPic: $userPic) {
       id
+      firstName
+      lastName
       username
-      email
-      password
       role
-      phoneNumber
-      fullName
-      UserPicture {
-        id
-        url
-      }
+      email
     }
   }
 `;
@@ -26,52 +21,39 @@ export const CREATE_USER_BY_USER = gql`
   }
 `;
 
-export const EDIT_USER = gql`
-  mutation editUser(
-    $id: ID!
-    $username: String!
-    $email: String!
-    $password: String!
-    $role: EnumRole
-    $phoneNumber: String!
-    $fullName: String!
-  ) {
-    editUser(
-      id: $id
-      data: {
-        username: $username
-        email: $email
-        password: $password
-        role: $role
-        phoneNumber: $phoneNumber
-        fullName: $fullName
-      }
-    ) {
+export const UPDATE_USER = gql`
+  mutation ($userId: ID!, $data: uUserData!) {
+    updateUser(userId: $userId, data: $data) {
       id
       username
       email
       role
-      fullName
+      firstName
+      lastName
     }
   }
 `;
 
 export const DELETE_USER = gql`
-  mutation deleteUser($id: ID!) {
-    deleteUser(id: $id) {
+  mutation ($userId: ID!, $username: String!) {
+    deleteUser(userId: $userId, username: $username) {
       id
-      username
-      email
-      role
-      fullName
     }
   }
 `;
 
 export const CHANGE_PASSWORD = gql`
-  mutation changePassword($data: cPData!) {
+  mutation ($data: cPData!) {
     changePassword(data: $data) {
       message
+    }
+  }
+`;
+
+export const UPDATE_USER_BY_USER = gql`
+  mutation ($userId: ID!, $data: uUserData!) {
+    updateUser(userId: $userId, data: $data) {
+      id
     }
   }
 `;

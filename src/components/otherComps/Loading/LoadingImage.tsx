@@ -7,10 +7,14 @@ const Main = styled.main`
   position: relative;
 `;
 
-const Loader = styled.div`
+type TLoader = {
+  dotSize: number;
+};
+
+const Loader = styled.div<TLoader>`
   --color: ${({ theme }) => theme.color[2]};
   --size-mid: 6vmin;
-  --size-dot: 0.8rem;
+  --size-dot: ${({ dotSize }) => `${dotSize}px`};
   --size-bar: 0.4vmin;
   --size-square: 3vmin;
   display: flex;
@@ -62,12 +66,13 @@ const Loader = styled.div`
   }
 `;
 
-const LoadingBookCover: FC = () => {
+type TLoadingImage = { dotSize: number };
+const LoadingImage: FC<TLoadingImage> = ({ dotSize }) => {
   return (
     <Main>
-      <Loader />
+      <Loader dotSize={dotSize} />
     </Main>
   );
 };
 
-export default LoadingBookCover;
+export default LoadingImage;

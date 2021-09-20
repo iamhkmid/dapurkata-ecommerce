@@ -26,13 +26,13 @@ export const Mutation: TUserMutation = {
     if (!!check) throw new ValidationError(check + " already exists");
     const { username, email, password, role, phone, firstName, lastName } =
       data;
-    const { imgDir } = await makeDirFile({
+    const { pictureDir } = await makeDirFile({
       dirLoc: "/server/static/uploads/profile",
     });
     const profilePicInfo =
       userPic &&
-      (await saveUserPic({ imgDir, userPic }).catch((err) => {
-        removeDir(imgDir);
+      (await saveUserPic({ pictureDir, userPic }).catch((err) => {
+        removeDir(pictureDir);
         throw err;
       }));
     return await db.user.create({
@@ -44,8 +44,8 @@ export const Mutation: TUserMutation = {
         password: await hashPassword(password),
         role: role && user?.role === "ADMIN" ? role : "USER",
         phone,
-        imgDir,
-        UserPicture: { create: profilePicInfo || undefined },
+        pictureDir,
+        userPicture: profilePicInfo?.url || undefined,
       },
     });
   },
@@ -72,8 +72,14 @@ export const Mutation: TUserMutation = {
       data: userFields,
     });
   },
-  deleteUser: async (_, { userId }, { db }) => {
-    return await db.user.delete({ where: { id: userId } });
+  deleteUser: async (_, { userId, username }, { db }) => {
+    const findUser = await db.user.findUnique({ where: { id: userId } });
+    if (!findUser) throw new ApolloError("User not found");
+    if (findUser.username === username) {
+      return await db.user.delete({ where: { id: userId } });
+    } else {
+      throw new ApolloError("Invalid username");
+    }
   },
   changePassword: async (_, { data }, { db, user }) => {
     const { newPassword, oldPassword } = data;
@@ -81,25 +87,27 @@ export const Mutation: TUserMutation = {
       where: { id: user.id },
       select: { id: true, password: true },
     });
-    if (!!findUser) {
-      if (findUser.id !== user.id)
-        throw new AuthenticationError(
-          "Cannot change password from different user"
-        );
-      const checkPw = await bcrypt.compare(oldPassword, findUser.password);
-      if (!checkPw) {
-        throw new ApolloError("Password incorrect");
-      } else {
-        const updatePass = await db.user.update({
-          where: { id: user.id },
-          data: { password: await hashPassword(newPassword) },
-        });
-        if (updatePass) return { message: "Password change successful" };
-      }
+    validateUser({
+      target: "SPECIFIC_USER_OR_ADMIN",
+      targetId: findUser?.id,
+      currRole: user.role,
+      currId: user.id,
+    });
+
+    const checkPw = await bcrypt.compare(oldPassword, findUser.password);
+    if (!checkPw) {
+      throw new ApolloError("Password incorrect");
     } else {
-      throw new ApolloError("User not found");
+      const updatePass = await db.user.update({
+        where: { id: user.id },
+        data: { password: await hashPassword(newPassword) },
+      });
+      if (updatePass) {
+        return { message: "Password change successful" };
+      } else {
+        throw new ApolloError("Failed to save data");
+      }
     }
-    return null;
   },
 };
 
@@ -111,9 +119,6 @@ export const User: TUser = {
         select: { ShoppingCart: true },
       })
     ).ShoppingCart,
-  UserPicture: async ({ id }, _, { db }) =>
-    (await db.user.findUnique({ where: { id }, select: { UserPicture: true } }))
-      .UserPicture,
   Recipient: async ({ id }, _, { db }) =>
     (await db.user.findUnique({ where: { id }, select: { Recipient: true } }))
       .Recipient,

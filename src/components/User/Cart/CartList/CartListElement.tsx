@@ -58,16 +58,9 @@ export const CoverWrapper = styled.div`
   position: relative;
   border-radius: 100%;
   min-height: 3rem;
-  min-width: 3rem;
+  height: 3rem;
   aspect-ratio: 1/1;
   overflow: hidden;
-  > div {
-    display: flex;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-  }
 `;
 export const InfoWrapper = styled.div`
   display: flex;

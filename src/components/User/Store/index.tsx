@@ -6,7 +6,7 @@ import { TBookCard, TGQLGetBookCards } from "../../../types/book";
 import * as El from "./StoreElement";
 import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
-import CoverResponsive from "./Cover/CoverResponsive";
+import ImageResponsive from "../../otherComps/ImageResponsive";
 import IconsControl from "../../IconsControl";
 import NumberFormat from "react-number-format";
 
@@ -48,12 +48,18 @@ const Store = () => {
                   onClick={() =>
                     dispatch({
                       type: "SHOW_POPUP",
-                      value: { name: "BOOK_DETAIL", value: book.id },
+                      value: { name: "BOOK_DETAIL", bookId: book.id },
                     })
                   }
                 >
                   <El.CoverWrapper>
-                    <CoverResponsive url={coverUrl} />
+                    <ImageResponsive
+                      src={coverUrl}
+                      alt={book.title}
+                      height={290}
+                      width={200}
+                      quality={75}
+                    />
                   </El.CoverWrapper>
                   <El.BookInfo>
                     <div className="info1">
@@ -71,10 +77,7 @@ const Store = () => {
                           decimalSeparator={","}
                         />
                       </h1>
-                      <div className="star">
-                        {IconsControl("star")}
-                        <h1>{book.rating}</h1>
-                      </div>
+                      <div className="star">{IconsControl("star")}</div>
                     </div>
                   </El.BookInfo>
                 </El.Card>

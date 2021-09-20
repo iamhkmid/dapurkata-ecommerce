@@ -17,34 +17,34 @@ export const category = async () => {
     data: { group: "LibraryType", name: "Non Fiksi" },
   });
   const cat6 = await prisma.category.create({
-    data: { group: "Published", name: "Perguruan Tinggi" },
+    data: { group: "Other", name: "Example Category9" },
   });
   const cat7 = await prisma.category.create({
-    data: { group: "Published", name: "Swasta" },
+    data: { group: "Other", name: "Example Category10" },
   });
   const cat8 = await prisma.category.create({
-    data: { group: "Published", name: "Penelitian" },
-  });
-  const cat9 = await prisma.category.create({
-    data: { group: "Published", name: "Non Penelitian" },
-  });
-  const cat10 = await prisma.category.create({
-    data: { group: "Published", name: "Pemerintah" },
-  });
-  const cat11 = await prisma.category.create({
-    data: { group: "TypeCategory", name: "Terjemahan" },
-  });
-  const cat12 = await prisma.category.create({
-    data: { group: "TypeCategory", name: "Non Terjemahan" },
-  });
-  const cat13 = await prisma.category.create({
     data: { group: "Other", name: "Example Category1" },
   });
-  const cat14 = await prisma.category.create({
+  const cat9 = await prisma.category.create({
     data: { group: "Other", name: "Example Category2" },
   });
-  const cat15 = await prisma.category.create({
+  const cat10 = await prisma.category.create({
     data: { group: "Other", name: "Example Category3" },
+  });
+  const cat11 = await prisma.category.create({
+    data: { group: "Other", name: "Example Category4" },
+  });
+  const cat12 = await prisma.category.create({
+    data: { group: "Other", name: "Example Category5" },
+  });
+  const cat13 = await prisma.category.create({
+    data: { group: "Other", name: "Example Category6" },
+  });
+  const cat14 = await prisma.category.create({
+    data: { group: "Other", name: "Example Category7" },
+  });
+  const cat15 = await prisma.category.create({
+    data: { group: "Other", name: "Example Category8" },
   });
 
   console.log({

@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect, useRef } from "react";
+import { FC, useContext, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import {
@@ -18,7 +18,10 @@ import {
   useGQLUpdateRecipient,
 } from "./useGQL";
 
-const UpdateRecipient = () => {
+type TUpdateRcpt = {
+  recipientId: string;
+};
+const UpdateRecipient: FC<TUpdateRcpt> = ({ recipientId }) => {
   const { user } = useContext(AuthContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
   const htmlElRef = useRef<{ focus: () => void }>();
@@ -45,9 +48,7 @@ const UpdateRecipient = () => {
   const watchProvId = watch("province");
   const watchCityId = watch("city");
 
-  const { dataInit, loadInit, errorInit } = useGQLInitData({
-    recipientId: userNav.showPopUp.value,
-  });
+  const { dataInit, loadInit, errorInit } = useGQLInitData({ recipientId });
 
   const {
     dataProvs,
@@ -71,11 +72,7 @@ const UpdateRecipient = () => {
   };
   const onSubmit = async (values: TFormEditRecipient) => {
     const { city, province, ...rest } = values;
-    const nData = {
-      cityId: city,
-      recipientId: userNav.showPopUp.value,
-      ...rest,
-    };
+    const nData = { cityId: city, recipientId, ...rest };
     await updateRecipient({ data: nData });
   };
   useEffect(() => {
@@ -151,7 +148,7 @@ const UpdateRecipient = () => {
             />
             <FormsControl
               control="input"
-              type="email"
+              type="text"
               name="email"
               register={register}
               label="Email"

@@ -1,12 +1,12 @@
 import * as El from "./DetailELement";
 import { useContext, useEffect } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import Moment from "moment";
 import { useGQLCategory } from "../../useGQLCategory";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 
 const Detail = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { data, error, loading } = useGQLCategory({ categoryId: id });
 
   return (

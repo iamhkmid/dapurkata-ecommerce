@@ -7,14 +7,14 @@ import { TFormAuthor } from "../../../../../../../types/Forms";
 import FormsControl from "../../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import { useGQLUpdateAuthor, useGQLAuthor } from "../../useGQLAuthor";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 import { TFormUpdateAuthor } from "../../../../../../../types/author";
 import ShowMessage from "../../../../../../otherComps/ShowMessage";
 
 const Update = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { register, handleSubmit, formState, setValue } = useForm<TFormAuthor>({
     mode: "all",
     reValidateMode: "onChange",
@@ -39,7 +39,7 @@ const Update = ({ id }) => {
     await updateAuthor({ authorId: id, ...values }).then(({ data }) => {
       dispatch({
         type: "SHOW_POPUP",
-        value: { name: "authorDetail", value: data.updateAuthor.id },
+        value: { name: "AUTHOR_DETAIL", value: data.updateAuthor.id },
       });
     });
   };

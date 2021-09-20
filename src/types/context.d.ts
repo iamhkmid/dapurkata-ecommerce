@@ -120,16 +120,21 @@ export type TOrderCtx = {
 
 // ADMIN NAV CONTEXT
 type TAdminPopUpVal =
-  | "bookUpdate"
-  | "bookDelete"
-  | "bookDetail"
-  | "categoryUpdate"
-  | "categoryDelete"
-  | "categoryDetail"
-  | "authorUpdate"
-  | "authorDelete"
-  | "authorDetail"
-  | "USER_DETAIL";
+  | "BOOK_UPDATE"
+  | "BOOK_DELETE"
+  | "BOOK_DETAIL"
+  | "CATEGORY_UPDATE"
+  | "CATEGORY_DELETE"
+  | "CATEGORY_DETAIL"
+  | "AUTHOR_UPDATE"
+  | "AUTHOR_DELETE"
+  | "AUTHOR_DETAIL"
+  | "PUBLISHER_UPDATE"
+  | "PUBLISHER_DELETE"
+  | "PUBLISHER_DETAIL"
+  | "USER_DETAIL"
+  | "USER_DELETE"
+  | "USER_UPDATE";
 
 type TAdminShowPopUp = {
   name: TAdminPopUpVal;
@@ -159,31 +164,61 @@ export type TAdminNavCtx = {
 };
 
 // USER NAV CONTEXT
-type TUserPopUpVal =
-  | "CHANGE_RECIPIENT"
-  | "ADD_RECIPIENT"
-  | "EDIT_RECIPIENT"
-  | "MESSAGE"
-  | "AUTH_ERROR"
-  | "ORDER_DETAIL"
-  | "BOOK_DETAIL"
-  | "CHANGE_PASSWORD";
-type TUserPopUp = {
-  name: TUserPopUpVal;
-  value?: string;
-  onClose?: TUserPopUpVal;
-  onCloseValue?: string;
-};
+
+type TUserPopUp = { onClose?: TUserPopUpVal; onCloseValue?: string } & (
+  | {
+      name: "CHANGE_RECIPIENT";
+    }
+  | {
+      name: "ADD_RECIPIENT";
+    }
+  | {
+      name: "UPDATE_RECIPIENT";
+      recipientId?: string;
+    }
+  | {
+      name: "AUTH_ERROR";
+      value?: string;
+    }
+  | {
+      name: "MESSAGE";
+      message: string;
+    }
+  | {
+      name: "ORDER_DETAIL";
+      orderId: string;
+    }
+  | {
+      name: "BOOK_DETAIL";
+      bookId: string;
+    }
+  | {
+      name: "CHANGE_PASSWORD";
+    }
+);
 type TUserMenu = "MENU" | "CART" | "MAIL" | "SERVICES";
+type TMessage = {
+  message: string;
+  color: "danger" | "success" | "warning";
+};
 type TUserDropdown = "SERVICES";
 type TUserNavAction =
   | { type: "SHOW_MENU"; value: TUserMenu }
   | { type: "CLOSE_MENU" }
   | { type: "SHOW_POPUP"; value: TUserPopUp }
-  | { type: "CLOSE_POPUP" };
+  | { type: "CLOSE_POPUP" }
+  | {
+      type: "SHOW_MESSAGE";
+      value: {
+        message: string;
+        color: "danger" | "success" | "warning";
+      };
+    }
+  | { type: "CLOSE_MESSAGE" };
 export type TUserNavState = {
   showMenu: TUserMenu;
   showPopUp: TUserPopUp;
+  message: TMessage;
 };
 export type TUserNavRdcr = (
   state: TUserNavState,

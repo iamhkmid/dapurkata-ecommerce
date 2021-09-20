@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { useContext } from "react";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 
 import RowBtn from "../../../../../otherComps/Buttons/RowBtn";
 import { ActionColumn, DefaultColumn, NumberColumn } from "./ListELement";
@@ -34,7 +34,7 @@ export const columns = [
     Header: "Action",
     className: "actions",
     Cell: (d) => {
-      const { dispatch } = useContext(AdminContext);
+      const { dispatch } = useContext(AdminNavCtx);
       return (
         <ActionColumn>
           <RowBtn
@@ -42,7 +42,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "authorDetail", value: d.row.values.id },
+                value: { name: "AUTHOR_DETAIL", value: d.row.values.id },
               })
             }
           />
@@ -51,7 +51,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "authorUpdate", value: d.row.values.id },
+                value: { name: "AUTHOR_UPDATE", value: d.row.values.id },
               })
             }
           />
@@ -60,7 +60,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "authorDelete", value: d.row.values.id },
+                value: { name: "AUTHOR_DELETE", value: d.row.values.id },
               })
             }
           />

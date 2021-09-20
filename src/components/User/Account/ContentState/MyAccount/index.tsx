@@ -7,19 +7,14 @@ import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import { TFormMyAccount } from "../../../../../types/user";
 import Button from "../../../../otherComps/Buttons/Button";
 import FormsControl from "../../../../otherComps/Forms/FormsControl";
+import ImageResponsive from "../../../../otherComps/ImageResponsive";
 import ShowMessage from "../../../../otherComps/ShowMessage";
 import * as El from "./MyAccountElement";
-import { useGQLInitData } from "./useGQL";
+import { useGQLInitData, useGQLUpdateUser } from "./useGQL";
 import { validationSchema } from "./validationScema";
 
 const MyAccount = () => {
   const { dispatch: dispatchUserNav } = useContext(UserNavCtx);
-  const defUserPic = `/uploads/profile/default/defProfilePic.svg`;
-  const [userPic, setUserPic] = useState(defUserPic);
-  const [imgSize, setImgSize] = useState(80);
-  const defaultImgSrc = () => {
-    setUserPic(defUserPic);
-  };
 
   const {
     data: dataInit,
@@ -35,7 +30,24 @@ const MyAccount = () => {
       resolver: yupResolver(validationSchema),
     });
   const { isDirty, isValid, errors } = formState;
-  const onSubmit = async (values: TFormMyAccount) => {};
+
+  const { updateUser, data, error, loading } = useGQLUpdateUser();
+
+  const onSubmit = async (values: TFormMyAccount) => {
+    setMessage(null);
+    updateUser(values).catch(() => {});
+  };
+
+  type TMessage = { value: string; color: "danger" | "success" | "warning" };
+  const [message, setMessage] = useState<TMessage>(null);
+
+  useEffect(() => {
+    if (error) {
+      setMessage({ value: error?.message, color: "danger" });
+    } else if (!!data) {
+      setMessage({ value: "Berhasil update data user", color: "success" });
+    }
+  }, [data, error]);
 
   useEffect(() => {
     if (dataInit) {
@@ -44,15 +56,8 @@ const MyAccount = () => {
       setValue("username", dataInit.username);
       setValue("email", dataInit.email);
       setValue("phone", dataInit.phone);
-      if (dataInit.UserPicture?.url) setUserPic(dataInit.UserPicture.url);
     }
   }, [dataInit]);
-
-  const { width } = useWindowSize();
-  useEffect(() => {
-    width > 540 && setImgSize(80);
-    width <= 540 && setImgSize(70);
-  }, [width]);
 
   return (
     <El.Main
@@ -62,14 +67,13 @@ const MyAccount = () => {
     >
       <El.Head>
         <El.PhotoWrapper>
-          <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${userPic}`}
+          <ImageResponsive
+            src={dataInit?.userPicture}
             alt="Profile Pic"
-            layout="fixed"
+            height={90}
+            width={90}
+            defaultIcon="person"
             quality={75}
-            height={imgSize}
-            width={imgSize}
-            onError={() => defaultImgSrc()}
           />
         </El.PhotoWrapper>
         <El.ButtonWrapper>
@@ -78,7 +82,7 @@ const MyAccount = () => {
         </El.ButtonWrapper>
       </El.Head>
       <El.FormWrapper>
-        <ShowMessage message={null} color="danger" />
+        <ShowMessage message={message?.value} color={message?.color} />
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <El.InputGroup2>
             <FormsControl
@@ -89,6 +93,7 @@ const MyAccount = () => {
               label="Nama Depan"
               error={errors.firstName ? true : false}
               isLoading={loadInit}
+              disabled={loading}
               message={errors.firstName ? errors.firstName.message : null}
             />
             <FormsControl
@@ -99,6 +104,7 @@ const MyAccount = () => {
               label="Nama Belakang"
               error={errors.lastName ? true : false}
               isLoading={loadInit}
+              disabled={loading}
               message={errors.lastName ? errors.lastName.message : null}
             />
           </El.InputGroup2>
@@ -111,6 +117,7 @@ const MyAccount = () => {
               label="Phone"
               error={errors.phone ? true : false}
               isLoading={loadInit}
+              disabled={loading}
               message={errors.phone ? errors.phone.message : null}
             />
             <FormsControl
@@ -121,16 +128,18 @@ const MyAccount = () => {
               label="Username"
               error={errors.username ? true : false}
               isLoading={loadInit}
+              disabled={loading}
               message={errors.username ? errors.username.message : null}
             />
             <FormsControl
               control="input"
-              type="email"
+              type="text"
               name="email"
               register={register}
               label="Email"
               error={errors.email ? true : false}
               isLoading={loadInit}
+              disabled={loading}
               message={errors.email ? errors.email.message : null}
             />
           </El.InputGroup3>
@@ -145,7 +154,11 @@ const MyAccount = () => {
             Ubah password
           </El.ButtonLink>
           <El.SubmitWrapper>
-            <Button type="submit" name="Simpan" isLoading={loadInit} />
+            <Button
+              type="submit"
+              name="Simpan"
+              isLoading={loadInit || loading}
+            />
           </El.SubmitWrapper>
         </El.Form>
       </El.FormWrapper>

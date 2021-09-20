@@ -60,6 +60,7 @@ export const PhotoWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 70px;
   aspect-ratio: 1/1;
   position: relative;
   overflow: hidden;

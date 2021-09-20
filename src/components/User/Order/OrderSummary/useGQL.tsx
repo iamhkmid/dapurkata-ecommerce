@@ -1,4 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useContext } from "react";
+import { useEffect } from "react";
+import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_ORDER_BOOK } from "../../../../graphql/book/queries";
 import { ORDER } from "../../../../graphql/transaction/mutations";
 import { TGQLGetOrderBook } from "../../../../types/book";
@@ -14,6 +17,7 @@ type TValues = {
   payment: string;
 };
 export const useGQLOrder = () => {
+  const { dispatch } = useContext(UserNavCtx);
   const [order, { data, error, loading }] = useMutation<TGQLOrder>(ORDER, {
     errorPolicy: "all",
     fetchPolicy: "no-cache",
@@ -21,5 +25,15 @@ export const useGQLOrder = () => {
   const makeAnOrder = async (values: TValues) => {
     return order({ variables: { data: values } });
   };
+  useEffect(() => {
+    if (error)
+      dispatch({
+        type: "SHOW_MESSAGE",
+        value: {
+          message: "Gagal melakukan pemesanan",
+          color: "danger",
+        },
+      });
+  }, [error]);
   return { makeAnOrder, data: data?.order, error, loading };
 };

@@ -119,6 +119,9 @@ export const CoverWrapper = styled.div`
   background: ${({ theme }) => theme.content.bookCard.cover.background};
 
   > div {
+    display: flex;
+    min-height: 220px;
+    min-width: 150px;
     overflow: hidden;
     border-radius: ${({ theme }) => theme.borderRadius};
     box-shadow: rgba(13, 18, 29, 0.158) 0px 1px 2px,
@@ -128,6 +131,10 @@ export const CoverWrapper = styled.div`
       rgba(13, 18, 29, 0.158) 0px 32px 64px;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    > div {
+      min-height: 220px;
+      min-width: 150px;
+    }
     height: 100%;
     aspect-ratio: unset;
     width: 100%;

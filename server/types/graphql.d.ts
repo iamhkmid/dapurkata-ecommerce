@@ -56,6 +56,11 @@ import {
   TArgsUpdateSChart,
   TGQLSCart,
 } from "./shoppingCart";
+import {
+  TArgsCreatePublisher,
+  TArgsUpdatePublisher,
+  TGQLPublisher,
+} from "./publisher";
 
 //BOOK SCHEMA
 export type TBookQuery = {
@@ -87,6 +92,11 @@ export type TBookMutation = {
 
 export type TBook = {
   Author: (parent: TGQLBook, args: any, context: TCtx) => Promise<TGQLAuthor>;
+  Publisher: (
+    parent: TGQLBook,
+    args: any,
+    context: TCtx
+  ) => Promise<TGQLPublisher>;
   Category: (
     parent: TGQLBook,
     args: any,
@@ -129,6 +139,46 @@ export type TAuthorMutation = {
 
 export type TAuthor = {
   Book: (parent: TGQLAuthor, args: any, context: TCtx) => Promise<TGQLBook[]>;
+};
+
+//Publisher SCHEMA
+export type TPublisherQuery = {
+  publisher: (
+    parent: any,
+    args: { publisherId: string },
+    context: TCtx
+  ) => Promise<TGQLPublisher>;
+  publishers: (
+    parent: any,
+    args: any,
+    context: TCtx
+  ) => Promise<TGQLPublisher[]>;
+};
+
+export type TPublisherMutation = {
+  createPublisher: (
+    parent: any,
+    args: TArgsCreatePublisher,
+    context: TCtx
+  ) => Promise<TGQLPublisher>;
+  updatePublisher: (
+    parent: any,
+    args: TArgsUpdatePublisher,
+    context: TCtx
+  ) => Promise<TGQLPublisher>;
+  deletePublisher: (
+    parent: any,
+    args: { publisherId: string },
+    context: TCtx
+  ) => Promise<TGQLPublisher>;
+};
+
+export type TPublisher = {
+  Book: (
+    parent: TGQLPublisher,
+    args: any,
+    context: TCtx
+  ) => Promise<TGQLBook[]>;
 };
 
 //CATEGORY SCHEMA
@@ -189,7 +239,7 @@ export type TUserMutation = {
   ) => Promise<TGQLUser>;
   deleteUser: (
     parent: any,
-    args: { userId: string },
+    args: { userId: string; username: string },
     context: TCtx
   ) => Promise<TGQLUser>;
   changePassword: (
@@ -200,11 +250,6 @@ export type TUserMutation = {
 };
 
 export type TUser = {
-  UserPicture: (
-    parent: TGQLUser,
-    args: any,
-    context: TCtx
-  ) => Promise<TGQLUserPic>;
   ShoppingCart: (
     parent: TGQLUser,
     args: any,
@@ -227,11 +272,6 @@ export type TAuthMutation = {
     args: TGQLArgsSignin,
     context: TCtx
   ) => Promise<TGQLSignin>;
-  logout: (
-    parent: any,
-    args: any,
-    context: TCtx
-  ) => Promise<{ message: string }>;
 };
 
 export type TCourierQuery = {

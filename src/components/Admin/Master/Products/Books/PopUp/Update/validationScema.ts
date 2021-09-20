@@ -13,9 +13,19 @@ export const customValidation = (
 
 export const validationSchema = yup.object({
   title: yup.string().required("Required"),
-  synopsis: yup.string().required("Required"),
-  edition: yup.string().required("Required"),
-  series: yup.string().required("Required"),
+  description: yup.string().required("Required"),
+  edition: yup
+    .string()
+    .required("Required")
+    .test("len", "Must be less than 10 characters", (val) => val.length < 10),
+  series: yup
+    .string()
+    .required("Required")
+    .test(
+      "len",
+      "Must be number and less than 1000",
+      (val) => Number(val) < 1000
+    ),
   releaseYear: yup
     .string()
     .required("Required")
@@ -25,7 +35,12 @@ export const validationSchema = yup.object({
     .required("Required")
     .typeError("Field must be number")
     .positive("Field must be positive number"),
-  height: yup
+  lenght: yup
+    .number()
+    .required("Required")
+    .typeError("Field must be number")
+    .positive("Field must be positive number"),
+  width: yup
     .number()
     .required("Required")
     .typeError("Field must be number")
@@ -41,14 +56,11 @@ export const validationSchema = yup.object({
     .required("Required")
     .typeError("Field must be number")
     .positive("Field must be positive number"),
-  rating: yup
-    .string()
-    .required("Required")
-    .typeError("Field must be number")
-    .matches(/^(?:5(?:\.0)?|[1-4](?:\.[0-9])?|0?\.[1-9])$/, "Range 0.1-5"),
-  published: yup.string().required("Required"),
-  author: yup.string().required("Required"),
+  language: yup.string().required("Required"),
+  isbn: yup.string().required("Required"),
+  authorId: yup.string().required("Required"),
+  publisherId: yup.string().required("Required"),
   libraryType: yup.string().required("Required"),
-  typeCategory: yup.string().required("Required"),
+  readerGroup: yup.string().required("Required"),
   category: yup.array().of(yup.string()),
 });

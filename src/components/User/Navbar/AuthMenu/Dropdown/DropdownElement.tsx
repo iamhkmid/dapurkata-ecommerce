@@ -39,15 +39,10 @@ export const UserInfo = styled.div`
 `;
 export const PhotoWrapper = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: center;
   border-radius: ${({ theme }) => theme.borderRadius};
-  overflow: hidden;
-  height: 5rem;
-  width: 5rem;
-  position: relative;
+  height: 80px;
+  aspect-ratio: 1/1;
   margin: 0.5rem;
-  background: ${({ theme }) => theme.color[1]};
   border: 1px solid ${({ theme }) => theme.button.primary.background};
 `;
 export const FullName = styled.h1`

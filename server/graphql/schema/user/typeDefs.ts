@@ -9,7 +9,7 @@ const typeDefs = gql`
   type Mutation {
     createUser(data: cUserData!, userPic: Upload): User
     updateUser(userId: ID!, data: uUserData!): User @auth(requires: AUTH)
-    deleteUser(userId: ID!): User @auth(requires: ADMIN)
+    deleteUser(userId: ID!, username: String!): User @auth(requires: ADMIN)
     changePassword(data: cPData!): changePassword @auth(requires: AUTH)
   }
 
@@ -37,7 +37,7 @@ const typeDefs = gql`
     lastName: String
     username: String!
     email: String!
-    role: EnumRole!
+    role: EnumRole
     phone: String!
   }
 
@@ -50,20 +50,14 @@ const typeDefs = gql`
     password: String
     role: EnumRole
     phone: String
-    imgDir: String
+    pictureDir: String
     Recipient: [Recipient]
-    UserPicture: UserPicture
+    userPicture: String
     ShoppingCart: [ShoppingCart]
     createdAt: Date
     updatedAt: Date
   }
 
-  type UserPicture {
-    id: ID
-    url: String
-    createdAt: Date
-    updatedAt: Date
-  }
   enum EnumRole {
     ADMIN
     USER

@@ -10,10 +10,7 @@ export const CHECK_USER = gql`
       firstName
       lastName
       phone
-      UserPicture {
-        id
-        url
-      }
+      userPicture
     }
   }
 `;

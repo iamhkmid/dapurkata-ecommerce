@@ -57,6 +57,7 @@ export const PhotoWrapper = styled.div`
   border: 1px solid ${({ theme }) => theme.border[3]};
   height: 5rem;
   width: 5rem;
+  aspect-ratio: 1/1;
   position: relative;
   transition: 0.4s all ease;
 `;

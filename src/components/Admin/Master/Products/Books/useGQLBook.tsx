@@ -50,22 +50,18 @@ export const useGQLCreateBook = () => {
   );
   const GQLCreateBook = async (values: TFormCreateBook) => {
     const {
-      typeCategory,
       libraryType,
-      published,
-      category,
-      author,
+      categories,
+      readerGroup,
       cover: coverlist,
       ...rest
     } = values;
-    const cat1 = { id: typeCategory };
+    const cat1 = { id: readerGroup };
     const cat2 = { id: libraryType };
-    const cat3 = { id: published };
-    const cat4 = category ? category.map((cat) => ({ id: cat })) : [];
-    const Category = [cat1, cat2, cat3, ...cat4];
-    const Author = { id: author };
+    const cat3 = categories ? categories.map((cat) => ({ id: cat })) : [];
+    const cats = [cat1, cat2, ...cat3];
     const [cover] = coverlist;
-    const varData = { Category, Author, ...rest };
+    const varData = { categories: cats, ...rest };
     const variables = { data: varData, cover };
 
     return await createBook({
@@ -95,15 +91,12 @@ export const useGQLUpdateBook = () => {
     }
   );
   const GQLUpdateBook = async (values: TFormUpdateBook) => {
-    const { typeCategory, libraryType, published, category, author, ...rest } =
-      values;
-    const cat1 = { id: typeCategory };
+    const { readerGroup, libraryType, categories, ...rest } = values;
+    const cat1 = { id: readerGroup };
     const cat2 = { id: libraryType };
-    const cat3 = { id: published };
-    const cat4 = category?.map((cat) => ({ id: cat }));
-    const Category = [cat1, cat2, cat3, ...cat4];
-    const Author = { id: author };
-    const variables = { data: { Category, Author, ...rest } };
+    const cat3 = categories?.map((cat) => ({ id: cat }));
+    const cats = [cat1, cat2, ...cat3];
+    const variables = { data: { categories: cats, ...rest } };
     return await updateBook({
       variables,
       refetchQueries: [

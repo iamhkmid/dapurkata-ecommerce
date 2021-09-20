@@ -12,9 +12,7 @@ export const SIGNIN = gql`
         firstName
         lastName
         phone
-        UserPicture {
-          url
-        }
+        userPicture
       }
     }
   }

@@ -10,6 +10,7 @@ export const Main = styled(motion.div)`
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   position: relative;
+  gap: 1rem;
   transition: 0.4s all ease;
   transition-property: width, height;
 `;

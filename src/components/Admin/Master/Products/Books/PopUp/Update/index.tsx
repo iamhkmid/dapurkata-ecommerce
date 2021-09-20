@@ -1,12 +1,12 @@
 import { useContext, useState } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 import FormData from "./FormData";
 import SideMenu from "./SideMenu";
 import * as El from "./UpdateElement";
 
 const Update = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const [navState, setNavState] = useState(0);
   const [showSideMenu, setShowSideMenu] = useState(true);
 

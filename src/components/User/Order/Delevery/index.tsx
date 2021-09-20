@@ -55,9 +55,6 @@ const Delevery = () => {
     (order.order.type === "shoppingcart" && shoppingCart.data.length === 0) ||
     (order.order.type === "buy-now" &&
       (!order.order.book || !order.order.amount));
-  useEffect(() => {
-    console.log(order.order.type === "buy-now");
-  }, [order.order]);
 
   return (
     <El.Main>

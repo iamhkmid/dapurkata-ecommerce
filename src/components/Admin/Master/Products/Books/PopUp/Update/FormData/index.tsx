@@ -6,7 +6,7 @@ import * as El from "./FormDataElement";
 import { TFormUpdateBook } from "../../../../../../../../types/Forms";
 import FormsControl from "../../../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../../../otherComps/Buttons/Button";
-import { AdminContext } from "../../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../../contexts/AdminNavCtx";
 import {
   useGQLUpdateBook,
   useGQLGetFormBook,
@@ -32,7 +32,7 @@ const FormData = ({ bookId }) => {
   });
 
   const { isDirty, isValid, errors } = formState;
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
 
   const { updateBook, data, error, loading } = useGQLUpdateBook();
   const { dataGFI, errorGFI, loadGFI } = useGQLGetFormInit({ bookId });
@@ -43,7 +43,7 @@ const FormData = ({ bookId }) => {
       .then(({ data }) => {
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "bookDetail", value: data.updateBook.id },
+          value: { name: "BOOK_DETAIL", value: data.updateBook.id },
         });
       })
       .catch(() => {});
@@ -52,21 +52,21 @@ const FormData = ({ bookId }) => {
   useEffect(() => {
     if (dataGFI && dataForm) {
       setValue("title", dataGFI.title);
-      setValue("author", dataGFI.Author.id);
+      setValue("authorId", dataGFI.Author.id);
       setValue("description", dataGFI.description);
       setValue("edition", dataGFI.edition);
       setValue("series", dataGFI.series);
       setValue("numberOfPages", dataGFI.numberOfPages);
-      setValue("height", dataGFI.height);
+      setValue("lenght", dataGFI.lenght);
+      setValue("width", dataGFI.width);
       setValue("weight", dataGFI.weight);
       setValue("releaseYear", dataGFI.releaseYear);
       setValue("stock", dataGFI.stock);
       setValue("price", dataGFI.price);
-      setValue("rating", dataGFI.rating);
-      setValue(
-        "published",
-        dataGFI.Category.find((val) => val.group === "Published")?.id
-      );
+      setValue("language", dataGFI.language);
+      setValue("isbn", dataGFI.isbn);
+      setValue("penerbit", dataGFI);
+      setValue("publisherId", dataGFI.Publisher.id);
       setValue(
         "libraryType",
         dataGFI.Category.find((val) => val.group === "LibraryType")?.id
@@ -74,10 +74,6 @@ const FormData = ({ bookId }) => {
       setValue(
         "readerGroup",
         dataGFI.Category.find((val) => val.group === "ReaderGroup")?.id
-      );
-      setValue(
-        "typeCategory",
-        dataGFI.Category.find((val) => val.group === "TypeCategory")?.id
       );
       setValue(
         "category[]",
@@ -107,17 +103,17 @@ const FormData = ({ bookId }) => {
             />
             <FormsControl
               control="select"
-              name="author"
+              name="authorId"
               register={register}
               label="Kepengarangan"
               options={dataForm?.authors.map((author) => ({
                 id: author.id,
                 value: author.name,
               }))}
-              error={errors.author ? true : false}
+              error={errors.authorId ? true : false}
               disabled={loading || loadGFI}
               isLoading={loadForm || loadGFI}
-              message={errors.author ? "Required" : null}
+              message={errors.authorId ? "Required" : null}
               clearError={clearErrors}
             />
             <FormsControl
@@ -144,7 +140,7 @@ const FormData = ({ bookId }) => {
               />
               <FormsControl
                 control="input"
-                type="text"
+                type="number"
                 name="series"
                 register={register}
                 label="Seri"
@@ -160,33 +156,31 @@ const FormData = ({ bookId }) => {
               <FormsControl
                 control="input"
                 type="number"
-                name="numberOfPages"
+                name="lenght"
                 register={register}
-                label="Jumlah Halaman"
-                error={errors.numberOfPages ? true : false}
+                label="Panjang"
+                error={errors.lenght ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
-                message={
-                  errors.numberOfPages ? errors.numberOfPages.message : null
-                }
+                message={errors.lenght ? errors.lenght.message : null}
               />
               <FormsControl
                 control="input"
                 type="number"
-                name="height"
+                name="width"
                 register={register}
-                label="Tinggi Buku"
-                error={errors.height ? true : false}
+                label="Lebar"
+                error={errors.width ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
-                message={errors.height ? errors.height.message : null}
+                message={errors.width ? errors.width.message : null}
               />
               <FormsControl
                 control="input"
                 type="number"
                 name="weight"
                 register={register}
-                label="Berat Buku"
+                label="Berat"
                 error={errors.weight ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
@@ -196,23 +190,21 @@ const FormData = ({ bookId }) => {
             <El.SpanGroupGrid2>
               <FormsControl
                 control="select"
-                name="published"
+                name="publisherId"
                 register={register}
-                label="Terbitan"
+                label="Penerbit"
                 options={
                   !dataForm
                     ? null
-                    : dataForm.categories
-                        .filter((category) => category.group === "Published")
-                        .map((category) => ({
-                          id: category.id,
-                          value: category.name,
-                        }))
+                    : dataForm.publishers.map((publisher) => ({
+                        id: publisher.id,
+                        value: publisher.name,
+                      }))
                 }
-                error={errors.published ? true : false}
+                error={errors.publisherId ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadForm || loadGFI}
-                message={errors.published ? "Required" : null}
+                message={errors.publisherId ? "Required" : null}
                 clearError={clearErrors}
               />
               <FormsControl
@@ -227,6 +219,30 @@ const FormData = ({ bookId }) => {
                 message={errors.releaseYear ? errors.releaseYear.message : null}
               />
             </El.SpanGroupGrid2>
+            <El.SpanGroup>
+              <FormsControl
+                control="input"
+                type="text"
+                name="language"
+                register={register}
+                label="Bahasa"
+                error={errors.language ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadGFI}
+                message={errors.language?.message}
+              />
+              <FormsControl
+                control="input"
+                type="number"
+                name="isbn"
+                register={register}
+                label="ISBN"
+                error={errors.isbn ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadGFI}
+                message={errors.isbn?.message}
+              />
+            </El.SpanGroup>
             <El.SpanGroup>
               <FormsControl
                 control="select"
@@ -251,23 +267,23 @@ const FormData = ({ bookId }) => {
               />
               <FormsControl
                 control="select"
-                name="typeCategory"
+                name="readerGroup"
                 register={register}
-                label="Kategori Jenis"
+                label="Kelompok Baca"
                 options={
                   !dataForm
                     ? null
                     : dataForm.categories
-                        .filter((category) => category.group === "TypeCategory")
+                        .filter((category) => category.group === "ReaderGroup")
                         .map((category) => ({
                           id: category.id,
                           value: category.name,
                         }))
                 }
-                error={errors.typeCategory ? true : false}
+                error={errors.readerGroup ? true : false}
                 disabled={loading || loadGFI}
-                isLoading={loadGFI}
-                message={errors.typeCategory ? "Required" : null}
+                isLoading={loadForm || loadGFI}
+                message={errors.readerGroup ? "Required" : null}
                 clearError={clearErrors}
               />
             </El.SpanGroup>
@@ -285,7 +301,7 @@ const FormData = ({ bookId }) => {
               />
               <FormsControl
                 control="input"
-                type="money"
+                type="number"
                 name="price"
                 register={register}
                 label="Harga"
@@ -297,19 +313,20 @@ const FormData = ({ bookId }) => {
               <FormsControl
                 control="input"
                 type="number"
-                name="rating"
+                name="numberOfPages"
                 register={register}
-                label="Rating"
-                step=".01"
-                error={errors.rating ? true : false}
+                label="Halaman"
+                error={errors.numberOfPages ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
-                message={errors.rating ? errors.rating.message : null}
+                message={
+                  errors.numberOfPages ? errors.numberOfPages.message : null
+                }
               />
             </El.SpanGroupGrid3>
             <FormsControl
               control="selectMultiple"
-              name="category"
+              name="categories"
               register={register}
               label="Kategori Lainnya (opsi)"
               options={
@@ -322,10 +339,10 @@ const FormData = ({ bookId }) => {
                         value: category.name,
                       }))
               }
-              error={errors.category ? true : false}
+              error={errors.categories ? true : false}
               disabled={loading || loadGFI}
               isLoading={loadForm || loadGFI}
-              message={errors.category ? "Required" : null}
+              message={errors.categories ? "Required" : null}
               clearError={clearErrors}
             />
           </El.InputGroup>
@@ -333,7 +350,7 @@ const FormData = ({ bookId }) => {
         <El.SubmitWrapper>
           <Button
             type="submit"
-            name="Save"
+            name="Simpan"
             color="success"
             isLoading={loading}
             disabled={loading || loadGFI}

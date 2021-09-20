@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { useContext } from "react";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 
 import RowBtn from "../../../../../otherComps/Buttons/RowBtn";
 import * as El from "./columnsElement";
@@ -18,27 +18,18 @@ export const columns = [
     },
   },
   {
-    Header: "Title",
+    Header: "Judul",
     accessor: "title",
     Cell: (d) => <El.Title>{d.value}</El.Title>,
   },
-  { Header: "Price", accessor: "price" },
-  { Header: "Stock", accessor: "stock" },
+  { Header: "Harga", accessor: "price" },
+  { Header: "Stok", accessor: "stock" },
   {
-    Header: "Categories",
-    accessor: "Category",
-    Cell: (d) => {
-      return (
-        <El.CategoryWrapper>
-          {d.value.map((category) => (
-            <El.Category key={category.id}>{category.name}</El.Category>
-          ))}
-        </El.CategoryWrapper>
-      );
-    },
+    Header: "ISBN",
+    accessor: "isbn",
   },
   {
-    Header: "Author",
+    Header: "Pengarang",
     accessor: "Author",
     Cell: (d) => d.value.name,
   },
@@ -47,7 +38,7 @@ export const columns = [
     Header: "Action",
     className: "actions",
     Cell: (d) => {
-      const { dispatch } = useContext(AdminContext);
+      const { dispatch } = useContext(AdminNavCtx);
       return (
         <El.ActionColumn>
           <RowBtn
@@ -55,7 +46,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "bookDetail", value: d.row.values.id },
+                value: { name: "BOOK_DETAIL", value: d.row.values.id },
               })
             }
           />
@@ -64,7 +55,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "bookUpdate", value: d.row.values.id },
+                value: { name: "BOOK_UPDATE", value: d.row.values.id },
               })
             }
           />
@@ -73,7 +64,7 @@ export const columns = [
             onClick={() => {
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "bookDelete", value: d.row.values.id },
+                value: { name: "BOOK_DELETE", value: d.row.values.id },
               });
             }}
           />

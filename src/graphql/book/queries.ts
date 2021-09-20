@@ -7,11 +7,7 @@ export const GET_BOOKS = gql`
       title
       price
       stock
-      Category {
-        id
-        name
-        group
-      }
+      isbn
       Author {
         id
         name
@@ -32,18 +28,24 @@ export const GET_BOOK = gql`
       series
       releaseYear
       numberOfPages
-      height
+      lenght
+      width
       weight
       stock
       price
-      rating
-      imgDir
+      language
+      isbn
+      pictureDir
       Category {
         id
         name
         group
       }
       Author {
+        id
+        name
+      }
+      Publisher {
         id
         name
       }
@@ -93,6 +95,10 @@ export const GET_FORM_BOOK = gql`
       id
       name
     }
+    publishers {
+      id
+      name
+    }
     categories {
       id
       name
@@ -107,7 +113,6 @@ export const GET_BOOKS_SORT_NEW = gql`
       id
       title
       price
-      rating
       BookPicture {
         type
         url
@@ -131,10 +136,12 @@ export const GET_BOOK_DETAIL = gql`
       releaseYear
       numberOfPages
       weight
-      height
+      width
+      lenght
       stock
       price
-      rating
+      language
+      isbn
       Category {
         id
         name
@@ -143,6 +150,11 @@ export const GET_BOOK_DETAIL = gql`
         id
         name
       }
+      Publisher {
+        id
+        name
+      }
+
       BookPicture {
         id
         type

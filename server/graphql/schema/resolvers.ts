@@ -1,6 +1,7 @@
 import _ from "lodash";
 import * as scalar from "./scalar";
 import * as author from "./author/resolvers";
+import * as publisher from "./publisher/resolvers";
 import * as category from "./category/resolvers";
 import * as book from "./book/resolvers";
 import * as auth from "./auth/resolvers";
@@ -14,6 +15,7 @@ const resolvers = _.merge(
   scalar.resolvers,
   category,
   author,
+  publisher,
   book,
   user,
   courier,

@@ -122,7 +122,7 @@ const CreateRecipient = () => {
             />
             <FormsControl
               control="input"
-              type="email"
+              type="text"
               name="email"
               register={register}
               label="Email"

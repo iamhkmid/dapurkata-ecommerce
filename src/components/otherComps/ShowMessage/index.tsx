@@ -25,7 +25,7 @@ const ShowMessage: FC<TProps> = ({ color, message }) => {
   return (
     <El.Main isShowed={isShowed} color={color}>
       <El.Message>{msg}</El.Message>
-      <El.BtnWrapper onClick={() => setIsShowed(false)}>
+      <El.BtnWrapper onClick={() => setIsShowed(false)} color={color}>
         {IconsControl("x")}
       </El.BtnWrapper>
     </El.Main>

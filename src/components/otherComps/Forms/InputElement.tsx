@@ -73,6 +73,7 @@ export const Logo = styled.div<TLogo>`
 
 type TInputElement = {
   isLoading: boolean;
+  withIcon: boolean;
 };
 
 export const InputElement = styled.input<TInputElement>`
@@ -84,8 +85,8 @@ export const InputElement = styled.input<TInputElement>`
   background: ${({ theme }) => theme.input.background};
   text-decoration: none;
   padding: 0 0.5rem;
-  ${({ name }) =>
-    (name === "username" || name.includes("password")) &&
+  ${({ withIcon }) =>
+    withIcon &&
     css`
       padding: 0 0.5rem 0 2.5rem;
     `}

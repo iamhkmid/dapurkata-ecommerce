@@ -17,10 +17,7 @@ export type TAuthUser = {
   firstName: string;
   lastName: string;
   phone: string;
-  UserPicture: {
-    id: string;
-    url: string;
-  };
+  userPicture: string;
 };
 
 export type TGQLUserAdminList = {
@@ -50,4 +47,45 @@ export type TFormChangePass = {
   newPassword: string;
   oldPassword: string;
   confirmPassword: string;
+};
+
+export type TGQLUpdateUser = {
+  updateUser: { id: string };
+};
+
+export type TGQLDataDelUser = {
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    role: string;
+  };
+};
+
+export type TFormUpdateUser = {
+  username: string;
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+};
+
+export type TUpdateUserVal = {
+  userId: string;
+  username: string;
+  email: string;
+  phone: string;
+  firstName: string;
+  lastName: string;
+};
+
+export type TInitDataUpdateUser = {
+  user: {
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    phone: string;
+  };
 };

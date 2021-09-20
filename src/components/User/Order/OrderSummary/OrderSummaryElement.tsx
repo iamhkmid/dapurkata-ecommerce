@@ -14,10 +14,14 @@ export const ItemWrapper = styled.div`
 `;
 export const CoverWrapper = styled.div`
   display: flex;
+  align-items: center;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  overflow: hidden;
   flex-direction: column;
-  position: relative;
-  height: 3.5rem;
-  aspect-ratio: 1/1.5;
+  min-height: 70px;
+  min-width: 46px;
+  height: 70px;
+  width: 46px;
 `;
 export const EmptyCart = styled.h1`
   text-align: center;

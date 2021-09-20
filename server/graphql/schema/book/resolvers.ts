@@ -11,13 +11,13 @@ export const Query: TBookQuery = {
 
 export const Mutation: TBookMutation = {
   createBook: async (_, { data, cover, bookPics }, { db }) => {
-    const { imgDir } = await makeDirFile({
+    const { pictureDir } = await makeDirFile({
       dirLoc: "/server/static/uploads/books",
     });
     const imageInfo =
       (cover || bookPics) &&
-      (await saveBookPic({ imgDir, cover, bookPics }).catch((err) => {
-        removeDir(imgDir);
+      (await saveBookPic({ pictureDir, cover, bookPics }).catch((err) => {
+        removeDir(pictureDir);
         throw err;
       }));
     const newData: TDBCreateBook = {
@@ -27,25 +27,30 @@ export const Mutation: TBookMutation = {
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,
       numberOfPages: data.numberOfPages || undefined,
-      height: data.height || undefined,
+      lenght: data.lenght || undefined,
+      width: data.width || undefined,
       weight: data.weight || undefined,
       stock: data.stock,
       price: data.price,
-      imgDir,
-      rating: data.rating || undefined,
+      language: data.language || undefined,
+      isbn: data.isbn || undefined,
+      pictureDir,
       Category: {
-        connect: data.Category
-          ? data.Category.map((cat) => ({ id: cat.id }))
+        connect: data.categories
+          ? data.categories.map((cat) => ({ id: cat.id }))
           : undefined,
       },
-      Author: { connect: data.Author ? { id: data.Author.id } : undefined },
+      Author: { connect: data.authorId ? { id: data.authorId } : undefined },
+      Publisher: {
+        connect: data.publisherId ? { id: data.publisherId } : undefined,
+      },
       BookPicture: { create: imageInfo || undefined },
     };
 
     try {
       return await db.book.create({ data: newData });
     } catch (error) {
-      await removeDir(imgDir);
+      await removeDir(pictureDir);
       throw error;
     }
   },
@@ -58,17 +63,22 @@ export const Mutation: TBookMutation = {
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,
       numberOfPages: data.numberOfPages || undefined,
-      height: data.height || undefined,
+      lenght: data.lenght || undefined,
+      width: data.width || undefined,
       weight: data.weight || undefined,
       stock: data.stock || undefined,
       price: data.price || undefined,
-      rating: data.rating || undefined,
+      language: data.language || undefined,
+      isbn: data.isbn || undefined,
       Category: {
-        set: data.Category
-          ? data.Category.map((cat) => ({ id: cat.id }))
+        set: data.categories
+          ? data.categories.map((cat) => ({ id: cat.id }))
           : undefined,
       },
-      Author: { connect: data.Author ? { id: data.Author.id } : undefined },
+      Author: { connect: data.authorId ? { id: data.authorId } : undefined },
+      Publisher: {
+        connect: data.publisherId ? { id: data.publisherId } : undefined,
+      },
     };
     return await db.book.update({
       where: { id: data.bookId },
@@ -78,7 +88,7 @@ export const Mutation: TBookMutation = {
 
   deleteBook: async (_, { bookId }, { db }) => {
     const book = await db.book.delete({ where: { id: bookId } });
-    await removeDir(book.imgDir);
+    await removeDir(book.pictureDir);
     return book;
   },
 };
@@ -90,6 +100,13 @@ export const Book: TBook = {
       select: { Author: true },
     });
     return book.Author;
+  },
+  Publisher: async ({ id }, _, { db }) => {
+    const book = await db.book.findUnique({
+      where: { id },
+      select: { Publisher: true },
+    });
+    return book.Publisher;
   },
   Category: async ({ id }, _, { db }) => {
     const book = await db.book.findUnique({

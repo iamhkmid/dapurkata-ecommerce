@@ -26,16 +26,18 @@ export type TFormCreateBook = {
   series: string;
   releaseYear: string;
   numberOfPages: number;
-  height: number;
+  lenght: number;
+  width: number;
   weight: number;
   stock: number;
   price: number;
-  rating: string;
+  language: string;
+  isbn: string;
   libraryType: string;
-  typeCategory: string;
-  published: string;
-  author: string;
-  category: string[];
+  readerGroup: string;
+  authorId: string;
+  publisherId: string;
+  categories: string[];
   cover: any;
 };
 
@@ -47,16 +49,18 @@ export type TFormUpdateBook = {
   series: string;
   releaseYear: string;
   numberOfPages: number;
-  height: number;
+  lenght: number;
+  width: number;
   weight: number;
   stock: number;
   price: number;
-  rating: string;
+  language: string;
+  isbn: string;
   libraryType: string;
-  typeCategory: string;
-  published: string;
-  author: string;
-  category: string[];
+  readerGroup: string;
+  authorId: string;
+  publisherId: string;
+  categories: string[];
 };
 
 export type TFormAuthor = {

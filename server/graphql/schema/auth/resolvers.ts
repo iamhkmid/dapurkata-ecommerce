@@ -13,7 +13,6 @@ export const Query: TAuthQuery = {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const findUser = await db.user.findUnique({
           where: { id: decoded["id"] },
-          include: { UserPicture: true },
         });
         if (!findUser) throw new AuthenticationError("User not found");
         return findUser;
@@ -31,7 +30,6 @@ export const Mutation: TAuthMutation = {
     const { username, password, rememberMe } = args;
     const findUser = await db.user.findUnique({
       where: { username },
-      include: { UserPicture: true },
     });
     if (!findUser)
       throw new AuthenticationError("Username or Password incorrect");
@@ -42,8 +40,5 @@ export const Mutation: TAuthMutation = {
 
     const token = createToken({ id: findUser.id, role: findUser.role });
     return { jwt: token, user: findUser };
-  },
-  logout: async (_, __, { user, res }) => {
-    return { message: "You are logged out" };
   },
 };

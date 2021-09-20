@@ -14,6 +14,7 @@ export const Main = styled.div<TMain>`
   width: 100%;
   max-height: 0;
   padding: 0 1.5rem;
+  padding-right: 2rem;
   overflow: hidden;
 
   ${({ isShowed }) =>
@@ -22,13 +23,14 @@ export const Main = styled.div<TMain>`
       margin-top: 0.5rem;
       overflow: visible;
       padding: 0.3rem 1.5rem;
+      padding-right: 2rem;
       max-height: 3rem;
     `}
   ${({ theme, color }) => css`
-    background: ${theme.button[color || "primary"].background};
-    color: ${theme.button[color || "primary"].color};
+    background: ${theme.button[color || "success"].background};
+    color: ${theme.button[color || "success"].color};
     > svg {
-      color: ${theme.button[color || "primary"].color};
+      color: ${theme.button[color || "success"].color};
     }
   `}
   transition: 0.4s all ease;
@@ -50,7 +52,11 @@ export const Message = styled.h1`
   }
   transition: 0.4s all ease;
 `;
-export const BtnWrapper = styled.div`
+
+type TBtnWrapper = {
+  color: string;
+};
+export const BtnWrapper = styled.div<TBtnWrapper>`
   display: flex;
   position: absolute;
   cursor: pointer;
@@ -58,12 +64,15 @@ export const BtnWrapper = styled.div`
   justify-content: center;
   border-radius: 100%;
   margin: 0.2rem;
-  height: 100%;
+  max-height: 1.5rem;
+  height: 1.5rem;
   aspect-ratio: 1/1;
   right: 0;
   :hover {
-    background: ${({ theme }) => theme.button.hover.danger.background};
-    color: ${({ theme }) => theme.button.hover.danger.color};
+    ${({ theme, color }) => css`
+      background: ${theme.button.hover[color || "success"].background};
+      color: ${theme.button.hover[color || "success"].color};
+    `}
   }
   > svg {
     height: 1rem;

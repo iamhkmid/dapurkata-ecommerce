@@ -9,9 +9,9 @@ export const hashPassword = async (pw) => {
 };
 
 export const saveUserPic = async (options: TSaveUserPic) => {
-  const { userPic, imgDir } = options;
+  const { userPic, pictureDir } = options;
   if (userPic) {
-    const { pathFile } = await saveImg({ imgDir, file: userPic });
+    const { pathFile } = await saveImg({ pictureDir, file: userPic });
     return { url: pathFile.split("static")[1] };
   } else {
     return null;

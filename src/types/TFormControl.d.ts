@@ -1,8 +1,9 @@
 export type TInput = {
   childRef?: (ref: HTMLInputElement) => void;
   control: "input";
-  type: string;
+  type: "text" | "number" | "password";
   step?: string;
+  withIcon?: boolean;
   register?: (ref: HTMLInputElement) => void;
 };
 export type TSelect = {
@@ -34,7 +35,7 @@ export type TCheckbox = {
 
 export type TForm = {
   name: string;
-  label: string;
+  label?: string;
   error: boolean;
   message: string;
   isLoading?: boolean;

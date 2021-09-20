@@ -1,13 +1,13 @@
 import * as El from "./DetailELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import Moment from "moment";
 import { useGQLAuthor } from "../../useGQLAuthor";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 
 const Detail = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { data, error, loading } = useGQLAuthor({ authorId: id });
   return (
     <El.Container

@@ -3,9 +3,9 @@ import { useWindowSize } from "react-use";
 import { reducer, initialValue } from "../reducer/adminNav";
 import { TAdminNavCtx } from "../types/context";
 
-export const AdminContext = createContext<TAdminNavCtx | undefined>(undefined);
+export const AdminNavCtx = createContext<TAdminNavCtx | undefined>(undefined);
 
-const AdminContextProvider: FC<ReactNode> = ({ children }) => {
+const AdminNavCtxProvider: FC<ReactNode> = ({ children }) => {
   // sidebar open state
   const [adminNav, dispatch] = useReducer(reducer, initialValue);
 
@@ -17,10 +17,10 @@ const AdminContextProvider: FC<ReactNode> = ({ children }) => {
   }, [width]);
 
   return (
-    <AdminContext.Provider value={{ adminNav, dispatch }}>
+    <AdminNavCtx.Provider value={{ adminNav, dispatch }}>
       {children}
-    </AdminContext.Provider>
+    </AdminNavCtx.Provider>
   );
 };
 
-export default AdminContextProvider;
+export default AdminNavCtxProvider;

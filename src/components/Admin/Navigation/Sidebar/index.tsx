@@ -2,14 +2,14 @@ import { ThemeContext } from "../../../../contexts/ThemeCtx";
 import { useContext } from "react";
 import * as El from "./SidebarElement";
 import { adminSidebar } from "../../../../data/adminSidebar";
-import { AdminContext } from "../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../contexts/AdminNavCtx";
 import Menu from "./Menu";
 import Image from "next/image";
 import sidebar_dark from "../../../../img/sidebar_dark.svg";
 import sidebar_light from "../../../../img/sidebar_light.svg";
 
 const Admin = () => {
-  const { adminNav } = useContext(AdminContext);
+  const { adminNav } = useContext(AdminNavCtx);
   const { theme } = useContext(ThemeContext);
 
   return (

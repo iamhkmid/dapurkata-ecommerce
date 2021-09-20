@@ -94,6 +94,6 @@ export const TextGroup = styled.div`
 export const Text1 = styled.h1`
   font-family: "Roboto", sans-serif;
   font-size: 1.2rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color[1]};
+  font-weight: 600;
+  color: ${({ theme }) => theme.color[2]};
 `;

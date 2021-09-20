@@ -82,9 +82,7 @@ const UpdateCartInput: FC<TUpdateCart> = ({ cartProps }) => {
         type: "SHOW_POPUP",
         value: {
           name: "MESSAGE",
-          value: error.message,
-          onClose: userNav.showPopUp.name,
-          onCloseValue: userNav.showPopUp.value,
+          message: error.message,
         },
       });
     }

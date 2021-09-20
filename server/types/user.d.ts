@@ -8,7 +8,7 @@ export type TUser = {
   password: string;
   role: string;
   phone: string;
-  imgDir: string;
+  pictureDir: string;
 };
 
 export type TCreateUserData = {
@@ -19,7 +19,7 @@ export type TCreateUserData = {
   password: string;
   role: string;
   phone: string;
-  imgDir: string;
+  pictureDir: string;
 };
 
 export type TUpdateUserData = {
@@ -29,7 +29,7 @@ export type TUpdateUserData = {
   email: string;
   role: string;
   phone: string;
-  imgDir: string;
+  pictureDir: string;
 };
 
 export type TArgsCreateUser = {
@@ -55,7 +55,8 @@ export type TGQLUser = {
   password: string;
   role: string;
   phone: string;
-  imgDir: string;
+  pictureDir: string;
+  userPicture: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -68,8 +69,8 @@ type TDBCheckUser = {
   password: string;
   role: string;
   phone: string;
-  imgDir: string;
-  UserPicture: TGQLUserPic;
+  pictureDir: string;
+  userPicture: string;
   createdAt: Date;
   updatedAt: Date;
 };

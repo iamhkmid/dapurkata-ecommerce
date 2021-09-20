@@ -15,8 +15,8 @@ export const user = async () => {
       password: password1,
       role: "ADMIN",
       phone: "089633189921",
-      imgDir: "/uploads/profile/seed/",
-      UserPicture: { create: { url: "/uploads/profile/seed/img.jpg" } },
+      pictureDir: "/uploads/profile/seed/",
+      userPicture: "/uploads/profile/seed/img.jpg",
     },
   });
   const user2 = await prisma.user.create({
@@ -58,8 +58,8 @@ export const user = async () => {
           },
         ],
       },
-      imgDir: "/uploads/profile/seed/",
-      UserPicture: { create: { url: "/uploads/profile/seed/img.jpg" } },
+      pictureDir: "/uploads/profile/seed/",
+      userPicture: "/uploads/profile/seed/img.jpg",
     },
   });
 

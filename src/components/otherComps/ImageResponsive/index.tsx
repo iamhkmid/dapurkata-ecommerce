@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import styled, { keyframes } from "styled-components";
-import IconsControl from "../../../../IconsControl";
-import LoadingBookCover from "../../../../otherComps/Loading/LoadingBookCover";
+import IconsControl from "../../IconsControl";
+import LoadingImage from "../Loading/LoadingImage";
 
 export const Main = styled.div`
   display: block;
@@ -28,6 +28,7 @@ export const LoadingWrapper = styled.div`
   justify-content: center;
   z-index: 3;
 `;
+
 export const DefImg = styled.div`
   display: flex;
   position: absolute;
@@ -40,51 +41,55 @@ export const DefImg = styled.div`
   background: ${({ theme }) => theme.content.bookCard.cover.background};
   z-index: 2;
   > svg {
-    height: 40%;
+    height: 100%;
+    width: 100%;
     fill: ${({ theme }) => (theme.name === "light" ? "#adbdd3" : "#e8efff2e")};
   }
 `;
 
 type TBookCover = {
-  url: string;
+  src: string;
+  quality: number;
+  height: number;
+  width: number;
+  defaultIcon?: string;
+  alt?: string;
 };
 
-const Cover: FC<TBookCover> = ({ url }) => {
-  const defaultCover = "/uploads/books/default.svg";
-  const [cover, setCover] = useState<string>(defaultCover);
+const ImageResponsive: FC<TBookCover> = (props) => {
+  const { width, height, quality, src, defaultIcon, alt } = props;
+  const defIcon = defaultIcon || "dapurkata";
+  const [noImg, setNoImg] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const defaultImgSrc = () => {
-    setCover(defaultCover);
-  };
 
-  useEffect(() => {
-    if (url) {
-      setCover(url);
-    }
-  }, [url]);
   return (
     <Main>
-      {cover === defaultCover && <DefImg>{IconsControl("dapurkata")}</DefImg>}
-      {cover && (
+      {(!src || noImg) && <DefImg>{IconsControl(defIcon)}</DefImg>}
+
+      {src && (
         <Image
-          src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${cover}`}
-          alt="Cover"
+          src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${src}`}
+          alt={alt || "images"}
           layout="responsive"
           objectFit="fill"
-          width={200}
-          height={290}
-          quality={75}
-          onLoad={() => setIsLoading(false)}
-          onError={() => defaultImgSrc()}
+          width={width}
+          height={height}
+          quality={quality}
+          onLoad={() => {
+            setIsLoading(false);
+            setNoImg(false);
+          }}
+          onError={() => setNoImg(true)}
         />
       )}
-      {cover && isLoading && (
+
+      {false && (
         <LoadingWrapper>
-          <LoadingBookCover />
+          <LoadingImage dotSize={(width / 100) * 7} />
         </LoadingWrapper>
       )}
     </Main>
   );
 };
 
-export default Cover;
+export default ImageResponsive;

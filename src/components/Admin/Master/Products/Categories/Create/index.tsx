@@ -6,14 +6,14 @@ import * as El from "./CreateElement";
 import FormsControl from "../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../otherComps/Buttons/Button";
 import LoadingWrapper from "../../../../../otherComps/Loading/LoadingWrapper";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import { useGQLCreateCategory } from "../useGQLCategory";
 import { formCategory } from "../../../../../../data/form";
 import { TFormCreateCategory } from "../../../../../../types/category";
 import ShowMessage from "../../../../../otherComps/ShowMessage";
 
 const Create = () => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
 
   const { register, handleSubmit, formState, reset, clearErrors } =
     useForm<TFormCreateCategory>({
@@ -39,7 +39,7 @@ const Create = () => {
         reset();
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "categoryDetail", value: data.createCategory.id },
+          value: { name: "CATEGORY_DETAIL", value: data.createCategory.id },
         });
       })
       .catch(() => {});

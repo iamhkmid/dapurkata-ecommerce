@@ -1,4 +1,4 @@
-import { AdminContext } from "../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../contexts/AdminNavCtx";
 import * as El from "./NavigationElement";
 import Sidebar from "./Sidebar";
 import { FC, useContext } from "react";
@@ -6,7 +6,7 @@ import Header from "./Header";
 import PopUpControl from "../PopUpControl";
 import SectionInfo from "./SectionInfo";
 const Navigation: FC = ({ children }) => {
-  const { adminNav } = useContext(AdminContext);
+  const { adminNav } = useContext(AdminNavCtx);
   return (
     <El.Main>
       <PopUpControl />

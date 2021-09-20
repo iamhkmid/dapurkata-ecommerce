@@ -68,16 +68,16 @@ export const WithAuth: FC = ({ children }) => {
       )}
       {isNotAdmin && <RoleNotMatch role="ADMIN" />}
       {isNotUser && <RoleNotMatch role="USER" />}
-      {(isUser || (!isAdminPath && !isUserPath)) && (
-        <ShoppingCartCtxProvider>
-          <UserNavCtxProvider>
+      <UserNavCtxProvider>
+        {(isUser || (!isAdminPath && !isUserPath)) && (
+          <ShoppingCartCtxProvider>
             <PaymentCtxProvider>
               <PopUpControl />
               <Navbar>{children}</Navbar>
             </PaymentCtxProvider>
-          </UserNavCtxProvider>
-        </ShoppingCartCtxProvider>
-      )}
+          </ShoppingCartCtxProvider>
+        )}
+      </UserNavCtxProvider>
     </>
   );
 };

@@ -7,6 +7,7 @@ import MobileMenuBtn from "./MobileNavbar/MobileMenuBtn";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
+import NavbarMessage from "../../otherComps/NavbarMessage";
 
 const Navbar: FC = ({ children }) => {
   const { theme } = useContext(ThemeContext);
@@ -51,6 +52,7 @@ const Navbar: FC = ({ children }) => {
           <MenuList />
           <MobileMenuBtn />
         </El.NavbarContainer>
+        <NavbarMessage />
         <AnimatePresence>
           {userNav.showMenu && <MobileShowControl name={userNav.showMenu} />}
         </AnimatePresence>

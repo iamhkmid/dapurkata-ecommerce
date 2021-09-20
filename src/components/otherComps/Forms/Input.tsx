@@ -11,6 +11,7 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
     label,
     name,
     error,
+    withIcon,
     message,
     type,
     register,
@@ -26,7 +27,7 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
   }));
   return (
     <El.InputContainer>
-      <El.Label htmlFor={name}>{label}</El.Label>
+      {!!label && <El.Label htmlFor={name}>{label}</El.Label>}
       <El.InputWrapper>
         <El.InputElement
           className={error && "error"}
@@ -37,10 +38,11 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
           name={name}
           type={type}
           isLoading={isLoading}
+          withIcon={withIcon}
           autoComplete={name.includes("password") ? "new-password" : "off"}
           {...rest}
         />
-        {(name === "username" || name.includes("password")) && (
+        {withIcon && (name === "username" || name.includes("password")) && (
           <El.Logo error={error ? true : false}>{IconsControl(name)}</El.Logo>
         )}
         {isLoading && (

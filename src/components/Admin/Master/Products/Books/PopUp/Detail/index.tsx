@@ -1,14 +1,14 @@
 import * as El from "./DetailELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext, useEffect } from "react";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import DetailInfo from "./DetailInfo";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
 import { useGQLGetBook } from "../../useGQLBook";
 import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
 
 const Detail = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { dataGBook, errorGBook, loadGBook } = useGQLGetBook({ bookId: id });
   return (
     <El.Container

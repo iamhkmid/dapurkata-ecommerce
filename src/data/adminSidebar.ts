@@ -38,6 +38,12 @@ export const adminSidebar = [
             title: "MASTER / Products / Authors",
             desc: "Tambah, ubah dan hapus author buku",
           },
+          {
+            name: "Publisher",
+            link: "/admin/master/products/publisher",
+            title: "MASTER / Products / Publisher",
+            desc: "Tambah, ubah dan hapus penerbit buku",
+          },
         ],
       },
       {

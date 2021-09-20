@@ -6,7 +6,7 @@ import * as El from "./UpdateElement";
 import FormsControl from "../../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
-import { AdminContext } from "../../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import Detail from "../Detail";
 import { useGQLCategory, useGQLUpdateCategory } from "../../useGQLCategory";
 import { formCategory } from "../../../../../../../data/form";
@@ -15,7 +15,7 @@ import { TFormUpdateCategory } from "../../../../../../../types/category";
 import ShowMessage from "../../../../../../otherComps/ShowMessage";
 
 const Update = ({ id }) => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { register, handleSubmit, formState, reset, clearErrors, setValue } =
     useForm<TFormUpdateCategory>({
       mode: "all",
@@ -41,7 +41,7 @@ const Update = ({ id }) => {
       .then(({ data }) =>
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "categoryDetail", value: data.updateCategory.id },
+          value: { name: "CATEGORY_DETAIL", value: data.updateCategory.id },
         })
       )
       .catch(() => {});

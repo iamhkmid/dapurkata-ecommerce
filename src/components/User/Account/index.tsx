@@ -40,7 +40,7 @@ const Account = () => {
             }}
             showSideMenu={showSideMenu}
           >
-            {IconsControl("chevron-left")}
+            {IconsControl("chevron-back-outline")}
           </El.IconWrapper>
           <El.TextInfo>
             <h1 className="navigation">U / Account /&nbsp;</h1>

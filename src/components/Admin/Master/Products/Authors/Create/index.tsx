@@ -6,13 +6,13 @@ import * as El from "./CreateElement";
 import FormsControl from "../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../otherComps/Buttons/Button";
 import LoadingWrapper from "../../../../../otherComps/Loading/LoadingWrapper";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import { useGQLCreateAuthor } from "../useGQLAuthor";
 import ShowMessage from "../../../../../otherComps/ShowMessage";
 import { TFormCreateAuthor } from "../../../../../../types/author";
 
 const Create = () => {
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
   const { register, handleSubmit, formState, reset } =
     useForm<TFormCreateAuthor>({
       mode: "all",
@@ -31,7 +31,7 @@ const Create = () => {
         reset();
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "authorDetail", value: data.createAuthor.id },
+          value: { name: "AUTHOR_DETAIL", value: data.createAuthor.id },
         });
       })
       .catch(() => {});

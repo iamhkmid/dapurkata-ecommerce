@@ -1,5 +1,5 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useContext, useEffect, useRef } from "react";
+import { FC, useContext, useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import Button from "../../../../../otherComps/Buttons/Button";
@@ -11,8 +11,9 @@ import { useGQLChangePassword } from "./useGQL";
 import ShowMessage from "../../../../../otherComps/ShowMessage";
 import { TFormChangePass } from "../../../../../../types/user";
 import { useLogOut } from "../../../../../../hooks/useGQLAuth";
+import { AuthContext } from "../../../../../../contexts/AuthCtx";
 
-const ChangePassword = () => {
+const ChangePassword: FC = () => {
   const { dispatch: dispatchUserNav } = useContext(UserNavCtx);
   const htmlElRef = useRef<{ focus: () => void }>();
   const setFocus = () => {
@@ -41,6 +42,7 @@ const ChangePassword = () => {
     await changePassword({ newPassword, oldPassword });
   };
 
+  const { setUser } = useContext(AuthContext);
   useEffect(() => {
     setFocus();
   }, []);
@@ -48,6 +50,13 @@ const ChangePassword = () => {
   useEffect(() => {
     const checkData = async () => {
       if (data) {
+        dispatchUserNav({
+          type: "SHOW_MESSAGE",
+          value: {
+            message: "Berhasil mengubah password",
+            color: "success",
+          },
+        });
         close();
         await logOut();
       }

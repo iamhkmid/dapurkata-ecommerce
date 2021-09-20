@@ -4,11 +4,11 @@ import { TGQLUser } from "./user";
 export type TSaveBookPic = {
   cover?: any;
   bookPics?: any[];
-  imgDir?: string;
+  pictureDir?: string;
 };
 export type TSaveUserPic = {
   userPic?: any;
-  imgDir?: string;
+  pictureDir?: string;
 };
 
 export type TGQLBookPic = {

@@ -20,13 +20,16 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
-    height: Int
+    lenght: Int
+    width: Int
     weight: Int
     stock: Int!
     price: Int!
-    rating: String
-    Category: [categoryInput]
-    Author: authorInput
+    language: String
+    isbn: String
+    categories: [categoryInput]
+    authorId: String
+    publisherId: String
   }
 
   input uBookData {
@@ -37,20 +40,19 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
-    height: Int
+    lenght: Int
+    width: Int
     weight: Int
     stock: Int
-    price: Float
-    rating: String
-    Category: [categoryInput]
-    Author: authorInput
+    price: Int
+    language: String
+    isbn: String
+    categories: [categoryInput]
+    authorId: String
+    publisherId: String
   }
 
   input categoryInput {
-    id: String
-  }
-
-  input authorInput {
     id: String
   }
 
@@ -62,15 +64,18 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
-    height: Int
+    lenght: Int
+    width: Int
     weight: Int
     stock: Int
-    price: Float
-    rating: String
-    imgDir: String
+    price: Int
+    language: String
+    isbn: String
+    pictureDir: String
     Category: [Category]
     authorId: String
     Author: Author
+    Publisher: Publisher
     BookPicture: [BookPicture]
     createdAt: Date
     updatedAt: Date

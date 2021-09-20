@@ -6,7 +6,7 @@ import * as El from "./CreateElement";
 import { TFormCreateBook } from "../../../../../../types/Forms";
 import FormsControl from "../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../otherComps/Buttons/Button";
-import { AdminContext } from "../../../../../../contexts/AdminNavCtx";
+import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import { useGQLCreateBook, useGQLGetFormBook } from "../useGQLBook";
 import ShowMessage from "../../../../../otherComps/ShowMessage";
 
@@ -28,19 +28,21 @@ const Create = () => {
   });
 
   const { isDirty, isValid, errors } = formState;
-  const { dispatch } = useContext(AdminContext);
+  const { dispatch } = useContext(AdminNavCtx);
 
   const { createBook, data, error, loading } = useGQLCreateBook();
 
   const { dataForm, errorForm, loadForm } = useGQLGetFormBook();
   const onSubmit = async (values: TFormCreateBook) => {
-    createBook(values).then(({ data }) => {
-      reset();
-      dispatch({
-        type: "SHOW_POPUP",
-        value: { name: "bookDetail", value: data.createBook.id },
-      });
-    });
+    createBook(values)
+      .then(({ data }) => {
+        reset();
+        dispatch({
+          type: "SHOW_POPUP",
+          value: { name: "BOOK_DETAIL", value: data.createBook.id },
+        });
+      })
+      .catch(() => {});
   };
 
   return (
@@ -61,7 +63,7 @@ const Create = () => {
             />
             <FormsControl
               control="select"
-              name="author"
+              name="authorId"
               register={register}
               label="Kepengarangan"
               options={
@@ -72,10 +74,10 @@ const Create = () => {
                       value: author.name,
                     }))
               }
-              error={errors.author ? true : false}
+              error={errors.authorId ? true : false}
               disabled={loading}
               isLoading={loadForm}
-              message={errors.author ? "Required" : null}
+              message={errors.authorId ? "Required" : null}
               clearError={clearErrors}
             />
             <FormsControl
@@ -100,7 +102,7 @@ const Create = () => {
               />
               <FormsControl
                 control="input"
-                type="text"
+                type="number"
                 name="series"
                 register={register}
                 label="Seri"
@@ -113,31 +115,29 @@ const Create = () => {
               <FormsControl
                 control="input"
                 type="number"
-                name="numberOfPages"
+                name="lenght"
                 register={register}
-                label="Jumlah Halaman"
-                error={errors.numberOfPages ? true : false}
+                label="Panjang"
+                error={errors.lenght ? true : false}
                 disabled={loading}
-                message={
-                  errors.numberOfPages ? errors.numberOfPages.message : null
-                }
+                message={errors.lenght ? errors.lenght.message : null}
               />
               <FormsControl
                 control="input"
                 type="number"
-                name="height"
+                name="width"
                 register={register}
-                label="Tinggi Buku"
-                error={errors.height ? true : false}
+                label="Lebar"
+                error={errors.width ? true : false}
                 disabled={loading}
-                message={errors.height ? errors.height.message : null}
+                message={errors.lenght ? errors.width.message : null}
               />
               <FormsControl
                 control="input"
                 type="number"
                 name="weight"
                 register={register}
-                label="Berat Buku"
+                label="Berat"
                 error={errors.weight ? true : false}
                 disabled={loading}
                 message={errors.weight ? errors.weight.message : null}
@@ -148,23 +148,21 @@ const Create = () => {
             <El.SpanGroupGrid2>
               <FormsControl
                 control="select"
-                name="published"
+                name="publisherId"
                 register={register}
-                label="Terbitan"
+                label="Penerbit"
                 options={
                   !dataForm
                     ? null
-                    : dataForm.categories
-                        .filter((category) => category.group === "Published")
-                        .map((category) => ({
-                          id: category.id,
-                          value: category.name,
-                        }))
+                    : dataForm.publishers.map((publisher) => ({
+                        id: publisher.id,
+                        value: publisher.name,
+                      }))
                 }
-                error={errors.published ? true : false}
+                error={errors.publisherId ? true : false}
                 disabled={loading}
                 isLoading={loadForm}
-                message={errors.published ? "Required" : null}
+                message={errors.publisherId ? "Required" : null}
                 clearError={clearErrors}
               />
               <FormsControl
@@ -177,7 +175,29 @@ const Create = () => {
                 disabled={loading}
                 message={errors.releaseYear ? errors.releaseYear.message : null}
               />
-            </El.SpanGroupGrid2>{" "}
+            </El.SpanGroupGrid2>
+            <El.SpanGroup>
+              <FormsControl
+                control="input"
+                type="text"
+                name="language"
+                register={register}
+                label="Bahasa"
+                error={!!errors?.language}
+                disabled={loading}
+                message={errors.language?.message}
+              />
+              <FormsControl
+                control="input"
+                type="number"
+                name="isbn"
+                register={register}
+                label="ISBN"
+                error={!!errors?.isbn}
+                disabled={loading}
+                message={errors.isbn?.message}
+              />
+            </El.SpanGroup>
             <El.SpanGroup>
               <FormsControl
                 control="select"
@@ -202,23 +222,23 @@ const Create = () => {
               />
               <FormsControl
                 control="select"
-                name="typeCategory"
+                name="readerGroup"
                 register={register}
-                label="Kategori Jenis"
+                label="Kelompok Baca"
                 options={
                   !dataForm
                     ? null
                     : dataForm.categories
-                        .filter((category) => category.group === "TypeCategory")
+                        .filter((category) => category.group === "ReaderGroup")
                         .map((category) => ({
                           id: category.id,
                           value: category.name,
                         }))
                 }
-                error={errors.typeCategory ? true : false}
+                error={errors.readerGroup ? true : false}
                 disabled={loading}
                 isLoading={loadForm}
-                message={errors.typeCategory ? "Required" : null}
+                message={errors.readerGroup ? "Required" : null}
                 clearError={clearErrors}
               />
             </El.SpanGroup>
@@ -235,7 +255,7 @@ const Create = () => {
               />
               <FormsControl
                 control="input"
-                type="money"
+                type="number"
                 name="price"
                 register={register}
                 label="Harga"
@@ -246,18 +266,19 @@ const Create = () => {
               <FormsControl
                 control="input"
                 type="number"
-                name="rating"
+                name="numberOfPages"
                 register={register}
-                label="Rating"
-                step=".01"
-                error={errors.rating ? true : false}
+                label="Halaman"
+                error={errors.numberOfPages ? true : false}
                 disabled={loading}
-                message={errors.rating ? errors.rating.message : null}
+                message={
+                  errors.numberOfPages ? errors.numberOfPages.message : null
+                }
               />
             </El.SpanGroupGrid3>
             <FormsControl
               control="selectMultiple"
-              name="category"
+              name="categories"
               register={register}
               label="Kategori Lainnya (opsi)"
               options={
@@ -270,10 +291,10 @@ const Create = () => {
                         value: category.name,
                       }))
               }
-              error={errors.category ? true : false}
+              error={errors.categories ? true : false}
               disabled={loading}
               isLoading={loadForm}
-              message={errors.category ? "Required" : null}
+              message={errors.categories ? "Required" : null}
               clearError={clearErrors}
             />
             <FormsControl
@@ -290,7 +311,7 @@ const Create = () => {
         <El.SubmitWrapper>
           <Button
             type="submit"
-            name="Save"
+            name="Simpan"
             isLoading={loading}
             disabled={loading}
           />

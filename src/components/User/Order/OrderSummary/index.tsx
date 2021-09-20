@@ -6,8 +6,8 @@ import { AuthContext } from "../../../../contexts/AuthCtx";
 import { OrderCtx } from "../../../../contexts/OrderCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { ORDER } from "../../../../graphql/transaction/mutations";
-import BookCover from "../../Store/Cover/CoverFixed";
 import Button from "../../../otherComps/Buttons/Button";
+import ImageResponsive from "../../../otherComps/ImageResponsive";
 import Loading from "./Loading";
 import * as El from "./OrderSummaryElement";
 import { useGQLOrder } from "./useGQL";
@@ -64,15 +64,17 @@ const OrderSummary = () => {
                 <El.CartInfo>
                   <El.ItemWrapper>
                     <El.CoverWrapper>
-                      <BookCover
-                        url={
+                      <ImageResponsive
+                        src={
                           order.order.book?.BookPicture.find(
                             (img) => img.type === "COVER"
                           )?.url
                         }
-                        quality={75}
-                        height={55}
+                        alt={order.order.book?.title}
+                        height={75}
                         width={37}
+                        quality={75}
+                        defaultIcon="dapurkata"
                       />
                     </El.CoverWrapper>
                     <El.InfoWrapper>
@@ -103,17 +105,19 @@ const OrderSummary = () => {
                 <El.TableName>KERANJANG</El.TableName>
                 <El.CartInfo>
                   {shoppingCart.data.map((val, i) => {
-                    const cover = val.Book.BookPicture.filter(
+                    const cover = val.Book.BookPicture.find(
                       (img) => img.type === "COVER"
                     );
                     return (
                       <El.ItemWrapper key={val.id}>
                         <El.CoverWrapper>
-                          <BookCover
-                            url={cover.length > 0 && cover[0].url}
+                          <ImageResponsive
+                            src={cover?.url}
+                            alt={val.Book?.title}
+                            height={70}
+                            width={46}
                             quality={75}
-                            height={55}
-                            width={37}
+                            defaultIcon="dapurkata"
                           />
                         </El.CoverWrapper>
                         <El.InfoWrapper>
