@@ -94,8 +94,8 @@ const AddressList = () => {
                     dispatchUserNav({
                       type: "SHOW_POPUP",
                       value: {
-                        name: "EDIT_RECIPIENT",
-                        value: val.id,
+                        name: "UPDATE_RECIPIENT",
+                        recipientId: val.id,
                       },
                     })
                   }
