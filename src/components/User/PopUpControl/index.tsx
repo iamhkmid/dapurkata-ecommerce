@@ -8,6 +8,7 @@ import ChangeRecipient from "../Order/Delevery/PopUp/ChangeRecipient";
 import UpdateRecipient from "../Order/Delevery/PopUp/UpdateRecipient";
 import OrderDetail from "../Order/PopUp";
 import ChangePassword from "../Account/ContentState/PopUp/ChangePassword";
+import GlobalMessage from "../../otherComps/GlobalMessage";
 
 const PopUpControl = () => {
   const {
@@ -15,21 +16,24 @@ const PopUpControl = () => {
   } = useContext(UserNavCtx);
 
   return (
-    <AnimatePresence>
-      {showPopUp.name === "CHANGE_RECIPIENT" && <ChangeRecipient />}
-      {showPopUp.name === "ADD_RECIPIENT" && <CreateRecipient />}
-      {showPopUp.name === "UPDATE_RECIPIENT" && (
-        <UpdateRecipient recipientId={showPopUp.recipientId} />
-      )}
-      {showPopUp.name === "MESSAGE" && (
-        <PopUpMessage message={showPopUp.message} />
-      )}
-      {showPopUp.name === "BOOK_DETAIL" && (
-        <BookDetail bookId={showPopUp.bookId} />
-      )}
-      {showPopUp.name === "CHANGE_PASSWORD" && <ChangePassword />}
-      {/* <OrderDetail /> */}
-    </AnimatePresence>
+    <>
+      {!!showPopUp.name && <GlobalMessage />}
+      <AnimatePresence>
+        {showPopUp.name === "CHANGE_RECIPIENT" && <ChangeRecipient />}
+        {showPopUp.name === "ADD_RECIPIENT" && <CreateRecipient />}
+        {showPopUp.name === "UPDATE_RECIPIENT" && (
+          <UpdateRecipient recipientId={showPopUp.recipientId} />
+        )}
+        {showPopUp.name === "MESSAGE" && (
+          <PopUpMessage message={showPopUp.message} />
+        )}
+        {showPopUp.name === "BOOK_DETAIL" && (
+          <BookDetail bookId={showPopUp.bookId} />
+        )}
+        {showPopUp.name === "CHANGE_PASSWORD" && <ChangePassword />}
+        {/* <OrderDetail /> */}
+      </AnimatePresence>
+    </>
   );
 };
 

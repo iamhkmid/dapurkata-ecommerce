@@ -37,9 +37,15 @@ export const Section = styled.div`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  overflow-x: auto;
-  gap: 2rem;
+  gap: 1rem;
   padding: 1rem 2rem 3rem 2rem;
+  overflow-x: auto;
+  .gap-border {
+    border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  }
+  .short {
+    max-width: 20%;
+  }
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -58,8 +64,11 @@ export const ContentWrapper = styled.div`
   }
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    padding: 0.5rem 0.5rem 2rem 0.5rem;
-    gap: 1rem;
+    padding: 1rem;
+    ::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
   }
 `;
 
@@ -70,7 +79,6 @@ export const Content = styled.div`
     flex-direction: column;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    padding: 1rem;
     gap: 1rem;
   }
 `;
@@ -78,10 +86,10 @@ export const Content = styled.div`
 export const Content2 = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 1.5rem;
   width: 100%;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    padding: 1rem;
+    gap: 1rem;
   }
 `;
 
@@ -201,63 +209,95 @@ export const CartBtn = styled.div`
   gap: 1rem;
 `;
 
-export const AdditionalInfo = styled.div`
-  display: grid;
-  width: 100%;
-  max-width: 100%;
-  grid-template-columns: repeat(auto-fill, minmax(7rem, auto));
-  grid-gap: 8px 2%;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
+export const Categories = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .section-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.button.section.color};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.9rem;
+    }
   }
-  > div {
-    border-radius: ${({ theme }) => theme.borderRadius};
-    padding: 0.2rem 1rem;
-    overflow: hidden;
-    min-width: max-content;
-    display: flex;
-    flex-direction: column;
-    background: ${({ theme }) => theme.button.hover.base.background};
-    color: ${({ theme }) => theme.button.list.color};
-    .ai-name {
-      font-size: 0.9rem;
-      font-weight: 500;
-      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.7rem;
-      }
+  .category {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(6rem, auto));
+    grid-gap: 8px 2%;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      grid-template-columns: repeat(1fr, minmax(5rem, 1fr));
     }
-    .ai-value {
+    > div {
       font-family: "Mulish", sans-serif;
-      font-size: 0.9rem;
-      font-weight: 400;
+      border-radius: ${({ theme }) => theme.borderRadius};
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      overflow: hidden;
+      min-width: max-content;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      background: ${({ theme }) => theme.button.list.background};
+      color: ${({ theme }) => theme.button.list.color};
+      :hover {
+        background: ${({ theme }) => theme.button.hover.list.background};
+        color: ${({ theme }) => theme.button.hover.list.color};
+      }
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
         font-size: 0.7rem;
+        padding: 0.2rem 0.5rem;
       }
+      transition: 0.4s all ease;
     }
-    .ai-star {
-      > h1 {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        overflow: hidden;
-        font-size: 0.8rem;
-        font-family: "Mulish", sans-serif;
-        font-weight: 400;
-        color: ${({ theme }) => theme.color[2]};
-      }
+  }
+`;
+
+export const AdditionalInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  .section-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.button.section.color};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.9rem;
+    }
+  }
+  .info-wrapper {
+    display: grid;
+    width: 100%;
+    max-width: 100%;
+    grid-template-columns: repeat(auto-fill, minmax(7rem, auto));
+    grid-gap: 8px 2%;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      grid-template-columns: repeat(1fr, minmax(6rem, 1fr));
+    }
+    > div {
+      border-radius: ${({ theme }) => theme.borderRadius};
+      padding: 0.3rem 1rem;
+      overflow: hidden;
+      min-width: max-content;
       display: flex;
-      height: 100%;
-      align-items: center;
-      > svg {
-        height: 0.9rem;
-        fill: ${({ theme }) => theme.color[7]};
-      }
-      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        > svg {
-          height: 0.8rem;
-          fill: ${({ theme }) => theme.color[7]};
+      flex-direction: column;
+      background: ${({ theme }) => theme.button.list.background};
+      color: ${({ theme }) => theme.button.list.color};
+      .ai-name {
+        font-size: 0.9rem;
+        font-weight: 500;
+        @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+          font-size: 0.7rem;
         }
-        > h1 {
+      }
+      .ai-value {
+        font-family: "Mulish", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 400;
+        @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
           font-size: 0.7rem;
         }
       }
@@ -268,12 +308,12 @@ export const AdditionalInfo = styled.div`
 export const AboutBook = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 1rem;
   gap: 0.5rem;
-  .about-book {
+  padding-bottom: 1rem;
+  .section-name {
     font-size: 1.2rem;
     font-weight: 600;
-    color: ${({ theme }) => theme.color[1]};
+    color: ${({ theme }) => theme.button.section.color};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.9rem;
     }
@@ -284,8 +324,31 @@ export const AboutBook = styled.div`
     text-align: justify;
     font-weight: 400;
     color: ${({ theme }) => theme.color[2]};
+    max-height: 15rem;
+    padding: 0 0.4rem;
+    overflow-x: auto;
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.scrollbar.v1.thumb};
+      border-radius: ${({ theme }) => theme.input.borderRadius};
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+    }
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.9rem;
+      ::-webkit-scrollbar {
+        width: 5px;
+        height: 5px;
+      }
     }
   }
 `;

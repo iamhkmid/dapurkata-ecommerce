@@ -9,14 +9,6 @@ export const formCategory = {
       value: "ReaderGroup",
     },
     {
-      id: "LibraryType",
-      value: "LibraryType",
-    },
-    {
-      id: "Published",
-      value: "Published",
-    },
-    {
       id: "Other",
       value: "Other",
     },

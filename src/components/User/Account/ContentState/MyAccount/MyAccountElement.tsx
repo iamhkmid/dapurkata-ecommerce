@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const Main = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   width: 100%;
   padding: 0.5rem;
 `;
@@ -14,7 +14,7 @@ export const Head = styled.div`
   gap: 1rem;
   height: 100%;
   width: 100%;
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 `;
 

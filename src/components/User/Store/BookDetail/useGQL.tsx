@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../../../contexts/AuthCtx";
+import { OrderCtx } from "../../../../contexts/OrderCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_BOOK_DETAIL } from "../../../../graphql/book/queries";
@@ -25,7 +26,8 @@ export const useGQLGetbook = ({ bookId }) => {
 export const useGQLCreateSC = () => {
   const { push, pathname } = useRouter();
   const { user } = useContext(AuthContext);
-  const { dispatch } = useContext(UserNavCtx);
+  const { dispatch: dispatchUserNav } = useContext(UserNavCtx);
+  const { dispatch: dispatchSCart } = useContext(ShoppingCartCtx);
   const [createShoppingCart, { data, loading, error }] =
     useMutation<TGQLCreateShoppingCart>(CREATE_SHOPPING_CART, {
       errorPolicy: "all",
@@ -39,7 +41,7 @@ export const useGQLCreateSC = () => {
   const createSC = async ({ bookId, amount }: TCreateSC) => {
     if (!user) {
       push(`/auth/signin?next=${pathname}`);
-      dispatch({ type: "CLOSE_POPUP" });
+      dispatchUserNav({ type: "CLOSE_POPUP" });
     } else {
       await createShoppingCart({
         variables: { bookId, amount },
@@ -53,7 +55,7 @@ export const useGQLCreateSC = () => {
 
   useEffect(() => {
     if (error)
-      dispatch({
+      dispatchUserNav({
         type: "SHOW_POPUP",
         value: {
           name: "MESSAGE",
@@ -61,6 +63,14 @@ export const useGQLCreateSC = () => {
         },
       });
   }, [error]);
+
+  useEffect(() => {
+    if (loading)
+      dispatchSCart({
+        type: "SET_LOADING_SCART",
+        value: loading,
+      });
+  }, [loading]);
   return {
     createShoppingCart: createSC,
     data: data?.createShoppingCart,

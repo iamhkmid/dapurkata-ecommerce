@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../../contexts/AuthCtx";
+import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import {
   CITIES_BY_PROV_ID,
   PROVINCES,
@@ -82,6 +83,7 @@ export const useGQLFormData = ({ watchProvId }: { watchProvId: string }) => {
 
 export const useGQLUpdateRecipient = () => {
   const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(UserNavCtx);
   const [updateRecipient, { data, loading, error }] =
     useMutation<TGQLUpdateRecipient>(UPDATE_RECIPIENT, { errorPolicy: "all" });
   const updateRcpt = async (variables: TUpdateRcptVar) => {
@@ -91,6 +93,16 @@ export const useGQLUpdateRecipient = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.updateRecipient)
+      dispatch({
+        type: "SHOW_MESSAGE",
+        value: {
+          message: "Berhasil menyimpan data",
+          color: "success",
+        },
+      });
+  }, [data?.updateRecipient]);
   return {
     updateRecipient: updateRcpt,
     data: data?.updateRecipient,

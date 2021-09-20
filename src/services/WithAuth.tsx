@@ -10,6 +10,7 @@ import PopUpControl from "../components/User/PopUpControl";
 import PaymentCtxProvider from "../contexts/OrderCtx";
 import UserNavCtxProvider, { UserNavCtx } from "../contexts/UserNavCtx";
 import ShoppingCartCtxProvider from "../contexts/ShoppingCartCtx";
+import NavbarMessage from "../components/otherComps/GlobalMessage";
 
 const AuthLoading = dynamic(
   () => import("../components/otherComps/Loading/AuthLoading")

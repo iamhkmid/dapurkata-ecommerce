@@ -170,7 +170,7 @@ type TBookDetail = {
   Category: {
     id: string;
     name: string;
-  };
+  }[];
   Author: {
     id: string;
     name: string;

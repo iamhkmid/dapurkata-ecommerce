@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import {
   CITIES_BY_PROV_ID,
   PROVINCES,
@@ -44,6 +45,7 @@ export const useGQLGetFormData = ({ watchProvId }: { watchProvId: string }) => {
   };
 };
 export const useGQLCreateRecipient = ({ userId }: { userId: string }) => {
+  const { dispatch } = useContext(UserNavCtx);
   const [createRecipient, { data, loading, error }] =
     useMutation<TGQLCreateRecipient>(CREATE_RECIPIENT, {
       errorPolicy: "all",
@@ -55,6 +57,16 @@ export const useGQLCreateRecipient = ({ userId }: { userId: string }) => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.createRecipient)
+      dispatch({
+        type: "SHOW_MESSAGE",
+        value: {
+          message: "Berhasil menyimpan data",
+          color: "success",
+        },
+      });
+  }, [data?.createRecipient]);
   return {
     createRecipient: createRcpt,
     data: data?.createRecipient,

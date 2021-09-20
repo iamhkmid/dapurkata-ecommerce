@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../../../contexts/AuthCtx";
+import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import { UPDATE_USER_BY_USER } from "../../../../../graphql/user/mutations";
 import { INIT_DATA_MY_ACCOUNT } from "../../../../../graphql/user/queries";
 import { TFormMyAccount, TGQLUpdateUser } from "../../../../../types/user";
@@ -29,6 +30,7 @@ export const useGQLInitData = () => {
 
 export const useGQLUpdateUser = () => {
   const { user } = useContext(AuthContext);
+  const { dispatch } = useContext(UserNavCtx);
   const [updateUser, { data, error, loading }] = useMutation<TGQLUpdateUser>(
     UPDATE_USER_BY_USER,
     {
@@ -44,6 +46,16 @@ export const useGQLUpdateUser = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.updateUser)
+      dispatch({
+        type: "SHOW_MESSAGE",
+        value: {
+          message: "Berhasil menyimpan data",
+          color: "success",
+        },
+      });
+  }, [data?.updateUser]);
   return {
     updateUser: GQLUpdateUser,
     data: data?.updateUser,

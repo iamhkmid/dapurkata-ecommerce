@@ -30,8 +30,6 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
   const { dataGB, loadGB, errorGB } = useGQLGetbook({ bookId });
   const { createShoppingCart, data, error, loading } = useGQLCreateSC();
 
-  const isDisabled =
-    loading || loadGB || (user && user.role !== "USER") || !!currCart;
   type TbuyNowHandler = { amount: number; bookId: string };
   const buyNowHandler = (props: TbuyNowHandler) => {
     const { amount, bookId } = props;
@@ -118,7 +116,13 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                       type="button"
                       name="Masukan Keranjang"
                       color="success"
-                      disabled={isDisabled}
+                      isLoading={loading}
+                      disabled={
+                        shoppingCart.loading ||
+                        loadGB ||
+                        user?.role !== "USER" ||
+                        !!currCart
+                      }
                       onClick={() =>
                         createShoppingCart({
                           bookId: dataGB.id,
@@ -134,53 +138,72 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                       onClick={() =>
                         buyNowHandler({ amount, bookId: dataGB.id })
                       }
-                      disabled={isDisabled}
+                      disabled={
+                        shoppingCart.loading ||
+                        loadGB ||
+                        user?.role !== "USER" ||
+                        !!currCart
+                      }
                     />
                   </El.ActionBtn>
                 </El.OrderInfo>
               </El.InfoWrapper>
             </El.Content>
+            <div className="gap-border short"></div>
             <El.Content2>
+              <El.Categories>
+                <h1 className="section-name">Kategori</h1>
+                <div className="category">
+                  {dataGB.Category.map((val) => (
+                    <div key={val.id}>{val.name}</div>
+                  ))}
+                </div>
+              </El.Categories>
+              <div className="gap-border"></div>
               <El.AdditionalInfo>
-                <div>
-                  <h1 className="ai-name">Edisi</h1>
-                  <h1 className="ai-value">{dataGB.edition}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Seri</h1>
-                  <h1 className="ai-value">{dataGB.series}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Berat</h1>
-                  <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Panjang</h1>
-                  <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Lebar</h1>
-                  <h1 className="ai-value">{`${dataGB.width} cm`}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Halaman</h1>
-                  <h1 className="ai-value">{dataGB.numberOfPages}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Tahun Terbit</h1>
-                  <h1 className="ai-value">{dataGB.releaseYear}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Bahasa</h1>
-                  <h1 className="ai-value">{dataGB.language}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">ISBN</h1>
-                  <h1 className="ai-value">{dataGB.isbn}</h1>
+                <h1 className="section-name">Detail</h1>
+                <div className="info-wrapper">
+                  <div>
+                    <h1 className="ai-name">Edisi</h1>
+                    <h1 className="ai-value">{dataGB.edition}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Seri</h1>
+                    <h1 className="ai-value">{dataGB.series}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Berat</h1>
+                    <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Panjang</h1>
+                    <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Lebar</h1>
+                    <h1 className="ai-value">{`${dataGB.width} cm`}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Halaman</h1>
+                    <h1 className="ai-value">{dataGB.numberOfPages}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Tahun Terbit</h1>
+                    <h1 className="ai-value">{dataGB.releaseYear}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">Bahasa</h1>
+                    <h1 className="ai-value">{dataGB.language}</h1>
+                  </div>
+                  <div>
+                    <h1 className="ai-name">ISBN</h1>
+                    <h1 className="ai-value">{dataGB.isbn}</h1>
+                  </div>
                 </div>
               </El.AdditionalInfo>
+              <div className="gap-border"></div>
               <El.AboutBook>
-                <h1 className="about-book">Tentang Buku</h1>
+                <h1 className="section-name">Tentang Buku</h1>
                 <h1 className="description">{dataGB.description}</h1>
               </El.AboutBook>
             </El.Content2>

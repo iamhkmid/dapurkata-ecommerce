@@ -49,6 +49,7 @@ const SignIn = () => {
             register={register}
             label="Username"
             disabled={loading}
+            withIcon={true}
             error={errors.username ? true : false}
             message={errors.username ? errors.username.message : null}
           />
@@ -59,6 +60,7 @@ const SignIn = () => {
             register={register}
             label="Password"
             disabled={loading}
+            withIcon={true}
             error={errors.password ? true : false}
             message={errors.password ? errors.password.message : null}
           />

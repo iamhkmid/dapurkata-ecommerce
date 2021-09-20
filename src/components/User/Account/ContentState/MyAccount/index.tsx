@@ -82,7 +82,6 @@ const MyAccount = () => {
         </El.ButtonWrapper>
       </El.Head>
       <El.FormWrapper>
-        <ShowMessage message={message?.value} color={message?.color} />
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <El.InputGroup2>
             <FormsControl

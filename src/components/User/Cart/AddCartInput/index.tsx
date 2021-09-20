@@ -1,4 +1,5 @@
-import { FC, useRef } from "react";
+import { FC, useContext, useRef } from "react";
+import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import IconsControl from "../../../IconsControl";
 import * as El from "./AddCartInputElement";
 
@@ -9,6 +10,7 @@ type TAddCartInput = {
 
 const AddCartInput: FC<TAddCartInput> = ({ setAmount, amount }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const { shoppingCart } = useContext(ShoppingCartCtx);
 
   const changeAmount = (val: string) => {
     const numVal = Math.floor(Number(val));
@@ -35,7 +37,7 @@ const AddCartInput: FC<TAddCartInput> = ({ setAmount, amount }) => {
           onClick={() =>
             changeAmount(String(Number(inputRef.current.value) - 1))
           }
-          disabled={amount === 1}
+          disabled={amount === 1 || shoppingCart.loading}
         >
           {IconsControl("Minus")}
         </El.AmountBtn>
@@ -49,7 +51,7 @@ const AddCartInput: FC<TAddCartInput> = ({ setAmount, amount }) => {
           onClick={() =>
             changeAmount(String(Number(inputRef.current.value) + 1))
           }
-          disabled={amount === 100}
+          disabled={amount === 100 || shoppingCart.loading}
         >
           {IconsControl("Plus")}
         </El.AmountBtn>

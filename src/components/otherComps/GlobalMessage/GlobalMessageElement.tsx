@@ -4,6 +4,7 @@ import styled, { css } from "styled-components";
 type TMain = {
   isShowed: boolean;
   color: string;
+  fixed: boolean;
 };
 
 export const Main = styled.div<TMain>`
@@ -20,9 +21,14 @@ export const Main = styled.div<TMain>`
   width: max-content;
   max-width: 90%;
   max-height: 0;
-  padding: 0 1.5rem;
   overflow: hidden;
-
+  z-index: 101;
+  ${({ fixed }) =>
+    fixed &&
+    css`
+      top: 1rem;
+      position: fixed;
+    `}
   ${({ isShowed }) =>
     isShowed &&
     css`
@@ -56,7 +62,7 @@ export const Message = styled.h1`
   font-weight: 500;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
   }
   transition: 0.4s all ease;
 `;

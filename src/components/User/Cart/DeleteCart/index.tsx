@@ -1,5 +1,5 @@
 import { useMutation } from "@apollo/client";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DELETE_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
 import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
 import { AuthContext } from "../../../../contexts/AuthCtx";
@@ -10,14 +10,21 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 
 const DeleteCart = ({ cartId }) => {
   const { user } = useContext(AuthContext);
-  const { shoppingCart } = useContext(ShoppingCartCtx);
-  const [deleteShoppingCart, {}] = useMutation<TGQLDeleteShoppingCart>(
+  const { shoppingCart, dispatch } = useContext(ShoppingCartCtx);
+  const [deleteShoppingCart, { loading }] = useMutation<TGQLDeleteShoppingCart>(
     DELETE_SHOPPING_CART,
     {
       errorPolicy: "none",
       fetchPolicy: "no-cache",
     }
   );
+  useEffect(() => {
+    if (loading)
+      dispatch({
+        type: "SET_LOADING_SCART",
+        value: loading,
+      });
+  }, [loading]);
 
   const handler = () => {
     deleteShoppingCart({

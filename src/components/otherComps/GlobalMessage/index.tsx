@@ -2,12 +2,12 @@ import { useRef } from "react";
 import { FC, useContext, useEffect, useState } from "react";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import IconsControl from "../../IconsControl";
-import * as El from "./NavbarMessageElement";
+import * as El from "./GlobalMessageElement";
 type TMessage = {
   message: string;
   color: "danger" | "success" | "warning";
 };
-const NavbarMessage: FC = () => {
+const GlobalMessage: FC = () => {
   const { userNav, dispatch } = useContext(UserNavCtx);
   const [isShowed, setIsShowed] = useState<boolean>(false);
   const [msg, setMsg] = useState<TMessage>(null);
@@ -30,7 +30,11 @@ const NavbarMessage: FC = () => {
   }, [userNav.message.message]);
 
   return (
-    <El.Main isShowed={isShowed} color={msg?.color}>
+    <El.Main
+      isShowed={isShowed}
+      color={msg?.color}
+      fixed={!!userNav.showPopUp.name}
+    >
       <El.Message>{msg?.message}</El.Message>
       <El.BtnWrapper
         onClick={() => dispatch({ type: "CLOSE_MESSAGE" })}
@@ -42,4 +46,4 @@ const NavbarMessage: FC = () => {
   );
 };
 
-export default NavbarMessage;
+export default GlobalMessage;
