@@ -30,8 +30,8 @@ const PopUpMessage: FC<TPopupMessage> = ({ message }) => {
             dispatch({
               type: "SHOW_POPUP",
               value: {
-                name: userNav.showPopUp.onClose,
-                value: userNav.showPopUp.onCloseValue,
+                name: userNav.popup.onClose,
+                value: userNav.popup.onCloseValue,
               },
             })
           }
