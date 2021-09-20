@@ -17,7 +17,7 @@ const Navigation: FC = ({ children }) => {
       >
         <Header />
         <Sidebar />
-        <El.AdminWrapper isOpen={adminNav.showSidebar}>
+        <El.AdminWrapper isOpen={adminNav.sidebar}>
           <SectionInfo />
           {children}
           <El.Footer>DapurKata &copy; 2021</El.Footer>

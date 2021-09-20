@@ -13,7 +13,7 @@ const Admin = () => {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <El.Main themeState={theme} isOpen={adminNav.showSidebar}>
+    <El.Main themeState={theme} isOpen={adminNav.sidebar}>
       <El.Sidebar>
         {adminSidebar.map((group) => (
           <El.ItemGroup key={group.name}>

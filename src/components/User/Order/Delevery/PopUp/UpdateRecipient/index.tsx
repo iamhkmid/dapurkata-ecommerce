@@ -61,7 +61,7 @@ const UpdateRecipient: FC<TUpdateRcpt> = ({ recipientId }) => {
   const { updateRecipient, data, error, loading } = useGQLUpdateRecipient();
 
   const close = () => {
-    if (!!userNav.showPopUp.onClose) {
+    if (!!userNav.popup.onClose) {
       dispatch({
         type: "SHOW_POPUP",
         value: { name: "CHANGE_RECIPIENT" },

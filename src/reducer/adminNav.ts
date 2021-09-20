@@ -3,21 +3,21 @@ import { TAdminNavRdcr, TAdminNavState } from "../types/context";
 export const reducer: TAdminNavRdcr = (state, action) => {
   switch (action.type) {
     case "OPEN_SIDEBAR":
-      return { ...state, showSidebar: true };
+      return { ...state, sidebar: true };
     case "CLOSE_SIDEBAR":
-      return { ...state, showSidebar: false };
+      return { ...state, sidebar: false };
     case "SIDEBAR_TOGGLER":
-      return { ...state, showSidebar: !state.showSidebar };
+      return { ...state, sidebar: !state.sidebar };
     case "SHOW_POPUP":
-      return { ...state, showPopUp: action.value };
+      return { ...state, popup: action.value };
     case "CLOSE_POPUP":
-      return { ...state, showPopUp: { name: null, value: null } };
+      return { ...state, popup: { name: null, value: null } };
     default:
       return state;
   }
 };
 
 export const initialValue: TAdminNavState = {
-  showSidebar: true,
-  showPopUp: { name: null, value: null, onClose: null, onCloseValue: null },
+  sidebar: true,
+  popup: { name: null, value: null, onClose: null, onCloseValue: null },
 };

@@ -21,14 +21,16 @@ export const useGQLCreateUser = () => {
     return await createUser({ variables });
   };
   useEffect(() => {
-    if (data?.createUser) if (data) Router.replace("/auth/signin");
-    dispatch({
-      type: "SHOW_MESSAGE",
-      value: {
-        message: "Berhasil membuat akun baru",
-        color: "success",
-      },
-    });
+    if (data?.createUser) {
+      Router.replace("/auth/signin");
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: "Berhasil membuat akun baru",
+          color: "success",
+        },
+      });
+    }
   }, [data?.createUser]);
   return {
     createUser: GQLCreateUser,

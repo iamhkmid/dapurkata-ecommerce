@@ -9,36 +9,38 @@ type TMessage = {
 };
 const GlobalMessage: FC = () => {
   const { userNav, dispatch } = useContext(UserNavCtx);
-  const [isShowed, setIsShowed] = useState<boolean>(false);
   const [msg, setMsg] = useState<TMessage>(null);
   const timeout = useRef<NodeJS.Timeout>(undefined);
   const close = () => {
-    dispatch({ type: "CLOSE_MESSAGE" });
+    dispatch({ type: "CLOSE_GLOBAL_MESSAGE" });
   };
   useEffect(() => {
-    if (userNav.message.message) {
+    if (userNav.globalMessage.message) {
       clearTimeout(timeout.current);
       timeout.current = setTimeout(close, 4000);
-      setIsShowed(true);
       setMsg({
-        message: userNav.message.message,
-        color: userNav.message.color,
+        message: userNav.globalMessage.message,
+        color: userNav.globalMessage.color,
       });
-    } else {
-      setIsShowed(false);
     }
-  }, [userNav.message.message]);
+  }, [userNav.globalMessage]);
 
   return (
     <El.Main
-      isShowed={isShowed}
-      color={msg?.color}
-      fixed={!!userNav.showPopUp.name}
+      isShowed={userNav.globalMessage.isShowed}
+      color={userNav.globalMessage?.color || msg?.color}
+      fixed={!!userNav.popup.name}
+      onMouseEnter={() => {
+        clearTimeout(timeout.current);
+      }}
+      onMouseLeave={() => {
+        timeout.current = setTimeout(close, 4000);
+      }}
     >
-      <El.Message>{msg?.message}</El.Message>
+      <El.Message>{msg?.message || ""}</El.Message>
       <El.BtnWrapper
-        onClick={() => dispatch({ type: "CLOSE_MESSAGE" })}
-        color={msg?.color}
+        onClick={() => dispatch({ type: "CLOSE_GLOBAL_MESSAGE" })}
+        color={userNav.globalMessage?.color || msg?.color}
       >
         {IconsControl("x")}
       </El.BtnWrapper>

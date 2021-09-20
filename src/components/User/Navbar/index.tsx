@@ -52,9 +52,9 @@ const Navbar: FC = ({ children }) => {
           <MenuList />
           <MobileMenuBtn />
         </El.NavbarContainer>
-        {!userNav.showPopUp.name && <GlobalMessage />}
+        {!userNav.popup.name && <GlobalMessage />}
         <AnimatePresence>
-          {userNav.showMenu && <MobileShowControl name={userNav.showMenu} />}
+          {userNav.menu && <MobileShowControl name={userNav.menu} />}
         </AnimatePresence>
       </El.Nav>
       {children}

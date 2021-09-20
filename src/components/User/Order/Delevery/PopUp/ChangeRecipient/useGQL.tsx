@@ -25,7 +25,7 @@ export const useGQLDelRcpt = ({ userId }: { userId: string }) => {
   useEffect(() => {
     if (data?.deleteRecipient)
       dispatch({
-        type: "SHOW_MESSAGE",
+        type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Berhasil menghapus data",
           color: "success",

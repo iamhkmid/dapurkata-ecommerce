@@ -53,7 +53,7 @@ const CreateRecipient = () => {
     userId: user.id,
   });
   const close = () => {
-    if (!!userNav.showPopUp.onClose) {
+    if (!!userNav.popup.onClose) {
       dispatchUserNav({
         type: "SHOW_POPUP",
         value: { name: "CHANGE_RECIPIENT" },

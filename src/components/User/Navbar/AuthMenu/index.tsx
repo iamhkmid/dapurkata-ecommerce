@@ -33,7 +33,7 @@ const AuthMenu = () => {
         <El.AuthMenuContainer onClick={(e) => e.stopPropagation()}>
           <El.AccountBtn
             onClick={() => dispatch({ type: "SHOW_MENU", value: "MENU" })}
-            active={userNav.showMenu === "MENU"}
+            active={userNav.menu === "MENU"}
           >
             <El.PhotoWrapper className="profile">
               <ImageResponsive
@@ -49,7 +49,7 @@ const AuthMenu = () => {
               {IconsControl("chevron-down-outline")}
             </El.MenuIconWrapper>
             <AnimatePresence>
-              {userNav.showMenu === "MENU" && <Dropdown />}
+              {userNav.menu === "MENU" && <Dropdown />}
             </AnimatePresence>
           </El.AccountBtn>
         </El.AuthMenuContainer>

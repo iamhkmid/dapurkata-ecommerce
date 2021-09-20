@@ -12,25 +12,21 @@ import GlobalMessage from "../../otherComps/GlobalMessage";
 
 const PopUpControl = () => {
   const {
-    userNav: { showPopUp },
+    userNav: { popup },
   } = useContext(UserNavCtx);
 
   return (
     <>
-      {!!showPopUp.name && <GlobalMessage />}
+      {!!popup.name && <GlobalMessage />}
       <AnimatePresence>
-        {showPopUp.name === "CHANGE_RECIPIENT" && <ChangeRecipient />}
-        {showPopUp.name === "ADD_RECIPIENT" && <CreateRecipient />}
-        {showPopUp.name === "UPDATE_RECIPIENT" && (
-          <UpdateRecipient recipientId={showPopUp.recipientId} />
+        {popup.name === "CHANGE_RECIPIENT" && <ChangeRecipient />}
+        {popup.name === "ADD_RECIPIENT" && <CreateRecipient />}
+        {popup.name === "UPDATE_RECIPIENT" && (
+          <UpdateRecipient recipientId={popup.recipientId} />
         )}
-        {showPopUp.name === "MESSAGE" && (
-          <PopUpMessage message={showPopUp.message} />
-        )}
-        {showPopUp.name === "BOOK_DETAIL" && (
-          <BookDetail bookId={showPopUp.bookId} />
-        )}
-        {showPopUp.name === "CHANGE_PASSWORD" && <ChangePassword />}
+        {popup.name === "MESSAGE" && <PopUpMessage message={popup.message} />}
+        {popup.name === "BOOK_DETAIL" && <BookDetail bookId={popup.bookId} />}
+        {popup.name === "CHANGE_PASSWORD" && <ChangePassword />}
         {/* <OrderDetail /> */}
       </AnimatePresence>
     </>

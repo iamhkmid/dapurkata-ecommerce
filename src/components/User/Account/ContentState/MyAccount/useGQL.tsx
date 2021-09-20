@@ -49,7 +49,7 @@ export const useGQLUpdateUser = () => {
   useEffect(() => {
     if (data?.updateUser)
       dispatch({
-        type: "SHOW_MESSAGE",
+        type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Berhasil menyimpan data",
           color: "success",

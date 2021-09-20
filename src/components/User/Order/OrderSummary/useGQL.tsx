@@ -28,7 +28,7 @@ export const useGQLOrder = () => {
   useEffect(() => {
     if (error)
       dispatch({
-        type: "SHOW_MESSAGE",
+        type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Gagal melakukan pemesanan",
           color: "danger",

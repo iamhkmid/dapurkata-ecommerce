@@ -51,7 +51,7 @@ const ChangePassword: FC = () => {
     const checkData = async () => {
       if (data) {
         dispatchUserNav({
-          type: "SHOW_MESSAGE",
+          type: "SHOW_GLOBAL_MESSAGE",
           value: {
             message: "Berhasil mengubah password",
             color: "success",

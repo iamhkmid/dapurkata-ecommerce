@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { customValidation, validationSchema } from "./validationScema";
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import { TGQLFormSignin } from "../../../../types/auth";
 import FormsControl from "../../../otherComps/Forms/FormsControl";
 import Button from "../../../otherComps/Buttons/Button";
@@ -12,7 +12,9 @@ import * as El from "./SignInElement";
 import ThemeToggle from "../../../otherComps/Buttons/ThemeToggle";
 import { useSignIn } from "../../../../hooks/useGQLAuth";
 import ShowMessage from "../../../otherComps/ShowMessage";
+import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 const SignIn = () => {
+  const { dispatch } = useContext(UserNavCtx);
   const htmlElRef = useRef<{ focus: () => void }>();
   const setFocus = () => {
     htmlElRef.current && htmlElRef.current.focus();
@@ -33,13 +35,23 @@ const SignIn = () => {
   };
 
   useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: error.message,
+          color: "danger",
+        },
+      });
+    }
+  }, [error]);
+  useEffect(() => {
     htmlElRef.current.focus();
   }, []);
   return (
     <El.Main>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <El.CompTittle>Log In</El.CompTittle>
-        <ShowMessage message={error?.message} color="danger" />
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <FormsControl
             control="input"

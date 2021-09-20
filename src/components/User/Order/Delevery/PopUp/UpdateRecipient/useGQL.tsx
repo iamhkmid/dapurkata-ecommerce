@@ -96,7 +96,7 @@ export const useGQLUpdateRecipient = () => {
   useEffect(() => {
     if (data?.updateRecipient)
       dispatch({
-        type: "SHOW_MESSAGE",
+        type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Berhasil menyimpan data",
           color: "success",

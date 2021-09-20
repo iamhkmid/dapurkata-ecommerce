@@ -32,7 +32,7 @@ const Header = () => {
         </El.Logo>
         <El.ButtonGroup>
           <El.IconWrapper
-            active={adminNav.showSidebar}
+            active={adminNav.sidebar}
             onClick={() => dispatch({ type: "SIDEBAR_TOGGLER" })}
           >
             {IconsControl("chevron-back-outline")}

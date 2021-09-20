@@ -35,6 +35,14 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
     const { amount, bookId } = props;
     if (!user) {
       push(`/auth/signin?next=${pathname}`);
+      dispatch({ type: "CLOSE_POPUP" });
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: "Anda harus login terlebih dahulu",
+          color: "warning",
+        },
+      });
     } else {
       dispatch({ type: "CLOSE_POPUP" });
       push({
@@ -120,7 +128,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                       disabled={
                         shoppingCart.loading ||
                         loadGB ||
-                        user?.role !== "USER" ||
+                        (user && user.role !== "USER") ||
                         !!currCart
                       }
                       onClick={() =>
@@ -141,7 +149,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                       disabled={
                         shoppingCart.loading ||
                         loadGB ||
-                        user?.role !== "USER" ||
+                        (user && user.role !== "USER") ||
                         !!currCart
                       }
                     />

@@ -60,7 +60,7 @@ export const useGQLCreateRecipient = ({ userId }: { userId: string }) => {
   useEffect(() => {
     if (data?.createRecipient)
       dispatch({
-        type: "SHOW_MESSAGE",
+        type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Berhasil menyimpan data",
           color: "success",

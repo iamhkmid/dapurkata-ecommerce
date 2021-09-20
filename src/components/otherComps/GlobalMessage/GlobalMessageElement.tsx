@@ -8,6 +8,7 @@ type TMain = {
 };
 
 export const Main = styled.div<TMain>`
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,6 +17,7 @@ export const Main = styled.div<TMain>`
   top: 4rem;
   left: 0;
   right: 0;
+  padding: 0 1.5rem;
   margin-left: auto;
   margin-right: auto;
   width: max-content;
@@ -64,7 +66,6 @@ export const Message = styled.h1`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.7rem;
   }
-  transition: 0.4s all ease;
 `;
 
 type TBtnWrapper = {
@@ -91,5 +92,4 @@ export const BtnWrapper = styled.div<TBtnWrapper>`
   > svg {
     height: 1rem;
   }
-  transition: 0.4s all ease;
 `;

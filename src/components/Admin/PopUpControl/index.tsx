@@ -18,49 +18,31 @@ import UserUpdate from "../Master/Users/PopUp/Update";
 
 const PopUpControl = () => {
   const {
-    adminNav: { showPopUp },
+    adminNav: { popup },
   } = useContext(AdminNavCtx);
   return (
     <AnimatePresence>
-      {showPopUp.name === "AUTHOR_DELETE" && (
-        <AuthorDelete id={showPopUp.value} />
+      {popup.name === "AUTHOR_DELETE" && <AuthorDelete id={popup.value} />}
+      {popup.name === "AUTHOR_DETAIL" && <AuthorDetail id={popup.value} />}
+      {popup.name === "AUTHOR_UPDATE" && <AuthorUpdate id={popup.value} />}
+      {popup?.name === "BOOK_DELETE" && <BookDelete id={popup.value} />}
+      {popup?.name === "BOOK_DETAIL" && <BookDetail id={popup.value} />}
+      {popup?.name === "BOOK_UPDATE" && <BookUpadate id={popup.value} />}
+      {popup.name === "CATEGORY_DELETE" && <CategoryDelete id={popup.value} />}
+      {popup.name === "CATEGORY_DETAIL" && <CategoryDetail id={popup.value} />}
+      {popup.name === "CATEGORY_UPDATE" && <CategoryUpdate id={popup.value} />}
+      {popup.name === "PUBLISHER_DELETE" && (
+        <PublisherDelete id={popup.value} />
       )}
-      {showPopUp.name === "AUTHOR_DETAIL" && (
-        <AuthorDetail id={showPopUp.value} />
+      {popup.name === "PUBLISHER_DETAIL" && (
+        <PublisherDetail id={popup.value} />
       )}
-      {showPopUp.name === "AUTHOR_UPDATE" && (
-        <AuthorUpdate id={showPopUp.value} />
-      )}
-      {showPopUp?.name === "BOOK_DELETE" && <BookDelete id={showPopUp.value} />}
-      {showPopUp?.name === "BOOK_DETAIL" && <BookDetail id={showPopUp.value} />}
-      {showPopUp?.name === "BOOK_UPDATE" && (
-        <BookUpadate id={showPopUp.value} />
-      )}
-      {showPopUp.name === "CATEGORY_DELETE" && (
-        <CategoryDelete id={showPopUp.value} />
-      )}
-      {showPopUp.name === "CATEGORY_DETAIL" && (
-        <CategoryDetail id={showPopUp.value} />
-      )}
-      {showPopUp.name === "CATEGORY_UPDATE" && (
-        <CategoryUpdate id={showPopUp.value} />
-      )}
-      {showPopUp.name === "PUBLISHER_DELETE" && (
-        <PublisherDelete id={showPopUp.value} />
-      )}
-      {showPopUp.name === "PUBLISHER_DETAIL" && (
-        <PublisherDetail id={showPopUp.value} />
-      )}
-      {showPopUp.name === "PUBLISHER_UPDATE" && (
-        <PublisherUpdate id={showPopUp.value} />
+      {popup.name === "PUBLISHER_UPDATE" && (
+        <PublisherUpdate id={popup.value} />
       )}
 
-      {showPopUp.name === "USER_DELETE" && (
-        <UserDelete userId={showPopUp.value} />
-      )}
-      {showPopUp.name === "USER_UPDATE" && (
-        <UserUpdate userId={showPopUp.value} />
-      )}
+      {popup.name === "USER_DELETE" && <UserDelete userId={popup.value} />}
+      {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.value} />}
     </AnimatePresence>
   );
 };

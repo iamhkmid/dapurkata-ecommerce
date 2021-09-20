@@ -136,21 +136,21 @@ type TAdminPopUpVal =
   | "USER_DELETE"
   | "USER_UPDATE";
 
-type TAdminShowPopUp = {
+type TAdminPopUp = {
   name: TAdminPopUpVal;
   value?: string;
   onClose?: TAdminPopUpVal;
   onCloseValue?: string;
 };
 export type TAdminNavState = {
-  showSidebar: boolean;
-  showPopUp: TAdminShowPopUp;
+  sidebar: boolean;
+  popup: TAdminPopUp;
 };
 type TAdminNavAction =
   | { type: "OPEN_SIDEBAR" }
   | { type: "CLOSE_SIDEBAR" }
   | { type: "SIDEBAR_TOGGLER" }
-  | { type: "SHOW_POPUP"; value: TAdminShowPopUp }
+  | { type: "SHOW_POPUP"; value: TAdminPopUp }
   | { type: "CLOSE_POPUP" };
 
 export type TAdminNavRdcr = (
@@ -199,6 +199,7 @@ type TUserPopUp = { onClose?: TUserPopUpVal; onCloseValue?: string } & (
 type TUserMenu = "MENU" | "CART" | "MAIL" | "SERVICES";
 type TMessage = {
   message: string;
+  isShowed: boolean;
   color: "danger" | "success" | "warning";
 };
 type TUserDropdown = "SERVICES";
@@ -208,17 +209,17 @@ type TUserNavAction =
   | { type: "SHOW_POPUP"; value: TUserPopUp }
   | { type: "CLOSE_POPUP" }
   | {
-      type: "SHOW_MESSAGE";
+      type: "SHOW_GLOBAL_MESSAGE";
       value: {
         message: string;
         color: "danger" | "success" | "warning";
       };
     }
-  | { type: "CLOSE_MESSAGE" };
+  | { type: "CLOSE_GLOBAL_MESSAGE" };
 export type TUserNavState = {
-  showMenu: TUserMenu;
-  showPopUp: TUserPopUp;
-  message: TMessage;
+  menu: TUserMenu;
+  popup: TUserPopUp;
+  globalMessage: TMessage;
 };
 export type TUserNavRdcr = (
   state: TUserNavState,

@@ -5,31 +5,35 @@ export const reducer: TUserNavRdcr = (state, action) => {
     case "SHOW_MENU":
       return {
         ...state,
-        showMenu: action.value === state.showMenu ? null : action.value,
+        menu: action.value === state.menu ? null : action.value,
       };
     case "CLOSE_MENU":
-      return { ...state, showMenu: null };
+      return { ...state, menu: null };
     case "SHOW_POPUP":
-      return { ...state, showPopUp: action.value };
-    case "SHOW_MESSAGE":
+      return { ...state, popup: action.value };
+    case "SHOW_GLOBAL_MESSAGE":
       return {
         ...state,
-        message: { message: action.value.message, color: action.value.color },
+        globalMessage: {
+          isShowed: true,
+          message: action.value.message,
+          color: action.value.color,
+        },
       };
-    case "CLOSE_MESSAGE":
+    case "CLOSE_GLOBAL_MESSAGE":
       return {
         ...state,
-        message: { color: null, message: null },
+        globalMessage: { color: null, message: null, isShowed: false },
       };
     case "CLOSE_POPUP":
-      return { ...state, showPopUp: { name: null, value: null } };
+      return { ...state, popup: { name: null, value: null } };
     default:
       return state;
   }
 };
 
 export const initialValue: TUserNavState = {
-  showMenu: null,
-  showPopUp: { name: null, value: null, onClose: null, onCloseValue: null },
-  message: { color: null, message: null },
+  menu: null,
+  popup: { name: null, value: null, onClose: null, onCloseValue: null },
+  globalMessage: { color: null, message: null, isShowed: false },
 };
