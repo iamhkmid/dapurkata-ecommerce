@@ -4,6 +4,7 @@ import { useContext } from "react";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { CREATE_USER_BY_USER } from "../../../../graphql/user/mutations";
 import { TFormCreateUser } from "../../../../types/user";
+import Router from "next/router";
 
 export const useGQLCreateUser = () => {
   const { dispatch } = useContext(UserNavCtx);
@@ -20,15 +21,15 @@ export const useGQLCreateUser = () => {
     return await createUser({ variables });
   };
   useEffect(() => {
-    if (data)
-      dispatch({
-        type: "SHOW_MESSAGE",
-        value: {
-          message: "Berhasil membuat akun baru",
-          color: "success",
-        },
-      });
-  }, [data]);
+    if (data?.createUser) if (data) Router.replace("/auth/signin");
+    dispatch({
+      type: "SHOW_MESSAGE",
+      value: {
+        message: "Berhasil membuat akun baru",
+        color: "success",
+      },
+    });
+  }, [data?.createUser]);
   return {
     createUser: GQLCreateUser,
     data: data?.createUser,

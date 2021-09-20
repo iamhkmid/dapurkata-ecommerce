@@ -10,7 +10,6 @@ import ThemeContextProvider from "../../../../contexts/ThemeCtx";
 import LoadingWrapper from "../../../otherComps/Loading/LoadingWrapper";
 import * as El from "./SignUpElement";
 import { DateSingleInput } from "@datepicker-react/styled";
-import Router from "next/router";
 import ShowMessage from "../../../otherComps/ShowMessage";
 import { useGQLCreateUser } from "./useGQL";
 
@@ -37,11 +36,6 @@ const SignUp = () => {
   useEffect(() => {
     setFocus();
   }, []);
-
-  useEffect(() => {
-    if (data) Router.replace("/auth/signin");
-    console.log(error);
-  }, [data, error]);
 
   return (
     <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
