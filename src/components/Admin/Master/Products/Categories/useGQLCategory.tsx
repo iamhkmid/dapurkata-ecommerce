@@ -1,5 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
 import {
   CREATE_CATEGORY,
   DELETE_CATEGORY,
@@ -79,6 +80,7 @@ export const useGQLUpdateCategory = () => {
 };
 
 export const useGQLDeleteCategory = () => {
+  const { dispatch } = useContext(AdminNavCtx);
   const [deleteCategory, { data, error, loading }] =
     useMutation<TGQLDeleteCategory>(DELETE_CATEGORY, {
       errorPolicy: "all",
@@ -91,6 +93,14 @@ export const useGQLDeleteCategory = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (!!data?.deleteCategory) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil menghapus data", color: "success" },
+      });
+    }
+  }, [data?.deleteCategory]);
   return {
     deleteCategory: GQLDeleteCategory,
     data: data?.deleteCategory,

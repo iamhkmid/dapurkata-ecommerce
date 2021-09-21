@@ -14,6 +14,8 @@ import {
   TValCreateAuthor,
   TValUpdateAuthor,
 } from "../../../../../types/author";
+import { useContext, useEffect } from "react";
+import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
 
 export const useGQLAuthors = () => {
   const { data, error, loading } = useQuery<TGQLAuthors>(AUTHORS, {
@@ -69,6 +71,7 @@ export const useGQLUpdateAuthor = () => {
 };
 
 export const useGQLDeleteAuthor = () => {
+  const { dispatch } = useContext(AdminNavCtx);
   const [deleteAuthor, { data, error, loading }] =
     useMutation<TGQLDeleteAuthor>(DELETE_AUTHOR, {
       errorPolicy: "all",
@@ -80,6 +83,14 @@ export const useGQLDeleteAuthor = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (!!data?.deleteAuthor) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil menghapus data", color: "success" },
+      });
+    }
+  }, [data?.deleteAuthor]);
   return {
     deleteAuthor: GQLDeleteAuthor,
     data: data && data.deleteAuthor,

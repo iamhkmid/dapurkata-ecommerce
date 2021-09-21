@@ -13,7 +13,7 @@ const OrderDetail = () => {
       exit={{ opacity: 0 }}
     >
       <El.Section>
-        <PopUpHeader title="Pesanan" close={() => close()} />
+        <PopUpHeader title="Pesanan" />
         <El.Body></El.Body>
       </El.Section>
     </El.Main>
