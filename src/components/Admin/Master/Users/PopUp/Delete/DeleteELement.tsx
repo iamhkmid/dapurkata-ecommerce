@@ -1,33 +1,19 @@
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
-export const Container = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Section = styled(motion.div)`
+export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  max-height: 90vh;
-  width: 35rem;
+  width: 30rem;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    margin: 0.2rem;
     width: 100%;
   }
 `;
@@ -92,6 +78,9 @@ export const Text1 = styled.h1`
   font-size: 1.2rem;
   font-weight: 600;
   color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 1rem;
+  }
 `;
 export const Form = styled.form`
   font-family: "Roboto", sans-serif;

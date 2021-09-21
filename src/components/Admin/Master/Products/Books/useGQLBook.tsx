@@ -1,4 +1,6 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useContext, useEffect } from "react";
+import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
 import {
   CREATE_BOOK,
   DELETE_BOOK,
@@ -114,6 +116,7 @@ export const useGQLUpdateBook = () => {
 };
 
 export const useGQLDeleteBook = () => {
+  const { dispatch } = useContext(AdminNavCtx);
   const [deleteBook, { data, error, loading }] = useMutation(DELETE_BOOK, {
     errorPolicy: "all",
   });
@@ -133,6 +136,14 @@ export const useGQLDeleteBook = () => {
       },
     });
   };
+  useEffect(() => {
+    if (!!data?.deleteBook) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil menghapus data", color: "success" },
+      });
+    }
+  }, [data?.deleteBook]);
   return {
     deleteBook: GQLDeleteBook,
     data: data && data.deleteBook,

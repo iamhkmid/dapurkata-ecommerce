@@ -94,7 +94,7 @@ export const useGQLUpdateRecipient = () => {
     });
   };
   useEffect(() => {
-    if (data?.updateRecipient)
+    if (data?.updateRecipient) {
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
@@ -102,7 +102,10 @@ export const useGQLUpdateRecipient = () => {
           color: "success",
         },
       });
+      dispatch({ type: "CLOSE_POPUP" });
+    }
   }, [data?.updateRecipient]);
+
   return {
     updateRecipient: updateRcpt,
     data: data?.updateRecipient,

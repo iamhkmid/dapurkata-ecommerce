@@ -5,7 +5,7 @@ import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import Button from "../../../../../otherComps/Buttons/Button";
 import RowBtn from "../../../../../otherComps/Buttons/RowBtn";
 import LoadingWrapper from "../../../../../otherComps/Loading/LoadingWrapper";
-import PopUpHeader from "../../../../../otherComps/PopUpHeader";
+import PopUpHeader from "../../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./ChangeRecipientElement";
 import { useGQLDelRcpt } from "./useGQL";
 
@@ -32,73 +32,66 @@ const ChangeRecipient: FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <El.Section>
-        <PopUpHeader
-          title="Kirim Ke alamat Lain"
-          close={() => dispatchUserNav({ type: "CLOSE_POPUP" })}
-        />
-        {loadingDelRcpt && <LoadingWrapper />}
-        <El.Body>
-          <El.BtnWrapper>
-            <Button
-              name="Tambah"
-              type="button"
-              onClick={() =>
-                dispatchUserNav({
-                  type: "SHOW_POPUP",
-                  value: {
-                    name: "ADD_RECIPIENT",
-                    onClose: "CHANGE_RECIPIENT",
-                  },
-                })
-              }
-              color="success"
-            />
-            <Button
-              name="Simpan"
-              type="button"
-              onClick={() => dispatchUserNav({ type: "CLOSE_POPUP" })}
-              color="primary"
-            />
-          </El.BtnWrapper>
-          <El.Ul>
-            {order.recipient.data.recipients?.map((val) => (
-              <El.Li key={val.id}>
-                <El.Info
-                  active={val.id === order.recipient.selected.id}
-                  onClick={() => {
-                    dispatchOrder({ type: "SET_RECIPIENT_ID", value: val.id });
-                  }}
-                >
-                  <h1>{`${val.firstName} ${val.lastName}`}</h1>
-                  <h1>{val.address}</h1>
-                </El.Info>
-                <El.BtnLiWrapper>
-                  <RowBtn
-                    type="edit"
-                    disabled={loadingDelRcpt}
-                    onClick={() =>
-                      dispatchUserNav({
-                        type: "SHOW_POPUP",
-                        value: {
-                          name: "UPDATE_RECIPIENT",
-                          recipientId: val.id,
-                          onClose: "CHANGE_RECIPIENT",
-                        },
-                      })
-                    }
-                  />
-                  <RowBtn
-                    type="delete"
-                    disabled={loadingDelRcpt}
-                    onClick={() => deleteHandler({ id: val.id })}
-                  />
-                </El.BtnLiWrapper>
-              </El.Li>
-            ))}
-          </El.Ul>
-        </El.Body>
-      </El.Section>
+      <PopUpHeader title="Kirim Ke alamat Lain" />
+      {loadingDelRcpt && <LoadingWrapper />}
+      <El.Body>
+        <El.BtnWrapper>
+          <Button
+            name="Tambah"
+            type="button"
+            onClick={() =>
+              dispatchUserNav({
+                type: "SHOW_POPUP",
+                value: {
+                  name: "ADD_RECIPIENT",
+                },
+              })
+            }
+            color="success"
+          />
+          <Button
+            name="Simpan"
+            type="button"
+            onClick={() => dispatchUserNav({ type: "CLOSE_POPUP" })}
+            color="primary"
+          />
+        </El.BtnWrapper>
+        <El.Ul>
+          {order.recipient.data.recipients?.map((val) => (
+            <El.Li key={val.id}>
+              <El.Info
+                active={val.id === order.recipient.selected.id}
+                onClick={() => {
+                  dispatchOrder({ type: "SET_RECIPIENT_ID", value: val.id });
+                }}
+              >
+                <h1>{`${val.firstName} ${val.lastName}`}</h1>
+                <h1>{val.address}</h1>
+              </El.Info>
+              <El.BtnLiWrapper>
+                <RowBtn
+                  type="edit"
+                  disabled={loadingDelRcpt}
+                  onClick={() =>
+                    dispatchUserNav({
+                      type: "SHOW_POPUP",
+                      value: {
+                        name: "UPDATE_RECIPIENT",
+                        recipientId: val.id,
+                      },
+                    })
+                  }
+                />
+                <RowBtn
+                  type="delete"
+                  disabled={loadingDelRcpt}
+                  onClick={() => deleteHandler({ id: val.id })}
+                />
+              </El.BtnLiWrapper>
+            </El.Li>
+          ))}
+        </El.Ul>
+      </El.Body>
     </El.Main>
   );
 };

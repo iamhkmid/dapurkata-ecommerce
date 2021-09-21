@@ -5,32 +5,27 @@ import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import DetailInfo from "./DetailInfo";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
 import { useGQLGetBook } from "../../useGQLBook";
-import PopUpHeader from "../../../../../../otherComps/PopUpHeader";
+import PopUpHeaderAdmin from "../../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 
 const Detail = ({ id }) => {
   const { dispatch } = useContext(AdminNavCtx);
   const { dataGBook, errorGBook, loadGBook } = useGQLGetBook({ bookId: id });
   return (
-    <El.Container
+    <El.Main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <El.Section>
-        <PopUpHeader
-          title="Detail"
-          close={() => dispatch({ type: "CLOSE_POPUP" })}
-        />
-        <El.DetailBody>
-          {loadGBook && (
-            <El.LoadingWrapper>
-              <LoadingWrapper />
-            </El.LoadingWrapper>
-          )}
-          {dataGBook && <DetailInfo data={dataGBook} />}
-        </El.DetailBody>
-      </El.Section>
-    </El.Container>
+      <PopUpHeaderAdmin title="Detail" />
+      <El.DetailBody>
+        {loadGBook && (
+          <El.LoadingWrapper>
+            <LoadingWrapper />
+          </El.LoadingWrapper>
+        )}
+        {dataGBook && <DetailInfo data={dataGBook} />}
+      </El.DetailBody>
+    </El.Main>
   );
 };
 

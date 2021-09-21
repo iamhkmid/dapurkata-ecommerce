@@ -15,10 +15,8 @@ export const InputContainer = styled.div`
   padding: 0 1rem;
   flex-direction: row;
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    flex-direction: column;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    flex-direction: column;
   }
 `;
 
@@ -44,7 +42,7 @@ export const FormInput = styled.div`
   display: flex;
   flex-direction: row;
   gap: 1rem;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     flex-direction: column;
   }
 `;

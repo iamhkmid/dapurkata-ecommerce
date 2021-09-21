@@ -9,8 +9,26 @@ export const reducer: TUserNavRdcr = (state, action) => {
       };
     case "CLOSE_MENU":
       return { ...state, menu: null };
-    case "SHOW_POPUP":
-      return { ...state, popup: action.value };
+    case "SHOW_POPUP": {
+      if (!!state.popup.name) {
+        return {
+          ...state,
+          popup: {
+            ...action.value,
+            backTo: state.popup,
+          },
+        };
+      } else {
+        return { ...state, popup: { ...action.value, backTo: null } };
+      }
+    }
+    case "CLOSE_POPUP": {
+      if (!!state.popup.backTo) {
+        return { ...state, popup: state.popup.backTo };
+      } else {
+        return { ...state, popup: { name: null, value: null, backTo: null } };
+      }
+    }
     case "SHOW_GLOBAL_MESSAGE":
       return {
         ...state,
@@ -25,8 +43,7 @@ export const reducer: TUserNavRdcr = (state, action) => {
         ...state,
         globalMessage: { color: null, message: null, isShowed: false },
       };
-    case "CLOSE_POPUP":
-      return { ...state, popup: { name: null, value: null } };
+
     default:
       return state;
   }
@@ -34,6 +51,6 @@ export const reducer: TUserNavRdcr = (state, action) => {
 
 export const initialValue: TUserNavState = {
   menu: null,
-  popup: { name: null, value: null, onClose: null, onCloseValue: null },
+  popup: { name: null, value: null, backTo: null },
   globalMessage: { color: null, message: null, isShowed: false },
 };

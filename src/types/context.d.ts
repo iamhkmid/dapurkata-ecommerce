@@ -118,6 +118,12 @@ export type TOrderCtx = {
   dispatch: Dispatch<TOrderAction>;
 };
 
+type TMessage = {
+  message: string;
+  isShowed: boolean;
+  color: "danger" | "success" | "warning";
+};
+
 // ADMIN NAV CONTEXT
 type TAdminPopUpVal =
   | "BOOK_UPDATE"
@@ -145,13 +151,22 @@ type TAdminPopUp = {
 export type TAdminNavState = {
   sidebar: boolean;
   popup: TAdminPopUp;
+  globalMessage: TMessage;
 };
 type TAdminNavAction =
   | { type: "OPEN_SIDEBAR" }
   | { type: "CLOSE_SIDEBAR" }
   | { type: "SIDEBAR_TOGGLER" }
   | { type: "SHOW_POPUP"; value: TAdminPopUp }
-  | { type: "CLOSE_POPUP" };
+  | { type: "CLOSE_POPUP" }
+  | {
+      type: "SHOW_GLOBAL_MESSAGE";
+      value: {
+        message: string;
+        color: "danger" | "success" | "warning";
+      };
+    }
+  | { type: "CLOSE_GLOBAL_MESSAGE" };
 
 export type TAdminNavRdcr = (
   state: TAdminNavState,
@@ -164,8 +179,7 @@ export type TAdminNavCtx = {
 };
 
 // USER NAV CONTEXT
-
-type TUserPopUp = { onClose?: TUserPopUpVal; onCloseValue?: string } & (
+type TUserPopUpVal =
   | {
       name: "CHANGE_RECIPIENT";
     }
@@ -194,19 +208,18 @@ type TUserPopUp = { onClose?: TUserPopUpVal; onCloseValue?: string } & (
     }
   | {
       name: "CHANGE_PASSWORD";
-    }
-);
+    };
+
+type TUserPopUp = {
+  backTo: TUserPopUp;
+} & TUserPopUpVal;
 type TUserMenu = "MENU" | "CART" | "MAIL" | "SERVICES";
-type TMessage = {
-  message: string;
-  isShowed: boolean;
-  color: "danger" | "success" | "warning";
-};
+
 type TUserDropdown = "SERVICES";
 type TUserNavAction =
   | { type: "SHOW_MENU"; value: TUserMenu }
   | { type: "CLOSE_MENU" }
-  | { type: "SHOW_POPUP"; value: TUserPopUp }
+  | { type: "SHOW_POPUP"; value: TUserPopUpVal }
   | { type: "CLOSE_POPUP" }
   | {
       type: "SHOW_GLOBAL_MESSAGE";

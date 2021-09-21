@@ -1,39 +1,20 @@
 import styled, { css } from "styled-components";
 import { motion } from "framer-motion";
 
-export const Container = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Section = styled(motion.div)`
+export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  max-width: 80vw;
-  max-height: 90vh;
-  min-width: 30vw;
+  width: 30rem;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    max-width: 90vw;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    margin: 0.2rem;
     width: 100%;
-    max-width: 100%;
   }
 `;
 

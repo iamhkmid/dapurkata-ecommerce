@@ -73,8 +73,14 @@ export const useGQLDeleteUser = () => {
     });
   };
   useEffect(() => {
-    if (!!data?.deleteUser) dispatch({ type: "CLOSE_POPUP" });
-  }, [data]);
+    if (!!data?.deleteUser) {
+      dispatch({ type: "CLOSE_POPUP" });
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil menghapus data", color: "success" },
+      });
+    }
+  }, [data?.deleteUser]);
   return {
     deleteUser: GQLDeleteUser,
     data: data?.deleteUser,

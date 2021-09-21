@@ -5,6 +5,7 @@ type TMain = {
   isShowed: boolean;
   color: string;
   fixed: boolean;
+  isAdmin: boolean;
 };
 
 export const Main = styled.div<TMain>`
@@ -14,10 +15,10 @@ export const Main = styled.div<TMain>`
   justify-content: center;
   position: absolute;
   border-radius: ${({ theme }) => theme.borderRadius};
-  top: 4rem;
+  top: 5rem;
   left: 0;
   right: 0;
-  padding: 0 1.5rem;
+  padding: 0 1.5rem 0 0.5rem;
   margin-left: auto;
   margin-right: auto;
   width: max-content;
@@ -25,19 +26,25 @@ export const Main = styled.div<TMain>`
   max-height: 0;
   overflow: hidden;
   z-index: 101;
+
   ${({ fixed }) =>
     fixed &&
     css`
-      top: 1rem;
+      top: 2rem;
+      position: fixed;
+    `}
+  ${({ isAdmin }) =>
+    isAdmin &&
+    css`
+      top: 3rem;
       position: fixed;
     `}
   ${({ isShowed }) =>
     isShowed &&
     css`
       box-shadow: ${({ theme }) => theme.boxShadow};
-      margin-top: 0.5rem;
       overflow: visible;
-      padding: 0.3rem 1.5rem;
+      padding: 0.3rem 1.5rem 0.3rem 0.5rem;
       max-height: 3rem;
     `}
   ${({ theme, color }) => css`

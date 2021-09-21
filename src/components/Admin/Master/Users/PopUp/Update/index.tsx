@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
-import PopUpHeader from "../../../../../otherComps/PopUpHeader";
+import PopUpHeaderAdmin from "../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 import FormData from "./FormData";
 import SideMenu from "./SideMenu";
 import * as El from "./UpdateElement";
@@ -16,24 +16,21 @@ const Update = ({ userId }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <El.Section>
-        <PopUpHeader
-          title="Update"
-          close={() => dispatch({ type: "CLOSE_POPUP" })}
-          withSideMenu={{ showSideMenu, setShowSideMenu }}
-          themeToggle={true}
+      <PopUpHeaderAdmin
+        title="Update"
+        withSideMenu={{ showSideMenu, setShowSideMenu }}
+        themeToggle={true}
+      />
+      <El.Body>
+        <SideMenu
+          navState={navState}
+          setNavState={setNavState}
+          showSideMenu={showSideMenu}
         />
-        <El.Body>
-          <SideMenu
-            navState={navState}
-            setNavState={setNavState}
-            showSideMenu={showSideMenu}
-          />
-          <El.Content showSideMenu={showSideMenu}>
-            {navState === 0 && <FormData userId={userId} />}
-          </El.Content>
-        </El.Body>
-      </El.Section>
+        <El.Content showSideMenu={showSideMenu}>
+          {navState === 0 && <FormData userId={userId} />}
+        </El.Content>
+      </El.Body>
     </El.Main>
   );
 };

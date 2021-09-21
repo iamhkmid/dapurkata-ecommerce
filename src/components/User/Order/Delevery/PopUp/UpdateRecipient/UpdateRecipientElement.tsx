@@ -2,22 +2,10 @@ import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 
 export const Main = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Section = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
   background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.color[1]};
   border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
@@ -37,7 +25,6 @@ export const Section = styled(motion.div)`
     width: 100%;
     max-width: 100%;
   }
-  transition: 0.4s all ease;
 `;
 export const Body = styled.div`
   display: flex;

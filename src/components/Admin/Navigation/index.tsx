@@ -5,6 +5,7 @@ import { FC, useContext } from "react";
 import Header from "./Header";
 import PopUpControl from "../PopUpControl";
 import SectionInfo from "./SectionInfo";
+import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
 const Navigation: FC = ({ children }) => {
   const { adminNav } = useContext(AdminNavCtx);
   return (
@@ -16,6 +17,7 @@ const Navigation: FC = ({ children }) => {
         transition={{ delay: 0.3 }}
       >
         <Header />
+        {!adminNav.popup.name && <GlobalMessageAdmin />}
         <Sidebar />
         <El.AdminWrapper isOpen={adminNav.sidebar}>
           <SectionInfo />

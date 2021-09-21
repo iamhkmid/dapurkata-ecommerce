@@ -12,6 +12,21 @@ export const reducer: TAdminNavRdcr = (state, action) => {
       return { ...state, popup: action.value };
     case "CLOSE_POPUP":
       return { ...state, popup: { name: null, value: null } };
+    case "SHOW_GLOBAL_MESSAGE":
+      return {
+        ...state,
+        globalMessage: {
+          isShowed: true,
+          message: action.value.message,
+          color: action.value.color,
+        },
+      };
+    case "CLOSE_GLOBAL_MESSAGE":
+      return {
+        ...state,
+        globalMessage: { color: null, message: null, isShowed: false },
+      };
+
     default:
       return state;
   }
@@ -20,4 +35,5 @@ export const reducer: TAdminNavRdcr = (state, action) => {
 export const initialValue: TAdminNavState = {
   sidebar: true,
   popup: { name: null, value: null, onClose: null, onCloseValue: null },
+  globalMessage: { color: null, message: null, isShowed: false },
 };

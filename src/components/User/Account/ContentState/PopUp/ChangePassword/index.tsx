@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import Button from "../../../../../otherComps/Buttons/Button";
 import FormsControl from "../../../../../otherComps/Forms/FormsControl";
-import PopUpHeader from "../../../../../otherComps/PopUpHeader";
+import PopUpHeader from "../../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./ChangePasswordElement";
 import { validationSchema } from "./validationScema";
 import { useGQLChangePassword } from "./useGQL";
@@ -31,12 +31,6 @@ const ChangePassword: FC = () => {
   const { logOut } = useLogOut();
   const { data, loading, error, changePassword } = useGQLChangePassword();
 
-  const close = () => {
-    dispatchUserNav({
-      type: "CLOSE_POPUP",
-    });
-  };
-
   const onSubmit = async (values: TFormChangePass) => {
     const { newPassword, oldPassword } = values;
     await changePassword({ newPassword, oldPassword });
@@ -57,7 +51,9 @@ const ChangePassword: FC = () => {
             color: "success",
           },
         });
-        close();
+        dispatchUserNav({
+          type: "CLOSE_POPUP",
+        });
         await logOut();
       }
     };
@@ -71,7 +67,7 @@ const ChangePassword: FC = () => {
       exit={{ opacity: 0 }}
     >
       <El.Section>
-        <PopUpHeader title="Ubah Password" close={() => close()} />
+        <PopUpHeader title="Ubah Password" />
         <El.Body>
           <ShowMessage message={error?.message} color="danger" />
           <El.Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { FC, useContext } from "react";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import Button from "../Buttons/Button";
-import PopUpHeader from "../PopUpHeader";
+import PopUpHeader from "../PopUpHeader/PopUpHeaderUser";
 import * as El from "./PopUpMessageElement";
 
 type TPopupMessage = {
@@ -24,18 +24,7 @@ const PopUpMessage: FC<TPopupMessage> = ({ message }) => {
       exit={{ opacity: 0 }}
     >
       <El.Section>
-        <PopUpHeader
-          title="Message"
-          close={() =>
-            dispatch({
-              type: "SHOW_POPUP",
-              value: {
-                name: userNav.popup.onClose,
-                value: userNav.popup.onCloseValue,
-              },
-            })
-          }
-        />
+        <PopUpHeader title="Message" />
         <El.Body>
           <El.Message>{msg}</El.Message>
           <El.ButtonWrapper>

@@ -1,25 +1,12 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-export const Main = styled(motion.main)`
-  display: flex;
-  position: fixed;
+export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0.2rem;
-`;
-
-export const Section = styled.div`
   display: flex;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
   background: ${({ theme }) => theme.background[2]};
   min-width: 80%;

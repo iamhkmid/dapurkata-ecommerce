@@ -16,7 +16,7 @@ export const SideMenu = styled.div<TSideMenu>`
   border-right: 1px solid ${({ theme }) => theme.border[2]};
   background: ${({ theme }) => theme.background[2]};
   overflow: hidden;
-  transform: translateX(-10rem);
+  transform: translateX(-11rem);
   ${({ active }) =>
     active &&
     css`

@@ -7,7 +7,7 @@ import MobileMenuBtn from "./MobileNavbar/MobileMenuBtn";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
-import GlobalMessage from "../../otherComps/GlobalMessage";
+import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 
 const Navbar: FC = ({ children }) => {
   const { theme } = useContext(ThemeContext);
@@ -52,7 +52,7 @@ const Navbar: FC = ({ children }) => {
           <MenuList />
           <MobileMenuBtn />
         </El.NavbarContainer>
-        {!userNav.popup.name && <GlobalMessage />}
+        {!userNav.popup.name && <GlobalMessageUser />}
         <AnimatePresence>
           {userNav.menu && <MobileShowControl name={userNav.menu} />}
         </AnimatePresence>

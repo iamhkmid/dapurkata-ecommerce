@@ -1,38 +1,24 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-export const Container = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  overflow: hidden;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-`;
-export const Section = styled(motion.div)`
+export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  max-width: 80vw;
-  max-height: 90vh;
-  min-width: 70vw;
+  min-width: 80%;
+  width: 90%;
+  min-height: 70%;
+  height: 90%;
+
   background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
   flex-direction: column;
   position: relative;
 
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    max-width: 90vw;
-  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    margin: 0.2rem;
+    height: 100%;
     width: 100%;
-    max-width: 100%;
   }
 `;
 
@@ -48,8 +34,9 @@ export const DetailBody = styled.div`
   position: relative;
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding: 1rem 2rem 2rem 2rem;
-  overflow-y: auto;
+  overflow: auto;
 
   ::-webkit-scrollbar {
     width: 10px;
