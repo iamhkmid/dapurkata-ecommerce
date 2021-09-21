@@ -5,6 +5,7 @@ export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
   background: ${({ theme }) => theme.background[2]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.color[1]};
   border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
@@ -42,7 +43,7 @@ export const Body = styled.div`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.scrollbar.v1.thumb};
-    border-radius: 10px;
+    border-radius: ${({ theme }) => theme.input.borderRadius};
   }
 
   ::-webkit-scrollbar-thumb:hover {

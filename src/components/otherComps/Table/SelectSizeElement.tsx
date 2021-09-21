@@ -124,11 +124,14 @@ type TDropdownIconWrapper = {
   active: boolean;
 };
 export const DropdownIconWrapper = styled.div<TDropdownIconWrapper>`
-  height: 1.5rem;
-  width: 1.5rem;
   position: absolute;
   right: 0.5rem;
   color: ${({ theme }) => theme.input.dropdown.icon};
+  svg {
+    display: flex;
+    height: 16px;
+    stroke-width: 58px;
+  }
   ${(props) =>
     props.active &&
     css`

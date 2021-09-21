@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AuthContext } from "../../../../../contexts/AuthCtx";
+import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import { DELETE_RECIPIENT } from "../../../../../graphql/recipient/mutations";
 import { RECIPIENTS } from "../../../../../graphql/recipient/queries";
 import { TGQLDelRecipient, TRecipients } from "../../../../../types/recipient";
@@ -10,6 +11,7 @@ type TProps = {
 };
 
 export const useGQLDelRcpt = ({ userId }: { userId: string }) => {
+  const { dispatch } = useContext(UserNavCtx);
   const [deleteRecipient, { data, loading, error }] =
     useMutation<TGQLDelRecipient>(DELETE_RECIPIENT, {
       errorPolicy: "none",
@@ -21,6 +23,16 @@ export const useGQLDelRcpt = ({ userId }: { userId: string }) => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.deleteRecipient)
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: "Berhasil menghapus data",
+          color: "success",
+        },
+      });
+  }, [data?.deleteRecipient]);
   return {
     deleteRecipient: delRcpt,
     dataDelRcpt: data?.deleteRecipient,

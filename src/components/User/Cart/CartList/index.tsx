@@ -49,14 +49,16 @@ const CartList = () => {
                       <td>
                         <El.Product>
                           <El.CoverWrapper>
-                            <ImageResponsive
-                              src={cover?.url}
-                              alt={val.Book.title}
-                              height={75}
-                              width={50}
-                              quality={75}
-                              defaultIcon="dapurkata"
-                            />
+                            <div>
+                              <ImageResponsive
+                                src={cover?.url}
+                                alt={val.Book.title}
+                                height={75}
+                                width={50}
+                                quality={75}
+                                defaultIcon="dapurkata"
+                              />
+                            </div>
                           </El.CoverWrapper>
                           <El.Info>
                             <h1>{val.Book.title}</h1>

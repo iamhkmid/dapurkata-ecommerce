@@ -19,16 +19,26 @@ export const Main = styled.main<TSection>`
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
+  ::before {
+    content: "";
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    backdrop-filter: blur(2px);
+  }
 `;
 
 export const Section = styled.div`
   display: grid;
-  gap: 0.5rem;
+  position: relative;
   color: ${({ theme }) => theme.color[2]};
   grid-template-columns: 1.3fr 1fr;
   gap: 2rem;
   align-items: center;
-  padding: calc(7vw + 5em) calc(13vw - 2em) 0 calc(13vw - 2em);
+  padding: calc(7vw + 4em) calc(13vw - 2em) 0 calc(13vw - 2em);
   @media screen and (max-width: 1170px) {
     grid-template-columns: none;
     grid-template-rows: 1.3fr 1fr;

@@ -11,19 +11,24 @@ export const Main = styled(motion.div)`
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
   top: 95%;
-  right: 0%;
+  right: -10px;
   min-width: 35rem;
   border: 1px solid ${({ theme }) => theme.border[2]};
   border-radius: ${({ theme }) => theme.borderRadius};
   ::after {
     content: "";
     position: absolute;
-    bottom: 100%;
-    right: 10px;
-    margin-left: -10px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent ${({ theme }) => theme.border[2]}
-      transparent;
+    width: 15px;
+    height: 15px;
+    top: -9px;
+    z-index: 10;
+    right: 20px;
+
+    border-top: 1px solid ${({ theme }) => theme.border[2]};
+    border-bottom: 0px solid ${({ theme }) => theme.border[2]};
+    border-left: 1px solid ${({ theme }) => theme.border[2]};
+    border-right: 0px solid ${({ theme }) => theme.border[2]};
+    transform: rotate(45deg);
+    background: ${({ theme }) => theme.background[2]};
   }
 `;

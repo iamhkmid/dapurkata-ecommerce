@@ -22,7 +22,7 @@ const SelectSize = ({ setPageSize, pageSize }) => {
         <El.SelectStyled>
           {pageSize}
           <El.DropdownIconWrapper active={isFocus ? true : false}>
-            {IconsControl("chevron-up")}
+            {IconsControl("chevron-up-outline")}
           </El.DropdownIconWrapper>
         </El.SelectStyled>
         <El.BorderBottom />

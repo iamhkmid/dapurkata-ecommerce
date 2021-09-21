@@ -15,7 +15,7 @@ export const Main = styled.div<TMain>`
   justify-content: center;
   position: absolute;
   border-radius: ${({ theme }) => theme.borderRadius};
-  top: 5rem;
+  top: 4.5rem;
   left: 0;
   right: 0;
   padding: 0 1.5rem 0 0.5rem;
@@ -30,13 +30,13 @@ export const Main = styled.div<TMain>`
   ${({ fixed }) =>
     fixed &&
     css`
-      top: 2rem;
+      top: 1.5rem;
       position: fixed;
     `}
   ${({ isAdmin }) =>
     isAdmin &&
     css`
-      top: 3rem;
+      top: 2.5rem;
       position: fixed;
     `}
   ${({ isShowed }) =>

@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
-  box-shadow: ${({ theme }) => theme.boxShadow};
+  border: 1px solid ${({ theme }) => theme.border[2]};
   border-radius: ${({ theme }) => theme.borderRadius};
   display: flex;
   flex-direction: column;
@@ -12,8 +12,8 @@ export const Main = styled(motion.div)`
   position: absolute;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
-  top: 110%;
-  right: 0.2%;
+  top: 45px;
+  right: 5px;
   z-index: 12;
   padding: 0.5rem 1rem 1rem 1rem;
   min-width: 15rem;
@@ -26,13 +26,17 @@ export const Main = styled(motion.div)`
   ::after {
     content: "";
     position: absolute;
-    bottom: 100%;
-    right: 10px;
-    margin-left: -10px;
-    border-width: 10px;
-    border-style: solid;
-    border-color: transparent transparent ${({ theme }) => theme.border[1]}
-      transparent;
+    width: 15px;
+    height: 15px;
+    top: -9px;
+    z-index: 10;
+    right: 17px;
+    border-top: 1px solid ${({ theme }) => theme.border[2]};
+    border-bottom: 0px solid ${({ theme }) => theme.border[2]};
+    border-left: 1px solid ${({ theme }) => theme.border[2]};
+    border-right: 0px solid ${({ theme }) => theme.border[2]};
+    transform: rotate(45deg);
+    background: ${({ theme }) => theme.background[2]};
   }
   transition: 0.4s all ease;
   transition-property: width, height;

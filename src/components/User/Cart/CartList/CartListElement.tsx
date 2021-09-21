@@ -61,6 +61,17 @@ export const CoverWrapper = styled.div`
   height: 3rem;
   aspect-ratio: 1/1;
   overflow: hidden;
+  > div {
+    display: flex;
+    height: 5rem;
+    width: 3rem;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+  }
 `;
 export const InfoWrapper = styled.div`
   display: flex;

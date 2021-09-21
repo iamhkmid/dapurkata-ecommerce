@@ -66,50 +66,48 @@ const ChangePassword: FC = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <El.Section>
-        <PopUpHeader title="Ubah Password" />
-        <El.Body>
-          <ShowMessage message={error?.message} color="danger" />
-          <El.Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
-            <FormsControl
-              control="input"
-              type="password"
-              name="oldPassword"
-              ref={htmlElRef}
-              register={register}
-              label="Password Lama"
-              error={errors.oldPassword ? true : false}
-              disabled={loading}
-              message={errors.oldPassword ? errors.oldPassword.message : null}
-            />
-            <FormsControl
-              control="input"
-              type="password"
-              name="newPassword"
-              register={register}
-              label="Password Baru"
-              error={errors.newPassword ? true : false}
-              disabled={loading}
-              message={errors.newPassword ? errors.newPassword.message : null}
-            />
-            <FormsControl
-              control="input"
-              type="password"
-              name="confirmPassword"
-              register={register}
-              label="Konfirmasi Password"
-              error={errors.confirmPassword ? true : false}
-              disabled={loading}
-              message={
-                errors.confirmPassword ? errors.confirmPassword.message : null
-              }
-            />
-            <El.SubmitWrapper>
-              <Button type="submit" name="Simpan" isLoading={loading} />
-            </El.SubmitWrapper>
-          </El.Form>
-        </El.Body>
-      </El.Section>
+      <PopUpHeader title="Ubah Password" />
+      <El.Body>
+        <ShowMessage message={error?.message} color="danger" />
+        <El.Form autoComplete="off" onSubmit={handleSubmit(onSubmit)}>
+          <FormsControl
+            control="input"
+            type="password"
+            name="oldPassword"
+            ref={htmlElRef}
+            register={register}
+            label="Password Lama"
+            error={errors.oldPassword ? true : false}
+            disabled={loading}
+            message={errors.oldPassword ? errors.oldPassword.message : null}
+          />
+          <FormsControl
+            control="input"
+            type="password"
+            name="newPassword"
+            register={register}
+            label="Password Baru"
+            error={errors.newPassword ? true : false}
+            disabled={loading}
+            message={errors.newPassword ? errors.newPassword.message : null}
+          />
+          <FormsControl
+            control="input"
+            type="password"
+            name="confirmPassword"
+            register={register}
+            label="Konfirmasi Password"
+            error={errors.confirmPassword ? true : false}
+            disabled={loading}
+            message={
+              errors.confirmPassword ? errors.confirmPassword.message : null
+            }
+          />
+          <El.SubmitWrapper>
+            <Button type="submit" name="Simpan" isLoading={loading} />
+          </El.SubmitWrapper>
+        </El.Form>
+      </El.Body>
     </El.Main>
   );
 };
