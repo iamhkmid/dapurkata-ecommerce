@@ -43,7 +43,7 @@ const GlobalMessageUser: FC = () => {
         onClick={() => dispatch({ type: "CLOSE_GLOBAL_MESSAGE" })}
         color={userNav.globalMessage?.color || msg?.color}
       >
-        {IconsControl("x")}
+        {IconsControl("close-outline")}
       </El.BtnWrapper>
     </El.Main>
   );

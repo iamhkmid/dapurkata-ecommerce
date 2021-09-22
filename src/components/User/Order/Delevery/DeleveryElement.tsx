@@ -5,6 +5,11 @@ export const Main = styled.div`
   flex-direction: column;
   padding: 1rem;
   gap: 1rem;
+  > div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0.5rem;
   }
@@ -20,25 +25,32 @@ type TContentName = {
 };
 export const ContentHeader = styled.div<TContentName>`
   display: flex;
+  align-items: center;
+  background: ${({ theme }) => theme.input.background};
+  width: fit-content;
+  padding: 0 0.5rem;
+  border-radius: ${({ theme }) => theme.borderRadius};
   cursor: pointer;
   position: relative;
   height: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
-  color: ${({ theme }) => theme.button.base.color};
+  color: ${({ theme }) => theme.input.color};
   ${({ disabled }) =>
     disabled &&
     css`
       cursor: default;
       color: ${({ theme }) => theme.input.disabled.color};
     `}
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.9rem;
-  }
+
   transition: 0.4s all ease;
 `;
 export const ContentTitle = styled.h1`
-  font-size: 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
   padding: 0.3rem 0.5rem;
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.8rem;
+  }
 `;
 type TContentBody = {
   isShowed: boolean;
@@ -49,9 +61,11 @@ export const ContentBody = styled.div<TContentBody>`
   padding: 0 1rem;
   max-height: 0;
   overflow-y: scroll;
+  border-bottom: 1px solid transparent;
   ${({ isShowed }) =>
     isShowed &&
     css`
+      border-bottom: 1px solid ${({ theme }) => theme.border[2]};
       max-height: 30rem;
     `}
   ::-webkit-scrollbar {
@@ -72,7 +86,7 @@ export const ContentBody = styled.div<TContentBody>`
     background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
   }
   transition: 0.4s all ease;
-  transition-property: max-height, height;
+  transition-property: max-height, height, border-bottom;
 `;
 
 type TDropdownIconWrapper = {
@@ -82,9 +96,6 @@ type TDropdownIconWrapper = {
 export const DropdownIconWrapper = styled.div<TDropdownIconWrapper>`
   display: flex;
   align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0.5rem;
   height: 100%;
   color: ${({ theme }) => theme.input.dropdown.icon};
   svg {

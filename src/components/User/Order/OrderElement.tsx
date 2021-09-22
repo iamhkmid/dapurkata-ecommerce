@@ -59,7 +59,6 @@ export const SectionHead = styled.div`
   height: fit-content;
   color: ${({ theme }) => theme.button.primary.background};
   width: 100%;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   transition: 0.4s all ease;
 `;
 export const SectionName = styled.h1`

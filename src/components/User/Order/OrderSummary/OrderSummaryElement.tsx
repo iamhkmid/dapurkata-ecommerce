@@ -8,9 +8,9 @@ export const Main = styled.div`
 `;
 export const ItemWrapper = styled.div`
   display: flex;
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   padding: 0.5rem;
   gap: 0.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 `;
 export const CoverWrapper = styled.div`
   display: flex;
@@ -150,15 +150,15 @@ export const TableName = styled.h1`
   font-size: 0.8rem;
   font-weight: 500;
   padding: 0.2rem 0.5rem;
-  color: ${({ theme }) => theme.button.primary.background};
   border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  color: ${({ theme }) => theme.button.primary.background};
 `;
 
 export const TableWrapper = styled.div`
   display: flex;
+  border: 1px solid ${({ theme }) => theme.border[2]};
   flex-direction: column;
   gap: 0 rem;
-  border: 1px solid ${({ theme }) => theme.border[2]};
 `;
 export const TableInfo = styled.table`
   font-size: 0.8rem;
@@ -168,7 +168,8 @@ export const TableInfo = styled.table`
   > tbody {
     tr {
       .title {
-        font-weight: 500;
+        font-size: 0.8rem;
+        font-weight: 600;
         color: ${({ theme }) => theme.button.primary.background};
       }
     }

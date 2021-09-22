@@ -11,6 +11,7 @@ type TMain = {
 export const Main = styled.div<TMain>`
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   position: absolute;
@@ -90,13 +91,22 @@ export const BtnWrapper = styled.div<TBtnWrapper>`
   height: 1.5rem;
   aspect-ratio: 1/1;
   right: 0;
+  > svg {
+    height: 18px;
+    stroke-width: 48px;
+  }
   :hover {
     ${({ theme, color }) => css`
       background: ${theme.button.hover[color || "success"].background};
       color: ${theme.button.hover[color || "success"].color};
     `}
   }
-  > svg {
-    height: 1rem;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > svg {
+      height: 16px;
+      stroke-width: 48px;
+    }
   }
+
+  transition: 0.4s all ease;
 `;

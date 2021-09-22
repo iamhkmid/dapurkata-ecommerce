@@ -5,15 +5,23 @@ export const Main = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 1px solid ${({ theme }) => theme.border[1]};
   transition: 0.4s all ease;
 `;
 
 export const Title = styled.h1`
-  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  overflow: hidden;
+  font-size: 0.9rem;
   height: 100%;
   padding: 0.2rem 1rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color[1]};
+  font-weight: 500;
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.8rem;
+  }
   transition: 0.4s all ease;
 `;
 
@@ -27,18 +35,22 @@ export const CloseBtn = styled.button`
   border: none;
   outline: none;
   cursor: pointer;
+  padding: 3px;
   > svg {
-    height: 1rem;
+    height: 18px;
+    stroke-width: 48px;
   }
   background: transparent;
-  color: ${({ theme }) => theme.button.base.color};
+  color: ${({ theme }) => theme.button.list.color};
   :hover {
     background: ${({ theme }) => theme.button.hover.danger.background};
     color: ${({ theme }) => theme.button.hover.danger.color};
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 3px;
     > svg {
-      height: 0.9rem;
+      height: 16px;
+      stroke-width: 48px;
     }
   }
   transition: 0.4s all ease;
@@ -86,4 +98,5 @@ export const IconWrapper = styled.div<TSidebarButton>`
 `;
 export const Left = styled.div`
   display: flex;
+  align-items: center;
 `;

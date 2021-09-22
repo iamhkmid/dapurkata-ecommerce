@@ -32,6 +32,11 @@ export const IconWrapper = styled(motion.div)`
     height: 20px;
     fill: ${({ theme }) => theme.color[1]};
   }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > svg {
+      height: 16px;
+    }
+  }
   padding: 0.2rem;
 `;
 export const IconWrapper2 = styled(motion.div)`
@@ -43,6 +48,11 @@ export const IconWrapper2 = styled(motion.div)`
   > svg {
     height: 18px;
     fill: ${({ theme }) => theme.color[1]};
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > svg {
+      height: 16px;
+    }
   }
   padding: 0.2rem;
 `;

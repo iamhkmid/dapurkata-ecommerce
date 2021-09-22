@@ -71,7 +71,10 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeader />
+      <PopUpHeader
+        title={`${dataGB?.title} - ${dataGB?.Author?.name}`}
+        themeToggle={true}
+      />
       {dataGB && (
         <El.ContentWrapper>
           <El.Content>
@@ -203,6 +206,10 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                 <div>
                   <h1 className="ai-name">ISBN</h1>
                   <h1 className="ai-value">{dataGB.isbn}</h1>
+                </div>
+                <div>
+                  <h1 className="ai-name">Penerbit</h1>
+                  <h1 className="ai-value">{dataGB.Publisher.name}</h1>
                 </div>
               </div>
             </El.AdditionalInfo>

@@ -218,11 +218,11 @@ export const Categories = styled.div`
       grid-template-columns: repeat(1fr, minmax(5rem, 1fr));
     }
     > div {
-      font-family: "Mulish", sans-serif;
       border-radius: ${({ theme }) => theme.borderRadius};
       padding: 0.5rem 1rem;
       font-size: 0.8rem;
-      font-weight: 600;
+      font-weight: 500;
+      align-items: center;
       overflow: hidden;
       min-width: max-content;
       display: flex;
@@ -256,23 +256,26 @@ export const AdditionalInfo = styled.div`
     }
   }
   .info-wrapper {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
-    max-width: 100%;
-    grid-template-columns: repeat(auto-fill, minmax(7rem, auto));
-    grid-gap: 8px 2%;
+    gap: 16px;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      grid-template-columns: repeat(1fr, minmax(6rem, 1fr));
+      gap: 8px;
     }
+
     > div {
       border-radius: ${({ theme }) => theme.borderRadius};
       padding: 0.3rem 1rem;
       overflow: hidden;
-      min-width: max-content;
+      min-width: 7rem;
       display: flex;
       flex-direction: column;
       background: ${({ theme }) => theme.button.list.background};
       color: ${({ theme }) => theme.button.list.color};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        flex-grow: 1;
+      }
       .ai-name {
         font-size: 0.9rem;
         font-weight: 500;

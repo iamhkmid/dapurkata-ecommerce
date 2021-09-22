@@ -99,7 +99,7 @@ const Select = () => {
             disabled={disabled}
             error={!!order.courier.error}
           >
-            {IconsControl("chevron-up")}
+            {IconsControl("chevron-up-outline")}
           </El.DropdownIconWrapper>
         </El.SelectStyled>
         <El.Dropdown isFocus={isFocus} onClick={(e) => e.stopPropagation()}>

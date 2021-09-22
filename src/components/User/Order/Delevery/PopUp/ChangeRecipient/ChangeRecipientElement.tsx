@@ -30,7 +30,7 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1rem;
-  gap: 0.5rem;
+  gap: 1rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0.5rem;
   }
@@ -47,9 +47,8 @@ export const Ul = styled.ul`
   overflow-y: auto;
   gap: 1rem;
   max-height: 40vh;
-  border-top: 1px solid ${({ theme }) => theme.border[2]};
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
-  padding: 0.5rem 0.5rem;
+  border-top: 2px solid ${({ theme }) => theme.border[2]};
+  padding: 1rem 0.5rem;
   width: 100%;
   ::-webkit-scrollbar {
     width: 10px;
