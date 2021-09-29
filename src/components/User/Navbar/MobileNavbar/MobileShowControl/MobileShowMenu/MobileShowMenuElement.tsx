@@ -10,13 +10,13 @@ export const Main = styled(motion.div)`
   top: 100%;
   max-height: 80vh;
   width: 100%;
-  border-radius: 10px;
+  border-radius: ${({ theme }) => theme.borderRadius};
   margin-top: 0.2rem;
   overflow: hidden;
   padding: 1rem 0.5rem 2rem 0.5rem;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
-  border: 1px solid ${({ theme }) => theme.border[1]};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 1;

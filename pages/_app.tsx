@@ -15,8 +15,6 @@ Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const { pathname } = useRouter();
-
   return (
     <>
       <Head>

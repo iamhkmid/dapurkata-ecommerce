@@ -59,9 +59,18 @@ export const Nav = styled.nav<TNavbar>`
   transition: 0.4s all ease;
   transition-property: top, background-color, border-color;
 `;
-export const NavbarContainer = styled.div`
-  background: ${({ theme }) => theme.background[2]};
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+
+type TNavCon = {
+  showColor: boolean;
+};
+export const NavbarContainer = styled.div<TNavCon>`
+  ${({ showColor }) =>
+    showColor &&
+    css`
+      background: ${({ theme }) => theme.background[2]};
+      box-shadow: ${({ theme }) => theme.boxShadow};
+    `}
+
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -77,6 +86,8 @@ export const NavbarContainer = styled.div`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0 1rem;
   }
+  transition: 0.4s all ease;
+  transition-property: background, border-bottom;
 `;
 
 export const LogoLink = styled(LinkN)`
@@ -96,4 +107,10 @@ export const Logo = styled.img`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     height: 1.8rem;
   }
+`;
+
+export const MobileWrapper = styled.div`
+  display: flex;
+  padding: 0 0.3rem;
+  width: 100%;
 `;

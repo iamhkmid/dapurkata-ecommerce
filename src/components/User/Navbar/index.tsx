@@ -8,35 +8,53 @@ import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
+import { useRouter } from "next/router";
 
 const Navbar: FC = ({ children }) => {
+  const { pathname } = useRouter();
   const { theme } = useContext(ThemeContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
   const mainRef = useRef<HTMLDivElement>(null);
   const [showNav, setShowNav] = useState(true);
+  const [showColor, setShowColor] = useState(true);
   const [scroll, setScroll] = useState(0);
 
   useEffect(() => {
     if (process.browser) {
       mainRef.current.onscroll = (e) => {
-        if (
-          scroll < mainRef.current.scrollTop &&
-          mainRef.current.offsetHeight + mainRef.current.scrollTop >=
-            mainRef.current.offsetHeight + 64
-        ) {
-          setShowNav(false);
+        if (pathname !== "/") {
+          setShowColor(true);
+        } else if (mainRef.current.scrollTop > 32) {
+          setShowColor(true);
         } else {
-          setShowNav(true);
+          setShowColor(false);
         }
-        setScroll(mainRef.current.scrollTop);
+        // if (
+        //   scroll < mainRef.current.scrollTop &&
+        //   mainRef.current.offsetHeight + mainRef.current.scrollTop >=
+        //     mainRef.current.offsetHeight + 64
+        // ) {
+        //   setShowNav(false);
+        // } else {
+        //   setShowNav(true);
+        // }
+        // setScroll(mainRef.current.scrollTop);
       };
     }
-  }, [scroll]);
+  }, [scroll, pathname]);
+
+  useEffect(() => {
+    if (pathname === "/") {
+      setShowColor(false);
+    } else {
+      setShowColor(true);
+    }
+  }, [pathname]);
 
   return (
     <El.Main onClick={() => dispatch({ type: "CLOSE_MENU" })} ref={mainRef}>
       <El.Nav showNav={showNav}>
-        <El.NavbarContainer>
+        <El.NavbarContainer showColor={showColor}>
           <El.LogoLink href="/">
             <a>
               <El.Logo
@@ -54,7 +72,11 @@ const Navbar: FC = ({ children }) => {
         </El.NavbarContainer>
         {!userNav.popup.name && <GlobalMessageUser />}
         <AnimatePresence>
-          {userNav.menu && <MobileShowControl name={userNav.menu} />}
+          {userNav.menu && (
+            <El.MobileWrapper>
+              <MobileShowControl name={userNav.menu} />
+            </El.MobileWrapper>
+          )}
         </AnimatePresence>
       </El.Nav>
       {children}

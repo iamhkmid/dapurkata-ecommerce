@@ -10,7 +10,6 @@ export const Main = styled(motion.div)`
   position: absolute;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
-  border: 1px solid ${({ theme }) => theme.border[2]};
   border-radius: ${({ theme }) => theme.borderRadius};
   top: 95%;
   right: -29%;
@@ -18,20 +17,30 @@ export const Main = styled(motion.div)`
   min-width: 17rem;
   width: max-content;
   cursor: default;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   ::after {
     content: "";
     position: absolute;
     width: 15px;
     height: 15px;
-    top: -9px;
+    top: -8px;
     z-index: 10;
-    right: 17px;
-
-    border-top: 1px solid ${({ theme }) => theme.border[2]};
-    border-bottom: 0px solid ${({ theme }) => theme.border[2]};
-    border-left: 1px solid ${({ theme }) => theme.border[2]};
-    border-right: 0px solid ${({ theme }) => theme.border[2]};
+    right: 20px;
+    box-shadow: ${({ theme }) =>
+      theme.name === "light"
+        ? "0 0 2px 1px #1d2e4225"
+        : "0 0 2px 1px #0f13188e"};
     transform: rotate(45deg);
+    background: ${({ theme }) => theme.background[2]};
+  }
+  ::before {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 15px;
+    top: 0px;
+    z-index: 11;
+    right: 15px;
     background: ${({ theme }) => theme.background[2]};
   }
 `;
