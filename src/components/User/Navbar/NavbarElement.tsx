@@ -94,6 +94,11 @@ export const LogoLink = styled.div`
   cursor: pointer;
   display: flex;
   justify-self: flex-start;
+  > a {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
 `;
 
 export const Logo = styled.div`

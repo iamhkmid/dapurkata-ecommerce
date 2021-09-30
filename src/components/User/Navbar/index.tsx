@@ -81,12 +81,12 @@ const Navbar: FC = ({ children }) => {
             <Link href="/">
               <a>
                 <El.Logo>{IconsControl("navbar_logo")}</El.Logo>
+                <El.LogoText showLogo={showLogo}>
+                  <h1>Penerbit</h1>
+                  <h1>Dapurkata</h1>
+                </El.LogoText>
               </a>
             </Link>
-            <El.LogoText showLogo={showLogo}>
-              <h1>Penerbit</h1>
-              <h1>Dapurkata</h1>
-            </El.LogoText>
           </El.LogoLink>
 
           <El.MenuWrapper>
