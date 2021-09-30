@@ -23,6 +23,7 @@ export const Section1 = styled.div<TSc1>`
   gap: 3rem;
   width: 100%;
   overflow: hidden;
+  padding-top: 6rem;
   padding-bottom: 1rem;
 
   background-image: url(${({ bgUrl }) => bgUrl});
@@ -162,11 +163,6 @@ const animateDown = keyframes`
 `;
 export const ChevronDown = styled(motion.div)`
   display: flex;
-  position: absolute;
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-  bottom: 1rem;
   > svg {
     color: ${({ theme }) => theme.color[2]};
     height: 2rem;

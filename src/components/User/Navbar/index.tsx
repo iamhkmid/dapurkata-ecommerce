@@ -13,6 +13,7 @@ import Link from "next/link";
 import ThemeToggle from "../../otherComps/Buttons/ThemeToggle";
 import AuthMenu from "./AuthMenu";
 import { useWindowSize } from "react-use";
+import IconsControl from "../../IconsControl";
 
 const Navbar: FC = ({ children }) => {
   const { pathname } = useRouter();
@@ -59,7 +60,7 @@ const Navbar: FC = ({ children }) => {
 
   useEffect(() => {
     if (process.browser) {
-      if (pathname === "/") {
+      if (pathname === "/" && mainRef.current.scrollTop <= 32) {
         setShowColor(false);
       } else {
         setShowColor(true);
@@ -75,20 +76,17 @@ const Navbar: FC = ({ children }) => {
   return (
     <El.Main onClick={() => dispatch({ type: "CLOSE_MENU" })} ref={mainRef}>
       <El.Nav showNav={showNav}>
-        <El.NavbarContainer showColor={showColor} showLogo={showLogo}>
-          <El.LogoLink showLogo={showLogo}>
+        <El.NavbarContainer showColor={showColor}>
+          <El.LogoLink>
             <Link href="/">
               <a>
-                <El.Logo
-                  src={
-                    theme === "light"
-                      ? "/icons/logo_light.svg"
-                      : "/icons/logo_dark.svg"
-                  }
-                  alt="logo"
-                ></El.Logo>
+                <El.Logo>{IconsControl("navbar_logo")}</El.Logo>
               </a>
             </Link>
+            <El.LogoText showLogo={showLogo}>
+              <h1>Penerbit</h1>
+              <h1>Dapurkata</h1>
+            </El.LogoText>
           </El.LogoLink>
 
           <El.MenuWrapper>

@@ -61,7 +61,6 @@ export const Nav = styled.nav<TNavbar>`
 
 type TNavCon = {
   showColor: boolean;
-  showLogo: boolean;
 };
 export const NavbarContainer = styled.div<TNavCon>`
   ${({ showColor }) =>
@@ -69,11 +68,6 @@ export const NavbarContainer = styled.div<TNavCon>`
     css`
       background: ${({ theme }) => theme.background[2]};
       box-shadow: ${({ theme }) => theme.boxShadow};
-    `}
-  ${({ showLogo }) =>
-    showLogo &&
-    css`
-      justify-content: space-between;
     `}
 
   align-items: center;
@@ -95,42 +89,67 @@ export const NavbarContainer = styled.div<TNavCon>`
   transition: 0.4s all ease;
 `;
 
-type TLogo = {
-  showLogo: boolean;
-};
-
-export const LogoLink = styled.div<TLogo>`
+export const LogoLink = styled.div`
   align-items: center;
   cursor: pointer;
   display: flex;
   justify-self: flex-start;
+`;
+
+export const Logo = styled.div`
+  display: flex;
+  > svg {
+    height: 2.4rem;
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+      height: 2.2rem;
+    }
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      height: 1.8rem;
+    }
+  }
+`;
+type TLogo = {
+  showLogo: boolean;
+};
+export const LogoText = styled.div<TLogo>`
+  display: flex;
   min-width: 0;
   max-width: 0;
+  padding-left: 0;
   overflow: hidden;
+  font-family: "Poppins", sans-serif;
+  flex-direction: column;
+  gap: 0;
+  line-height: 1;
+  color: ${({ theme }) => theme.color[1]};
+  > h1 :nth-child(1) {
+    font-size: 0.9rem;
+    font-weight: 500;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.7rem;
+    }
+  }
+  > h1 :nth-child(2) {
+    font-size: 1.2rem;
+    font-weight: 600;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 1rem;
+    }
+  }
   ${({ showLogo }) =>
     showLogo &&
     css`
-      min-width: 11rem;
-      max-width: 10rem;
+      max-width: 7rem;
+      margin-left: 0.5rem;
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        min-width: 8rem;
+        max-width: 6rem;
       }
     `}
   transition: 0.4s all ease;
-  transition-property: max-width, min-width;
+  transition-property: margin-left, max-width, min-width;
   transition-delay: 0.2s;
-`;
-
-export const Logo = styled.img`
-  height: 2.4rem;
-
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    height: 2.2rem;
-  }
-
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    height: 1.8rem;
-  }
 `;
 
 export const MobileWrapper = styled.div`
