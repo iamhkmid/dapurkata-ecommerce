@@ -13,15 +13,8 @@ import { TUserMenu } from "../../../../types/context";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 
 const MenuList = () => {
-  const { user } = useContext(AuthContext);
-  const { shoppingCart } = useContext(ShoppingCartCtx);
   const { pathname } = useRouter();
-  const [totalItems, setTotalItems] = useState(0);
   const { userNav, dispatch } = useContext(UserNavCtx);
-  useEffect(() => {
-    const total = shoppingCart.data.reduce((acc, curr) => acc + curr.amount, 0);
-    setTotalItems(total);
-  }, [shoppingCart]);
   return (
     <El.Main>
       <El.Ul>
@@ -61,29 +54,6 @@ const MenuList = () => {
           </El.Li>
         ))}
       </El.Ul>
-      {user && user.role === "USER" && (
-        <El.IconGroup onClick={(e) => e.stopPropagation()}>
-          {["CART", "MAIL"].map((value) => (
-            <El.IconButton
-              key={value}
-              active={userNav.menu === value}
-              onClick={() =>
-                dispatch({ type: "SHOW_MENU", value: value as TUserMenu })
-              }
-            >
-              {IconsControl(value)}
-              {value === "CART" && totalItems > 0 && (
-                <El.AmountNum>{totalItems}</El.AmountNum>
-              )}
-              <AnimatePresence>
-                {userNav.menu === value && <DropdownControl name={value} />}
-              </AnimatePresence>
-            </El.IconButton>
-          ))}
-        </El.IconGroup>
-      )}
-      <ThemeToggle />
-      <AuthMenu />
     </El.Main>
   );
 };

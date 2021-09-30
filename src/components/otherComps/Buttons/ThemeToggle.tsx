@@ -14,6 +14,7 @@ const Container = styled.div`
   aspect-ratio: 1/1;
   min-width: 2rem;
   width: 2rem;
+  height: 2rem;
   :hover {
     color: ${({ theme }) => theme.button.color};
     background: ${({ theme }) => theme.input.focus.background};

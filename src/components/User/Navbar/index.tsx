@@ -9,6 +9,10 @@ import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 import { useRouter } from "next/router";
+import Link from "next/link";
+import ThemeToggle from "../../otherComps/Buttons/ThemeToggle";
+import AuthMenu from "./AuthMenu";
+import { useWindowSize } from "react-use";
 
 const Navbar: FC = ({ children }) => {
   const { pathname } = useRouter();
@@ -17,7 +21,9 @@ const Navbar: FC = ({ children }) => {
   const mainRef = useRef<HTMLDivElement>(null);
   const [showNav, setShowNav] = useState(true);
   const [showColor, setShowColor] = useState(true);
+  const [showLogo, setShowLogo] = useState(true);
   const [scroll, setScroll] = useState(0);
+  const { width } = useWindowSize();
 
   useEffect(() => {
     if (process.browser) {
@@ -28,6 +34,14 @@ const Navbar: FC = ({ children }) => {
           setShowColor(true);
         } else {
           setShowColor(false);
+        }
+
+        if (pathname !== "/" || width < 960) {
+          setShowLogo(true);
+        } else if (mainRef.current.scrollTop > 96) {
+          setShowLogo(true);
+        } else {
+          setShowLogo(false);
         }
         // if (
         //   scroll < mainRef.current.scrollTop &&
@@ -44,30 +58,43 @@ const Navbar: FC = ({ children }) => {
   }, [scroll, pathname]);
 
   useEffect(() => {
-    if (pathname === "/") {
-      setShowColor(false);
-    } else {
-      setShowColor(true);
+    if (process.browser) {
+      if (pathname === "/") {
+        setShowColor(false);
+      } else {
+        setShowColor(true);
+      }
+      if (pathname === "/" && width > 960) {
+        setShowLogo(false);
+      } else {
+        setShowLogo(true);
+      }
     }
-  }, [pathname]);
+  }, [pathname, width]);
 
   return (
     <El.Main onClick={() => dispatch({ type: "CLOSE_MENU" })} ref={mainRef}>
       <El.Nav showNav={showNav}>
-        <El.NavbarContainer showColor={showColor}>
-          <El.LogoLink href="/">
-            <a>
-              <El.Logo
-                src={
-                  theme === "light"
-                    ? "/icons/logo_light.svg"
-                    : "/icons/logo_dark.svg"
-                }
-                alt="logo"
-              ></El.Logo>
-            </a>
+        <El.NavbarContainer showColor={showColor} showLogo={showLogo}>
+          <El.LogoLink showLogo={showLogo}>
+            <Link href="/">
+              <a>
+                <El.Logo
+                  src={
+                    theme === "light"
+                      ? "/icons/logo_light.svg"
+                      : "/icons/logo_dark.svg"
+                  }
+                  alt="logo"
+                ></El.Logo>
+              </a>
+            </Link>
           </El.LogoLink>
-          <MenuList />
+
+          <El.MenuWrapper>
+            <MenuList />
+            <AuthMenu />
+          </El.MenuWrapper>
           <MobileMenuBtn />
         </El.NavbarContainer>
         {!userNav.popup.name && <GlobalMessageUser />}

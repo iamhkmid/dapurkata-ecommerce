@@ -7,6 +7,7 @@ export const Main = styled.div`
   margin-left: 1rem;
   height: 100%;
   display: flex;
+  gap: 1rem;
   font-size: 1rem;
   font-family: "Roboto", sans-serif;
   font-weight: 400;
@@ -14,6 +15,9 @@ export const Main = styled.div`
   color: ${({ theme }) => theme.color[1]};
   cursor: default;
   position: relative;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    display: none;
+  }
 `;
 
 export const NLink = styled(NextLink)`
@@ -124,4 +128,61 @@ export const ActiveLine = styled.div`
   background: ${({ theme }) => theme.button.hover.primary.background};
   aspect-ratio: 6/1;
   transition: 0.4s all ease;
+`;
+
+export const IconGroup = styled.div`
+  display: flex;
+  height: 100%;
+  height: 100%;
+`;
+
+type TIconButton = {
+  active: boolean;
+};
+export const IconButton = styled.div<TIconButton>`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  outline: none;
+  border: none;
+  height: 100%;
+  padding: 0.5rem;
+  cursor: pointer;
+  position: relative;
+  background: none;
+  fill: ${({ theme }) => theme.navbar.menu.fill};
+  color: ${({ theme }) => theme.navbar.menu.fill};
+  :hover {
+    fill: ${({ theme }) => theme.navbar.menu.hover.fill};
+    color: ${({ theme }) => theme.navbar.menu.hover.fill};
+  }
+  ${({ active }) =>
+    active &&
+    css`
+      fill: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.navbar.menu.hover.fill};
+    `}
+  > svg {
+    height: 1.4rem;
+  }
+
+  transition: 0.4s all ease;
+`;
+
+export const AmountNum = styled.div`
+  font-family: "Poppins", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 20%;
+  right: -5%;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
+  padding: 0 0.2rem;
+  height: 1rem;
+  aspect-ratio: 1/1;
+  background: ${({ theme }) => theme.button.list.background};
+  color: ${({ theme }) => theme.button.list.color};
 `;

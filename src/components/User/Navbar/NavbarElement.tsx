@@ -1,5 +1,4 @@
 import styled, { css } from "styled-components";
-import LinkN from "next/link";
 
 export const Main = styled.div`
   display: flex;
@@ -62,6 +61,7 @@ export const Nav = styled.nav<TNavbar>`
 
 type TNavCon = {
   showColor: boolean;
+  showLogo: boolean;
 };
 export const NavbarContainer = styled.div<TNavCon>`
   ${({ showColor }) =>
@@ -70,11 +70,17 @@ export const NavbarContainer = styled.div<TNavCon>`
       background: ${({ theme }) => theme.background[2]};
       box-shadow: ${({ theme }) => theme.boxShadow};
     `}
+  ${({ showLogo }) =>
+    showLogo &&
+    css`
+      justify-content: space-between;
+    `}
 
   align-items: center;
   display: flex;
   justify-content: space-between;
   height: 4rem;
+  gap: 1rem;
   padding: 0 calc(13vw - 2em);
   width: 100%;
   z-index: 12;
@@ -87,21 +93,39 @@ export const NavbarContainer = styled.div<TNavCon>`
     padding: 0 1rem;
   }
   transition: 0.4s all ease;
-  transition-property: background, border-bottom;
 `;
 
-export const LogoLink = styled(LinkN)`
+type TLogo = {
+  showLogo: boolean;
+};
+
+export const LogoLink = styled.div<TLogo>`
   align-items: center;
   cursor: pointer;
   display: flex;
   justify-self: flex-start;
+  min-width: 0;
+  max-width: 0;
+  overflow: hidden;
+  ${({ showLogo }) =>
+    showLogo &&
+    css`
+      min-width: 11rem;
+      max-width: 10rem;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        min-width: 8rem;
+      }
+    `}
+  transition: 0.4s all ease;
+  transition-property: max-width, min-width;
+  transition-delay: 0.2s;
 `;
 
 export const Logo = styled.img`
-  height: 2.5rem;
+  height: 2.4rem;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    height: 2.3rem;
+    height: 2.2rem;
   }
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -113,4 +137,11 @@ export const MobileWrapper = styled.div`
   display: flex;
   padding: 0 0.3rem;
   width: 100%;
+`;
+
+export const MenuWrapper = styled.div`
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: space-between;
 `;

@@ -5,6 +5,7 @@ export const Main = styled.div`
   display: flex;
   align-items: center;
   height: 100%;
+  width: 100%;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     display: none;
   }
@@ -15,6 +16,7 @@ export const Ul = styled.ul`
   align-items: center;
   list-style: none;
   text-align: center;
+  gap: 0.5rem;
   margin: 0 0.5rem;
   height: 100%;
   transition: 0.4s all ease;
@@ -49,18 +51,17 @@ export const Anchor = styled.a<TAnchor>`
   color: ${({ theme }) => theme.color[1]};
   :hover {
     .active-line {
-      background: ${({ theme }) => theme.button.hover.primary.background};
+      background: ${({ theme }) => theme.button.hover.list.background};
     }
-    color: ${({ theme }) => theme.button.hover.primary.background};
+    color: ${({ theme }) => theme.button.hover.list.color};
   }
   ${({ active }) =>
     active &&
     css`
       .active-line {
-        background: ${({ theme }) => theme.button.primary.background};
-        width: 1.5rem;
+        background: ${({ theme }) => theme.button.list.background};
       }
-      color: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.button.list.color};
     `}
   transition: 0.4s all ease;
 `;
@@ -79,27 +80,27 @@ export const DropdownBtn = styled.div<TDropdownBtn>`
   height: 100%;
   width: 100%;
   border: none;
-  padding: 0 0.5rem;
+  padding: 0 0.5rem 0 0.2rem;
   background: transparent;
   cursor: pointer;
   color: ${({ theme }) => theme.color[1]};
   :hover {
     .active-line {
-      background: ${({ theme }) => theme.button.hover.primary.background};
+      background: ${({ theme }) => theme.button.hover.list.background};
     }
-    color: ${({ theme }) => theme.button.hover.primary.background};
+    color: ${({ theme }) => theme.button.list.color};
   }
   ${({ active }) =>
     active &&
     css`
       .active-line {
-        background: ${({ theme }) => theme.button.primary.background};
-        width: 1.3rem;
+        background: ${({ theme }) => theme.button.list.background};
       }
-      color: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.button.hover.list.color};
     `}
   transition: 0.4s all ease;
 `;
+
 export const DropdownName = styled.div`
   display: flex;
   align-items: center;
@@ -107,7 +108,6 @@ export const DropdownName = styled.div`
   height: 100%;
   padding: 0 0.5rem 0 1rem;
 `;
-
 export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -120,73 +120,17 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const IconGroup = styled.div`
-  display: flex;
-  height: 100%;
-  margin: 0 1rem;
-  height: 100%;
-`;
-
-type TIconButton = {
-  active: boolean;
-};
-export const IconButton = styled.div<TIconButton>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  outline: none;
-  border: none;
-  height: 100%;
-  padding: 0.5rem;
-  cursor: pointer;
-  position: relative;
-  background: none;
-  fill: ${({ theme }) => theme.navbar.menu.fill};
-  color: ${({ theme }) => theme.navbar.menu.fill};
-  :hover {
-    fill: ${({ theme }) => theme.navbar.menu.hover.fill};
-    color: ${({ theme }) => theme.navbar.menu.hover.fill};
-  }
-  ${({ active }) =>
-    active &&
-    css`
-      fill: ${({ theme }) => theme.navbar.menu.hover.fill};
-      color: ${({ theme }) => theme.navbar.menu.hover.fill};
-    `}
-  > svg {
-    height: 1.4rem;
-  }
-
-  transition: 0.4s all ease;
-`;
-
-export const AmountNum = styled.div`
-  font-family: "Poppins", sans-serif;
-  font-size: 0.7rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 20%;
-  right: -5%;
-  border-radius: ${({ theme }) => theme.input.borderRadius};
-  padding: 0 0.2rem;
-  height: 1rem;
-  aspect-ratio: 1/1;
-  background: ${({ theme }) => theme.button.list.background};
-  color: ${({ theme }) => theme.button.list.color};
-`;
-
 export const ActiveLine = styled.div`
   display: flex;
-  top: 75%;
-  border-radius: 1rem;
+  border-radius: 10px;
   position: absolute;
   left: 50%;
-  transform: translate(-50%, 0);
-  width: 0;
-  background: ${({ theme }) => theme.button.hover.primary.background};
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: 1.6rem;
+  width: 100%;
+  z-index: -1;
+  background: transparent;
   aspect-ratio: 6/1;
   transition: 0.4s all ease;
 `;

@@ -12,6 +12,7 @@ export const Main = styled(motion.div)`
 export const Container = styled(motion.div)`
   display: flex;
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   background: ${({ theme }) => theme.background[2]};
   gap: 1rem;
   flex-direction: column;
