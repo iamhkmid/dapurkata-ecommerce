@@ -27,7 +27,11 @@ const AuthMenu = () => {
     const total = shoppingCart.data.reduce((acc, curr) => acc + curr.amount, 0);
     setTotalItems(total);
   }, [shoppingCart]);
-
+  const spring = {
+    type: "spring",
+    stiffness: 400,
+    damping: 40,
+  };
   return (
     <El.Main>
       {loading && <Loading2 />}
@@ -56,7 +60,14 @@ const AuthMenu = () => {
       {!user && !loading && (
         <El.NLink href={signinBtn.link[0]}>
           <El.Anchor active={signinBtn.link.includes(pathname)}>
-            <El.ActiveLine className="active-line" />
+            {signinBtn.link.includes(pathname) && (
+              <El.ActiveLine
+                className="active-line"
+                layoutId="menu_bg"
+                initial={false}
+                transition={spring}
+              />
+            )}
             <El.MenuIconWrapper>{IconsControl("Signin")}</El.MenuIconWrapper>
             {signinBtn.name}
           </El.Anchor>

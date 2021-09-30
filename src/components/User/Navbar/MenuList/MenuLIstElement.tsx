@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import NextLink from "next/link";
+import { motion } from "framer-motion";
 
 export const Main = styled.div`
   display: flex;
@@ -46,21 +47,15 @@ export const Anchor = styled.a<TAnchor>`
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0 0.7rem;
   cursor: pointer;
   color: ${({ theme }) => theme.color[1]};
   :hover {
-    .active-line {
-      background: ${({ theme }) => theme.button.hover.list.background};
-    }
     color: ${({ theme }) => theme.button.hover.list.color};
   }
   ${({ active }) =>
     active &&
     css`
-      .active-line {
-        background: ${({ theme }) => theme.button.list.background};
-      }
       color: ${({ theme }) => theme.button.list.color};
     `}
   transition: 0.4s all ease;
@@ -85,17 +80,11 @@ export const DropdownBtn = styled.div<TDropdownBtn>`
   cursor: pointer;
   color: ${({ theme }) => theme.color[1]};
   :hover {
-    .active-line {
-      background: ${({ theme }) => theme.button.hover.list.background};
-    }
     color: ${({ theme }) => theme.button.list.color};
   }
   ${({ active }) =>
     active &&
     css`
-      .active-line {
-        background: ${({ theme }) => theme.button.list.background};
-      }
       color: ${({ theme }) => theme.button.hover.list.color};
     `}
   transition: 0.4s all ease;
@@ -120,17 +109,16 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const ActiveLine = styled.div`
+export const ActiveLine = styled(motion.div)`
   display: flex;
   border-radius: 10px;
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  height: 1.6rem;
+  left: 0;
+  top: 1.2rem;
+  height: 1.7rem;
   width: 100%;
   z-index: -1;
-  background: transparent;
-  aspect-ratio: 6/1;
+  background: ${({ theme }) => theme.button.list.background};
   transition: 0.4s all ease;
+  transition-property: background;
 `;

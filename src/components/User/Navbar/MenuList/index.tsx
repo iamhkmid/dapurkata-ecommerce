@@ -12,6 +12,12 @@ import * as El from "./MenuLIstElement";
 import { TUserMenu } from "../../../../types/context";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 
+const spring = {
+  type: "spring",
+  stiffness: 400,
+  damping: 40,
+};
+
 const MenuList = () => {
   const { pathname } = useRouter();
   const { userNav, dispatch } = useContext(UserNavCtx);
@@ -20,11 +26,18 @@ const MenuList = () => {
       <El.Ul>
         {navbarMenu.map((value) => (
           <El.Li key={value.name}>
+            {pathname === value.link && (
+              <El.ActiveLine
+                className="active-line"
+                layoutId="menu_bg"
+                initial={false}
+                transition={spring}
+              />
+            )}
             {value.type === "link" && (
               <El.NLink href={value.link}>
                 <El.Anchor active={pathname === value.link}>
                   {value.name}
-                  <El.ActiveLine className="active-line" />
                 </El.Anchor>
               </El.NLink>
             )}
@@ -39,7 +52,6 @@ const MenuList = () => {
                   });
                 }}
               >
-                <El.ActiveLine className="active-line" />
                 <El.DropdownName>{value.name}</El.DropdownName>
                 <El.IconWrapper>
                   {IconsControl("chevron-down-outline")}

@@ -1,5 +1,6 @@
 import styled, { css, keyframes } from "styled-components";
 import NextLink from "next/link";
+import { motion } from "framer-motion";
 
 export const Main = styled.div`
   font-family: "Poppins", sans-serif;
@@ -33,27 +34,22 @@ export const Anchor = styled.a<TAnchor>`
   font-weight: 500;
   display: flex;
   flex-direction: row;
+  position: relative;
   align-items: center;
   height: 100%;
+  width: 100%;
   padding: 0 0.5rem;
   border: none;
   cursor: pointer;
-  color: ${({ theme }) => theme.color[1]};
   border-bottom: 3px solid transparent;
+  color: ${({ theme }) => theme.color[1]};
   :hover {
-    .active-line {
-      background: ${({ theme }) => theme.button.hover.primary.background};
-    }
-    color: ${({ theme }) => theme.button.hover.primary.background};
+    color: ${({ theme }) => theme.button.list.color};
   }
   ${({ active }) =>
     active &&
     css`
-      .active-line {
-        background: ${({ theme }) => theme.button.primary.background};
-        width: 1.3rem;
-      }
-      color: ${({ theme }) => theme.navbar.menu.hover.fill};
+      color: ${({ theme }) => theme.button.hover.list.color};
     `}
   transition: 0.4s all ease;
 `;
@@ -116,18 +112,18 @@ export const AuthMenuContainer = styled.div`
   height: 100%;
   position: relative;
 `;
-
-export const ActiveLine = styled.div`
+export const ActiveLine = styled(motion.div)`
   display: flex;
-  top: 75%;
-  border-radius: 1rem;
+  border-radius: 10px;
   position: absolute;
-  left: 50%;
-  transform: translate(-50%, 0);
-  width: 0;
-  background: ${({ theme }) => theme.button.hover.primary.background};
-  aspect-ratio: 6/1;
+  left: 0;
+  top: 1.1rem;
+  height: 1.7rem;
+  width: 100%;
+  z-index: -1;
+  background: ${({ theme }) => theme.button.list.background};
   transition: 0.4s all ease;
+  transition-property: background;
 `;
 
 export const IconGroup = styled.div`

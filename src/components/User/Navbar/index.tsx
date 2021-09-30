@@ -10,10 +10,10 @@ import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import ThemeToggle from "../../otherComps/Buttons/ThemeToggle";
 import AuthMenu from "./AuthMenu";
 import { useWindowSize } from "react-use";
 import IconsControl from "../../IconsControl";
+import { AnimateSharedLayout } from "framer-motion";
 
 const Navbar: FC = ({ children }) => {
   const { pathname } = useRouter();
@@ -39,7 +39,7 @@ const Navbar: FC = ({ children }) => {
 
         if (pathname !== "/" || width < 960) {
           setShowLogo(true);
-        } else if (mainRef.current.scrollTop > 96) {
+        } else if (mainRef.current.scrollTop >= 64) {
           setShowLogo(true);
         } else {
           setShowLogo(false);
@@ -90,8 +90,10 @@ const Navbar: FC = ({ children }) => {
           </El.LogoLink>
 
           <El.MenuWrapper>
-            <MenuList />
-            <AuthMenu />
+            <AnimateSharedLayout>
+              <MenuList />
+              <AuthMenu />
+            </AnimateSharedLayout>
           </El.MenuWrapper>
           <MobileMenuBtn />
         </El.NavbarContainer>

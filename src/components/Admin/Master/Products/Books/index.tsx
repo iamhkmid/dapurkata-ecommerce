@@ -10,7 +10,7 @@ const Books = () => {
   const [navState, setNavState] = useState(1);
 
   return (
-    <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <El.Container>
       <El.Navigation>
         {navItem.map((item, index) => (
           <ButtonBase

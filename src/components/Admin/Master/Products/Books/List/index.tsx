@@ -7,7 +7,7 @@ const List = () => {
   const { dataGBooks, errorGBooks, loadGBooks } = useGQLGetBooks();
 
   return (
-    <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <El.Container>
       <Table columns={columns} data={dataGBooks} />
     </El.Container>
   );
