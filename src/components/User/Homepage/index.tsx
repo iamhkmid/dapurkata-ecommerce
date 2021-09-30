@@ -58,10 +58,8 @@ const Homepage = ({ data }) => {
             <Button type="button" name="Pesan Sekarang" color="primary" />
             <Button type="button" name="Paket Penerbitan" color="list" />
           </div>
-          <El.ChevronDown>
-            {IconsControl("chevron-down-outline")}
-          </El.ChevronDown>
         </El.ButtonWrapper>
+        <El.ChevronDown>{IconsControl("chevron-down-outline")}</El.ChevronDown>
       </El.Section1>
       <El.Section2></El.Section2>
     </El.Main>
