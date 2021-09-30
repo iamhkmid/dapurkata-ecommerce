@@ -125,14 +125,14 @@ export const LogoText = styled.div<TLogo>`
   line-height: 1;
   color: ${({ theme }) => theme.color[1]};
   > h1 :nth-child(1) {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 0.7rem;
     }
   }
   > h1 :nth-child(2) {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 600;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 1rem;
