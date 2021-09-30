@@ -116,8 +116,12 @@ export const ButtonWrapper = styled(motion.div)`
   justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
-  > button {
-    border-radius: 100px;
+  .button-home {
+    display: flex;
+    gap: 2rem;
+    > button {
+      border-radius: 100px;
+    }
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     gap: 1rem;

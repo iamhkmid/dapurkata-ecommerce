@@ -54,7 +54,7 @@ const Homepage = ({ data }) => {
           animate={{ opacity: 1, y: "0" }}
           transition={{ ease: "easeIn", duration: 0.4, delay: 0.6 }}
         >
-          <div style={{ display: "flex", gap: "2rem" }}>
+          <div className="button-home">
             <Button type="button" name="Pesan Sekarang" color="primary" />
             <Button type="button" name="Paket Penerbitan" color="list" />
           </div>
