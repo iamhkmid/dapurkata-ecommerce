@@ -9,6 +9,7 @@ import recipient from "./recipient/typeDefs";
 import auth from "./auth/typeDefs";
 import courier from "./courier/typeDefs";
 import transaction from "./transaction/typeDefs";
+import footerInfo from "./footerInfo/typeDefs";
 import directive from "./directives/typeDefs";
 import * as scalar from "./scalar";
 
@@ -24,6 +25,7 @@ const typeDefs = [
   courier,
   auth,
   transaction,
+  footerInfo,
   directive,
 ];
 

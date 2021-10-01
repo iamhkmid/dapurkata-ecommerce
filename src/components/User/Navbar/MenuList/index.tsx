@@ -14,7 +14,7 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 
 const spring = {
   type: "spring",
-  stiffness: 400,
+  stiffness: 300,
   damping: 40,
 };
 

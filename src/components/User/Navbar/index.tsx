@@ -14,6 +14,7 @@ import AuthMenu from "./AuthMenu";
 import { useWindowSize } from "react-use";
 import IconsControl from "../../IconsControl";
 import { AnimateSharedLayout } from "framer-motion";
+import Footer from "../Footer";
 
 const Navbar: FC = ({ children }) => {
   const { pathname } = useRouter();
@@ -107,6 +108,7 @@ const Navbar: FC = ({ children }) => {
         </AnimatePresence>
       </El.Nav>
       {children}
+      <Footer />
     </El.Main>
   );
 };

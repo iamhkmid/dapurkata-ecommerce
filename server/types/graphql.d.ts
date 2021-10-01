@@ -61,6 +61,12 @@ import {
   TArgsUpdatePublisher,
   TGQLPublisher,
 } from "./publisher";
+import {
+  TGQLFooterAddress,
+  TGQLFooterMessage,
+  TGQLFooterPhone,
+  TGQLFooterSocialMedia,
+} from "./footerInfo";
 
 //BOOK SCHEMA
 export type TBookQuery = {
@@ -409,4 +415,50 @@ export type TOrder = {
     args: null,
     context: TCtx
   ) => Promise<TGQLCustomerDetails>;
+};
+
+export type TFooterInfoQuery = {
+  footerPhone: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLFooterPhone>;
+  footerAddress: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLFooterAddress>;
+  footerMessage: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLFooterMessage>;
+  footerSocialMedia: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLFooterSocialMedia[]>;
+};
+
+export type TFooterInfoMutation = {
+  updateFooterPhone: (
+    parent: any,
+    args: { id: string; phone: string },
+    context: TCtx
+  ) => Promise<TGQLFooterPhone>;
+  updateFooterAddress: (
+    parent: any,
+    args: { id: string; address: string },
+    context: TCtx
+  ) => Promise<TGQLFooterAddress>;
+  updateFooterMessage: (
+    parent: any,
+    args: { id: string; message: string },
+    context: TCtx
+  ) => Promise<TGQLFooterMessage>;
+  updateFooterSocialMedia: (
+    parent: any,
+    args: { id: string; url: string; isEnabled: boolean },
+    context: TCtx
+  ) => Promise<TGQLFooterSocialMedia>;
 };

@@ -29,7 +29,7 @@ const AuthMenu = () => {
   }, [shoppingCart]);
   const spring = {
     type: "spring",
-    stiffness: 400,
+    stiffness: 300,
     damping: 40,
   };
   return (

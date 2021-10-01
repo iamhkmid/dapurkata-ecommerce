@@ -15,6 +15,7 @@
     "seed": "ts-node --project tsconfig.server.json prisma/seed.ts"
   },
   "dependencies": {
+    "@apollo/client": "^3.4.15",
     "@datepicker-react/styled": "^2.8.0",
     "@graphql-tools/merge": "^6.2.13",
     "@graphql-tools/schema": "^7.1.5",

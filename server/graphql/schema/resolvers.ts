@@ -10,6 +10,7 @@ import * as user from "./user/resolvers";
 import * as shoppingCart from "./shoppingCart/resolvers";
 import * as recipient from "./recipient/resolvers";
 import * as transaction from "./transaction/resolvers";
+import * as footerInfo from "./footerInfo/resolvers";
 
 const resolvers = _.merge(
   scalar.resolvers,
@@ -22,6 +23,7 @@ const resolvers = _.merge(
   auth,
   shoppingCart,
   recipient,
-  transaction
+  transaction,
+  footerInfo
 );
 export default resolvers;
