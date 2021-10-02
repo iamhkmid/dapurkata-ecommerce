@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-import { customValidation, validationSchema } from "./validationScema";
+import { validationSchema } from "./validationScema";
 import { useContext, useEffect, useRef } from "react";
 import { TGQLFormSignin } from "../../../../types/auth";
 import FormsControl from "../../../otherComps/Forms/FormsControl";
