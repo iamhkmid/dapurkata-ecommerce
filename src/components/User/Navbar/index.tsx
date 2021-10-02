@@ -8,7 +8,7 @@ import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
-import { Router, useRouter } from "next/router";
+import { useRouter } from "next/router";
 import Link from "next/link";
 import AuthMenu from "./AuthMenu";
 import { useWindowSize } from "react-use";
