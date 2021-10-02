@@ -58,7 +58,7 @@ const AuthMenu = () => {
       )}
       <ThemeToggle />
       {!user && !loading && (
-        <El.NLink href={signinBtn.link[0]} scroll={false}>
+        <El.NLink href={signinBtn.link[0]}>
           <El.Anchor
             active={signinBtn.link.includes(pathname)}
             onMouseEnter={() =>

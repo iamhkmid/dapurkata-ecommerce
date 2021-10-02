@@ -8,7 +8,7 @@ import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import MobileShowControl from "./MobileNavbar/MobileShowControl";
 import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
-import { useRouter } from "next/router";
+import { Router, useRouter } from "next/router";
 import Link from "next/link";
 import AuthMenu from "./AuthMenu";
 import { useWindowSize } from "react-use";
@@ -26,6 +26,12 @@ const Navbar: FC = ({ children }) => {
   const [showLogo, setShowLogo] = useState(true);
   const [scroll, setScroll] = useState(0);
   const { width } = useWindowSize();
+
+  useEffect(() => {
+    Router.events.on("routeChangeComplete", () => {
+      if (process.browser) mainRef.current.scroll({ top: 0, left: 0 });
+    });
+  }, []);
 
   useEffect(() => {
     if (process.browser) {

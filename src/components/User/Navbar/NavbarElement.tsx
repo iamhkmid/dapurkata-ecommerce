@@ -6,7 +6,7 @@ export const Main = styled.div`
   min-height: 100vh;
   max-height: 100vh;
   background: ${({ theme }) => theme.background[1]};
-  overflow-y: auto;
+  overflow-x: auto;
   ::-webkit-scrollbar {
     width: 0.7rem;
     height: 0.7rem;
