@@ -9,16 +9,16 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    updateFooterPhone(id: ID!, address: String!): FooterPhone
+    updateFooterPhone(id: ID!, phone: String!): FooterPhone
       @auth(requires: ADMIN)
-    updateFooterAddress(id: ID!, phone: String!): FooterAddress
+    updateFooterAddress(id: ID!, address: String!): FooterAddress
       @auth(requires: ADMIN)
     updateFooterMessage(id: ID!, message: String!): FooterMessage
       @auth(requires: ADMIN)
     updateFooterSocialMedia(
       id: ID!
-      isEnabled: Boolean
-      url: String
+      isEnabled: Boolean!
+      url: String!
     ): FooterSocialMedia @auth(requires: ADMIN)
   }
 

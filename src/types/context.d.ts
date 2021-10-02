@@ -218,6 +218,7 @@ type TUserMenu = "MENU" | "CART" | "MAIL" | "SERVICES";
 type TUserDropdown = "SERVICES";
 type TUserNavAction =
   | { type: "SHOW_MENU"; value: TUserMenu }
+  | { type: "CHANGE_NAV_MENU"; menu: string }
   | { type: "CLOSE_MENU" }
   | { type: "SHOW_POPUP"; value: TUserPopUpVal }
   | { type: "CLOSE_POPUP" }
@@ -232,6 +233,7 @@ type TUserNavAction =
 export type TUserNavState = {
   menu: TUserMenu;
   popup: TUserPopUp;
+  selectedNavMenu: string;
   globalMessage: TMessage;
 };
 export type TUserNavRdcr = (

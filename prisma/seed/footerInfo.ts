@@ -5,7 +5,7 @@ export const footerInfo = async () => {
     data: {
       type: "phone",
       isEnabled: true,
-      value: "0812-7327-2469",
+      value: "081273272469",
     },
   });
   const address = await prisma.footerInfo.create({

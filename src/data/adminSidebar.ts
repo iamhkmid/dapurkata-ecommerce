@@ -71,43 +71,18 @@ export const adminSidebar = [
     name: "CONTENTS",
     menu: [
       {
-        name: "Slider Contents",
-        link: "/admin/content/slider-contents",
-        title: "CONTENTS / Slider Contents",
-        desc: "...",
+        name: "Homepage",
+        link: "/admin/content/homepage",
+        title: "CONTENTS / Homepage",
+        desc: "Ubah informasi homepage website",
         subMenu: [],
       },
-      {
-        name: "Services",
-        link: "/admin/content/section1",
-        title: "CONTENTS / Services",
-        desc: "...",
-        subMenu: [
-          {
-            name: "Section1",
-            link: "/admin/content/section1",
-            title: "MASTER / Products / Authors",
-            desc: "...",
-          },
-          {
-            name: "Section2",
-            link: "/admin/content/section2",
-            title: "MASTER / Products / Authors",
-            desc: "...",
-          },
-          {
-            name: "Section3",
-            link: "/admin/content/section3",
-            title: "MASTER / Products / Authors",
-            desc: "...",
-          },
-        ],
-      },
+
       {
         name: "Footer",
-        link: "/admin/content/Footer",
+        link: "/admin/content/footer",
         title: "CONTENTS / Footer",
-        desc: "...",
+        desc: "Ubah informasi pada footer website",
         subMenu: [],
       },
     ],

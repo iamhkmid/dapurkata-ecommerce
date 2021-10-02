@@ -43,6 +43,11 @@ export const reducer: TUserNavRdcr = (state, action) => {
         ...state,
         globalMessage: { color: null, message: null, isShowed: false },
       };
+    case "CHANGE_NAV_MENU":
+      return {
+        ...state,
+        selectedNavMenu: action.menu,
+      };
 
     default:
       return state;
@@ -53,4 +58,5 @@ export const initialValue: TUserNavState = {
   menu: null,
   popup: { name: null, value: null, backTo: null },
   globalMessage: { color: null, message: null, isShowed: false },
+  selectedNavMenu: null,
 };

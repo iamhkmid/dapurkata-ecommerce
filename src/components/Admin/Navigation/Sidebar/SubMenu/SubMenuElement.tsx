@@ -9,7 +9,8 @@ export const Main = styled.div<TMain>`
   flex-direction: column;
   max-height: 0;
   width: 100%;
-  margin-left: 2.5rem;
+  padding-left: 2.5rem;
+  padding-right: 1.5rem;
   overflow: hidden;
   ${({ active }) =>
     active &&
@@ -29,32 +30,34 @@ export const Item = styled.div<TItem>`
   display: flex;
   align-items: center;
   cursor: pointer;
-  padding-left: 1rem;
+  padding: 0 1rem;
   margin: 0.1rem 0;
   min-height: 1.8rem;
   width: 100%;
+  border-radius: ${({ theme }) => theme.input.borderRadius};
   color: ${({ theme }) => theme.color[1]};
   ::before {
     content: "";
     position: absolute;
-    height: 4px;
-    aspect-ratio: 1/1;
-    border: 2px solid transparent;
-    left: 0.1rem;
+    height: 50%;
+    border-left: 2px solid transparent;
+    left: -0.5rem;
     background: transparent;
   }
   ${({ active }) =>
     active &&
     css`
       ::before {
-        transform: rotate(180deg);
         border-color: ${({ theme }) => theme.button.focus.sidebar.color};
-        transition: 1s all ease;
+        transition: 0.4s all ease;
       }
+
       color: ${({ theme }) => theme.button.focus.sidebar.color};
+      background: ${({ theme }) => theme.button.focus.sidebar.background};
       font-weight: 500;
     `}
   :hover {
+    background: ${({ theme }) => theme.button.hover.sidebar.background};
     color: ${({ theme }) => theme.button.focus.sidebar.color};
   }
   transition: 0.4s all ease;

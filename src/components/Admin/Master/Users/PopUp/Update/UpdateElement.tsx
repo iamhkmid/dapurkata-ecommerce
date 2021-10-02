@@ -10,8 +10,8 @@ export const Main = styled(motion.div)`
   height: 90%;
   overflow: hidden;
   background: ${({ theme }) => theme.background[2]};
-  color: ${({ theme }) => theme.color[1]};
   box-shadow: ${({ theme }) => theme.boxShadow};
+  color: ${({ theme }) => theme.color[1]};
   border-radius: ${({ theme }) => theme.borderRadius};
   flex-direction: column;
   position: relative;

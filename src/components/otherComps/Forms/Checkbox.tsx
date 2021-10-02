@@ -12,6 +12,7 @@ const Checkbox = forwardRef<HTMLInputElement, props>((props, ref) => {
   return (
     <El.Label>
       <El.HiddenCheckbox
+        type="checkbox"
         checked={checked}
         onChange={handleCheckboxChange}
         ref={(ref) => props.register(ref)}

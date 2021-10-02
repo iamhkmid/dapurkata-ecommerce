@@ -6,6 +6,7 @@ export const Label = styled.label`
   width: fit-content;
   user-select: none;
   cursor: pointer;
+  position: relative;
 `;
 
 export const TextLabel = styled.span`
@@ -29,7 +30,7 @@ export const IconWrapper = styled.div`
   }
 `;
 
-export const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
+export const HiddenCheckbox = styled.input`
   border: 0;
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

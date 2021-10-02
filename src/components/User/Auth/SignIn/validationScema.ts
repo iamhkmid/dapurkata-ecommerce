@@ -1,16 +1,5 @@
 import * as yup from "yup";
 
-export const customValidation = (
-  authErrors: { messages: string },
-  setError
-) => {
-  if (authErrors) {
-    authErrors.messages.toLowerCase().includes("username") &&
-      setError("username", {});
-    authErrors.messages.toLowerCase().includes("password") &&
-      setError("password", {});
-  }
-};
 export const validationSchema = yup.object({
   username: yup
     .string()

@@ -38,7 +38,7 @@ export const Anchor = styled.a<TAnchor>`
   align-items: center;
   height: 100%;
   width: 100%;
-  padding: 0 0.5rem;
+  padding: 0 0.8rem;
   border: none;
   cursor: pointer;
   border-bottom: 3px solid transparent;

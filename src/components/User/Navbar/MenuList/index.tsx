@@ -21,12 +21,25 @@ const spring = {
 const MenuList = () => {
   const { pathname } = useRouter();
   const { userNav, dispatch } = useContext(UserNavCtx);
+  useEffect(() => {
+    if (pathname) {
+      dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+    }
+  }, [pathname]);
   return (
     <El.Main>
       <El.Ul>
         {navbarMenu.map((value) => (
-          <El.Li key={value.name}>
-            {pathname === value.link && (
+          <El.Li
+            key={value.name}
+            onMouseEnter={() =>
+              dispatch({ type: "CHANGE_NAV_MENU", menu: value.link })
+            }
+            onMouseLeave={() => {
+              dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+            }}
+          >
+            {userNav.selectedNavMenu === value.link && (
               <El.ActiveLine
                 className="active-line"
                 layoutId="menu_bg"
@@ -51,6 +64,13 @@ const MenuList = () => {
                     value: "SERVICES" as TUserMenu,
                   });
                 }}
+                onMouseEnter={() =>
+                  dispatch({
+                    type: "SHOW_MENU",
+                    value: "SERVICES" as TUserMenu,
+                  })
+                }
+                onMouseLeave={() => dispatch({ type: "CLOSE_MENU" })}
               >
                 <El.DropdownName>{value.name}</El.DropdownName>
                 <El.IconWrapper>

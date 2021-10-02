@@ -2,6 +2,7 @@ import { useQuery } from "@apollo/client";
 import { FC, useEffect } from "react";
 import { FOOTERINFO_BY_USER } from "../../../graphql/footerInfo/queries";
 import { TGQLFooterInfoByUser } from "../../../types/footerInfo";
+import IconsControl from "../../IconsControl";
 import * as El from "./FooterElement";
 
 const Footer: FC = () => {
@@ -15,7 +16,11 @@ const Footer: FC = () => {
         {data?.footerPhone && (
           <El.Phone>
             <h1>No. Telp</h1>
-            <h1>{data.footerPhone.phone}</h1>
+            <h1>
+              {data.footerPhone.phone
+                .match(/.{1,4}/g)
+                .map((val, i, arr) => (i + 1 !== arr.length ? `${val}-` : val))}
+            </h1>
           </El.Phone>
         )}
         {data?.footerAddress && (
@@ -27,6 +32,13 @@ const Footer: FC = () => {
         {data?.footerSocialMedia && (
           <El.SocialMedia>
             <h1>Sosial Media</h1>
+            <div className="item-group">
+              {data?.footerSocialMedia.map((val) => (
+                <div key={val.name} className="icon-wrapper">
+                  {IconsControl(val.name)}
+                </div>
+              ))}
+            </div>
           </El.SocialMedia>
         )}
       </El.Section>

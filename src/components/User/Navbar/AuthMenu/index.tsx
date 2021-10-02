@@ -58,9 +58,14 @@ const AuthMenu = () => {
       )}
       <ThemeToggle />
       {!user && !loading && (
-        <El.NLink href={signinBtn.link[0]}>
-          <El.Anchor active={signinBtn.link.includes(pathname)}>
-            {signinBtn.link.includes(pathname) && (
+        <El.NLink href={signinBtn.link[0]} scroll={false}>
+          <El.Anchor
+            active={signinBtn.link.includes(pathname)}
+            onMouseEnter={() =>
+              dispatch({ type: "CHANGE_NAV_MENU", menu: "/auth/signin" })
+            }
+          >
+            {signinBtn.link.includes(userNav.selectedNavMenu) && (
               <El.ActiveLine
                 className="active-line"
                 layoutId="menu_bg"

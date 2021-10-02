@@ -37,9 +37,15 @@ export const Item = styled.li<TNavItem>`
     right: -2rem;
     z-index: 10;
   }
+  > div > svg {
+    stroke: ${({ theme }) => theme.color[1]};
+  }
   :hover {
     background: ${({ theme }) => theme.button.hover.sidebar.background};
     color: ${({ theme }) => theme.button.hover.sidebar.color};
+    > div > svg {
+      stroke: ${({ theme }) => theme.button.hover.sidebar.color};
+    }
   }
   ${({ active }) =>
     active &&
@@ -51,6 +57,9 @@ export const Item = styled.li<TNavItem>`
         right: -1.3rem;
         background: ${({ theme }) => theme.button.primary.background};
         transition: 0.4s all ease;
+      }
+      > div > svg {
+        stroke: ${({ theme }) => theme.button.focus.sidebar.color};
       }
     `};
   transition: 0.4s all ease;

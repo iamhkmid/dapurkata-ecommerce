@@ -8,6 +8,7 @@ import {
   TCheckbox,
   TFile,
   TForm,
+  TToggle,
 } from "../../../types/TFormControl";
 import Checkbox from "./Checkbox";
 import File from "./File";
@@ -15,6 +16,7 @@ import Input from "./Input";
 import Select from "./Select";
 import SelectMultiple from "./SelectMultiple";
 import TextArea from "./TextArea";
+import Toggle from "./Toggle";
 type TRef = { focus?: () => void; reset?: () => void };
 const FormsControl = forwardRef<TRef, TPropsFormControl>((props, ref) => {
   const { control } = props;
@@ -35,9 +37,14 @@ const FormsControl = forwardRef<TRef, TPropsFormControl>((props, ref) => {
       const { ...rest } = props as TSelectMultiple & TForm;
       return <SelectMultiple {...rest} />;
     }
-    case "checkbox":
+    case "checkbox": {
       const { ...rest } = props as TCheckbox & TForm;
       return <Checkbox {...rest} />;
+    }
+    case "toggle": {
+      const { ...rest } = props as TToggle & TForm;
+      return <Toggle {...rest} />;
+    }
     case "file": {
       const { ...rest } = props as TFile & TForm;
       return <File ref={ref} {...rest} />;

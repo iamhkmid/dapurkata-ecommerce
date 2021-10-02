@@ -35,14 +35,18 @@ export const TextInfo = styled.div`
   }
 `;
 export const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
   aspect-ratio: 1/1;
   align-items: center;
   border-radius: ${({ theme }) => theme.borderRadius};
   justify-content: center;
   margin-right: 0.5rem;
   padding: 0.2rem;
+  height: 2.5rem;
   background: ${({ theme }) => theme.button.hover.list.background};
-  color: ${({ theme }) => theme.button.hover.list.color};
+  stroke: ${({ theme }) => theme.button.hover.list.color};
   > svg {
     height: 2rem;
     stroke-width: 1.5px;

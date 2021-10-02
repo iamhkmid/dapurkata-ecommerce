@@ -19,6 +19,7 @@ export const Section = styled.div`
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 2rem 1rem;
+    grid-gap: 2rem;
   }
   transition: 0.4s all ease;
 `;
@@ -36,6 +37,14 @@ export const Phone = styled.div`
     color: ${({ theme }) => theme.color[1]};
     font-size: 0.9rem;
   }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > h1 :nth-child(1) {
+      font-size: 1rem;
+    }
+    > h1 :nth-child(2) {
+      font-size: 0.8rem;
+    }
+  }
 `;
 
 export const Address = styled.div`
@@ -51,6 +60,14 @@ export const Address = styled.div`
     color: ${({ theme }) => theme.color[1]};
     font-size: 0.9rem;
   }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > h1 :nth-child(1) {
+      font-size: 1rem;
+    }
+    > h1 :nth-child(2) {
+      font-size: 0.8rem;
+    }
+  }
 `;
 export const SocialMedia = styled.div`
   display: flex;
@@ -60,6 +77,36 @@ export const SocialMedia = styled.div`
     color: ${({ theme }) => theme.color[2]};
     font-size: 1.2rem;
     font-weight: 600;
+  }
+  .item-group {
+    display: flex;
+    gap: 1rem;
+  }
+  > div .icon-wrapper {
+    display: flex;
+    border-radius: 100%;
+    cursor: pointer;
+    box-shadow: ${({ theme }) => theme.boxShadow};
+    padding: 0.3rem;
+    border: 1px solid transparent;
+    background: ${({ theme }) => theme.background[2]};
+    :hover {
+      border-color: ${({ theme }) => theme.button.primary.background};
+    }
+    > svg {
+      height: 1.8rem;
+    }
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      > svg {
+        height: 1.3rem;
+      }
+    }
+    transition: 0.4s all ease;
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > h1 :nth-child(1) {
+      font-size: 1rem;
+    }
   }
 `;
 

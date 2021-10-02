@@ -19,11 +19,38 @@ export type TFooterSocialMedia = {
   name: string;
   url: string;
   isEnabled: boolean;
-}[];
+};
 
 export type TGQLFooterInfoByUser = {
   footerPhone: TFooterPhone;
   footerAddress: TFooterAddress;
   footerMessage: TFooterMessage;
   footerSocialMedia: TFooterSocialMedia[];
+};
+
+export type TGQLFooterPhone = {
+  footerPhone: TFooterPhone;
+};
+
+export type TGQLFooterAddress = {
+  footerAddress: TFooterAddress;
+};
+export type TGQLFooterMessage = {
+  footerMessage: TFooterMessage;
+};
+export type TGQLFooterSocialMedia = {
+  footerSocialMedia: TFooterSocialMedia[];
+};
+
+export type TGQLUpdateFooterPhone = {
+  updateFooterPhone: TFooterPhone;
+};
+export type TGQLUpdateFooterAddress = {
+  updateFooterAddress: TFooterAddress;
+};
+export type TGQLUpdateFooterMessage = {
+  updateFooterMessage: TFooterMessage;
+};
+export type TGQLUpdateFooterSocialMedia = {
+  updateFooterSocialMedia: TFooterSocialMedia;
 };

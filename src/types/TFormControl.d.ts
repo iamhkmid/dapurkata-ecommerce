@@ -32,6 +32,10 @@ export type TCheckbox = {
   control: "checkbox";
   register: (ref: HTMLInputElement) => void;
 };
+export type TToggle = {
+  control: "toggle";
+  register: (ref: HTMLInputElement) => void;
+};
 
 export type TForm = {
   name: string;
@@ -42,4 +46,12 @@ export type TForm = {
   disabled?: boolean;
 };
 export type TPropsFormControl = TForm &
-  (TInput | TSelect | TSelectMultiple | TFile | TTextarea | TCheckbox);
+  (
+    | TInput
+    | TSelect
+    | TSelectMultiple
+    | TFile
+    | TTextarea
+    | TCheckbox
+    | TToggle
+  );

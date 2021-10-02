@@ -17,7 +17,6 @@ export const Ul = styled.ul`
   align-items: center;
   list-style: none;
   text-align: center;
-  gap: 0.5rem;
   margin: 0 0.5rem;
   height: 100%;
   transition: 0.4s all ease;
@@ -28,6 +27,7 @@ export const Li = styled.li`
   align-items: center;
   text-decoration: none;
   height: 100%;
+  padding: 0 0.3rem;
   align-items: center;
   position: relative;
 `;
@@ -111,7 +111,7 @@ export const IconWrapper = styled.div`
 
 export const ActiveLine = styled(motion.div)`
   display: flex;
-  border-radius: 10px;
+  border-radius: 20px;
   position: absolute;
   left: 0;
   top: 1.2rem;

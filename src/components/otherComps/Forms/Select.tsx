@@ -64,7 +64,7 @@ const Select = forwardRef<any, props>((props, ref) => {
     if (options && selectRef.current && !isLoading) {
       setSelected(selectRef.current.selectedOptions[0]?.value);
     }
-  }, [selectRef.current?.selectedIndex, options, isLoading]);
+  }, [selectRef.current?.selectedIndex, options, isLoading, disabled]);
 
   return (
     <El.InputContainer>
