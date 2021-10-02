@@ -28,12 +28,6 @@ const Navbar: FC = ({ children }) => {
   const { width } = useWindowSize();
 
   useEffect(() => {
-    Router.events.on("routeChangeComplete", () => {
-      if (process.browser) mainRef.current.scroll({ top: 0, left: 0 });
-    });
-  }, []);
-
-  useEffect(() => {
     if (process.browser) {
       mainRef.current.onscroll = (e) => {
         if (pathname !== "/") {
