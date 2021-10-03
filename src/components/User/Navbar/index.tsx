@@ -29,10 +29,10 @@ const Navbar: FC = ({ children }) => {
 
   useEffect(() => {
     if (process.browser) {
-      mainRef.current.onscroll = (e) => {
+      document.body.onscroll = (e) => {
         if (pathname !== "/") {
           setShowColor(true);
-        } else if (mainRef.current.scrollTop > 32) {
+        } else if (document.documentElement.scrollTop > 32) {
           setShowColor(true);
         } else {
           setShowColor(false);
@@ -40,7 +40,7 @@ const Navbar: FC = ({ children }) => {
 
         if (pathname !== "/" || width < 960) {
           setShowLogo(true);
-        } else if (mainRef.current.scrollTop >= 64) {
+        } else if (document.documentElement.scrollTop >= 64) {
           setShowLogo(true);
         } else {
           setShowLogo(false);

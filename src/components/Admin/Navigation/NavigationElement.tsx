@@ -9,25 +9,6 @@ export const AdminContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  max-height: 100vh;
-  overflow-y: auto;
-  ::-webkit-scrollbar {
-    width: 10px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.scrollbar.v2.track};
-    border-radius: 10px;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: ${({ theme }) => theme.scrollbar.v2.thumb};
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.scrollbar.v2.hover.thumb};
-  }
 `;
 
 type TAdminWrapper = {

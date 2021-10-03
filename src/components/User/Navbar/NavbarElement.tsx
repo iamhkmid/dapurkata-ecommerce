@@ -3,33 +3,8 @@ import styled, { css } from "styled-components";
 export const Main = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  max-height: 100vh;
   background: ${({ theme }) => theme.background[1]};
-  overflow-x: auto;
-  ::-webkit-scrollbar {
-    width: 0.7rem;
-    height: 0.7rem;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: ${({ theme }) => theme.scrollbar.v2.thumb};
-    border-radius: ${({ theme }) => theme.borderRadius};
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.scrollbar.v2.hover.thumb};
-    border-radius: ${({ theme }) => theme.borderRadius};
-  }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    ::-webkit-scrollbar {
-      width: 5px;
-    }
-  }
+  min-height: 100vh;
   transition: 0.4s all ease;
   transition-property: background;
 `;

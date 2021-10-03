@@ -329,7 +329,7 @@ const ThemeContextProvider = ({ children }) => {
         changeTheme,
       }}
     >
-      <GlobalStyle />
+      <GlobalStyle theme={themeConf[theme]} />
       <GlobalFonts />
       <ThemeProvider theme={themeConf[theme]}>{children}</ThemeProvider>
     </ThemeContext.Provider>

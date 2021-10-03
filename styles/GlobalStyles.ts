@@ -1,12 +1,29 @@
 import { createGlobalStyle } from "styled-components";
 
-export const GlobalStyle = createGlobalStyle`
+export const GlobalStyle = createGlobalStyle<{ theme: any }>`
   html,
 body {
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+
+    ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${({ theme }) => theme.scrollbar.v2.track};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+    background: ${({ theme }) => theme.scrollbar.v2.thumb};
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.scrollbar.v2.hover.thumb};
+  }
 }
 
 html,
