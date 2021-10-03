@@ -18,14 +18,14 @@ import {
   TGQLUpdateBook,
   TGQLGetBook,
   TGQLGetBookDel,
-  TGQLGetBooks,
+  TGQLBooks,
   TGQLGetFormBook,
   TGQLGetFormBookInit,
 } from "../../../../../types/book";
 import { TFormCreateBook, TFormUpdateBook } from "../../../../../types/Forms";
 
 export const useGQLGetBooks = () => {
-  const { data, error, loading } = useQuery<TGQLGetBooks>(GET_BOOKS, {
+  const { data, error, loading } = useQuery<TGQLBooks>(GET_BOOKS, {
     errorPolicy: "all",
   });
   return {
