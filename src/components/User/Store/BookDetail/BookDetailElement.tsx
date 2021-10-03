@@ -28,7 +28,8 @@ export const ContentWrapper = styled.div`
   padding: 1rem 2rem 3rem 2rem;
   overflow-x: auto;
   .gap-border {
-    border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+    border-bottom: 2px solid ${({ theme }) => theme.border[2]};
+    border-style: dashed;
   }
   .short {
     max-width: 20%;

@@ -51,13 +51,13 @@ export const TableOrders = styled.table`
       text-align: start;
       padding: 0.5rem;
       width: max-content;
+      border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
       ::before {
         content: "";
         position: absolute;
         left: 0;
         bottom: 0;
         width: 100%;
-        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
       }
     }
   }
@@ -88,7 +88,6 @@ export const TableOrders = styled.table`
       td {
         padding: 0.8rem 0.5rem;
         font-size: 0.8rem;
-        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
         transition: 0.4s all ease;
       }
     }

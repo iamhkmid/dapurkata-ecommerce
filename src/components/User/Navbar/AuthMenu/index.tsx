@@ -64,6 +64,9 @@ const AuthMenu = () => {
             onMouseEnter={() =>
               dispatch({ type: "CHANGE_NAV_MENU", menu: "/auth/signin" })
             }
+            onMouseLeave={() => {
+              dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+            }}
           >
             {signinBtn.link.includes(userNav.selectedNavMenu) && (
               <El.ActiveLine

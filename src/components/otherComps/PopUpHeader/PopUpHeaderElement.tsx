@@ -5,7 +5,8 @@ export const Main = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${({ theme }) => theme.border[1]};
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  border-style: dashed;
   transition: 0.4s all ease;
 `;
 

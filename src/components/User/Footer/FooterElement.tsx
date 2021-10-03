@@ -115,10 +115,13 @@ export const FooterMessage = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 1rem;
-  background: ${({ theme }) => theme.background[3]};
+  padding: 0.5rem;
+  position: relative;
+  border-top: 2px dashed ${({ theme }) => theme.border[2]};
+  background: ${({ theme }) => theme.background[1]};
   > h1 {
     font-size: 0.9rem;
-    color: ${({ theme }) => theme.color[4]};
+    color: ${({ theme }) => theme.color[1]};
   }
+  transition: 0.4s all ease;
 `;

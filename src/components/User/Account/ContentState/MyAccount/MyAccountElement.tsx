@@ -15,7 +15,7 @@ export const Head = styled.div`
   height: 100%;
   width: 100%;
   padding: 1rem 0.5rem;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
 `;
 
 export const FormWrapper = styled.div`

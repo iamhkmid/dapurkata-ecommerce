@@ -29,8 +29,8 @@ export const Ul = styled.ul`
   flex-direction: column;
   gap: 1rem;
   width: 100%;
-  border-top: 1px solid ${({ theme }) => theme.border[2]};
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  border-top: 2px dashed ${({ theme }) => theme.border[2]};
+  border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
   padding: 0.5rem 0.5rem;
   overflow: auto;
   ::-webkit-scrollbar {

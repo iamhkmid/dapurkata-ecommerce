@@ -48,6 +48,7 @@ export const Ul = styled.ul`
   gap: 1rem;
   max-height: 40vh;
   border-top: 2px solid ${({ theme }) => theme.border[2]};
+  border-style: dashed;
   padding: 1rem 0.5rem;
   width: 100%;
   ::-webkit-scrollbar {

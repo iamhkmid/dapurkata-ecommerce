@@ -65,7 +65,7 @@ export const ContentBody = styled.div<TContentBody>`
   ${({ isShowed }) =>
     isShowed &&
     css`
-      border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+      border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
       max-height: 30rem;
     `}
   ::-webkit-scrollbar {
