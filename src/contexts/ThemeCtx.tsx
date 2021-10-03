@@ -265,7 +265,7 @@ const themeConf = {
       },
       disabled: { background: "#1e2531", color: "#404e62" },
     },
-    loading: { 1: "#1e2330", 2: "#141a24" },
+    loading: { 1: "#1e2433", 2: "#141a24" },
     navbar: {
       menu: {
         fill: "#dedff0",

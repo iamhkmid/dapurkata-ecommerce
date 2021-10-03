@@ -1,12 +1,34 @@
-import { TDBCreateBook, TDBUpdateBook } from "../../../types/book";
+import {
+  TArgsBooks,
+  TDBCreateBook,
+  TDBUpdateBook,
+  TGQLBook,
+} from "../../../types/book";
 import { TBookMutation, TBookQuery, TBook } from "../../../types/graphql";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
-import { saveBookPic } from "./utils";
+import { bookFilter, saveBookPic } from "./utils";
 
 export const Query: TBookQuery = {
   book: async (_, { bookId }, { db }) =>
     await db.book.findUnique({ where: { id: bookId } }),
-  books: async (_, __, { db }) => await db.book.findMany(),
+  books: async (_, { filter }, { db, cache }) => {
+    if (cache.has("books")) {
+      const books = cache.get("books") as TGQLBook[];
+      if (!!filter) {
+        return bookFilter({ books, filter });
+      } else {
+        return books;
+      }
+    } else {
+      const books = await db.book.findMany({ include: { Author: true } });
+      cache.set("books", books);
+      if (!!filter) {
+        return bookFilter({ books, filter });
+      } else {
+        return books;
+      }
+    }
+  },
 };
 
 export const Mutation: TBookMutation = {

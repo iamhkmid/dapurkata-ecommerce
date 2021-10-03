@@ -96,7 +96,7 @@ type TGQLGetBookDel = {
   };
 };
 
-type TGQLGetBooks = {
+type TGQLBooks = {
   books: {
     id: string;
     title: string;
@@ -193,20 +193,22 @@ type TGQLGetBooksATC = {
   book: TBookDetail[];
 };
 
-type TGQLGetBookCards = {
-  books: {
-    id: string;
-    title: string;
-    price: string;
+export type TBookCardProps = {
+  id: string;
+  title: string;
+  price: string;
 
-    BookPicture: {
-      type: string;
-      url: string;
-    }[];
-    Author: {
-      name: string;
-    };
+  BookPicture: {
+    type: string;
+    url: string;
   }[];
+  Author: {
+    name: string;
+  };
+};
+
+export type TGQLGetBookCards = {
+  books: TBookCards[];
 };
 
 export type TBookCard = {

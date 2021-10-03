@@ -108,8 +108,8 @@ export const GET_FORM_BOOK = gql`
 `;
 
 export const GET_BOOKS_SORT_NEW = gql`
-  query {
-    books {
+  query ($filter: BookFilter) {
+    books(filter: $filter) {
       id
       title
       price

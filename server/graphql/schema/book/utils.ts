@@ -1,3 +1,4 @@
+import { TGQLBook } from "../../../types/book";
 import { TSaveBookPic } from "../../../types/picture";
 import { saveImg } from "../../utils/uploadFIle";
 
@@ -61,3 +62,21 @@ export const saveBookPic = async (options: TSaveBookPic) => {
 //     url: pathFile.split("public")[1],
 //   };
 // };
+
+type TBookfilter = (p: {
+  books: TGQLBook[];
+  filter: { search: string };
+}) => TGQLBook[];
+export const bookFilter: TBookfilter = ({ filter, books }) => {
+  const { search } = filter;
+  if (!!search) {
+    return books.filter(
+      (book) =>
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.Author.name.toLowerCase().includes(search.toLowerCase())
+    );
+  } else {
+    return books;
+  }
+  return [];
+};

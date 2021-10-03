@@ -3,7 +3,7 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     book(bookId: ID!): Book
-    books: [Book]
+    books(filter: BookFilter): [Book]
   }
 
   type Mutation {
@@ -13,6 +13,10 @@ const typeDefs = gql`
     deleteBook(bookId: ID!): Book @auth(requires: ADMIN)
   }
 
+  input BookFilter {
+    search: String
+    take: Int
+  }
   input cBookData {
     title: String!
     description: String

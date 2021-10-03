@@ -6,7 +6,7 @@ import {
   TDBAuthor,
   TGQLAuthor,
 } from "./author";
-import { TArgsCreateBook, TArgsUpdateBook, TGQLBook } from "./book";
+import { TArgsBooks, TArgsCreateBook, TArgsUpdateBook, TGQLBook } from "./book";
 import {
   TArgsCreateCategory,
   TArgsUpdateCategory,
@@ -75,7 +75,7 @@ export type TBookQuery = {
     args: { bookId: string },
     context: TCtx
   ) => Promise<TGQLBook>;
-  books: (parent: any, args: any, context: TCtx) => Promise<TGQLBook[]>;
+  books: (parent: any, args: TArgsBooks, context: TCtx) => Promise<TGQLBook[]>;
 };
 
 export type TBookMutation = {

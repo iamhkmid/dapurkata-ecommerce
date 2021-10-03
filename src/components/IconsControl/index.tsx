@@ -271,12 +271,17 @@ export const IconsControl = (name: string) => {
       );
     case "search":
       return (
-        <svg fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg viewBox="0 0 512 512">
           <path
+            d="M221.09 64a157.09 157.09 0 10157.09 157.09A157.1 157.1 0 00221.09 64z"
+            fill="none"
+            strokeMiterlimit="10"
+          />
+          <path
+            fill="none"
             strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            strokeMiterlimit="10"
+            d="M338.29 338.29L448 448"
           />
         </svg>
       );

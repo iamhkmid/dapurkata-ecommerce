@@ -4,6 +4,7 @@ import { ExecutionParams } from "subscriptions-transport-ws";
 import { db } from "../db";
 import { TCtx } from "../../types/gContext";
 import { PubSub } from "graphql-subscriptions";
+import NodeCache from "node-cache";
 
 type TParamsCtx = {
   req: Request;
@@ -13,8 +14,10 @@ type TParamsCtx = {
 type TContext = (params: TParamsCtx) => Promise<TCtx>;
 
 const pubsub = new PubSub();
+const cache = new NodeCache();
+
 const context: TContext = async ({ req, res, connection }) => {
-  return { api, req, res, db, pubsub };
+  return { api, req, res, db, pubsub, cache };
 };
 
 export default context;

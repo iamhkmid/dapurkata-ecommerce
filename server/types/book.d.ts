@@ -26,6 +26,8 @@ export type TGQLBook = {
   updatedAt: Date;
 };
 
+export type TArgsBooks = { filter: { search: string } };
+
 export type TArgsCreateBook = {
   data: {
     title: string;

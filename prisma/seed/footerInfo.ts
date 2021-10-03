@@ -20,7 +20,7 @@ export const footerInfo = async () => {
     data: {
       type: "message",
       isEnabled: true,
-      value: "DapurKata © 2021 Made with ❤️",
+      value: "Penerbit DapurKata © 2021 ~ Made with ❤️",
     },
   });
   const socialMedia1 = await prisma.footerInfo.create({
