@@ -123,5 +123,10 @@ export const FooterMessage = styled.div`
     font-size: 0.9rem;
     color: ${({ theme }) => theme.color[1]};
   }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > h1 {
+      font-size: 0.7rem;
+    }
+  }
   transition: 0.4s all ease;
 `;

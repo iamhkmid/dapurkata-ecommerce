@@ -24,8 +24,7 @@ export const list = styled.div`
   max-height: 15rem;
   width: 100%;
   overflow-y: auto;
-  border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
-  border-style: dashed;
+  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
 
   ::-webkit-scrollbar {
     width: 10px;
@@ -177,7 +176,7 @@ export const TableInfo = styled.table`
         left: 0;
         bottom: 0;
         width: 100%;
-        border-bottom: 2px dashed ${({ theme }) => theme.border[2]};
+        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
       }
     }
   }
