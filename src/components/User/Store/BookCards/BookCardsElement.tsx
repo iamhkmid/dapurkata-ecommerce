@@ -14,6 +14,20 @@ export const Cards = styled(motion.div)`
   }
 `;
 
+export const NoBook = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1rem;
+  font-weight: 500;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.9rem;
+  }
+  color: ${({ theme }) => theme.color[2]};
+`;
+
 export const Card = styled.div`
   display: flex;
   font-family: "Mulish", sans-serif;

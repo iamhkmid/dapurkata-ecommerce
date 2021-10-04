@@ -44,6 +44,7 @@ export const CloseIcon = styled.div`
   justify-content: center;
   position: absolute;
   right: 0;
+  height: 100%;
   width: 1.5rem;
   top: 50%;
   transform: translateY(-50%);

@@ -21,6 +21,9 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
   return (
     <>
       {isLoading && <BookCardsLoading />}
+      {!isLoading && data?.length === 0 && (
+        <El.NoBook>Buku tidak ditemukan</El.NoBook>
+      )}
       {!isLoading && (
         <El.Cards initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {data?.map((book, index) => {

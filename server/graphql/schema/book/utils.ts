@@ -91,7 +91,7 @@ export const bookFilter: TBookfilter = ({ filter, books }) => {
   return {
     hasPrev: skip > 0,
     hasNext,
-    currentPage: skip + 1,
+    currentPage: data.length > 0 ? skip + 1 : 0,
     numberOfPages,
     skip,
     take,
