@@ -5,13 +5,11 @@ import IconsControl from "../../../IconsControl";
 import * as El from "./BooksFilterElement";
 
 type TProps = {
-  refetch: (
-    variables: Partial<OperationVariables>
-  ) => Promise<ApolloQueryResult<TGQLBookCards>>;
+  changeSearchInput: (p: string) => void;
 };
 
 const BooksFilter: FC<TProps> = (props) => {
-  const { refetch } = props;
+  const { changeSearchInput } = props;
   return (
     <El.Main>
       <El.InputWrapper>
@@ -19,9 +17,7 @@ const BooksFilter: FC<TProps> = (props) => {
         <El.Input
           type="text"
           placeholder="Cari berdasarkan judul/penulis"
-          onChange={(e) =>
-            refetch({ filter: { search: e.target.value, take: 12, skip: 0 } })
-          }
+          onChange={(e) => changeSearchInput(e.target.value)}
         />
       </El.InputWrapper>
     </El.Main>

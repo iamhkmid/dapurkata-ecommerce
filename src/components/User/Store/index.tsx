@@ -13,28 +13,40 @@ import BookCards from "./BookCards";
 import BooksFilter from "./BooksFilter";
 import BooksPagination from "./BooksPagination";
 
+type TFilter = {
+  search?: string;
+  skip: number;
+  take: number;
+};
 const Store = () => {
+  const initialFilter = { skip: 0, take: 12 };
+  const [filter, setFilter] = useState<TFilter>(initialFilter);
   const { data, error, loading, refetch } = useQuery<TGQLBookCards>(
     BOOKS_WITH_FILTER,
     {
-      variables: {
-        filter: {
-          skip: 0,
-          take: 12,
-        },
-      },
-      errorPolicy: "none",
+      variables: { filter },
+      errorPolicy: "all",
       notifyOnNetworkStatusChange: true,
     }
   );
 
+  const changeSearchInput = (search: string) => {
+    setFilter({ ...initialFilter, search });
+  };
+
+  const changePage = (p: { skip: number; take: number }) => {
+    const { skip, take } = p;
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+    setFilter({ skip, take, search: filter.search });
+  };
+
   return (
     <El.Main>
       <El.Section>
-        <BooksFilter refetch={refetch} />
+        <BooksFilter changeSearchInput={changeSearchInput} />
         <BookCards data={data?.booksWithFilter?.data} isLoading={loading} />
         <BooksPagination
-          refetch={refetch}
+          changePage={changePage}
           hasPrev={data?.booksWithFilter?.hasPrev}
           hasNext={data?.booksWithFilter?.hasNext}
           currentPage={data?.booksWithFilter?.currentPage}

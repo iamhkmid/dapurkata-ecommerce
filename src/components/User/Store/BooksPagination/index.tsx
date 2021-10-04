@@ -11,16 +11,18 @@ type TProps = {
   take: number;
   currentPage: number;
   numberOfPages: number;
-  refetch: (
-    variables: Partial<OperationVariables>
-  ) => Promise<ApolloQueryResult<TGQLBookCards>>;
+  changePage: (p: { skip: number; take: number }) => void;
 };
 const BooksPagination: FC<TProps> = (props) => {
-  const { refetch, currentPage, hasNext, hasPrev, numberOfPages, skip, take } =
-    props;
-  const changePage = () => {
-    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-  };
+  const {
+    changePage,
+    currentPage,
+    hasNext,
+    hasPrev,
+    numberOfPages,
+    skip,
+    take,
+  } = props;
   return (
     <El.Main>
       <El.PageInfo>{`Halaman ${currentPage} dari ${numberOfPages}`}</El.PageInfo>
@@ -28,14 +30,14 @@ const BooksPagination: FC<TProps> = (props) => {
         <Button
           name="Prev"
           disabled={!hasPrev}
-          onClick={() => changePage()}
+          onClick={() => changePage({ skip: skip - 1, take })}
           buttonFor="next_or_prev"
           isShowed={true}
         />
         <El.Pages>
           <Button
             name="1"
-            onClick={() => changePage()}
+            onClick={() => changePage({ skip: 0, take })}
             buttonFor="page_number"
             active={currentPage === 1}
             isShowed={numberOfPages > 0}
@@ -50,7 +52,7 @@ const BooksPagination: FC<TProps> = (props) => {
                     <Button
                       isShowed={true}
                       name={(val + 1).toString()}
-                      onClick={() => changePage()}
+                      onClick={() => changePage({ skip: val, take })}
                       buttonFor="page_number"
                       active={val + 1 === currentPage}
                     />
@@ -59,7 +61,7 @@ const BooksPagination: FC<TProps> = (props) => {
             )}
           <Button
             name={numberOfPages?.toString()}
-            onClick={() => changePage()}
+            onClick={() => changePage({ skip: numberOfPages - 1, take })}
             buttonFor="page_number"
             active={currentPage === numberOfPages}
             isShowed={numberOfPages > 1}
@@ -68,7 +70,7 @@ const BooksPagination: FC<TProps> = (props) => {
         <Button
           name="Next"
           disabled={!hasNext}
-          onClick={() => changePage()}
+          onClick={() => changePage({ skip: skip + 1, take })}
           buttonFor="next_or_prev"
           isShowed={true}
         />
