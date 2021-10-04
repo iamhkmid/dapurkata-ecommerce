@@ -3,6 +3,7 @@ import styled, { css } from "styled-components";
 import IconsControl from "../../IconsControl";
 import Loading2 from "../Loading/Loading2";
 import TextLoading from "../Loading/TextLoading";
+
 type TButtonElement = {
   color?: string;
   isLoading?: boolean;

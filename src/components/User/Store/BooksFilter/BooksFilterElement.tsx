@@ -37,14 +37,16 @@ export const SearchIcon = styled.div`
   }
 `;
 
-export const CloseIcon = styled.div`
+type TCloseIcon = {
+  isShowed: boolean;
+};
+export const CloseIcon = styled.div<TCloseIcon>`
   display: flex;
   cursor: pointer;
   align-items: center;
   justify-content: center;
   position: absolute;
   right: 0;
-  height: 100%;
   width: 1.5rem;
   top: 50%;
   transform: translateY(-50%);
@@ -69,6 +71,18 @@ export const CloseIcon = styled.div`
     }
     transition: 0.4s all ease;
   }
+  ${({ isShowed }) =>
+    isShowed &&
+    css`
+      height: 100%;
+      > svg {
+        padding: 0.2rem;
+        max-width: 1.4rem;
+        max-height: 1.4rem;
+        min-height: 1.4rem;
+        min-width: 1.4rem;
+      }
+    `}
 `;
 
 type TInput = {

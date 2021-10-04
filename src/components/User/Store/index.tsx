@@ -44,7 +44,10 @@ const Store = () => {
   return (
     <El.Main>
       <El.Section>
-        <BooksFilter changeSearchInput={changeSearchInput} />
+        <BooksFilter
+          changeSearchInput={changeSearchInput}
+          search={filter?.search}
+        />
         <BookCards data={data?.booksWithFilter?.data} isLoading={loading} />
         <BooksPagination
           changePage={changePage}

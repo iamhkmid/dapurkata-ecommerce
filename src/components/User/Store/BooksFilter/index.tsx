@@ -6,10 +6,11 @@ import * as El from "./BooksFilterElement";
 
 type TProps = {
   changeSearchInput: (p: string) => void;
+  search: string;
 };
 
 const BooksFilter: FC<TProps> = (props) => {
-  const { changeSearchInput } = props;
+  const { changeSearchInput, search } = props;
   const inputRef = useRef<HTMLInputElement>();
   return (
     <El.Main>
@@ -25,6 +26,7 @@ const BooksFilter: FC<TProps> = (props) => {
         </El.SearchIcon>
         <El.CloseIcon
           className="close-icon"
+          isShowed={!!search}
           onClick={() => {
             inputRef.current.value = "";
             changeSearchInput("");
