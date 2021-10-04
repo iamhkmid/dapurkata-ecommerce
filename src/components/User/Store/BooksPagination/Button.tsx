@@ -5,7 +5,6 @@ import Loading2 from "../../../otherComps/Loading/Loading2";
 type TButtonElement = {
   buttonFor: "page_number" | "next_or_prev";
   active?: boolean;
-  isShowed: boolean;
 };
 
 const ButtonElement = styled.button<TButtonElement>`
@@ -96,21 +95,11 @@ const ButtonElement = styled.button<TButtonElement>`
           `};
   }
 
-  ${({ isShowed }) =>
-    !isShowed &&
-    css`
-      box-shadow: none;
-      min-width: 0;
-      max-width: 0;
-      padding: 0;
-      overflow: hidden;
-    `}
   transition: 0.4s all ease;
 `;
 
 type TButton = {
   name: string;
-  isShowed: boolean;
   disabled?: boolean;
   onClick?: any;
 } & (
@@ -126,7 +115,7 @@ type TButton = {
 const Button: FC<TButton> = (props) => {
   switch (props.buttonFor) {
     case "page_number": {
-      const { name, disabled, onClick, buttonFor, active, isShowed } = props;
+      const { name, disabled, onClick, buttonFor, active } = props;
       return (
         <ButtonElement
           type="button"
@@ -134,21 +123,19 @@ const Button: FC<TButton> = (props) => {
           disabled={disabled}
           buttonFor={buttonFor}
           active={active}
-          isShowed={isShowed}
         >
           {name}
         </ButtonElement>
       );
     }
     case "next_or_prev": {
-      const { name, disabled, onClick, buttonFor, isShowed } = props;
+      const { name, disabled, onClick, buttonFor } = props;
       return (
         <ButtonElement
           type="button"
           onClick={onClick}
           disabled={disabled}
           buttonFor={buttonFor}
-          isShowed={isShowed}
         >
           {name}
         </ButtonElement>

@@ -32,16 +32,16 @@ const BooksPagination: FC<TProps> = (props) => {
           disabled={!hasPrev}
           onClick={() => changePage({ skip: skip - 1, take })}
           buttonFor="next_or_prev"
-          isShowed={true}
         />
         <El.Pages>
-          <Button
-            name="1"
-            onClick={() => changePage({ skip: 0, take })}
-            buttonFor="page_number"
-            active={currentPage === 1}
-            isShowed={numberOfPages > 0}
-          />
+          {numberOfPages > 0 && (
+            <Button
+              name="1"
+              onClick={() => changePage({ skip: 0, take })}
+              buttonFor="page_number"
+              active={currentPage === 1}
+            />
+          )}
           {Array.from(Array(numberOfPages).keys())
             .slice(currentPage - 1, currentPage + 2)
             .map(
@@ -50,7 +50,6 @@ const BooksPagination: FC<TProps> = (props) => {
                 val + 1 !== numberOfPages && (
                   <div key={val}>
                     <Button
-                      isShowed={true}
                       name={(val + 1).toString()}
                       onClick={() => changePage({ skip: val, take })}
                       buttonFor="page_number"
@@ -59,20 +58,20 @@ const BooksPagination: FC<TProps> = (props) => {
                   </div>
                 )
             )}
-          <Button
-            name={numberOfPages?.toString()}
-            onClick={() => changePage({ skip: numberOfPages - 1, take })}
-            buttonFor="page_number"
-            active={currentPage === numberOfPages}
-            isShowed={numberOfPages > 1}
-          />
+          {numberOfPages > 1 && (
+            <Button
+              name={numberOfPages?.toString()}
+              onClick={() => changePage({ skip: numberOfPages - 1, take })}
+              buttonFor="page_number"
+              active={currentPage === numberOfPages}
+            />
+          )}
         </El.Pages>
         <Button
           name="Next"
           disabled={!hasNext}
           onClick={() => changePage({ skip: skip + 1, take })}
           buttonFor="next_or_prev"
-          isShowed={true}
         />
       </El.Pagination>
     </El.Main>
