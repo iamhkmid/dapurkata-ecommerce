@@ -1,8 +1,8 @@
 import {
-  TArgsBooks,
+  TBooksWithFilter,
   TDBCreateBook,
   TDBUpdateBook,
-  TGQLBook,
+  TGQLBooksWithFilter,
 } from "../../../types/book";
 import { TBookMutation, TBookQuery, TBook } from "../../../types/graphql";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
@@ -11,22 +11,36 @@ import { bookFilter, saveBookPic } from "./utils";
 export const Query: TBookQuery = {
   book: async (_, { bookId }, { db }) =>
     await db.book.findUnique({ where: { id: bookId } }),
-  books: async (_, { filter }, { db, cache }) => {
-    if (cache.has("books")) {
-      const books = cache.get("books") as TGQLBook[];
-      if (!!filter) {
-        return bookFilter({ books, filter });
-      } else {
-        return books;
-      }
+  books: async (_, __, { db }) => await db.book.findMany(),
+  booksWithFilter: async (_, { filter }, { db, cache }) => {
+    if (cache.has("books_with_filter")) {
+      const books = cache.get("books_with_filter") as TBooksWithFilter[];
+      return bookFilter({ books, filter });
     } else {
-      const books = await db.book.findMany({ include: { Author: true } });
-      cache.set("books", books);
-      if (!!filter) {
-        return bookFilter({ books, filter });
-      } else {
-        return books;
-      }
+      const findBooks = await db.book.findMany({
+        select: {
+          id: true,
+          title: true,
+          price: true,
+          Author: true,
+          BookPicture: true,
+        },
+      });
+      const books = findBooks.reduce(
+        (acc, curr) => [
+          ...acc,
+          {
+            id: curr.id,
+            title: curr.title,
+            author: curr.Author.name,
+            price: curr.price,
+            coverURL: curr.BookPicture.find((val) => val.type === "COVER")?.url,
+          },
+        ],
+        [] as TBooksWithFilter[]
+      );
+      cache.set("books_with_filter", books);
+      return bookFilter({ books, filter });
     }
   },
 };

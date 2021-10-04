@@ -107,19 +107,21 @@ export const GET_FORM_BOOK = gql`
   }
 `;
 
-export const GET_BOOKS_SORT_NEW = gql`
-  query ($filter: BookFilter) {
-    books(filter: $filter) {
-      id
-      title
-      price
-      BookPicture {
-        type
-        url
-      }
-      Author {
+export const BOOKS_WITH_FILTER = gql`
+  query ($filter: BookFilter!) {
+    booksWithFilter(filter: $filter) {
+      hasPrev
+      hasNext
+      skip
+      take
+      currentPage
+      numberOfPages
+      data {
         id
-        name
+        title
+        price
+        coverURL
+        author
       }
     }
   }

@@ -102,7 +102,7 @@ const themeConf = {
         danger: { background: "#d13232", color: "#e5eaf1" },
         warning: { background: "#FBBF24", color: "#e5eaf1" },
         list: { background: "#c0cfe47f", color: "#2f5994" },
-        base: { background: "#d2dae976", color: "#2f5994" },
+        base: { background: "#9caac576", color: "#2f5994" },
         section: { background: "#b7c9db", color: "#2f5994" },
         sidebar: { background: "#c0cfe47f", color: "#2f5994" },
       },

@@ -1,16 +1,16 @@
 import { ApolloQueryResult, OperationVariables } from "@apollo/client";
 import { FC } from "react";
-import { TGQLBooks } from "../../../../types/book";
+import { TGQLBookCards, TGQLBooks } from "../../../../types/book";
 import IconsControl from "../../../IconsControl";
-import * as El from "./SearchInputElement";
+import * as El from "./BooksFilterElement";
 
 type TProps = {
   refetch: (
     variables: Partial<OperationVariables>
-  ) => Promise<ApolloQueryResult<TGQLBooks>>;
+  ) => Promise<ApolloQueryResult<TGQLBookCards>>;
 };
 
-const SearchInput: FC<TProps> = (props) => {
+const BooksFilter: FC<TProps> = (props) => {
   const { refetch } = props;
   return (
     <El.Main>
@@ -18,11 +18,14 @@ const SearchInput: FC<TProps> = (props) => {
         <El.SearchIcon>{IconsControl("search")}</El.SearchIcon>
         <El.Input
           type="text"
-          onChange={(e) => refetch({ filter: { search: e.target.value } })}
+          placeholder="Cari berdasarkan judul/penulis"
+          onChange={(e) =>
+            refetch({ filter: { search: e.target.value, take: 12, skip: 0 } })
+          }
         />
       </El.InputWrapper>
     </El.Main>
   );
 };
 
-export default SearchInput;
+export default BooksFilter;

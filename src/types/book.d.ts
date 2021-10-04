@@ -193,33 +193,24 @@ type TGQLGetBooksATC = {
   book: TBookDetail[];
 };
 
-export type TBookCardProps = {
-  id: string;
-  title: string;
-  price: string;
-
-  BookPicture: {
-    type: string;
-    url: string;
-  }[];
-  Author: {
-    name: string;
+export type TGQLBookCards = {
+  booksWithFilter: {
+    hasPrev: boolean;
+    hasNext: boolean;
+    skip: number;
+    take: number;
+    currentPage: number;
+    numberOfPages: number;
+    data: TBookCard[];
   };
-};
-
-export type TGQLGetBookCards = {
-  books: TBookCards[];
 };
 
 export type TBookCard = {
   id: string;
   title: string;
   price: string;
-  coverUrl: string;
-  Author: {
-    name: string;
-  };
-  inCart: boolean;
+  coverURL: string;
+  author: string;
 };
 
 type TGQLGetFormBook = {

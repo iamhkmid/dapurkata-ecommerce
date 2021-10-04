@@ -3,7 +3,8 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     book(bookId: ID!): Book
-    books(filter: BookFilter): [Book]
+    books: [Book]
+    booksWithFilter(filter: BookFilter!): BooksWithFilter
   }
 
   type Mutation {
@@ -15,7 +16,8 @@ const typeDefs = gql`
 
   input BookFilter {
     search: String
-    take: Int
+    skip: Int!
+    take: Int!
   }
   input cBookData {
     title: String!
@@ -59,7 +61,22 @@ const typeDefs = gql`
   input categoryInput {
     id: String
   }
-
+  type BooksWithFilter {
+    hasPrev: Boolean
+    hasNext: Boolean
+    skip: Int
+    take: Int
+    currentPage: Int
+    numberOfPages: Int
+    data: [DataBooksWithFilter]
+  }
+  type DataBooksWithFilter {
+    id: ID
+    title: String
+    price: Int
+    author: String
+    coverURL: String
+  }
   type Book {
     id: ID
     title: String

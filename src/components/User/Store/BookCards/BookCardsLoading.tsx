@@ -34,7 +34,7 @@ const shimmer = keyframes`0%{
 `;
 export const Cards = styled(motion.div)`
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 1rem;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -88,6 +88,7 @@ const CoverWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 100%;
+  overflow: hidden;
   background: ${({ theme }) => theme.loading[1]};
   aspect-ratio: 2.1/3;
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -112,10 +113,11 @@ const BookInfo = styled.div`
     display: flex;
     min-height: 0.9rem;
     position: relative;
+    overflow: hidden;
     background: ${({ theme }) => theme.loading[1]};
     border-radius: ${({ theme }) => theme.borderRadius};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 12px;
+      min-height: 0.8rem;
     }
   }
   .author {
@@ -124,10 +126,11 @@ const BookInfo = styled.div`
     min-width: 4rem;
     position: relative;
     width: fit-content;
+    overflow: hidden;
     background: ${({ theme }) => theme.loading[1]};
     border-radius: ${({ theme }) => theme.borderRadius};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 9px;
+      min-height: 0.5rem;
     }
   }
   .price {
@@ -136,36 +139,11 @@ const BookInfo = styled.div`
     position: relative;
     min-width: 6rem;
     width: fit-content;
+    overflow: hidden;
     background: ${({ theme }) => theme.loading[1]};
     border-radius: ${({ theme }) => theme.borderRadius};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 12px;
-    }
-  }
-  .info2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-  .star {
-    > div {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      font-size: 12px;
-      font-weight: 700;
-      color: ${({ theme }) => theme.color[2]};
-    }
-    display: flex;
-    height: 100%;
-    align-items: center;
-    > svg {
-      height: 0.9rem;
-      fill: ${({ theme }) => theme.color[7]};
-    }
-    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 12px;
+      min-height: 0.8rem;
     }
   }
 `;

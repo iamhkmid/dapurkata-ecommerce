@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export const Cards = styled(motion.div)`
   margin: 0 auto;
-  padding-top: 2rem;
+  padding-top: 1rem;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

@@ -1,4 +1,8 @@
-import { TGQLBook } from "../../../types/book";
+import {
+  TBooksWithFilter,
+  TGQLBook,
+  TGQLBooksWithFilter,
+} from "../../../types/book";
 import { TSaveBookPic } from "../../../types/picture";
 import { saveImg } from "../../utils/uploadFIle";
 
@@ -64,19 +68,36 @@ export const saveBookPic = async (options: TSaveBookPic) => {
 // };
 
 type TBookfilter = (p: {
-  books: TGQLBook[];
-  filter: { search: string };
-}) => TGQLBook[];
+  books: TBooksWithFilter[];
+  filter: { search: string; skip: number; take: number };
+}) => TGQLBooksWithFilter;
 export const bookFilter: TBookfilter = ({ filter, books }) => {
-  const { search } = filter;
+  const { search, skip, take } = filter;
+  const newBooks = books.slice(skip * take, (skip + 1) * take);
   if (!!search) {
-    return books.filter(
+    const searchBooks = newBooks.filter(
       (book) =>
         book.title.toLowerCase().includes(search.toLowerCase()) ||
-        book.Author.name.toLowerCase().includes(search.toLowerCase())
+        book.author.toLowerCase().includes(search.toLowerCase())
     );
+    return {
+      hasPrev: skip > 0,
+      hasNext: (skip + 1) * take < searchBooks.length,
+      currentPage: skip + 1,
+      numberOfPages: Math.ceil(searchBooks.length / take),
+      skip,
+      take,
+      data: searchBooks,
+    };
   } else {
-    return books;
+    return {
+      hasPrev: skip > 0,
+      hasNext: (skip + 1) * take < books.length,
+      currentPage: skip + 1,
+      numberOfPages: Math.ceil(books.length / take),
+      skip,
+      take,
+      data: newBooks,
+    };
   }
-  return [];
 };

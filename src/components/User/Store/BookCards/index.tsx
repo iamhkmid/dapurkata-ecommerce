@@ -3,14 +3,14 @@ import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import { TBookCard, TBookCardProps } from "../../../../types/book";
+import { TBookCard } from "../../../../types/book";
 import IconsControl from "../../../IconsControl";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
 import * as El from "./BookCardsElement";
 import BookCardsLoading from "./BookCardsLoading";
 
 type TProps = {
-  data: TBookCardProps[];
+  data: TBookCard[];
   isLoading: boolean;
 };
 
@@ -24,21 +24,9 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
       {!isLoading && (
         <El.Cards initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
           {data?.map((book, index) => {
-            const cover = book.BookPicture.filter(
-              (img) => img.type === "COVER"
-            );
-            const coverUrl = cover.length > 0 && cover[0].url;
             const inCart = shoppingCart.data.find(
               (val) => val.Book.id === book.id
             );
-            const bookData: TBookCard = {
-              id: book.id,
-              Author: book.Author,
-              coverUrl,
-              price: book.price,
-              title: book.title,
-              inCart: inCart ? true : false,
-            };
             return (
               <El.Card
                 key={book.id}
@@ -51,7 +39,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
               >
                 <El.CoverWrapper>
                   <ImageResponsive
-                    src={coverUrl}
+                    src={book.coverURL}
                     alt={book.title}
                     height={290}
                     width={200}
@@ -61,7 +49,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                 <El.BookInfo>
                   <div className="info1">
                     <h1 className="title">{book.title}</h1>
-                    <h1 className="author">{book.Author.name}</h1>
+                    <h1 className="author">{book.author}</h1>
                   </div>
                   <div className="info2">
                     <h1 className="price">

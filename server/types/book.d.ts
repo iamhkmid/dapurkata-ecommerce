@@ -26,7 +26,26 @@ export type TGQLBook = {
   updatedAt: Date;
 };
 
-export type TArgsBooks = { filter: { search: string } };
+export type TBooksWithFilter = {
+  id: string;
+  title: string;
+  price: number;
+  author: string;
+  coverURL: string;
+};
+export type TGQLBooksWithFilter = {
+  hasPrev: boolean;
+  hasNext: boolean;
+  skip: number;
+  take: number;
+  currentPage: number;
+  numberOfPages: number;
+  data: TBooksWithFilter[];
+};
+
+export type TArgsBooksWithFilter = {
+  filter: { search: string; skip: number; take: number };
+};
 
 export type TArgsCreateBook = {
   data: {
