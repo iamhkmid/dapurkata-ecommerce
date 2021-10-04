@@ -26,6 +26,7 @@ const Store = () => {
     {
       variables: { filter },
       errorPolicy: "all",
+      fetchPolicy: "network-only",
       notifyOnNetworkStatusChange: true,
     }
   );

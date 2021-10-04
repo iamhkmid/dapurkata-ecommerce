@@ -73,31 +73,28 @@ type TBookfilter = (p: {
 }) => TGQLBooksWithFilter;
 export const bookFilter: TBookfilter = ({ filter, books }) => {
   const { search, skip, take } = filter;
-  const newBooks = books.slice(skip * take, (skip + 1) * take);
+  let data = books.slice(skip * take, (skip + 1) * take);
+  let numberOfPages = Math.ceil(books.length / take);
+  let hasNext = (skip + 1) * take < books.length;
+
   if (!!search) {
-    const searchBooks = newBooks.filter(
+    const searchBooks = books.filter(
       (book) =>
         book.title.toLowerCase().includes(search.toLowerCase()) ||
         book.author.toLowerCase().includes(search.toLowerCase())
     );
-    return {
-      hasPrev: skip > 0,
-      hasNext: (skip + 1) * take < searchBooks.length,
-      currentPage: skip + 1,
-      numberOfPages: Math.ceil(searchBooks.length / take),
-      skip,
-      take,
-      data: searchBooks,
-    };
-  } else {
-    return {
-      hasPrev: skip > 0,
-      hasNext: (skip + 1) * take < books.length,
-      currentPage: skip + 1,
-      numberOfPages: Math.ceil(books.length / take),
-      skip,
-      take,
-      data: newBooks,
-    };
+    hasNext = (skip + 1) * take < searchBooks.length;
+    numberOfPages = Math.ceil(searchBooks.length / take);
+    data = searchBooks.slice(skip * take, (skip + 1) * take);
   }
+
+  return {
+    hasPrev: skip > 0,
+    hasNext,
+    currentPage: skip + 1,
+    numberOfPages,
+    skip,
+    take,
+    data,
+  };
 };

@@ -33,6 +33,40 @@ export const SearchIcon = styled.div`
     height: 1.2rem;
     stroke-width: 58;
     stroke: ${({ theme }) => theme.input.searchIcon};
+    transition: 0.4s all ease;
+  }
+`;
+
+export const CloseIcon = styled.div`
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 0;
+  width: 1.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+
+  margin-right: 0.7rem;
+  z-index: 2;
+  > svg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 0;
+    max-height: 0;
+    min-height: 0;
+    min-width: 0;
+    stroke-width: 58;
+    border-radius: 100%;
+    background: ${({ theme }) => theme.button.list.background};
+    color: ${({ theme }) => theme.button.list.color};
+    :hover {
+      background: ${({ theme }) => theme.button.danger.background};
+      color: ${({ theme }) => theme.button.danger.color};
+    }
+    transition: 0.4s all ease;
   }
 `;
 
@@ -48,8 +82,7 @@ export const Input = styled.input<TInput>`
   color: ${({ theme }) => theme.input.color};
   background: ${({ theme }) => theme.background[2]};
   text-decoration: none;
-  padding: 0 0.5rem;
-  padding-left: 2.5rem;
+  padding: 0 2.5rem;
   height: 2.5rem;
   width: 100%;
   box-shadow: ${({ theme }) => theme.boxShadow};
@@ -109,6 +142,18 @@ export const Input = styled.input<TInput>`
       !isLoading &&
       !disabled &&
       css`
+        ~ .search-icon > svg {
+          stroke: ${({ theme }) => theme.button.primary.background};
+        }
+        ~ .close-icon {
+          > svg {
+            padding: 0.2rem;
+            max-width: 1.4rem;
+            max-height: 1.4rem;
+            min-height: 1.4rem;
+            min-width: 1.4rem;
+          }
+        }
         background: ${({ theme }) => theme.background[2]};
         box-shadow: ${({ theme }) => theme.input.focus.boxShadow};
         border: 1px solid ${({ theme }) => theme.input.focus.border};
