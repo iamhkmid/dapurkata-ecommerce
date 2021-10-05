@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
-import { db } from "../graphql/db";
+import { db } from "../graphql/services/db";
 
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.AuthToken;
