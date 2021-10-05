@@ -1,6 +1,11 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
+export const Main = styled(motion.div)`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+`;
 export const Cards = styled(motion.div)`
   margin: 0 auto;
   padding-top: 1rem;

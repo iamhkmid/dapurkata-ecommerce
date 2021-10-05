@@ -75,23 +75,29 @@ type TBookfilter = (p: {
 
 export const bookFilter: TBookfilter = ({ filter, books }) => {
   const { search, skip, take, categoryId } = filter;
-  let data = books.slice(skip * take, (skip + 1) * take);
+  let data = books;
   let numberOfPages = Math.ceil(books.length / take);
   let hasNext = (skip + 1) * take < books.length;
   let numberOfBooks = books.length;
 
-  if (!!search && !!categoryId) {
-    const searchBooks = books.filter(
+  if (!!search) {
+    data = data.filter(
       (book) =>
-        (book.title.toLowerCase().includes(search.toLowerCase()) ||
-          book.authorName.toLowerCase().includes(search.toLowerCase())) &&
-        (categoryId === "all" || book.categoryIds.includes(categoryId))
+        book.title.toLowerCase().includes(search.toLowerCase()) ||
+        book.authorName.toLowerCase().includes(search.toLowerCase())
     );
-    hasNext = (skip + 1) * take < searchBooks.length;
-    numberOfPages = Math.ceil(searchBooks.length / take);
-    numberOfBooks = searchBooks.length;
-    data = searchBooks.slice(skip * take, (skip + 1) * take);
   }
+
+  if (!!categoryId) {
+    data = data.filter(
+      (book) => categoryId === "all" || book.categoryIds.includes(categoryId)
+    );
+  }
+
+  hasNext = (skip + 1) * take < data.length;
+  numberOfPages = Math.ceil(data.length / take);
+  numberOfBooks = data.length;
+  data = data.slice(skip * take, (skip + 1) * take);
 
   return {
     hasPrev: skip > 0,

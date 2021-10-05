@@ -1,26 +1,15 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { BOOKS_WITH_FILTER } from "../../../graphql/book/queries";
-import { AuthContext } from "../../../contexts/AuthCtx";
-import { UserNavCtx } from "../../../contexts/UserNavCtx";
-import { TBookCard, TGQLBookCards } from "../../../types/book";
+import { TGQLBookCards, TStoreFilter } from "../../../types/book";
 import * as El from "./StoreElement";
-import { ShoppingCartCtx } from "../../../contexts/ShoppingCartCtx";
 import { useQuery } from "@apollo/client";
-import ImageResponsive from "../../otherComps/ImageResponsive";
-import IconsControl from "../../IconsControl";
-import NumberFormat from "react-number-format";
 import BookCards from "./BookCards";
 import BooksFilter from "./BooksFilter";
 import BooksPagination from "./BooksPagination";
 
-type TFilter = {
-  search?: string;
-  skip: number;
-  take: number;
-};
 const Store = () => {
   const initialFilter = { skip: 0, take: 12, categoryId: "all" };
-  const [filter, setFilter] = useState<TFilter>(initialFilter);
+  const [filter, setFilter] = useState<TStoreFilter>(initialFilter);
   const { data, error, loading, refetch } = useQuery<TGQLBookCards>(
     BOOKS_WITH_FILTER,
     {
@@ -34,11 +23,19 @@ const Store = () => {
   const changeSearchInput = (search: string) => {
     setFilter({ ...initialFilter, search });
   };
+  const changeCategory = (categoryId: string) => {
+    setFilter({ skip: 0, take: 12, categoryId, search: filter.search });
+  };
 
   const changePage = (p: { skip: number; take: number }) => {
     const { skip, take } = p;
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
-    setFilter({ skip, take, search: filter.search });
+    setFilter({
+      skip,
+      take,
+      search: filter.search,
+      categoryId: filter.categoryId,
+    });
   };
 
   return (
@@ -46,7 +43,8 @@ const Store = () => {
       <El.Section>
         <BooksFilter
           changeSearchInput={changeSearchInput}
-          search={filter?.search}
+          changeCategory={changeCategory}
+          filter={filter}
           numberOfBooks={data?.booksWithFilter?.numberOfBooks}
         />
         <BookCards data={data?.booksWithFilter?.data} isLoading={loading} />

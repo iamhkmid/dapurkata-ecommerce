@@ -229,3 +229,10 @@ type TGQLGetFormBook = {
     group: string;
   }[];
 };
+
+export type TStoreFilter = {
+  search?: string;
+  categoryId: string;
+  skip: number;
+  take: number;
+};

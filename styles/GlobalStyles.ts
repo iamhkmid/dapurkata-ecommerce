@@ -5,11 +5,16 @@ export const GlobalStyle = createGlobalStyle<{ theme: any }>`
 body {
   padding: 0;
   margin: 0;
+}
+
+body{
+  overflow: scroll;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 
-    ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 10px;
+    height: 10px;
   }
 
   ::-webkit-scrollbar-track {

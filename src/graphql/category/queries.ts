@@ -12,6 +12,15 @@ export const CATEGORIES = gql`
   }
 `;
 
+export const CATEGORIES_BY_USER = gql`
+  query {
+    categories {
+      id
+      name
+    }
+  }
+`;
+
 export const CATEGORY = gql`
   query ($categoryId: ID!) {
     category(categoryId: $categoryId) {

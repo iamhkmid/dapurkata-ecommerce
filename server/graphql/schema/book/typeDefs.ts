@@ -18,7 +18,7 @@ const typeDefs = gql`
     search: String
     skip: Int!
     take: Int!
-    categoryId: String!
+    categoryId: String
   }
   input cBookData {
     title: String!

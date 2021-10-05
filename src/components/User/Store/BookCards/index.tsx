@@ -19,7 +19,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
   const { shoppingCart } = useContext(ShoppingCartCtx);
   const { dispatch } = useContext(UserNavCtx);
   return (
-    <>
+    <El.Main>
       {isLoading && <BookCardsLoading />}
       {!isLoading && data?.length === 0 && (
         <El.NoBook>Buku tidak ditemukan</El.NoBook>
@@ -73,7 +73,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
           })}
         </El.Cards>
       )}
-    </>
+    </El.Main>
   );
 };
 

@@ -1,48 +1,39 @@
-import { ApolloQueryResult, OperationVariables } from "@apollo/client";
-import { FC, useRef } from "react";
-import { TGQLBookCards, TGQLBooks } from "../../../../types/book";
-import IconsControl from "../../../IconsControl";
+import { FC } from "react";
+import { TStoreFilter } from "../../../../types/book";
 import * as El from "./BooksFilterElement";
+import SearchInput from "./SearchInput";
+import SelectCategory from "./SelectCategory";
 
 type TProps = {
   changeSearchInput: (p: string) => void;
-  search: string;
+  changeCategory: (p: string) => void;
+  filter: TStoreFilter;
   numberOfBooks?: number;
 };
 
 const BooksFilter: FC<TProps> = (props) => {
-  const { changeSearchInput, search, numberOfBooks } = props;
-  const inputRef = useRef<HTMLInputElement>();
+  const { changeSearchInput, filter, numberOfBooks, changeCategory } = props;
   return (
     <El.Main>
-      <El.InputWrapper>
-        <El.Input
-          type="text"
-          ref={inputRef}
-          placeholder="Cari berdasarkan judul/penulis"
-          onChange={(e) => changeSearchInput(e.target.value)}
+      <El.FilterOption>
+        <SearchInput
+          changeSearchInput={changeSearchInput}
+          search={filter.search}
         />
-        <El.SearchIcon className="search-icon">
-          {IconsControl("search")}
-        </El.SearchIcon>
-        <El.CloseIcon
-          className="close-icon"
-          isShowed={!!search}
-          onClick={() => {
-            inputRef.current.value = "";
-            changeSearchInput("");
-          }}
-        >
-          {IconsControl("close-outline")}
-        </El.CloseIcon>
-      </El.InputWrapper>
+        <SelectCategory
+          changeCategory={changeCategory}
+          selected={filter.categoryId}
+        />
+      </El.FilterOption>
       <El.BookInfo>
         <El.BookCount
-          isShowed={(!search || search?.length < 1) && !!numberOfBooks}
-        >{`Total buku : ${numberOfBooks}`}</El.BookCount>
+          isShowed={
+            (!filter.search || filter.search?.length < 1) && !!numberOfBooks
+          }
+        >{`Total buku : ${numberOfBooks || "-"}`}</El.BookCount>
 
         <El.BookCount
-          isShowed={search?.length > 0 && !!numberOfBooks}
+          isShowed={filter.search?.length > 0 && !!numberOfBooks}
         >{`Ditemukan ${numberOfBooks || "-"} buku`}</El.BookCount>
       </El.BookInfo>
     </El.Main>
