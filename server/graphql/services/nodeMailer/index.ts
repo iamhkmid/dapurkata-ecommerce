@@ -16,7 +16,9 @@ const OAuth2Client = new google.auth.OAuth2(
 OAuth2Client.setCredentials({ refresh_token: EMAIL_REFRESH_TOKEN });
 
 export const transporter = nodemailer.createTransport({
-  service: "gmail",
+  host: "smtp.gmail.com",
+  port: 465,
+  secure: true,
   auth: {
     type: "OAuth2",
     user: CLIENT_EMAIL,
