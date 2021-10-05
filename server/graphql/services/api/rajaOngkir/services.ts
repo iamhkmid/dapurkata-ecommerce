@@ -1,14 +1,14 @@
 import Axios, { AxiosResponse } from "axios";
 import qs from "qs";
 import { ApolloError } from "apollo-server-errors";
-import { TAPIRajaOngkir } from "../../../types/api";
+import { TAPIRajaOngkir } from "../../../../types/api";
 import {
   TAxiosCities,
   TAxiosCity,
   TAxiosCost,
   TAxiosProvince,
   TAxiosProvinces,
-} from "../../../types/rajaOngkir";
+} from "../../../../types/rajaOngkir";
 import { rajaOngkirAPI as api } from "./api";
 
 export const rajaOngkir: TAPIRajaOngkir = {

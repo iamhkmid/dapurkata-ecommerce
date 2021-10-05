@@ -2,6 +2,8 @@ import { Prisma, PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
 import { PubSub } from "graphql-subscriptions";
 import NodeCache from "node-cache";
+import { Transporter } from "nodemailer";
+import SMTPTransport from "nodemailer/lib/smtp-transport";
 import { TAPI } from "./api";
 import { TUserCtx } from "./user";
 
@@ -19,6 +21,7 @@ type TCtx = {
   db: TDB;
   pubsub: PubSub;
   cache: NodeCache;
+  mail: Transporter<SMTPTransport.SentMessageInfo>;
 };
 type TDecoded = {
   id: string;

@@ -1,14 +1,14 @@
 import { ApolloError } from "apollo-server-express";
 import { AxiosResponse } from "axios";
 import { midtransAPI as api } from "./api";
-import { TAPIBankTransfer } from "../../../types/api";
+import { TAPIBankTransfer } from "../../../../types/api";
 import {
   TAPIResBTBCA,
   TAPIResBTBNI,
   TAPIResBTBRI,
   TAPIResBTMandiriBill,
   TAPIResBTPermata,
-} from "../../../types/midtrans";
+} from "../../../../types/midtrans";
 
 export const bankTransfer: TAPIBankTransfer = {
   BNI: async (values) => {

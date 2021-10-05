@@ -1,10 +1,11 @@
-import api from "../api";
+import api from "../services/api";
 import { Request, Response } from "express";
 import { ExecutionParams } from "subscriptions-transport-ws";
-import { db } from "../db";
 import { TCtx } from "../../types/gContext";
-import { PubSub } from "graphql-subscriptions";
-import NodeCache from "node-cache";
+import { db } from "../services/db";
+import pubsub from "../services/pubsub";
+import cache from "../services/nodeCache";
+import { transporter } from "../services/nodeMailer";
 
 type TParamsCtx = {
   req: Request;
@@ -13,11 +14,8 @@ type TParamsCtx = {
 };
 type TContext = (params: TParamsCtx) => Promise<TCtx>;
 
-const pubsub = new PubSub();
-const cache = new NodeCache();
-
 const context: TContext = async ({ req, res, connection }) => {
-  return { api, req, res, db, pubsub, cache };
+  return { api, req, res, db, pubsub, cache, mail: transporter };
 };
 
 export default context;

@@ -1,5 +1,5 @@
 import bcrypt from "bcrypt";
-import { db } from "../../db";
+import { db } from "../../services/db";
 import { TSaveUserPic } from "../../../types/picture";
 import { saveImg } from "../../utils/uploadFIle";
 

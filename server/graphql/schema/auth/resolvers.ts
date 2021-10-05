@@ -26,7 +26,14 @@ export const Query: TAuthQuery = {
 };
 
 export const Mutation: TAuthMutation = {
-  signin: async (_, args, { db }) => {
+  signin: async (_, args, { db, mail }) => {
+    mail.sendMail({
+      from: `dapurkata.dev@gmail.com`,
+      to: "iamhkmid@gmail.com",
+      subject: `testing email`,
+      text: "Berhasil bro",
+    });
+
     const { username, password, rememberMe } = args;
     const findUser = await db.user.findUnique({
       where: { username },

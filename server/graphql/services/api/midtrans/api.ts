@@ -1,7 +1,7 @@
 import Axios from "axios";
 import { encode } from "js-base64";
-import { TAPIMidtrans } from "../../../types/api";
-import { TGQLPaymentInfo } from "../../../types/transaction";
+import { TAPIMidtrans } from "../../../../types/api";
+import { TGQLPaymentInfo } from "../../../../types/transaction";
 import { bankTransfer } from "./bankTransfer";
 const serverKey = encode(`${process.env.MIDTRANS_SERVER_KEY}:`);
 
