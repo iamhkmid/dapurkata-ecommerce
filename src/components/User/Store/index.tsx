@@ -19,7 +19,7 @@ type TFilter = {
   take: number;
 };
 const Store = () => {
-  const initialFilter = { skip: 0, take: 12 };
+  const initialFilter = { skip: 1, take: 12 };
   const [filter, setFilter] = useState<TFilter>(initialFilter);
   const { data, error, loading, refetch } = useQuery<TGQLBookCards>(
     BOOKS_WITH_FILTER,

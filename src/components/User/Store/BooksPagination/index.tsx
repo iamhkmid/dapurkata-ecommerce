@@ -34,37 +34,23 @@ const BooksPagination: FC<TProps> = (props) => {
           buttonFor="next_or_prev"
         />
         <El.Pages>
-          {numberOfPages > 0 && (
-            <Button
-              name="1"
-              onClick={() => changePage({ skip: 0, take })}
-              buttonFor="page_number"
-              active={currentPage === 1}
-            />
-          )}
-          {Array.from(Array(numberOfPages).keys())
-            .slice(currentPage - 1, currentPage + 2)
-            .map(
-              (val, index) =>
-                val !== 0 &&
-                val + 1 !== numberOfPages && (
-                  <div key={val}>
-                    <Button
-                      name={(val + 1).toString()}
-                      onClick={() => changePage({ skip: val, take })}
-                      buttonFor="page_number"
-                      active={val + 1 === currentPage}
-                    />
-                  </div>
-                )
-            )}
-          {numberOfPages > 1 && (
-            <Button
-              name={numberOfPages?.toString()}
-              onClick={() => changePage({ skip: numberOfPages - 1, take })}
-              buttonFor="page_number"
-              active={currentPage === numberOfPages}
-            />
+          {Array.from(Array(numberOfPages).keys()).map(
+            (val, index) =>
+              (val === 0 /*first page*/ ||
+                val + 1 === numberOfPages /*last page*/ ||
+                (val <= currentPage + (currentPage === 1 ? 2 : 1) &&
+                  val >= currentPage - 1) /*after first page*/ ||
+                (currentPage > numberOfPages - 3 &&
+                  val > numberOfPages - 5)) /*before last page*/ && (
+                <div key={val}>
+                  <Button
+                    name={(val + 1).toString()}
+                    onClick={() => changePage({ skip: val, take })}
+                    buttonFor="page_number"
+                    active={val + 1 === currentPage}
+                  />
+                </div>
+              )
           )}
         </El.Pages>
         <Button
