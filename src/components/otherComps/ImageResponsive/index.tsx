@@ -26,6 +26,12 @@ export const LoadingWrapper = styled.div`
   background: ${({ theme }) => theme.content.bookCard.cover.background};
   align-items: center;
   justify-content: center;
+  z-index: 2;
+`;
+
+export const ImgWrapper = styled.div`
+  display: block;
+  position: relative;
   z-index: 3;
 `;
 
@@ -39,7 +45,7 @@ export const DefImg = styled.div`
   top: 0;
   left: 0;
   background: ${({ theme }) => theme.content.bookCard.cover.background};
-  z-index: 2;
+  z-index: 3;
   > svg {
     height: 100%;
     width: 100%;
@@ -67,23 +73,25 @@ const ImageResponsive: FC<TBookCover> = (props) => {
       {(!src || noImg) && <DefImg>{IconsControl(defIcon)}</DefImg>}
 
       {src && (
-        <Image
-          src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${src}`}
-          alt={alt || "images"}
-          layout="responsive"
-          objectFit="fill"
-          width={width}
-          height={height}
-          quality={quality}
-          onLoad={() => {
-            setIsLoading(false);
-            setNoImg(false);
-          }}
-          onError={() => setNoImg(true)}
-        />
+        <ImgWrapper>
+          <Image
+            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${src}`}
+            alt={alt || "images"}
+            layout="responsive"
+            objectFit="fill"
+            width={width}
+            height={height}
+            quality={quality}
+            onLoad={() => {
+              setIsLoading(false);
+              setNoImg(false);
+            }}
+            onError={() => setNoImg(true)}
+          />
+        </ImgWrapper>
       )}
 
-      {false && (
+      {!noImg && (
         <LoadingWrapper>
           <LoadingImage dotSize={(width / 100) * 7} />
         </LoadingWrapper>
