@@ -94,6 +94,7 @@ export const SelectStyled = styled.div<TSelectStyled>`
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.8rem;
+    height: 2.3rem;
   }
   transition: 0.4s all ease;
 `;
@@ -111,6 +112,7 @@ export const Dropdown = styled.div<TDropdown>`
   display: flex;
   flex-direction: column;
   top: 100%;
+  width: 100%;
   left: 0;
   position: absolute;
   z-index: 9;
@@ -270,9 +272,9 @@ export const InputWrapper = styled.div`
   position: relative;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 5px;
-  min-width: 12rem;
+  min-width: 13rem;
   width: fit-content;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     min-width: 12rem;
   }
 

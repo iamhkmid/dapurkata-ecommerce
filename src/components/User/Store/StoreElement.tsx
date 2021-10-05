@@ -4,7 +4,8 @@ export const Main = styled.main`
   display: flex;
   gap: 2rem;
   flex-direction: column;
-  padding: 5rem 0;
+  padding-top: 6rem;
+  padding-bottom: 2rem;
   align-items: center;
   justify-content: center;
   background: ${({ theme }) => theme.background[1]};
