@@ -116,12 +116,13 @@ export const BOOKS_WITH_FILTER = gql`
       take
       currentPage
       numberOfPages
+      numberOfBooks
       data {
         id
         title
         price
         coverURL
-        author
+        authorName
       }
     }
   }

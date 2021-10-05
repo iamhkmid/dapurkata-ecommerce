@@ -34,9 +34,11 @@ const Footer: FC = () => {
             <h1>Sosial Media</h1>
             <div className="item-group">
               {data?.footerSocialMedia.map((val) => (
-                <div key={val.name} className="icon-wrapper">
-                  {IconsControl(val.name)}
-                </div>
+                <a href={val.url} target="_blank" rel="noopener noreferrer">
+                  <div key={val.name} className="icon-wrapper">
+                    {IconsControl(val.name)}
+                  </div>
+                </a>
               ))}
             </div>
           </El.SocialMedia>

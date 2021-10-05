@@ -7,10 +7,11 @@ import * as El from "./BooksFilterElement";
 type TProps = {
   changeSearchInput: (p: string) => void;
   search: string;
+  numberOfBooks?: number;
 };
 
 const BooksFilter: FC<TProps> = (props) => {
-  const { changeSearchInput, search } = props;
+  const { changeSearchInput, search, numberOfBooks } = props;
   const inputRef = useRef<HTMLInputElement>();
   return (
     <El.Main>
@@ -35,6 +36,15 @@ const BooksFilter: FC<TProps> = (props) => {
           {IconsControl("close-outline")}
         </El.CloseIcon>
       </El.InputWrapper>
+      <El.BookInfo>
+        <El.BookCount
+          isShowed={(!search || search?.length < 1) && !!numberOfBooks}
+        >{`Total buku : ${numberOfBooks}`}</El.BookCount>
+
+        <El.BookCount
+          isShowed={search?.length > 0 && !!numberOfBooks}
+        >{`Ditemukan ${numberOfBooks || "-"} buku`}</El.BookCount>
+      </El.BookInfo>
     </El.Main>
   );
 };

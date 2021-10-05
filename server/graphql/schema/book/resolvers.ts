@@ -1,5 +1,6 @@
 import {
   TBooksWithFilter,
+  TDBBooksWithFilter,
   TDBCreateBook,
   TDBUpdateBook,
   TGQLBooksWithFilter,
@@ -14,7 +15,7 @@ export const Query: TBookQuery = {
   books: async (_, __, { db }) => await db.book.findMany(),
   booksWithFilter: async (_, { filter }, { db, cache }) => {
     if (cache.has("books_with_filter")) {
-      const books = cache.get("books_with_filter") as TBooksWithFilter[];
+      const books = cache.get("books_with_filter") as TDBBooksWithFilter[];
       return bookFilter({ books, filter });
     } else {
       const findBooks = await db.book.findMany({
@@ -24,6 +25,7 @@ export const Query: TBookQuery = {
           price: true,
           Author: true,
           BookPicture: true,
+          Category: { select: { id: true } },
         },
       });
       const books = findBooks.reduce(
@@ -32,12 +34,16 @@ export const Query: TBookQuery = {
           {
             id: curr.id,
             title: curr.title,
-            author: curr.Author.name,
+            authorName: curr.Author.name,
             price: curr.price,
+            categoryIds: curr.Category.reduce(
+              (acc, curr) => [...acc, curr.id],
+              [] as string[]
+            ),
             coverURL: curr.BookPicture.find((val) => val.type === "COVER")?.url,
           },
         ],
-        [] as TBooksWithFilter[]
+        [] as TDBBooksWithFilter[]
       );
       cache.set("books_with_filter", books);
       return bookFilter({ books, filter });

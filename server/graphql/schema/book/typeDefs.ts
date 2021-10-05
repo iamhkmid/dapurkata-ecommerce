@@ -18,6 +18,7 @@ const typeDefs = gql`
     search: String
     skip: Int!
     take: Int!
+    categoryId: String!
   }
   input cBookData {
     title: String!
@@ -68,13 +69,14 @@ const typeDefs = gql`
     take: Int
     currentPage: Int
     numberOfPages: Int
+    numberOfBooks: Int
     data: [DataBooksWithFilter]
   }
   type DataBooksWithFilter {
     id: ID
     title: String
     price: Int
-    author: String
+    authorName: String
     coverURL: String
   }
   type Book {

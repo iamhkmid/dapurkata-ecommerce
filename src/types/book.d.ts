@@ -201,6 +201,7 @@ export type TGQLBookCards = {
     take: number;
     currentPage: number;
     numberOfPages: number;
+    numberOfBooks: number;
     data: TBookCard[];
   };
 };
@@ -210,7 +211,7 @@ export type TBookCard = {
   title: string;
   price: string;
   coverURL: string;
-  author: string;
+  authorName: string;
 };
 
 type TGQLGetFormBook = {

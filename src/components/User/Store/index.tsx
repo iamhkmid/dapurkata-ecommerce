@@ -19,7 +19,7 @@ type TFilter = {
   take: number;
 };
 const Store = () => {
-  const initialFilter = { skip: 0, take: 12 };
+  const initialFilter = { skip: 0, take: 12, categoryId: "all" };
   const [filter, setFilter] = useState<TFilter>(initialFilter);
   const { data, error, loading, refetch } = useQuery<TGQLBookCards>(
     BOOKS_WITH_FILTER,
@@ -47,6 +47,7 @@ const Store = () => {
         <BooksFilter
           changeSearchInput={changeSearchInput}
           search={filter?.search}
+          numberOfBooks={data?.booksWithFilter?.numberOfBooks}
         />
         <BookCards data={data?.booksWithFilter?.data} isLoading={loading} />
         <BooksPagination

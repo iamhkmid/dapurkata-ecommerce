@@ -52,7 +52,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                 <El.BookInfo>
                   <div className="info1">
                     <h1 className="title">{book.title}</h1>
-                    <h1 className="author">{book.author}</h1>
+                    <h1 className="author">{book.authorName}</h1>
                   </div>
                   <div className="info2">
                     <h1 className="price">

@@ -30,9 +30,19 @@ export type TBooksWithFilter = {
   id: string;
   title: string;
   price: number;
-  author: string;
+  authorName: string;
   coverURL: string;
 };
+
+export type TDBBooksWithFilter = {
+  id: string;
+  title: string;
+  price: number;
+  authorName: string;
+  categoryIds: string[];
+  coverURL: string;
+};
+
 export type TGQLBooksWithFilter = {
   hasPrev: boolean;
   hasNext: boolean;
@@ -40,11 +50,12 @@ export type TGQLBooksWithFilter = {
   take: number;
   currentPage: number;
   numberOfPages: number;
+  numberOfBooks: number;
   data: TBooksWithFilter[];
 };
 
 export type TArgsBooksWithFilter = {
-  filter: { search: string; skip: number; take: number };
+  filter: { search: string; skip: number; take: number; categoryId: string };
 };
 
 export type TArgsCreateBook = {
