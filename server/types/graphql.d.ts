@@ -1,5 +1,13 @@
 import { TAPI } from "./api";
-import { TGQLArgsSignin, TGQLCheckUser, TGQLSignin } from "./auth";
+import {
+  TArgsRegisterConfirmation,
+  TArgsRegisterUser,
+  TGQLArgsSignin,
+  TGQLCheckUser,
+  TGQLRegister,
+  TGQLRegisterConfirmation,
+  TGQLSignin,
+} from "./auth";
 import {
   TArgsCreateAuthor,
   TArgsUpdateAuthor,
@@ -289,6 +297,16 @@ export type TAuthMutation = {
     args: TGQLArgsSignin,
     context: TCtx
   ) => Promise<TGQLSignin>;
+  register: (
+    parent: any,
+    args: TArgsRegisterUser,
+    context: TCtx
+  ) => Promise<TGQLRegister>;
+  registerConfirmation: (
+    parent: any,
+    args: TArgsRegisterConfirmation,
+    context: TCtx
+  ) => Promise<TGQLRegisterConfirmation>;
 };
 
 export type TCourierQuery = {

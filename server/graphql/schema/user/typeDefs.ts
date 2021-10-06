@@ -7,7 +7,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    createUser(data: cUserData!, userPic: Upload): User
+    createUser(data: cUserData!, userPic: Upload): User @auth(requires: ADMIN)
     updateUser(userId: ID!, data: uUserData!): User @auth(requires: AUTH)
     deleteUser(userId: ID!, username: String!): User @auth(requires: ADMIN)
     changePassword(data: cPData!): changePassword @auth(requires: AUTH)
