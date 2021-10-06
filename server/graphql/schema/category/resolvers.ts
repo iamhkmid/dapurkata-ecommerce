@@ -7,7 +7,8 @@ import {
 export const Query: TCategoryQuery = {
   category: async (_, { categoryId }, { db }) =>
     await db.category.findUnique({ where: { id: categoryId } }),
-  categories: async (_, __, { db }) => await db.category.findMany(),
+  categories: async (_, __, { db }) =>
+    await db.category.findMany({ orderBy: { name: "asc" } }),
 };
 
 export const Mutation: TCategoryMutation = {
