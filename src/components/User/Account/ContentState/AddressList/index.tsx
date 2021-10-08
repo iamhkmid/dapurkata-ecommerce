@@ -68,17 +68,17 @@ const AddressList = () => {
                 <El.TextGroup>
                   <h1 className="key">Provinsi</h1>
                   <h1 className="separator">{":"}</h1>
-                  <h1 className="value">{val.provinceName}</h1>
+                  <h1 className="value">{val.City.Province.name}</h1>
                 </El.TextGroup>
                 <El.TextGroup>
                   <h1 className="key">Kabupaten/Kota</h1>
                   <h1 className="separator">{":"}</h1>
-                  <h1 className="value">{val.cityName}</h1>
+                  <h1 className="value">{val.City.name}</h1>
                 </El.TextGroup>
                 <El.TextGroup>
                   <h1 className="key">Kode Pos</h1>
                   <h1 className="separator">{":"}</h1>
-                  <h1 className="value">{val.postalCode}</h1>
+                  <h1 className="value">{val.City.postalCode}</h1>
                 </El.TextGroup>
                 <El.TextGroup>
                   <h1 className="key">Alamat Lengkap</h1>
