@@ -8,7 +8,11 @@ const typeDefs = gql`
   type Mutation {
     createRecipient(data: cRcptData!): Recipient @auth(requires: USER)
     updateRecipient(data: uRcptData!): Recipient @auth(requires: USER)
-    deleteRecipient(recipientId: ID!): Recipient @auth(requires: USER)
+    deleteRecipient(recipientId: ID!): Message @auth(requires: USER)
+  }
+
+  type Message {
+    message: String
   }
 
   type Recipient {
@@ -17,16 +21,24 @@ const typeDefs = gql`
     lastName: String
     email: String
     phone: String
-    provinceId: String
-    provinceName: String
-    cityId: String
-    cityName: String
-    postalCode: String
+    City: City
     address: String
     userId: String
     User: User
     createdAt: Date
     updatedAt: Date
+  }
+
+  type City {
+    id: ID
+    name: String
+    postalCode: String
+    Province: Province
+  }
+
+  type Province {
+    id: ID
+    name: String
   }
 
   input cRcptData {

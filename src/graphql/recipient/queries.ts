@@ -8,11 +8,15 @@ export const RECIPIENTS = gql`
       lastName
       email
       phone
-      provinceId
-      provinceName
-      cityId
-      cityName
-      postalCode
+      City {
+        id
+        name
+        postalCode
+        Province {
+          id
+          name
+        }
+      }
       address
     }
   }
@@ -26,11 +30,15 @@ export const RECIPIENT = gql`
       lastName
       email
       phone
-      provinceId
-      provinceName
-      cityId
-      cityName
-      postalCode
+      City {
+        id
+        name
+        postalCode
+        Province {
+          id
+          name
+        }
+      }
       address
     }
   }

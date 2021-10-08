@@ -169,15 +169,17 @@ const OrderSummary = () => {
                   </tr>
                   <tr>
                     <td>Provinsi</td>
-                    <td>{order.recipient.data.recipient?.provinceName}</td>
+                    <td>
+                      {order.recipient.data.recipient?.City.Province.name}
+                    </td>
                   </tr>
                   <tr>
                     <td>Kota</td>
-                    <td>{order.recipient.data.recipient?.cityName}</td>
+                    <td>{order.recipient.data.recipient?.City.name}</td>
                   </tr>
                   <tr>
                     <td>Kode Pos</td>
-                    <td>{order.recipient.data.recipient?.postalCode}</td>
+                    <td>{order.recipient.data.recipient?.City.postalCode}</td>
                   </tr>
                   <tr>
                     <td>Alamat Lengkap</td>

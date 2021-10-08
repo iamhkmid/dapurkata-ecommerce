@@ -8,11 +8,15 @@ export const CREATE_RECIPIENT = gql`
       lastName
       email
       phone
-      provinceId
-      provinceName
-      cityId
-      cityName
-      postalCode
+      City {
+        id
+        name
+        postalCode
+        Province {
+          id
+          name
+        }
+      }
       address
     }
   }
@@ -26,11 +30,15 @@ export const UPDATE_RECIPIENT = gql`
       lastName
       email
       phone
-      provinceId
-      provinceName
-      cityId
-      cityName
-      postalCode
+      City {
+        id
+        name
+        postalCode
+        Province {
+          id
+          name
+        }
+      }
       address
     }
   }
@@ -43,11 +51,15 @@ export const DELETE_RECIPIENT = gql`
       firstName
       lastName
       phone
-      provinceId
-      provinceName
-      cityId
-      cityName
-      postalCode
+      City {
+        id
+        name
+        postalCode
+        Province {
+          id
+          name
+        }
+      }
       address
     }
   }

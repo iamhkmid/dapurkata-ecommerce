@@ -120,6 +120,12 @@ export const User: TUser = {
       })
     ).ShoppingCart,
   Recipient: async ({ id }, _, { db }) =>
-    (await db.user.findUnique({ where: { id }, select: { Recipient: true } }))
-      .Recipient,
+    (
+      await db.user.findUnique({
+        where: { id },
+        select: {
+          Recipient: { include: { City: { include: { Province: true } } } },
+        },
+      })
+    ).Recipient,
 };

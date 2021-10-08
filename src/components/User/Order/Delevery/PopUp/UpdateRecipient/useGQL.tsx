@@ -36,8 +36,8 @@ export const useGQLInitData = ({ recipientId }: { recipientId: string }) => {
         lastName: val.lastName,
         email: val.email,
         phone: val.phone,
-        province: { id: val.provinceId, value: val.provinceName },
-        city: { id: val.cityId, value: val.cityName },
+        province: { id: val.City.Province.id, value: val.City.Province.name },
+        city: { id: val.City.id, value: val.City.name },
         address: val.address,
       });
     }

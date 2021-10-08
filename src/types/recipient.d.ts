@@ -4,12 +4,16 @@ export type TRecipient = {
   lastName: string;
   email: string;
   phone: string;
-  provinceId: string;
-  provinceName: string;
-  cityId: string;
-  cityName: string;
+  City: {
+    id: string;
+    name: string;
+    postalCode: string;
+    Province: {
+      id: string;
+      name: string;
+    };
+  };
   address: string;
-  postalCode: string;
 };
 
 export type TCreateRcptVar = {

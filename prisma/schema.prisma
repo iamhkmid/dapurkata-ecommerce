@@ -36,23 +36,43 @@ model User {
 }
 
 model Recipient {
-  id           String   @id @default(cuid())
-  firstName    String   @map("first_name")
-  lastName     String?  @map("last_name")
-  email        String?
-  phone        String
-  provinceId   String   @map("province_id")
-  provinceName String   @map("province_name")
-  cityId       String   @map("city_id")
-  cityName     String   @map("city_name")
-  postalCode   String   @map("postal_Code")
-  address      String
-  createdAt    DateTime @default(now()) @map("created_at")
-  updatedAt    DateTime @updatedAt @map("updated_at")
-  userId       String
-  User         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id        String   @id @default(cuid())
+  firstName String   @map("first_name")
+  lastName  String?  @map("last_name")
+  email     String?
+  phone     String
+  cityId    String   @map("city_id")
+  address   String
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  userId    String
+  City      City     @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("recipient")
+}
+
+model City {
+  id         String      @id
+  name       String      @map("city_name")
+  postalCode String      @map("postal_Code")
+  Province   Province    @relation(fields: [provinceId], references: [id], onDelete: Cascade)
+  Recipient  Recipient[]
+  createdAt  DateTime    @default(now()) @map("created_at")
+  updatedAt  DateTime    @updatedAt @map("updated_at")
+
+  provinceId String
+  @@map("city")
+}
+
+model Province {
+  id        String   @id
+  name      String   @map("province_name")
+  City      City[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("province")
 }
 
 model ShoppingCart {

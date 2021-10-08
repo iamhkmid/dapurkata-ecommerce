@@ -35,26 +35,42 @@ export const user = async () => {
             lastName: "Fakhri",
             email: "naufal12345@gmail.com",
             phone: "0853687799132",
-            provinceId: "2",
-            provinceName: "Bangka Belitung",
-            cityId: "334",
-            cityName: "Pangkal Pinang",
+            City: {
+              create: {
+                id: "334",
+                name: "Pangkal Pinang",
+                postalCode: "33684",
+                Province: {
+                  create: {
+                    id: "2",
+                    name: "Bangka Belitung",
+                  },
+                },
+              },
+            },
             address:
               "Batin Tikal, Kec. Taman Sari, Kota Pangkal Pinang, Kepulauan Bangka Belitung 33684",
-            postalCode: "33684",
           },
           {
             firstName: "Muhammad Luqmanul",
             lastName: "Hakim",
             email: "luqman12345@gmail.com",
             phone: "089633189921",
-            provinceId: "18",
-            provinceName: "Lampung",
-            cityId: "227",
-            cityName: "Lampung Utara",
+            City: {
+              create: {
+                id: "227",
+                name: "Lampung Utara",
+                postalCode: "34516",
+                Province: {
+                  create: {
+                    id: "18",
+                    name: "Lampung",
+                  },
+                },
+              },
+            },
             address:
               "Jl.Madukoro Baru No.321 Kec. Kotabumi Utara, Kab. Lampung Utara, Prov. Lampung",
-            postalCode: "34516",
           },
         ],
       },

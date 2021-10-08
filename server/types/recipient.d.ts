@@ -4,12 +4,16 @@ export type TGQLRecipient = {
   lastName?: string;
   email: string;
   phone: string;
-  provinceId: string;
-  provinceName: string;
-  cityId: string;
-  cityName: string;
+  City: {
+    Province: {
+      id: string;
+      name: string;
+    };
+    id: string;
+    name: string;
+    postalCode: string;
+  };
   address: string;
-  postalCode: string;
   userId: string;
   createdAt: Date;
   updatedAt: Date;

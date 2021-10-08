@@ -15,7 +15,7 @@ const RadioButton = () => {
 
   const { data, loading } = useGQLCCost({
     courier: order.courier.selected.code,
-    destination: order.recipient.data.recipient?.cityId,
+    destination: order.recipient.data.recipient?.City.id,
     weight:
       order.order.type === "buy-now" ? order.order.weight : shoppingCart.weight,
   });
