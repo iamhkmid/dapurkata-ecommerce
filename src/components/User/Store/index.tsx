@@ -45,15 +45,15 @@ const Store = () => {
           changeSearchInput={changeSearchInput}
           changeCategory={changeCategory}
           filter={filter}
-          numberOfBooks={data?.booksWithFilter?.numberOfBooks}
+          numberOfBooks={data?.booksWithFilter?.numberOfBooks || 0}
         />
         <BookCards data={data?.booksWithFilter?.data} isLoading={loading} />
         <BooksPagination
           changePage={changePage}
           hasPrev={data?.booksWithFilter?.hasPrev}
           hasNext={data?.booksWithFilter?.hasNext}
-          currentPage={data?.booksWithFilter?.currentPage}
-          numberOfPages={data?.booksWithFilter?.numberOfPages}
+          currentPage={data?.booksWithFilter?.currentPage || 0}
+          numberOfPages={data?.booksWithFilter?.numberOfPages || 0}
           skip={data?.booksWithFilter?.skip}
           take={data?.booksWithFilter?.take}
         />
