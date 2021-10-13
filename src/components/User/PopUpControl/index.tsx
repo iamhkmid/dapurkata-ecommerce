@@ -10,7 +10,6 @@ import OrderDetail from "../Order/PopUp";
 import ChangePassword from "../Account/ContentState/PopUp/ChangePassword";
 import styled from "styled-components";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
-import RegisterConfirm from "../Auth/Popup/RegisterConfirm";
 import ActivateAccount from "../Auth/Popup/ActivateAccount";
 
 export const Main = styled(motion.div)`
