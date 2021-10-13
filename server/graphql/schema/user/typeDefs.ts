@@ -39,6 +39,7 @@ const typeDefs = gql`
     email: String!
     role: EnumRole
     phone: String!
+    isActive: Boolean
   }
 
   type User {

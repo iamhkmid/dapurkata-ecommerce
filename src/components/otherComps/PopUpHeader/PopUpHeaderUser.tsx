@@ -28,17 +28,17 @@ const PopUpHeaderUser: FC<TPopUpHeader> = (props) => {
   return (
     <El.Main>
       <El.Left>
-        <El.ButtonGroup>
-          {ws && (
+        {ws && (
+          <El.ButtonGroup>
             <El.IconWrapper
               showSideMenu={ws.showSideMenu}
               onClick={() => ws.setShowSideMenu(!ws.showSideMenu)}
             >
               {IconsControl("chevron-back-outline")}
             </El.IconWrapper>
-          )}
-          {themeToggle && <ThemeToggle />}
-        </El.ButtonGroup>
+            {themeToggle && <ThemeToggle />}
+          </El.ButtonGroup>
+        )}
         <El.Title>{title}</El.Title>
       </El.Left>
       <El.CloseBtn onClick={() => dispatch({ type: "CLOSE_POPUP" })}>

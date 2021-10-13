@@ -2,14 +2,15 @@ import { useMutation } from "@apollo/client";
 import { useEffect } from "react";
 import { useContext } from "react";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import { CREATE_USER_BY_USER } from "../../../../graphql/user/mutations";
+import { REGISTER } from "../../../../graphql/auth/mutations";
 import { TFormCreateUser } from "../../../../types/user";
 import Router from "next/router";
+import { TGQLRegister } from "../../../../types/auth";
 
 export const useGQLCreateUser = () => {
   const { dispatch } = useContext(UserNavCtx);
-  const [createUser, { data, error, loading }] = useMutation(
-    CREATE_USER_BY_USER,
+  const [register, { data, error, loading }] = useMutation<TGQLRegister>(
+    REGISTER,
     {
       errorPolicy: "all",
     }
@@ -18,23 +19,43 @@ export const useGQLCreateUser = () => {
     const { userPic, confirmPassword, ...rest } = values;
     const [pic] = userPic;
     const variables = { userPic: pic, data: { ...rest } };
-    return await createUser({ variables });
+    return await register({ variables });
   };
   useEffect(() => {
-    if (data?.createUser) {
+    if (data?.register) {
       Router.replace("/auth/signin");
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
-          message: "Berhasil membuat akun baru",
+          message: data.register?.message,
           color: "success",
         },
       });
+      dispatch({
+        type: "SHOW_POPUP",
+        value: {
+          name: "REGISTER_CONFIRM",
+          email: data?.register?.email,
+          fetchWaitTime: data?.register?.fetchWaitTime,
+        },
+      });
     }
-  }, [data?.createUser]);
+  }, [data?.register]);
+
+  useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: error.message,
+          color: "danger",
+        },
+      });
+    }
+  }, [error]);
   return {
     createUser: GQLCreateUser,
-    data: data?.createUser,
+    data: data?.register,
     error,
     loading,
   };

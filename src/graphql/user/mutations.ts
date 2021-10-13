@@ -13,14 +13,6 @@ export const CREATE_USER = gql`
   }
 `;
 
-export const CREATE_USER_BY_USER = gql`
-  mutation ($data: cUserData!, $userPic: Upload) {
-    createUser(data: $data, userPic: $userPic) {
-      id
-    }
-  }
-`;
-
 export const UPDATE_USER = gql`
   mutation ($userId: ID!, $data: uUserData!) {
     updateUser(userId: $userId, data: $data) {

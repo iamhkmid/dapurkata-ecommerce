@@ -44,6 +44,7 @@ export const Mutation: TUserMutation = {
         password: await hashPassword(password),
         role: role && user?.role === "ADMIN" ? role : "USER",
         phone,
+        isActive: true,
         pictureDir,
         userPicture: profilePicInfo?.url || undefined,
       },
@@ -51,7 +52,8 @@ export const Mutation: TUserMutation = {
   },
 
   updateUser: async (_, { userId, data }, { user, db }) => {
-    const { username, email, role, phone, firstName, lastName } = data;
+    const { username, email, role, phone, firstName, lastName, isActive } =
+      data;
     const findUser = await db.user.findUnique({ where: { id: userId } });
     validateUser({
       target: "SPECIFIC_USER_OR_ADMIN",
@@ -64,8 +66,9 @@ export const Mutation: TUserMutation = {
       lastName: lastName || undefined,
       username,
       email,
-      role,
+      role: role && user?.role === "ADMIN" ? role : "USER",
       phone,
+      isActive: isActive || undefined,
     };
     return await db.user.update({
       where: { id: userId },

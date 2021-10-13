@@ -22,12 +22,13 @@ export type TGQLSignin = {
 };
 
 export type TGQLRegister = {
-  confirmId: string;
+  email: string;
   expirationTime: Date;
+  fetchWaitTime: Date;
   message: string;
 };
 export type TArgsRegisterConfirmation = {
-  confirmId: string;
+  email: string;
   confirmCode: string;
 };
 export type TGQLRegisterConfirmation = {
@@ -69,15 +70,6 @@ export type TRegisterUserData = {
 };
 
 export type TCacheRegisterConfirm = {
-  confirmId: string;
   confirmCode: string;
-  userData: {
-    firstName: string;
-    lastName?: string;
-    username: string;
-    email: string;
-    password: string;
-    phone: string;
-    userPic?: any;
-  };
+  canRequestAt: Date;
 };

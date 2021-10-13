@@ -51,7 +51,6 @@ export const InputGroup = styled(motion.div)`
 `;
 
 export const Form = styled.form`
-  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
@@ -70,7 +69,7 @@ export const ToggleWrapper = styled.div`
   right: 0;
 `;
 export const CompTittle = styled.h1`
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: 500;
   color: ${({ theme }) => theme.color[1]};
 `;

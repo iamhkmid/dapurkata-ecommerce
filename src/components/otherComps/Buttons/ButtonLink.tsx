@@ -5,7 +5,7 @@ const NLink = styled(Link)``;
 const Container = styled.div`
   font-family: "Poppins", sans-serif;
   cursor: pointer;
-  font-weight: 300;
+  font-weight: 400;
   padding: 0 0.2rem;
   font-size: 0.9rem;
   height: fit-content;
@@ -18,6 +18,10 @@ const Container = styled.div`
   :hover {
     color: ${({ theme }) => theme.link.hover.color};
   }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.8rem;
+  }
+  transition: 0.4s all ease;
 `;
 
 type TButton = {

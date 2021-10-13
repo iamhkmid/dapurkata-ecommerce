@@ -23,3 +23,27 @@ export type TGQLFormSignin = {
   password: string;
   rememberMe: boolean;
 };
+export type TGQLRegister = {
+  register: {
+    email: string;
+    expirationTime: Date;
+    message: string;
+    fetchWaitTime: number;
+  };
+};
+
+export type TGQLRegisterConfirm = {
+  registerConfirmation: {
+    user: TUser;
+    message: string;
+  };
+};
+
+export type TGQLResendRegisterConfirmCode = {
+  resendConfirmCode: {
+    email: string;
+    expirationTime: number;
+    fetchWaitTime: number;
+    message: string;
+  };
+};

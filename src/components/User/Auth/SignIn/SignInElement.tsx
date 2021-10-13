@@ -63,3 +63,41 @@ export const CompTittle = styled.h1`
   font-weight: 500;
   color: ${({ theme }) => theme.color[1]};
 `;
+
+export const LinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  border-top: 2px dashed ${({ theme }) => theme.border[2]};
+  gap: 0.3rem;
+  > div {
+    font-size: 0.8rem;
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    > div {
+      font-size: 0.7rem;
+    }
+  }
+`;
+
+export const ButtonLink = styled.div`
+  font-family: "Poppins", sans-serif;
+  cursor: pointer;
+  font-weight: 400;
+  padding: 0 0.2rem;
+  font-size: 0.9rem;
+  height: fit-content;
+  background: transparent;
+  color: ${({ theme }) => theme.link.color};
+  border: none;
+  outline: none;
+  border-radius: 5px;
+
+  :hover {
+    color: ${({ theme }) => theme.link.hover.color};
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.8rem;
+  }
+  transition: 0.4s all ease;
+`;

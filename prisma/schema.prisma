@@ -24,6 +24,7 @@ model User {
   password     String
   role         String
   phone        String         @unique
+  isActive     Boolean
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
   pictureDir   String         @map("picture_dir")
@@ -182,7 +183,7 @@ model CustomerDetails {
   lastName        String           @map("last_name")
   email           String
   phone           String
-  orderId         String
+  orderId         String           @unique
   Order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
   ShippingAddress ShippingAddress?
   createdAt       DateTime         @default(now()) @map("created_at")
@@ -203,7 +204,7 @@ model ShippingAddress {
   countryCode       String          @map("country_code")
   createdAt         DateTime        @default(now()) @map("created_at")
   updatedAt         DateTime        @updatedAt @map("updated_at")
-  customerDetailsId String
+  customerDetailsId String          @unique
   CustomerDetails   CustomerDetails @relation(fields: [customerDetailsId], references: [id], onDelete: Cascade)
 
   @@map("shipping_address")

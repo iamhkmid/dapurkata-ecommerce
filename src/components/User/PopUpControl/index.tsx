@@ -10,6 +10,8 @@ import OrderDetail from "../Order/PopUp";
 import ChangePassword from "../Account/ContentState/PopUp/ChangePassword";
 import styled from "styled-components";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
+import RegisterConfirm from "../Auth/Popup/RegisterConfirm";
+import ActivateAccount from "../Auth/Popup/ActivateAccount";
 
 export const Main = styled(motion.div)`
   display: flex;
@@ -58,6 +60,17 @@ const PopUpControl = () => {
           {popup.name === "MESSAGE" && <PopUpMessage message={popup.message} />}
           {popup.name === "BOOK_DETAIL" && <BookDetail bookId={popup.bookId} />}
           {popup.name === "CHANGE_PASSWORD" && <ChangePassword />}
+
+          {popup.name === "REGISTER_CONFIRM" && (
+            <ActivateAccount
+              type="REGISTRATION"
+              email={popup.email}
+              fetchWaitTime={popup.fetchWaitTime}
+            />
+          )}
+          {popup.name === "ACTIVATE_ACCOUNT" && (
+            <ActivateAccount type="ACTIVATE_ACCOUNT" />
+          )}
           {/* <OrderDetail /> */}
         </Main>
       )}

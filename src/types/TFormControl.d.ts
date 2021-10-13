@@ -4,6 +4,7 @@ export type TInput = {
   type: "text" | "number" | "password";
   step?: string;
   withIcon?: boolean;
+  placeholder?: string;
   register?: (ref: HTMLInputElement) => void;
 };
 export type TSelect = {

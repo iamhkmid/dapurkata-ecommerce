@@ -16,6 +16,7 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
     type,
     register,
     isLoading,
+    placeholder,
     childRef,
     ...rest
   } = props;
@@ -37,6 +38,7 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
           }}
           name={name}
           type={type}
+          placeholder={placeholder}
           isLoading={isLoading}
           withIcon={withIcon}
           autoComplete={name.includes("password") ? "new-password" : "off"}

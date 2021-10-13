@@ -66,7 +66,6 @@ export const Message = styled.h1`
   text-align: center;
 
   font-family: "Poppins", sans-serif;
-  text-transform: capitalize;
   font-size: 0.9rem;
   padding: 0 1rem;
   font-weight: 500;

@@ -88,8 +88,21 @@ const SignIn = () => {
               disabled={!isDirty || !isValid || loading}
               isLoading={loading}
             />
-            <ButtonLink name="Buat akun" link="/auth/signup" />
+            <ButtonLink name="Buat akun baru" link="/auth/signup" />
           </El.SubmitWrapper>
+          <El.LinkWrapper>
+            <El.ButtonLink>Lupa password</El.ButtonLink>
+            <El.ButtonLink
+              onClick={() =>
+                dispatch({
+                  type: "SHOW_POPUP",
+                  value: { name: "ACTIVATE_ACCOUNT" },
+                })
+              }
+            >
+              Aktifkan akun
+            </El.ButtonLink>
+          </El.LinkWrapper>
         </El.Form>
       </El.Container>
     </El.Main>

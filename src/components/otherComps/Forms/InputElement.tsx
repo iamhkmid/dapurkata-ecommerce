@@ -85,6 +85,23 @@ export const InputElement = styled.input<TInputElement>`
   background: ${({ theme }) => theme.input.background};
   text-decoration: none;
   padding: 0 0.5rem;
+
+  ::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: ${({ theme }) => theme.input.placeholder};
+    opacity: 1; /* Firefox */
+  }
+
+  :-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: ${({ theme }) => theme.input.placeholder};
+  }
+
+  ::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: ${({ theme }) => theme.input.placeholder};
+  }
+
   ${({ withIcon }) =>
     withIcon &&
     css`

@@ -40,9 +40,7 @@ const SignUp = () => {
   return (
     <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        {loading && <LoadingWrapper />}
-        <El.CompTittle>Sign up</El.CompTittle>
-        <ShowMessage message={error?.message} color="danger" />
+        <El.CompTittle>Buat akun baru</El.CompTittle>
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <El.FormWrapper>
             <El.InputGroup>
@@ -136,7 +134,7 @@ const SignUp = () => {
           <El.SubmitWrapper>
             <Button
               type="submit"
-              name="Sign up"
+              name="Daftar"
               isLoading={loading}
               disabled={!isDirty || !isValid || loading}
             />

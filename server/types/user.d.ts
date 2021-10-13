@@ -29,6 +29,7 @@ export type TUpdateUserData = {
   email: string;
   role: string;
   phone: string;
+  isActive: boolean;
   pictureDir: string;
 };
 

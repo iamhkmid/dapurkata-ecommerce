@@ -15,6 +15,7 @@ export const user = async () => {
       password: password1,
       role: "ADMIN",
       phone: "089633189921",
+      isActive: true,
       pictureDir: "/uploads/profile/seed/",
       userPicture: "/uploads/profile/seed/img.jpg",
     },
@@ -28,6 +29,7 @@ export const user = async () => {
       password: password2,
       role: "USER",
       phone: "089633189922",
+      isActive: true,
       Recipient: {
         create: [
           {

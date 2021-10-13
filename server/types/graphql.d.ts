@@ -302,6 +302,11 @@ export type TAuthMutation = {
     args: TArgsRegisterUser,
     context: TCtx
   ) => Promise<TGQLRegister>;
+  resendConfirmCode: (
+    parent: any,
+    args: { email: string },
+    context: TCtx
+  ) => Promise<TGQLRegister>;
   registerConfirmation: (
     parent: any,
     args: TArgsRegisterConfirmation,

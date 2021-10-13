@@ -24,6 +24,8 @@ export const Query: TAuthQuery = {
           where: { id: decoded["id"] },
         });
         if (!findUser) throw new AuthenticationError("User not found");
+        if (!findUser.isActive)
+          throw new AuthenticationError("Akun belum aktif");
         return findUser;
       } catch (error) {
         throw error;
@@ -43,6 +45,8 @@ export const Mutation: TAuthMutation = {
     if (!findUser)
       throw new AuthenticationError("Username or Password incorrect");
 
+    if (!findUser.isActive) throw new AuthenticationError("Akun belum aktif");
+
     const checkPw = await bcrypt.compare(password, findUser.password);
     if (!checkPw)
       throw new AuthenticationError("Username or Password incorrect");
@@ -50,15 +54,41 @@ export const Mutation: TAuthMutation = {
     const token = createToken({ id: findUser.id, role: findUser.role });
     return { jwt: token, user: findUser };
   },
-  register: async (_, { data, userPic }, { mail, cache }) => {
+  register: async (_, { data, userPic }, { mail, cache, db }) => {
     const check = await checkUser(data);
     if (!!check) throw new ValidationError(check + " already exists");
 
-    const confirmId = `confirm-${cuid()}`;
+    const { username, email, password, phone, firstName, lastName } = data;
+    const { pictureDir } = await makeDirFile({
+      dirLoc: "/server/static/uploads/profile",
+    });
+    const profilePicInfo =
+      userPic &&
+      (await saveUserPic({ pictureDir, userPic }).catch((err) => {
+        removeDir(pictureDir);
+        throw err;
+      }));
+    const cUser = await db.user.create({
+      data: {
+        firstName,
+        lastName: lastName || undefined,
+        username,
+        email,
+        password: await hashPassword(password),
+        role: "USER",
+        phone,
+        isActive: false,
+        pictureDir,
+        userPicture: profilePicInfo?.url || undefined,
+      },
+    });
+
     const expr = 300000; /* 5 minutes*/
+    const reqInterval = 90000; /* 1.5 minute*/
     const expirationTime = new Date(new Date().getTime() + expr);
+    const canRequestAt = new Date(new Date().getTime() + reqInterval);
     const confirmCode = genConfirmCode(6);
-    cache.set(confirmId, { userData: { ...data, userPic }, confirmCode }, expr);
+    cache.set(cUser.email, { confirmCode, canRequestAt }, expr);
     try {
       await mail.sendMail({
         from: `Penerbit Dapurkata <${process.env.COMPANY_EMAIL}>`, // sender address
@@ -71,23 +101,74 @@ export const Mutation: TAuthMutation = {
     }
 
     return {
-      confirmId,
+      email,
       expirationTime,
+      fetchWaitTime: canRequestAt,
       message: "Kode konfirmasi telah dikirim melalui email",
     };
   },
-  registerConfirmation: async (_, args, { mail, cache }) => {
-    const { confirmId, confirmCode } = args;
-    if (!cache.has(confirmId))
-      throw new ApolloError("Kode konfirmasi kaldaluarsa");
+  resendConfirmCode: async (_, args, { mail, cache, db }) => {
+    const { email } = args;
 
-    const registerData = cache.get(confirmId) as TCacheRegisterConfirm;
+    if (cache.has(email)) {
+      const registerData = cache.get(email) as TCacheRegisterConfirm;
+      const timeNow = new Date().getTime();
+      if (timeNow < registerData.canRequestAt.getTime())
+        throw new ApolloError(
+          `Request terlalu cepat, waktu tunggu ${Math.ceil(
+            (registerData.canRequestAt.getTime() - timeNow) / 1000
+          )} detik`
+        );
+    }
+
+    const fUser = await db.user.findUnique({
+      where: { email },
+      select: { isActive: true },
+    });
+
+    if (!fUser) throw new ApolloError("Email belum terdaftar");
+    if (fUser.isActive) throw new ApolloError("Akun sudah aktif");
+
+    const expr = 300000; /* 5 minutes*/
+    const reqInterval = 90000; /* 1.5 minute*/
+    const expirationTime = new Date(new Date().getTime() + expr);
+    const canRequestAt = new Date(new Date().getTime() + reqInterval);
+    const confirmCode = genConfirmCode(6);
+
+    try {
+      await mail.sendMail({
+        from: `Penerbit Dapurkata <${process.env.COMPANY_EMAIL}>`, // sender address
+        to: email, // list of receivers
+        subject: "Konfirmasi Pendaftaran", // Subject line
+        html: confirmCodeTemp({ expirationTime, confirmCode }), // html body
+      });
+    } catch (err) {
+      throw new ApolloError("Error sending email on server");
+    }
+
+    cache.set(email, { confirmCode, canRequestAt }, expr);
+    return {
+      email,
+      expirationTime,
+      fetchWaitTime: canRequestAt,
+      message: "Kode konfirmasi telah dikirim melalui email",
+    };
+  },
+  registerConfirmation: async (_, args, { mail, cache, db }) => {
+    const { email, confirmCode } = args;
+    if (!cache.has(email))
+      throw new ApolloError("Kode konfirmasi tidak ditemukan atau kaldaluarsa");
+
+    const registerData = cache.get(email) as TCacheRegisterConfirm;
     if (registerData.confirmCode !== confirmCode)
       throw new ApolloError("Kode konfirmasi salah");
-
+    const uUser = await db.user.update({
+      where: { email },
+      data: { isActive: true },
+    });
     return {
-      user: null,
-      message: "Registration Successful",
+      user: uUser,
+      message: "Akun berhasil diaktifkan",
     };
   },
 };

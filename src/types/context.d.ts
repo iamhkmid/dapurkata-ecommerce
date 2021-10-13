@@ -208,6 +208,14 @@ type TUserPopUpVal =
     }
   | {
       name: "CHANGE_PASSWORD";
+    }
+  | {
+      name: "REGISTER_CONFIRM";
+      email: string;
+      fetchWaitTime?: number;
+    }
+  | {
+      name: "ACTIVATE_ACCOUNT";
     };
 
 type TUserPopUp = {
