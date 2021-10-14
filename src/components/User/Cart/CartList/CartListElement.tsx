@@ -55,6 +55,7 @@ export const Li = styled.li`
   transition: 0.4s all ease;
 `;
 export const CoverWrapper = styled.div`
+  display: flex;
   position: relative;
   border-radius: 100%;
   min-height: 3rem;

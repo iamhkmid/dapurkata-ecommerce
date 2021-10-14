@@ -62,7 +62,7 @@ type TBookCover = {
   alt?: string;
 };
 
-const ImageResponsive: FC<TBookCover> = (props) => {
+const ImageFixed: FC<TBookCover> = (props) => {
   const { width, height, quality, src, defaultIcon, alt } = props;
   const defIcon = defaultIcon || "dapurkata";
   const [noImg, setNoImg] = useState<boolean>(true);
@@ -77,8 +77,7 @@ const ImageResponsive: FC<TBookCover> = (props) => {
           <Image
             src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${src}`}
             alt={alt || "images"}
-            layout="responsive"
-            objectFit="fill"
+            layout="fixed"
             width={width}
             height={height}
             quality={quality}
@@ -100,4 +99,4 @@ const ImageResponsive: FC<TBookCover> = (props) => {
   );
 };
 
-export default ImageResponsive;
+export default ImageFixed;

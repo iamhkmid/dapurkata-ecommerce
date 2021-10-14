@@ -9,8 +9,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { checkUser, hashPassword, saveUserPic } from "../user/utils";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
-import cuid from "cuid";
-import moment from "moment";
 import { TCacheConfirmCode } from "../../../types/auth";
 
 export const Query: TAuthQuery = {

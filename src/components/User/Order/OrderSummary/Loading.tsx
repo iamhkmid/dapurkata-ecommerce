@@ -8,6 +8,96 @@ const shimmer = keyframes`0%{
  }
 `;
 
+export const TableInfo = styled.table`
+  font-size: 0.8rem;
+  width: 100%;
+  height: max-content;
+  border-collapse: collapse;
+
+  .value-sub-total::before,
+  .value-total::before,
+  .value-shipping::before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(
+      to right,
+      ${({ theme }) => theme.loading[1]} 0%,
+      ${({ theme }) => theme.loading[2]} 20%,
+      ${({ theme }) => theme.loading[1]} 40%,
+      ${({ theme }) => theme.loading[1]} 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: ${shimmer} 1s linear infinite;
+  }
+
+  .value-sub-total {
+    position: relative;
+    min-height: 1rem;
+    min-width: 6rem;
+    max-width: 8rem;
+    border-radius: 0.2rem;
+    overflow: hidden;
+    background: ${({ theme }) => theme.loading[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      min-height: 0.9rem;
+    }
+  }
+  .value-shipping {
+    position: relative;
+    min-height: 1rem;
+    min-width: 4rem;
+    max-width: 5rem;
+    overflow: hidden;
+    border-radius: 0.2rem;
+    background: ${({ theme }) => theme.loading[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      min-height: 0.9rem;
+    }
+    transition: 0.4s background ease;
+  }
+  .value-total {
+    position: relative;
+    overflow: hidden;
+    min-height: 1.2rem;
+    min-width: 3rem;
+    max-width: 6rem;
+    border-radius: 0.2rem;
+    background: ${({ theme }) => theme.loading[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      min-height: 1.1rem;
+    }
+    transition: 0.4s background ease;
+  }
+  .total-name {
+    font-size: 1rem;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.9rem;
+    }
+    transition: 0.4s background ease;
+  }
+  > tbody {
+    tr {
+      .title {
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: ${({ theme }) => theme.button.primary.background};
+      }
+    }
+    td {
+      padding: 0.2rem 0.5rem;
+      border: 1px solid ${({ theme }) => theme.border[2]};
+    }
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.7rem;
+  }
+`;
+
 const Main = styled.div`
   display: flex;
   font-family: "Poppins", sans-serif;
@@ -102,22 +192,30 @@ const TotalPrice = styled.div`
 
 const Loading = () => {
   return (
-    <Main>
-      <DetailPrice>
-        <div className="group">
-          <div className="key1 load" />
-          <div className="value1 load" />
-        </div>
-        <div className="group">
-          <div className="key2 load" />
-          <div className="value2 load" />
-        </div>
-      </DetailPrice>
-      <TotalPrice>
-        <div className="load" />
-        <div className="load" />
-      </TotalPrice>
-    </Main>
+    <TableInfo>
+      <tbody>
+        <tr>
+          <td className="name">Subtotal</td>
+          <td>
+            <div className="value-sub-total" />
+          </td>
+        </tr>
+        <tr>
+          <td className="name">Biaya Kirim</td>
+          <td>
+            <div className="value-shipping" />
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <div className="total-name">Total</div>
+          </td>
+          <td>
+            <div className="value-total" />
+          </td>
+        </tr>
+      </tbody>
+    </TableInfo>
   );
 };
 

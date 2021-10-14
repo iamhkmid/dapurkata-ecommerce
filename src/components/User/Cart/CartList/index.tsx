@@ -5,6 +5,7 @@ import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import Button from "../../../otherComps/Buttons/Button";
+import ImageFixed from "../../../otherComps/ImageFixed";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
 import DeleteCart from "../DeleteCart";
 import UpdateCartInput from "../UpdateCartInput";
@@ -50,7 +51,7 @@ const CartList = () => {
                         <El.Product>
                           <El.CoverWrapper>
                             <div>
-                              <ImageResponsive
+                              <ImageFixed
                                 src={cover?.url}
                                 alt={val.Book.title}
                                 height={75}
