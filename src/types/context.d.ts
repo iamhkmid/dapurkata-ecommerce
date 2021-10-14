@@ -216,6 +216,9 @@ type TUserPopUpVal =
     }
   | {
       name: "ACTIVATE_ACCOUNT";
+    }
+  | {
+      name: "RESET_PASSWORD";
     };
 
 type TUserPopUp = {

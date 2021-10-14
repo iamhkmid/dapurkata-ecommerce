@@ -11,7 +11,7 @@ import { checkUser, hashPassword, saveUserPic } from "../user/utils";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
 import cuid from "cuid";
 import moment from "moment";
-import { TCacheRegisterConfirm } from "../../../types/auth";
+import { TCacheConfirmCode } from "../../../types/auth";
 
 export const Query: TAuthQuery = {
   checkUser: async (_, __, { db, req }) => {
@@ -88,7 +88,12 @@ export const Mutation: TAuthMutation = {
     const expirationTime = new Date(new Date().getTime() + expr);
     const canRequestAt = new Date(new Date().getTime() + reqInterval);
     const confirmCode = genConfirmCode(6);
-    cache.set(cUser.email, { confirmCode, canRequestAt }, expr);
+    const cacheData: TCacheConfirmCode = {
+      canRequestAt,
+      confirmCode,
+      type: "ACTIVATE_ACCOUNT",
+    };
+    cache.set(cUser.email, cacheData, expr);
     try {
       await mail.sendMail({
         from: `Penerbit Dapurkata <${process.env.COMPANY_EMAIL}>`, // sender address
@@ -102,20 +107,20 @@ export const Mutation: TAuthMutation = {
 
     return {
       email,
+      type: "ACTIVATE_ACCOUNT",
       expirationTime,
       fetchWaitTime: canRequestAt,
       message: "Kode konfirmasi telah dikirim melalui email",
     };
   },
   resendConfirmCode: async (_, args, { mail, cache, db }) => {
-    const { email } = args;
-
+    const { email, type } = args;
     if (cache.has(email)) {
-      const registerData = cache.get(email) as TCacheRegisterConfirm;
+      const registerData = cache.get(email) as TCacheConfirmCode;
       const timeNow = new Date().getTime();
       if (timeNow < registerData.canRequestAt.getTime())
         throw new ApolloError(
-          `Request terlalu cepat, waktu tunggu ${Math.ceil(
+          `Tunggu sebentar, waktu tunggu ${Math.ceil(
             (registerData.canRequestAt.getTime() - timeNow) / 1000
           )} detik`
         );
@@ -127,28 +132,42 @@ export const Mutation: TAuthMutation = {
     });
 
     if (!fUser) throw new ApolloError("Email belum terdaftar");
-    if (fUser.isActive) throw new ApolloError("Akun sudah aktif");
+    if (type === "ACTIVATE_ACCOUNT" && fUser.isActive)
+      throw new ApolloError("Akun sudah aktif");
 
     const expr = 300000; /* 5 minutes*/
     const reqInterval = 90000; /* 1.5 minute*/
     const expirationTime = new Date(new Date().getTime() + expr);
     const canRequestAt = new Date(new Date().getTime() + reqInterval);
     const confirmCode = genConfirmCode(6);
+    let subject: string;
+    const cacheData: TCacheConfirmCode = {
+      canRequestAt,
+      confirmCode,
+      type,
+    };
 
+    if (type === "ACTIVATE_ACCOUNT") {
+      subject = "Konfirmasi Pendaftaran";
+    } else if (type === "RESET_PASSWORD") {
+      subject = "Reset Password";
+    }
+    const emailOptions = {
+      from: `Penerbit Dapurkata <${process.env.COMPANY_EMAIL}>`, // sender address
+      to: email, // list of receivers
+      subject, // Subject line
+      html: confirmCodeTemp({ expirationTime, confirmCode }), // html body
+    };
     try {
-      await mail.sendMail({
-        from: `Penerbit Dapurkata <${process.env.COMPANY_EMAIL}>`, // sender address
-        to: email, // list of receivers
-        subject: "Konfirmasi Pendaftaran", // Subject line
-        html: confirmCodeTemp({ expirationTime, confirmCode }), // html body
-      });
+      await mail.sendMail(emailOptions);
     } catch (err) {
       throw new ApolloError("Error sending email on server");
     }
+    cache.set(email, { confirmCode, canRequestAt, type }, expr);
 
-    cache.set(email, { confirmCode, canRequestAt }, expr);
     return {
       email,
+      type: cacheData.type,
       expirationTime,
       fetchWaitTime: canRequestAt,
       message: "Kode konfirmasi telah dikirim melalui email",
@@ -159,16 +178,43 @@ export const Mutation: TAuthMutation = {
     if (!cache.has(email))
       throw new ApolloError("Kode konfirmasi tidak ditemukan atau kaldaluarsa");
 
-    const registerData = cache.get(email) as TCacheRegisterConfirm;
-    if (registerData.confirmCode !== confirmCode)
+    const cacheData = cache.get(email) as TCacheConfirmCode;
+    if (
+      cacheData.confirmCode !== confirmCode ||
+      cacheData.type !== "ACTIVATE_ACCOUNT"
+    )
       throw new ApolloError("Kode konfirmasi salah");
     const uUser = await db.user.update({
       where: { email },
       data: { isActive: true },
     });
+    cache.del(email);
     return {
       user: uUser,
       message: "Akun berhasil diaktifkan",
+    };
+  },
+  resetPassword: async (_, args, { mail, cache, db }) => {
+    const { email, confirmCode, password } = args;
+    if (!cache.has(email))
+      throw new ApolloError("Kode konfirmasi tidak ditemukan atau kaldaluarsa");
+
+    const cacheData = cache.get(email) as TCacheConfirmCode;
+    if (
+      cacheData.confirmCode !== confirmCode ||
+      cacheData.type !== "RESET_PASSWORD"
+    )
+      throw new ApolloError("Kode konfirmasi salah");
+
+    await db.user.update({
+      where: { email },
+      data: {
+        password: await hashPassword(password),
+      },
+    });
+    cache.del(email);
+    return {
+      message: "Berhasil mengubah password",
     };
   },
 };

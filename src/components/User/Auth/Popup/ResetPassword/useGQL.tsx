@@ -5,25 +5,28 @@ import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import {
   REGISTER_CONFIRMATION,
   RESEND_CONFIRM_CODE,
+  RESET_PASSWORD,
 } from "../../../../../graphql/auth/mutations";
 import {
   TGQLRegisterConfirm,
   TGQLResendConfirmCode,
+  TGQLResetPassword,
 } from "../../../../../types/auth";
 
 type TVals = {
   email: string;
   confirmCode: string;
+  password: string;
 };
 
-export const useGQLRegisterConfirm = () => {
+export const useGQLResetPassword = () => {
   const { dispatch } = useContext(UserNavCtx);
-  const [registerConfirmation, { data, error, loading }] =
-    useMutation<TGQLRegisterConfirm>(REGISTER_CONFIRMATION, {
+  const [resetPassword, { data, error, loading }] =
+    useMutation<TGQLResetPassword>(RESET_PASSWORD, {
       errorPolicy: "all",
     });
-  const GQLRegisterConfirm = async (variables: TVals) => {
-    return await registerConfirmation({ variables });
+  const GQLResetPassword = async (variables: TVals) => {
+    return await resetPassword({ variables });
   };
   useEffect(() => {
     if (error) {
@@ -35,11 +38,11 @@ export const useGQLRegisterConfirm = () => {
         },
       });
     }
-    if (data?.registerConfirmation) {
+    if (data?.resetPassword) {
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
-          message: data.registerConfirmation.message,
+          message: data.resetPassword.message,
           color: "success",
         },
       });
@@ -47,8 +50,8 @@ export const useGQLRegisterConfirm = () => {
     }
   }, [error, data]);
   return {
-    registerConfirmation: GQLRegisterConfirm,
-    data: data?.registerConfirmation,
+    resetPassword: GQLResetPassword,
+    data: data?.resetPassword,
     error,
     loading,
   };

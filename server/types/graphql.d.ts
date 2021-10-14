@@ -2,10 +2,13 @@ import { TAPI } from "./api";
 import {
   TArgsRegisterConfirmation,
   TArgsRegisterUser,
+  TArgsResendConfirmCode,
+  TArgsResetPassword,
   TGQLArgsSignin,
   TGQLCheckUser,
   TGQLRegister,
   TGQLRegisterConfirmation,
+  TGQLResendConfirmCode,
   TGQLSignin,
 } from "./auth";
 import {
@@ -304,14 +307,19 @@ export type TAuthMutation = {
   ) => Promise<TGQLRegister>;
   resendConfirmCode: (
     parent: any,
-    args: { email: string },
+    args: TArgsResendConfirmCode,
     context: TCtx
-  ) => Promise<TGQLRegister>;
+  ) => Promise<TGQLResendConfirmCode>;
   registerConfirmation: (
     parent: any,
     args: TArgsRegisterConfirmation,
     context: TCtx
   ) => Promise<TGQLRegisterConfirmation>;
+  resetPassword: (
+    parent: any,
+    args: TArgsResetPassword,
+    context: TCtx
+  ) => Promise<TGQLResetPassword>;
 };
 
 export type TCourierQuery = {

@@ -91,7 +91,16 @@ const SignIn = () => {
             <ButtonLink name="Buat akun baru" link="/auth/signup" />
           </El.SubmitWrapper>
           <El.LinkWrapper>
-            <El.ButtonLink>Lupa password</El.ButtonLink>
+            <El.ButtonLink
+              onClick={() =>
+                dispatch({
+                  type: "SHOW_POPUP",
+                  value: { name: "RESET_PASSWORD" },
+                })
+              }
+            >
+              Lupa password
+            </El.ButtonLink>
             <El.ButtonLink
               onClick={() =>
                 dispatch({

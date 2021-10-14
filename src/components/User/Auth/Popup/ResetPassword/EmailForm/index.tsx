@@ -26,10 +26,9 @@ const EmailForm: FC<TProps> = (props) => {
     if (values.email === email) {
       toggleShowEmailForm(false);
     } else {
-      resendConfirmCode({
-        email: values.email,
-        type: "ACTIVATE_ACCOUNT",
-      }).catch(() => {});
+      resendConfirmCode({ email: values.email, type: "RESET_PASSWORD" }).catch(
+        () => {}
+      );
     }
   };
 

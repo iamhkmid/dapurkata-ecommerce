@@ -1,16 +1,16 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import PopUpMessage from "../../otherComps/PopUpMessage";
 import BookDetail from "../Store/BookDetail";
 import CreateRecipient from "../Order/Delevery/PopUp/CreateRecipient";
 import ChangeRecipient from "../Order/Delevery/PopUp/ChangeRecipient";
 import UpdateRecipient from "../Order/Delevery/PopUp/UpdateRecipient";
-import OrderDetail from "../Order/PopUp";
 import ChangePassword from "../Account/ContentState/PopUp/ChangePassword";
 import styled from "styled-components";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 import ActivateAccount from "../Auth/Popup/ActivateAccount";
+import ResetPassword from "../Auth/Popup/ResetPassword";
 
 export const Main = styled(motion.div)`
   display: flex;
@@ -19,7 +19,7 @@ export const Main = styled(motion.div)`
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 100;
+  z-index: 200;
   align-items: center;
   justify-content: center;
   padding: 1rem 0.3rem;
@@ -40,6 +40,14 @@ const PopUpControl = () => {
   const {
     userNav: { popup },
   } = useContext(UserNavCtx);
+
+  useEffect(() => {
+    if (!!popup.name) {
+      document.documentElement.style.overflowY = "hidden";
+    } else {
+      document.documentElement.style.overflowY = "scroll";
+    }
+  }, [popup.name]);
 
   return (
     <AnimatePresence>
@@ -70,6 +78,7 @@ const PopUpControl = () => {
           {popup.name === "ACTIVATE_ACCOUNT" && (
             <ActivateAccount type="ACTIVATE_ACCOUNT" />
           )}
+          {popup.name === "RESET_PASSWORD" && <ResetPassword />}
           {/* <OrderDetail /> */}
         </Main>
       )}

@@ -8,11 +8,16 @@ const typeDefs = gql`
   type Mutation {
     signin(username: String!, password: String!, rememberMe: Boolean!): signin
     register(data: RegisterData!, userPic: Upload): Register
-    resendConfirmCode(email: String!): Register
+    resendConfirmCode(email: String!, type: String): ResendConfirmCode
     registerConfirmation(
       email: String!
       confirmCode: String!
     ): RegisterConfirmation
+    resetPassword(
+      email: String!
+      confirmCode: String!
+      password: String!
+    ): ResetPassword
   }
 
   type signin {
@@ -21,9 +26,22 @@ const typeDefs = gql`
   }
 
   type Register {
+    type: String
     email: String
     expirationTime: Date
     fetchWaitTime: Date
+    message: String
+  }
+
+  type ResendConfirmCode {
+    type: String
+    email: String
+    expirationTime: Date
+    fetchWaitTime: Date
+    message: String
+  }
+
+  type ResetPassword {
     message: String
   }
 

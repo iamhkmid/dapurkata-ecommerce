@@ -90,7 +90,9 @@ const ActivateAccount: FC<TProps> = (Props) => {
           <ConfirmCodeForm email={email} disabled={loading} />
           <div className="resend-code-wrapper">
             <El.ButtonLink
-              onClick={() => resendConfirmCode({ email })}
+              onClick={() =>
+                resendConfirmCode({ email, type: "ACTIVATE_ACCOUNT" })
+              }
               className="resend-code-button"
               disabled={loading}
             >

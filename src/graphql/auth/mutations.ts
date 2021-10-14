@@ -44,12 +44,25 @@ export const REGISTER_CONFIRMATION = gql`
   }
 `;
 
-export const RESEND_REGISTER_CONFIRM_CODE = gql`
-  mutation ($email: String!) {
-    resendConfirmCode(email: $email) {
+export const RESEND_CONFIRM_CODE = gql`
+  mutation ($email: String!, $type: String!) {
+    resendConfirmCode(email: $email, type: $type) {
+      type
       email
       expirationTime
       fetchWaitTime
+      message
+    }
+  }
+`;
+
+export const RESET_PASSWORD = gql`
+  mutation ($email: String!, $confirmCode: String!, $password: String!) {
+    resetPassword(
+      email: $email
+      confirmCode: $confirmCode
+      password: $password
+    ) {
       message
     }
   }

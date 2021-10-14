@@ -38,9 +38,14 @@ export type TGQLRegisterConfirm = {
     message: string;
   };
 };
-
-export type TGQLResendRegisterConfirmCode = {
+export type TGQLResetPassword = {
+  resetPassword: {
+    message: string;
+  };
+};
+export type TGQLResendConfirmCode = {
   resendConfirmCode: {
+    type: string;
     email: string;
     expirationTime: number;
     fetchWaitTime: number;

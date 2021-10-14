@@ -22,6 +22,15 @@ export type TGQLSignin = {
 };
 
 export type TGQLRegister = {
+  type: "ACTIVATE_ACCOUNT" | "RESET_PASSWORD";
+  email: string;
+  expirationTime: Date;
+  fetchWaitTime: Date;
+  message: string;
+};
+
+export type TGQLResendConfirmCode = {
+  type: "ACTIVATE_ACCOUNT" | "RESET_PASSWORD";
   email: string;
   expirationTime: Date;
   fetchWaitTime: Date;
@@ -30,6 +39,21 @@ export type TGQLRegister = {
 export type TArgsRegisterConfirmation = {
   email: string;
   confirmCode: string;
+};
+
+export type TArgsResendConfirmCode = {
+  email: string;
+  type: "ACTIVATE_ACCOUNT" | "RESET_PASSWORD";
+};
+
+export type TArgsResetPassword = {
+  email: string;
+  confirmCode: string;
+  password: string;
+};
+
+export type TGQLResetPassword = {
+  message: string;
 };
 export type TGQLRegisterConfirmation = {
   user: {
@@ -69,7 +93,8 @@ export type TRegisterUserData = {
   phone: string;
 };
 
-export type TCacheRegisterConfirm = {
+export type TCacheConfirmCode = {
+  type: "ACTIVATE_ACCOUNT" | "RESET_PASSWORD";
   confirmCode: string;
   canRequestAt: Date;
 };
