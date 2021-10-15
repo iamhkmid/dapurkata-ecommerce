@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
-import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import PopUpHeader from "../../../otherComps/PopUpHeader/PopUpHeaderUser";
+import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
+import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./OrderDetailElement";
 
 const OrderDetail = () => {

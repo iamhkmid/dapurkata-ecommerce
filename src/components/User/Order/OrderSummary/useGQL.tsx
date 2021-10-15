@@ -6,6 +6,7 @@ import { GET_ORDER_BOOK } from "../../../../graphql/book/queries";
 import { ORDER } from "../../../../graphql/transaction/mutations";
 import { TGQLGetOrderBook } from "../../../../types/book";
 import { TGQLOrder } from "../../../../types/order";
+import { TGQLMutationOrder } from "../../../../types/transaction";
 
 type TValues = {
   orderType: string;
@@ -18,10 +19,13 @@ type TValues = {
 };
 export const useGQLOrder = () => {
   const { dispatch } = useContext(UserNavCtx);
-  const [order, { data, error, loading }] = useMutation<TGQLOrder>(ORDER, {
-    errorPolicy: "all",
-    fetchPolicy: "no-cache",
-  });
+  const [order, { data, error, loading }] = useMutation<TGQLMutationOrder>(
+    ORDER,
+    {
+      errorPolicy: "all",
+      fetchPolicy: "no-cache",
+    }
+  );
   const makeAnOrder = async (values: TValues) => {
     return order({ variables: { data: values } });
   };
@@ -34,6 +38,12 @@ export const useGQLOrder = () => {
           color: "danger",
         },
       });
-  }, [error]);
+    if (data?.order) {
+      dispatch({
+        type: "SHOW_POPUP",
+        value: { name: "ORDER_PAYMENT_INFO", order: data?.order },
+      });
+    }
+  }, [error, data?.order]);
   return { makeAnOrder, data: data?.order, error, loading };
 };

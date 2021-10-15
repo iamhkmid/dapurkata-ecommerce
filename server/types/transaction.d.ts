@@ -24,12 +24,11 @@ export type TGQLBankTransfer = {
 };
 
 export type TDBPaymentType = {
-  group: string;
-  groupLabel: string;
-  payment: string;
-  paymentLabel: string;
+  id: string;
+  name: string;
+  icon: string;
   isEnabled: boolean;
-  imgURL: string;
+  description: string;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -40,6 +39,7 @@ export type TGQLPaymentService = {
   isEnabled: boolean;
   icon: string;
   description: string;
+  PaymentType?: TDBPaymentType;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -147,7 +147,20 @@ export type TBuyNowItems = (p: TPBuyNowItems) => {
 export type TGQLOrder = {
   id: string;
   paymentServiceId: string;
-  PaymentService?: TGQLPaymentService;
+  PaymentService?: {
+    id: string;
+    name: string;
+    isEnabled: boolean;
+    icon: string;
+    description: string;
+    PaymentType?: {
+      id: string;
+      name: string;
+      icon: string;
+      isEnabled: boolean;
+      description: string;
+    };
+  };
   userId: string;
   User?: TGQLUser;
   grossAmount: number;
@@ -171,8 +184,6 @@ type TGQLItemDetail = {
   price: number;
   quantity: number;
   orderId: string;
-  createdAt: Date;
-  updatedAt: Date;
 };
 
 type TGQLCustomerDetails = {
@@ -200,4 +211,29 @@ type TGQLShippingAddress = {
   customerDetailsId: string;
   createdAt: Date;
   updatedAt: Date;
+};
+
+export type TGQLOrderPaymentInfo = {
+  id: string;
+  PaymentService?: {
+    id: string;
+    name: string;
+    isEnabled: boolean;
+    icon: string;
+    description: string;
+    PaymentType?: {
+      id: string;
+      name: string;
+      icon: string;
+      isEnabled: boolean;
+      description: string;
+    };
+  };
+  grossAmount: number;
+  currency: string;
+  transactionTime: Date;
+  expirationTime: Date;
+  transactionStatus: string;
+  fraudStatus: string;
+  PaymentInfo?: TGQLPaymentInfo[];
 };

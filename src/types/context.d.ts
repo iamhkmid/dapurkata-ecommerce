@@ -5,6 +5,7 @@ import { TOrderBook } from "./book";
 import { TPaymentService, TPaymentType } from "./payment";
 import { TRecipient } from "./recipient";
 import { TCart } from "./shoppingCart";
+import { TOrderPaymentInfo } from "./transaction";
 import { TAuthUser } from "./user";
 
 // AUTH CONTEXT
@@ -201,6 +202,10 @@ type TUserPopUpVal =
   | {
       name: "ORDER_DETAIL";
       orderId: string;
+    }
+  | {
+      name: "ORDER_PAYMENT_INFO";
+      order: TOrderPaymentInfo;
     }
   | {
       name: "BOOK_DETAIL";

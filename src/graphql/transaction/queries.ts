@@ -38,3 +38,12 @@ export const ORDERS_FILTER_BY_USER = gql`
     }
   }
 `;
+
+export const HOW_TO_PAY = gql`
+  query ($paymentId: ID!) {
+    howToPay(paymentId: $paymentId) {
+      name
+      stages
+    }
+  }
+`;

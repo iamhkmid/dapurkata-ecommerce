@@ -57,6 +57,7 @@ import {
   TGQLHowToPay,
   TGQLItemDetail,
   TGQLOrder,
+  TGQLOrderPaymentInfo,
   TGQLPaymentInfo,
   TGQLPaymentService,
   TGQLPaymentType,
@@ -432,7 +433,7 @@ export type TTransactionMutation = {
     parent: any,
     args: TGQLArgsOrder,
     context: TCtx
-  ) => Promise<TGQLOrder>;
+  ) => Promise<TGQLOrderPaymentInfo>;
 };
 
 export type TOrder = {
@@ -457,6 +458,19 @@ export type TOrder = {
     args: null,
     context: TCtx
   ) => Promise<TGQLCustomerDetails>;
+};
+
+export type TOrderPaymentInfoMutation = {
+  PaymentService: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLPaymentService>;
+  PaymentInfo: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLPaymentInfo[]>;
 };
 
 export type TFooterInfoQuery = {

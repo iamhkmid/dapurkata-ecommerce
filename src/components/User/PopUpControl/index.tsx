@@ -11,6 +11,8 @@ import styled from "styled-components";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 import ActivateAccount from "../Auth/Popup/ActivateAccount";
 import ResetPassword from "../Auth/Popup/ResetPassword";
+import OrderDetail from "../Order/PopUp/OrderDetail";
+import OrderPaymentInfo from "../Order/PopUp/OrderPaymentInfo";
 
 export const Main = styled(motion.div)`
   display: flex;
@@ -39,13 +41,16 @@ export const Backround = styled.div`
 const PopUpControl = () => {
   const {
     userNav: { popup },
+    dispatch,
   } = useContext(UserNavCtx);
 
   useEffect(() => {
     if (!!popup.name) {
-      document.documentElement.style.overflowY = "hidden";
+      window.document.body.style.overflowY = "hidden";
+      window.document.body.style.paddingRight = "10px";
     } else {
-      document.documentElement.style.overflowY = "scroll";
+      window.document.body.style.overflowY = "scroll";
+      window.document.body.style.paddingRight = "0";
     }
   }, [popup.name]);
 
@@ -79,7 +84,10 @@ const PopUpControl = () => {
             <ActivateAccount type="ACTIVATE_ACCOUNT" />
           )}
           {popup.name === "RESET_PASSWORD" && <ResetPassword />}
-          {/* <OrderDetail /> */}
+          {popup.name === "ORDER_DETAIL" && <OrderDetail />}
+          {popup.name === "ORDER_PAYMENT_INFO" && (
+            <OrderPaymentInfo order={popup.order} />
+          )}
         </Main>
       )}
     </AnimatePresence>

@@ -9,7 +9,7 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    order(data: OrderInput!): Order! @auth(requires: USER)
+    order(data: OrderInput!): OrderPaymentInfo @auth(requires: USER)
   }
 
   enum orderFilter {
@@ -66,6 +66,18 @@ const typeDefs = gql`
     CustomerDetails: CustomerDetails
     createdAt: Date
     updatedAt: Date
+  }
+
+  type OrderPaymentInfo {
+    id: ID
+    PaymentService: PaymentService
+    grossAmount: Int
+    currency: String
+    transactionTime: Date
+    transactionStatus: String
+    expirationTime: Date
+    fraudStatus: String
+    PaymentInfo: [PaymentInfo]
   }
 
   type ItemDetail {

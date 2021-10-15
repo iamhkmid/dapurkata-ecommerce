@@ -5,6 +5,7 @@ import {
   TTransactionQuery,
   TTransactionMutation,
   TOrder,
+  TOrderPaymentInfoMutation,
 } from "../../../types/graphql";
 import { TGQLPaymentType, TPaymentBT } from "../../../types/transaction";
 import {
@@ -331,6 +332,23 @@ export const Order: TOrder = {
       select: { CustomerDetails: { include: { ShippingAddress: true } } },
     });
     return findOrder.CustomerDetails;
+  },
+  PaymentInfo: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { PaymentInfo: true },
+    });
+    return findOrder.PaymentInfo;
+  },
+};
+
+export const OrderPaymentInfo: TOrderPaymentInfoMutation = {
+  PaymentService: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { PaymentService: { include: { PaymentType: true } } },
+    });
+    return findOrder.PaymentService;
   },
   PaymentInfo: async ({ id }, _, { db }) => {
     const findOrder = await db.order.findUnique({
