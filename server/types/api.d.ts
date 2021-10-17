@@ -77,3 +77,28 @@ type TRMidtrans = {
 export type TAPIMidtrans = (props: TMidtransProps) => Promise<TRMidtrans>;
 
 export type TMidtransPayType = TPaymentBT | TPaymentStore;
+
+type TNotifPaymentBody = {
+  transaction_time: string;
+  transaction_status: string;
+  transaction_id: string;
+  status_message: string;
+  status_code: string;
+  signature_key: string;
+  payment_type: string;
+  payment_amounts: any[];
+  order_id: string;
+  merchant_id: string;
+  gross_amount: string;
+  fraud_status: string;
+  currency: string;
+} & (
+  | {
+      va_numbers: { va_number: string; bank: string }[];
+    }
+  | {
+      biller_code: string;
+      bill_key: string;
+    }
+  | { permata_va_number: string }
+);

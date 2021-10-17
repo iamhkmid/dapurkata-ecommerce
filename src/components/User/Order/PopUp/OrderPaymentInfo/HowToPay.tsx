@@ -19,7 +19,7 @@ const HowToPay: FC<TProps> = ({ paymentServiceId }) => {
   const { data, error, loading } = useQuery<TGQLHowToPay>(HOW_TO_PAY, {
     skip: !paymentServiceId,
     fetchPolicy: "network-only",
-    variables: { paymentId: "MANDIRI_BILL_BANK_TRANSFER" },
+    variables: { paymentId: paymentServiceId },
   });
 
   useEffect(() => {
@@ -52,13 +52,18 @@ const HowToPay: FC<TProps> = ({ paymentServiceId }) => {
             ))}
           </div>
         </AnimateSharedLayout>
-        <div className="stages">
-          {data?.howToPay
-            ?.find((htp) => htp.name === selected)
-            ?.stages.map((stage) => (
-              <h1 className="stage">{stage}</h1>
-            ))}
-        </div>
+        <table className="stages">
+          <tbody>
+            {data?.howToPay
+              ?.find((htp) => htp.name === selected)
+              ?.stages.map((stage, i) => (
+                <tr key={stage} className="stage">
+                  <td className="count">{i + 1}</td>
+                  <td className="value">{stage}</td>
+                </tr>
+              ))}
+          </tbody>
+        </table>
       </div>
     </Main>
   );
@@ -125,8 +130,8 @@ export const Main = styled.div`
     border-radius: 0.2rem;
     border: 2px solid ${({ theme }) => theme.button.hover.list.background};
     gap: 0.5rem;
-    max-height: 15rem;
-    min-height: 15rem;
+    max-height: 12rem;
+    min-height: 12rem;
     overflow-y: auto;
     > div {
       display: flex;
@@ -150,23 +155,28 @@ export const Main = styled.div`
       background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
     }
     .stage {
-      position: relative;
-      font-size: 0.9rem;
-      padding-left: 1rem;
-      ::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        border-radius: 100%;
-        background: ${({ theme }) => theme.button.hover.list.color};
-        min-width: 8px;
-        min-height: 8px;
+      font-size: 0.8rem;
+      .value {
+        font-family: "Poppins", sans-serif;
+        padding: 0.2rem 0;
+        padding-left: 0.6rem;
+      }
+      .count {
+        font-family: "Roboto", sans-serif;
+        text-align: end;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: ${({ theme }) => theme.button.hover.list.color};
+        @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+          font-size: 0.8rem;
+        }
       }
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 0.7rem;
       }
+    }
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      padding: 0.5rem;
     }
   }
 `;

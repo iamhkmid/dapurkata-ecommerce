@@ -6,6 +6,7 @@ import {
   TTransactionMutation,
   TOrder,
   TOrderPaymentInfoMutation,
+  TTransactionSubcription,
 } from "../../../types/graphql";
 import { TGQLPaymentType, TPaymentBT } from "../../../types/transaction";
 import {
@@ -17,6 +18,8 @@ import {
 } from "./utils";
 import util from "util";
 import { validateUser } from "../../utils/validateUser";
+import { withFilter } from "graphql-subscriptions";
+import pubsub from "../../services/pubsub";
 
 export const Query: TTransactionQuery = {
   paymentType: async (_, { isEnabled }, { db }) => {
@@ -301,6 +304,17 @@ export const Mutation: TTransactionMutation = {
       default:
         throw new ApolloError(`Order type not found`);
     }
+  },
+};
+
+export const Subscription: TTransactionSubcription = {
+  orderInfo: {
+    subscribe: withFilter(
+      () => pubsub.asyncIterator("UPDATE_ORDER_STATUS"),
+      (payload, variables) => {
+        return true;
+      }
+    ),
   },
 };
 

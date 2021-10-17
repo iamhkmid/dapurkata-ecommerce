@@ -12,9 +12,19 @@ const typeDefs = gql`
     order(data: OrderInput!): OrderPaymentInfo @auth(requires: USER)
   }
 
+  type Subscription {
+    orderInfo(orderId: ID!): OrderInfoSubscription
+  }
+
   enum orderFilter {
     ALL
     USER
+  }
+
+  type OrderInfoSubscription {
+    transactionTime: Date
+    transactionStatus: String
+    fraudStatus: String
   }
 
   type PaymentType {

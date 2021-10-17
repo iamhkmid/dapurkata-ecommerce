@@ -2,29 +2,27 @@ import { FC } from "react";
 import styled from "styled-components";
 
 type Props = {
-  paymentService: string;
-  paymentType: string;
+  paymentServiceId: string;
   data: { name: string; value: string }[];
 };
 
 const PaymentCode: FC<Props> = (props) => {
-  const { data, paymentService, paymentType } = props;
-  const payment = `${paymentType} - ${paymentService}`;
+  const { data, paymentServiceId } = props;
 
-  switch (payment) {
-    case "ATM/Bank Transfer - BCA": {
+  switch (paymentServiceId) {
+    case "BCA_BANK_TRANSFER": {
       return <BankTransferType1 data={data} />;
     }
-    case "ATM/Bank Transfer - BNI": {
+    case "BRI_BANK_TRANSFER": {
       return <BankTransferType1 data={data} />;
     }
-    case "ATM/Bank Transfer - BRI": {
+    case "BNI_BANK_TRANSFER": {
       return <BankTransferType1 data={data} />;
     }
-    case "ATM/Bank Transfer - Permata": {
+    case "PERMATA_BANK_TRANSFER": {
       return <BankTransferType1 data={data} />;
     }
-    case "ATM/Bank Transfer - Mandiri Bill": {
+    case "MANDIRI_BILL_BANK_TRANSFER": {
       return <BankTransferType2 data={data} />;
     }
 
@@ -109,6 +107,7 @@ const Code = styled.div`
     width: 100%;
   }
   > div > div.name {
+    font-family: "Poppins", sans-serif;
     color: ${({ theme }) => theme.color[2]};
     font-size: 0.8rem;
     font-weight: 600;
@@ -117,7 +116,8 @@ const Code = styled.div`
     }
   }
   > div > div.value {
-    background: ${({ theme }) => theme.background[1]};
+    font-family: "Poppins", sans-serif;
+    background: ${({ theme }) => theme.button.hover.list.background};
     border-radius: ${({ theme }) => theme.borderRadius};
     padding: 0.8rem 2rem;
     min-width: 50%;
@@ -131,6 +131,7 @@ const Code = styled.div`
     }
   }
   > div > div.value.bill-code {
+    font-family: "Poppins", sans-serif;
     font-size: 1.8rem;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 1.3rem;

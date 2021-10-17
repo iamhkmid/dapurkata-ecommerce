@@ -7,7 +7,7 @@ export const Main = styled.main`
   align-items: flex-start;
   justify-content: center;
   font-family: "Poppins", sans-serif;
-  padding: 5rem 1rem 1rem 1rem;
+  padding: 5rem 1rem 2rem 1rem;
   gap: 1rem;
   flex-wrap: wrap;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

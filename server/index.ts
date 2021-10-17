@@ -4,6 +4,7 @@ import next from "next";
 import cors from "cors";
 import morgan from "morgan";
 import altairRoute from "./routes/altairRoute";
+import notificationRoute from "./routes/notificationRoute";
 import cookieParser from "cookie-parser";
 import path from "path";
 import graphql from "./graphql";
@@ -45,6 +46,7 @@ const main = async () => {
 
   app.use("/graphql", graphqlUploadExpress(gqlUploadOptions));
   app.use("/altair", altairRoute);
+  app.use("/notification", notificationRoute);
   app.get("*", (req, res) => handle(req, res));
 
   const httpServer = http.createServer(app);

@@ -11,8 +11,8 @@ export type TOrdersFByUser = {
     };
     grossAmount: number;
     currency: string;
-    transactionTime: Date;
-    expirationTime: Date;
+    transactionTime: number;
+    expirationTime: number;
     transactionStatus: string;
     fraudStatus: string;
   }[];
@@ -76,8 +76,8 @@ type TGQLShippingAddress = {
   postalCode: string;
   countryCode: string;
   customerDetailsId: string;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: number;
+  updatedAt: number;
 };
 export type TGQLPaymentService = {
   id: string;
@@ -92,4 +92,12 @@ export type TGQLHowToPay = {
     name: string;
     stages: string[];
   }[];
+};
+
+export type TGQLOrderInfoSubscription = {
+  orderInfo: {
+    transactionTime: number;
+    transactionStatus: string;
+    fraudStatus: string;
+  };
 };

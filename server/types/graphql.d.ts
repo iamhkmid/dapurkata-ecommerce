@@ -436,6 +436,12 @@ export type TTransactionMutation = {
   ) => Promise<TGQLOrderPaymentInfo>;
 };
 
+export type TTransactionSubcription = {
+  orderInfo: {
+    subscribe: any;
+  };
+};
+
 export type TOrder = {
   PaymentService: (
     parent: TGQLOrder,

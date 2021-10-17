@@ -34,6 +34,7 @@ export const Section = styled(motion.div)`
     max-width: 90%;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    min-height: max-content;
     width: 100%;
     max-width: 100%;
   }
@@ -86,6 +87,7 @@ export const GrossAmount = styled.div`
   font-weight: 600;
   border-right: 3px solid ${({ theme }) => theme.border[2]};
   > h1.name {
+    font-family: "Poppins", sans-serif;
     font-size: 0.9rem;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -93,6 +95,7 @@ export const GrossAmount = styled.div`
     }
   }
   > h1.value {
+    font-family: "Poppins", sans-serif;
     font-size: 1.5rem;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

@@ -9,11 +9,56 @@ import { createContext, FC, useEffect } from "react";
 import { createUploadLink } from "apollo-upload-client";
 import { useState } from "react";
 import { TApolloClientCtx } from "../types/context";
-import { useApolloWithWs } from "../hooks/useApolloWithWs";
-
+import { WebSocketLink } from "@apollo/client/link/ws";
+import { getMainDefinition } from "@apollo/client/utilities";
 const isBrowser = process.browser;
 
+const authMiddleware = new ApolloLink((operation, forward) => {
+  const token =
+    isBrowser &&
+    (sessionStorage.getItem("authToken") || localStorage.getItem("authToken"));
+  operation.setContext(({ headers = {} }) => ({
+    headers: {
+      ...headers,
+      authorization: token ? `Bearer ${token}` : "",
+    },
+  }));
+
+  return forward(operation);
+});
+const httpLink = createUploadLink({
+  uri: `${process.env.NEXT_PUBLIC_GQL_HTTP_URL}/graphql`,
+});
+
+const authToken =
+  isBrowser &&
+  (sessionStorage.getItem("authToken") || localStorage.getItem("authToken"));
+
+const wsLink =
+  process.browser &&
+  new WebSocketLink({
+    uri: `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
+    options: { reconnect: true, connectionParams: { authToken } },
+  });
+const splitLink = process.browser
+  ? WebSocketLink.split(
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        console.log(
+          definition.kind === "OperationDefinition" && definition.operation
+        );
+        return (
+          definition.kind === "OperationDefinition" &&
+          definition.operation === "subscription"
+        );
+      },
+      wsLink,
+      httpLink
+    )
+  : httpLink;
+
 export const client = new ApolloClient({
+  link: concat(authMiddleware, splitLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -54,37 +99,9 @@ export const client = new ApolloClient({
   }),
 });
 
-const authMiddleware = new ApolloLink((operation, forward) => {
-  const token =
-    isBrowser &&
-    (sessionStorage.getItem("authToken") || localStorage.getItem("authToken"));
-  operation.setContext(({ headers = {} }) => ({
-    headers: {
-      ...headers,
-      authorization: token ? `Bearer ${token}` : "",
-    },
-  }));
-
-  return forward(operation);
-});
-const httpLink = createUploadLink({
-  uri: `${process.env.NEXT_PUBLIC_GQL_HTTP_URL}/graphql`,
-});
-
-const httpLinkApollo = () => {
-  client.setLink(concat(authMiddleware, httpLink));
-  return client;
-};
-
 export const ApolloClientCtx = createContext<TApolloClientCtx>(null);
 const ApolloClientCtxProvider: FC = ({ children }) => {
   const [isLoggin, setIsLoggin] = useState(false);
-  const apolloWithWs = useApolloWithWs({
-    isLoggin,
-    authMiddleware,
-    client,
-    httpLink,
-  });
   return (
     <ApolloClientCtx.Provider
       value={{
@@ -92,9 +109,7 @@ const ApolloClientCtxProvider: FC = ({ children }) => {
         setIsLoggin,
       }}
     >
-      <ApolloProvider client={isLoggin ? apolloWithWs : httpLinkApollo()}>
-        {children}
-      </ApolloProvider>
+      <ApolloProvider client={client}>{children}</ApolloProvider>
     </ApolloClientCtx.Provider>
   );
 };
