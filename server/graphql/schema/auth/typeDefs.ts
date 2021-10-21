@@ -7,6 +7,7 @@ const typeDefs = gql`
 
   type Mutation {
     signin(username: String!, password: String!, rememberMe: Boolean!): signin
+    googleOauth2Verify(code: String!): signin
     register(data: RegisterData!, userPic: Upload): Register
     resendConfirmCode(email: String!, type: String): ResendConfirmCode
     registerConfirmation(
@@ -66,7 +67,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     password: String!
-    phone: String!
+    phone: String
   }
 
   type CheckUser {

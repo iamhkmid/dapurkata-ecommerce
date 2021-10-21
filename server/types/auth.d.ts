@@ -17,7 +17,7 @@ export type TGQLSignin = {
     phone: string;
     firstName: string;
     lastName?: string;
-    userPicture: TDBGetUserPic;
+    userPicture: string;
   };
 };
 
@@ -97,4 +97,15 @@ export type TCacheConfirmCode = {
   type: "ACTIVATE_ACCOUNT" | "RESET_PASSWORD";
   confirmCode: string;
   canRequestAt: Date;
+};
+
+export type TAxiosGoogleUser = {
+  id: string;
+  email: string;
+  verified_email: boolean;
+  name: string;
+  given_name: string;
+  family_name: string;
+  picture: string;
+  locale: string;
 };

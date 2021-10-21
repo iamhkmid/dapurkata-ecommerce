@@ -52,7 +52,7 @@ export const useLogOut = () => {
     sessionStorage.removeItem("authToken");
     sc?.dispatch({ type: "CLEAR_SCART" });
     order?.dispatch({ type: "CLEAR_ORDER" });
-    Router.replace("/");
+    Router.replace("/auth/signin");
     setUser(null);
   };
   return { logOut };

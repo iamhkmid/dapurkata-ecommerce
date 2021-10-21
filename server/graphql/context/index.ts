@@ -10,11 +10,10 @@ import { transporter } from "../services/nodeMailer";
 type TParamsCtx = {
   req: Request;
   res: Response;
-  connection: ExecutionParams;
 };
 type TContext = (params: TParamsCtx) => Promise<TCtx>;
 
-const context: TContext = async ({ req, res, connection }) => {
+const context: TContext = async ({ req, res }) => {
   return { api, req, res, db, pubsub, cache, mail: transporter };
 };
 

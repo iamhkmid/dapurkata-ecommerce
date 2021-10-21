@@ -20,6 +20,7 @@ import util from "util";
 import { validateUser } from "../../utils/validateUser";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";
+import { db } from "../../services/db";
 
 export const Query: TTransactionQuery = {
   paymentType: async (_, { isEnabled }, { db }) => {
@@ -204,7 +205,42 @@ export const Mutation: TTransactionMutation = {
             PaymentInfo: { create: charge.paymentInfo },
             PaymentService: { connect: { id: charge.paymentServiceId } },
           },
+          include: {
+            ItemDetails: true,
+            PaymentService: { include: { PaymentType: true } },
+          },
         });
+        if (order) {
+          try {
+            const itemsName = order.ItemDetails.reduce((acc, curr) => {
+              if (acc.length === 0) {
+                return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
+              } else {
+                return `${acc}, ${curr.name} x${curr.quantity} Rp.${curr.price}`;
+              }
+            }, "");
+            const notif = await db.notification.create({
+              data: {
+                title: "Pesanan Ditambahkan",
+                message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
+                valueName: "ORDER_DETAIL",
+                valueId: order.id,
+                User: { connect: { id: order.userId } },
+              },
+            });
+            if (!!notif)
+              pubsub.publish("USER_NOTIFICATION", {
+                userNotification: {
+                  id: notif.id,
+                  title: notif.title,
+                  message: notif.message,
+                  valueName: notif.valueName,
+                  valueId: notif.valueId,
+                  userId: notif.userId,
+                },
+              });
+          } catch (error) {}
+        }
         return order;
       }
       case "buy-now": {
@@ -298,7 +334,42 @@ export const Mutation: TTransactionMutation = {
             PaymentInfo: { create: charge.paymentInfo },
             PaymentService: { connect: { id: charge.paymentServiceId } },
           },
+          include: {
+            ItemDetails: true,
+            PaymentService: { include: { PaymentType: true } },
+          },
         });
+        if (order) {
+          try {
+            const itemsName = order.ItemDetails.reduce((acc, curr) => {
+              if (acc.length === 0) {
+                return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
+              } else {
+                return `${acc}, ${curr.name} x${curr.quantity} Rp.${curr.price}`;
+              }
+            }, "");
+            const notif = await db.notification.create({
+              data: {
+                title: "Pesanan Ditambahkan",
+                message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
+                valueName: "ORDER_DETAIL",
+                valueId: order.id,
+                User: { connect: { id: order.userId } },
+              },
+            });
+            if (!!notif)
+              pubsub.publish("USER_NOTIFICATION", {
+                userNotification: {
+                  id: notif.id,
+                  title: notif.title,
+                  message: notif.message,
+                  valueName: notif.valueName,
+                  valueId: notif.valueId,
+                  userId: notif.userId,
+                },
+              });
+          } catch (error) {}
+        }
         return order;
       }
       default:
@@ -311,8 +382,15 @@ export const Subscription: TTransactionSubcription = {
   orderInfo: {
     subscribe: withFilter(
       () => pubsub.asyncIterator("UPDATE_ORDER_STATUS"),
-      (payload, variables) => {
-        return true;
+      async (payload, variables, context) => {
+        const order = await db.order.findUnique({
+          where: { id: payload.orderInfo.orderId },
+          select: { userId: true },
+        });
+        return (
+          payload.orderInfo.orderId === variables.orderId &&
+          context.user.id === order.userId
+        );
       }
     ),
   },

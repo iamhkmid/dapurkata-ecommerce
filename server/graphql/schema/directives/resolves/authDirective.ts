@@ -6,7 +6,7 @@ import { TUserCtx } from "../../../../types/user";
 
 type TCheckRole = (p: { requires: string; role: string }) => void;
 
-const checkRole: TCheckRole = ({ requires, role }) => {
+export const checkRole: TCheckRole = ({ requires, role }) => {
   if (requires === "AUTH" && !(role === "ADMIN" || role === "USER")) {
     throw new AuthenticationError("Authentication is required");
   } else if (requires === "ADMIN" && role !== "ADMIN") {
@@ -20,7 +20,7 @@ type TAuthD = (p: {
   db: TDB;
   req: Request;
   requires: string;
-}) => Promise<{ user: TUserCtx }>;
+}) => Promise<{ user: any }>;
 
 const authDirective: TAuthD = async (props) => {
   const { db, req, requires } = props;
@@ -30,21 +30,9 @@ const authDirective: TAuthD = async (props) => {
   if (!!token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      const findUser = await db.user.findUnique({
-        where: { id: decoded["id"] },
-        select: {
-          id: true,
-          firstName: true,
-          lastName: true,
-          email: true,
-          username: true,
-          role: true,
-          phone: true,
-        },
-      });
-      if (!!findUser) {
-        checkRole({ requires, role: findUser.role });
-        return { user: findUser };
+      if (!!decoded) {
+        checkRole({ requires, role: decoded["role"] });
+        return { user: decoded };
       } else {
         throw new AuthenticationError("User not found");
       }

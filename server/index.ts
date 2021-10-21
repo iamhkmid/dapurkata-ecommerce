@@ -4,6 +4,7 @@ import next from "next";
 import cors from "cors";
 import morgan from "morgan";
 import altairRoute from "./routes/altairRoute";
+import authRoute from "./routes/authRoute";
 import notificationRoute from "./routes/notificationRoute";
 import cookieParser from "cookie-parser";
 import path from "path";
@@ -11,6 +12,7 @@ import graphql from "./graphql";
 import { graphqlUploadExpress } from "graphql-upload";
 import checkFile from "./middleware/checkFile";
 import useragent from "express-useragent";
+import passport from "passport";
 
 const PORT = parseInt(process.env.PORT || "3000");
 const dev = process.env.NODE_ENV !== "production";
@@ -43,7 +45,9 @@ const main = async () => {
   app.use(cors(corsOptions));
   app.use(express.urlencoded({ extended: true }));
   app.use(useragent.express());
+  app.use(passport.initialize());
 
+  app.use("/auth", authRoute);
   app.use("/graphql", graphqlUploadExpress(gqlUploadOptions));
   app.use("/altair", altairRoute);
   app.use("/notification", notificationRoute);

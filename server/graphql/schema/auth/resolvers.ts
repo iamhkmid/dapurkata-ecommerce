@@ -4,12 +4,19 @@ import {
   ValidationError,
 } from "apollo-server-errors";
 import { TAuthMutation, TAuthQuery } from "../../../types/graphql";
-import { confirmCodeTemp, createToken, genConfirmCode } from "./utils";
+import {
+  confirmCodeTemp,
+  createToken,
+  genConfirmCode,
+  getGoogleOauth2Tokens,
+} from "./utils";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { checkUser, hashPassword, saveUserPic } from "../user/utils";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
-import { TCacheConfirmCode } from "../../../types/auth";
+import { TAxiosGoogleUser, TCacheConfirmCode } from "../../../types/auth";
+import axios, { AxiosResponse } from "axios";
+import cuid from "cuid";
 
 export const Query: TAuthQuery = {
   checkUser: async (_, __, { db, req }) => {
@@ -49,8 +56,63 @@ export const Mutation: TAuthMutation = {
     if (!checkPw)
       throw new AuthenticationError("Username or Password incorrect");
 
-    const token = createToken({ id: findUser.id, role: findUser.role });
+    const token = createToken({
+      id: findUser.id,
+      role: findUser.role,
+    });
     return { jwt: token, user: findUser };
+  },
+  googleOauth2Verify: async (_, { code }, { db, mail }) => {
+    const { access_token, id_token } = await getGoogleOauth2Tokens({
+      code,
+    });
+
+    const googleUser = await axios
+      .get<TAxiosGoogleUser>(
+        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
+        {
+          headers: {
+            Authorization: `Bearer ${id_token}`,
+          },
+        }
+      )
+      .then((res) => res.data)
+      .catch((error) => {
+        throw new ApolloError("Gagal masuk dengan Google Account");
+      });
+    const user = await db.user.findUnique({
+      where: { email: googleUser.email },
+    });
+    if (!!user) {
+      const token = createToken({
+        id: user.id,
+        role: user.role,
+      });
+      return { jwt: token, user };
+    } else {
+      const { pictureDir } = await makeDirFile({
+        dirLoc: "/server/static/uploads/profile",
+      });
+      const user = await db.user.create({
+        data: {
+          firstName: googleUser.given_name,
+          lastName: googleUser.family_name || undefined,
+          email: googleUser.email,
+          username: `user${cuid()}`,
+          password: "12345",
+          role: "USER",
+          phone: "089866545454",
+          userPicture: googleUser.picture || undefined,
+          pictureDir,
+          isActive: true,
+        },
+      });
+      const token = createToken({
+        id: user.id,
+        role: user.role,
+      });
+      return { jwt: token, user };
+    }
   },
   register: async (_, { data, userPic }, { mail, cache, db }) => {
     const check = await checkUser(data);

@@ -14,6 +14,10 @@ export type TGqlSignin = {
   signin: { jwt: string; user: TUser };
 };
 
+export type TGQLGoogleOauth2Verify = {
+  googleOauth2Verify: { jwt: string; user: TUser };
+};
+
 export type TGqlCheckUser = {
   checkUser: TUser;
 };

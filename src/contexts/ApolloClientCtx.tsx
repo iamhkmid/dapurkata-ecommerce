@@ -38,15 +38,16 @@ const wsLink =
   process.browser &&
   new WebSocketLink({
     uri: `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
-    options: { reconnect: true, connectionParams: { authToken } },
+    options: {
+      reconnect: true,
+      lazy: true,
+      connectionParams: { authToken: authToken ? `Bearer ${authToken}` : "" },
+    },
   });
 const splitLink = process.browser
   ? WebSocketLink.split(
       ({ query }) => {
         const definition = getMainDefinition(query);
-        console.log(
-          definition.kind === "OperationDefinition" && definition.operation
-        );
         return (
           definition.kind === "OperationDefinition" &&
           definition.operation === "subscription"

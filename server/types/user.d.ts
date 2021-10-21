@@ -84,3 +84,17 @@ export type TUserCtx = {
   role: string;
   phone: string;
 };
+
+export type TGQLUserNotification = {
+  id: string;
+  title: string;
+  message: string;
+  valueName: string;
+  valueId: string;
+};
+
+export type TUserSubcription = {
+  userNotification: {
+    subscribe: any;
+  };
+};

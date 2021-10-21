@@ -23,7 +23,7 @@ model User {
   email        String         @unique
   password     String
   role         String
-  phone        String         @unique
+  phone        String?        @unique
   isActive     Boolean
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
@@ -32,8 +32,23 @@ model User {
   userPicture  String?        @map("user_picture")
   ShoppingCart ShoppingCart[]
   Order        Order[]
+  Notification Notification[]
 
   @@map("user")
+}
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String
+  valueName String?
+  valueId   String?
+  User      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("notification")
 }
 
 model Recipient {

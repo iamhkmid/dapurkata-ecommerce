@@ -101,3 +101,28 @@ export type TGQLOrderInfoSubscription = {
     fraudStatus: string;
   };
 };
+
+export type TGQLPaymentInfoQuery = {
+  order: {
+    id: string;
+    PaymentService: {
+      id: string;
+      name: string;
+      icon: string;
+      description: string;
+      PaymentType?: {
+        id: string;
+        name: string;
+        icon: string;
+        description: string;
+      };
+    };
+    grossAmount: number;
+    currency: string;
+    transactionTime: number;
+    expirationTime: number;
+    transactionStatus: string;
+    fraudStatus: string;
+    PaymentInfo: { name: string; value: string }[];
+  };
+};

@@ -205,7 +205,7 @@ type TUserPopUpVal =
     }
   | {
       name: "ORDER_PAYMENT_INFO";
-      order: TOrderPaymentInfo;
+      orderId: string;
     }
   | {
       name: "BOOK_DETAIL";

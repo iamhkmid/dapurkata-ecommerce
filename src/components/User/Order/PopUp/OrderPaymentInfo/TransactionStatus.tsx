@@ -60,7 +60,7 @@ const Status = styled.div<TStatus>`
     status === "settlement" &&
     (theme.name === "light"
       ? css`
-          background: #00ff8048;
+          background: #00c2612f;
         `
       : css`
           background: #00ff8013;

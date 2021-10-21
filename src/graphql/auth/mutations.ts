@@ -18,6 +18,24 @@ export const SIGNIN = gql`
   }
 `;
 
+export const GOOGLE_OAUTH2_VERIFY = gql`
+  mutation ($code: String!) {
+    googleOauth2Verify(code: $code) {
+      jwt
+      user {
+        id
+        username
+        email
+        role
+        firstName
+        lastName
+        phone
+        userPicture
+      }
+    }
+  }
+`;
+
 export const REGISTER = gql`
   mutation ($data: RegisterData!, $userPic: Upload) {
     register(data: $data, userPic: $userPic) {

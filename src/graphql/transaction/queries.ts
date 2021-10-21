@@ -47,3 +47,30 @@ export const HOW_TO_PAY = gql`
     }
   }
 `;
+
+export const PAYMENT_INFO = gql`
+  query ($orderId: ID!) {
+    order(orderId: $orderId) {
+      id
+      PaymentService {
+        id
+        name
+        icon
+        PaymentType {
+          id
+          name
+        }
+      }
+      grossAmount
+      currency
+      transactionTime
+      expirationTime
+      transactionStatus
+      fraudStatus
+      PaymentInfo {
+        name
+        value
+      }
+    }
+  }
+`;

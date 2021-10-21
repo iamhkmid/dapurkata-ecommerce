@@ -1,9 +1,16 @@
+import { ApolloError } from "apollo-server-errors";
+import axios from "axios";
 import jwt from "jsonwebtoken";
 import moment from "moment";
+import querystring from "querystring";
 
-export const createToken = ({ id, role }) => {
+type TCreateToken = {
+  id: string;
+  role: string;
+};
+export const createToken = (props: TCreateToken) => {
   const maxAge = 1 * 24 * 60 * 60;
-  return jwt.sign({ id, role }, process.env.JWT_SECRET, {
+  return jwt.sign(props, process.env.JWT_SECRET, {
     expiresIn: maxAge,
   });
 };
@@ -46,4 +53,49 @@ export const confirmCodeTemp = (props: TConfirmCodeTemp) => {
       </h1>
     </div>
   </div>`;
+};
+
+type TGetToken = (p: { code: string }) => Promise<{
+  access_token: string;
+  expires_in: Number;
+  refresh_token: string;
+  scope: string;
+  id_token: string;
+}>;
+
+export const getGoogleOauth2Tokens: TGetToken = (props) => {
+  const { code } = props;
+
+  const GOOGLE_CLIENT_ID =
+    process.env.NODE_ENV === "production"
+      ? process.env.GOOGLE_CLIENT_ID
+      : process.env.GOOGLE_CLIENT_ID_DEV;
+  const GOOGLE_CLIENT_SECRET =
+    process.env.NODE_ENV === "production"
+      ? process.env.GOOGLE_CLIENT_SECRET
+      : process.env.GOOGLE_CLIENT_SECRET_DEV;
+  const BACKEND_URL =
+    process.env.NODE_ENV === "production"
+      ? process.env.BACKEND_URL
+      : process.env.BACKEND_URL_DEV;
+
+  const url = "https://oauth2.googleapis.com/token";
+  const values = {
+    code,
+    clientId: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    redirectUri: `${BACKEND_URL}/auth/signin`,
+    grant_type: "authorization_code",
+  };
+
+  return axios
+    .post(url, querystring.stringify(values), {
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+    .then((res) => res.data)
+    .catch((error) => {
+      throw new ApolloError("Gagal masuk dengan Google Account");
+    });
 };

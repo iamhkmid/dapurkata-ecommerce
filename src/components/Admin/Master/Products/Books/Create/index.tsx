@@ -130,7 +130,7 @@ const Create = () => {
                 label="Lebar"
                 error={errors.width ? true : false}
                 disabled={loading}
-                message={errors.lenght ? errors.width.message : null}
+                message={errors.width ? errors.width.message : null}
               />
               <FormsControl
                 control="input"

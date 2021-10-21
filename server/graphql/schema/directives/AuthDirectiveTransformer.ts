@@ -19,7 +19,7 @@ const AuthDirectiveTransformer = (
       const directive =
         getDirective(schema, fieldConfig, directiveName)?.[0] ??
         typeDirectiveArgumentMaps[typeName];
-      if (directive) {
+      if (!!directive) {
         const { requires } = directive;
         if (requires) {
           const { resolve = defaultFieldResolver } = fieldConfig;

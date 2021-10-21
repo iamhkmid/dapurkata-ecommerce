@@ -22,6 +22,7 @@ const typeDefs = gql`
   }
 
   type OrderInfoSubscription {
+    orderId: String
     transactionTime: Date
     transactionStatus: String
     fraudStatus: String

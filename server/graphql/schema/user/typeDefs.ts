@@ -4,6 +4,7 @@ const typeDefs = gql`
   type Query {
     user(userId: ID!): User @auth(requires: AUTH)
     users: [User] @auth(requires: ADMIN)
+    userNotification: [UserNotification] @auth(requires: USER)
   }
 
   type Mutation {
@@ -13,6 +14,18 @@ const typeDefs = gql`
     changePassword(data: cPData!): changePassword @auth(requires: AUTH)
   }
 
+  type Subscription {
+    userNotification: UserNotification
+  }
+
+  type UserNotification {
+    id: String
+    title: String
+    message: String
+    valueName: String
+    valueId: String
+    userId: String
+  }
   input cPData {
     oldPassword: String!
     newPassword: String!
@@ -29,7 +42,7 @@ const typeDefs = gql`
     email: String!
     password: String!
     role: EnumRole
-    phone: String!
+    phone: String
   }
 
   input uUserData {
@@ -38,7 +51,7 @@ const typeDefs = gql`
     username: String!
     email: String!
     role: EnumRole
-    phone: String!
+    phone: String
     isActive: Boolean
   }
 

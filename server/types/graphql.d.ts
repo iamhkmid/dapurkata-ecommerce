@@ -68,6 +68,7 @@ import {
   TArgsUpdateUser,
   TGQLArgsUser,
   TGQLUser,
+  TGQLUserNotification,
 } from "./user";
 import {
   TArgsCreateSChart,
@@ -253,6 +254,11 @@ export type TUserQuery = {
     context: TCtx
   ) => Promise<TGQLUser>;
   users: (parent: any, args: any, context: TCtx) => Promise<TGQLUser[]>;
+  userNotification: (
+    parent: any,
+    args: any,
+    context: TCtx
+  ) => Promise<TGQLUserNotification[]>;
 };
 
 export type TUserMutation = {
@@ -299,6 +305,11 @@ export type TAuthMutation = {
   signin: (
     parent: any,
     args: TGQLArgsSignin,
+    context: TCtx
+  ) => Promise<TGQLSignin>;
+  googleOauth2Verify: (
+    parent: any,
+    args: { code: string },
     context: TCtx
   ) => Promise<TGQLSignin>;
   register: (

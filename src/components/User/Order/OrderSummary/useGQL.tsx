@@ -41,7 +41,7 @@ export const useGQLOrder = () => {
     if (data?.order) {
       dispatch({
         type: "SHOW_POPUP",
-        value: { name: "ORDER_PAYMENT_INFO", order: data?.order },
+        value: { name: "ORDER_PAYMENT_INFO", orderId: data.order.id },
       });
     }
   }, [error, data?.order]);

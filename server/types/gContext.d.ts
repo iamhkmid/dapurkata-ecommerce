@@ -16,7 +16,7 @@ export type TDB = PrismaClient<
 type TCtx = {
   req: Request;
   res: Response;
-  user?: TUserCtx;
+  user?: { id: string; role: string };
   api: TAPI;
   db: TDB;
   pubsub: PubSub;

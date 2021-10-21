@@ -21,7 +21,11 @@ module.exports = withImages({
     return config;
   },
   images: {
-    domains: ["localhost", "penerbitdapurkata.herokuapp.com"],
+    domains: [
+      "localhost",
+      "penerbitdapurkata.herokuapp.com",
+      "lh3.googleusercontent.com",
+    ],
   },
   async headers() {
     return [

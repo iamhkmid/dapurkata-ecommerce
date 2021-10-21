@@ -5,6 +5,9 @@ import { makeDirFile, removeDir } from "../../utils/uploadFIle";
 import { validateUser } from "../../utils/validateUser";
 import { checkUser, hashPassword, saveUserPic } from "./utils";
 import bcrypt from "bcrypt";
+import { TUserSubcription } from "../../../types/user";
+import { withFilter } from "graphql-subscriptions";
+import pubsub from "../../services/pubsub";
 
 export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
@@ -18,6 +21,19 @@ export const Query: TUserQuery = {
     return findUser;
   },
   users: async (_, __, { db }) => await db.user.findMany(),
+  userNotification: async (_, __, { db, user }) => {
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { id: true, Notification: true },
+    });
+    validateUser({
+      target: "SPECIFIC_USER",
+      targetId: findUser?.id,
+      currRole: user.role,
+      currId: user.id,
+    });
+    return findUser.Notification;
+  },
 };
 
 export const Mutation: TUserMutation = {
@@ -111,6 +127,17 @@ export const Mutation: TUserMutation = {
         throw new ApolloError("Failed to save data");
       }
     }
+  },
+};
+
+export const Subscription: TUserSubcription = {
+  userNotification: {
+    subscribe: withFilter(
+      () => pubsub.asyncIterator("USER_NOTIFICATION"),
+      async (payload, variables, context) => {
+        return payload.userNotification.userId === context.user.id;
+      }
+    ),
   },
 };
 

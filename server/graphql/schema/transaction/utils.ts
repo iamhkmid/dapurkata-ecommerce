@@ -62,7 +62,7 @@ export const sCartItems: TSCartItems = (props) => {
       {
         id: cuid(),
         itemId: courier.code,
-        name: `${courier.code} - ${courier.service}`,
+        name: `Ongkos Kirim ${courier.code.toUpperCase()} - ${courier.service}`,
         price: courier.cost,
         quantity: 1,
       },
@@ -91,7 +91,7 @@ export const buyNowItems: TBuyNowItems = (props) => {
       {
         id: cuid(),
         itemId: courier.code,
-        name: `${courier.code} - ${courier.service}`,
+        name: `Ongkos Kirim ${courier.code.toUpperCase()} - ${courier.service}`,
         price: courier.cost,
         quantity: 1,
       },

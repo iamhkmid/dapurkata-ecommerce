@@ -3,8 +3,8 @@ import { motion } from "framer-motion";
 
 export const Main = styled.div`
   font-family: "Poppins", sans-serif;
+  margin-top: 4rem;
   background: ${({ theme }) => theme.background[1]};
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -99,5 +99,109 @@ export const ButtonLink = styled.div`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     font-size: 0.8rem;
   }
+  transition: 0.4s all ease;
+`;
+
+type TButtonElement = {
+  isLoading?: boolean;
+};
+export const GoogleSignin = styled.button<TButtonElement>`
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  border-radius: ${({ theme }) => theme.button.borderRadius};
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-weight: 400;
+  font-size: 0.9rem;
+  min-height: 2.3rem;
+  max-height: max-content;
+  min-width: max-content;
+  padding: 0.2rem 1rem;
+  border: 1px solid transparent;
+  outline: none;
+  gap: 0.2rem;
+  position: relative;
+  overflow: hidden;
+  > svg {
+    height: 1.2rem;
+    padding-right: 0.5rem;
+  }
+  ${({ theme }) =>
+    theme.name === "light"
+      ? css`
+          background: #e02525;
+          color: ${theme.button.primary.color};
+          > svg {
+            fill: ${theme.button.primary.color};
+          }
+        `
+      : css`
+          background: #e22f2f;
+          color: ${theme.button.primary.color};
+          > svg {
+            fill: ${theme.button.primary.color};
+          }
+        `}
+
+  :hover {
+    ${({ theme }) =>
+      theme.name === "light"
+        ? css`
+            background: #b11c1c;
+            color: ${theme.button.primary.color};
+            > svg {
+              fill: ${theme.button.primary.color};
+            }
+          `
+        : css`
+            background: #af2323;
+            color: ${theme.button.primary.color};
+            > svg {
+              fill: ${theme.button.primary.color};
+            }
+          `}
+  }
+
+  :focus {
+    ${({ theme, color }) => css`
+      border: 1px solid ${theme.button.focus.danger.border};
+      box-shadow: ${theme.button.focus.danger.boxShadow};
+    `}
+  }
+
+  ${({ isLoading, disabled }) =>
+    (isLoading || disabled) &&
+    css`
+      background: ${({ theme }) => theme.button.disabled.background};
+      color: ${({ theme }) => theme.button.disabled.color};
+      cursor: default;
+      :hover {
+        background: ${({ theme }) => theme.button.disabled.background};
+        color: ${({ theme }) => theme.button.disabled.color};
+      }
+      :focus {
+        border: 1px solid transparent;
+        box-shadow: none;
+      }
+    `}
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.8rem;
+    min-height: 2rem;
+    padding: 0.2rem 1rem;
+  }
+  transition: 0.4s all ease;
+`;
+
+export const LoadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
   transition: 0.4s all ease;
 `;

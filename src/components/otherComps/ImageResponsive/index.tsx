@@ -75,7 +75,9 @@ const ImageResponsive: FC<TBookCover> = (props) => {
       {src && (
         <ImgWrapper>
           <Image
-            src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${src}`}
+            src={`${
+              src[0] === "/" ? process.env.NEXT_PUBLIC_GQL_HTTP_URL : ""
+            }${src}`}
             alt={alt || "images"}
             layout="responsive"
             objectFit="fill"

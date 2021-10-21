@@ -9,8 +9,13 @@ import ButtonLink from "../../../otherComps/Buttons/ButtonLink";
 import * as El from "./SignInElement";
 import { useSignIn } from "../../../../hooks/useGQLAuth";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
+import IconsControl from "../../../IconsControl";
+import { useRouter } from "next/router";
+import { useGQLGoogleOauth2Verify } from "./useGQL";
+import Loading2 from "../../../otherComps/Loading/Loading2";
 const SignIn = () => {
   const { dispatch } = useContext(UserNavCtx);
+  const { query } = useRouter();
   const htmlElRef = useRef<{ focus: () => void }>();
   const setFocus = () => {
     htmlElRef.current && htmlElRef.current.focus();
@@ -29,6 +34,18 @@ const SignIn = () => {
   const onSubmit = async (values: TGQLFormSignin) => {
     await signIn(values);
   };
+  const {
+    googleOauth2Verify,
+    data: dataGOV,
+    error: errorGOV,
+    loading: loadingGOV,
+  } = useGQLGoogleOauth2Verify();
+
+  useEffect(() => {
+    if (query.code as string) {
+      googleOauth2Verify({ code: query.code as string });
+    }
+  }, [query?.code]);
 
   useEffect(() => {
     if (error) {
@@ -42,7 +59,7 @@ const SignIn = () => {
     }
   }, [error]);
   useEffect(() => {
-    htmlElRef.current.focus();
+    // htmlElRef.current.focus();
   }, []);
   return (
     <El.Main>
@@ -90,6 +107,18 @@ const SignIn = () => {
             />
             <ButtonLink name="Buat akun baru" link="/auth/signup" />
           </El.SubmitWrapper>
+          <El.GoogleSignin
+            type="button"
+            isLoading={loadingGOV}
+            onClick={() => (window.location.href = "/auth/google")}
+          >
+            {IconsControl("Google")}Masuk dengan Google{" "}
+            {loadingGOV && (
+              <El.LoadingWrapper>
+                <Loading2 />
+              </El.LoadingWrapper>
+            )}
+          </El.GoogleSignin>
           <El.LinkWrapper>
             <El.ButtonLink
               onClick={() =>

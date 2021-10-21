@@ -86,7 +86,7 @@ const PopUpControl = () => {
           {popup.name === "RESET_PASSWORD" && <ResetPassword />}
           {popup.name === "ORDER_DETAIL" && <OrderDetail />}
           {popup.name === "ORDER_PAYMENT_INFO" && (
-            <OrderPaymentInfo order={popup.order} />
+            <OrderPaymentInfo orderId={popup.orderId} />
           )}
         </Main>
       )}
