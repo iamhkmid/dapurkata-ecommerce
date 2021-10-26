@@ -30,7 +30,7 @@ export const useGQLOrder = () => {
     return order({ variables: { data: values } });
   };
   useEffect(() => {
-    if (error)
+    if (error) {
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
@@ -38,6 +38,7 @@ export const useGQLOrder = () => {
           color: "danger",
         },
       });
+    }
     if (data?.order) {
       dispatch({
         type: "SHOW_POPUP",

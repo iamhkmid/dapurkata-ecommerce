@@ -7,7 +7,7 @@ export type TUser = {
   email: string;
   password: string;
   role: string;
-  phone: string;
+  phone?: string;
   pictureDir: string;
 };
 
@@ -18,7 +18,7 @@ export type TCreateUserData = {
   email: string;
   password: string;
   role: string;
-  phone: string;
+  phone?: string;
   pictureDir: string;
 };
 
@@ -28,7 +28,7 @@ export type TUpdateUserData = {
   username: string;
   email: string;
   role: string;
-  phone: string;
+  phone?: string;
   isActive: boolean;
   pictureDir: string;
 };
@@ -55,7 +55,7 @@ export type TGQLUser = {
   email: string;
   password: string;
   role: string;
-  phone: string;
+  phone?: string;
   pictureDir: string;
   userPicture: string;
   createdAt: Date;
@@ -69,7 +69,7 @@ type TDBCheckUser = {
   email: string;
   password: string;
   role: string;
-  phone: string;
+  phone?: string;
   pictureDir: string;
   userPicture: string;
   createdAt: Date;
@@ -82,7 +82,7 @@ export type TUserCtx = {
   username: string;
   email: string;
   role: string;
-  phone: string;
+  phone?: string;
 };
 
 export type TGQLUserNotification = {

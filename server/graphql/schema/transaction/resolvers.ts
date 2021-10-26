@@ -8,7 +8,12 @@ import {
   TOrderPaymentInfoMutation,
   TTransactionSubcription,
 } from "../../../types/graphql";
-import { TGQLPaymentType, TPaymentBT } from "../../../types/transaction";
+import {
+  TGQLOrder,
+  TGQLPaymentType,
+  TItemDetails,
+  TPaymentBT,
+} from "../../../types/transaction";
 import {
   buyNowItems,
   buyNowWeight,
@@ -98,7 +103,6 @@ export const Query: TTransactionQuery = {
 
 export const Mutation: TTransactionMutation = {
   order: async (_, { data }, { api, db, user }) => {
-    const exprDuration = 86400000; /* 24hours */
     const recipient = await db.recipient.findUnique({
       where: { id: data.recipientId },
       include: { User: true, City: { include: { Province: true } } },
@@ -111,270 +115,171 @@ export const Mutation: TTransactionMutation = {
     });
 
     const orderId = cuid();
+    let item_details: TItemDetails[];
+    let gross_amount: number;
 
-    switch (data.orderType) {
-      case "shoppingcart": {
-        const sCart = await db.shoppingCart.findMany({
-          where: { userId: recipient.userId },
-          select: {
-            amount: true,
-            Book: {
-              select: { id: true, title: true, price: true, weight: true },
-            },
+    if (data.orderType === "shoppingcart") {
+      const sCart = await db.shoppingCart.findMany({
+        where: { userId: recipient.userId },
+        select: {
+          amount: true,
+          Book: {
+            select: { id: true, title: true, price: true, weight: true },
           },
-        });
+        },
+      });
 
-        const weight = sCartWeight({ shoppingCart: sCart });
-        const cost = await courierCost({
-          api,
-          courier: data.courierCode,
+      const weight = sCartWeight({ shoppingCart: sCart });
+      const cost = await courierCost({
+        api,
+        courier: data.courierCode,
+        service: data.courierService,
+        destination: recipient.cityId,
+        weight,
+      });
+      const Items = sCartItems({
+        shoppingCart: sCart,
+        courier: {
+          code: data.courierCode,
           service: data.courierService,
-          destination: recipient.cityId,
-          weight,
-        });
-        const { item_details, gross_amount } = sCartItems({
-          shoppingCart: sCart,
-          courier: {
-            code: data.courierCode,
-            service: data.courierService,
-            cost,
-          },
-        });
-
-        const charge = await api.midtrans({
-          type: data.payment as TMidtransPayType,
-          value: {
-            transaction_details: { gross_amount, order_id: orderId },
-            item_details,
-            customer_details: {
-              first_name: recipient.User.firstName,
-              last_name: recipient.User.lastName,
-              email: recipient.User.email,
-              phone: recipient.User.phone,
-              shipping_address: {
-                first_name: recipient.firstName,
-                last_name: recipient.lastName,
-                email: recipient.email,
-                phone: recipient.phone,
-                city: recipient.City.name,
-                postal_code: recipient.City.postalCode,
-                address: recipient.address,
-                country_code: "IDN",
-              },
-            },
-          },
-        });
-        if (charge.fraud_status === "deny" || charge.status_code !== "201")
-          throw new ApolloError(`Transaction rejected`);
-
-        const transactionTime = new Date(`${charge.transaction_time} GMT+7`);
-        const expirationTime = new Date(
-          transactionTime.getTime() + exprDuration
-        );
-        const order = await db.order.create({
-          data: {
-            id: charge.order_id,
-            grossAmount: gross_amount,
-            currency: charge.currency,
-            fraudStatus: charge.fraud_status,
-            transactionStatus: charge.transaction_status,
-            transactionTime,
-            expirationTime,
-            ItemDetails: { create: item_details },
-            User: { connect: { id: user.id } },
-            CustomerDetails: {
-              create: {
-                firstName: recipient.User.firstName,
-                lastName: recipient.User.lastName,
-                email: recipient.User.email,
-                phone: recipient.User.phone,
-                ShippingAddress: {
-                  create: {
-                    firstName: recipient.firstName,
-                    lastName: recipient.lastName,
-                    email: recipient.email,
-                    phone: recipient.phone,
-                    city: recipient.City.name,
-                    postalCode: recipient.City.postalCode,
-                    address: recipient.address,
-                    countryCode: "IDN",
-                  },
-                },
-              },
-            },
-            PaymentInfo: { create: charge.paymentInfo },
-            PaymentService: { connect: { id: charge.paymentServiceId } },
-          },
-          include: {
-            ItemDetails: true,
-            PaymentService: { include: { PaymentType: true } },
-          },
-        });
-        if (order) {
-          try {
-            const itemsName = order.ItemDetails.reduce((acc, curr) => {
-              if (acc.length === 0) {
-                return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
-              } else {
-                return `${acc}, ${curr.name} x${curr.quantity} Rp.${curr.price}`;
-              }
-            }, "");
-            const notif = await db.notification.create({
-              data: {
-                title: "Pesanan Ditambahkan",
-                message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
-                valueName: "ORDER_DETAIL",
-                valueId: order.id,
-                User: { connect: { id: order.userId } },
-              },
-            });
-            if (!!notif)
-              pubsub.publish("USER_NOTIFICATION", {
-                userNotification: {
-                  id: notif.id,
-                  title: notif.title,
-                  message: notif.message,
-                  valueName: notif.valueName,
-                  valueId: notif.valueId,
-                  userId: notif.userId,
-                },
-              });
-          } catch (error) {}
-        }
-        return order;
-      }
-      case "buy-now": {
-        const book = await db.book.findUnique({
-          where: { id: data.bookId },
-          select: { id: true, title: true, weight: true, price: true },
-        });
-        const weight = await buyNowWeight({
-          book,
-          amount: data.amount,
-        });
-        const cost = await courierCost({
-          api,
-          courier: data.courierCode,
+          cost,
+        },
+      });
+      item_details = Items.item_details;
+      gross_amount = Items.gross_amount;
+    } else if (data.orderType === "buy-now") {
+      const book = await db.book.findUnique({
+        where: { id: data.bookId },
+        select: { id: true, title: true, weight: true, price: true },
+      });
+      const weight = await buyNowWeight({
+        book,
+        amount: data.amount,
+      });
+      const cost = await courierCost({
+        api,
+        courier: data.courierCode,
+        service: data.courierService,
+        destination: recipient.cityId,
+        weight,
+      });
+      const Items = buyNowItems({
+        book,
+        amount: data.amount,
+        courier: {
+          code: data.courierCode,
           service: data.courierService,
-          destination: recipient.cityId,
-          weight,
-        });
-
-        const { item_details, gross_amount } = buyNowItems({
-          book,
-          amount: data.amount,
-          courier: {
-            code: data.courierCode,
-            service: data.courierService,
-            cost,
-          },
-        });
-
-        const charge = await api.midtrans({
-          type: data.payment as TMidtransPayType,
-          value: {
-            transaction_details: { gross_amount, order_id: orderId },
-            item_details,
-            customer_details: {
-              first_name: recipient.User.firstName,
-              last_name: recipient.User.lastName,
-              email: recipient.User.email,
-              phone: recipient.User.phone,
-              shipping_address: {
-                first_name: recipient.firstName,
-                last_name: recipient.lastName,
-                email: recipient.email,
-                phone: recipient.phone,
-                city: recipient.City.name,
-                postal_code: recipient.City.postalCode,
-                address: recipient.address,
-                country_code: "IDN",
-              },
-            },
-          },
-        });
-        if (charge.fraud_status === "deny" || charge.status_code !== "201")
-          throw new ApolloError(`Transaction rejected`);
-
-        const transactionTime = new Date(`${charge.transaction_time} GMT+7`);
-        const expirationTime = new Date(
-          transactionTime.getTime() + exprDuration
-        );
-        const order = await db.order.create({
-          data: {
-            id: charge.order_id,
-            grossAmount: gross_amount,
-            currency: charge.currency,
-            fraudStatus: charge.fraud_status,
-            transactionStatus: charge.transaction_status,
-            transactionTime,
-            expirationTime,
-            ItemDetails: { create: item_details },
-            User: { connect: { id: user.id } },
-            CustomerDetails: {
-              create: {
-                firstName: recipient.User.firstName,
-                lastName: recipient.User.lastName,
-                email: recipient.User.email,
-                phone: recipient.User.phone,
-                ShippingAddress: {
-                  create: {
-                    firstName: recipient.firstName,
-                    lastName: recipient.lastName,
-                    email: recipient.email,
-                    phone: recipient.phone,
-                    city: recipient.City.name,
-                    postalCode: recipient.City.postalCode,
-                    address: recipient.address,
-                    countryCode: "IDN",
-                  },
-                },
-              },
-            },
-            PaymentInfo: { create: charge.paymentInfo },
-            PaymentService: { connect: { id: charge.paymentServiceId } },
-          },
-          include: {
-            ItemDetails: true,
-            PaymentService: { include: { PaymentType: true } },
-          },
-        });
-        if (order) {
-          try {
-            const itemsName = order.ItemDetails.reduce((acc, curr) => {
-              if (acc.length === 0) {
-                return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
-              } else {
-                return `${acc}, ${curr.name} x${curr.quantity} Rp.${curr.price}`;
-              }
-            }, "");
-            const notif = await db.notification.create({
-              data: {
-                title: "Pesanan Ditambahkan",
-                message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
-                valueName: "ORDER_DETAIL",
-                valueId: order.id,
-                User: { connect: { id: order.userId } },
-              },
-            });
-            if (!!notif)
-              pubsub.publish("USER_NOTIFICATION", {
-                userNotification: {
-                  id: notif.id,
-                  title: notif.title,
-                  message: notif.message,
-                  valueName: notif.valueName,
-                  valueId: notif.valueId,
-                  userId: notif.userId,
-                },
-              });
-          } catch (error) {}
-        }
-        return order;
-      }
-      default:
-        throw new ApolloError(`Order type not found`);
+          cost,
+        },
+      });
+      item_details = Items.item_details;
+      gross_amount = Items.gross_amount;
+    } else {
+      throw new ApolloError(`Order type not found`);
     }
+    // REQUEST CHARGE TO PAYMENT GATEWAY
+    const charge = await api.midtrans({
+      type: data.payment as TMidtransPayType,
+      value: {
+        transaction_details: { gross_amount, order_id: orderId },
+        item_details,
+        customer_details: {
+          first_name: recipient.User.firstName,
+          last_name: recipient.User.lastName,
+          email: recipient.User.email,
+          phone: recipient.User.phone,
+          shipping_address: {
+            first_name: recipient.firstName,
+            last_name: recipient.lastName,
+            email: recipient.email,
+            phone: recipient.phone,
+            city: recipient.City.name,
+            postal_code: recipient.City.postalCode,
+            address: recipient.address,
+            country_code: "IDN",
+          },
+        },
+      },
+    });
+    if (charge.fraud_status === "deny" || charge.status_code !== "201")
+      throw new ApolloError(`Transaction rejected`);
+
+    const transactionTime = new Date(`${charge.transaction_time} GMT+7`);
+    const exprDuration = 86400000; /* 24hours */
+    const expirationTime = new Date(transactionTime.getTime() + exprDuration);
+    // SAVE DATA TO DB
+    const order = await db.order.create({
+      data: {
+        id: charge.order_id,
+        grossAmount: gross_amount,
+        currency: charge.currency,
+        fraudStatus: charge.fraud_status,
+        transactionStatus: charge.transaction_status,
+        transactionTime,
+        expirationTime,
+        ItemDetails: { create: item_details },
+        User: { connect: { id: user.id } },
+        CustomerDetails: {
+          create: {
+            firstName: recipient.User.firstName,
+            lastName: recipient.User.lastName || undefined,
+            email: recipient.User.email,
+            phone: recipient.User.phone || undefined,
+            ShippingAddress: {
+              create: {
+                firstName: recipient.firstName,
+                lastName: recipient.lastName,
+                email: recipient.email,
+                phone: recipient.phone,
+                city: recipient.City.name,
+                postalCode: recipient.City.postalCode,
+                address: recipient.address,
+                countryCode: "IDN",
+              },
+            },
+          },
+        },
+        PaymentInfo: { create: charge.paymentInfo },
+        PaymentService: { connect: { id: charge.paymentServiceId } },
+      },
+      include: {
+        ItemDetails: true,
+        PaymentService: { include: { PaymentType: true } },
+      },
+    });
+    // PUSH NOTIFICATION WITH WEBSOCKET
+    if (order) {
+      try {
+        const itemsName = order.ItemDetails.reduce((acc, curr) => {
+          if (acc.length === 0) {
+            return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
+          } else {
+            return `${acc}, ${curr.name} x${curr.quantity} Rp.${curr.price}`;
+          }
+        }, "");
+        const notif = await db.notification.create({
+          data: {
+            title: "Pesanan Ditambahkan",
+            message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
+            valueName: "ORDER_DETAIL",
+            valueId: order.id,
+            User: { connect: { id: order.userId } },
+          },
+        });
+        if (!!notif)
+          pubsub.publish("USER_NOTIFICATION", {
+            userNotification: {
+              id: notif.id,
+              title: notif.title,
+              message: notif.message,
+              valueName: notif.valueName,
+              valueId: notif.valueId,
+              userId: notif.userId,
+            },
+          });
+      } catch (error) {}
+    }
+    return order;
   },
 };
 

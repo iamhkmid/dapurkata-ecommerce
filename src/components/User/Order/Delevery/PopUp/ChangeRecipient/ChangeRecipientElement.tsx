@@ -6,7 +6,7 @@ export const Main = styled(motion.div)`
   display: flex;
   max-width: 50%;
   max-height: 90%;
-  min-width: 30%;
+  min-width: 40rem;
   background: ${({ theme }) => theme.background[2]};
   box-shadow: ${({ theme }) => theme.boxShadow};
   color: ${({ theme }) => theme.color[1]};
@@ -17,13 +17,16 @@ export const Main = styled(motion.div)`
   font-size: 1rem;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    min-width: 30rem;
     max-width: 90%;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    min-width: 100%;
     margin: 0.2rem;
     width: 100%;
     max-width: 100%;
   }
+  transition: 0.4s all ease;
 `;
 
 export const Body = styled.div`

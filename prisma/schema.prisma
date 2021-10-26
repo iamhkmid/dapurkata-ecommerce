@@ -195,9 +195,9 @@ model ItemDetail {
 model CustomerDetails {
   id              String           @id @default(cuid())
   firstName       String           @map("first_name")
-  lastName        String           @map("last_name")
+  lastName        String?          @map("last_name")
   email           String
-  phone           String
+  phone           String?
   orderId         String           @unique
   Order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
   ShippingAddress ShippingAddress?

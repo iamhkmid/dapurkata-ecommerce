@@ -59,7 +59,7 @@ export const Mutation: TUserMutation = {
         email,
         password: await hashPassword(password),
         role: role && user?.role === "ADMIN" ? role : "USER",
-        phone,
+        phone: phone || undefined,
         isActive: true,
         pictureDir,
         userPicture: profilePicInfo?.url || undefined,
@@ -83,7 +83,7 @@ export const Mutation: TUserMutation = {
       username,
       email,
       role: role && user?.role === "ADMIN" ? role : "USER",
-      phone,
+      phone: phone || undefined,
       isActive: isActive || undefined,
     };
     return await db.user.update({

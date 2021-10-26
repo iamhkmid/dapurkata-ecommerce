@@ -107,9 +107,9 @@ export type TShippingAddress = {
 
 export type TCustomerDetails = {
   first_name: string;
-  last_name: string;
+  last_name?: string;
   email: string;
-  phone: string;
+  phone?: string;
   shipping_address: TShippingAddress;
 };
 
@@ -189,9 +189,9 @@ type TGQLItemDetail = {
 type TGQLCustomerDetails = {
   id: string;
   firstName: string;
-  lastName: string;
+  lastName?: string;
   email: string;
-  phone: string;
+  phone?: string;
   orderId: string;
   ShippingAddress: TGQLShippingAddress;
   createdAt: Date;
