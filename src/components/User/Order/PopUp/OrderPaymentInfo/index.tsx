@@ -62,7 +62,6 @@ const OrderPaymentInfo: FC<TProps> = ({ orderId }) => {
                 <h1 className="value">
                   <NumberFormat
                     prefix="Rp"
-                    suffix=",00"
                     value={data?.order?.grossAmount}
                     displayType={"text"}
                     thousandSeparator={"."}

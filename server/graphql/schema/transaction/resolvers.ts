@@ -113,10 +113,11 @@ export const Mutation: TTransactionMutation = {
       currRole: user.role,
       currId: user.id,
     });
-
+    type TBookStocks = { bookId: string; stock: number }[];
     const orderId = cuid();
     let item_details: TItemDetails[];
     let gross_amount: number;
+    let bookStocks: TBookStocks;
 
     if (data.orderType === "shoppingcart") {
       const sCart = await db.shoppingCart.findMany({
@@ -124,10 +125,23 @@ export const Mutation: TTransactionMutation = {
         select: {
           amount: true,
           Book: {
-            select: { id: true, title: true, price: true, weight: true },
+            select: {
+              id: true,
+              title: true,
+              price: true,
+              weight: true,
+              stock: true,
+            },
           },
         },
       });
+      bookStocks = sCart.reduce(
+        (acc, curr) => [
+          ...acc,
+          { bookId: curr.Book.id, stock: curr.Book.stock - curr.amount },
+        ],
+        [] as TBookStocks
+      );
 
       const weight = sCartWeight({ shoppingCart: sCart });
       const cost = await courierCost({
@@ -150,8 +164,15 @@ export const Mutation: TTransactionMutation = {
     } else if (data.orderType === "buy-now") {
       const book = await db.book.findUnique({
         where: { id: data.bookId },
-        select: { id: true, title: true, weight: true, price: true },
+        select: {
+          id: true,
+          title: true,
+          weight: true,
+          price: true,
+          stock: true,
+        },
       });
+      bookStocks = [{ bookId: data.bookId, stock: book.stock - data.amount }];
       const weight = await buyNowWeight({
         book,
         amount: data.amount,
@@ -249,6 +270,15 @@ export const Mutation: TTransactionMutation = {
     });
     // PUSH NOTIFICATION WITH WEBSOCKET
     if (order) {
+      // reset shoppingcart
+      await db.shoppingCart.deleteMany({ where: { userId: user.id } });
+      // decrement book stock
+      bookStocks.forEach(async (val) => {
+        await db.book.update({
+          where: { id: val.bookId },
+          data: { stock: val.stock },
+        });
+      });
       try {
         const itemsName = order.ItemDetails.reduce((acc, curr) => {
           if (acc.length === 0) {

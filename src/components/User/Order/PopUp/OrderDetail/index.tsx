@@ -64,7 +64,6 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                   <h1 className="gross-amount">
                     <NumberFormat
                       prefix="Rp"
-                      suffix=",00"
                       value={data.order.grossAmount}
                       displayType={"text"}
                       thousandSeparator={"."}
