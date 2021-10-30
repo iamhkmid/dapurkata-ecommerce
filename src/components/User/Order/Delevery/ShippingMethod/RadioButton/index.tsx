@@ -71,7 +71,6 @@ const RadioButton = () => {
               <h1 className="text-cost">
                 <NumberFormat
                   prefix="Rp"
-                  suffix=",00"
                   value={val.cost[0].value}
                   displayType={"text"}
                   thousandSeparator={"."}
