@@ -213,7 +213,7 @@ export const Mutation: TTransactionMutation = {
         id: charge.order_id,
         grossAmount: gross_amount,
         currency: charge.currency,
-        fraudStatus: charge.fraud_status,
+        fraudStatus: charge.fraud_status || "not available",
         transactionStatus: charge.transaction_status,
         transactionTime,
         expirationTime,

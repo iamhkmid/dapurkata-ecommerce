@@ -1,8 +1,8 @@
 export const navbarMenu = [
-  { name: "Home", link: "/", type: "link", id: "HOME" },
+  { name: "Home", link: "/#section1", type: "link", id: "HOME" },
   {
     name: "Layanan kami",
-    link: "/layanan-kami",
+    link: "/#section2",
     type: "dropdown",
     id: "SERVICES",
   },

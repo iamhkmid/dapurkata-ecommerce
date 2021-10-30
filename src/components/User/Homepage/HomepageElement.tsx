@@ -14,7 +14,11 @@ export const Main = styled.div<TSection>`
 type TSc1 = { bgUrl: string };
 export const Section1 = styled.div<TSc1>`
   display: flex;
-  background: ${({ theme }) => theme.background[2]};
+  background: linear-gradient(
+    0deg,
+    ${({ theme }) => (theme.name === "light" ? "#e8f4ff" : "#38669242")} 0%,
+    ${({ theme }) => theme.background[2]} 100%
+  );
   flex-direction: column;
   position: relative;
   justify-content: center;
@@ -25,8 +29,8 @@ export const Section1 = styled.div<TSc1>`
   overflow: hidden;
   padding-top: 6rem;
   padding-bottom: 1rem;
-
-  background-image: url(${({ bgUrl }) => bgUrl});
+  /* 
+  background-image: url(${({ bgUrl }) => bgUrl}); */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Do not repeat the image */
   background-size: cover; /* Resize the background image to cover the entire container */
@@ -83,13 +87,13 @@ export const ImageContainer = styled(motion.div)`
   display: block;
   align-items: center;
   position: relative;
-  height: 300px;
-  aspect-ratio: 5/3;
+  height: 280px;
+  aspect-ratio: 10/6;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    height: 250px;
+    height: 240px;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    height: 150px;
+    height: 160px;
   }
 `;
 
@@ -128,30 +132,16 @@ export const ButtonWrapper = styled(motion.div)`
   }
 `;
 
-export const Section2 = styled.div`
+export const Section = styled.div`
   display: flex;
-  background: ${({ theme }) => theme.background[1]};
-  flex-direction: column;
   position: relative;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  gap: 3rem;
+  background: ${({ theme }) => theme.background[2]};
   width: 100%;
-  padding-top: 6rem;
-  padding-bottom: 3rem;
-  /* ::before {
-    content: "";
-    width: 100%;
-    height: 100%;
+  .scroll-point {
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    backdrop-filter: blur(1px);
-  } */
-
-  transition: 0.4s all ease;
+    top: -3rem;
+    visibility: hidden;
+  }
 `;
 
 const animateDown = keyframes`
@@ -167,6 +157,7 @@ const animateDown = keyframes`
 `;
 export const ChevronDown = styled(motion.div)`
   display: flex;
+  cursor: pointer;
   > svg {
     color: ${({ theme }) => theme.color[2]};
     height: 2rem;

@@ -19,13 +19,14 @@ const spring = {
 };
 
 const MenuList = () => {
-  const { pathname } = useRouter();
+  const { asPath } = useRouter();
+  const router = useRouter();
   const { userNav, dispatch } = useContext(UserNavCtx);
   useEffect(() => {
-    if (pathname) {
-      dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+    if (asPath) {
+      dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });
     }
-  }, [pathname]);
+  }, [asPath]);
   return (
     <El.Main>
       <El.Ul>
@@ -36,7 +37,7 @@ const MenuList = () => {
               dispatch({ type: "CHANGE_NAV_MENU", menu: value.link })
             }
             onMouseLeave={() => {
-              dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+              dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });
             }}
           >
             {userNav.selectedNavMenu === value.link && (
@@ -49,14 +50,16 @@ const MenuList = () => {
             )}
             {value.type === "link" && (
               <El.NLink href={value.link}>
-                <El.Anchor active={pathname === value.link}>
+                <El.Anchor
+                  active={userNav.selectedNavMenu?.includes(value.link)}
+                >
                   {value.name}
                 </El.Anchor>
               </El.NLink>
             )}
             {value.type === "dropdown" && (
               <El.DropdownBtn
-                active={pathname === value.link}
+                active={userNav.selectedNavMenu?.includes(value.link)}
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch({

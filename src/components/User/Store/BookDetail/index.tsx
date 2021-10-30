@@ -100,7 +100,6 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                 <h1 className="price">
                   <NumberFormat
                     prefix="Rp"
-                    suffix=",00"
                     value={dataGB.price}
                     displayType={"text"}
                     thousandSeparator={"."}

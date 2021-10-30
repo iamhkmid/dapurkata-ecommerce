@@ -1,11 +1,15 @@
 import moment from "moment";
 import "moment/locale/id";
+import { useContext } from "react";
 import NumberFormat from "react-number-format";
+import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import * as El from "./OrdersElement";
+import TransactionStatus from "./TransactionStatus";
 import { useGQLOrders } from "./useGQL";
 
 const Orders = () => {
   const { data, error, loading } = useGQLOrders();
+  const { dispatch } = useContext(UserNavCtx);
   return (
     <El.Main>
       <El.Section>
@@ -22,7 +26,15 @@ const Orders = () => {
           <tbody>
             {data?.map((val) => {
               return (
-                <tr key={val.id}>
+                <tr
+                  key={val.id}
+                  onClick={() =>
+                    dispatch({
+                      type: "SHOW_POPUP",
+                      value: { name: "ORDER_DETAIL", orderId: val.id },
+                    })
+                  }
+                >
                   <td>
                     <El.OrderId>{val.id}</El.OrderId>
                   </td>
@@ -44,10 +56,7 @@ const Orders = () => {
                     </El.Payment>
                   </td>
                   <td>
-                    <El.TransactionStatus status={val.transactionStatus}>
-                      {val.transactionStatus[0].toUpperCase() +
-                        val.transactionStatus.slice(1).toLowerCase()}
-                    </El.TransactionStatus>
+                    <TransactionStatus status={val.transactionStatus} />
                   </td>
                   <td>
                     <El.TransactionTime>

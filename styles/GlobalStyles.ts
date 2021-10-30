@@ -5,6 +5,7 @@ export const GlobalStyle = createGlobalStyle<{ theme: any }>`
 body {
   padding: 0;
   margin: 0;
+  scroll-behavior: smooth;
 }
 
 body{

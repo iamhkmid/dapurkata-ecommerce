@@ -24,14 +24,16 @@ export const Main = styled(motion.div)`
   z-index: 200;
   align-items: center;
   justify-content: center;
-  padding: 1rem 0.3rem;
+  padding: 1rem 0.2rem;
 `;
 
 export const Backround = styled.div`
   display: flex;
   position: absolute;
-  height: 100%;
-  width: 100%;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   background: ${({ theme }) => theme.popup};
   backdrop-filter: blur(4px);
@@ -84,7 +86,9 @@ const PopUpControl = () => {
             <ActivateAccount type="ACTIVATE_ACCOUNT" />
           )}
           {popup.name === "RESET_PASSWORD" && <ResetPassword />}
-          {popup.name === "ORDER_DETAIL" && <OrderDetail />}
+          {popup.name === "ORDER_DETAIL" && (
+            <OrderDetail orderId={popup.orderId} />
+          )}
           {popup.name === "ORDER_PAYMENT_INFO" && (
             <OrderPaymentInfo orderId={popup.orderId} />
           )}

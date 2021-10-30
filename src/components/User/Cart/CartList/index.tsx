@@ -71,7 +71,6 @@ const CartList = () => {
                         <El.Price>
                           <NumberFormat
                             prefix="Rp"
-                            suffix=",00"
                             value={val.Book.price}
                             displayType={"text"}
                             thousandSeparator={"."}
@@ -106,7 +105,6 @@ const CartList = () => {
               <h1>
                 <NumberFormat
                   prefix="Rp"
-                  suffix=",00"
                   value={amountPrice}
                   displayType={"text"}
                   thousandSeparator={"."}

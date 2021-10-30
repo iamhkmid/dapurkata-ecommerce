@@ -1,8 +1,10 @@
+import { ApolloError } from "apollo-server-errors";
 import Axios from "axios";
 import { encode } from "js-base64";
 import { TAPIMidtrans } from "../../../../types/api";
 import { TGQLPaymentInfo } from "../../../../types/transaction";
 import { bankTransfer } from "./bankTransfer";
+import { convenienceStore } from "./convenienceStore";
 const serverKey = encode(`${process.env.MIDTRANS_SERVER_KEY}:`);
 
 export const midtransAPI = Axios.create({
@@ -94,6 +96,39 @@ export const midtrans: TAPIMidtrans = async (props) => {
         { name: "va_number", value: permata_va_number },
       ];
       return { ...rest, paymentInfo, paymentServiceId: props.type };
+    }
+    case "INDOMARET_CSTORE": {
+      const { item_details, customer_details, transaction_details } =
+        props.value;
+      const charge = await convenienceStore.Indomaret({
+        item_details,
+        customer_details,
+        transaction_details,
+      });
+      const { payment_code, store, ...rest } = charge;
+      const paymentInfo: TGQLPaymentInfo[] = [
+        { name: "store", value: store },
+        { name: "payment_code", value: payment_code },
+      ];
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
+    }
+    case "ALFAMART_CSTORE": {
+      const { item_details, customer_details, transaction_details } =
+        props.value;
+      const charge = await convenienceStore.Indomaret({
+        item_details,
+        customer_details,
+        transaction_details,
+      });
+      const { payment_code, store, ...rest } = charge;
+      const paymentInfo: TGQLPaymentInfo[] = [
+        { name: "store", value: store },
+        { name: "payment_code", value: payment_code },
+      ];
+      return { ...rest, paymentInfo, paymentServiceId: props.type };
+    }
+    default: {
+      throw new ApolloError("Payment Type not found");
     }
   }
 };

@@ -94,27 +94,6 @@ export const TableOrders = styled.table`
   }
 `;
 
-type TTStatus = { status: string };
-export const TransactionStatus = styled.div<TTStatus>`
-  display: flex;
-  padding: 0.2rem 0.3rem;
-  font-size: 0.8rem;
-  font-weight: 400;
-  align-items: center;
-  justify-content: center;
-  border-radius: ${({ theme }) => theme.input.borderRadius};
-  ${({ status, theme }) =>
-    status === "pending" &&
-    css`
-      background: ${theme.transactionStatus[status].background};
-      color: ${theme.transactionStatus[status].color};
-      border: 1px solid ${theme.transactionStatus[status].border};
-    `}
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.7rem;
-  }
-`;
-
 export const GrossAmount = styled.h1`
   min-width: max-content;
 `;

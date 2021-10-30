@@ -25,6 +25,12 @@ const PaymentCode: FC<Props> = (props) => {
     case "MANDIRI_BILL_BANK_TRANSFER": {
       return <BankTransferType2 data={data} />;
     }
+    case "INDOMARET_CSTORE": {
+      return <Cstore data={data} />;
+    }
+    case "ALFAMART_CSTORE": {
+      return <Cstore data={data} />;
+    }
 
     default:
       return null;
@@ -39,7 +45,6 @@ type TPCode = {
 const BankTransferType1: FC<TPCode> = ({ data }) => (
   <Main>
     <Section>
-      <Label>Kode Pembayaran</Label>
       <Code>
         <div>
           <div className="name">VA NUMBER</div>
@@ -55,7 +60,6 @@ const BankTransferType1: FC<TPCode> = ({ data }) => (
 const BankTransferType2: FC<TPCode> = ({ data }) => (
   <Main>
     <Section>
-      <Label>Kode Pembayaran</Label>
       <Code>
         <div>
           <div className="name">BILLER CODE</div>
@@ -67,6 +71,21 @@ const BankTransferType2: FC<TPCode> = ({ data }) => (
           <div className="name">BILL KEY</div>
           <div className="value">
             {data.find((val) => val.name === "bill_key")?.value}
+          </div>
+        </div>
+      </Code>
+    </Section>
+  </Main>
+);
+
+const Cstore: FC<TPCode> = ({ data }) => (
+  <Main>
+    <Section>
+      <Code>
+        <div>
+          <div className="name">KODE PEMBAYARAN</div>
+          <div className="value">
+            {data.find((val) => val.name === "payment_code")?.value}
           </div>
         </div>
       </Code>

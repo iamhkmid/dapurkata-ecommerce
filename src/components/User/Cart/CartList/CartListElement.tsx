@@ -163,7 +163,7 @@ export const TableInfo = styled.table`
     height: 100%;
     background: ${({ theme }) => theme.background[2]};
     color: ${({ theme }) => theme.color[2]};
-    z-index: 3;
+    z-index: 10;
   }
   > thead {
     th {
@@ -209,6 +209,7 @@ export const Product = styled.div`
 `;
 export const Price = styled.h1`
   font-size: 0.85rem;
+  width: max-content;
   font-weight: 500;
   color: ${({ theme }) => theme.color[3]};
   border-color: ${({ theme }) => theme.button.disabled.background};

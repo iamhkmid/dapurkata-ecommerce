@@ -45,27 +45,24 @@ export type TGQLMutationOrder = {
 
 type TGQLPaymentInfo = { name: string; value: string };
 
-type TGQLItemDetail = {
+type TItemDetail = {
   id: string;
   name: string;
   price: number;
   quantity: number;
-  orderId: string;
 };
 
-type TGQLCustomerDetails = {
+type TCustomerDetails = {
   id: string;
   firstName: string;
   lastName: string;
   email: string;
   phone: string;
   orderId: string;
-  ShippingAddress: TGQLShippingAddress;
-  createdAt: Date;
-  updatedAt: Date;
+  ShippingAddress: TShippingAddress;
 };
 
-type TGQLShippingAddress = {
+type TShippingAddress = {
   id: string;
   firstName: string;
   lastName: string;
@@ -76,8 +73,6 @@ type TGQLShippingAddress = {
   postalCode: string;
   countryCode: string;
   customerDetailsId: string;
-  createdAt: number;
-  updatedAt: number;
 };
 export type TGQLPaymentService = {
   id: string;
@@ -124,5 +119,31 @@ export type TGQLPaymentInfoQuery = {
     transactionStatus: string;
     fraudStatus: string;
     PaymentInfo: { name: string; value: string }[];
+  };
+};
+
+export type TGQLOrderDetailQuery = {
+  order: {
+    id: string;
+    PaymentService: {
+      id: string;
+      name: string;
+      icon: string;
+      description: string;
+      PaymentType?: {
+        id: string;
+        name: string;
+        icon: string;
+        description: string;
+      };
+    };
+    ItemDetails?: TItemDetail[];
+    CustomerDetails: TCustomerDetails;
+    grossAmount: number;
+    currency: string;
+    transactionTime: number;
+    expirationTime: number;
+    transactionStatus: string;
+    fraudStatus: string;
   };
 };

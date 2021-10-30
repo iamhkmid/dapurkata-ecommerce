@@ -2,24 +2,12 @@ import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 
 export const Main = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: ${({ theme }) => theme.popup};
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const Section = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
   border-radius: ${({ theme }) => theme.borderRadius};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   flex-direction: column;
   position: relative;
   max-width: 80%;

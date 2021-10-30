@@ -12,7 +12,7 @@ export const Main = styled(motion.div)`
   color: ${({ theme }) => theme.color[1]};
   top: 95%;
   right: -10px;
-  min-width: 35rem;
+  min-width: 38rem;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   ::after {

@@ -12,23 +12,26 @@ const data = {
   spesifikasi: [
     {
       name: "isi",
-      warna: "Hitam-Putih",
-      jenisKertas: ["Bookpaper", " 72g/HVS 70g/HVS 80g"],
-      ukuran: "A5",
+      values: [
+        { name: "Warna", value: "Hitam-Putih", info: null },
+        { name: "Jenis Kertas", value: "72g/HVS 70g/HVS 80g", info: null },
+        { name: "Ukuran", value: "A5", info: null },
+      ],
     },
     {
       name: "sampul",
-      warna: "Fullcolor",
-      jenisKertas: "Ivory 260g",
-      laminasi: "Doff/Glossy",
-      att: "*pilih salah satu",
+      values: [
+        { name: "Warna", value: "Full Color", info: null },
+        { name: "Jenis Kertas", value: "Ivory 260g", info: null },
+        { name: "Laminasi", value: "Doff/Glossy", info: "Pilih salah satu" },
+      ],
     },
     {
       name: "finalisasi",
       values: [
-        ["Sampul kertas", " (softcover binding)"],
-        ["Penjilidan", " (Binding)"],
-        ["Shrink", ""],
+        { name: "Sampul kertas", value: "(softcover binding)", info: null },
+        { name: "Penjilidan", value: "(Binding)", info: null },
+        { name: "", value: "Shrink", info: null },
       ],
     },
   ],

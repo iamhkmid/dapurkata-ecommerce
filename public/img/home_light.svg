@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="true"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="0.90509667"
-     inkscape:cx="7226.2999"
-     inkscape:cy="3994.6009"
+     inkscape:zoom="0.056568542"
+     inkscape:cx="4498.9669"
+     inkscape:cy="2828.4271"
      inkscape:window-width="1366"
      inkscape:window-height="716"
      inkscape:window-x="0"
@@ -36,6 +36,18 @@
      borderlayer="true" />
   <defs
      id="defs2593">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient1999">
+      <stop
+         style="stop-color:#dbe4ea;stop-opacity:1"
+         offset="0"
+         id="stop1995" />
+      <stop
+         style="stop-color:#ffffff;stop-opacity:1"
+         offset="1"
+         id="stop1997" />
+    </linearGradient>
     <linearGradient
        inkscape:collect="always"
        id="linearGradient2658">
@@ -371,11 +383,27 @@
        y1="-18.552843"
        x2="779.65521"
        y2="541.89673" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient1999"
+       id="linearGradient2001"
+       x1="911.38129"
+       y1="1071.0826"
+       x2="916.04016"
+       y2="11.91225"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1">
+    <rect
+       style="fill:url(#linearGradient2001);stroke:none;stroke-width:0.499999;fill-opacity:1"
+       id="rect1842"
+       width="1953.6698"
+       height="1113.9083"
+       x="-11.364175"
+       y="-5.1339765" />
     <g
        id="g3656"
        clip-path="url(#clipPath3660)"

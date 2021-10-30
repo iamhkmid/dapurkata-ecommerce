@@ -58,7 +58,6 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                     <h1 className="price">
                       <NumberFormat
                         prefix="Rp"
-                        suffix=",00"
                         value={book.price}
                         displayType={"text"}
                         thousandSeparator={"."}

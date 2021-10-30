@@ -19,17 +19,16 @@ import { PAYMENT_INFO } from "../../../../../graphql/transaction/queries";
 type TProps = {
   orderId: string;
 };
-const OrderPaymentInfo: FC<TProps> = (props) => {
+const OrderPaymentInfo: FC<TProps> = ({ orderId }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { data, loading, error, subscribeToMore } =
     useQuery<TGQLPaymentInfoQuery>(PAYMENT_INFO, {
       fetchPolicy: "network-only",
-      variables: { orderId: props.orderId },
+      variables: { orderId },
     });
 
   useEffect(() => {
     if (data?.order?.id) {
-      console.log(data);
       subscribeToMore<TGQLOrderInfoSubscription>({
         document: ORDER_INFO_SUBSCRIPTION,
         variables: { orderId: data?.order?.id },
@@ -53,55 +52,53 @@ const OrderPaymentInfo: FC<TProps> = (props) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <El.Section>
-        <PopUpHeader title="Info Pembayaran" />
-        {data?.order && (
-          <El.PaymentInfo>
-            <div>
-              <El.Payment>
-                <El.GrossAmount>
-                  <h1 className="name">Total Pembayaran</h1>
-                  <h1 className="value">
-                    <NumberFormat
-                      prefix="Rp"
-                      suffix=",00"
-                      value={data?.order?.grossAmount}
-                      displayType={"text"}
-                      thousandSeparator={"."}
-                      decimalSeparator={","}
-                    />
+      <PopUpHeader title="Info Pembayaran" />
+      {data?.order && (
+        <El.PaymentInfo>
+          <div>
+            <El.Payment>
+              <El.GrossAmount>
+                <h1 className="name">Total Pembayaran</h1>
+                <h1 className="value">
+                  <NumberFormat
+                    prefix="Rp"
+                    suffix=",00"
+                    value={data?.order?.grossAmount}
+                    displayType={"text"}
+                    thousandSeparator={"."}
+                    decimalSeparator={","}
+                  />
+                </h1>
+              </El.GrossAmount>
+              <El.PaymentService>
+                <div className="payment-icon-wrapper">
+                  <Image
+                    src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${data?.order?.PaymentService.icon}`}
+                    height={40}
+                    width={40}
+                    alt="payment logo"
+                    layout="fixed"
+                  />
+                </div>
+                <div className="name">
+                  <h1 className="type">
+                    {data?.order?.PaymentService?.PaymentType.name}
                   </h1>
-                </El.GrossAmount>
-                <El.PaymentService>
-                  <div className="payment-icon-wrapper">
-                    <Image
-                      src={`${process.env.NEXT_PUBLIC_GQL_HTTP_URL}${data?.order?.PaymentService.icon}`}
-                      height={40}
-                      width={40}
-                      alt="payment logo"
-                      layout="fixed"
-                    />
-                  </div>
-                  <div className="name">
-                    <h1 className="type">
-                      {data?.order?.PaymentService?.PaymentType.name}
-                    </h1>
-                    <h1 className="service">
-                      {data?.order?.PaymentService?.name}
-                    </h1>
-                  </div>
-                </El.PaymentService>
-              </El.Payment>
-              <TransactionStatus status={data?.order?.transactionStatus} />
-              <PaymentCode
-                data={data?.order?.PaymentInfo}
-                paymentServiceId={data?.order?.PaymentService.id}
-              />
-              <HowToPay paymentServiceId={data?.order?.PaymentService?.id} />
-            </div>
-          </El.PaymentInfo>
-        )}
-      </El.Section>
+                  <h1 className="service">
+                    {data?.order?.PaymentService?.name}
+                  </h1>
+                </div>
+              </El.PaymentService>
+            </El.Payment>
+            <TransactionStatus status={data?.order?.transactionStatus} />
+            <PaymentCode
+              data={data?.order?.PaymentInfo}
+              paymentServiceId={data?.order?.PaymentService.id}
+            />
+            <HowToPay paymentServiceId={data?.order?.PaymentService?.id} />
+          </div>
+        </El.PaymentInfo>
+      )}
     </El.Main>
   );
 };

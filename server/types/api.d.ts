@@ -10,6 +10,10 @@ import {
   TAPIResBTMandiriBill,
   TAPIResBTPermata,
   TDBBankTransfer,
+  TAPIResCSAlfamart,
+  TAPIResCSIndomaret,
+  TAPIParamsCSIndomaret,
+  TAPIParamsCSAlfamart,
 } from "./midtrans";
 import { TAPICity, TAPICost, TAPIProvince } from "./rajaOngkir";
 import {
@@ -58,6 +62,11 @@ export type TAPIBankTransfer = {
   MandiriBill: (data: TAPIParamsBTMandiriBill) => Promise<TAPIResBTMandiriBill>;
   Permata: (data: TAPIParamsBTPermata) => Promise<TAPIResBTPermata>;
 };
+export type TAPIConvenienceStore = {
+  Indomaret: (data: TAPIParamsCSIndomaret) => Promise<TAPIResCSIndomaret>;
+  Alfamart: (data: TAPIParamsCSAlfamart) => Promise<TAPIResCSAlfamart>;
+};
+
 type TRMidtrans = {
   status_code: string;
   status_message: string;
@@ -69,7 +78,7 @@ type TRMidtrans = {
   payment_type: string;
   transaction_time: string;
   transaction_status: string;
-  fraud_status: string;
+  fraud_status?: string;
   paymentServiceId: string;
   paymentInfo: TPaymentInfo[];
 };
@@ -90,7 +99,7 @@ type TNotifPaymentBody = {
   order_id: string;
   merchant_id: string;
   gross_amount: string;
-  fraud_status: string;
+  fraud_status?: string;
   currency: string;
 } & (
   | {

@@ -79,7 +79,7 @@ const Navbar: FC = ({ children }) => {
       <El.Nav showNav={showNav}>
         <El.NavbarContainer showColor={showColor}>
           <El.LogoLink>
-            <Link href="/">
+            <Link href="/#section1">
               <a>
                 <El.Logo>{IconsControl("navbar_logo")}</El.Logo>
                 <El.LogoText showLogo={showLogo}>

@@ -601,6 +601,71 @@ export const IconsControl = (name: string) => {
           <path d="M473.16 221.48l-2.26-9.59H262.46v88.22H387c-12.93 61.4-72.93 93.72-121.94 93.72-35.66 0-73.25-15-98.13-39.11a140.08 140.08 0 01-41.8-98.88c0-37.16 16.7-74.33 41-98.78s61-38.13 97.49-38.13c41.79 0 71.74 22.19 82.94 32.31l62.69-62.36C390.86 72.72 340.34 32 261.6 32c-60.75 0-119 23.27-161.58 65.71C58 139.5 36.25 199.93 36.25 256s20.58 113.48 61.3 155.6c43.51 44.92 105.13 68.4 168.58 68.4 57.73 0 112.45-22.62 151.45-63.66 38.34-40.4 58.17-96.3 58.17-154.9 0-24.67-2.48-39.32-2.59-39.96z" />
         </svg>
       );
+    case "isi":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            d="M368 415.86V72a24.07 24.07 0 00-24-24H72a24.07 24.07 0 00-24 24v352a40.12 40.12 0 0040 40h328"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M416 464h0a48 48 0 01-48-48V128h72a24 24 0 0124 24v264a48 48 0 01-48 48z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+            strokeWidth="32"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
+            d="M240 128h64M240 192h64M112 256h192M112 320h192M112 384h192"
+          />
+          <path
+            fill="currentColor"
+            d="M176 208h-64a16 16 0 01-16-16v-64a16 16 0 0116-16h64a16 16 0 0116 16v64a16 16 0 01-16 16z"
+          />
+        </svg>
+      );
+    case "sampul":
+      return (
+        <svg fill="currentColor" viewBox="0 0 512 512">
+          <title>Book</title>
+          <path
+            d="M256 160c16-63.16 76.43-95.41 208-96a15.94 15.94 0 0116 16v288a16 16 0 01-16 16c-128 0-177.45 25.81-208 64-30.37-38-80-64-208-64-9.88 0-16-8.05-16-17.93V80a15.94 15.94 0 0116-16c131.57.59 192 32.84 208 96zM256 160v288"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      );
+    case "finalisasi":
+      return (
+        <svg fill="none" viewBox="0 0 512 512" stroke="currentColor">
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="m 176.97089,255.98084 52.51666,52.51666 105.03332,-105.03332 m 157.54998,52.51666 a 236.32497,236.32497 0 1 1 -472.649932,0 236.32497,236.32497 0 0 1 472.649932,0 z"
+          />
+        </svg>
+      );
+    case "checkmark-outline":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M416 128L192 384l-96-96"
+          />
+        </svg>
+      );
     default:
       return null;
       break;

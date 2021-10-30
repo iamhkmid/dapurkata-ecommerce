@@ -74,3 +74,60 @@ export const PAYMENT_INFO = gql`
     }
   }
 `;
+
+export const ORDER_DETAIL = gql`
+  query ($orderId: ID!) {
+    order(orderId: $orderId) {
+      id
+      PaymentServiceId
+      userId
+      grossAmount
+      currency
+      transactionTime
+      transactionStatus
+      expirationTime
+      fraudStatus
+      ItemDetails {
+        id
+        name
+        price
+        quantity
+      }
+      CustomerDetails {
+        id
+        firstName
+        lastName
+        email
+        phone
+        orderId
+        ShippingAddress {
+          id
+          firstName
+          lastName
+          email
+          phone
+          address
+          city
+          postalCode
+          countryCode
+          customerDetailsId
+        }
+      }
+      PaymentService {
+        id
+        name
+        icon
+        PaymentType {
+          id
+          name
+        }
+      }
+      PaymentInfo {
+        name
+        value
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

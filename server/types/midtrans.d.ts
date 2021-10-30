@@ -14,7 +14,17 @@ type TAPIResBTVaNumPermata = {
   permata_va_number: string;
 };
 
-type TAPIResBTOther = {
+type TAPIResCSCodeAlfamart = {
+  payment_code: string;
+  store: string;
+};
+
+type TAPIResCSCodeIndomaret = {
+  payment_code: string;
+  store: string;
+};
+
+type TAPIChargeRes = {
   status_code: string;
   status_message: string;
   transaction_id: string;
@@ -25,10 +35,10 @@ type TAPIResBTOther = {
   payment_type: string;
   transaction_time: string;
   transaction_status: string;
-  fraud_status: string;
+  fraud_status?: string;
 };
 
-type TAPIParamsBT = {
+type TAPIParamsCharge = {
   transaction_details: { order_id: string; gross_amount: number };
   customer_details?: {
     email?: string;
@@ -52,15 +62,19 @@ type TAPIParamsEchannel = {
 };
 
 //Parameters
-export type TAPIParamsBTBNI = TAPIParamsBT;
-export type TAPIParamsBTBCA = TAPIParamsBT;
-export type TAPIParamsBTBRI = TAPIParamsBT;
-export type TAPIParamsBTPermata = TAPIParamsBT;
-export type TAPIParamsBTMandiriBill = TAPIParamsEchannel & TAPIParamsBT;
+export type TAPIParamsBTBNI = TAPIParamsCharge;
+export type TAPIParamsBTBCA = TAPIParamsCharge;
+export type TAPIParamsBTBRI = TAPIParamsCharge;
+export type TAPIParamsBTPermata = TAPIParamsCharge;
+export type TAPIParamsBTMandiriBill = TAPIParamsEchannel & TAPIParamsCharge;
+export type TAPIParamsCSIndomaret = TAPIParamsCharge;
+export type TAPIParamsCSAlfamart = TAPIParamsCharge;
 
 //Response
-export type TAPIResBTBNI = TAPIResBTVaNum & TAPIResBTOther;
-export type TAPIResBTBCA = TAPIResBTVaNum & TAPIResBTOther;
-export type TAPIResBTBRI = TAPIResBTVaNum & TAPIResBTOther;
-export type TAPIResBTMandiriBill = TAPIResBTBill & TAPIResBTOther;
-export type TAPIResBTPermata = TAPIResBTVaNumPermata & TAPIResBTOther;
+export type TAPIResBTBNI = TAPIResBTVaNum & TAPIChargeRes;
+export type TAPIResBTBCA = TAPIResBTVaNum & TAPIChargeRes;
+export type TAPIResBTBRI = TAPIResBTVaNum & TAPIChargeRes;
+export type TAPIResBTMandiriBill = TAPIResBTBill & TAPIChargeRes;
+export type TAPIResBTPermata = TAPIResBTVaNumPermata & TAPIChargeRes;
+export type TAPIResCSIndomaret = TAPIResCSCodeIndomaret & TAPIChargeRes;
+export type TAPIResCSAlfamart = TAPIResCSCodeAlfamart & TAPIChargeRes;
