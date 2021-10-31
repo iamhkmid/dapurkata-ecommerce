@@ -21,7 +21,7 @@ const ImageResponsive: FC<TBookCover> = (props) => {
 
   return (
     <Main>
-      <DefImg>{IconsControl(defIcon)}</DefImg>
+      {(!src || noImg) && <DefImg>{IconsControl(defIcon)}</DefImg>}
 
       {src && (
         <ImgWrapper>
