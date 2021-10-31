@@ -65,9 +65,15 @@ export const CoverWrapper = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   min-width: 100%;
-  min-height: 200px;
+  aspect-ratio: 2.1/3;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
+  > div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    background: red;
+  }
 `;
 
 export const BookInfo = styled.div`
