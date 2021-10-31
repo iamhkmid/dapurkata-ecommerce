@@ -116,7 +116,6 @@ const Main = styled.div<TSc1>`
     z-index: 1;
     backdrop-filter: blur(1px);
   } */
-
   transition: 0.4s all ease;
 `;
 const GroupText = styled.div`
