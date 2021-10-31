@@ -21,8 +21,9 @@ const ImageResponsive: FC<TBookCover> = (props) => {
 
   return (
     <Main>
-      {(!src || noImg) && <DefImg>{IconsControl(defIcon)}</DefImg>}
-
+      <LoadingWrapper>
+        <LoadingImage dotSize={15} />
+      </LoadingWrapper>
       {src && (
         <ImgWrapper>
           <Image
@@ -42,12 +43,6 @@ const ImageResponsive: FC<TBookCover> = (props) => {
             onError={() => setNoImg(true)}
           />
         </ImgWrapper>
-      )}
-
-      {!noImg && (
-        <LoadingWrapper>
-          <LoadingImage dotSize={15} />
-        </LoadingWrapper>
       )}
     </Main>
   );
