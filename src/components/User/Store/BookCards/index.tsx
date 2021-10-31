@@ -41,7 +41,13 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                 }
               >
                 <El.CoverWrapper>
-                  <div></div>
+                  <ImageResponsive
+                    src={book.coverURL}
+                    alt={book.title}
+                    height={290}
+                    width={200}
+                    quality={75}
+                  />
                 </El.CoverWrapper>
                 <El.BookInfo>
                   <div className="info1">

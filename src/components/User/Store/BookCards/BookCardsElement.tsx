@@ -68,12 +68,6 @@ export const CoverWrapper = styled.div`
   aspect-ratio: 2.1/3;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
-  > div {
-    display: flex;
-    min-width: 100%;
-    min-height: 100%;
-    background: red;
-  }
 `;
 
 export const BookInfo = styled.div`

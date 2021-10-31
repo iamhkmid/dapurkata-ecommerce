@@ -21,9 +21,8 @@ const ImageResponsive: FC<TBookCover> = (props) => {
 
   return (
     <Main>
-      <LoadingWrapper>
-        <LoadingImage dotSize={15} />
-      </LoadingWrapper>
+      {(!src || noImg) && <DefImg>{IconsControl(defIcon)}</DefImg>}
+
       {src && (
         <ImgWrapper>
           <Image
@@ -44,6 +43,12 @@ const ImageResponsive: FC<TBookCover> = (props) => {
           />
         </ImgWrapper>
       )}
+
+      {!noImg && (
+        <LoadingWrapper>
+          <LoadingImage dotSize={15} />
+        </LoadingWrapper>
+      )}
     </Main>
   );
 };
@@ -55,8 +60,8 @@ const Main = styled.div`
   position: relative;
   align-items: center;
   justify-content: center;
-  height: 100%;
-  width: 100%;
+  min-height: 100%;
+  min-width: 100%;
   overflow: hidden;
   transition: 0.4s all ease;
   background: ${({ theme }) => theme.content.bookCard.cover.background};
