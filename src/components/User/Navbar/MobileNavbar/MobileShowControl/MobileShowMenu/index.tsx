@@ -13,7 +13,7 @@ import ImageResponsive from "../../../../../otherComps/ImageResponsive";
 
 const MobileShowMenu = () => {
   const { pathname } = useRouter();
-  const { dispatch } = useContext(UserNavCtx);
+  const { userNav, dispatch } = useContext(UserNavCtx);
   const [showDropdown, setShowDropdown] = useState<string>(null);
   const { logOut } = useLogOut();
   const { user } = useContext(AuthContext);
@@ -93,7 +93,7 @@ const MobileShowMenu = () => {
             {value.type === "link" && (
               <El.NLink href={value.link}>
                 <El.Anchor
-                  active={pathname === value.link ? true : false}
+                  active={value.link.includes(userNav.selectedNavMenu)}
                   onClick={() => dispatch({ type: "CLOSE_MENU" })}
                 >
                   {value.name}
@@ -102,7 +102,7 @@ const MobileShowMenu = () => {
             )}
             {value.type === "dropdown" && (
               <El.DropdownBtn
-                active={pathname === value.link}
+                active={value.link.includes(userNav.selectedNavMenu)}
                 onClick={() => setShowDropdown(!showDropdown ? value.id : null)}
               >
                 {value.name}
@@ -114,8 +114,8 @@ const MobileShowMenu = () => {
               </El.DropdownBtn>
             )}
             <DropdownControl
-              name={value.name}
-              active={showDropdown && showDropdown === value.id}
+              name={value.id}
+              active={showDropdown === value.id}
             />
           </El.Li>
         ))}

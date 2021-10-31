@@ -11,7 +11,7 @@ import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser"
 import { useRouter } from "next/router";
 import Link from "next/link";
 import AuthMenu from "./AuthMenu";
-import { useWindowSize } from "react-use";
+import { useWindowScroll, useWindowSize } from "react-use";
 import IconsControl from "../../IconsControl";
 import { AnimateSharedLayout } from "framer-motion";
 import Footer from "../Footer";
@@ -24,55 +24,38 @@ const Navbar: FC = ({ children }) => {
   const [showNav, setShowNav] = useState(true);
   const [showColor, setShowColor] = useState(true);
   const [showLogo, setShowLogo] = useState(true);
-  const [scroll, setScroll] = useState(0);
   const { width } = useWindowSize();
+  const { y } = useWindowScroll();
 
   useEffect(() => {
     if (process.browser) {
-      document.body.onscroll = (e) => {
-        if (pathname !== "/") {
-          setShowColor(true);
-        } else if (document.documentElement.scrollTop > 32) {
-          setShowColor(true);
-        } else {
-          setShowColor(false);
-        }
-
-        if (pathname !== "/" || width < 960) {
-          setShowLogo(true);
-        } else if (document.documentElement.scrollTop >= 64) {
-          setShowLogo(true);
-        } else {
-          setShowLogo(false);
-        }
-        // if (
-        //   scroll < mainRef.current.scrollTop &&
-        //   mainRef.current.offsetHeight + mainRef.current.scrollTop >=
-        //     mainRef.current.offsetHeight + 64
-        // ) {
-        //   setShowNav(false);
-        // } else {
-        //   setShowNav(true);
-        // }
-        // setScroll(mainRef.current.scrollTop);
-      };
-    }
-  }, [scroll, pathname]);
-
-  useEffect(() => {
-    if (process.browser) {
-      if (pathname === "/" && mainRef.current.scrollTop <= 32) {
-        setShowColor(false);
-      } else {
+      if (pathname !== "/") {
         setShowColor(true);
-      }
-      if (pathname === "/" && width > 960) {
-        setShowLogo(false);
+      } else if (y > 48) {
+        setShowColor(true);
       } else {
-        setShowLogo(true);
+        setShowColor(false);
       }
+
+      if (pathname !== "/" || width < 960) {
+        setShowLogo(true);
+      } else if (y >= 48) {
+        setShowLogo(true);
+      } else {
+        setShowLogo(false);
+      }
+      // if (
+      //   scroll < mainRef.current.scrollTop &&
+      //   mainRef.current.offsetHeight + mainRef.current.scrollTop >=
+      //     mainRef.current.offsetHeight + 64
+      // ) {
+      //   setShowNav(false);
+      // } else {
+      //   setShowNav(true);
+      // }
+      // setScroll(mainRef.current.scrollTop);
     }
-  }, [pathname, width]);
+  }, [y, pathname, width]);
 
   return (
     <El.Main onClick={() => dispatch({ type: "CLOSE_MENU" })} ref={mainRef}>

@@ -179,6 +179,10 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                   <h1 className="ai-value">{dataGB.series}</h1>
                 </div>
                 <div>
+                  <h1 className="ai-name">Stok</h1>
+                  <h1 className="ai-value">{dataGB.stock}</h1>
+                </div>
+                <div>
                   <h1 className="ai-name">Berat</h1>
                   <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
                 </div>

@@ -40,7 +40,7 @@ const MenuList = () => {
               dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });
             }}
           >
-            {userNav.selectedNavMenu === value.link && (
+            {value.link.includes(userNav?.selectedNavMenu) && (
               <El.ActiveLine
                 className="active-line"
                 layoutId="menu_bg"
@@ -51,7 +51,7 @@ const MenuList = () => {
             {value.type === "link" && (
               <El.NLink href={value.link}>
                 <El.Anchor
-                  active={userNav.selectedNavMenu?.includes(value.link)}
+                  active={value.link.includes(userNav?.selectedNavMenu)}
                 >
                   {value.name}
                 </El.Anchor>
@@ -59,7 +59,7 @@ const MenuList = () => {
             )}
             {value.type === "dropdown" && (
               <El.DropdownBtn
-                active={userNav.selectedNavMenu?.includes(value.link)}
+                active={value.link.includes(userNav?.selectedNavMenu)}
                 onClick={(e) => {
                   e.stopPropagation();
                   dispatch({

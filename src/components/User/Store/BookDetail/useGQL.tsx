@@ -16,7 +16,7 @@ export const useGQLGetbook = ({ bookId }) => {
   const { data, loading, error } = useQuery<TGQLBookDetail>(GET_BOOK_DETAIL, {
     skip: !bookId,
     variables: { bookId },
-    fetchPolicy: "cache-first",
+    fetchPolicy: "network-only",
     errorPolicy: "all",
   });
 

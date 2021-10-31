@@ -1,9 +1,14 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import * as El from "./ServicesElement";
 
 const Services = () => {
-  const { dispatch } = useContext(UserNavCtx);
+  const { userNav, dispatch } = useContext(UserNavCtx);
+  const servicesMenu = [
+    { name: "Spesifikasi Naskah", link: "/#section2-1" },
+    { name: "Paket Kreator", link: "/#section2-2" },
+    { name: "Layanan Lainnya", link: "/#section2-3" },
+  ];
   return (
     <El.Main
       initial={{ opacity: 0 }}
@@ -12,21 +17,13 @@ const Services = () => {
       onClick={(e) => e.stopPropagation()}
     >
       <El.Ul onClick={() => dispatch({ type: "CLOSE_MENU" })}>
-        <El.Li>
-          <El.NLink href="/#section2-1">
-            <El.Anchor>Spesifikasi Naskah</El.Anchor>
-          </El.NLink>
-        </El.Li>
-        <El.Li>
-          <El.NLink href="/#section2-2">
-            <El.Anchor>Paket Kreator</El.Anchor>
-          </El.NLink>
-        </El.Li>
-        <El.Li>
-          <El.NLink href="/#section2-3">
-            <El.Anchor>Layanan</El.Anchor>
-          </El.NLink>
-        </El.Li>
+        {servicesMenu.map((val) => (
+          <El.Li key={val.link}>
+            <El.NLink href={val.link}>
+              <El.Anchor>{val.name}</El.Anchor>
+            </El.NLink>
+          </El.Li>
+        ))}
       </El.Ul>
     </El.Main>
   );

@@ -1,8 +1,11 @@
 import { useMutation, useQuery } from "@apollo/client";
+import { useRouter } from "next/router";
 import { useContext } from "react";
 import { useEffect } from "react";
+import { AuthContext } from "../../../../contexts/AuthCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_ORDER_BOOK } from "../../../../graphql/book/queries";
+import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
 import { ORDER } from "../../../../graphql/transaction/mutations";
 import { TGQLGetOrderBook } from "../../../../types/book";
 import { TGQLOrder } from "../../../../types/order";
@@ -19,6 +22,8 @@ type TValues = {
 };
 export const useGQLOrder = () => {
   const { dispatch } = useContext(UserNavCtx);
+  const { user } = useContext(AuthContext);
+  const { replace } = useRouter();
   const [order, { data, error, loading }] = useMutation<TGQLMutationOrder>(
     ORDER,
     {
@@ -27,7 +32,11 @@ export const useGQLOrder = () => {
     }
   );
   const makeAnOrder = async (values: TValues) => {
-    return order({ variables: { data: values } });
+    return order({
+      variables: { data: values },
+      refetchQueries: [{ query: SHOPPINGCART, variables: { userId: user.id } }],
+      awaitRefetchQueries: true,
+    });
   };
   useEffect(() => {
     if (error) {
@@ -40,6 +49,7 @@ export const useGQLOrder = () => {
       });
     }
     if (data?.order) {
+      replace("/store");
       dispatch({
         type: "SHOW_POPUP",
         value: { name: "ORDER_PAYMENT_INFO", orderId: data.order.id },

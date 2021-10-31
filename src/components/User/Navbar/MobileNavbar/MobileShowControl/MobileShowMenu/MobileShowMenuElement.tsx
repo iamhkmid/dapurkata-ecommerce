@@ -103,7 +103,6 @@ export const Li = styled.li<TLi>`
   flex-direction: column;
   align-items: center;
   text-decoration: none;
-  height: 100%;
   width: 100%;
   align-items: center;
   position: relative;
@@ -155,7 +154,6 @@ export const DropdownBtn = styled.button<TDropdownBtn>`
   flex-direction: row;
   gap: 0.2rem;
   align-items: center;
-  height: 100%;
   width: 100%;
   border: none;
   padding: 0.5rem 1rem;

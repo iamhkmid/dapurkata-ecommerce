@@ -2,11 +2,10 @@ import Services from "./Services";
 
 const DropdownControl = ({ name, active }) => {
   switch (name) {
-    case "Layanan kami":
+    case "SERVICES":
       return <Services active={active} />;
     default:
       return null;
-      break;
   }
 };
 

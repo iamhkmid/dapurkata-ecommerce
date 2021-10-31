@@ -15,6 +15,7 @@ export const Main = styled.div<TMain>`
   position: relative;
   max-height: 0;
   width: 100%;
+  overflow: hidden;
   ${({ active }) =>
     active &&
     css`

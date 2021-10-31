@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import NextLink from "next/link";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
@@ -52,7 +52,6 @@ export const Ul = styled.ul`
   align-items: center;
   gap: 0.1rem;
 `;
-
 export const Li = styled.li`
   display: flex;
   cursor: pointer;
@@ -63,10 +62,12 @@ export const Li = styled.li`
   width: 100%;
   text-align: start;
   border-radius: ${({ theme }) => theme.borderRadius};
+
   :hover {
     color: ${({ theme }) => theme.button.hover.list.color};
     background: ${({ theme }) => theme.button.hover.list.background};
   }
+
   transition: 0.4s all ease;
 `;
 export const Item = styled.h1`

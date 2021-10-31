@@ -268,18 +268,20 @@ export const Mutation: TTransactionMutation = {
         PaymentService: { include: { PaymentType: true } },
       },
     });
-    // PUSH NOTIFICATION WITH WEBSOCKET
-    if (order) {
-      // reset shoppingcart
-      await db.shoppingCart.deleteMany({ where: { userId: user.id } });
-      // decrement book stock
-      bookStocks.forEach(async (val) => {
-        await db.book.update({
-          where: { id: val.bookId },
-          data: { stock: val.stock },
+    try {
+      if (order) {
+        // reset shoppingcart
+        if (data.orderType === "shoppingcart") {
+          await db.shoppingCart.deleteMany({ where: { userId: user.id } });
+        }
+        // decrement book stock
+        bookStocks.forEach(async (val) => {
+          await db.book.update({
+            where: { id: val.bookId },
+            data: { stock: val.stock },
+          });
         });
-      });
-      try {
+        // PUSH NOTIFICATION WITH WEBSOCKET
         const itemsName = order.ItemDetails.reduce((acc, curr) => {
           if (acc.length === 0) {
             return `${curr.name} x${curr.quantity} Rp.${curr.price}`;
@@ -307,8 +309,8 @@ export const Mutation: TTransactionMutation = {
               userId: notif.userId,
             },
           });
-      } catch (error) {}
-    }
+      }
+    } catch {}
     return order;
   },
 };
