@@ -65,7 +65,7 @@ export const CoverWrapper = styled.div`
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
   min-width: 100%;
-  aspect-ratio: 2.1/3;
+  min-height: 200px;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
 `;
