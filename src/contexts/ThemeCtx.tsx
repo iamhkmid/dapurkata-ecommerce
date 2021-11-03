@@ -32,6 +32,31 @@ const themeConf = {
     popup: "rgba(196, 206, 216, 0.452)",
     transactionStatus: {
       pending: { background: "#c0cfe47f", color: "#424953", border: "#bdc7d6" },
+      settlement: {
+        background: "#79ff9a7c",
+        color: "#096e2a",
+        border: "#38c968",
+      },
+      expire: {
+        background: "#ff6e6e7b",
+        color: "#a31010",
+        border: "#dd5252",
+      },
+      deny: {
+        background: "#ff6e6e7b",
+        color: "#a31010",
+        border: "#dd5252",
+      },
+      cancel: {
+        background: "#ff6e6e7b",
+        color: "#a31010",
+        border: "#dd5252",
+      },
+      failure: {
+        background: "#ff6e6e7b",
+        color: "#a31010",
+        border: "#dd5252",
+      },
     },
     content: {
       cart: { color: { total: "#e94aaf" } },
@@ -176,6 +201,31 @@ const themeConf = {
     popup: "rgba(6, 13, 20, 0.685)",
     transactionStatus: {
       pending: { background: "#3b4458", color: "#c6d0e0", border: "#545d6b" },
+      settlement: {
+        background: "#3cff6d26",
+        color: "#90eeaf",
+        border: "#57e78789",
+      },
+      expire: {
+        background: "#ff2e2e1f",
+        color: "#ffacac",
+        border: "#dd5252",
+      },
+      deny: {
+        background: "#ff2e2e1f",
+        color: "#ffacac",
+        border: "#dd5252",
+      },
+      cancel: {
+        background: "#ff2e2e1f",
+        color: "#ffacac",
+        border: "#dd5252",
+      },
+      failure: {
+        background: "#ff2e2e1f",
+        color: "#ffacac",
+        border: "#dd5252",
+      },
     },
     content: {
       cart: { color: { total: "#f06ec0" } },

@@ -4,6 +4,7 @@ import { FC, useContext, useEffect, useRef } from "react";
 import NumberFormat from "react-number-format";
 import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import { ORDER_DETAIL } from "../../../../../graphql/transaction/queries";
+import getTransactionStatus from "../../../../../services/getTransactionStatus";
 import { TGQLOrderDetailQuery } from "../../../../../types/transaction";
 import Button from "../../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
@@ -21,15 +22,6 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
       variables: { orderId },
     }
   );
-  const getStatus = (stat: string) => {
-    switch (stat.toLocaleLowerCase()) {
-      case "pending":
-        return "Menunggu Pembayaran";
-
-      default:
-        return "";
-    }
-  };
 
   return (
     <El.Main
@@ -78,7 +70,7 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                 <div className="val-wrapper">
                   <div className="name">Status Pembayaran</div>
                   <div className="value">
-                    {getStatus(data.order.transactionStatus)}
+                    {getTransactionStatus(data.order.transactionStatus)}
                   </div>
                 </div>
                 <div className="val-wrapper">

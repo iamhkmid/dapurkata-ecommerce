@@ -1,21 +1,13 @@
 import { FC } from "react";
 import styled, { css } from "styled-components";
+import getTransactionStatus from "../../../../../services/getTransactionStatus";
 
 type TProps = {
   status: string;
 };
 
-const getStatus = (stat: string) => {
-  switch (stat.toLocaleLowerCase()) {
-    case "pending":
-      return "Menunggu Pembayaran";
-
-    default:
-      return "";
-  }
-};
 const TransactionStatus: FC<TProps> = ({ status }) => {
-  return <Main status={status}>{getStatus(status)}</Main>;
+  return <Main status={status}>{getTransactionStatus(status)}</Main>;
 };
 export default TransactionStatus;
 
@@ -34,6 +26,13 @@ const Main = styled.div<TTStatus>`
   border-radius: ${({ theme }) => theme.input.borderRadius};
   ${({ status, theme }) =>
     status === "pending" &&
+    css`
+      background: ${theme.transactionStatus[status].background};
+      color: ${theme.transactionStatus[status].color};
+      border: 1px solid ${theme.transactionStatus[status].border};
+    `}
+  ${({ status, theme }) =>
+    status === "settlement" &&
     css`
       background: ${theme.transactionStatus[status].background};
       color: ${theme.transactionStatus[status].color};

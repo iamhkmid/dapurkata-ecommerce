@@ -1,5 +1,6 @@
 import { FC } from "react";
 import styled, { css } from "styled-components";
+import getTransactionStatus from "../../../../../services/getTransactionStatus";
 import LoadingWaitPayement from "../../../../otherComps/Loading/LoadingWaitPayement";
 type TProps = {
   status: string;
@@ -7,22 +8,26 @@ type TProps = {
 const TransactionStatus: FC<TProps> = ({ status }) => {
   return (
     <Main>
-      <Status isShowed={status === "pending"}>
+      <Status isShowed={status === "pending"} status={status}>
         <div className="loading-wrapper">
           <LoadingWaitPayement />
         </div>
-        <h1>Menunggu Pembayaran</h1>
+        <h1>{getTransactionStatus(status)}</h1>
       </Status>
       <Status isShowed={status === "settlement"} status={status}>
-        <h1 className="payment-success">Pembayaran Berhasil</h1>
+        <h1>{getTransactionStatus(status)}</h1>
       </Status>
-      <Status
-        isShowed={
-          status === "deny" || status === "cancel" || status === "expire"
-        }
-        status={status}
-      >
-        <h1 className="payment-error">Waktu Pembayaran Habis</h1>
+      <Status isShowed={status === "expire"} status={status}>
+        <h1>{getTransactionStatus(status)}</h1>
+      </Status>
+      <Status isShowed={status === "deny"} status={status}>
+        <h1>{getTransactionStatus(status)}</h1>
+      </Status>
+      <Status isShowed={status === "cancel"} status={status}>
+        <h1>{getTransactionStatus(status)}</h1>
+      </Status>
+      <Status isShowed={status === "failure"} status={status}>
+        <h1>{getTransactionStatus(status)}</h1>
       </Status>
     </Main>
   );
@@ -57,24 +62,17 @@ const Status = styled.div<TStatus>`
     `}
   ${({ isShowed, status, theme }) =>
     isShowed &&
-    status === "settlement" &&
-    (theme.name === "light"
-      ? css`
-          background: #00c2612f;
-        `
-      : css`
-          background: #00ff8013;
-        `)}
-    ${({ isShowed, status, theme }) =>
+    css`
+      background: ${theme.transactionStatus[status].background};
+      color: ${theme.transactionStatus[status].color};
+    `}
+  ${({ isShowed, status, theme }) =>
     isShowed &&
-    (status === "deny" || status === "cancel" || status === "expire") &&
-    (theme.name === "light"
-      ? css`
-          background: #ff000028;
-        `
-      : css`
-          background: #ff00001a;
-        `)}
+    status === "pending" &&
+    css`
+      background: transparent;
+      color: ${theme.transactionStatus[status].color};
+    `}
     
   > div.loading-wrapper {
     display: flex;
@@ -85,13 +83,6 @@ const Status = styled.div<TStatus>`
     padding-left: 0.5rem;
     font-size: 0.9rem;
     font-weight: 600;
-    color: ${({ theme }) => theme.color[2]};
-  }
-  > h1.payment-success {
-    color: ${({ theme }) => theme.color[6]};
-  }
-  > h1.payment-error {
-    color: ${({ theme }) => theme.color[5]};
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     > h1 {
