@@ -57,12 +57,13 @@ model Recipient {
   lastName  String?  @map("last_name")
   email     String?
   phone     String
-  cityId    String   @map("city_id")
+  cityId    String?  @map("city_id")
+  // address      String     @db.VarChar(1000)
   address   String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  userId    String
-  City      City     @relation(fields: [cityId], references: [id], onDelete: SetNull)
+  userId    String   @map("user_id")
+  City      City?    @relation(fields: [cityId], references: [id], onDelete: SetNull)
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("recipient")
@@ -122,9 +123,10 @@ model PaymentService {
   isEnabled     Boolean
   icon          String
   description   String
+  // howToPay      String     @db.VarChar(2000)
   howToPay      String       @map("how_to_pay")
   Order         Order[]
-  paymentTypeId String?
+  paymentTypeId String?      @map("payment_type_id")
   PaymentType   PaymentType? @relation(fields: [paymentTypeId], references: [id], onDelete: Cascade)
   createdAt     DateTime     @default(now()) @map("created_at")
   updatedAt     DateTime     @updatedAt @map("updated_at")
@@ -160,7 +162,7 @@ model Order {
   updatedAt         DateTime         @updatedAt @map("updated_at")
   PaymentInfo       PaymentInfo[]
   CustomerDetails   CustomerDetails?
-  paymentServiceId  String?
+  paymentServiceId  String?          @map("payment_service_id")
   PaymentService    PaymentService?  @relation(fields: [paymentServiceId], references: [id], onDelete: SetNull)
 
   @@map("order")
@@ -180,7 +182,7 @@ model PaymentInfo {
 
 model ItemDetail {
   id        String   @id @default(cuid())
-  itemId    String
+  itemId    String   @map("item_id")
   price     Float
   quantity  Int
   name      String
@@ -198,7 +200,7 @@ model CustomerDetails {
   lastName        String?          @map("last_name")
   email           String
   phone           String?
-  orderId         String           @unique
+  orderId         String           @unique @map("order_id")
   Order           Order            @relation(fields: [orderId], references: [id], onDelete: Cascade)
   ShippingAddress ShippingAddress?
   createdAt       DateTime         @default(now()) @map("created_at")
@@ -213,13 +215,14 @@ model ShippingAddress {
   lastName          String          @map("last_name")
   email             String
   phone             String
+  // address      String     @db.VarChar(1000)
   address           String
   city              String
-  postalCode        String          @map("postal_Code")
+  postalCode        String          @map("postal_code")
   countryCode       String          @map("country_code")
   createdAt         DateTime        @default(now()) @map("created_at")
   updatedAt         DateTime        @updatedAt @map("updated_at")
-  customerDetailsId String          @unique
+  customerDetailsId String          @unique @map("customer_details_id")
   CustomerDetails   CustomerDetails @relation(fields: [customerDetailsId], references: [id], onDelete: Cascade)
 
   @@map("shipping_address")
@@ -249,7 +252,7 @@ model Book {
   Category      Category[]
   BookPicture   BookPicture[]
   ShoppingCart  ShoppingCart[]
-  publisherId   String?
+  publisherId   String?        @map("publisher_id")
   Publisher     Publisher?     @relation(fields: [publisherId], references: [id], onDelete: SetNull)
 
   @@map("book")
@@ -307,6 +310,7 @@ model BookPicture {
 model FooterInfo {
   id        String   @id @default(cuid())
   type      String
+  // value      String     @db.VarChar(1000)
   value     String
   isEnabled Boolean
   createdAt DateTime @default(now()) @map("created_at")
