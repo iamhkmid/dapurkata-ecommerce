@@ -10,6 +10,7 @@ import auth from "./auth/typeDefs";
 import courier from "./courier/typeDefs";
 import transaction from "./transaction/typeDefs";
 import footerInfo from "./footerInfo/typeDefs";
+import dashboard from "./dashboard/typeDefs";
 import directive from "./directives/typeDefs";
 import * as scalar from "./scalar";
 
@@ -27,6 +28,7 @@ const typeDefs = [
   transaction,
   footerInfo,
   directive,
+  dashboard,
 ];
 
 export default mergeTypeDefs(typeDefs);

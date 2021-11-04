@@ -2,7 +2,7 @@ import { forwardRef } from "react";
 import { TForm, TTextarea } from "../../../types/TFormControl";
 import Loading2 from "../Loading/Loading2";
 import * as El from "./TextAreaElement";
-import TextError from "./TextError";
+import TextError from "./TextMessage";
 
 type props = TTextarea & TForm;
 const TextArea = forwardRef<HTMLTextAreaElement, props>((props, ref) => {

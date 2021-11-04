@@ -34,32 +34,8 @@ const authToken =
   isBrowser &&
   (sessionStorage.getItem("authToken") || localStorage.getItem("authToken"));
 
-const wsLink =
-  process.browser &&
-  new WebSocketLink({
-    uri: `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
-    options: {
-      reconnect: true,
-      lazy: true,
-      connectionParams: { authToken: authToken ? `Bearer ${authToken}` : "" },
-    },
-  });
-const splitLink = process.browser
-  ? WebSocketLink.split(
-      ({ query }) => {
-        const definition = getMainDefinition(query);
-        return (
-          definition.kind === "OperationDefinition" &&
-          definition.operation === "subscription"
-        );
-      },
-      wsLink,
-      httpLink
-    )
-  : httpLink;
-
 export const client = new ApolloClient({
-  link: concat(authMiddleware, splitLink),
+  link: concat(authMiddleware, httpLink),
   cache: new InMemoryCache({
     typePolicies: {
       Query: {
@@ -103,6 +79,33 @@ export const client = new ApolloClient({
 export const ApolloClientCtx = createContext<TApolloClientCtx>(null);
 const ApolloClientCtxProvider: FC = ({ children }) => {
   const [isLoggin, setIsLoggin] = useState(false);
+  useEffect(() => {
+    const wsLink =
+      process.browser &&
+      new WebSocketLink({
+        uri: `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
+        options: {
+          reconnect: true,
+          connectionParams: {
+            authToken: authToken ? `Bearer ${authToken}` : "",
+          },
+        },
+      });
+    const splitLink = process.browser
+      ? WebSocketLink.split(
+          ({ query }) => {
+            const definition = getMainDefinition(query);
+            return (
+              definition.kind === "OperationDefinition" &&
+              definition.operation === "subscription"
+            );
+          },
+          wsLink,
+          httpLink
+        )
+      : httpLink;
+    client.setLink(concat(authMiddleware, splitLink));
+  }, []);
   return (
     <ApolloClientCtx.Provider
       value={{

@@ -5,7 +5,7 @@ export const validationSchema = yup.object({
     .string()
     .required("Required")
     .matches(
-      /^[a-zA-Z]([._-](?![._-])|[a-zA-Z0-9]){3,18}[a-zA-Z0-9]$/,
+      /^[a-zA-Z]([._-](?![._-])|[a-zA-Z0-9]){3,30}[a-zA-Z0-9]$/,
       "Minimum 5 characters, start with Alphabet"
     ),
 });

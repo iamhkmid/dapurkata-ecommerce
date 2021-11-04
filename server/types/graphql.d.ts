@@ -86,6 +86,7 @@ import {
   TGQLFooterPhone,
   TGQLFooterSocialMedia,
 } from "./footerInfo";
+import { TGQLDashboardQuery } from "./dashboard";
 
 //BOOK SCHEMA
 export type TBookQuery = {
@@ -534,4 +535,12 @@ export type TFooterInfoMutation = {
     args: { id: string; url: string; isEnabled: boolean },
     context: TCtx
   ) => Promise<TGQLFooterSocialMedia>;
+};
+
+export type TDashboardQuery = {
+  dashboard: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLDashboardQuery>;
 };

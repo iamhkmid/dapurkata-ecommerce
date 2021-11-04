@@ -10,6 +10,6 @@ export const navbarMenu = [
 ];
 
 export const signinBtn = {
-  name: "Signin",
+  name: "Masuk",
   link: ["/auth/signin", "/auth/signup"],
 };

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useContext, useRef, useState } from "react";
 import { OrderCtx } from "../../../../../../contexts/OrderCtx";
 import IconsControl from "../../../../../IconsControl";
-import TextError from "../../../../../otherComps/Forms/TextError";
+import TextError from "../../../../../otherComps/Forms/TextMessage";
 import Loading2 from "../../../../../otherComps/Loading/Loading2";
 import TextLoading from "../../../../../otherComps/Loading/TextLoading";
 import * as El from "./SelectElement";

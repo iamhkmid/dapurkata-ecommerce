@@ -6,6 +6,7 @@ import context from "./context";
 import jwt from "jsonwebtoken";
 import { db } from "./services/db";
 import { checkRole } from "./schema/directives/resolves/authDirective";
+import cache from "./services/nodeCache";
 
 const graphql = async ({ app, httpServer }) => {
   const apolloServer = new ApolloServer({
@@ -33,11 +34,33 @@ const graphql = async ({ app, httpServer }) => {
       subscribe,
       onConnect: async (connectionParams, webSocket, context) => {
         console.log("Connected!");
+
         const token = connectionParams?.authToken?.split(" ")[1];
         if (!!token) {
           try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);
             if (!!decoded) {
+              if (cache.has("online-user")) {
+                const currOnline = [...(cache.get("online-user") as [])];
+                cache.set("online-user", [
+                  ...currOnline,
+                  {
+                    id: decoded["id"],
+                    role: decoded["role"],
+                    firstName: decoded["firstName"],
+                    lastName: decoded["lastName"],
+                  },
+                ]);
+              } else {
+                cache.set("online-user", [
+                  {
+                    id: decoded["id"],
+                    role: decoded["role"],
+                    firstName: decoded["firstName"],
+                    lastName: decoded["lastName"],
+                  },
+                ]);
+              }
               return { user: decoded };
             }
           } catch (error) {
@@ -45,8 +68,22 @@ const graphql = async ({ app, httpServer }) => {
           }
         }
       },
-      onDisconnect(webSocket, context) {
+      onDisconnect: async (webSocket, context) => {
         console.log("Disconnected!");
+        const initialContext = await context.initPromise;
+        if (
+          initialContext &&
+          typeof initialContext === "object" &&
+          Reflect.has(initialContext, "user")
+        ) {
+          if (cache.has("online-user") && !!initialContext?.user?.id) {
+            const currUser = cache.get("online-user") as [];
+            const filterUser = currUser.filter(
+              (val) => val["id"] !== initialContext.user.id
+            );
+            cache.set("online-user", filterUser);
+          }
+        }
       },
     },
     { server: httpServer, path: apolloServer.graphqlPath }

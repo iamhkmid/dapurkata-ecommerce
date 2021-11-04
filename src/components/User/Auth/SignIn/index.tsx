@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { validationSchema } from "./validationScema";
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { TGQLFormSignin } from "../../../../types/auth";
 import FormsControl from "../../../otherComps/Forms/FormsControl";
 import Button from "../../../otherComps/Buttons/Button";
@@ -15,7 +15,7 @@ import { useGQLGoogleOauth2Verify } from "./useGQL";
 import Loading2 from "../../../otherComps/Loading/Loading2";
 const SignIn = () => {
   const { dispatch } = useContext(UserNavCtx);
-  const { query } = useRouter();
+  const { query, push } = useRouter();
   const htmlElRef = useRef<{ focus: () => void }>();
   const setFocus = () => {
     htmlElRef.current && htmlElRef.current.focus();
@@ -61,10 +61,11 @@ const SignIn = () => {
   useEffect(() => {
     // htmlElRef.current.focus();
   }, []);
+
   return (
     <El.Main>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <El.CompTittle>Log In</El.CompTittle>
+        <El.CompTittle>Login</El.CompTittle>
         <El.Form onSubmit={handleSubmit(onSubmit)}>
           <FormsControl
             control="input"
@@ -73,7 +74,7 @@ const SignIn = () => {
             ref={htmlElRef}
             register={register}
             label="Username"
-            disabled={loading}
+            disabled={loading || loadingGOV}
             withIcon={true}
             error={errors.username ? true : false}
             message={errors.username ? errors.username.message : null}
@@ -84,7 +85,7 @@ const SignIn = () => {
             name="password"
             register={register}
             label="Password"
-            disabled={loading}
+            disabled={loading || loadingGOV}
             withIcon={true}
             error={errors.password ? true : false}
             message={errors.password ? errors.password.message : null}
@@ -95,51 +96,63 @@ const SignIn = () => {
             register={register}
             label="Ingat saya"
             error={false}
-            disabled={loading}
+            disabled={loading || loadingGOV}
             message={errors.rememberMe ? errors.rememberMe.message : null}
           />
           <El.SubmitWrapper>
             <Button
               type="submit"
               name="Masuk"
-              disabled={!isDirty || !isValid || loading}
+              disabled={loading || loadingGOV}
               isLoading={loading}
             />
-            <ButtonLink name="Buat akun baru" link="/auth/signup" />
+            <h1>atau</h1>
+            <El.GoogleSignin
+              type="button"
+              isLoading={loadingGOV}
+              onClick={() => (window.location.href = "/auth/google")}
+            >
+              {IconsControl("Google")}Masuk dengan Google
+              {loadingGOV && (
+                <El.LoadingWrapper>
+                  <Loading2 />
+                </El.LoadingWrapper>
+              )}
+            </El.GoogleSignin>
           </El.SubmitWrapper>
-          <El.GoogleSignin
-            type="button"
-            isLoading={loadingGOV}
-            onClick={() => (window.location.href = "/auth/google")}
-          >
-            {IconsControl("Google")}Masuk dengan Google{" "}
-            {loadingGOV && (
-              <El.LoadingWrapper>
-                <Loading2 />
-              </El.LoadingWrapper>
-            )}
-          </El.GoogleSignin>
+
           <El.LinkWrapper>
-            <El.ButtonLink
+            <Button
+              type="button"
+              name="Buat Akun Baru"
+              disabled={loading || loadingGOV}
+              color="section"
+              onClick={() => push("/auth/signup")}
+            />
+            <Button
+              type="button"
+              name="Lupa password"
+              disabled={loading || loadingGOV}
+              color="section"
               onClick={() =>
                 dispatch({
                   type: "SHOW_POPUP",
                   value: { name: "RESET_PASSWORD" },
                 })
               }
-            >
-              Lupa password
-            </El.ButtonLink>
-            <El.ButtonLink
+            />
+            <Button
+              type="button"
+              name="Aktifkan akun"
+              disabled={loading || loadingGOV}
+              color="section"
               onClick={() =>
                 dispatch({
                   type: "SHOW_POPUP",
                   value: { name: "ACTIVATE_ACCOUNT" },
                 })
               }
-            >
-              Aktifkan akun
-            </El.ButtonLink>
+            />
           </El.LinkWrapper>
         </El.Form>
       </El.Container>

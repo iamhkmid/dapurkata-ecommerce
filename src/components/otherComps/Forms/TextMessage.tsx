@@ -18,13 +18,24 @@ export const Message = styled.label<TMessage>`
       max-height: 3rem;
       transition: 0.4s all ease;
     `}
-  ${({ theme, color }) => css`
-    color: ${theme.button[color || "primary"].background};
-    > svg {
-      color: ${theme.button[color || "primary"].background};
-    }
-    transition: 0.4s all ease;
-  `}
+  ${({ theme, color }) =>
+    color === "danger" &&
+    css`
+      color: ${theme.color[5]};
+      > svg {
+        color: ${theme.color[5]};
+      }
+      transition: 0.4s all ease;
+    `}
+    ${({ theme, color }) =>
+    color === "info" &&
+    css`
+      color: ${theme.color[8]};
+      > svg {
+        color: ${theme.color[8]};
+      }
+      transition: 0.4s all ease;
+    `}
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     font-size: 0.7rem;
@@ -34,7 +45,7 @@ export const Message = styled.label<TMessage>`
   }
 `;
 
-type TProps = { message: string; color: string };
+type TProps = { message: string; color: "danger" | "info" };
 const TextError: FC<TProps> = ({ message, color }) => {
   const [msg, setMsg] = useState("");
   useEffect(() => {

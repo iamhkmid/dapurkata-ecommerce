@@ -7,7 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import TextError from "./TextError";
+import TextError from "./TextMessage";
 import * as El from "./SelectElement";
 import IconsControl from "../../IconsControl";
 import { TSelect, TForm } from "../../../types/TFormControl";

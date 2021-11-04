@@ -666,6 +666,107 @@ export const IconsControl = (name: string) => {
           />
         </svg>
       );
+    case "wallet-outline":
+      return (
+        <svg viewBox="0 0 512 512">
+          <rect
+            x="48"
+            y="144"
+            width="416"
+            height="288"
+            rx="48"
+            ry="48"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M411.36 144v-30A50 50 0 00352 64.9L88.64 109.85A50 50 0 0048 159v49"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+          />
+          <path
+            stroke="currentColor"
+            fill="none"
+            d="M368 320a32 32 0 1132-32 32 32 0 01-32 32z"
+          />
+        </svg>
+      );
+    case "cube-outline":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            d="M448 341.37V170.61A32 32 0 00432.11 143l-152-88.46a47.94 47.94 0 00-48.24 0L79.89 143A32 32 0 0064 170.61v170.76A32 32 0 0079.89 369l152 88.46a48 48 0 0048.24 0l152-88.46A32 32 0 00448 341.37z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M69 153.99l187 110 187-110M256 463.99v-200"
+          />
+        </svg>
+      );
+    case "people-outline":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            d="M402 168c-2.93 40.67-33.1 72-66 72s-63.12-31.32-66-72c-3-42.31 26.37-72 66-72s69 30.46 66 72z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M336 304c-65.17 0-127.84 32.37-143.54 95.41-2.08 8.34 3.15 16.59 11.72 16.59h263.65c8.57 0 13.77-8.25 11.72-16.59C463.85 335.36 401.18 304 336 304z"
+            fill="none"
+            stroke="currentColor"
+            strokeMiterlimit="10"
+          />
+          <path
+            d="M200 185.94c-2.34 32.48-26.72 58.06-53 58.06s-50.7-25.57-53-58.06C91.61 152.15 115.34 128 147 128s55.39 24.77 53 57.94z"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M206 306c-18.05-8.27-37.93-11.45-59-11.45-52 0-102.1 25.85-114.65 76.2-1.65 6.66 2.53 13.25 9.37 13.25H154"
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+          />
+        </svg>
+      );
+    case "reader-outline":
+      return (
+        <svg viewBox="0 0 512 512">
+          <rect
+            x="96"
+            y="48"
+            width="320"
+            height="416"
+            rx="48"
+            ry="48"
+            fill="none"
+            stroke="currentColor"
+            strokeLinejoin="round"
+          />
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M176 128h160M176 208h160M176 288h80"
+          />
+        </svg>
+      );
     default:
       return null;
       break;

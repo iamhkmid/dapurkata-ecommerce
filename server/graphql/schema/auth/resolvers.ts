@@ -58,6 +58,8 @@ export const Mutation: TAuthMutation = {
 
     const token = createToken({
       id: findUser.id,
+      firstName: findUser.firstName,
+      lastName: findUser.lastName,
       role: findUser.role,
     });
     return { jwt: token, user: findUser };
@@ -87,6 +89,8 @@ export const Mutation: TAuthMutation = {
       const token = createToken({
         id: user.id,
         role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName,
       });
       return { jwt: token, user };
     } else {
@@ -109,6 +113,8 @@ export const Mutation: TAuthMutation = {
       const token = createToken({
         id: user.id,
         role: user.role,
+        firstName: user.firstName,
+        lastName: user.lastName,
       });
       return { jwt: token, user };
     }

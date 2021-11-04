@@ -7,6 +7,8 @@ import querystring from "querystring";
 type TCreateToken = {
   id: string;
   role: string;
+  firstName: string;
+  lastName: string;
 };
 export const createToken = (props: TCreateToken) => {
   const maxAge = 1 * 24 * 60 * 60;

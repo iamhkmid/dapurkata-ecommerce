@@ -8,7 +8,7 @@ import {
   useState,
 } from "react";
 import * as El from "./SelectMultipleElement";
-import TextError from "./TextError";
+import TextError from "./TextMessage";
 import IconsControl from "../../IconsControl";
 import { TForm, TSelectMultiple } from "../../../types/TFormControl";
 import TextLoading from "../Loading/TextLoading";

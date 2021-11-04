@@ -48,9 +48,43 @@ export const Form = styled.form`
 
 export const SubmitWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
-  gap: 1rem;
+  width: 100%;
+  > button {
+    width: 100%;
+  }
+  > h1 {
+    text-align: center;
+    background: ${({ theme }) => theme.background[2]};
+    color: ${({ theme }) => theme.color[2]};
+    font-size: 0.9rem;
+    font-weight: 500;
+    width: 100%;
+    ::before,
+    ::after {
+      background: ${({ theme }) => theme.button.list.background};
+      content: "";
+      display: inline-block;
+      height: 2px;
+      position: relative;
+      vertical-align: middle;
+      width: 40%;
+    }
+    ::before {
+      right: 0.5em;
+      margin-left: -50%;
+    }
+    ::after {
+      left: 0.5em;
+      margin-right: -50%;
+    }
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 0.8rem;
+    }
+  }
+  gap: 0.5rem;
 `;
 
 export const ToggleWrapper = styled.div`
@@ -70,11 +104,13 @@ export const LinkWrapper = styled.div`
   padding-top: 1rem;
   border-top: 2px dashed ${({ theme }) => theme.border[2]};
   gap: 0.3rem;
-  > div {
+  > button {
+    width: min-content;
     font-size: 0.8rem;
+    min-height: 1rem;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    > div {
+    > button {
       font-size: 0.7rem;
     }
   }
@@ -130,7 +166,7 @@ export const GoogleSignin = styled.button<TButtonElement>`
   ${({ theme }) =>
     theme.name === "light"
       ? css`
-          background: #e02525;
+          background: #fd4141;
           color: ${theme.button.primary.color};
           > svg {
             fill: ${theme.button.primary.color};
@@ -148,14 +184,14 @@ export const GoogleSignin = styled.button<TButtonElement>`
     ${({ theme }) =>
       theme.name === "light"
         ? css`
-            background: #b11c1c;
+            background: #e02626;
             color: ${theme.button.primary.color};
             > svg {
               fill: ${theme.button.primary.color};
             }
           `
         : css`
-            background: #af2323;
+            background: #e03232;
             color: ${theme.button.primary.color};
             > svg {
               fill: ${theme.button.primary.color};

@@ -8,7 +8,7 @@ import {
 } from "react";
 import { TFile, TForm } from "../../../types/TFormControl";
 import * as El from "./FileElement";
-import TextError from "./TextError";
+import TextError from "./TextMessage";
 type props = TFile & TForm;
 const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
   const htmlRef = useRef(null);

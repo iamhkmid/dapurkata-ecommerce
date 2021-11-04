@@ -11,6 +11,7 @@ import * as shoppingCart from "./shoppingCart/resolvers";
 import * as recipient from "./recipient/resolvers";
 import * as transaction from "./transaction/resolvers";
 import * as footerInfo from "./footerInfo/resolvers";
+import * as dashboard from "./dashboard/resolvers";
 
 const resolvers = _.merge(
   scalar.resolvers,
@@ -24,6 +25,7 @@ const resolvers = _.merge(
   shoppingCart,
   recipient,
   transaction,
-  footerInfo
+  footerInfo,
+  dashboard
 );
 export default resolvers;
