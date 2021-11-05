@@ -24,8 +24,8 @@ export const useSignIn = () => {
       } else {
         sessionStorage.setItem("authToken", data.signin.jwt);
       }
-      setIsLoggin(true);
       setUser(data.signin.user);
+      setIsLoggin(true);
     }
     setLoading(loading);
   }, [data, loading]);

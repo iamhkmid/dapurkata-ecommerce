@@ -3,7 +3,7 @@ import { SubscriptionServer } from "subscriptions-transport-ws";
 import { execute, subscribe } from "graphql";
 import schema from "./schema";
 import context from "./context";
-import jwt from "jsonwebtoken";
+import jwt, { decode } from "jsonwebtoken";
 import { db } from "./services/db";
 import { checkRole } from "./schema/directives/resolves/authDirective";
 import cache from "./services/nodeCache";
@@ -42,15 +42,17 @@ const graphql = async ({ app, httpServer }) => {
             if (!!decoded) {
               if (cache.has("online-user")) {
                 const currOnline = [...(cache.get("online-user") as [])];
-                cache.set("online-user", [
-                  ...currOnline,
-                  {
-                    id: decoded["id"],
-                    role: decoded["role"],
-                    firstName: decoded["firstName"],
-                    lastName: decoded["lastName"],
-                  },
-                ]);
+                if (!currOnline.find((val) => val["id"] === decoded["id"])) {
+                  cache.set("online-user", [
+                    ...currOnline,
+                    {
+                      id: decoded["id"],
+                      role: decoded["role"],
+                      firstName: decoded["firstName"],
+                      lastName: decoded["lastName"],
+                    },
+                  ]);
+                }
               } else {
                 cache.set("online-user", [
                   {

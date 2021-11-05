@@ -5,12 +5,13 @@ import {
   ApolloLink,
 } from "@apollo/client";
 import { ApolloProvider } from "@apollo/client/react";
-import { createContext, FC, useEffect } from "react";
+import { createContext, FC, useEffect, useRef } from "react";
 import { createUploadLink } from "apollo-upload-client";
 import { useState } from "react";
 import { TApolloClientCtx } from "../types/context";
 import { WebSocketLink } from "@apollo/client/link/ws";
 import { getMainDefinition } from "@apollo/client/utilities";
+import { SubscriptionClient } from "subscriptions-transport-ws";
 const isBrowser = process.browser;
 
 const authMiddleware = new ApolloLink((operation, forward) => {
@@ -29,10 +30,6 @@ const authMiddleware = new ApolloLink((operation, forward) => {
 const httpLink = createUploadLink({
   uri: `${process.env.NEXT_PUBLIC_GQL_HTTP_URL}/graphql`,
 });
-
-const authToken =
-  isBrowser &&
-  (sessionStorage.getItem("authToken") || localStorage.getItem("authToken"));
 
 export const client = new ApolloClient({
   link: concat(authMiddleware, httpLink),
@@ -75,37 +72,49 @@ export const client = new ApolloClient({
     },
   }),
 });
-
 export const ApolloClientCtx = createContext<TApolloClientCtx>(null);
 const ApolloClientCtxProvider: FC = ({ children }) => {
   const [isLoggin, setIsLoggin] = useState(false);
+
+  const subsClient = useRef<SubscriptionClient>(null);
   useEffect(() => {
-    const wsLink =
-      process.browser &&
-      new WebSocketLink({
-        uri: `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
-        options: {
-          reconnect: true,
-          connectionParams: {
-            authToken: authToken ? `Bearer ${authToken}` : "",
-          },
-        },
-      });
-    const splitLink = process.browser
-      ? WebSocketLink.split(
-          ({ query }) => {
-            const definition = getMainDefinition(query);
-            return (
-              definition.kind === "OperationDefinition" &&
-              definition.operation === "subscription"
-            );
-          },
-          wsLink,
-          httpLink
-        )
-      : httpLink;
-    client.setLink(concat(authMiddleware, splitLink));
-  }, []);
+    if (isLoggin) {
+      const authToken =
+        isBrowser &&
+        (sessionStorage.getItem("authToken") ||
+          localStorage.getItem("authToken"));
+      subsClient.current =
+        process.browser &&
+        new SubscriptionClient(
+          `${process.env.NEXT_PUBLIC_GQL_WS_URL}/graphql`,
+          {
+            reconnect: true,
+            connectionParams: {
+              authToken: authToken ? `Bearer ${authToken}` : "",
+            },
+          }
+        );
+      const wsLink = process.browser && new WebSocketLink(subsClient.current);
+      const splitLink = process.browser
+        ? WebSocketLink.split(
+            ({ query }) => {
+              const definition = getMainDefinition(query);
+              return (
+                definition.kind === "OperationDefinition" &&
+                definition.operation === "subscription"
+              );
+            },
+            wsLink,
+            httpLink
+          )
+        : httpLink;
+      client.setLink(concat(authMiddleware, splitLink));
+    } else {
+      subsClient.current?.unsubscribeAll();
+      subsClient.current?.close(true);
+      client.setLink(concat(authMiddleware, httpLink));
+    }
+  }, [isLoggin]);
   return (
     <ApolloClientCtx.Provider
       value={{
