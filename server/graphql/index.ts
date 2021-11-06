@@ -44,13 +44,13 @@ const graphql = async ({ app, httpServer }) => {
                 const currOnline = [...(cache.get("online-user") as [])];
                 if (!currOnline.find((val) => val["id"] === decoded["id"])) {
                   cache.set("online-user", [
-                    ...currOnline,
                     {
                       id: decoded["id"],
                       role: decoded["role"],
                       firstName: decoded["firstName"],
                       lastName: decoded["lastName"],
                     },
+                    ...currOnline,
                   ]);
                 }
               } else {
