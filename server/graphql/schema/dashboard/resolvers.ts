@@ -1,3 +1,4 @@
+import { TGQLDashboardGraph } from "../../../types/dashboard";
 import { TDashboardQuery } from "../../../types/graphql";
 
 export const Query: TDashboardQuery = {
@@ -34,6 +35,49 @@ export const Query: TDashboardQuery = {
       },
     });
     const onlineUsers = cache.get("online-user") as [];
+    const successOrders = await db.order.findMany({
+      where: {
+        transactionStatus: "settlement",
+        fraudStatus: "accept",
+        transactionTime: {
+          gte: new Date(`${new Date().getFullYear()}-01-01`),
+          lt: new Date(`${new Date().getFullYear() + 1}-01-01`),
+        },
+      },
+      select: {
+        grossAmount: true,
+        transactionTime: true,
+      },
+    });
+    const labels = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "Mei",
+      "Jun",
+      "Jul",
+      "Agu",
+      "Sep",
+      "Okt",
+      "Nov",
+      "Des",
+    ];
+    const graph = successOrders.reduce(
+      (acc, curr) => {
+        const data = acc.data;
+        data[curr.transactionTime.getMonth()] =
+          acc.data[curr.transactionTime.getMonth()] + curr.grossAmount;
+        return {
+          labels: acc.labels,
+          data,
+        };
+      },
+      {
+        labels,
+        data: new Array(12).fill(0),
+      } as TGQLDashboardGraph
+    );
     return {
       totalOrders,
       totalIncome: totalIncome._sum.grossAmount,
@@ -41,6 +85,7 @@ export const Query: TDashboardQuery = {
       totalUsers,
       lastOrders,
       onlineUsers,
+      graph,
     };
   },
 };

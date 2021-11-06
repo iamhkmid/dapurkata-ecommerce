@@ -12,6 +12,11 @@ const typeDefs = gql`
     totalProducts: Int
     lastOrders: [dashboardLastOrders]
     onlineUsers: [onlineUsers]
+    graph: dashboardGraph
+  }
+  type dashboardGraph {
+    labels: [String]
+    data: [Int]
   }
   type onlineUsers {
     id: String

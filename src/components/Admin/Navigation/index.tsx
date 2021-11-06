@@ -22,7 +22,7 @@ const Navigation: FC = ({ children }) => {
         <El.AdminWrapper isOpen={adminNav.sidebar}>
           <SectionInfo />
           {children}
-          <El.Footer>DapurKata &copy; 2021</El.Footer>
+          <El.Footer>Penerbit DapurKata © 2021 ~ Made with ❤️</El.Footer>
         </El.AdminWrapper>
       </El.AdminContainer>
     </El.Main>

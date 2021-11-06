@@ -23,6 +23,10 @@ export const DASHBOARD = gql`
         lastName
         role
       }
+      graph {
+        labels
+        data
+      }
     }
   }
 `;

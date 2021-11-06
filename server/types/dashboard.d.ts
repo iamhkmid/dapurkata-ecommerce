@@ -1,3 +1,5 @@
+type TGQLDashboardGraph = { labels: string[]; data: number[] };
+
 export type TGQLDashboardQuery = {
   totalOrders: number;
   totalIncome: number;
@@ -19,4 +21,5 @@ export type TGQLDashboardQuery = {
     lastName: string;
     role: string;
   }[];
+  graph: TGQLDashboardGraph;
 };

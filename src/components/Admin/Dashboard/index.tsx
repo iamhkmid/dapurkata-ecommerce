@@ -5,6 +5,7 @@ import { TGQLDashboardQuery } from "../../../types/dashboard";
 import IconsControl from "../../IconsControl";
 import Cards from "./Cards";
 import * as El from "./DashboardElement";
+import Graph from "./Graph";
 import SideSection from "./SideSection";
 
 const Dashboard = () => {
@@ -23,7 +24,14 @@ const Dashboard = () => {
         isLoading={loading}
       />
       <El.Section>
-        <El.Graph></El.Graph>
+        <El.GraphWrapper>
+          <Graph
+            graph={{
+              data: data?.dashboard?.graph?.data || [],
+              labels: data?.dashboard?.graph?.labels || [],
+            }}
+          />
+        </El.GraphWrapper>
         <SideSection
           lastOrders={data?.dashboard?.lastOrders || []}
           onlineUsers={data?.dashboard?.onlineUsers || []}

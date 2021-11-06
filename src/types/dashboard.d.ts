@@ -1,4 +1,4 @@
-type TLastOrders = {
+type TDashboardLastOrders = {
   id: string;
   grossAmount: number;
   User: {
@@ -8,11 +8,16 @@ type TLastOrders = {
   transactionStatus: string;
   transactionTime: number;
 };
-export type TOnlineUsers = {
+export type TDashboardOnlineUsers = {
   id: string;
   firstName: string;
   lastName: string;
   role: string;
+};
+
+export type TDashboardGraph = {
+  labels: string[];
+  data: number[];
 };
 
 export type TGQLDashboardQuery = {
@@ -23,5 +28,6 @@ export type TGQLDashboardQuery = {
     totalProducts: number;
     lastOrders: TLastOrders[];
     onlineUsers: onlineUsers[];
+    graph: TDashboardGraph;
   };
 };

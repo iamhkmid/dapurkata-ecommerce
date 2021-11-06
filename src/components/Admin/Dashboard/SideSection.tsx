@@ -1,13 +1,17 @@
 import moment from "moment";
+import "moment/locale/id";
 import { FC } from "react";
 import NumberFormat from "react-number-format";
 import styled from "styled-components";
 import getTransactionStatus from "../../../services/getTransactionStatus";
-import { TLastOrders, TOnlineUsers } from "../../../types/dashboard";
+import {
+  TDashboardLastOrders,
+  TDashboardOnlineUsers,
+} from "../../../types/dashboard";
 
 type TProps = {
-  lastOrders: TLastOrders[];
-  onlineUsers: TOnlineUsers[];
+  lastOrders: TDashboardLastOrders[];
+  onlineUsers: TDashboardOnlineUsers[];
 };
 
 const SideSection: FC<TProps> = (props) => {
@@ -19,26 +23,28 @@ const SideSection: FC<TProps> = (props) => {
         <ItemWrapperLastOrder>
           {lastOrders.map((val) => (
             <ItemLastOrder key={val.id} status={val.transactionStatus}>
-              <h1 className="name">{`${val.User.firstName} ${
-                val.User.lastName || ""
-              }`}</h1>
-              <h1 className="price">
-                <NumberFormat
-                  prefix="Rp"
-                  value={val.grossAmount}
-                  displayType={"text"}
-                  thousandSeparator={"."}
-                  decimalSeparator={","}
-                />
-              </h1>
-              <h1 className="transaction-status">
-                {getTransactionStatus(val.transactionStatus)}
-              </h1>
-              <h1 className="transaction-time">
-                {moment(val.transactionTime)
-                  .locale("id")
-                  .format("dddd, DD MMMM YYYY | HH:mm")}
-              </h1>
+              <div className="info-wrapper">
+                <h1 className="name">{`${val.User.firstName} ${
+                  val.User.lastName || ""
+                }`}</h1>
+                <h1 className="price">
+                  <NumberFormat
+                    prefix="Rp"
+                    value={val.grossAmount}
+                    displayType={"text"}
+                    thousandSeparator={"."}
+                    decimalSeparator={","}
+                  />
+                </h1>
+                <h1 className="transaction-status">
+                  {getTransactionStatus(val.transactionStatus)}
+                </h1>
+                <h1 className="transaction-time">
+                  {moment(val.transactionTime)
+                    .locale("id")
+                    .format("dddd, DD MMMM YYYY | HH:mm")}
+                </h1>
+              </div>
             </ItemLastOrder>
           ))}
         </ItemWrapperLastOrder>
@@ -66,21 +72,26 @@ const Main = styled.div`
   display: flex;
   padding: 0.5rem;
   min-width: 320px;
+  height: fit-content;
   gap: 1rem;
   flex-direction: column;
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   background: ${({ theme }) => theme.background[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    min-width: auto;
+  }
 `;
 
 const Section = styled.div`
   display: flex;
   flex-direction: column;
+  height: fit-content;
   color: ${({ theme }) => theme.color[2]};
   .title {
     margin: 0 0.5rem;
     margin-bottom: 0.2rem;
-    color: ${({ theme }) => theme.button.primary.background};
+    color: ${({ theme }) => theme.color[8]};
     border-bottom: 2px solid ${({ theme }) => theme.button.list.background};
     font-size: 0.9rem;
     font-weight: 600;
@@ -95,7 +106,6 @@ const ItemWrapperLastOrder = styled.div`
   flex-direction: column;
   padding: 0.5rem 0;
   gap: 0.5rem;
-  min-height: 12rem;
   max-height: 12rem;
   overflow: auto;
   ::-webkit-scrollbar {
@@ -126,29 +136,50 @@ const ItemLastOrder = styled.div<TItem>`
   padding: 0.5rem;
   background: transparent;
   border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  position: relative;
+  .info-wrapper {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    gap: 2px;
+    flex-direction: column;
+  }
+  ::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 4px;
+    z-index: 1;
+    transition: 0.4s all ease;
+  }
   :hover {
-    background: ${({ theme }) => theme.button.list.background};
+    ::before {
+      background: ${({ theme }) => theme.button.hover.list.background};
+    }
   }
   gap: 0.2rem;
   .name {
-    font-size: 0.8rem;
-    font-weight: 600;
+    font-size: 12px;
+    font-weight: 500;
     line-height: 1;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-      font-size: 0.7rem;
+      font-size: 10px;
     }
   }
   .price {
-    font-size: 0.9rem;
+    font-size: 16px;
     line-height: 1;
     font-weight: 600;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-      font-size: 0.8rem;
+      font-size: 14px;
     }
   }
   .transaction-status {
-    font-size: 0.8rem;
+    font-size: 11px;
     line-height: 1;
     padding: 0.3rem 0.5rem;
     border-radius: 3px;
@@ -158,16 +189,16 @@ const ItemLastOrder = styled.div<TItem>`
       theme.transactionStatus[status].background};
     color: ${({ theme, status }) => theme.transactionStatus[status].color};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-      font-size: 0.7rem;
+      font-size: 9px;
     }
   }
   .transaction-time {
-    font-size: 0.8rem;
+    font-size: 12px;
     line-height: 1;
     font-weight: 400;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-      font-size: 0.7rem;
+      font-size: 10px;
     }
   }
   transition: 0.4s all ease;
@@ -177,7 +208,6 @@ const ItemWrapperOnlineUser = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0.5rem 0;
-  min-height: 12rem;
   max-height: 12rem;
   overflow: auto;
   ::-webkit-scrollbar {
@@ -204,7 +234,11 @@ const ItemOnlineUser = styled.div`
   padding: 0.5rem;
   border-radius: 3px;
   :hover {
-    background: ${({ theme }) => theme.button.list.background};
+    background: ${({ theme }) => theme.button.hover.list.background};
+    .name,
+    .role {
+      color: ${({ theme }) => theme.button.hover.list.color};
+    }
   }
   ::before {
     content: "";
@@ -220,7 +254,7 @@ const ItemOnlineUser = styled.div`
   .name {
     padding-left: 1rem;
     font-size: 0.8rem;
-    font-weight: 500;
+    font-weight: 400;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
       font-size: 0.7rem;
@@ -229,7 +263,7 @@ const ItemOnlineUser = styled.div`
   .role {
     padding-left: 0.5rem;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 500;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
       font-size: 0.7rem;

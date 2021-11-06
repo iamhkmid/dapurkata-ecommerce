@@ -44,8 +44,8 @@ export const AdminWrapper = styled.div<TAdminWrapper>`
 export const Footer = styled.div`
   font-family: "Roboto", sans-serif;
   border-radius: ${({ theme }) => theme.borderRadius};
-  font-weight: 300;
-  font-size: 1rem;
+  font-weight: 400;
+  font-size: 0.8rem;
   height: 3rem;
   margin-top: 3rem;
   display: flex;
@@ -54,5 +54,8 @@ export const Footer = styled.div`
   justify-content: center;
   background: ${({ theme }) => theme.background[2]};
   box-shadow: ${({ theme }) => theme.boxShadow};
-  color: ${({ theme }) => theme.color[1]};
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 0.7rem;
+  }
 `;
