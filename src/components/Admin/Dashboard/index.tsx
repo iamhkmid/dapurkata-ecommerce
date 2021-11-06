@@ -33,6 +33,7 @@ const Dashboard = () => {
           />
         </El.GraphWrapper>
         <SideSection
+          isLoading={loading}
           lastOrders={data?.dashboard?.lastOrders || []}
           onlineUsers={data?.dashboard?.onlineUsers || []}
         />

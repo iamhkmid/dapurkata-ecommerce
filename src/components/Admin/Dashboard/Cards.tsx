@@ -1,7 +1,7 @@
 import { useQuery } from "@apollo/client";
 import { FC } from "react";
 import NumberFormat from "react-number-format";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import { DASHBOARD } from "../../../graphql/dashboard/queries";
 import { TGQLDashboardQuery } from "../../../types/dashboard";
 import IconsControl from "../../IconsControl";
@@ -15,43 +15,50 @@ type TProps = {
 };
 
 const Cards: FC<TProps> = (props) => {
-  const { totalIncome, totalOrders, totalProducts, totalUsers } = props;
+  const { totalIncome, totalOrders, totalProducts, totalUsers, isLoading } =
+    props;
   return (
     <Main>
       <Card>
         <IconWrapper>{IconsControl("reader-outline")}</IconWrapper>
         <div className="info">
           <h1 className="name">Total Pesanan</h1>
-          <h1 className="value">{totalOrders}</h1>
+          {isLoading && <Loading className="total-orders" />}
+          {!isLoading && <h1 className="value">{totalOrders}</h1>}
         </div>
       </Card>
       <Card>
         <IconWrapper>{IconsControl("wallet-outline")}</IconWrapper>
         <div className="info">
           <h1 className="name">Total Pendapatan</h1>
-          <h1 className="value">
-            <NumberFormat
-              prefix="Rp"
-              value={totalIncome}
-              displayType={"text"}
-              thousandSeparator={"."}
-              decimalSeparator={","}
-            />
-          </h1>
+          {isLoading && <Loading className="total-income" />}
+          {!isLoading && (
+            <h1 className="value">
+              <NumberFormat
+                prefix="Rp"
+                value={totalIncome}
+                displayType={"text"}
+                thousandSeparator={"."}
+                decimalSeparator={","}
+              />
+            </h1>
+          )}
         </div>
       </Card>
       <Card>
         <IconWrapper>{IconsControl("cube-outline")}</IconWrapper>
         <div className="info">
           <h1 className="name">Total Produk</h1>
-          <h1 className="value">{totalProducts}</h1>
+          {isLoading && <Loading className="total-products" />}
+          {!isLoading && <h1 className="value">{totalProducts}</h1>}
         </div>
       </Card>
       <Card>
         <IconWrapper>{IconsControl("people-outline")}</IconWrapper>
         <div className="info">
           <h1 className="name">Total User</h1>
-          <h1 className="value">{totalUsers}</h1>
+          {isLoading && <Loading className="total-users" />}
+          {!isLoading && <h1 className="value">{totalUsers}</h1>}
         </div>
       </Card>
     </Main>
@@ -104,6 +111,58 @@ const IconWrapper = styled.div`
   }
 `;
 
+const shimmer = keyframes`0%{
+  background-position: -450px 0;
+}
+100%{
+  background-position: 450px 0;
+}
+
+`;
+const Loading = styled.div`
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: 17px;
+  &.total-orders {
+    min-width: 40px;
+    max-width: 40px;
+  }
+  &.total-income {
+    min-width: 100px;
+    max-width: 100px;
+  }
+  &.total-users {
+    min-width: 35px;
+    max-width: 35px;
+  }
+  &.total-products {
+    min-width: 50px;
+    max-width: 50px;
+  }
+  border-radius: 3px;
+  background: ${({ theme }) => theme.loading[1]};
+  :before {
+    position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background-image: linear-gradient(
+      to right,
+      ${({ theme }) => theme.loading[1]} 0%,
+      ${({ theme }) => theme.loading[2]} 20%,
+      ${({ theme }) => theme.loading[1]} 60%,
+      ${({ theme }) => theme.loading[1]} 100%
+    );
+    background-repeat: no-repeat;
+    background-size: 450px 400px;
+    animation: ${shimmer} 1s linear infinite;
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    min-height: 15px;
+  }
+`;
+
 const Card = styled.div`
   display: flex;
   cursor: pointer;
@@ -120,26 +179,26 @@ const Card = styled.div`
   .info {
     display: flex;
     flex-direction: column;
-    gap: 0.1rem;
+    gap: 5px;
     padding-left: 0.5rem;
     border-left: 1px solid ${({ theme }) => theme.button.list.background};
   }
   .name {
-    font-size: 0.9rem;
-    line-height: 1.2;
+    font-size: 14px;
+    line-height: 1;
     font-weight: 500;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.7rem;
+      font-size: 12px;
     }
   }
   .value {
-    font-size: 1.1rem;
-    line-height: 1.2;
+    font-size: 17px;
+    line-height: 1;
     font-weight: 600;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
+      font-size: 15px;
     }
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
