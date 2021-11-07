@@ -1,4 +1,4 @@
-import { MouseEvent, useMemo } from "react";
+import { FC, MouseEvent, useMemo } from "react";
 import {
   useTable,
   useSortBy,
@@ -14,7 +14,11 @@ import { useRef } from "react";
 import { useEffect } from "react";
 import useScroll from "../../../hooks/useScroll";
 
-const Table = ({ columns, data }) => {
+type TProps = {
+  columns: any;
+  data: any[];
+};
+const Table: FC<TProps> = ({ columns, data }) => {
   const mColumns = useMemo(() => columns, [columns]);
   const mData = useMemo(() => data, [data]);
   const tableRef = useRef<HTMLDivElement>();
@@ -86,7 +90,7 @@ const Table = ({ columns, data }) => {
                         isShowed={column.isSorted}
                         rotare={column.isSortedDesc}
                       >
-                        {IconsControl("chevron-up")}
+                        {IconsControl("chevron-up-outline")}
                       </El.ThIcon>
                     </El.ThWrapper>
                   </th>
@@ -109,6 +113,7 @@ const Table = ({ columns, data }) => {
             })}
           </tbody>
         </El.TableElement>
+        {mData.length === 0 && <El.EmptyData>Data Kosong</El.EmptyData>}
       </El.TableWrapper>
       <El.TableFooter>
         <Pagination paginationProps={paginationProps} />

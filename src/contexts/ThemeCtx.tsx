@@ -58,6 +58,23 @@ const themeConf = {
         border: "#dd5252",
       },
     },
+    shippingStatus: {
+      inProcess: {
+        background: "#79afff7a",
+        color: "#09496e",
+        border: "#3888c9",
+      },
+      inShipping: {
+        background: "#79ff9a7c",
+        color: "#096e2a",
+        border: "#38c968",
+      },
+      unProcessed: {
+        background: "#c0cfe47f",
+        color: "#424953",
+        border: "#bdc7d6",
+      },
+    },
     content: {
       cart: { color: { total: "#e94aaf" } },
       bookCard: {
@@ -225,6 +242,23 @@ const themeConf = {
         background: "#ff2e2e1f",
         color: "#ffacac",
         border: "#dd5252",
+      },
+    },
+    shippingStatus: {
+      inProcess: {
+        background: "#3cc8ff25",
+        color: "#90c8ee",
+        border: "#57a6e787",
+      },
+      inShipping: {
+        background: "#3cff6d26",
+        color: "#90eeaf",
+        border: "#57e78789",
+      },
+      unProcessed: {
+        background: "#3b4458",
+        color: "#c6d0e0",
+        border: "#545d6b",
       },
     },
     content: {

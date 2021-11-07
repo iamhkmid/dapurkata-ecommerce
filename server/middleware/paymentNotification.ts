@@ -51,6 +51,7 @@ const paymentNotification = async (
             data: {
               transactionTime: new Date(`${transactionTime} GMT+7`),
               transactionStatus: transactionStatus,
+              shippingStatus: "inProcess",
               fraudStatus: fraudStatus,
             },
             include: {

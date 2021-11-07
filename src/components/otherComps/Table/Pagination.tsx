@@ -13,9 +13,9 @@ const Pagination = ({ paginationProps }) => {
   return (
     <El.PaginationContainer>
       <El.PageInfo>
-        <El.Text1>Page</El.Text1>
+        <El.Text1>Halaman</El.Text1>
         <El.Text2>
-          {pageIndex + 1} of {pageOptions.length}
+          {pageOptions.length > 0 ? pageIndex + 1 : 0} dari {pageOptions.length}
         </El.Text2>
       </El.PageInfo>
       <El.ButtonWrapper>

@@ -5,7 +5,8 @@ const typeDefs = gql`
     paymentType(isEnabled: Boolean): [PaymentType] @auth(requires: AUTH)
     howToPay(paymentId: ID!): [HowToPay]
     order(orderId: ID!): Order @auth(requires: AUTH)
-    orders(userId: ID, filterBy: orderFilter!): [Order] @auth(requires: AUTH)
+    ordersListUser: [Order] @auth(requires: USER)
+    ordersListUsers(userId: ID): [Order] @auth(requires: ADMIN)
   }
 
   type Mutation {
@@ -70,6 +71,8 @@ const typeDefs = gql`
     currency: String
     transactionTime: Date
     transactionStatus: String
+    shippingStatus: String
+    receiptNumber: String
     expirationTime: Date
     fraudStatus: String
     ItemDetails: [ItemDetail]
@@ -86,6 +89,8 @@ const typeDefs = gql`
     currency: String
     transactionTime: Date
     transactionStatus: String
+    shippingStatus: String
+    receiptNumber: String
     expirationTime: Date
     fraudStatus: String
     PaymentInfo: [PaymentInfo]

@@ -7,12 +7,9 @@ import * as El from "./UsersElement";
 const Users = () => {
   const navItem = ["Create", "Users list"];
   const [navState, setNavState] = useState(1);
-  const changeNavState = (value) => {
-    setNavState(value);
-  };
 
   return (
-    <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+    <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <El.Navigation>
         {navItem.map((item, index) => (
           <ButtonBase
@@ -26,7 +23,7 @@ const Users = () => {
       </El.Navigation>
       {navState === 0 && <Create />}
       {navState === 1 && <List />}
-    </El.Container>
+    </El.Main>
   );
 };
 export default Users;

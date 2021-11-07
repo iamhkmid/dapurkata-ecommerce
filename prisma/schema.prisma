@@ -155,6 +155,8 @@ model Order {
   currency          String
   transactionTime   DateTime         @map("transaction_time")
   transactionStatus String           @map("transaction_status")
+  shippingStatus    String           @map("shipping_status")
+  receiptNumber     String?          @map("receipt_number")
   expirationTime    DateTime         @map("expiration_time")
   fraudStatus       String           @map("fraud_status")
   ItemDetails       ItemDetail[]

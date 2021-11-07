@@ -4,8 +4,11 @@ import { FC, useContext, useEffect, useRef } from "react";
 import NumberFormat from "react-number-format";
 import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import { ORDER_DETAIL } from "../../../../../graphql/transaction/queries";
-import getTransactionStatus from "../../../../../services/getTransactionStatus";
-import { TGQLOrderDetailQuery } from "../../../../../types/transaction";
+import {
+  getTransactionStatus,
+  getShippingStatus,
+} from "../../../../../services/getStatus";
+import { TGQLOrderDetaiBylUserQuery } from "../../../../../types/transaction";
 import Button from "../../../../otherComps/Buttons/Button";
 import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./OrderDetailElement";
@@ -15,7 +18,7 @@ type TProps = {
 };
 const OrderDetail: FC<TProps> = ({ orderId }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
-  const { data, loading, error } = useQuery<TGQLOrderDetailQuery>(
+  const { data, loading, error } = useQuery<TGQLOrderDetaiBylUserQuery>(
     ORDER_DETAIL,
     {
       fetchPolicy: "network-only",
@@ -72,6 +75,16 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                   <div className="value">
                     {getTransactionStatus(data.order.transactionStatus)}
                   </div>
+                </div>
+                <div className="val-wrapper">
+                  <div className="name">Status Pengiriman</div>
+                  <div className="value">
+                    {getShippingStatus(data.order.shippingStatus)}
+                  </div>
+                </div>
+                <div className="val-wrapper">
+                  <div className="name">No Resi</div>
+                  <div className="value">{data.order.receiptNumber || "-"}</div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Waktu Transaksi</div>

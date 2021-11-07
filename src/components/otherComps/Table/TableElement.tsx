@@ -8,6 +8,7 @@ export const Main = styled.div`
 
 export const TableHeader = styled.div`
   display: flex;
+  gap: 16px;
   justify-content: space-between;
 `;
 
@@ -114,8 +115,12 @@ type TThIcon = {
 };
 export const ThIcon = styled.div<TThIcon>`
   color: ${({ theme }) => theme.table.td.color};
+  margin-left: 3px;
+  display: flex;
+  align-items: center;
   > svg {
-    height: 1.2rem;
+    height: 15px;
+    stroke-width: 52;
   }
   ${({ rotare }) =>
     rotare &&
@@ -128,4 +133,17 @@ export const ThIcon = styled.div<TThIcon>`
       color: transparent;
     `}
   transition: 0.4s all ease;
+`;
+
+export const EmptyData = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 15px;
+  padding: 12px;
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 13px;
+  }
 `;

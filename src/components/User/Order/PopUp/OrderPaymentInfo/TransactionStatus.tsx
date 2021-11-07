@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styled, { css } from "styled-components";
-import getTransactionStatus from "../../../../../services/getTransactionStatus";
+import { getTransactionStatus } from "../../../../../services/getStatus";
 import LoadingWaitPayement from "../../../../otherComps/Loading/LoadingWaitPayement";
 type TProps = {
   status: string;

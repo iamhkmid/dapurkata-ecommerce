@@ -1,5 +1,5 @@
-export type TOrdersFByUser = {
-  orders: {
+export type TOrderListsUser = {
+  ordersListUser: {
     id: string;
     PaymentService: {
       id: string;
@@ -14,6 +14,32 @@ export type TOrdersFByUser = {
     transactionTime: number;
     expirationTime: number;
     transactionStatus: string;
+    fraudStatus: string;
+  }[];
+};
+
+export type TOrderListsUsers = {
+  ordersListUsers: {
+    id: string;
+    PaymentService: {
+      id: string;
+      name: string;
+      PaymentType: {
+        id: string;
+        name: string;
+      };
+    };
+    CustomerDetails: {
+      id: string;
+      firstName: string;
+      lastName: string;
+    };
+    grossAmount: number;
+    currency: string;
+    transactionTime: number;
+    expirationTime: number;
+    transactionStatus: string;
+    shippingStatus: string;
     fraudStatus: string;
   }[];
 };
@@ -122,7 +148,7 @@ export type TGQLPaymentInfoQuery = {
   };
 };
 
-export type TGQLOrderDetailQuery = {
+export type TGQLOrderDetaiBylUserQuery = {
   order: {
     id: string;
     PaymentService: {
@@ -144,6 +170,36 @@ export type TGQLOrderDetailQuery = {
     transactionTime: number;
     expirationTime: number;
     transactionStatus: string;
+    shippingStatus: string;
+    receiptNumber?: string;
+    fraudStatus: string;
+  };
+};
+
+export type TGQLOrderDetailByAdminQuery = {
+  order: {
+    id: string;
+    PaymentService: {
+      id: string;
+      name: string;
+      icon: string;
+      description: string;
+      PaymentType?: {
+        id: string;
+        name: string;
+        icon: string;
+        description: string;
+      };
+    };
+    ItemDetails?: TItemDetail[];
+    CustomerDetails: TCustomerDetails;
+    grossAmount: number;
+    currency: string;
+    transactionTime: number;
+    expirationTime: number;
+    transactionStatus: string;
+    shippingStatus: string;
+    receiptNumber?: string;
     fraudStatus: string;
   };
 };

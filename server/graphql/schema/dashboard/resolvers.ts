@@ -80,7 +80,7 @@ export const Query: TDashboardQuery = {
     );
     return {
       totalOrders,
-      totalIncome: totalIncome._sum.grossAmount,
+      totalIncome: totalIncome._sum.grossAmount || 0,
       totalProducts,
       totalUsers,
       lastOrders,

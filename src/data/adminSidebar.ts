@@ -60,9 +60,9 @@ export const adminSidebar = [
     menu: [
       {
         name: "Orders",
-        link: "/admin/transaction/orders",
+        link: "/admin/transactions/orders",
         title: "TRANSACTIONS / Orders",
-        desc: "...",
+        desc: "Transaksi Pesanan",
         subMenu: [],
       },
     ],

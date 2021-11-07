@@ -109,15 +109,17 @@ export const InputWrapper = styled.div`
   position: relative;
   color: ${({ theme }) => theme.input.color};
   background: ${({ theme }) => theme.input.base.background};
+  border: 1px solid ${({ theme }) => theme.input.border};
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 4.5rem;
   :focus {
     background: ${({ theme }) => theme.input.base.focus.background};
+    border: 1px solid ${({ theme }) => theme.input.focus.border};
   }
 
   transition: 0.4s all ease;
-  transition-property: width, height, background, box-shadow;
+  transition-property: width, height, background, border, box-shadow;
 `;
 
 type TDropdownIconWrapper = {

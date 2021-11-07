@@ -1,4 +1,4 @@
-const getTransactionStatus = (stat: string) => {
+export const getTransactionStatus = (stat: string) => {
   switch (stat.toLocaleLowerCase()) {
     case "pending":
       return "Menunggu Pembayaran";
@@ -15,7 +15,19 @@ const getTransactionStatus = (stat: string) => {
     case "expire":
       return "Transaksi Kaldaluarsa";
     default:
-      return "";
+      return "-";
   }
 };
-export default getTransactionStatus;
+
+export const getShippingStatus = (stat: string) => {
+  switch (stat) {
+    case "unProcessed":
+      return "Belum Diproses";
+    case "inProcess":
+      return "Sedang Diproses";
+    case "inShipping":
+      return "Dikirim";
+    default:
+      return "-";
+  }
+};

@@ -3,7 +3,7 @@ import "moment/locale/id";
 import { FC } from "react";
 import NumberFormat from "react-number-format";
 import styled, { keyframes } from "styled-components";
-import getTransactionStatus from "../../../services/getTransactionStatus";
+import { getTransactionStatus } from "../../../services/getStatus";
 import {
   TDashboardLastOrders,
   TDashboardOnlineUsers,

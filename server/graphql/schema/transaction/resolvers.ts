@@ -76,27 +76,26 @@ export const Query: TTransactionQuery = {
     });
     return findOrder;
   },
-  orders: async (_, { userId, filterBy }, { db, user }) => {
-    if (filterBy === "USER") {
-      const findUser = await db.user.findUnique({
-        where: { id: user.id },
-        select: { id: true, Order: true },
-      });
-      validateUser({
-        target: "SPECIFIC_USER",
-        targetId: findUser?.id,
-        currRole: user.role,
-        currId: user.id,
-      });
-      return findUser.Order;
-    } else if (filterBy === "ALL") {
-      validateUser({
-        target: "ADMIN_ONLY",
-        currRole: user.role,
-      });
-      return await db.order.findMany();
+  ordersListUser: async (_, __, { db, user }) => {
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { id: true, Order: true },
+    });
+    validateUser({
+      target: "SPECIFIC_USER",
+      targetId: findUser?.id,
+      currRole: user.role,
+      currId: user.id,
+    });
+    return findUser.Order;
+  },
+  ordersListUsers: async (_, { userId }, { db, user }) => {
+    if (userId) {
+      const orders = await db.order.findMany({ where: { userId } });
+      return orders;
     } else {
-      throw new ApolloError("Invalid orderFilter");
+      const orders = await db.order.findMany();
+      return orders;
     }
   },
 };
@@ -236,6 +235,7 @@ export const Mutation: TTransactionMutation = {
         currency: charge.currency,
         fraudStatus: charge.fraud_status || "not available",
         transactionStatus: charge.transaction_status,
+        shippingStatus: "unProcessed",
         transactionTime,
         expirationTime,
         ItemDetails: { create: item_details },

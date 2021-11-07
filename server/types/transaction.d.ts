@@ -168,6 +168,8 @@ export type TGQLOrder = {
   transactionTime: Date;
   expirationTime: Date;
   transactionStatus: string;
+  shippingStatus: string;
+  receiptNumber?: string;
   fraudStatus: string;
   ItemDetails?: TGQLItemDetail[];
   PaymentInfo?: TGQLPaymentInfo[];

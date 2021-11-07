@@ -17,9 +17,9 @@ export const PAYMENT_TYPE_ISACTIVE = gql`
   }
 `;
 
-export const ORDERS_FILTER_BY_USER = gql`
-  query ($userId: ID, $filterBy: orderFilter!) {
-    orders(userId: $userId, filterBy: $filterBy) {
+export const ORDERS_LIST_USER = gql`
+  query {
+    ordersListUser {
       id
       grossAmount
       currency
@@ -85,6 +85,8 @@ export const ORDER_DETAIL = gql`
       currency
       transactionTime
       transactionStatus
+      shippingStatus
+      receiptNumber
       expirationTime
       fraudStatus
       ItemDetails {
@@ -128,6 +130,34 @@ export const ORDER_DETAIL = gql`
       }
       createdAt
       updatedAt
+    }
+  }
+`;
+
+export const ORDER_LIST_ADMIN = gql`
+  query {
+    ordersListUsers {
+      id
+      grossAmount
+      currency
+      expirationTime
+      transactionTime
+      transactionStatus
+      shippingStatus
+      fraudStatus
+      CustomerDetails {
+        id
+        firstName
+        lastName
+      }
+      PaymentService {
+        id
+        name
+        PaymentType {
+          id
+          name
+        }
+      }
     }
   }
 `;

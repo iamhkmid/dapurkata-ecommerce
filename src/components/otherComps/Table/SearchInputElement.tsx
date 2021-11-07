@@ -10,12 +10,16 @@ export const IconWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  color: ${({ theme }) => theme.input.focus.border};
   > svg {
-    height: 1.5rem;
+    height: 1.2rem;
+    stroke-width: 58;
+    stroke: ${({ theme }) => theme.input.border};
+    transition: 0.4s all ease;
   }
   &.focus {
-    color: ${({ theme }) => theme.input.focus.borderFocus};
+    > svg {
+      stroke: ${({ theme }) => theme.input.focus.border};
+    }
   }
   transition: 0.4s all ease;
 `;
@@ -48,7 +52,7 @@ export const InputElement = styled.input`
   background: ${({ theme }) => theme.input.base.background};
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.boxShadow};
-  border: 1px solid transparent;
+  border: 1px solid ${({ theme }) => theme.input.border};
   text-decoration: none;
   padding: 0 0.5rem 0 2.2rem;
   height: 2.2rem;

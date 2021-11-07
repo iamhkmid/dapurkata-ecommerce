@@ -433,9 +433,14 @@ export type TTransactionQuery = {
     args: { orderId: string },
     context: TCtx
   ) => Promise<TGQLOrder>;
-  orders: (
+  ordersListUser: (
     parent: any,
-    args: { userId: string; filterBy: string },
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLOrder[]>;
+  ordersListUsers: (
+    parent: any,
+    args: { userId?: string },
     context: TCtx
   ) => Promise<TGQLOrder[]>;
 };
