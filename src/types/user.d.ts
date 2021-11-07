@@ -28,7 +28,7 @@ export type TGQLUserAdminList = {
     role: string;
     firstName: string;
     lastName: string;
-  };
+  }[];
 };
 
 export type TFormMyAccount = {
