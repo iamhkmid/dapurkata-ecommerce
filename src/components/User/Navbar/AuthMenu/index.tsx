@@ -19,7 +19,7 @@ import ThemeToggle from "../../../otherComps/Buttons/ThemeToggle";
 const AuthMenu = () => {
   const { user, loading } = useContext(AuthContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
-  const { pathname } = useRouter();
+  const { pathname, asPath } = useRouter();
 
   const { shoppingCart } = useContext(ShoppingCartCtx);
   const [totalItems, setTotalItems] = useState(0);
@@ -65,7 +65,7 @@ const AuthMenu = () => {
               dispatch({ type: "CHANGE_NAV_MENU", menu: "/auth/signin" })
             }
             onMouseLeave={() => {
-              dispatch({ type: "CHANGE_NAV_MENU", menu: pathname });
+              dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });
             }}
           >
             {signinBtn.link.includes(userNav.selectedNavMenu) && (
