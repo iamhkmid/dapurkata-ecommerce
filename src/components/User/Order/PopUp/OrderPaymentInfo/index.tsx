@@ -4,7 +4,6 @@ import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import {
   TGQLOrderInfoSubscription,
   TGQLPaymentInfoQuery,
-  TOrderPaymentInfo,
 } from "../../../../../types/transaction";
 import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./OrderPaymentInfoElement";

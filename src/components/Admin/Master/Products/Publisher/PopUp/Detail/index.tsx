@@ -2,7 +2,8 @@ import * as El from "./DetailELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext } from "react";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
-import Moment from "moment";
+import moment from "moment";
+import "moment/locale/id";
 import { useGQLPublisher } from "../../useGQLPublisher";
 import PopUpHeaderAdmin from "../../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 
@@ -31,13 +32,17 @@ const Detail = ({ id }) => {
               <tr>
                 <td>Update At</td>
                 <td>
-                  {Moment(data.updatedAt).local().format("DD-MM-YYYY hh:mm a")}
+                  {moment(data.createdAt)
+                    .locale("id")
+                    .format("dddd, DD MMMM YYYY | HH:mm")}
                 </td>
               </tr>
               <tr>
                 <td>Create At</td>
                 <td>
-                  {Moment(data.createdAt).local().format("DD-MM-YYYY hh:mm a")}
+                  {moment(data.updatedAt)
+                    .locale("id")
+                    .format("dddd, DD MMMM YYYY | HH:mm")}
                 </td>
               </tr>
             </tbody>

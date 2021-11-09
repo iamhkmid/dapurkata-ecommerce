@@ -5,7 +5,7 @@ import { UserNavCtx } from "../../../../../../contexts/UserNavCtx";
 import { TFormAddRecipient } from "../../../../../../types/Forms";
 import Button from "../../../../../otherComps/Buttons/Button";
 import FormsControl from "../../../../../otherComps/Forms/FormsControl";
-import PopUpHeader from "../../../../../otherComps/PopUpHeader/PopUpHeaderUser";
+import PopUpHeaderUser from "../../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./CreateRecipientElement";
 import { validationSchema } from "./validationScema";
 import { AuthContext } from "../../../../../../contexts/AuthCtx";
@@ -80,7 +80,7 @@ const CreateRecipient = () => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeader title="Tambah Data Penerima" />
+      <PopUpHeaderUser title="Tambah Data Penerima" />
       <El.Body>
         <FormMessage message={error?.message} color="danger" />
         <El.Form

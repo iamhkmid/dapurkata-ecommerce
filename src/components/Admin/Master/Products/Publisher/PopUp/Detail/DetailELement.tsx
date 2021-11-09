@@ -20,6 +20,7 @@ export const Main = styled(motion.div)`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   padding: 1rem 2rem;
   gap: 1rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

@@ -35,6 +35,7 @@ export const DetailBody = styled.div`
   display: flex;
   flex-direction: column;
   height: 100%;
+  margin-top: 2rem;
   padding: 1rem 2rem 2rem 2rem;
   overflow: auto;
 

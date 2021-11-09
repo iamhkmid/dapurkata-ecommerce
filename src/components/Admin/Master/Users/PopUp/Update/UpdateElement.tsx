@@ -24,6 +24,7 @@ export const Main = styled(motion.div)`
 export const Body = styled.div`
   display: flex;
   height: 100%;
+  margin-top: 2rem;
   position: relative;
 `;
 

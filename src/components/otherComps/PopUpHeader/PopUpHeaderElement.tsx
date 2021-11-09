@@ -3,10 +3,15 @@ import styled, { css } from "styled-components";
 export const Main = styled.div`
   font-family: "Poppins", sans-serif;
   display: flex;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 40;
+  background: inherit;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid ${({ theme }) => theme.border[2]};
-  border-style: dashed;
+  box-shadow: ${({ theme }) => theme.boxShadow};
   transition: 0.4s all ease;
 `;
 
@@ -16,7 +21,6 @@ export const Title = styled.h1`
   -webkit-line-clamp: 1;
   overflow: hidden;
   font-size: 0.9rem;
-  height: 100%;
   padding: 0.2rem 1rem;
   font-weight: 500;
   color: ${({ theme }) => theme.color[2]};

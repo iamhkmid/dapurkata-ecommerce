@@ -5,6 +5,7 @@ export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
+  position: relative;
   border-radius: ${({ theme }) => theme.borderRadius};
   box-shadow: ${({ theme }) => theme.boxShadow};
   overflow: hidden;
@@ -25,6 +26,7 @@ export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 2rem;
   padding: 1rem 2rem 3rem 2rem;
   overflow-x: auto;
   .gap-border {

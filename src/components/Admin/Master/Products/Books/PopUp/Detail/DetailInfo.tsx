@@ -1,4 +1,5 @@
-import Moment from "moment";
+import moment from "moment";
+import "moment/locale/id";
 import { TGetBook } from "../../../../../../../types/book";
 import * as El from "./DetailInfoElement";
 import ImageResponsive from "../../../../../../otherComps/ImageResponsive";
@@ -92,13 +93,17 @@ const DetailInfo = ({ data }: { data: TGetBook }) => {
         <El.TextWrapper>
           <El.Label>Update At</El.Label>
           <El.Value>
-            {Moment(data.updatedAt).local().format("DD-MM-YYYY hh:mm a")}
+            {moment(data.updatedAt)
+              .locale("id")
+              .format("dddd, DD MMMM YYYY | HH:mm")}
           </El.Value>
         </El.TextWrapper>
         <El.TextWrapper>
           <El.Label>Create At</El.Label>
           <El.Value>
-            {Moment(data.createdAt).local().format("DD-MM-YYYY hh:mm a")}
+            {moment(data.createdAt)
+              .locale("id")
+              .format("dddd, DD MMMM YYYY | HH:mm")}
           </El.Value>
         </El.TextWrapper>
       </El.Section>

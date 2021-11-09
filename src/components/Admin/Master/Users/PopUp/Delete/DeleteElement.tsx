@@ -21,6 +21,7 @@ export const Main = styled(motion.div)`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   padding: 1rem 2rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0.5rem 1.5rem;

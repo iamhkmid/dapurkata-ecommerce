@@ -12,7 +12,7 @@ export const Main = styled(motion.div)`
   position: relative;
   max-width: 50%;
   min-height: 80%;
-  max-height: 95%;
+  max-height: 100%;
   min-width: 28rem;
   font-size: 1rem;
   margin: 0.2rem;
@@ -30,8 +30,8 @@ export const Main = styled(motion.div)`
 export const Body = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1rem 2rem;
-  gap: 1rem;
+  margin-top: 2rem;
+  padding: 1rem 1.5rem;
   overflow-y: auto;
 
   ::-webkit-scrollbar {

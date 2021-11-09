@@ -31,6 +31,7 @@ export const Main = styled(motion.div)`
 export const PaymentInfo = styled.div`
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
   padding: 1rem;
   gap: 1rem;
   overflow-y: auto;

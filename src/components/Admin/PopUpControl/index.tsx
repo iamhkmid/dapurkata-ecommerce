@@ -1,5 +1,5 @@
 import { AnimatePresence, motion } from "framer-motion";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { AdminNavCtx } from "../../../contexts/AdminNavCtx";
 import AuthorDelete from "../Master/Products/Authors/PopUp/Delete";
 import AuthorUpdate from "../Master/Products/Authors/PopUp/Update";
@@ -47,6 +47,16 @@ const PopUpControl = () => {
   const {
     adminNav: { popup },
   } = useContext(AdminNavCtx);
+
+  useEffect(() => {
+    if (!!popup.name) {
+      window.document.body.style.overflowY = "hidden";
+      window.document.body.style.paddingRight = "10px";
+    } else {
+      window.document.body.style.overflowY = "scroll";
+      window.document.body.style.paddingRight = "0";
+    }
+  }, [popup.name]);
   return (
     <AnimatePresence>
       {!!popup.name && (

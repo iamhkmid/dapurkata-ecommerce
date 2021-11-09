@@ -1,4 +1,4 @@
-import * as El from "./DeleteELement";
+import * as El from "./DeleteElement";
 import Button from "../../../../../otherComps/Buttons/Button";
 import { useContext, useEffect, useRef } from "react";
 import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";

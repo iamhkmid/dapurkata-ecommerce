@@ -16,7 +16,7 @@ generator client {
 }
 
 model User {
-  id           String         @id @default(cuid())
+  id           String         @id @default(cuid()) @map("user_id")
   firstName    String         @map("first_name")
   lastName     String?        @map("last_name")
   username     String         @unique
@@ -24,7 +24,7 @@ model User {
   password     String
   role         String
   phone        String?        @unique
-  isActive     Boolean
+  isActive     Boolean        @map("is_active")
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
   pictureDir   String         @map("picture_dir")
@@ -38,7 +38,7 @@ model User {
 }
 
 model Notification {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("notification_id")
   title     String
   message   String
   valueName String?
@@ -52,7 +52,7 @@ model Notification {
 }
 
 model Recipient {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("recipient_id")
   firstName String   @map("first_name")
   lastName  String?  @map("last_name")
   email     String?
@@ -70,7 +70,7 @@ model Recipient {
 }
 
 model City {
-  id         String      @id
+  id         String      @id @map("city_id")
   name       String      @map("city_name")
   postalCode String      @map("postal_Code")
   Province   Province    @relation(fields: [provinceId], references: [id], onDelete: Cascade)
@@ -83,7 +83,7 @@ model City {
 }
 
 model Province {
-  id        String   @id
+  id        String   @id @map("province_id")
   name      String   @map("province_name")
   City      City[]
   createdAt DateTime @default(now()) @map("created_at")
@@ -93,7 +93,7 @@ model Province {
 }
 
 model ShoppingCart {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("shoppingcart_id")
   userId    String   @map("user_id")
   User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookId    String   @map("book_id")
@@ -108,9 +108,10 @@ model ShoppingCart {
 }
 
 model Courier {
-  code      String   @id @default(cuid())
+  code      String   @id @default(cuid()) @map("courier_code")
   name      String
-  isEnabled Boolean
+  isEnabled Boolean  @map("is_enabled")
+  Order     Order[]
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
@@ -118,9 +119,9 @@ model Courier {
 }
 
 model PaymentService {
-  id            String       @id @default(cuid())
+  id            String       @id @default(cuid()) @map("payment_service_id")
   name          String
-  isEnabled     Boolean
+  isEnabled     Boolean      @map("is_enabled")
   icon          String
   description   String
   // howToPay      String     @db.VarChar(2000)
@@ -135,12 +136,12 @@ model PaymentService {
 }
 
 model PaymentType {
-  id             String           @id @default(cuid())
+  id             String           @id @default(cuid()) @map("payment_type_id")
   name           String
   icon           String
   description    String
   PaymentService PaymentService[]
-  isEnabled      Boolean
+  isEnabled      Boolean          @map("is_enabled")
   createdAt      DateTime         @default(now()) @map("created_at")
   updatedAt      DateTime         @updatedAt @map("updated_at")
 
@@ -148,10 +149,10 @@ model PaymentType {
 }
 
 model Order {
-  id                String           @id @default(cuid())
+  id                String           @id @default(cuid()) @map("order_id")
   userId            String?          @map("user_id")
   User              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
-  grossAmount       Int              @map("gross_amount")
+  grossAmount       BigInt           @map("gross_amount")
   currency          String
   transactionTime   DateTime         @map("transaction_time")
   transactionStatus String           @map("transaction_status")
@@ -166,12 +167,14 @@ model Order {
   CustomerDetails   CustomerDetails?
   paymentServiceId  String?          @map("payment_service_id")
   PaymentService    PaymentService?  @relation(fields: [paymentServiceId], references: [id], onDelete: SetNull)
+  courierCode       String?          @map("courier_code")
+  Courier           Courier?         @relation(fields: [courierCode], references: [code], onDelete: SetNull)
 
   @@map("order")
 }
 
 model PaymentInfo {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("payment_info_id")
   name      String
   value     String
   orderId   String   @map("order_id")
@@ -183,9 +186,9 @@ model PaymentInfo {
 }
 
 model ItemDetail {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("item_detail_id")
   itemId    String   @map("item_id")
-  price     Float
+  price     Int
   quantity  Int
   name      String
   orderId   String   @map("order_id")
@@ -197,7 +200,7 @@ model ItemDetail {
 }
 
 model CustomerDetails {
-  id              String           @id @default(cuid())
+  id              String           @id @default(cuid()) @map("customer_details_id")
   firstName       String           @map("first_name")
   lastName        String?          @map("last_name")
   email           String
@@ -212,7 +215,7 @@ model CustomerDetails {
 }
 
 model ShippingAddress {
-  id                String          @id @default(cuid())
+  id                String          @id @default(cuid()) @map("shipping_address_id")
   firstName         String          @map("first_name")
   lastName          String          @map("last_name")
   email             String
@@ -231,7 +234,7 @@ model ShippingAddress {
 }
 
 model Book {
-  id            String         @id @default(cuid())
+  id            String         @id @default(cuid()) @map("book_id")
   title         String
   // description      String     @db.VarChar(2000)
   description   String
@@ -261,7 +264,7 @@ model Book {
 }
 
 model Category {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("category_id")
   name      String   @unique
   group     String
   createdAt DateTime @default(now()) @map("created_at")
@@ -272,7 +275,7 @@ model Category {
 }
 
 model Author {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("author_id")
   name      String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -282,7 +285,7 @@ model Author {
 }
 
 model Publisher {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("publisher_id")
   name      String   @unique
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
@@ -292,7 +295,7 @@ model Publisher {
 }
 
 model BookPicture {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("book_picture_id")
   url       String
   type      String
   createdAt DateTime @default(now()) @map("created_at")
@@ -310,11 +313,11 @@ model BookPicture {
 // }
 
 model FooterInfo {
-  id        String   @id @default(cuid())
+  id        String   @id @default(cuid()) @map("footer_info_id")
   type      String
   // value      String     @db.VarChar(1000)
   value     String
-  isEnabled Boolean
+  isEnabled Boolean  @map("is_enabled")
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

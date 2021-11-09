@@ -7,7 +7,7 @@ export const Main = styled(motion.div)`
   min-width: 80%;
   width: 90%;
   min-height: 70%;
-  height: 90%;
+  height: 100%;
   overflow: hidden;
   background: ${({ theme }) => theme.background[2]};
   color: ${({ theme }) => theme.color[1]};
@@ -18,14 +18,13 @@ export const Main = styled(motion.div)`
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 100%;
-    height: 100%;
   }
 `;
 export const Body = styled.div`
   display: flex;
   height: 100%;
-  max-height: 85vh;
   position: relative;
+  margin-top: 2rem;
 `;
 
 type TContent = {
@@ -34,7 +33,8 @@ type TContent = {
 export const Content = styled.div<TContent>`
   display: flex;
   margin-left: 0rem;
-  overflow-x: auto;
+  overflow-y: scroll;
+  padding-bottom: 1rem;
 
   ::-webkit-scrollbar {
     width: 10px;
