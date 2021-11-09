@@ -138,7 +138,6 @@ model PaymentService {
 model PaymentType {
   id             String           @id @default(cuid()) @map("payment_type_id")
   name           String
-  icon           String
   description    String
   PaymentService PaymentService[]
   isEnabled      Boolean          @map("is_enabled")
@@ -152,7 +151,7 @@ model Order {
   id                String           @id @default(cuid()) @map("order_id")
   userId            String?          @map("user_id")
   User              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
-  grossAmount       BigInt           @map("gross_amount")
+  grossAmount       Int              @map("gross_amount")
   currency          String
   transactionTime   DateTime         @map("transaction_time")
   transactionStatus String           @map("transaction_status")

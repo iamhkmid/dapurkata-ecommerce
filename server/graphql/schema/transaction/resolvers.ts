@@ -1,6 +1,6 @@
-import { ApolloError, AuthenticationError } from "apollo-server-express";
+import { ApolloError } from "apollo-server-express";
 import cuid from "cuid";
-import { TMidtransPayType, TMidtransProps } from "../../../types/api";
+import { TMidtransPayType } from "../../../types/api";
 import {
   TTransactionQuery,
   TTransactionMutation,
@@ -8,12 +8,7 @@ import {
   TOrderPaymentInfoMutation,
   TTransactionSubcription,
 } from "../../../types/graphql";
-import {
-  TGQLOrder,
-  TGQLPaymentType,
-  TItemDetails,
-  TPaymentBT,
-} from "../../../types/transaction";
+import { TGQLPaymentType, TItemDetails } from "../../../types/transaction";
 import {
   buyNowItems,
   buyNowWeight,
@@ -21,7 +16,6 @@ import {
   sCartItems,
   sCartWeight,
 } from "./utils";
-import util from "util";
 import { validateUser } from "../../utils/validateUser";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";

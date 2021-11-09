@@ -26,7 +26,6 @@ export type TGQLBankTransfer = {
 export type TDBPaymentType = {
   id: string;
   name: string;
-  icon: string;
   isEnabled: boolean;
   description: string;
   createdAt: Date;
@@ -46,7 +45,6 @@ export type TGQLPaymentService = {
 export type TGQLPaymentType = {
   id: string;
   name: string;
-  icon: string;
   isEnabled: boolean;
   description: string;
   PaymentService: TGQLPaymentService[];

@@ -15,7 +15,7 @@ const Delete = ({ id }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeaderAdmin title="Delete" />
+      <PopUpHeaderAdmin title="Hapus Data" />
       <El.Body>
         <ShowMessage message={error?.message} color="danger" />
         <El.Content>

@@ -56,7 +56,7 @@ const Update = ({ id }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeaderAdmin title="Edit" />
+      <PopUpHeaderAdmin title="Ubah data" />
       <El.Body>
         <ShowMessage message={errorUpdate?.message} color="danger" />
         <El.Form onSubmit={handleSubmit(onSubmit)}>

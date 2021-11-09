@@ -17,7 +17,7 @@ const Update = ({ userId }) => {
       exit={{ opacity: 0 }}
     >
       <PopUpHeaderAdmin
-        title="Update"
+        title="Ubah data"
         withSideMenu={{ showSideMenu, setShowSideMenu }}
         themeToggle={true}
       />

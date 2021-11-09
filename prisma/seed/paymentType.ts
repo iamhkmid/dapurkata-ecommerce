@@ -14,7 +14,6 @@ export const paymentType = async () => {
     data: {
       id: "BANK_TRANSFER",
       name: "ATM/Bank Transfer",
-      icon: "/img/payments/bank_transfer/bank_transfer.svg",
       description: "Bayar dari ATM atau Internet Banking",
       isEnabled: true,
     },
@@ -78,7 +77,6 @@ export const paymentType = async () => {
     data: {
       id: "CSTORE",
       name: "Convenience Store",
-      icon: "/img/payments/cstore/cstore.svg",
       description: "Pembayaran dari Indomaret atau Alfamart",
       isEnabled: true,
     },
