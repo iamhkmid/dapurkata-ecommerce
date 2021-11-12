@@ -121,6 +121,9 @@ export const BOOKS_WITH_FILTER = gql`
         id
         title
         price
+        stock
+        discount
+        coverType
         coverURL
         authorName
       }
@@ -143,6 +146,9 @@ export const GET_BOOK_DETAIL = gql`
       lenght
       stock
       price
+      condition
+      discount
+      coverType
       language
       isbn
       Category {

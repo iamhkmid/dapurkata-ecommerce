@@ -73,12 +73,12 @@ model City {
   id         String      @id @map("city_id")
   name       String      @map("city_name")
   postalCode String      @map("postal_Code")
+  provinceId String      @map("province_id")
   Province   Province    @relation(fields: [provinceId], references: [id], onDelete: Cascade)
   Recipient  Recipient[]
   createdAt  DateTime    @default(now()) @map("created_at")
   updatedAt  DateTime    @updatedAt @map("updated_at")
 
-  provinceId String
   @@map("city")
 }
 
@@ -237,8 +237,10 @@ model Book {
   title         String
   // description      String     @db.VarChar(2000)
   description   String
-  edition       String
-  series        String
+  condition     String
+  coverType     String         @map("cover_type")
+  edition       String?
+  series        String?
   releaseYear   String         @map("release_year")
   numberOfPages Int            @map("number_of_pages")
   lenght        Int
@@ -246,6 +248,7 @@ model Book {
   weight        Int
   stock         Int
   price         Int
+  discount      Int            @default(0)
   isbn          String
   language      String
   pictureDir    String         @map("picture_dir")

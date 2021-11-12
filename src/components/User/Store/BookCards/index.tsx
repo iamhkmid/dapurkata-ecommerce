@@ -30,6 +30,11 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
             const inCart = shoppingCart.data.find(
               (val) => val.Book.id === book.id
             );
+            const price = book.price;
+            const priceWithDiscount =
+              book.discount > 0
+                ? book.price - (book.price * book.discount) / 100
+                : book.price;
             return (
               <El.Card
                 key={book.id}
@@ -41,6 +46,11 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                 }
               >
                 <El.CoverWrapper>
+                  {book.stock === 0 && (
+                    <div className="empty-cover">
+                      <h1>Habis</h1>
+                    </div>
+                  )}
                   <ImageResponsive
                     src={book.coverURL}
                     alt={book.title}
@@ -55,16 +65,34 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                     <h1 className="author">{book.authorName}</h1>
                   </div>
                   <div className="info2">
-                    <h1 className="price">
-                      <NumberFormat
-                        prefix="Rp"
-                        value={book.price}
-                        displayType={"text"}
-                        thousandSeparator={"."}
-                        decimalSeparator={","}
-                      />
-                    </h1>
-                    <div className="star">{IconsControl("star")}</div>
+                    <div className="price-wrapper">
+                      <h1 className="discount-price">
+                        <NumberFormat
+                          prefix="Rp"
+                          value={priceWithDiscount}
+                          displayType={"text"}
+                          thousandSeparator={"."}
+                          decimalSeparator={","}
+                        />
+                      </h1>
+                      {book.discount > 0 && (
+                        <h1 className="normal-price">
+                          <NumberFormat
+                            prefix="Rp"
+                            value={price}
+                            displayType={"text"}
+                            thousandSeparator={"."}
+                            decimalSeparator={","}
+                          />
+                        </h1>
+                      )}
+                    </div>
+                    <div className="additional-info">
+                      {book.discount > 0 && (
+                        <div className="discount">{`${book.discount}% OFF`}</div>
+                      )}
+                      <div className="text">{book.coverType}</div>
+                    </div>
                   </div>
                 </El.BookInfo>
               </El.Card>

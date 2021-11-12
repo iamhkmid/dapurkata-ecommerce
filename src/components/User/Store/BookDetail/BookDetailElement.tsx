@@ -153,43 +153,108 @@ export const MainInfo = styled.div`
   flex-direction: column;
   text-align: start;
   padding-bottom: 1rem;
+  gap: 5px;
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
+    line-height: 1;
     overflow: hidden;
-    font-size: 1.8rem;
+    font-size: 28px;
     font-weight: 700;
     color: ${({ theme }) => theme.color[1]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 1.2rem;
+      font-size: 20px;
     }
   }
   .author {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+    line-height: 1;
     overflow: hidden;
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: 500;
     color: ${({ theme }) => theme.color[2]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
+      font-size: 14px;
+    }
+  }
+  .cover-type {
+    display: flex;
+    width: max-content;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: ${({ theme }) => theme.button.primary.background};
+    h1 {
+      font-size: 12px;
+      color: ${({ theme }) => theme.button.primary.color};
+      font-weight: 600;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 10px;
+      }
+    }
+  }
+  .empty-stock {
+    display: flex;
+    width: max-content;
+    padding: 1px 8px;
+    border-radius: 10px;
+    background: ${({ theme }) => theme.button.warning.background};
+    h1 {
+      font-size: 14px;
+      color: ${({ theme }) => theme.button.warning.color};
+      font-weight: 600;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 12px;
+      }
     }
   }
 `;
 
 export const OrderInfo = styled.div`
   display: flex;
-  gap: 1rem;
+  gap: 10px;
   flex-direction: column;
   .price {
+    display: flex;
     font-family: "Mulish", sans-serif;
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: ${({ theme }) => theme.color[3]};
-    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 1.2rem;
+    flex-direction: column;
+    gap: 2px;
+    .normal-price-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .discount {
+      font-family: "Poppins", sans-serif;
+      font-size: 12px;
+      padding: 2px 4px;
+      font-weight: 600;
+      background: ${({ theme }) => theme.button.success.background};
+      color: ${({ theme }) => theme.button.success.color};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 10px;
+      }
+    }
+    .normal-price {
+      font-size: 16px;
+      text-decoration: line-through;
+      line-height: 1;
+      font-weight: 800;
+      color: ${({ theme }) => theme.color[9]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 14px;
+      }
+    }
+    .discount-price {
+      font-size: 27px;
+      line-height: 1;
+      font-weight: 900;
+      color: ${({ theme }) => theme.color[3]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 22px;
+      }
     }
   }
 `;
@@ -293,6 +358,9 @@ export const AdditionalInfo = styled.div`
         @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
           font-size: 0.7rem;
         }
+      }
+      .capitalize {
+        text-transform: capitalize;
       }
     }
   }

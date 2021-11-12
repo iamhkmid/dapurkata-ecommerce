@@ -72,7 +72,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
       exit={{ opacity: 0 }}
     >
       <PopUpHeader
-        title={`${dataGB?.title} - ${dataGB?.Author?.name}`}
+        title={`${dataGB?.title || ""} - ${dataGB?.Author?.name || ""}`}
         themeToggle={true}
       />
       {dataGB && (
@@ -95,17 +95,43 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
               <El.MainInfo>
                 <h1 className="title">{dataGB.title}</h1>
                 <h1 className="author">{dataGB.Author.name}</h1>
+                <div className="cover-type">
+                  <h1>{dataGB.coverType}</h1>
+                </div>
+                {dataGB.stock === 0 && (
+                  <div className="empty-stock">
+                    <h1>STOK HABIS</h1>
+                  </div>
+                )}
               </El.MainInfo>
               <El.OrderInfo>
-                <h1 className="price">
-                  <NumberFormat
-                    prefix="Rp"
-                    value={dataGB.price}
-                    displayType={"text"}
-                    thousandSeparator={"."}
-                    decimalSeparator={","}
-                  />
-                </h1>
+                <div className="price">
+                  {dataGB.discount > 0 && (
+                    <div className="normal-price-wrapper">
+                      <div className="normal-price">
+                        <NumberFormat
+                          prefix="Rp"
+                          value={dataGB.price}
+                          displayType={"text"}
+                          thousandSeparator={"."}
+                          decimalSeparator={","}
+                        />
+                      </div>
+                      <h1 className="discount">{`${dataGB.discount}% OFF`}</h1>
+                    </div>
+                  )}
+                  <h1 className="discount-price">
+                    <NumberFormat
+                      prefix="Rp"
+                      value={
+                        dataGB.price - (dataGB.price * dataGB.discount) / 100
+                      }
+                      displayType={"text"}
+                      thousandSeparator={"."}
+                      decimalSeparator={","}
+                    />
+                  </h1>
+                </div>
                 {!currCart && (
                   <AddCartInput amount={amount} setAmount={setAmount} />
                 )}
@@ -124,13 +150,14 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                   <Button
                     type="button"
                     name="Masukan Keranjang"
-                    color="success"
+                    color="primary"
                     isLoading={loading}
                     disabled={
                       shoppingCart.loading ||
                       loadGB ||
                       (user && user.role !== "USER") ||
-                      !!currCart
+                      !!currCart ||
+                      dataGB.stock === 0
                     }
                     onClick={() =>
                       createShoppingCart({
@@ -149,7 +176,8 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                       shoppingCart.loading ||
                       loadGB ||
                       (user && user.role !== "USER") ||
-                      !!currCart
+                      !!currCart ||
+                      dataGB.stock === 0
                     }
                   />
                 </El.ActionBtn>
@@ -171,16 +199,30 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
               <h1 className="section-name">Detail</h1>
               <div className="info-wrapper">
                 <div>
-                  <h1 className="ai-name">Edisi</h1>
-                  <h1 className="ai-value">{dataGB.edition}</h1>
+                  <h1 className="ai-name">Sampul</h1>
+                  <h1 className="ai-value">{dataGB.coverType}</h1>
                 </div>
                 <div>
-                  <h1 className="ai-name">Seri</h1>
-                  <h1 className="ai-value">{dataGB.series}</h1>
+                  <h1 className="ai-name">Kondisi</h1>
+                  <h1 className="ai-value capitalize">{dataGB.condition}</h1>
                 </div>
+                {dataGB.edition && (
+                  <div>
+                    <h1 className="ai-name">Edisi</h1>
+                    <h1 className="ai-value">{dataGB.edition}</h1>
+                  </div>
+                )}
+                {dataGB.series && (
+                  <div>
+                    <h1 className="ai-name">Seri</h1>
+                    <h1 className="ai-value">{dataGB.series}</h1>
+                  </div>
+                )}
                 <div>
                   <h1 className="ai-name">Stok</h1>
-                  <h1 className="ai-value">{dataGB.stock}</h1>
+                  <h1 className="ai-value">
+                    {dataGB.stock > 0 ? dataGB.stock : "Habis"}
+                  </h1>
                 </div>
                 <div>
                   <h1 className="ai-name">Berat</h1>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Main = styled(motion.div)`
   display: flex;
@@ -11,8 +11,8 @@ export const Cards = styled(motion.div)`
   padding-top: 1rem;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 15px;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     gap: 10px;
@@ -34,12 +34,13 @@ export const NoBook = styled.div`
 `;
 
 export const Card = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-rows: max-content minmax(50px, max-content);
   font-family: "Mulish", sans-serif;
   flex-direction: column;
   position: relative;
   margin-top: 1rem;
-  padding: 0rem 0.5rem;
+  padding: 0rem 5px;
   background: ${({ theme }) => theme.background[2]};
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -62,12 +63,43 @@ export const CoverWrapper = styled.div`
   margin-left: auto;
   margin-right: auto;
   width: 100%;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
-    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  height: max-content;
+  ${({ theme }) =>
+    theme.name === "light"
+      ? css`
+          box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        `
+      : css`
+          box-shadow: rgba(9, 9, 19, 0.25) 0px 6px 12px -2px,
+            rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+        `}
   min-width: 100%;
   aspect-ratio: 2.1/3;
   border-radius: ${({ theme }) => theme.borderRadius};
   overflow: hidden;
+  .empty-cover {
+    display: flex;
+    font-family: "Poppins", sans-serif;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    position: absolute;
+    background: #090d11b2;
+    > h1 {
+      font-size: 22px;
+      font-weight: 600;
+      color: ${({ theme }) => theme.color[4]};
+      text-transform: uppercase;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 20px;
+      }
+    }
+  }
 `;
 
 export const BookInfo = styled.div`
@@ -77,7 +109,7 @@ export const BookInfo = styled.div`
   width: 100%;
   justify-content: space-between;
   top: -0.5rem;
-  gap: 5px;
+  gap: 3px;
   overflow: hidden;
   .title {
     display: -webkit-box;
@@ -104,42 +136,85 @@ export const BookInfo = styled.div`
       font-size: 9px;
     }
   }
-  .price {
+  .price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .normal-price {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    font-size: 14px;
-    height: 100%;
+    font-size: 11px;
+    font-weight: 600;
+    text-decoration: line-through;
+    color: ${({ theme }) => theme.color[9]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 9px;
+    }
+  }
+  .discount-price {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-size: 15px;
     font-weight: 800;
     color: ${({ theme }) => theme.color[3]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 12px;
+      font-size: 13px;
     }
   }
-  .info2 {
-    display: flex;
-    justify-content: space-between;
-  }
-  .star {
-    > h1 {
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      overflow: hidden;
-      font-size: 12px;
-      font-weight: 700;
-      color: ${({ theme }) => theme.color[2]};
-    }
-    display: flex;
-    height: 100%;
-    align-items: center;
-    > svg {
-      height: 0.9rem;
-      fill: ${({ theme }) => theme.color[7]};
-    }
+  .discount {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-size: 12px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.color[8]};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 12px;
+    }
+  }
+
+  .info2 {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .additional-info {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    width: 100%;
+    height: 100%;
+
+    .discount {
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 2px;
+      padding: 1px 5px;
+      background: ${({ theme }) => theme.button.success.background};
+      color: ${({ theme }) => theme.button.success.color};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 10px;
+      }
+    }
+
+    .text {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: capitalize;
+      border-radius: 2px;
+      padding: 1px 5px;
+      background: ${({ theme }) => theme.button.primary.background};
+      color: ${({ theme }) => theme.button.primary.color};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 10px;
+      }
     }
   }
 `;

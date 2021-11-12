@@ -91,7 +91,6 @@ export const Input = styled.input<TInput>`
   padding: 0 2.5rem;
   height: 2.5rem;
   width: 100%;
-  box-shadow: ${({ theme }) => theme.boxShadow};
   border: 1px solid ${({ theme }) => theme.input.border};
   outline: none;
   position: relative;

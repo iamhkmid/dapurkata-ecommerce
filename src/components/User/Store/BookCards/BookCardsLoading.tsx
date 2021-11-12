@@ -6,14 +6,21 @@ const BookCardsLoading = () => {
     <Cards>
       {Array.from(Array(12).keys()).map((val) => (
         <Card key={val}>
-          <CoverWrapper className="cover" />
+          <CoverWrapper className="cover loading" />
           <BookInfo>
             <div className="info1">
-              <div className="title" />
-              <div className="author" />
+              <div className="title loading" />
+              <div className="author loading" />
             </div>
             <div className="info2">
-              <div className="price" />
+              <div className="price-wrapper">
+                <div className="discount-price loading" />
+                <div className="normal-price loading" />
+              </div>
+              <div className="additional-info">
+                <div className="discount loading" />
+                <div className="text loading" />
+              </div>
             </div>
           </BookInfo>
         </Card>
@@ -45,20 +52,17 @@ export const Cards = styled(motion.div)`
   }
 `;
 const Card = styled.div`
-  display: flex;
-  font-family: "Mulish", sans-serif;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: max-content minmax(50px, max-content);
   position: relative;
   margin-top: 1rem;
-  padding: 0rem 0.5rem;
+  padding: 0rem 5px;
   background: ${({ theme }) => theme.background[2]};
+  border: 1px solid transparent;
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
   border-radius: ${({ theme }) => theme.borderRadius};
 
-  .cover::before,
-  .title::before,
-  .author::before,
-  .price::before {
+  .loading::before {
     position: absolute;
     content: "";
     height: 100%;
@@ -102,7 +106,7 @@ const BookInfo = styled.div`
   width: 100%;
   justify-content: space-between;
   top: -0.5rem;
-  gap: 9px;
+  gap: 3px;
   overflow: hidden;
   .info1 {
     display: flex;
@@ -133,109 +137,70 @@ const BookInfo = styled.div`
       min-height: 0.5rem;
     }
   }
-  .price {
+  .info2 {
     display: flex;
-    min-height: 1rem;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+  .normal-price {
+    display: flex;
+    min-height: 11px;
     position: relative;
-    min-width: 6rem;
-    width: fit-content;
+    min-width: 50px;
     overflow: hidden;
     background: ${({ theme }) => theme.loading[1]};
-    border-radius: ${({ theme }) => theme.borderRadius};
+    border-radius: 2px;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      min-height: 0.8rem;
+      min-height: 9px;
     }
   }
-`;
-
-const InputRadio = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  border: 1px solid ${({ theme }) => theme.input.border};
-  .icon-radio::before,
-  .text-service::before,
-  .text-description::before,
-  .text-cost::before {
-    position: absolute;
-    content: "";
-    height: 100%;
+  .discount-price {
+    overflow: hidden;
+    min-height: 15px;
+    position: relative;
+    min-width: 70px;
+    overflow: hidden;
+    background: ${({ theme }) => theme.loading[1]};
+    border-radius: 2px;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      min-height: 13px;
+    }
+  }
+  .additional-info {
+    display: flex;
+    align-items: center;
+    gap: 3px;
     width: 100%;
-    background-image: linear-gradient(
-      to right,
-      ${({ theme }) => theme.loading[1]} 0%,
-      ${({ theme }) => theme.loading[2]} 20%,
-      ${({ theme }) => theme.loading[1]} 40%,
-      ${({ theme }) => theme.loading[1]} 100%
-    );
-    background-repeat: no-repeat;
-    background-size: 450px 400px;
-    animation: ${shimmer} 1s linear infinite;
-  }
+    height: 100%;
 
-  transition: 0.4s border ease;
-`;
-
-const IconRadio = styled.div`
-  height: 1rem;
-  aspect-ratio: 1/1;
-  border-radius: 100%;
-  background: ${({ theme }) => theme.input.background};
-  position: relative;
-  overflow: hidden;
-  transition: 0.4s all ease;
-`;
-
-const Detail = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  width: 100%;
-
-  .text-service {
-    background: ${({ theme }) => theme.loading[1]};
-    border-radius: ${({ theme }) => theme.borderRadius};
-    height: 0.8rem;
-    width: 30%;
-    position: relative;
-    overflow: hidden;
-  }
-  .text-description {
-    background: ${({ theme }) => theme.loading[1]};
-    border-radius: ${({ theme }) => theme.borderRadius};
-    height: 0.7rem;
-    width: 30%;
-    position: relative;
-    overflow: hidden;
-  }
-  .text-cost {
-    background: ${({ theme }) => theme.loading[1]};
-    border-radius: ${({ theme }) => theme.borderRadius};
-    height: 0.9rem;
-    width: 20%;
-    position: relative;
-    overflow: hidden;
-  }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    gap: 0.3rem;
-    .text-service {
-      height: 0.7rem;
-      width: 50%;
+    .discount {
+      min-height: 13px;
+      position: relative;
+      min-width: 60px;
+      overflow: hidden;
+      background: ${({ theme }) => theme.loading[1]};
+      border-radius: 2px;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        min-height: 12px;
+      }
     }
-    .text-description {
-      height: 0.6rem;
-      width: 50%;
-    }
-    .text-cost {
-      height: 0.8rem;
-      width: 30%;
+
+    .text {
+      min-height: 13px;
+      position: relative;
+      min-width: 60px;
+      overflow: hidden;
+      background: ${({ theme }) => theme.loading[1]};
+      border-radius: 2px;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        min-height: 12px;
+      }
     }
   }
-  -moz-transition: none;
-  -webkit-transition: none;
-  -o-transition: all 0 ease-in;
-  transition: none;
 `;

@@ -15,7 +15,7 @@ const ButtonElement = styled.button<TButtonElement>`
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 0.9rem;
   min-height: 2.3rem;
   max-height: max-content;

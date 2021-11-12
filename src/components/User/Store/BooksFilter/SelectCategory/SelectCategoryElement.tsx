@@ -270,7 +270,6 @@ export const InputWrapper = styled.div`
   outline: none;
   text-decoration: none;
   position: relative;
-  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: 5px;
   min-width: 13rem;
   width: fit-content;

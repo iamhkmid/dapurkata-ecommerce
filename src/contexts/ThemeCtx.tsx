@@ -21,6 +21,7 @@ const themeConf = {
       6: "#0da159",
       7: "#f7d024",
       8: "#2f5994",
+      9: "#909baa",
     },
     border: {
       1: "#D1D5DB",
@@ -207,6 +208,7 @@ const themeConf = {
       6: "#0da159",
       7: "#fad843",
       8: "#a9c2e6",
+      9: "#97acc99b",
     },
     border: {
       1: "#161c25",

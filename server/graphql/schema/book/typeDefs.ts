@@ -27,6 +27,9 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
+    condition: String
+    discount: Int
+    coverType: String
     lenght: Int
     width: Int
     weight: Int
@@ -47,6 +50,9 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
+    condition: String
+    discount: Int
+    coverType: String
     lenght: Int
     width: Int
     weight: Int
@@ -76,6 +82,9 @@ const typeDefs = gql`
     id: ID
     title: String
     price: Int
+    stock: Int
+    discount: Int
+    coverType: String
     authorName: String
     coverURL: String
   }
@@ -92,6 +101,9 @@ const typeDefs = gql`
     weight: Int
     stock: Int
     price: Int
+    condition: String
+    discount: Int
+    coverType: String
     language: String
     isbn: String
     pictureDir: String
@@ -110,12 +122,6 @@ const typeDefs = gql`
     type: String
     createdAt: Date
     updatedAt: Date
-  }
-
-  type File {
-    filename: String!
-    mimetype: String!
-    encoding: String!
   }
 `;
 

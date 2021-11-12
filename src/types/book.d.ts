@@ -11,6 +11,9 @@ export type TGetBook = {
   weight: number;
   stock: number;
   price: number;
+  condition: string;
+  discount: number;
+  coverType: string;
   language: string;
   isbn: string;
   pictureDir: string;
@@ -43,6 +46,9 @@ export type TOrderBook = {
   title: string;
   price: number;
   weight: number;
+  condition: string;
+  discount: number;
+  coverType: string;
   Author: {
     id: string;
     name: string;
@@ -71,6 +77,9 @@ type TGQLGetFormBookInit = {
     weight: number;
     stock: number;
     price: number;
+    condition: string;
+    discount: number;
+    coverType: string;
     language: string;
     isbn: string;
     Category: {
@@ -165,6 +174,9 @@ type TBookDetail = {
   width: number;
   stock: number;
   price: number;
+  condition: string;
+  discount: number;
+  coverType: string;
   language: string;
   isbn: string;
   Category: {
@@ -209,7 +221,10 @@ export type TGQLBookCards = {
 export type TBookCard = {
   id: string;
   title: string;
-  price: string;
+  price: number;
+  stock: number;
+  discount: number;
+  coverType: string;
   coverURL: string;
   authorName: string;
 };

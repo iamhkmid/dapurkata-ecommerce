@@ -8,6 +8,9 @@ export type TGQLBook = {
   description: string;
   edition: string;
   series: string;
+  condition: string;
+  coverType: string;
+  discount: number;
   releaseYear: string;
   numberOfPages: number;
   lenght: number;
@@ -30,6 +33,9 @@ export type TBooksWithFilter = {
   id: string;
   title: string;
   price: number;
+  stock: number;
+  discount: number;
+  coverType: string;
   authorName: string;
   coverURL: string;
 };
@@ -38,6 +44,9 @@ export type TDBBooksWithFilter = {
   id: string;
   title: string;
   price: number;
+  stock: number;
+  discount: number;
+  coverType: string;
   authorName: string;
   categoryIds: string[];
   coverURL: string;
@@ -66,6 +75,9 @@ export type TArgsCreateBook = {
     series: string;
     releaseYear: string;
     numberOfPages: number;
+    condition: string;
+    coverType: string;
+    discount: number;
     lenght: number;
     weight: number;
     stock: number;
@@ -86,13 +98,16 @@ type TDBCreateBook = {
   description: string;
   edition: string;
   series: string;
+  condition: string;
+  coverType: string;
   releaseYear: string;
   numberOfPages: number;
   lenght: number;
   weight: number;
+  width: number;
   stock: number;
   price: number;
-  width: number;
+  discount?: number;
   language: string;
   isbn: string;
   pictureDir: string;
@@ -107,6 +122,8 @@ export type TDBUpdateBook = {
   description: string;
   edition: string;
   series: string;
+  condition: string;
+  coverType: string;
   releaseYear: string;
   numberOfPages: number;
   lenght: number;
@@ -114,6 +131,7 @@ export type TDBUpdateBook = {
   weight: number;
   stock: number;
   price: number;
+  discount?: number;
   language: string;
   isbn: string;
   pictureDir?: string;
@@ -129,6 +147,9 @@ export type TArgsUpdateBook = {
     description: string;
     edition: string;
     series: string;
+    condition: string;
+    coverType: string;
+    discount: number;
     releaseYear: string;
     numberOfPages: number;
     lenght: number;
