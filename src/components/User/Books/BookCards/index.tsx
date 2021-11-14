@@ -4,6 +4,7 @@ import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
+import { WishlistCtx } from "../../../../contexts/WishlistCtx";
 import { TBookCard } from "../../../../types/book";
 import IconsControl from "../../../IconsControl";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
@@ -19,6 +20,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
   const { user } = useContext(AuthContext);
   const { query } = useRouter();
   const { shoppingCart } = useContext(ShoppingCartCtx);
+  const { wishlist } = useContext(WishlistCtx);
   const { dispatch } = useContext(UserNavCtx);
 
   useEffect(() => {}, [query["book"]]);
@@ -96,6 +98,9 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                         <div className="discount">{`${book.discount}% OFF`}</div>
                       )}
                       <div className="text">{book.coverType}</div>
+                      {!!wishlist?.Book.find((val) => val.id === book.id) && (
+                        <div className="wishlist">{IconsControl("HEART")}</div>
+                      )}
                     </div>
                   </div>
                 </El.BookInfo>

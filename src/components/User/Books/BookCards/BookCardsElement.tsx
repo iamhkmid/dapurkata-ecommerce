@@ -203,6 +203,7 @@ export const BookInfo = styled.div`
       font-weight: 600;
       border-radius: 2px;
       padding: 1px 5px;
+      min-width: max-content;
       background: ${({ theme }) => theme.button.success.background};
       color: ${({ theme }) => theme.button.success.color};
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
@@ -215,11 +216,20 @@ export const BookInfo = styled.div`
       font-weight: 600;
       text-transform: capitalize;
       border-radius: 2px;
+      min-width: max-content;
       padding: 1px 5px;
       background: ${({ theme }) => theme.button.primary.background};
       color: ${({ theme }) => theme.button.primary.color};
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
         font-size: 10px;
+      }
+    }
+    .wishlist {
+      display: flex;
+      > svg {
+        height: 15px;
+        fill: #ff1f3d;
+        color: #ff1f3d;
       }
     }
   }
