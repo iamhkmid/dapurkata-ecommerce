@@ -21,6 +21,7 @@ import ImageResponsive from "../../../otherComps/ImageResponsive";
 import IconsControl from "../../../IconsControl";
 import { WishlistCtx } from "../../../../contexts/WishlistCtx";
 import Loading2 from "../../../otherComps/Loading/Loading2";
+import LoadingBookDetail from "./LoadingBookDetail";
 
 type TBookDetail = {
   bookId: string;
@@ -117,7 +118,8 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
         title={`${dataGB?.title || ""} - ${dataGB?.Author?.name || ""}`}
         themeToggle={true}
       />
-      {dataGB && (
+      {loadGB && <LoadingBookDetail />}
+      {dataGB && !loadGB && (
         <El.ContentWrapper>
           <El.Content>
             <El.Images>

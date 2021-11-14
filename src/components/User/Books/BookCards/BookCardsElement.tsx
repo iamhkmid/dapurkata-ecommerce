@@ -230,6 +230,9 @@ export const BookInfo = styled.div`
         height: 15px;
         fill: #ff1f3d;
         color: #ff1f3d;
+        @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+          height: 14px;
+        }
       }
     }
   }
