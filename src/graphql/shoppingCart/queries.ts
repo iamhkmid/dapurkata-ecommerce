@@ -9,6 +9,7 @@ export const SHOPPINGCART = gql`
         id
         title
         price
+        discount
         weight
         Author {
           name

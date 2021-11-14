@@ -18,7 +18,10 @@ const CartList = () => {
   const { push } = useRouter();
   useEffect(() => {
     const amount = shoppingCart.data.reduce(
-      (acc, curr) => acc + curr.Book.price * curr.amount,
+      (acc, curr) =>
+        acc +
+        (curr.Book.price - (curr.Book.price * curr.Book.discount) / 100) *
+          curr.amount,
       0
     );
     setAmountPrice(amount);
@@ -71,7 +74,10 @@ const CartList = () => {
                         <El.Price>
                           <NumberFormat
                             prefix="Rp"
-                            value={val.Book.price}
+                            value={
+                              val.Book.price -
+                              (val.Book.price * val.Book.discount) / 100
+                            }
                             displayType={"text"}
                             thousandSeparator={"."}
                             decimalSeparator={","}

@@ -49,14 +49,17 @@ export const sCartItems: TSCartItems = (props) => {
         id: cuid(),
         itemId: curr.Book.id,
         name: curr.Book.title,
-        price: curr.Book.price,
+        price: curr.Book.price - (curr.Book.price * curr.Book.discount) / 100,
         quantity: curr.amount,
       },
     ],
     [] as TItemDetails[]
   );
   const gross_amount = shoppingCart.reduce(
-    (acc, curr) => acc + curr.Book.price * curr.amount,
+    (acc, curr) =>
+      acc +
+      (curr.Book.price - (curr.Book.price * curr.Book.discount) / 100) *
+        curr.amount,
     0
   );
 
@@ -88,7 +91,8 @@ export const buyNowWeight = async (props: TbuyNowItemsWeight) => {
 export const buyNowItems: TBuyNowItems = (props) => {
   const { book, courier, amount } = props;
 
-  const gross_amount = book.price * amount;
+  const gross_amount =
+    (book.price - (book.price * book.discount) / 100) * amount;
 
   return {
     item_details: [
@@ -103,7 +107,7 @@ export const buyNowItems: TBuyNowItems = (props) => {
         id: cuid(),
         itemId: book.id,
         name: book.title,
-        price: book.price,
+        price: book.price - (book.price * book.discount) / 100,
         quantity: amount,
       },
     ],

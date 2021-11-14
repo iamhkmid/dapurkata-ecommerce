@@ -106,6 +106,7 @@ const typeDefs = gql`
     coverType: String
     language: String
     isbn: String
+    slug: String
     pictureDir: String
     Category: [Category]
     authorId: String

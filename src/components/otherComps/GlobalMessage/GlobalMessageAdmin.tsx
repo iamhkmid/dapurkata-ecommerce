@@ -17,7 +17,7 @@ const GlobalMessageAdmin: FC = () => {
   useEffect(() => {
     if (adminNav.globalMessage.message) {
       clearTimeout(timeout.current);
-      timeout.current = setTimeout(close, 4000);
+      timeout.current = setTimeout(close, 3000);
       setMsg({
         message: adminNav.globalMessage.message,
         color: adminNav.globalMessage.color,
@@ -35,7 +35,7 @@ const GlobalMessageAdmin: FC = () => {
         clearTimeout(timeout.current);
       }}
       onMouseLeave={() => {
-        timeout.current = setTimeout(close, 4000);
+        timeout.current = setTimeout(close, 1500);
       }}
     >
       <El.Message>{msg?.message || ""}</El.Message>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
@@ -25,17 +25,10 @@ export const Main = styled(motion.div)`
 export const ContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
+  gap: 32px;
+  margin-top: 35px;
   padding: 1rem 2rem 3rem 2rem;
   overflow-x: auto;
-  .gap-border {
-    border-bottom: 2px solid ${({ theme }) => theme.border[2]};
-    border-style: dashed;
-  }
-  .short {
-    max-width: 20%;
-  }
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -64,26 +57,32 @@ export const ContentWrapper = styled.div`
 
 export const Content = styled.div`
   display: flex;
-  gap: 2rem;
+  gap: 32px;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
     flex-direction: column;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    gap: 1rem;
+    gap: 16px;
   }
 `;
 
 export const Content2 = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 32px;
   width: 100%;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    gap: 1rem;
+    gap: 16px;
   }
 `;
 
-export const ActionBtn = styled.div`
+export const OrderButtons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+`;
+
+export const OptionButtons = styled.div`
   display: flex;
   gap: 1rem;
 `;
@@ -269,11 +268,11 @@ export const Categories = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   .section-name {
-    font-size: 1rem;
+    font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.button.section.color};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
+      font-size: 16px;
     }
   }
   .category {
@@ -287,8 +286,8 @@ export const Categories = styled.div`
     }
     > div {
       border-radius: ${({ theme }) => theme.borderRadius};
-      padding: 0.5rem 1rem;
-      font-size: 0.8rem;
+      padding: 8px 16px;
+      font-size: 13px;
       font-weight: 500;
       align-items: center;
       overflow: hidden;
@@ -303,7 +302,7 @@ export const Categories = styled.div`
         color: ${({ theme }) => theme.button.hover.list.color};
       }
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.7rem;
+        font-size: 11px;
         padding: 0.2rem 0.5rem;
       }
       transition: 0.4s all ease;
@@ -316,47 +315,84 @@ export const AdditionalInfo = styled.div`
   flex-direction: column;
   gap: 0.5rem;
   .section-name {
-    font-size: 1rem;
+    font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.button.section.color};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
+      font-size: 16px;
     }
   }
   .info-wrapper {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     width: 100%;
     gap: 16px;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       gap: 8px;
     }
-
-    > div {
-      border-radius: ${({ theme }) => theme.borderRadius};
+    .ai-group {
+      display: flex;
+      gap: 8px;
+      flex-direction: column;
+    }
+    .ai-wrapper {
       padding: 0.3rem 1rem;
       overflow: hidden;
       min-width: 7rem;
       display: flex;
       flex-direction: column;
-      background: ${({ theme }) => theme.button.list.background};
       color: ${({ theme }) => theme.button.list.color};
-      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        flex-grow: 1;
-      }
       .ai-name {
-        font-size: 0.9rem;
+        font-size: 12px;
         font-weight: 500;
         @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-          font-size: 0.7rem;
+          font-size: 10px;
         }
       }
       .ai-value {
         font-family: "Mulish", sans-serif;
-        font-size: 0.9rem;
+        font-size: 15px;
         font-weight: 400;
+        width: fit-content;
         @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-          font-size: 0.7rem;
+          font-size: 13px;
+        }
+      }
+      .publisher {
+        display: flex;
+        color: ${({ theme }) => theme.color[8]};
+        cursor: pointer;
+        position: relative;
+        width: fit-content;
+        > h1 {
+          font-family: "Mulish", sans-serif;
+          position: relative;
+          z-index: 1;
+          font-size: 15px;
+          font-weight: 400;
+          @media screen and (max-width: ${({ theme: { screen } }) =>
+              screen.sm}) {
+            font-size: 13px;
+          }
+        }
+        ::before {
+          content: "";
+          display: flex;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          border-radius: 3px;
+          transform: translate(-50%, -50%);
+          height: 110%;
+          width: 110%;
+          background: transparent;
+          transition: 0.4s all ease;
+        }
+        :hover {
+          ::before {
+            background: ${({ theme }) => theme.button.list.background};
+            color: ${({ theme }) => theme.button.list.color};
+          }
         }
       }
       .capitalize {
@@ -366,50 +402,142 @@ export const AdditionalInfo = styled.div`
   }
 `;
 
-export const AboutBook = styled.div`
+export const BookDescription = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
-  padding-bottom: 1rem;
+  gap: 8px;
   .section-name {
-    font-size: 1.2rem;
+    font-size: 18px;
     font-weight: 600;
     color: ${({ theme }) => theme.button.section.color};
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
+      font-size: 16px;
+    }
+  }
+  .desc-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .read-more-wrapper {
+    display: flex;
+    width: 100%;
+    padding: 0 8px;
+  }
+  .read-more {
+    font-size: 14px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color[8]};
+    cursor: pointer;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
     }
   }
   .description {
-    font-family: "Mulish", sans-serif;
-    font-size: 1rem;
+    font-size: 15px;
     text-align: justify;
     font-weight: 400;
-    color: ${({ theme }) => theme.color[2]};
-    max-height: 15rem;
-    padding: 0 0.4rem;
-    overflow-x: auto;
-    ::-webkit-scrollbar {
-      width: 10px;
-      height: 10px;
-    }
-
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-
-    ::-webkit-scrollbar-thumb {
-      background: ${({ theme }) => theme.scrollbar.v1.thumb};
-      border-radius: ${({ theme }) => theme.input.borderRadius};
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
-    }
+    color: ${({ theme }) => theme.color[1]};
+    padding: 0 8px;
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-      font-size: 0.9rem;
-      ::-webkit-scrollbar {
-        width: 5px;
-        height: 5px;
-      }
+      font-size: 13px;
     }
   }
+`;
+
+type TButtonElement = {
+  isLoading?: boolean;
+  active?: boolean;
+};
+export const Button = styled.button<TButtonElement>`
+  font-family: "Poppins", sans-serif;
+  display: flex;
+  border-radius: ${({ theme }) => theme.button.borderRadius};
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  min-height: 2.3rem;
+  max-height: max-content;
+  min-width: max-content;
+  padding: 0.2rem 14px;
+  border: 1px solid transparent;
+  outline: none;
+  gap: 0.2rem;
+  position: relative;
+  overflow: hidden;
+
+  > svg {
+    height: 18px;
+    stroke-width: 40;
+    fill: transparent;
+    color: ${({ theme }) => theme.button.section.color};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      height: 16px;
+    }
+  }
+
+  ${({ theme }) => css`
+    background: ${theme.button.section.background};
+    color: ${theme.button.section.color};
+  `}
+
+  :hover {
+    ${({ theme, active }) =>
+      css`
+        box-shadow: ${active
+          ? "0 0 1px 2px #ff14337b"
+          : "0 0 1px 2px #2072cf5a"};
+      `}
+  }
+  ${({ theme, active }) =>
+    active &&
+    css`
+      background: ${theme.name === "light" ? "#ff1f3d36" : "#ff1f3d22"};
+      color: #ff1f3d;
+      > svg {
+        fill: #ff1f3d;
+        color: #ff1f3d;
+      }
+    `}
+
+  ${({ isLoading, disabled }) =>
+    (isLoading || disabled) &&
+    css`
+      background: ${({ theme }) => theme.button.disabled.background};
+      color: ${({ theme }) => theme.button.disabled.color};
+      cursor: default;
+      :hover {
+        background: ${({ theme }) => theme.button.disabled.background};
+        color: ${({ theme }) => theme.button.disabled.color};
+      }
+      > svg {
+        fill: ${({ theme }) => theme.button.disabled.color};
+        color: ${({ theme }) => theme.button.disabled.color};
+      }
+      :focus {
+        border: 1px solid transparent;
+        box-shadow: none;
+      }
+    `}
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 12px;
+    min-height: 2rem;
+    padding: 0.2rem 1rem;
+  }
+  transition: 0.4s all ease;
+`;
+
+export const LoadingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  transition: 0.4s all ease;
 `;

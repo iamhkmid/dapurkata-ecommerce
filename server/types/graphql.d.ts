@@ -87,6 +87,7 @@ import {
   TGQLFooterSocialMedia,
 } from "./footerInfo";
 import { TGQLDashboardQuery } from "./dashboard";
+import { TGQLAddWishlist, TGQLDeleteWishlist, TGQLWishlist } from "./wishlist";
 
 //BOOK SCHEMA
 export type TBookQuery = {
@@ -548,4 +549,21 @@ export type TDashboardQuery = {
     args: null,
     context: TCtx
   ) => Promise<TGQLDashboardQuery>;
+};
+
+export type TWishlistQuery = {
+  wishlist: (parent: any, args: null, context: TCtx) => Promise<TGQLWishlist>;
+};
+
+export type TWishlistMutation = {
+  addWishlist: (
+    parent: any,
+    args: { bookId: string },
+    context: TCtx
+  ) => Promise<TGQLAddWishlist>;
+  deleteWishlist: (
+    parent: any,
+    args: { bookId: string },
+    context: TCtx
+  ) => Promise<TGQLDeleteWishlist>;
 };

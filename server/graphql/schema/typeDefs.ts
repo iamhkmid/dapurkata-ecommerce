@@ -11,6 +11,7 @@ import courier from "./courier/typeDefs";
 import transaction from "./transaction/typeDefs";
 import footerInfo from "./footerInfo/typeDefs";
 import dashboard from "./dashboard/typeDefs";
+import wishlist from "./wishlist/typeDefs";
 import directive from "./directives/typeDefs";
 import * as scalar from "./scalar";
 
@@ -29,6 +30,7 @@ const typeDefs = [
   footerInfo,
   directive,
   dashboard,
+  wishlist,
 ];
 
 export default mergeTypeDefs(typeDefs);

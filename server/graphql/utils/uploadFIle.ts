@@ -21,7 +21,7 @@ export const removeDir = async (pictureDir) => {
 };
 
 export const changeStr = (str: string) =>
-  str.replace(/([^a-z0-9 ]+)/gi, "_").replace(/\s/g, "_");
+  str.replace(/([^a-z0-9 ]+)/gi, "-").replace(/\s/g, "-");
 
 export const saveImg = async ({ file, pictureDir }) => {
   const { filename, mimetype, encoding, createReadStream } = await file;

@@ -46,9 +46,7 @@ export type TOrderBook = {
   title: string;
   price: number;
   weight: number;
-  condition: string;
   discount: number;
-  coverType: string;
   Author: {
     id: string;
     name: string;
@@ -116,8 +114,8 @@ type TGQLBooks = {
       id: string;
       name: string;
     };
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: number;
+    updatedAt: number;
   }[];
 };
 

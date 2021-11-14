@@ -67,6 +67,7 @@ export const GET_ORDER_BOOK = gql`
       title
       price
       weight
+      discount
       Author {
         id
         name

@@ -41,6 +41,7 @@ export const Body = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  margin-top: 2rem;
   gap: 1rem;
   padding: 1rem 2rem;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

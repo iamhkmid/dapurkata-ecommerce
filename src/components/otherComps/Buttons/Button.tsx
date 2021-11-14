@@ -16,20 +16,17 @@ const ButtonElement = styled.button<TButtonElement>`
   align-items: center;
   justify-content: center;
   font-weight: 500;
-  font-size: 0.9rem;
+  font-size: 14px;
   min-height: 2.3rem;
   max-height: max-content;
   min-width: max-content;
   padding: 0.2rem 1rem;
   border: 1px solid transparent;
   outline: none;
-  gap: 0.2rem;
+  gap: 5px;
   position: relative;
   overflow: hidden;
-  > svg {
-    stroke-width: 3px;
-    height: 1rem;
-  }
+
   ${({ theme, color }) => css`
     background: ${theme.button[color || "primary"].background};
     color: ${theme.button[color || "primary"].color};
@@ -44,7 +41,12 @@ const ButtonElement = styled.button<TButtonElement>`
       color: ${theme.button.hover[color || "primary"].color};
     `}
   }
-
+  > svg {
+    display: flex;
+    stroke-width: 42;
+    color: ${({ theme, color }) => theme.button[color || "primary"].color};
+    height: 18px;
+  }
   :focus {
     ${({ theme, color }) => css`
       border: 1px solid ${theme.button.focus[color || "primary"].border};
@@ -68,7 +70,7 @@ const ButtonElement = styled.button<TButtonElement>`
       }
     `}
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.8rem;
+    font-size: 12px;
     min-height: 2rem;
     padding: 0.2rem 1rem;
   }
@@ -148,6 +150,7 @@ type TButton =
     } & (
       | {
           type: "submit" | "button";
+          icon?: string;
         }
       | {
           type: "icon";
@@ -158,7 +161,7 @@ type TButton =
 const Button: FC<TButton> = (props) => {
   switch (props.type) {
     case "submit": {
-      const { name, disabled, type, onClick, color, isLoading } = props;
+      const { name, disabled, type, onClick, color, isLoading, icon } = props;
       return (
         <ButtonElement
           type="submit"
@@ -166,6 +169,7 @@ const Button: FC<TButton> = (props) => {
           color={color}
           isLoading={!!isLoading}
         >
+          {icon && IconsControl(icon)}
           {name}
           {!!isLoading && (
             <LoadingWrapper>
@@ -176,7 +180,7 @@ const Button: FC<TButton> = (props) => {
       );
     }
     case "button": {
-      const { name, disabled, type, onClick, color, isLoading } = props;
+      const { name, disabled, type, onClick, color, isLoading, icon } = props;
       return (
         <ButtonElement
           type="button"
@@ -185,6 +189,7 @@ const Button: FC<TButton> = (props) => {
           disabled={disabled}
           color={color}
         >
+          {icon && IconsControl(icon)}
           {name}
           {!!isLoading && (
             <LoadingWrapper>

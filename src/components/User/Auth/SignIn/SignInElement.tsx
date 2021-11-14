@@ -148,8 +148,8 @@ export const GoogleSignin = styled.button<TButtonElement>`
   cursor: pointer;
   align-items: center;
   justify-content: center;
-  font-weight: 400;
-  font-size: 0.9rem;
+  font-weight: 500;
+  font-size: 14px;
   min-height: 2.3rem;
   max-height: max-content;
   min-width: max-content;
@@ -222,7 +222,7 @@ export const GoogleSignin = styled.button<TButtonElement>`
       }
     `}
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.8rem;
+    font-size: 12px;
     min-height: 2rem;
     padding: 0.2rem 1rem;
   }

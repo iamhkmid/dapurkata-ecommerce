@@ -38,10 +38,17 @@ const OrderSummary = () => {
 
   useEffect(() => {
     if (order.order.type === "buy-now" && !!order.order.book) {
-      setAmountPrice(order.order.book.price * order.order.amount);
+      setAmountPrice(
+        (order.order.book.price -
+          (order.order.book.price * order.order.book.discount) / 100) *
+          order.order.amount
+      );
     } else {
       const amount = shoppingCart.data.reduce(
-        (acc, curr) => acc + curr.Book.price * curr.amount,
+        (acc, curr) =>
+          acc +
+          (curr.Book.price - (curr.Book.price * curr.Book.discount) / 100) *
+            curr.amount,
         0
       );
       setAmountPrice(amount);
@@ -86,7 +93,12 @@ const OrderSummary = () => {
                         <h1>
                           <NumberFormat
                             prefix="Rp"
-                            value={order.order.book?.price}
+                            value={
+                              order.order.book?.price -
+                              (order.order.book?.price *
+                                order.order.book?.discount) /
+                                100
+                            }
                             displayType={"text"}
                             thousandSeparator={"."}
                             decimalSeparator={","}
@@ -128,7 +140,10 @@ const OrderSummary = () => {
                             <h1>
                               <NumberFormat
                                 prefix="Rp"
-                                value={val.Book.price}
+                                value={
+                                  val.Book.price -
+                                  (val.Book.price * val.Book.discount) / 100
+                                }
                                 displayType={"text"}
                                 thousandSeparator={"."}
                                 decimalSeparator={","}

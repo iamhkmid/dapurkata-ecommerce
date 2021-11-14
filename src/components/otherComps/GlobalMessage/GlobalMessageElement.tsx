@@ -48,13 +48,22 @@ export const Main = styled.div<TMain>`
       padding: 0.3rem 1.5rem 0.3rem 0.5rem;
       max-height: 3rem;
     `}
-  ${({ theme, color }) => css`
-    background: ${theme.button[color || "success"].background};
-    color: ${theme.button[color || "success"].color};
-    > svg {
-      color: ${theme.button[color || "success"].color};
-    }
-  `}
+  ${({ theme, color }) =>
+    color
+      ? css`
+          background: ${theme.button[color].background};
+          color: ${theme.button[color].color};
+          > svg {
+            color: ${theme.button[color].color};
+          }
+        `
+      : css`
+          background: transparent;
+          color: transparent;
+          > svg {
+            color: transparent;
+          }
+        `}
   transition: 0.4s all ease;
 `;
 
@@ -96,8 +105,8 @@ export const BtnWrapper = styled.div<TBtnWrapper>`
   }
   :hover {
     ${({ theme, color }) => css`
-      background: ${theme.button.hover[color || "success"].background};
-      color: ${theme.button.hover[color || "success"].color};
+      background: ${theme.button.hover["danger"].background};
+      color: ${theme.button.hover["danger"].color};
     `}
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

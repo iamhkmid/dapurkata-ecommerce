@@ -1,5 +1,5 @@
 import Head from "next/head";
-import StoreComp from "../../src/components/User/Store";
+import StoreComp from "../../src/components/User/Books";
 
 const Store = () => {
   return (

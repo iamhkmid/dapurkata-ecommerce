@@ -123,6 +123,7 @@ export const Mutation: TTransactionMutation = {
               title: true,
               price: true,
               weight: true,
+              discount: true,
               stock: true,
             },
           },
@@ -144,7 +145,7 @@ export const Mutation: TTransactionMutation = {
         destination: recipient.cityId,
         weight,
       });
-      const Items = sCartItems({
+      const items = sCartItems({
         shoppingCart: sCart,
         courier: {
           code: data.courierCode,
@@ -152,8 +153,8 @@ export const Mutation: TTransactionMutation = {
           cost,
         },
       });
-      item_details = Items.item_details;
-      gross_amount = Items.gross_amount;
+      item_details = items.item_details;
+      gross_amount = items.gross_amount;
     } else if (data.orderType === "buy-now") {
       const book = await db.book.findUnique({
         where: { id: data.bookId },
@@ -162,6 +163,7 @@ export const Mutation: TTransactionMutation = {
           title: true,
           weight: true,
           price: true,
+          discount: true,
           stock: true,
         },
       });
@@ -270,11 +272,9 @@ export const Mutation: TTransactionMutation = {
         }
         // decrement book stock
         bookStocks.forEach(async (val) => {
-          await db.book.update({
-            where: { id: val.bookId },
-            data: { stock: val.stock },
-          });
+          await db.$queryRaw`UPDATE book SET stock = ${val.stock} WHERE book_id = ${val.bookId};`;
         });
+
         // PUSH NOTIFICATION WITH WEBSOCKET
         const itemsName = order.ItemDetails.reduce((acc, curr) => {
           if (acc.length === 0) {
@@ -304,7 +304,9 @@ export const Mutation: TTransactionMutation = {
             },
           });
       }
-    } catch {}
+    } catch (err) {
+      console.log(err);
+    }
     return order;
   },
 };

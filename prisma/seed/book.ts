@@ -25,6 +25,7 @@ export const book = async () => {
       stock: 43,
       language: "Indonesia",
       isbn: "9786020639536",
+      slug: "nebula-tere-liye",
       pictureDir: "/uploads/books/nebula/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -65,6 +66,7 @@ export const book = async () => {
       stock: 0,
       language: "Indonesia",
       isbn: "9786020639512",
+      slug: "selena-tere-liye",
       pictureDir: "/uploads/books/selena/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -105,6 +107,7 @@ export const book = async () => {
       stock: 43,
       language: "Indonesia",
       isbn: "9789797809485",
+      slug: "Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin",
       pictureDir:
         "/uploads/books/Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin/",
       Category: {
@@ -145,6 +148,7 @@ export const book = async () => {
       stock: 41,
       language: "Indonesia",
       isbn: "9789797809485",
+      slug: "concerto-al-malioboro-ansel-watra",
       pictureDir: "/uploads/books/concerto-al-malioboro/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -184,7 +188,8 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "9786239700201",
-      pictureDir: "/uploads/books/Example1/",
+      slug: "insecurity-is-my-middle-name-alvi-syahrin",
+      pictureDir: "/uploads/books/insecurity-is-my-middle-name/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
       },
@@ -223,6 +228,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example1",
       pictureDir: "/uploads/books/Example1/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -254,6 +260,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example2",
       pictureDir: "/uploads/books/Example2/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -284,6 +291,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example3",
       pictureDir: "/uploads/books/Example3/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -315,6 +323,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example4",
       pictureDir: "/uploads/books/Example4/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -345,6 +354,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example5",
       pictureDir: "/uploads/books/Example5/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -375,6 +385,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example6",
       pictureDir: "/uploads/books/Example6/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -405,6 +416,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example7",
       pictureDir: "/uploads/books/Example7/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -435,6 +447,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example8",
       pictureDir: "/uploads/books/Example8/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -465,6 +478,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example9",
       pictureDir: "/uploads/books/Example9/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -495,6 +509,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example10",
       pictureDir: "/uploads/books/Example10/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -525,6 +540,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example11",
       pictureDir: "/uploads/books/Example11/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
@@ -555,6 +571,7 @@ export const book = async () => {
       width: 15,
       language: "Indonesia",
       isbn: "123456789",
+      slug: "author13-example12",
       pictureDir: "/uploads/books/Example12/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],

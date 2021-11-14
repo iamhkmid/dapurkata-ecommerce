@@ -4,6 +4,7 @@ export type TCart = {
     id: string;
     title: string;
     price: number;
+    discount: number;
     weight: number;
     Author: {
       name: string;

@@ -87,7 +87,8 @@ const Main = styled.div<TSc1>`
   display: flex;
   background: linear-gradient(
     0deg,
-    ${({ theme }) => (theme.name === "light" ? "#e8f4ff" : "#38669242")} 0%,
+    ${({ theme }) => (theme.name === "light" ? "#b7d0ff" : "#1e578d42")} 0%,
+    ${({ theme }) => (theme.name === "light" ? "#e3edff" : "#305d8842")} 30%,
     ${({ theme }) => theme.background[2]} 100%
   );
   flex-direction: column;
@@ -180,7 +181,12 @@ const ButtonWrapper = styled(motion.div)`
     > button {
       border-radius: 100px;
     }
+    > button:nth-child(2) {
+      border: 1px solid
+        ${({ theme }) => (theme.name === "light" ? "#8da1b6" : "#60778b")};
+    }
   }
+
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     gap: 1rem;
   }

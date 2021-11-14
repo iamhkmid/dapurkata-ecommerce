@@ -1,4 +1,5 @@
-import { FC, useContext } from "react";
+import { useRouter } from "next/router";
+import { FC, useContext, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
@@ -16,8 +17,11 @@ type TProps = {
 
 const BookCards: FC<TProps> = ({ data, isLoading }) => {
   const { user } = useContext(AuthContext);
+  const { query } = useRouter();
   const { shoppingCart } = useContext(ShoppingCartCtx);
   const { dispatch } = useContext(UserNavCtx);
+
+  useEffect(() => {}, [query["book"]]);
   return (
     <El.Main>
       {isLoading && <BookCardsLoading />}

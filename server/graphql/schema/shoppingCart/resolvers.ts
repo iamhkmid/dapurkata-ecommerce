@@ -29,7 +29,12 @@ export const Mutation: TSChartMutation = {
       select: { id: true, ShoppingCart: { include: { Book: true } } },
     });
 
-    const findBook = await db.book.findUnique({ where: { id: bookId } });
+    const findBook = await db.book.findUnique({
+      where: { id: bookId },
+      select: { weight: true, stock: true },
+    });
+    if (amount > findBook.stock)
+      throw new ApolloError("Stok barang tidak mencukupi");
     const maxWeight = Number(process.env.MAX_COURIER_WEIGHT);
     const cartWeight = findUser.ShoppingCart.reduce(
       (acc, curr) => acc + curr.Book.weight * curr.amount,
@@ -65,7 +70,10 @@ export const Mutation: TSChartMutation = {
     });
     const findBook = await db.book.findUnique({
       where: { id: findSCart.bookId },
+      select: { weight: true, stock: true },
     });
+    if (amount > findBook.stock)
+      throw new ApolloError("Stok barang tidak mencukupi");
     const maxWeight = Number(process.env.MAX_COURIER_WEIGHT);
     const cartWeight = findUser.ShoppingCart.reduce(
       (acc, curr) =>

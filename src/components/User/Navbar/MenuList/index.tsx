@@ -19,7 +19,7 @@ const spring = {
 };
 
 const MenuList = () => {
-  const { asPath } = useRouter();
+  const { asPath, pathname } = useRouter();
   const router = useRouter();
   const { userNav, dispatch } = useContext(UserNavCtx);
   useEffect(() => {
@@ -37,7 +37,10 @@ const MenuList = () => {
               dispatch({ type: "CHANGE_NAV_MENU", menu: value.link })
             }
             onMouseLeave={() => {
-              dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });
+              dispatch({
+                type: "CHANGE_NAV_MENU",
+                menu: asPath === "/" ? "/#section1" : asPath,
+              });
             }}
           >
             {value.link.includes(userNav?.selectedNavMenu) && (
@@ -73,7 +76,13 @@ const MenuList = () => {
                     value: "SERVICES" as TUserMenu,
                   })
                 }
-                onMouseLeave={() => dispatch({ type: "CLOSE_MENU" })}
+                onMouseLeave={() => {
+                  dispatch({ type: "CLOSE_MENU" });
+                  dispatch({
+                    type: "CHANGE_NAV_MENU",
+                    menu: asPath === "/" ? "/#section1" : asPath,
+                  });
+                }}
               >
                 <El.DropdownName>{value.name}</El.DropdownName>
                 <El.IconWrapper>

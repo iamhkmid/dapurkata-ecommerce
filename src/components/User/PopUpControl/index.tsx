@@ -2,7 +2,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
 import PopUpMessage from "../../otherComps/PopUpMessage";
-import BookDetail from "../Store/BookDetail";
+import BookDetail from "../Books/BookDetail";
 import CreateRecipient from "../Order/Delevery/PopUp/CreateRecipient";
 import ChangeRecipient from "../Order/Delevery/PopUp/ChangeRecipient";
 import UpdateRecipient from "../Order/Delevery/PopUp/UpdateRecipient";

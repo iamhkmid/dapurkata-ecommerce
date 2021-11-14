@@ -6,7 +6,7 @@ export const navbarMenu = [
     type: "dropdown",
     id: "SERVICES",
   },
-  { name: "Buku", link: "/store", type: "link", id: "BOOK" },
+  { name: "Buku", link: "/books", type: "link", id: "BOOK" },
 ];
 
 export const signinBtn = {

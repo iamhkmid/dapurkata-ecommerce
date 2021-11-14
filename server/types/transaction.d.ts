@@ -81,7 +81,13 @@ export type TPropsCCost = {
 };
 export type TOrderSCart = {
   amount: number;
-  Book: { id: string; title: string; price: number; weight: number };
+  Book: {
+    id: string;
+    title: string;
+    price: number;
+    weight: number;
+    discount: number;
+  };
 };
 export type TPropsSCWeight = {
   shoppingCart: TOrderSCart[];
@@ -133,7 +139,13 @@ export type TSCartItems = (p: TPSCartItems) => {
   gross_amount: number;
 };
 export type TPBuyNowItems = {
-  book: { id: string; title: string; weight: number; price: number };
+  book: {
+    id: string;
+    title: string;
+    weight: number;
+    price: number;
+    discount: number;
+  };
   amount: number;
   courier: { code: string; service: string; cost: number };
 };

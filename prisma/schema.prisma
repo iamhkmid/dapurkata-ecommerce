@@ -33,6 +33,7 @@ model User {
   ShoppingCart ShoppingCart[]
   Order        Order[]
   Notification Notification[]
+  Wishlist     Wishlist?
 
   @@map("user")
 }
@@ -232,6 +233,17 @@ model ShippingAddress {
   @@map("shipping_address")
 }
 
+model Wishlist {
+  id        String   @id @default(cuid()) @map("wishlist_id")
+  userId    String   @unique @map("user_id")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  User      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  Book      Book[]
+
+  @@map("wishlist")
+}
+
 model Book {
   id            String         @id @default(cuid()) @map("book_id")
   title         String
@@ -251,6 +263,7 @@ model Book {
   discount      Int            @default(0)
   isbn          String
   language      String
+  slug          String         @unique
   pictureDir    String         @map("picture_dir")
   createdAt     DateTime       @default(now()) @map("created_at")
   updatedAt     DateTime       @updatedAt @map("updated_at")
@@ -261,6 +274,7 @@ model Book {
   ShoppingCart  ShoppingCart[]
   publisherId   String?        @map("publisher_id")
   Publisher     Publisher?     @relation(fields: [publisherId], references: [id], onDelete: SetNull)
+  Wishlist      Wishlist[]
 
   @@map("book")
 }

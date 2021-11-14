@@ -7,6 +7,7 @@ import { TRecipient } from "./recipient";
 import { TCart } from "./shoppingCart";
 import { TOrderPaymentInfo } from "./transaction";
 import { TAuthUser } from "./user";
+import { TWishlist } from "./wishlist";
 
 // AUTH CONTEXT
 export type TAuthContext = {
@@ -260,4 +261,10 @@ export type TUserNavRdcr = (
 export type TUserNavCtx = {
   userNav: TUserNavState;
   dispatch: Dispatch<TUserNavAction>;
+};
+
+export type TWishlistCtx = {
+  wishlist: TWishlist;
+  loading: boolean;
+  error: ApolloError;
 };

@@ -30,10 +30,6 @@ const Order: FC = () => {
         },
       });
     } else {
-      const amount = shoppingCart.data.reduce(
-        (acc, curr) => acc + curr.Book.price * curr.amount,
-        0
-      );
       dispatch({ type: "SET_ORDER_TYPE", value: { type: "shoppingcart" } });
     }
   }, [query.type, data]);

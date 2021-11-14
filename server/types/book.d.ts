@@ -110,6 +110,7 @@ type TDBCreateBook = {
   discount?: number;
   language: string;
   isbn: string;
+  slug: string;
   pictureDir: string;
   Author: { connect: { id: string } };
   Publisher: { connect: { id: string } };
@@ -134,6 +135,7 @@ export type TDBUpdateBook = {
   discount?: number;
   language: string;
   isbn: string;
+  slug: string;
   pictureDir?: string;
   Author: { connect: { id: string } };
   Publisher: { connect: { id: string } };

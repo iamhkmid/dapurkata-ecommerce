@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { BOOKS_WITH_FILTER } from "../../../graphql/book/queries";
 import { TGQLBookCards, TStoreFilter } from "../../../types/book";
-import * as El from "./StoreElement";
+import * as El from "./BooksElement";
 import { useQuery } from "@apollo/client";
 import BookCards from "./BookCards";
 import BooksFilter from "./BooksFilter";
 import BooksPagination from "./BooksPagination";
 
-const Store = () => {
+const Books = () => {
   const initialFilter = { skip: 0, take: 12, categoryId: "all" };
   const [filter, setFilter] = useState<TStoreFilter>(initialFilter);
   const { data, error, loading, refetch } = useQuery<TGQLBookCards>(
@@ -62,4 +62,4 @@ const Store = () => {
   );
 };
 
-export default Store;
+export default Books;

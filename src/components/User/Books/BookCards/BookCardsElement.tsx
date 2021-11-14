@@ -111,12 +111,17 @@ export const BookInfo = styled.div`
   top: -0.5rem;
   gap: 3px;
   overflow: hidden;
+  .info1 {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
-    line-height: 1.2;
+    line-height: 1;
     font-size: 13px;
     font-weight: 500;
     color: ${({ theme }) => theme.color[1]};
@@ -129,6 +134,7 @@ export const BookInfo = styled.div`
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
     overflow: hidden;
+    line-height: 1;
     font-size: 11px;
     font-weight: 400;
     color: ${({ theme }) => theme.color[2]};

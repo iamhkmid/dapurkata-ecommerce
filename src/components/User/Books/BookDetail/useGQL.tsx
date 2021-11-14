@@ -9,8 +9,17 @@ import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import { GET_BOOK_DETAIL } from "../../../../graphql/book/queries";
 import { CREATE_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
 import { SHOPPINGCART } from "../../../../graphql/shoppingCart/queries";
+import {
+  ADD_WISHLIST,
+  DELETE_WISHLIST,
+} from "../../../../graphql/wishlist/mutations";
+import { WISHLIST } from "../../../../graphql/wishlist/queries";
 import { TGQLBookDetail } from "../../../../types/book";
 import { TGQLCreateShoppingCart } from "../../../../types/shoppingCart";
+import {
+  TGQLAddWishlist,
+  TGQLDeleteWishlist,
+} from "../../../../types/wishlist";
 
 export const useGQLGetbook = ({ bookId }) => {
   const { data, loading, error } = useQuery<TGQLBookDetail>(GET_BOOK_DETAIL, {
@@ -63,20 +72,16 @@ export const useGQLCreateSC = () => {
   useEffect(() => {
     if (error)
       dispatchUserNav({
-        type: "SHOW_POPUP",
-        value: {
-          name: "MESSAGE",
-          message: error.message,
-        },
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "warning" },
       });
   }, [error]);
 
   useEffect(() => {
-    if (loading)
-      dispatchSCart({
-        type: "SET_LOADING_SCART",
-        value: loading,
-      });
+    dispatchSCart({
+      type: "SET_LOADING_SCART",
+      value: loading,
+    });
   }, [loading]);
   return {
     createShoppingCart: createSC,
@@ -84,4 +89,52 @@ export const useGQLCreateSC = () => {
     error,
     loading,
   };
+};
+
+export const useGQLAddWishlist = () => {
+  const { dispatch: dispatchUserNav } = useContext(UserNavCtx);
+  const [addWishlist, { data, loading, error }] = useMutation<TGQLAddWishlist>(
+    ADD_WISHLIST,
+    {
+      errorPolicy: "all",
+      refetchQueries: [{ query: WISHLIST }],
+      awaitRefetchQueries: true,
+    }
+  );
+
+  useEffect(() => {
+    if (error)
+      dispatchUserNav({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "warning" },
+      });
+  }, [error]);
+  type TAddWishlist = { bookId: string };
+  const GQLAddWishlist = async ({ bookId }: TAddWishlist) => {
+    addWishlist({ variables: { bookId } });
+  };
+  return { addWishlist: GQLAddWishlist, data, error, loading };
+};
+
+export const useGQLDeleteWishlist = () => {
+  const { dispatch: dispatchUserNav } = useContext(UserNavCtx);
+  const [deleteWishlist, { data, loading, error }] =
+    useMutation<TGQLDeleteWishlist>(DELETE_WISHLIST, {
+      errorPolicy: "all",
+      refetchQueries: [{ query: WISHLIST }],
+      awaitRefetchQueries: true,
+    });
+
+  useEffect(() => {
+    if (error)
+      dispatchUserNav({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "warning" },
+      });
+  }, [error]);
+  type TDeleteWishlist = { bookId: string };
+  const GQLDeleteWishlist = async ({ bookId }: TDeleteWishlist) => {
+    deleteWishlist({ variables: { bookId } });
+  };
+  return { deleteWishlist: GQLDeleteWishlist, data, error, loading };
 };

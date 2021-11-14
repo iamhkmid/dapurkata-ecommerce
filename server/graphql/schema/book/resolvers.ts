@@ -6,7 +6,7 @@ import {
   TGQLBooksWithFilter,
 } from "../../../types/book";
 import { TBookMutation, TBookQuery, TBook } from "../../../types/graphql";
-import { makeDirFile, removeDir } from "../../utils/uploadFIle";
+import { changeStr, makeDirFile, removeDir } from "../../utils/uploadFIle";
 import { bookFilter, saveBookPic } from "./utils";
 
 export const Query: TBookQuery = {
@@ -62,6 +62,13 @@ export const Mutation: TBookMutation = {
     const { pictureDir } = await makeDirFile({
       dirLoc: "/server/static/uploads/books",
     });
+    const author = await db.author.findUnique({
+      where: { id: data.authorId },
+      select: {
+        name: true,
+      },
+    });
+    const slug = changeStr(`${data.title} ${author.name}`);
     const imageInfo =
       (cover || bookPics) &&
       (await saveBookPic({ pictureDir, cover, bookPics }).catch((err) => {
@@ -85,6 +92,7 @@ export const Mutation: TBookMutation = {
       coverType: data.coverType,
       language: data.language || undefined,
       isbn: data.isbn || undefined,
+      slug,
       pictureDir,
       Category: {
         connect: data.categories
@@ -107,6 +115,16 @@ export const Mutation: TBookMutation = {
   },
 
   updateBook: async (_, { data }, { db }) => {
+    let slug: string = undefined;
+    if (!!data.title && !!data.authorId) {
+      const author = await db.author.findUnique({
+        where: { id: data.authorId },
+        select: {
+          name: true,
+        },
+      });
+      slug = changeStr(`${data.title} ${author.name}`);
+    }
     const newData: TDBUpdateBook = {
       title: data.title || undefined,
       description: data.description || undefined,
@@ -124,6 +142,7 @@ export const Mutation: TBookMutation = {
       coverType: data.coverType,
       language: data.language || undefined,
       isbn: data.isbn || undefined,
+      slug,
       Category: {
         set: data.categories
           ? data.categories.map((cat) => ({ id: cat.id }))

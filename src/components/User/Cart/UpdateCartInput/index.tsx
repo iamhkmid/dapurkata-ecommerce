@@ -79,11 +79,8 @@ const UpdateCartInput: FC<TUpdateCart> = ({ cartProps }) => {
       setAccAmount(curr.amount);
       inputRef.current.value = String(curr.amount);
       dispatch({
-        type: "SHOW_POPUP",
-        value: {
-          name: "MESSAGE",
-          message: error.message,
-        },
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "warning" },
       });
     }
   }, [error]);

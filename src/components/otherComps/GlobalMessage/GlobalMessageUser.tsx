@@ -17,7 +17,7 @@ const GlobalMessageUser: FC = () => {
   useEffect(() => {
     if (userNav.globalMessage.message) {
       clearTimeout(timeout.current);
-      timeout.current = setTimeout(close, 4000);
+      timeout.current = setTimeout(close, 3000);
       setMsg({
         message: userNav.globalMessage.message,
         color: userNav.globalMessage.color,
@@ -35,7 +35,7 @@ const GlobalMessageUser: FC = () => {
         clearTimeout(timeout.current);
       }}
       onMouseLeave={() => {
-        timeout.current = setTimeout(close, 4000);
+        timeout.current = setTimeout(close, 1500);
       }}
     >
       <El.Message>{msg?.message || ""}</El.Message>

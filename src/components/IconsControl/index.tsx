@@ -335,6 +335,18 @@ export const IconsControl = (name: string) => {
           />
         </svg>
       );
+    case "BAG-OUTLINE":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            fill="none"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M80 176a16 16 0 00-16 16v216c0 30.24 25.76 56 56 56h272c30.24 0 56-24.51 56-54.75V192a16 16 0 00-16-16zM160 176v-32a96 96 0 0196-96h0a96 96 0 0196 96v32"
+          />
+        </svg>
+      );
     case "BAG-REMOVE-OUTLINE":
       return (
         <svg viewBox="0 0 512 512">
@@ -773,6 +785,17 @@ export const IconsControl = (name: string) => {
           <circle cx="176" cy="416" r="32" />
           <circle cx="400" cy="416" r="32" />
           <path d="M456.8 120.78a23.92 23.92 0 00-18.56-8.78H133.89l-6.13-34.78A16 16 0 00112 64H48a16 16 0 000 32h50.58l45.66 258.78A16 16 0 00160 368h256a16 16 0 000-32H173.42l-5.64-32h241.66A24.07 24.07 0 00433 284.71l28.8-144a24 24 0 00-5-19.93z" />
+        </svg>
+      );
+    case "HEART-OUTLINE":
+      return (
+        <svg viewBox="0 0 512 512">
+          <path
+            d="M352.92 80C288 80 256 144 256 144s-32-64-96.92-64c-52.76 0-94.54 44.14-95.08 96.81-1.1 109.33 86.73 187.08 183 252.42a16 16 0 0018 0c96.26-65.34 184.09-143.09 183-252.42-.54-52.67-42.32-96.81-95.08-96.81z"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       );
     default:

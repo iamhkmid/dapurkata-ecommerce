@@ -11,8 +11,16 @@ import AddCartInput from "../../Cart/AddCartInput";
 import DeleteCart from "../../Cart/DeleteCart";
 import UpdateCartInput from "../../Cart/UpdateCartInput";
 import * as El from "./BookDetailElement";
-import { useGQLCreateSC, useGQLGetbook } from "./useGQL";
+import {
+  useGQLAddWishlist,
+  useGQLCreateSC,
+  useGQLDeleteWishlist,
+  useGQLGetbook,
+} from "./useGQL";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
+import IconsControl from "../../../IconsControl";
+import { WishlistCtx } from "../../../../contexts/WishlistCtx";
+import Loading2 from "../../../otherComps/Loading/Loading2";
 
 type TBookDetail = {
   bookId: string;
@@ -22,17 +30,24 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { user } = useContext(AuthContext);
   const { shoppingCart } = useContext(ShoppingCartCtx);
+  const { wishlist } = useContext(WishlistCtx);
   const { push, pathname } = useRouter();
   const [coverURL, setCoverURL] = useState<string>(null);
   const [amount, setAmount] = useState<number>(1);
   const [currCart, setCurrCart] = useState<TCart>(null);
+  const [readMore, setReadMore] = useState<boolean>(false);
 
   const { dataGB, loadGB, errorGB } = useGQLGetbook({ bookId });
   const { createShoppingCart, data, error, loading } = useGQLCreateSC();
+  const { addWishlist, data: dataWL, loading: loadingWL } = useGQLAddWishlist();
+  const {
+    deleteWishlist,
+    data: dataDWL,
+    loading: loadingDWL,
+  } = useGQLDeleteWishlist();
 
-  type TbuyNowHandler = { amount: number; bookId: string };
-  const buyNowHandler = (props: TbuyNowHandler) => {
-    const { amount, bookId } = props;
+  type TwishlistHandler = { bookId: string };
+  const wishlistHandler = ({ bookId }: TwishlistHandler) => {
     if (!user) {
       push(`/auth/signin?next=${pathname}`);
       dispatch({ type: "CLOSE_POPUP" });
@@ -40,6 +55,33 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
           message: "Anda harus login terlebih dahulu",
+          color: "warning",
+        },
+      });
+    } else if (!!wishlist?.Book?.find((val) => val.id === dataGB.id)) {
+      deleteWishlist({ bookId: dataGB.id });
+    } else {
+      addWishlist({ bookId: dataGB.id });
+    }
+  };
+  type TbuyNowHandler = { amount: number; bookId: string; stock: number };
+  const buyNowHandler = (props: TbuyNowHandler) => {
+    const { amount, bookId, stock } = props;
+    if (!user) {
+      push(`/auth/signin?next=${pathname}`);
+      dispatch({ type: "CLOSE_POPUP" });
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: "Anda harus login terlebih dahulu",
+          color: "warning",
+        },
+      });
+    } else if (amount > stock) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          message: "Stok barang tidak mencukupi",
           color: "warning",
         },
       });
@@ -146,10 +188,11 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                     <DeleteCart cartId={currCart.id} />
                   </El.CartBtn>
                 )}
-                <El.ActionBtn>
+                <El.OrderButtons>
                   <Button
                     type="button"
-                    name="Masukan Keranjang"
+                    name="Keranjang"
+                    icon="BAG-OUTLINE"
                     color="primary"
                     isLoading={loading}
                     disabled={
@@ -169,23 +212,47 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                   />
                   <Button
                     type="button"
-                    name="Beli"
-                    color="primary"
-                    onClick={() => buyNowHandler({ amount, bookId: dataGB.id })}
+                    name="Beli Sekarang"
+                    color="section"
+                    onClick={() =>
+                      buyNowHandler({
+                        amount,
+                        bookId: dataGB.id,
+                        stock: dataGB.stock,
+                      })
+                    }
                     disabled={
+                      loading ||
                       shoppingCart.loading ||
                       loadGB ||
                       (user && user.role !== "USER") ||
-                      !!currCart ||
                       dataGB.stock === 0
                     }
                   />
-                </El.ActionBtn>
+                  <El.Button
+                    type="button"
+                    active={
+                      !!wishlist?.Book?.find((val) => val.id === dataGB.id)
+                    }
+                    onClick={() => wishlistHandler({ bookId: dataGB.id })}
+                    disabled={
+                      (user && user.role !== "USER") || loadingWL || loadingDWL
+                    }
+                  >
+                    {IconsControl("HEART-OUTLINE")}
+                    Wishlist
+                    {(loadingWL || loadingDWL) && (
+                      <El.LoadingWrapper>
+                        <Loading2 />
+                      </El.LoadingWrapper>
+                    )}
+                  </El.Button>
+                </El.OrderButtons>
               </El.OrderInfo>
             </El.InfoWrapper>
           </El.Content>
-          <div className="gap-border short"></div>
           <El.Content2>
+            <El.OptionButtons></El.OptionButtons>
             <El.Categories>
               <h1 className="section-name">Kategori</h1>
               <div className="category">
@@ -194,75 +261,96 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                 ))}
               </div>
             </El.Categories>
-            <div className="gap-border"></div>
+            <El.BookDescription>
+              <h1 className="section-name">Deskripsi Buku</h1>
+              <div className="desc-wrapper">
+                <p className="description">
+                  {readMore
+                    ? dataGB.description
+                    : dataGB.description.slice(0, 350)}
+                  {!readMore && dataGB.description.length > 350 && (
+                    <span>{`... `}</span>
+                  )}
+                </p>
+                {dataGB.description.length > 350 && (
+                  <div className="read-more-wrapper">
+                    <div
+                      className="read-more"
+                      onClick={() => setReadMore(!readMore)}
+                    >
+                      {readMore ? "Ringkas Deskripsi" : "Baca Selengkapnya"}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </El.BookDescription>
             <El.AdditionalInfo>
               <h1 className="section-name">Detail</h1>
               <div className="info-wrapper">
-                <div>
-                  <h1 className="ai-name">Sampul</h1>
-                  <h1 className="ai-value">{dataGB.coverType}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Kondisi</h1>
-                  <h1 className="ai-value capitalize">{dataGB.condition}</h1>
-                </div>
-                {dataGB.edition && (
-                  <div>
-                    <h1 className="ai-name">Edisi</h1>
-                    <h1 className="ai-value">{dataGB.edition}</h1>
+                <div className="ai-group">
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Kondisi</h1>
+                    <h1 className="ai-value capitalize">{dataGB.condition}</h1>
                   </div>
-                )}
-                {dataGB.series && (
-                  <div>
-                    <h1 className="ai-name">Seri</h1>
-                    <h1 className="ai-value">{dataGB.series}</h1>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Panjang</h1>
+                    <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
                   </div>
-                )}
-                <div>
-                  <h1 className="ai-name">Stok</h1>
-                  <h1 className="ai-value">
-                    {dataGB.stock > 0 ? dataGB.stock : "Habis"}
-                  </h1>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Lebar</h1>
+                    <h1 className="ai-value">{`${dataGB.width} cm`}</h1>
+                  </div>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Berat</h1>
+                    <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="ai-name">Berat</h1>
-                  <h1 className="ai-value">{`${dataGB.weight} gram`}</h1>
+                <div className="ai-group">
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Jumlah Halaman</h1>
+                    <h1 className="ai-value">{dataGB.numberOfPages}</h1>
+                  </div>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Tahun Terbit</h1>
+                    <h1 className="ai-value">{dataGB.releaseYear}</h1>
+                  </div>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Bahasa</h1>
+                    <h1 className="ai-value">{dataGB.language}</h1>
+                  </div>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">ISBN</h1>
+                    <h1 className="ai-value">{dataGB.isbn}</h1>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="ai-name">Panjang</h1>
-                  <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Lebar</h1>
-                  <h1 className="ai-value">{`${dataGB.width} cm`}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Halaman</h1>
-                  <h1 className="ai-value">{dataGB.numberOfPages}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Tahun Terbit</h1>
-                  <h1 className="ai-value">{dataGB.releaseYear}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Bahasa</h1>
-                  <h1 className="ai-value">{dataGB.language}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">ISBN</h1>
-                  <h1 className="ai-value">{dataGB.isbn}</h1>
-                </div>
-                <div>
-                  <h1 className="ai-name">Penerbit</h1>
-                  <h1 className="ai-value">{dataGB.Publisher.name}</h1>
+                <div className="ai-group">
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Penerbit</h1>
+                    <div className="publisher">
+                      <h1>{dataGB.Publisher.name}</h1>
+                    </div>
+                  </div>
+                  <div className="ai-wrapper">
+                    <h1 className="ai-name">Stok</h1>
+                    <h1 className="ai-value">
+                      {dataGB.stock > 0 ? dataGB.stock : "Habis"}
+                    </h1>
+                  </div>
+                  {dataGB.edition && (
+                    <div className="ai-wrapper">
+                      <h1 className="ai-name">Edisi</h1>
+                      <h1 className="ai-value">{dataGB.edition}</h1>
+                    </div>
+                  )}
+                  {dataGB.series && (
+                    <div className="ai-wrapper">
+                      <h1 className="ai-name">Seri</h1>
+                      <h1 className="ai-value">{dataGB.series}</h1>
+                    </div>
+                  )}
                 </div>
               </div>
             </El.AdditionalInfo>
-            <div className="gap-border"></div>
-            <El.AboutBook>
-              <h1 className="section-name">Tentang Buku</h1>
-              <h1 className="description">{dataGB.description}</h1>
-            </El.AboutBook>
           </El.Content2>
         </El.ContentWrapper>
       )}

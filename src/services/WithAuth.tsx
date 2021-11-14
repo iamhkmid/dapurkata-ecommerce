@@ -10,6 +10,7 @@ import PopUpControl from "../components/User/PopUpControl";
 import PaymentCtxProvider from "../contexts/OrderCtx";
 import UserNavCtxProvider, { UserNavCtx } from "../contexts/UserNavCtx";
 import ShoppingCartCtxProvider from "../contexts/ShoppingCartCtx";
+import WishlistCtxProvider from "../contexts/WishlistCtx";
 
 const AuthLoading = dynamic(
   () => import("../components/otherComps/Loading/AuthLoading")
@@ -71,10 +72,12 @@ export const WithAuth: FC = ({ children }) => {
       <UserNavCtxProvider>
         {(isUser || (!isAdminPath && !isUserPath && !isLoading)) && (
           <ShoppingCartCtxProvider>
-            <PaymentCtxProvider>
-              <PopUpControl />
-              <Navbar>{children}</Navbar>
-            </PaymentCtxProvider>
+            <WishlistCtxProvider>
+              <PaymentCtxProvider>
+                <PopUpControl />
+                <Navbar>{children}</Navbar>
+              </PaymentCtxProvider>
+            </WishlistCtxProvider>
           </ShoppingCartCtxProvider>
         )}
       </UserNavCtxProvider>
