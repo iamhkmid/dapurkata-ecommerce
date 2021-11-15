@@ -26,7 +26,6 @@ const Main = styled.div`
   position: relative;
   max-width: 600px;
   min-width: 600px;
-  min-height: 20%;
   max-height: 100%;
   padding-bottom: 16px;
   font-size: 1rem;

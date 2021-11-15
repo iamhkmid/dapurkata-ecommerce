@@ -13,11 +13,9 @@ export const Main = styled.div`
   box-shadow: ${({ theme }) => theme.boxShadow};
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    margin-left: 0;
-    max-width: 100vw;
+    max-width: 100%;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    margin-left: 0;
   }
   transition: 0.5s all ease;
   transition-property: margin-left;

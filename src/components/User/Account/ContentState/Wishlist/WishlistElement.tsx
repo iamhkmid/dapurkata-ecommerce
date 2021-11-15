@@ -6,6 +6,18 @@ export const Main = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
+  .empty-list {
+    display: flex;
+    font-size: 14px;
+    color: ${({ theme }) => theme.color[1]};
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+  }
 `;
 
 export const ItemWrapper = styled.div`
@@ -24,6 +36,7 @@ export const CoverWrapper = styled.div`
   height: 3rem;
   aspect-ratio: 1/1;
   overflow: hidden;
+
   > div {
     display: flex;
     height: 5rem;
