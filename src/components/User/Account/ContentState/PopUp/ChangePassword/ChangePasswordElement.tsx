@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import styled, { css } from "styled-components";
 
-export const Main = styled(motion.div)`
+export const Main = styled.div`
   font-family: "Poppins", sans-serif;
   display: flex;
   background: ${({ theme }) => theme.background[2]};
@@ -31,6 +31,7 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   padding: 0 2rem 1rem 2rem;
+  margin-top: 35px;
   gap: 0.5rem;
   overflow-y: auto;
 

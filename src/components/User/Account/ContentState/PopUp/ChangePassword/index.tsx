@@ -61,11 +61,7 @@ const ChangePassword: FC = () => {
   }, [data]);
 
   return (
-    <El.Main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <El.Main>
       <PopUpHeader title="Ubah Password" />
       <El.Body>
         <ShowMessage message={error?.message} color="danger" />

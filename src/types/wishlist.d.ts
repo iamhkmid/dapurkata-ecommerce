@@ -6,6 +6,7 @@ export type TWishlist = {
   Book: {
     id: string;
     title: string;
+    coverURL: string;
     Author: {
       id: string;
       name: string;

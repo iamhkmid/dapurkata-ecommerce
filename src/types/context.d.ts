@@ -225,6 +225,9 @@ type TUserPopUpVal =
     }
   | {
       name: "RESET_PASSWORD";
+    }
+  | {
+      name: "WISHLIST";
     };
 
 type TUserPopUp = {

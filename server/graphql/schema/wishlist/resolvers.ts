@@ -1,5 +1,6 @@
 import { string } from "yup/lib/locale";
 import { TWishlistMutation, TWishlistQuery } from "../../../types/graphql";
+import { TWishlistBook } from "../../../types/wishlist";
 import { validateUser } from "../../utils/validateUser";
 
 export const Query: TWishlistQuery = {
@@ -22,12 +23,26 @@ export const Query: TWishlistQuery = {
           select: {
             id: true,
             title: true,
+            BookPicture: { where: { type: { contains: "COVER" } } },
             Author: { select: { id: true, name: true } },
           },
         },
       },
     });
-    return wishlist;
+    const { Book, ...resWishlist } = wishlist;
+    const books = Book.reduce(
+      (acc, curr) => [
+        ...acc,
+        {
+          id: curr.id,
+          title: curr.title,
+          coverURL: curr.BookPicture[0]?.url || null,
+          Author: curr.Author,
+        },
+      ],
+      [] as TWishlistBook[]
+    );
+    return { ...resWishlist, Book: books };
   },
 };
 

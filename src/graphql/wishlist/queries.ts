@@ -10,6 +10,7 @@ export const WISHLIST = gql`
       Book {
         id
         title
+        coverURL
         Author {
           id
           name

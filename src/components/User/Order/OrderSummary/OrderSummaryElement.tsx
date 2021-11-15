@@ -6,12 +6,19 @@ export const Main = styled.div`
   padding: 1rem;
   gap: 1rem;
 `;
+export const EmptyCart = styled.h1`
+  text-align: center;
+  font-size: 0.9rem;
+  font-weight: 300;
+  width: 100%;
+`;
 export const ItemWrapper = styled.div`
   display: flex;
   border-bottom: 1px solid ${({ theme }) => theme.border[2]};
   padding: 0.5rem;
   gap: 0.5rem;
 `;
+
 export const CoverWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -22,12 +29,6 @@ export const CoverWrapper = styled.div`
   min-width: 46px;
   height: 70px;
   width: 46px;
-`;
-export const EmptyCart = styled.h1`
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 300;
-  width: 100%;
 `;
 
 export const InfoWrapper = styled.div`

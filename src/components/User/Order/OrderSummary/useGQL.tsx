@@ -49,7 +49,7 @@ export const useGQLOrder = () => {
       });
     }
     if (data?.order) {
-      replace("/store");
+      replace("/books");
       dispatch({
         type: "SHOW_POPUP",
         value: { name: "ORDER_PAYMENT_INFO", orderId: data.order.id },

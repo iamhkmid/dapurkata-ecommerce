@@ -254,7 +254,6 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
             </El.InfoWrapper>
           </El.Content>
           <El.Content2>
-            <El.OptionButtons></El.OptionButtons>
             <El.Categories>
               <h1 className="section-name">Kategori</h1>
               <div className="category">

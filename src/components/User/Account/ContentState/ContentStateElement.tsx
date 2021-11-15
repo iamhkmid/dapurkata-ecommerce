@@ -29,3 +29,43 @@ export const Section = styled.div`
   gap: 1rem;
   width: 100%;
 `;
+
+export const WishlistWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  > h1.title {
+    font-size: 16px;
+    font-weight: 500;
+    color: ${({ theme }) => theme.color[2]};
+  }
+  > div.wishlist-wrapper {
+    display: flex;
+    max-height: 400px;
+    overflow-y: auto;
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.scrollbar.v1.thumb};
+      border-radius: 3px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+    }
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 8px;
+    > h1.title {
+      font-size: 14px;
+    }
+  }
+`;

@@ -476,6 +476,7 @@ export const Button = styled.button<TButtonElement>`
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       height: 16px;
     }
+  transition: 0.4s all ease;
   }
 
   ${({ theme }) => css`

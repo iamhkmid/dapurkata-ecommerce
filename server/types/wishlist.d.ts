@@ -1,16 +1,19 @@
+export type TWishlistBook = {
+  id: string;
+  title: string;
+  coverURL: string;
+  Author: {
+    id: string;
+    name: string;
+  };
+};
+
 export type TGQLWishlist = {
   id: string;
   userId: string;
   createdAt: Date;
   updatedAt: Date;
-  Book: {
-    id: string;
-    title: string;
-    Author: {
-      id: string;
-      name: string;
-    };
-  }[];
+  Book: TWishlistBook[];
 };
 
 export type TGQLAddWishlist = {

@@ -21,6 +21,7 @@ const typeDefs = gql`
   type WishlistBook {
     id: String
     title: String
+    coverURL: String
     Author: WishlistBookAuthor
   }
 

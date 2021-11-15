@@ -1,14 +1,14 @@
 import Head from "next/head";
-import StoreComp from "../../src/components/User/Books";
+import BooksComp from "../../src/components/User/Books";
 
 const Store = () => {
   return (
     <>
       <Head>
-        <title>Store</title>
+        <title>Buku</title>
         <link rel="icon" href="/dklogo.svg" />
       </Head>
-      <StoreComp />
+      <BooksComp />
     </>
   );
 };

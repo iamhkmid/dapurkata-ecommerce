@@ -88,7 +88,7 @@ const OrderSummary = () => {
                       <El.Info>
                         <h1>{order.order.book?.title}</h1>
                         <h1>{order.order.book?.Author.name}</h1>
-                      </El.Info>{" "}
+                      </El.Info>
                       <El.Info2>
                         <h1>
                           <NumberFormat

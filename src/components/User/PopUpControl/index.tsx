@@ -13,33 +13,8 @@ import ActivateAccount from "../Auth/Popup/ActivateAccount";
 import ResetPassword from "../Auth/Popup/ResetPassword";
 import OrderDetail from "../Order/PopUp/OrderDetail";
 import OrderPaymentInfo from "../Order/PopUp/OrderPaymentInfo";
+import WishlistPopup from "../Navbar/AuthMenu/WishlistPopup";
 
-export const Main = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 200;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0.2rem;
-`;
-
-export const Backround = styled.div`
-  display: flex;
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: -1;
-  background: ${({ theme }) => theme.popup};
-  backdrop-filter: blur(4px);
-  transition: 0.4s all ease;
-  transition-property: backdrop-filter;
-`;
 const PopUpControl = () => {
   const {
     userNav: { popup },
@@ -92,6 +67,7 @@ const PopUpControl = () => {
           {popup.name === "ORDER_PAYMENT_INFO" && (
             <OrderPaymentInfo orderId={popup.orderId} />
           )}
+          {popup.name === "WISHLIST" && <WishlistPopup />}
         </Main>
       )}
     </AnimatePresence>
@@ -99,3 +75,30 @@ const PopUpControl = () => {
 };
 
 export default PopUpControl;
+
+const Main = styled(motion.div)`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.2rem;
+`;
+
+const Backround = styled.div`
+  display: flex;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: -1;
+  background: ${({ theme }) => theme.popup};
+  backdrop-filter: blur(4px);
+  transition: 0.4s all ease;
+  transition-property: backdrop-filter;
+`;

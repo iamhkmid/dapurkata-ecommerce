@@ -46,6 +46,15 @@ const Dropdown = () => {
             </El.NLink>
           </El.Li>
         )}
+        {user.role === "USER" && (
+          <El.Li
+            onClick={async () =>
+              dispatch({ type: "SHOW_POPUP", value: { name: "WISHLIST" } })
+            }
+          >
+            <El.Item>Wishlist</El.Item>
+          </El.Li>
+        )}
         <El.Li onClick={async () => await logOut()}>
           <El.Item>Keluar</El.Item>
         </El.Li>
