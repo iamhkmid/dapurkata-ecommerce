@@ -20,6 +20,7 @@ import { validateUser } from "../../utils/validateUser";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";
 import { db } from "../../services/db";
+import { TNotification } from "../../../types/notification";
 
 export const Query: TTransactionQuery = {
   paymentType: async (_, { isEnabled }, { db }) => {
@@ -286,22 +287,24 @@ export const Mutation: TTransactionMutation = {
         const notif = await db.notification.create({
           data: {
             title: "Pesanan Ditambahkan",
-            message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
+            message: `Silahkan lakukan pembayaranmu 😉️. Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
             valueName: "ORDER_DETAIL",
             valueId: order.id,
             User: { connect: { id: order.userId } },
           },
         });
         if (!!notif)
-          pubsub.publish("USER_NOTIFICATION", {
-            userNotification: {
+          pubsub.publish("NOTIFICATION", {
+            notification: {
               id: notif.id,
               title: notif.title,
               message: notif.message,
               valueName: notif.valueName,
               valueId: notif.valueId,
               userId: notif.userId,
-            },
+              createdAt: notif.createdAt,
+              updatedAt: notif.updatedAt,
+            } as TNotification,
           });
       }
     } catch (err) {

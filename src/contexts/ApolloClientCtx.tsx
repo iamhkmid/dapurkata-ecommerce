@@ -90,7 +90,7 @@ const ApolloClientCtxProvider: FC = ({ children }) => {
           {
             reconnect: true,
             connectionParams: {
-              authToken: authToken ? `Bearer ${authToken}` : "",
+              authorization: authToken ? `Bearer ${authToken}` : "",
             },
           }
         );

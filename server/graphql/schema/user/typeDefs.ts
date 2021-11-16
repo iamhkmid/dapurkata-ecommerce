@@ -4,7 +4,7 @@ const typeDefs = gql`
   type Query {
     user(userId: ID!): User @auth(requires: AUTH)
     users: [User] @auth(requires: ADMIN)
-    userNotification: [UserNotification] @auth(requires: USER)
+    notification: [Notification] @auth(requires: USER)
   }
 
   type Mutation {
@@ -15,16 +15,18 @@ const typeDefs = gql`
   }
 
   type Subscription {
-    userNotification: UserNotification
+    notification: Notification
   }
 
-  type UserNotification {
-    id: String
+  type Notification {
+    id: ID
     title: String
     message: String
     valueName: String
     valueId: String
     userId: String
+    createdAt: Date
+    updatedAt: Date
   }
   input cPData {
     oldPassword: String!

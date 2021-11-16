@@ -6,7 +6,7 @@ import { TPaymentService, TPaymentType } from "./payment";
 import { TRecipient } from "./recipient";
 import { TCart } from "./shoppingCart";
 import { TOrderPaymentInfo } from "./transaction";
-import { TAuthUser } from "./user";
+import { TAuthUser, TNotification } from "./user";
 import { TWishlist } from "./wishlist";
 
 // AUTH CONTEXT
@@ -233,7 +233,7 @@ type TUserPopUpVal =
 type TUserPopUp = {
   backTo: TUserPopUp;
 } & TUserPopUpVal;
-type TUserMenu = "MENU" | "CART" | "MAIL" | "SERVICES";
+type TUserMenu = "MENU" | "CART" | "NOTIF" | "SERVICES";
 
 type TUserDropdown = "SERVICES";
 type TUserNavAction =
@@ -270,4 +270,12 @@ export type TWishlistCtx = {
   wishlist: TWishlist;
   loading: boolean;
   error: ApolloError;
+};
+
+export type TNotificationCtx = {
+  notification: TNotification[];
+  loading: boolean;
+  error: ApolloError;
+  newNotif: boolean;
+  setNewNotif: (p: boolean) => void;
 };

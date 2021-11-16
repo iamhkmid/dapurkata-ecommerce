@@ -88,6 +88,7 @@ import {
 } from "./footerInfo";
 import { TGQLDashboardQuery } from "./dashboard";
 import { TGQLAddWishlist, TGQLDeleteWishlist, TGQLWishlist } from "./wishlist";
+import { TGQLNotification } from "./notification";
 
 //BOOK SCHEMA
 export type TBookQuery = {
@@ -256,7 +257,7 @@ export type TUserQuery = {
     context: TCtx
   ) => Promise<TGQLUser>;
   users: (parent: any, args: any, context: TCtx) => Promise<TGQLUser[]>;
-  userNotification: (
+  notification: (
     parent: any,
     args: any,
     context: TCtx
@@ -284,6 +285,12 @@ export type TUserMutation = {
     args: TArgsChangePassword,
     context: TCtx
   ) => Promise<{ message: string }>;
+};
+
+export type TUserSubcription = {
+  notification: {
+    subscribe: any;
+  };
 };
 
 export type TUser = {

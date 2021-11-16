@@ -15,11 +15,13 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { TUserMenu } from "../../../../types/context";
 import DropdownControl from "../DropdownControl";
 import ThemeToggle from "../../../otherComps/Buttons/ThemeToggle";
+import { NotificationCtx } from "../../../../contexts/NotificationCtx";
 
 const MenuButton = () => {
   const { user, loading } = useContext(AuthContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { pathname, asPath } = useRouter();
+  const { notification, newNotif, setNewNotif } = useContext(NotificationCtx);
 
   const { shoppingCart } = useContext(ShoppingCartCtx);
   const [totalItems, setTotalItems] = useState(0);
@@ -37,24 +39,31 @@ const MenuButton = () => {
       {loading && <Loading2 />}
       {user && user.role === "USER" && (
         <El.IconGroup onClick={(e) => e.stopPropagation()}>
-          {["CART", "NOTIF"].map((value) => (
-            <El.IconButton
-              key={value}
-              active={userNav.menu === value}
-              onClick={() =>
-                dispatch({ type: "SHOW_MENU", value: value as TUserMenu })
-              }
-            >
-              {IconsControl(value)}
-              {value === "CART" && totalItems > 0 && (
-                <El.AmountNum>{totalItems}</El.AmountNum>
-              )}
-              {value === "NOTIF" && totalItems > 0 && <El.NotifIcon />}
-              <AnimatePresence>
-                {userNav.menu === value && <DropdownControl name={value} />}
-              </AnimatePresence>
-            </El.IconButton>
-          ))}
+          <El.IconButton
+            key={"CART"}
+            active={userNav.menu === "CART"}
+            onClick={() => dispatch({ type: "SHOW_MENU", value: "CART" })}
+          >
+            {IconsControl("CART")}
+            {totalItems > 0 && <El.AmountNum>{totalItems}</El.AmountNum>}
+            <AnimatePresence>
+              {userNav.menu === "CART" && <DropdownControl name={"CART"} />}
+            </AnimatePresence>
+          </El.IconButton>
+          <El.IconButton
+            key={"NOTIF"}
+            active={userNav.menu === "NOTIF"}
+            onClick={() => {
+              dispatch({ type: "SHOW_MENU", value: "NOTIF" });
+              setNewNotif(false);
+            }}
+          >
+            {IconsControl("NOTIF")}
+            {newNotif && <El.NotifIcon />}
+            <AnimatePresence>
+              {userNav.menu === "NOTIF" && <DropdownControl name={"NOTIF"} />}
+            </AnimatePresence>
+          </El.IconButton>
         </El.IconGroup>
       )}
       <ThemeToggle />

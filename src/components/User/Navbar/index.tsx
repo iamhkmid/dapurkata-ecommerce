@@ -39,7 +39,7 @@ const Navbar: FC = ({ children }) => {
 
       if (pathname !== "/" || width < 960) {
         setShowLogo(true);
-      } else if (y >= 48) {
+      } else if (y >= 64) {
         setShowLogo(true);
       } else {
         setShowLogo(false);

@@ -51,3 +51,18 @@ export const INIT_DATA_UPDATE_USER = gql`
     }
   }
 `;
+
+export const NOTIFICATION = gql`
+  query {
+    notification {
+      id
+      title
+      message
+      userId
+      valueName
+      valueId
+      createdAt
+      updatedAt
+    }
+  }
+`;

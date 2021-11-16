@@ -89,3 +89,21 @@ export type TInitDataUpdateUser = {
     phone: string;
   };
 };
+
+export type TNotification = {
+  id: string;
+  title: string;
+  message: string;
+  valueName: string;
+  valueId: string;
+  userId: string;
+  createdAt: number;
+  updatedAt: number;
+};
+export type TGQLNotification = {
+  notification: TNotification[];
+};
+
+export type TGQLNotificationSubs = {
+  notification: TNotification;
+};

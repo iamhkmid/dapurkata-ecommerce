@@ -1,5 +1,5 @@
 import * as El from "./NotificationElement";
-import CartList from "../../../Cart/CartList";
+import NotificationList from "../../../NotificationList";
 
 const Notification = () => {
   return (
@@ -9,7 +9,7 @@ const Notification = () => {
       exit={{ opacity: 0 }}
       onClick={(e) => e.stopPropagation()}
     >
-      <CartList />
+      <NotificationList />
     </El.Main>
   );
 };

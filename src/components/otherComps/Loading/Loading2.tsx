@@ -10,7 +10,7 @@ const Main = styled.main`
 const Loader = styled.div`
   --color: ${({ theme }) => theme.color[2]};
   --size-mid: 6vmin;
-  --size-dot: 0.6rem;
+  --size-dot: 10px;
   --size-bar: 0.4vmin;
   --size-square: 3vmin;
   display: flex;

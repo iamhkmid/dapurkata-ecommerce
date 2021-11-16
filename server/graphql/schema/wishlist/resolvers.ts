@@ -5,17 +5,6 @@ import { validateUser } from "../../utils/validateUser";
 
 export const Query: TWishlistQuery = {
   wishlist: async (_, __, { user, db }) => {
-    const findUser = await db.user.findUnique({
-      where: { id: user.id },
-      select: { id: true },
-    });
-
-    validateUser({
-      target: "SPECIFIC_USER",
-      targetId: findUser?.id,
-      currRole: user.role,
-      currId: user.id,
-    });
     const wishlist = await db.wishlist.findUnique({
       where: { userId: user.id },
       include: {
@@ -48,16 +37,6 @@ export const Query: TWishlistQuery = {
 
 export const Mutation: TWishlistMutation = {
   addWishlist: async (_, { bookId }, { user, db }) => {
-    const findUser = await db.user.findUnique({
-      where: { id: user.id },
-      select: { id: true },
-    });
-    validateUser({
-      target: "SPECIFIC_USER",
-      targetId: findUser?.id,
-      currRole: user.role,
-      currId: user.id,
-    });
     await db.wishlist.upsert({
       where: { userId: user.id },
       create: {
@@ -71,16 +50,6 @@ export const Mutation: TWishlistMutation = {
     return { message: "Wishlist Ditambahkan" };
   },
   deleteWishlist: async (_, { bookId }, { user, db }) => {
-    const findUser = await db.user.findUnique({
-      where: { id: user.id },
-      select: { id: true },
-    });
-    validateUser({
-      target: "SPECIFIC_USER",
-      targetId: findUser?.id,
-      currRole: user.role,
-      currId: user.id,
-    });
     await db.wishlist.update({
       where: { userId: user.id },
       data: {

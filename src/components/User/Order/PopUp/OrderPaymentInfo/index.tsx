@@ -32,6 +32,7 @@ const OrderPaymentInfo: FC<TProps> = ({ orderId }) => {
         document: ORDER_INFO_SUBSCRIPTION,
         variables: { orderId: data?.order?.id },
         updateQuery: (prev, { subscriptionData }) => {
+          if (!subscriptionData.data.orderInfo) return prev;
           return {
             order: {
               ...prev.order,

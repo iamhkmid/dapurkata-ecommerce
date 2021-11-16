@@ -197,8 +197,8 @@ export const NotifIcon = styled.div`
   background: ${({ theme }) => theme.color[3]};
   color: ${({ theme }) => theme.button.list.color};
 
-  animation: loader-2 3s ease infinite;
-  @keyframes loader-2 {
+  animation: notification-indicator 2s ease infinite;
+  @keyframes notification-indicator {
     0% {
       opacity: 0;
     }

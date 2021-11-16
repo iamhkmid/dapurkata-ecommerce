@@ -4,6 +4,7 @@ import { db } from "../graphql/services/db";
 import { TNotifPaymentBody } from "../types/api";
 import pubsub from "../graphql/services/pubsub";
 import { NextFunction, Request, Response } from "express";
+import { TNotification } from "../types/notification";
 
 const paymentNotification = async (
   req: Request,
@@ -71,22 +72,24 @@ const paymentNotification = async (
               const notif = await db.notification.create({
                 data: {
                   title: "Pembayaran Berhasil",
-                  message: `Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
+                  message: `Terimakasih telah melakukan pembayaran 🥰️. Total pembayaran Rp.${order.grossAmount} melalui ${order.PaymentService.PaymentType.name} > ${order.PaymentService.name}. Detail pembayaran : ${itemsName}.`,
                   valueName: "ORDER_DETAIL",
                   valueId: order.id,
                   User: { connect: { id: order.userId } },
                 },
               });
               if (!!notif)
-                pubsub.publish("USER_NOTIFICATION", {
-                  userNotification: {
+                pubsub.publish("NOTIFICATION", {
+                  notification: {
                     id: notif.id,
                     title: notif.title,
                     message: notif.message,
                     valueName: notif.valueName,
                     valueId: notif.valueId,
                     userId: notif.userId,
-                  },
+                    createdAt: notif.createdAt,
+                    updatedAt: notif.updatedAt,
+                  } as TNotification,
                 });
             } catch (error) {}
 

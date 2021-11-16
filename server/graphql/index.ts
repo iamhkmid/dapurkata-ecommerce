@@ -35,7 +35,7 @@ const graphql = async ({ app, httpServer }) => {
       onConnect: async (connectionParams, webSocket, context) => {
         console.log("Connected!");
 
-        const token = connectionParams?.authToken?.split(" ")[1];
+        const token = connectionParams?.authorization?.split(" ")[1];
         if (!!token) {
           try {
             const decoded = jwt.verify(token, process.env.JWT_SECRET);

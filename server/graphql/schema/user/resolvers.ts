@@ -1,11 +1,15 @@
 import { AuthenticationError, ValidationError } from "apollo-server-errors";
 import { ApolloError } from "apollo-server-express";
-import { TUser, TUserMutation, TUserQuery } from "../../../types/graphql";
+import {
+  TUser,
+  TUserMutation,
+  TUserQuery,
+  TUserSubcription,
+} from "../../../types/graphql";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
 import { validateUser } from "../../utils/validateUser";
 import { checkUser, hashPassword, saveUserPic } from "./utils";
 import bcrypt from "bcrypt";
-import { TUserSubcription } from "../../../types/user";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";
 
@@ -21,19 +25,11 @@ export const Query: TUserQuery = {
     return findUser;
   },
   users: async (_, __, { db }) => await db.user.findMany(),
-  userNotification: async (_, __, { db, user }) => {
-    const findUser = await db.user.findUnique({
-      where: { id: user.id },
-      select: { id: true, Notification: true },
-    });
-    validateUser({
-      target: "SPECIFIC_USER",
-      targetId: findUser?.id,
-      currRole: user.role,
-      currId: user.id,
-    });
-    return findUser.Notification;
-  },
+  notification: async (_, __, { db, user }) =>
+    await db.notification.findMany({
+      where: { userId: user.id },
+      orderBy: { createdAt: "desc" },
+    }),
 };
 
 export const Mutation: TUserMutation = {
@@ -131,11 +127,11 @@ export const Mutation: TUserMutation = {
 };
 
 export const Subscription: TUserSubcription = {
-  userNotification: {
+  notification: {
     subscribe: withFilter(
-      () => pubsub.asyncIterator("USER_NOTIFICATION"),
+      () => pubsub.asyncIterator("NOTIFICATION"),
       async (payload, variables, context) => {
-        return payload.userNotification.userId === context.user.id;
+        return payload.notification.userId === context.user.id;
       }
     ),
   },

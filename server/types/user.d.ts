@@ -91,10 +91,6 @@ export type TGQLUserNotification = {
   message: string;
   valueName: string;
   valueId: string;
-};
-
-export type TUserSubcription = {
-  userNotification: {
-    subscribe: any;
-  };
+  createdAt: Date;
+  updatedAt: Date;
 };
