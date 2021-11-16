@@ -24,8 +24,8 @@ export const list = styled.div`
   gap: 0.5rem;
   max-height: 15rem;
   width: 100%;
-  overflow-y: auto;
   border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+  overflow-y: auto;
 
   ::-webkit-scrollbar {
     width: 10px;
@@ -138,12 +138,19 @@ export const AmountPrice = styled.div`
   justify-content: space-between;
   font-weight: 600;
   > h1:nth-child(1) {
-    font-size: 0.8rem;
+    font-size: 13px;
     color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 11px;
+    }
   }
   > h1:nth-child(2) {
-    font-size: 1.1rem;
+    font-size: 19px;
+    font-weight: 600;
     color: ${({ theme }) => theme.color[3]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 17px;
+    }
   }
 `;
 
@@ -153,11 +160,11 @@ export const EmptyCart = styled.div`
   align-items: center;
   width: 100%;
   justify-content: center;
-  font-size: 14px;
-  font-weight: 400;
+  font-size: 13px;
+  font-weight: 500;
   color: ${({ theme }) => theme.color[2]};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 12px;
+    font-size: 11px;
   }
 `;
 
@@ -198,7 +205,7 @@ export const TableInfo = styled.table`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     > thead {
       th {
-        font-size: 0.8rem;
+        font-size: 12px;
       }
     }
     > tbody {
@@ -216,13 +223,13 @@ export const Product = styled.div`
   min-width: 15rem;
 `;
 export const Price = styled.h1`
-  font-size: 0.85rem;
+  font-size: 14px;
   width: max-content;
   font-weight: 500;
   color: ${({ theme }) => theme.color[3]};
   border-color: ${({ theme }) => theme.button.disabled.background};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.75rem;
+    font-size: 12px;
   }
   transition: 0.4s all ease;
 `;

@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { string } from "yup/lib/locale";
 import { NotificationCtx } from "../../../contexts/NotificationCtx";
 import { UserNavCtx } from "../../../contexts/UserNavCtx";
+import IconsControl from "../../IconsControl";
 
 const getTime = (time: number) => {
   const datenow = new Date().getTime();
@@ -50,6 +51,9 @@ const NotificationList = () => {
       <h1 className="popup-label">Pemberitahuan</h1>
       <List>
         <div>
+          {notification?.length === 0 && (
+            <h1 className="empty-notif">Tidak Ada Pemberitahuan</h1>
+          )}
           {notification?.map((value) => (
             <Item
               key={value.id}
@@ -93,8 +97,11 @@ const Item = styled.div`
   cursor: pointer;
   background: ${({ theme }) =>
     theme.name === "light" ? "#eff1f3" : "#11131653"};
-  padding: 5px 8px;
   border-radius: 4px;
+  gap: 5px;
+  padding: 10px 16px;
+  overflow: hidden;
+
   .title {
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -107,10 +114,7 @@ const Item = styled.div`
     }
   }
   .message {
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
-    overflow: hidden;
+    padding: 0 5px;
     font-size: 12px;
     font-weight: 400;
     color: ${({ theme }) => theme.color[2]};
@@ -152,6 +156,14 @@ const List = styled.div`
     display: flex;
     flex-direction: column;
     gap: 5px;
+    .empty-notif {
+      font-size: 13px;
+      font-weight: 500;
+      color: ${({ theme }) => theme.color[2]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 11px;
+      }
+    }
   }
 
   ::-webkit-scrollbar {
