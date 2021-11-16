@@ -13,7 +13,7 @@ import ActivateAccount from "../Auth/Popup/ActivateAccount";
 import ResetPassword from "../Auth/Popup/ResetPassword";
 import OrderDetail from "../Order/PopUp/OrderDetail";
 import OrderPaymentInfo from "../Order/PopUp/OrderPaymentInfo";
-import WishlistPopup from "../Navbar/AuthMenu/WishlistPopup";
+import WishlistPopup from "../Navbar/WishlistPopup";
 
 const PopUpControl = () => {
   const {

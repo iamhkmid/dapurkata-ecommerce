@@ -28,8 +28,8 @@ model User {
   createdAt    DateTime       @default(now()) @map("created_at")
   updatedAt    DateTime       @updatedAt @map("updated_at")
   pictureDir   String         @map("picture_dir")
-  Recipient    Recipient[]
   userPicture  String?        @map("user_picture")
+  Recipient    Recipient[]
   ShoppingCart ShoppingCart[]
   Order        Order[]
   Notification Notification[]
@@ -44,8 +44,8 @@ model Notification {
   message   String
   valueName String?
   valueId   String?
-  User      User?    @relation(fields: [userId], references: [id])
   userId    String?
+  User      User?    @relation(fields: [userId], references: [id])
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 

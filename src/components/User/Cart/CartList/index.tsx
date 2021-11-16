@@ -28,112 +28,111 @@ const CartList = () => {
   }, [shoppingCart]);
   return (
     <El.Main>
-      {shoppingCart.data.length === 0 && (
-        <El.EmptyCart>Keranjang Kosong</El.EmptyCart>
-      )}
-      {shoppingCart.data.length > 0 && (
-        <div>
-          <El.list>
-            <El.TableInfo>
-              <thead>
-                <tr>
-                  <th>Produk</th>
-                  <th>Harga</th>
-                  <th>Jumlah</th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {shoppingCart.data.map((val) => {
-                  const cover = val.Book.BookPicture.find(
-                    (img) => img.type === "COVER"
-                  );
-                  return (
-                    <tr key={val.id}>
-                      <td>
-                        <El.Product>
-                          <El.CoverWrapper>
-                            <div>
-                              <ImageFixed
-                                src={cover?.url}
-                                alt={val.Book.title}
-                                height={75}
-                                width={50}
-                                quality={75}
-                                defaultIcon="dapurkata"
-                              />
-                            </div>
-                          </El.CoverWrapper>
-                          <El.Info>
-                            <h1>{val.Book.title}</h1>
-                            <h1>{val.Book.Author.name}</h1>
-                          </El.Info>
-                        </El.Product>
-                      </td>
-                      <td>
-                        <El.Price>
-                          <NumberFormat
-                            prefix="Rp"
-                            value={
-                              val.Book.price -
-                              (val.Book.price * val.Book.discount) / 100
-                            }
-                            displayType={"text"}
-                            thousandSeparator={"."}
-                            decimalSeparator={","}
-                          />
-                        </El.Price>
-                      </td>
-                      <td>
-                        <El.ActionBtn>
-                          <UpdateCartInput
-                            cartProps={{
-                              cartId: val.id,
-                              amount: val.amount,
-                            }}
-                          />
-                        </El.ActionBtn>
-                      </td>
-                      <td>
-                        <El.ActionBtn>
-                          <DeleteCart cartId={val.id} />
-                        </El.ActionBtn>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </El.TableInfo>
-          </El.list>
-          <El.Footer>
-            <El.AmountPrice>
-              <h1>Total Harga</h1>
-              <h1>
-                <NumberFormat
-                  prefix="Rp"
-                  value={amountPrice}
-                  displayType={"text"}
-                  thousandSeparator={"."}
-                  decimalSeparator={","}
-                />
-              </h1>
-            </El.AmountPrice>
-            <El.BtnWrapper>
-              <Button
-                name="PESAN"
-                type="button"
-                onClick={() => {
-                  push({
-                    pathname: "/u/order",
-                    query: { type: "shoppingcart" },
-                  });
-                  dispatch({ type: "CLOSE_MENU" });
-                }}
+      <div>
+        <El.list>
+          <El.TableInfo>
+            <thead>
+              <tr>
+                <th>Produk</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {shoppingCart.data.map((val) => {
+                const cover = val.Book.BookPicture.find(
+                  (img) => img.type === "COVER"
+                );
+                return (
+                  <tr key={val.id}>
+                    <td>
+                      <El.Product>
+                        <El.CoverWrapper>
+                          <div>
+                            <ImageFixed
+                              src={cover?.url}
+                              alt={val.Book.title}
+                              height={75}
+                              width={50}
+                              quality={75}
+                              defaultIcon="dapurkata"
+                            />
+                          </div>
+                        </El.CoverWrapper>
+                        <El.Info>
+                          <h1>{val.Book.title}</h1>
+                          <h1>{val.Book.Author.name}</h1>
+                        </El.Info>
+                      </El.Product>
+                    </td>
+                    <td>
+                      <El.Price>
+                        <NumberFormat
+                          prefix="Rp"
+                          value={
+                            val.Book.price -
+                            (val.Book.price * val.Book.discount) / 100
+                          }
+                          displayType={"text"}
+                          thousandSeparator={"."}
+                          decimalSeparator={","}
+                        />
+                      </El.Price>
+                    </td>
+                    <td>
+                      <El.ActionBtn>
+                        <UpdateCartInput
+                          cartProps={{
+                            cartId: val.id,
+                            amount: val.amount,
+                          }}
+                        />
+                      </El.ActionBtn>
+                    </td>
+                    <td>
+                      <El.ActionBtn>
+                        <DeleteCart cartId={val.id} />
+                      </El.ActionBtn>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </El.TableInfo>
+          {shoppingCart.data.length === 0 && (
+            <El.EmptyCart>Keranjang Kosong</El.EmptyCart>
+          )}
+        </El.list>
+        <El.Footer>
+          <El.AmountPrice>
+            <h1>Total Harga</h1>
+            <h1>
+              <NumberFormat
+                prefix="Rp"
+                value={amountPrice}
+                displayType={"text"}
+                thousandSeparator={"."}
+                decimalSeparator={","}
               />
-            </El.BtnWrapper>
-          </El.Footer>
-        </div>
-      )}
+            </h1>
+          </El.AmountPrice>
+          <El.BtnWrapper>
+            <Button
+              name="PESAN"
+              type="button"
+              disabled={shoppingCart.data.length === 0}
+              onClick={() => {
+                push({
+                  pathname: "/u/order",
+                  query: { type: "shoppingcart" },
+                });
+                dispatch({ type: "CLOSE_MENU" });
+              }}
+            />
+          </El.BtnWrapper>
+        </El.Footer>
+      </div>
     </El.Main>
   );
 };

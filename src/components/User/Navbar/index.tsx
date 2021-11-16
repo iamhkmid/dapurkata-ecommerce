@@ -10,7 +10,7 @@ import { useRef } from "react";
 import GlobalMessageUser from "../../otherComps/GlobalMessage/GlobalMessageUser";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import AuthMenu from "./AuthMenu";
+import AuthMenu from "./MenuButton";
 import { useWindowScroll, useWindowSize } from "react-use";
 import IconsControl from "../../IconsControl";
 import { AnimateSharedLayout } from "framer-motion";

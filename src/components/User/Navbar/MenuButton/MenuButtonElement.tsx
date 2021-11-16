@@ -182,3 +182,28 @@ export const AmountNum = styled.div`
   background: ${({ theme }) => theme.button.list.background};
   color: ${({ theme }) => theme.button.list.color};
 `;
+
+export const NotifIcon = styled.div`
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 26%;
+  right: 12%;
+  border-radius: 100%;
+  height: 10px;
+  aspect-ratio: 1/1;
+  background: ${({ theme }) => theme.color[3]};
+  color: ${({ theme }) => theme.button.list.color};
+
+  animation: loader-2 3s ease infinite;
+  @keyframes loader-2 {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+`;

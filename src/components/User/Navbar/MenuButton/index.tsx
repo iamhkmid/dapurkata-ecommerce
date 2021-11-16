@@ -7,16 +7,16 @@ import { ThemeContext } from "../../../../contexts/ThemeCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import IconsControl from "../../../IconsControl";
 import UserLoading from "../../../otherComps/Loading/EllipsisLoading";
-import * as El from "./AuthMenuElement";
-import Dropdown from "./Dropdown";
+import * as El from "./MenuButtonElement";
+import Dropdown from "../DropdownControl/Account";
 import Loading2 from "../../../otherComps/Loading/Loading2";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { TUserMenu } from "../../../../types/context";
-import DropdownControl from "../MenuList/DropdownControl";
+import DropdownControl from "../DropdownControl";
 import ThemeToggle from "../../../otherComps/Buttons/ThemeToggle";
 
-const AuthMenu = () => {
+const MenuButton = () => {
   const { user, loading } = useContext(AuthContext);
   const { userNav, dispatch } = useContext(UserNavCtx);
   const { pathname, asPath } = useRouter();
@@ -37,7 +37,7 @@ const AuthMenu = () => {
       {loading && <Loading2 />}
       {user && user.role === "USER" && (
         <El.IconGroup onClick={(e) => e.stopPropagation()}>
-          {["CART", "MAIL"].map((value) => (
+          {["CART", "NOTIF"].map((value) => (
             <El.IconButton
               key={value}
               active={userNav.menu === value}
@@ -49,6 +49,7 @@ const AuthMenu = () => {
               {value === "CART" && totalItems > 0 && (
                 <El.AmountNum>{totalItems}</El.AmountNum>
               )}
+              {value === "NOTIF" && totalItems > 0 && <El.NotifIcon />}
               <AnimatePresence>
                 {userNav.menu === value && <DropdownControl name={value} />}
               </AnimatePresence>
@@ -110,4 +111,4 @@ const AuthMenu = () => {
   );
 };
 
-export default AuthMenu;
+export default MenuButton;

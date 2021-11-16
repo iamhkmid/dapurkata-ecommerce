@@ -4,10 +4,10 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../../../contexts/AuthCtx";
 import { useLogOut } from "../../../../../hooks/useGQLAuth";
 import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
-import * as El from "./DropdownElement";
+import * as El from "./AccountElement";
 import ImageResponsive from "../../../../otherComps/ImageResponsive";
 
-const Dropdown = () => {
+const Account = () => {
   const { logOut } = useLogOut();
   const { user } = useContext(AuthContext);
   const { dispatch } = useContext(UserNavCtx);
@@ -63,4 +63,4 @@ const Dropdown = () => {
   );
 };
 
-export default Dropdown;
+export default Account;

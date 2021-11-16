@@ -6,6 +6,7 @@ export const Main = styled.div`
   width: 100%;
   display: flex;
   padding: 1rem;
+  padding-bottom: 8px;
   gap: 0.5rem;
   flex-direction: column;
   border-radius: ${({ theme }) => theme.borderRadius};
@@ -146,11 +147,18 @@ export const AmountPrice = styled.div`
   }
 `;
 
-export const EmptyCart = styled.h1`
-  text-align: center;
-  font-size: 0.9rem;
-  font-weight: 300;
+export const EmptyCart = styled.div`
+  display: flex;
+  padding: 16px;
+  align-items: center;
   width: 100%;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 400;
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 12px;
+  }
 `;
 
 export const TableInfo = styled.table`

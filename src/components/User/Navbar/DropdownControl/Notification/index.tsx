@@ -1,7 +1,7 @@
-import * as El from "./ShoppingCartElement";
-import CartList from "../../../../Cart/CartList";
+import * as El from "./NotificationElement";
+import CartList from "../../../Cart/CartList";
 
-const ShoppingCart = () => {
+const Notification = () => {
   return (
     <El.Main
       initial={{ opacity: 0 }}
@@ -14,4 +14,4 @@ const ShoppingCart = () => {
   );
 };
 
-export default ShoppingCart;
+export default Notification;

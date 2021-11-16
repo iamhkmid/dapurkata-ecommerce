@@ -1,3 +1,4 @@
+import Notification from "./Notification";
 import Services from "./Services";
 import ShoppingCart from "./ShoppingCart";
 
@@ -7,8 +8,8 @@ const DropdownControl = ({ name }) => {
       return <Services />;
     case "CART":
       return <ShoppingCart />;
-    case "MAIL":
-      return null;
+    case "NOTIF":
+      return <Notification />;
     default:
       return null;
       break;

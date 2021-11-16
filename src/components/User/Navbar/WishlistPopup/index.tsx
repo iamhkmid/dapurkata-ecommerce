@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import PopUpHeaderUser from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
-import Wishlist from "../../../Account/ContentState/Wishlist";
+import PopUpHeaderUser from "../../../otherComps/PopUpHeader/PopUpHeaderUser";
+import Wishlist from "../../Account/ContentState/Wishlist";
 
 const WishlistPopup = () => {
   return (

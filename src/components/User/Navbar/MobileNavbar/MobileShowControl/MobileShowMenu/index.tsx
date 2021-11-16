@@ -63,6 +63,14 @@ const MobileShowMenu = () => {
                 </El.Anchor>
               </El.NLink>
               <El.Anchor
+                onClick={async () => {
+                  dispatch({ type: "CLOSE_MENU" });
+                  dispatch({ type: "SHOW_POPUP", value: { name: "WISHLIST" } });
+                }}
+              >
+                Wishlist
+              </El.Anchor>
+              <El.Anchor
                 onClick={() => {
                   dispatch({ type: "CLOSE_MENU" });
                   logOut();

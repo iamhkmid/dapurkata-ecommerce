@@ -64,6 +64,10 @@ const ButtonElement = styled.button<TButtonElement>`
         background: ${({ theme }) => theme.button.disabled.background};
         color: ${({ theme }) => theme.button.disabled.color};
       }
+      > svg {
+        fill: ${({ theme }) => theme.button.disabled.color};
+        color: ${({ theme }) => theme.button.disabled.color};
+      }
       :focus {
         border: 1px solid transparent;
         box-shadow: none;
