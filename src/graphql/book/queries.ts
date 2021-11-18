@@ -25,10 +25,13 @@ export const GET_BOOK = gql`
       title
       description
       edition
+      condition
+      coverType
+      discount
       series
       releaseYear
       numberOfPages
-      lenght
+      length
       width
       weight
       stock
@@ -144,7 +147,7 @@ export const GET_BOOK_DETAIL = gql`
       numberOfPages
       weight
       width
-      lenght
+      length
       stock
       price
       condition

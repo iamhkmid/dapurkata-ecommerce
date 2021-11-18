@@ -295,7 +295,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
                   </div>
                   <div className="ai-wrapper">
                     <h1 className="ai-name">Panjang</h1>
-                    <h1 className="ai-value">{`${dataGB.lenght} cm`}</h1>
+                    <h1 className="ai-value">{`${dataGB.length} cm`}</h1>
                   </div>
                   <div className="ai-wrapper">
                     <h1 className="ai-name">Lebar</h1>

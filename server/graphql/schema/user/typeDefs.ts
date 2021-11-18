@@ -52,7 +52,6 @@ const typeDefs = gql`
     lastName: String
     username: String!
     email: String!
-    role: EnumRole
     phone: String
     isActive: Boolean
   }

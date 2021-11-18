@@ -7,7 +7,7 @@ const List = () => {
   const { data, loading, error } = useGQLCategories();
   return (
     <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} isLoading={loading} />
     </El.Container>
   );
 };

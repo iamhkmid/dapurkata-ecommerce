@@ -1,7 +1,11 @@
 import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import { DASHBOARD } from "../../../graphql/dashboard/queries";
-import { TGQLDashboardQuery } from "../../../types/dashboard";
+import { ONLINE_USER } from "../../../graphql/dashboard/subscriptions";
+import {
+  TGQLDashboardQuery,
+  TGQLOnlineUserSubs,
+} from "../../../types/dashboard";
 import IconsControl from "../../IconsControl";
 import Cards from "./Cards";
 import * as El from "./DashboardElement";
@@ -9,10 +13,32 @@ import Graph from "./Graph";
 import SideSection from "./SideSection";
 
 const Dashboard = () => {
-  const { data, error, loading } = useQuery<TGQLDashboardQuery>(DASHBOARD, {
-    fetchPolicy: "network-only",
-    errorPolicy: "all",
-  });
+  const { data, error, loading, subscribeToMore } =
+    useQuery<TGQLDashboardQuery>(DASHBOARD, {
+      fetchPolicy: "network-only",
+      errorPolicy: "all",
+    });
+
+  const subscribeDashboard = () => {
+    subscribeToMore<TGQLOnlineUserSubs>({
+      document: ONLINE_USER,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data?.onlineUsers) return prev;
+        const newOnlineUsers = subscriptionData.data.onlineUsers;
+        return Object.assign({}, prev, {
+          dashboard: {
+            onlineUsers: newOnlineUsers,
+          },
+        } as TGQLDashboardQuery);
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (data) {
+      subscribeDashboard();
+    }
+  }, [data]);
 
   return (
     <El.Main>

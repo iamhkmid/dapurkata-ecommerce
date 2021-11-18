@@ -7,6 +7,8 @@ import jwt, { decode } from "jsonwebtoken";
 import { db } from "./services/db";
 import { checkRole } from "./schema/directives/resolves/authDirective";
 import cache from "./services/nodeCache";
+import pubsub from "./services/pubsub";
+import { TOnlineUsers } from "../types/dashboard";
 
 const graphql = async ({ app, httpServer }) => {
   const apolloServer = new ApolloServer({
@@ -63,6 +65,9 @@ const graphql = async ({ app, httpServer }) => {
                   },
                 ]);
               }
+              pubsub.publish("ONLINE_USER", {
+                onlineUsers: cache.get("online-user") || [],
+              });
               return { user: decoded };
             }
           } catch (error) {
@@ -84,6 +89,9 @@ const graphql = async ({ app, httpServer }) => {
               (val) => val["id"] !== initialContext.user.id
             );
             cache.set("online-user", filterUser);
+            pubsub.publish("ONLINE_USER", {
+              onlineUsers: filterUser,
+            });
           }
         }
       },

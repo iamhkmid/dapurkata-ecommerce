@@ -22,24 +22,24 @@ const typeDefs = gql`
   }
   input cBookData {
     title: String!
-    description: String
+    description: String!
     edition: String
     series: String
-    releaseYear: String
-    numberOfPages: Int
-    condition: String
+    releaseYear: String!
+    numberOfPages: Int!
+    condition: String!
     discount: Int
-    coverType: String
-    lenght: Int
-    width: Int
-    weight: Int
+    coverType: String!
+    length: Int!
+    width: Int!
+    weight: Int!
     stock: Int!
     price: Int!
-    language: String
+    language: String!
     isbn: String
-    categories: [categoryInput]
-    authorId: String
-    publisherId: String
+    categoryIds: [String]
+    authorId: String!
+    publisherId: String!
   }
 
   input uBookData {
@@ -53,21 +53,18 @@ const typeDefs = gql`
     condition: String
     discount: Int
     coverType: String
-    lenght: Int
+    length: Int
     width: Int
     weight: Int
     stock: Int
     price: Int
     language: String
     isbn: String
-    categories: [categoryInput]
+    categoryIds: [String]
     authorId: String
     publisherId: String
   }
 
-  input categoryInput {
-    id: String
-  }
   type BooksWithFilter {
     hasPrev: Boolean
     hasNext: Boolean
@@ -96,7 +93,7 @@ const typeDefs = gql`
     series: String
     releaseYear: String
     numberOfPages: Int
-    lenght: Int
+    length: Int
     width: Int
     weight: Int
     stock: Int

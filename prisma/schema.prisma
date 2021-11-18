@@ -255,7 +255,7 @@ model Book {
   series        String?
   releaseYear   String         @map("release_year")
   numberOfPages Int            @map("number_of_pages")
-  lenght        Int
+  length        Int
   width         Int
   weight        Int
   stock         Int

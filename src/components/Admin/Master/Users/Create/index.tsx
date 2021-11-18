@@ -56,7 +56,6 @@ const Create = () => {
               control="input"
               type="text"
               name="lastName"
-              ref={htmlElRef}
               register={register}
               label="Nama Belakang"
               error={errors.lastName ? true : false}

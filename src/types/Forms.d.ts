@@ -26,7 +26,10 @@ export type TFormCreateBook = {
   series: string;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  condition: string;
+  coverType: string;
+  discount: number;
+  length: number;
   width: number;
   weight: number;
   stock: number;
@@ -47,9 +50,12 @@ export type TFormUpdateBook = {
   description: string;
   edition: string;
   series: string;
+  condition: string;
+  coverType: string;
+  discount: number;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  length: number;
   width: number;
   weight: number;
   stock: number;

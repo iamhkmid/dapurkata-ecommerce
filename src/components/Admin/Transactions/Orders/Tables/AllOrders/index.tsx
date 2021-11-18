@@ -5,12 +5,12 @@ import { useGQLOrderListsUsers } from "../../useGQLOrders";
 import Table from "../../../../../otherComps/Table";
 
 const AllOrders = () => {
-  const { data } = useGQLOrderListsUsers();
+  const { data, loading } = useGQLOrderListsUsers();
 
   return (
     <El.Main>
       <h1 className="title">SEMUA PESANAN</h1>
-      <Table columns={columns} data={data} />
+      <Table columns={columns} data={data} isLoading={loading} />
     </El.Main>
   );
 };

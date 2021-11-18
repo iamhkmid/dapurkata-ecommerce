@@ -13,12 +13,14 @@ import SelectSize from "./SelectSize";
 import { useRef } from "react";
 import { useEffect } from "react";
 import useScroll from "../../../hooks/useScroll";
+import LoadingTable from "./LoadingTable";
 
 type TProps = {
   columns: any;
   data: any[];
+  isLoading?: boolean;
 };
-const Table: FC<TProps> = ({ columns, data }) => {
+const Table: FC<TProps> = ({ columns, data, isLoading }) => {
   const mColumns = useMemo(() => columns, [columns]);
   const mData = useMemo(() => data, [data]);
   const tableRef = useRef<HTMLDivElement>();
@@ -98,22 +100,27 @@ const Table: FC<TProps> = ({ columns, data }) => {
               </tr>
             ))}
           </thead>
-          <tbody {...getTableProps()}>
-            {page.map((row, index) => {
-              prepareRow(row);
-              return (
-                <tr {...row.getRowProps()}>
-                  {row.cells.map((cell) => (
-                    <td {...cell.getCellProps()}>
-                      <El.TdWrapper>{cell.render("Cell")}</El.TdWrapper>
-                    </td>
-                  ))}
-                </tr>
-              );
-            })}
-          </tbody>
+          {!isLoading && (
+            <tbody {...getTableProps()}>
+              {page.map((row, index) => {
+                prepareRow(row);
+                return (
+                  <tr {...row.getRowProps()}>
+                    {row.cells.map((cell) => (
+                      <td {...cell.getCellProps()}>
+                        <El.TdWrapper>{cell.render("Cell")}</El.TdWrapper>
+                      </td>
+                    ))}
+                  </tr>
+                );
+              })}
+            </tbody>
+          )}
         </El.TableElement>
-        {mData.length === 0 && <El.EmptyData>Data Kosong</El.EmptyData>}
+        {isLoading && <LoadingTable />}
+        {!isLoading && mData.length === 0 && (
+          <El.EmptyData>Data Kosong</El.EmptyData>
+        )}
       </El.TableWrapper>
       <El.TableFooter>
         <Pagination paginationProps={paginationProps} />

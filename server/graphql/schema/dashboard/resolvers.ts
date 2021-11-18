@@ -1,5 +1,7 @@
+import { withFilter } from "graphql-subscriptions";
 import { TGQLDashboardGraph } from "../../../types/dashboard";
-import { TDashboardQuery } from "../../../types/graphql";
+import { TDashboardQuery, TDashboardSubcription } from "../../../types/graphql";
+import pubsub from "../../services/pubsub";
 
 export const Query: TDashboardQuery = {
   dashboard: async (_, __, { db, cache }) => {
@@ -87,5 +89,16 @@ export const Query: TDashboardQuery = {
       onlineUsers,
       graph,
     };
+  },
+};
+
+export const Subscription: TDashboardSubcription = {
+  onlineUsers: {
+    subscribe: withFilter(
+      () => pubsub.asyncIterator("ONLINE_USER"),
+      async (payload, variables, context) => {
+        return context.user.role === "ADMIN";
+      }
+    ),
   },
 };

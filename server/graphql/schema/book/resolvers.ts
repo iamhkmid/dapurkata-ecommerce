@@ -1,13 +1,12 @@
 import {
-  TBooksWithFilter,
   TDBBooksWithFilter,
   TDBCreateBook,
   TDBUpdateBook,
-  TGQLBooksWithFilter,
 } from "../../../types/book";
 import { TBookMutation, TBookQuery, TBook } from "../../../types/graphql";
 import { changeStr, makeDirFile, removeDir } from "../../utils/uploadFIle";
 import { bookFilter, saveBookPic } from "./utils";
+import validateSchema from "./validateSchema";
 
 export const Query: TBookQuery = {
   book: async (_, { bookId }, { db }) =>
@@ -59,6 +58,7 @@ export const Query: TBookQuery = {
 
 export const Mutation: TBookMutation = {
   createBook: async (_, { data, cover, bookPics }, { db }) => {
+    await validateSchema({ type: "CREATE_BOOK", data });
     const { pictureDir } = await makeDirFile({
       dirLoc: "/server/static/uploads/books",
     });
@@ -82,7 +82,7 @@ export const Mutation: TBookMutation = {
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,
       numberOfPages: data.numberOfPages || undefined,
-      lenght: data.lenght || undefined,
+      length: data.length || undefined,
       width: data.width || undefined,
       weight: data.weight || undefined,
       stock: data.stock,
@@ -95,8 +95,8 @@ export const Mutation: TBookMutation = {
       slug,
       pictureDir,
       Category: {
-        connect: data.categories
-          ? data.categories.map((cat) => ({ id: cat.id }))
+        connect: data.categoryIds
+          ? data.categoryIds.map((cat) => ({ id: cat }))
           : undefined,
       },
       Author: { connect: data.authorId ? { id: data.authorId } : undefined },
@@ -132,7 +132,7 @@ export const Mutation: TBookMutation = {
       series: data.series || undefined,
       releaseYear: data.releaseYear || undefined,
       numberOfPages: data.numberOfPages || undefined,
-      lenght: data.lenght || undefined,
+      length: data.length || undefined,
       width: data.width || undefined,
       weight: data.weight || undefined,
       stock: data.stock || undefined,
@@ -144,8 +144,8 @@ export const Mutation: TBookMutation = {
       isbn: data.isbn || undefined,
       slug,
       Category: {
-        set: data.categories
-          ? data.categories.map((cat) => ({ id: cat.id }))
+        set: data.categoryIds
+          ? data.categoryIds.map((cat) => ({ id: cat }))
           : undefined,
       },
       Author: { connect: data.authorId ? { id: data.authorId } : undefined },

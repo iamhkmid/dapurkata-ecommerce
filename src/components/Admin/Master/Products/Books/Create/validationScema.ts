@@ -1,57 +1,73 @@
 import * as yup from "yup";
 
 export const validationSchema = yup.object({
-  title: yup.string().required("Required"),
-  description: yup.string().required("Required"),
+  title: yup.string().required("Title is required"),
+  description: yup.string().required("Description is required"),
   edition: yup
     .string()
-    .required("Required")
-    .test("len", "Must be less than 10 characters", (val) => val.length < 10),
+    .test("len", "Edition must be less than 10 characters", (val) =>
+      val ? val.length < 10 : true
+    ),
   series: yup
     .string()
-    .required("Required")
-    .test(
-      "len",
-      "Must be number and less than 1000",
-      (val) => Number(val) < 1000
+    .test("len", "Series must be number and less than 1000", (val) =>
+      !!val ? Number(val) < 1000 : true
     ),
   releaseYear: yup
     .string()
     .required("Required")
-    .matches(/^20((1[1-9])|([2-9][0-9]))$/, "minimum year 2011"),
+    .matches(/^20((0[5-9])|([1-9][0-9]))$/, "Release Year minimum is 2005"),
   numberOfPages: yup
     .number()
-    .required("Required")
-    .typeError("Field must be number")
-    .positive("Field must be positive number"),
-  lenght: yup
+    .required("Number of page is Required")
+    .typeError("Number of page must be number")
+    .positive("Number of page must be positive number"),
+  length: yup
     .number()
     .required("Required")
-    .typeError("Field must be number")
-    .positive("Field must be positive number"),
+    .typeError("length must be number")
+    .positive("length must be positive number"),
   width: yup
     .number()
     .required("Required")
-    .typeError("Field must be number")
-    .positive("Field must be positive number"),
+    .typeError("Width must be number")
+    .positive("Width must be positive number"),
   weight: yup
     .number()
     .required("Required")
-    .typeError("Field must be number")
-    .positive("Field must be positive number"),
-  stock: yup.number().typeError("Field must be number").required("Required"),
+    .typeError("Weight must be number")
+    .positive("Weight must be positive number"),
+  stock: yup.number().typeError("Stock must be number").required("Required"),
   price: yup
     .number()
     .required("Required")
-    .typeError("Field must be number")
-    .positive("Field must be positive number"),
+    .typeError("Price must be number")
+    .positive("Price must be positive number"),
+  condition: yup
+    .string()
+    .required("Required")
+    .matches(/^(NEW|PRELOVED)$/, "Condition must be NEW or PRELOVED"),
+  coverType: yup
+    .string()
+    .required("Required")
+    .matches(
+      /^(SOFT COVER|HARD COVER)$/,
+      "Cover Type must be SOFT COVER or HARD COVER"
+    ),
+  discount: yup
+    .number()
+    .transform((val) => (isNaN(val) ? undefined : val))
+    .integer()
+    .test("validDiscount", "Discount range must be 1-100", (val) =>
+      val ? /^([0-9]|[1-9][0-9]|100)$/.test(val.toString()) : true
+    ),
   language: yup.string().required("Required"),
-  isbn: yup.string().required("Required"),
+  isbn: yup.string(),
   authorId: yup.string().required("Required"),
   publisherId: yup.string().required("Required"),
   libraryType: yup.string().required("Required"),
   readerGroup: yup.string().required("Required"),
-  category: yup.array().of(yup.string()),
+  categories: yup.array().of(yup.string()),
   cover: yup
     .mixed()
     .required("Required")

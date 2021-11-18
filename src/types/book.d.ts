@@ -6,7 +6,7 @@ export type TGetBook = {
   series: string;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  length: number;
   width: number;
   weight: number;
   stock: number;
@@ -70,7 +70,7 @@ type TGQLGetFormBookInit = {
     series: string;
     releaseYear: string;
     numberOfPages: number;
-    lenght: number;
+    length: number;
     width: number;
     weight: number;
     stock: number;
@@ -168,7 +168,7 @@ type TBookDetail = {
   releaseYear: string;
   numberOfPages: number;
   weight: number;
-  lenght: number;
+  length: number;
   width: number;
   stock: number;
   price: number;

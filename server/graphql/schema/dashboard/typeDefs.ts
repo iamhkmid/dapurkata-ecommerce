@@ -5,6 +5,10 @@ const typeDefs = gql`
     dashboard: Dashboard @auth(requires: ADMIN)
   }
 
+  type Subscription {
+    onlineUsers: [onlineUsers]
+  }
+
   type Dashboard {
     totalOrders: Int
     totalIncome: Int

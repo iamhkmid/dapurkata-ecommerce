@@ -558,6 +558,12 @@ export type TDashboardQuery = {
   ) => Promise<TGQLDashboardQuery>;
 };
 
+export type TDashboardSubcription = {
+  onlineUsers: {
+    subscribe: any;
+  };
+};
+
 export type TWishlistQuery = {
   wishlist: (parent: any, args: null, context: TCtx) => Promise<TGQLWishlist>;
 };

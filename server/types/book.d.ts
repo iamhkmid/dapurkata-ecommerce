@@ -13,7 +13,7 @@ export type TGQLBook = {
   discount: number;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  length: number;
   width: number;
   weight: number;
   stock: number;
@@ -66,29 +66,29 @@ export type TGQLBooksWithFilter = {
 export type TArgsBooksWithFilter = {
   filter: { search: string; skip: number; take: number; categoryId: string };
 };
-
+export type TArgsCreateBookData = {
+  title: string;
+  description: string;
+  edition: string;
+  series: string;
+  releaseYear: string;
+  numberOfPages: number;
+  condition: string;
+  coverType: string;
+  discount: number;
+  length: number;
+  weight: number;
+  stock: number;
+  price: number;
+  width: number;
+  language: string;
+  isbn: string;
+  authorId: string;
+  publisherId: string;
+  categoryIds: string[];
+};
 export type TArgsCreateBook = {
-  data: {
-    title: string;
-    description: string;
-    edition: string;
-    series: string;
-    releaseYear: string;
-    numberOfPages: number;
-    condition: string;
-    coverType: string;
-    discount: number;
-    lenght: number;
-    weight: number;
-    stock: number;
-    price: number;
-    width: number;
-    language: string;
-    isbn: string;
-    authorId: string;
-    publisherId: string;
-    categories: { id: string }[];
-  };
+  data: TArgsCreateBookData;
   cover?: any;
   bookPics?: any[];
 };
@@ -102,7 +102,7 @@ type TDBCreateBook = {
   coverType: string;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  length: number;
   weight: number;
   width: number;
   stock: number;
@@ -127,7 +127,7 @@ export type TDBUpdateBook = {
   coverType: string;
   releaseYear: string;
   numberOfPages: number;
-  lenght: number;
+  length: number;
   width: number;
   weight: number;
   stock: number;
@@ -154,7 +154,7 @@ export type TArgsUpdateBook = {
     discount: number;
     releaseYear: string;
     numberOfPages: number;
-    lenght: number;
+    length: number;
     width: number;
     weight: number;
     stock: number;
@@ -164,6 +164,6 @@ export type TArgsUpdateBook = {
     pictureDir: string;
     authorId: string;
     publisherId: string;
-    categories: { id: string }[];
+    categoryIds: string[];
   };
 };

@@ -1,6 +1,7 @@
 import { useMutation, useQuery } from "@apollo/client";
 import { useContext, useEffect } from "react";
 import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
+import { UserNavCtx } from "../../../../../contexts/UserNavCtx";
 import {
   CREATE_BOOK,
   DELETE_BOOK,
@@ -40,10 +41,12 @@ export const useGQLGetBook = (values: { bookId: string }) => {
     variables: values,
     errorPolicy: "all",
   });
+
   return { dataGBook: data?.book, errorGBook: error, loadGBook: loading };
 };
 
 export const useGQLCreateBook = () => {
+  const { dispatch } = useContext(AdminNavCtx);
   const [createBook, { data, error, loading }] = useMutation<TGQLCreateBook>(
     CREATE_BOOK,
     {
@@ -58,12 +61,10 @@ export const useGQLCreateBook = () => {
       cover: coverlist,
       ...rest
     } = values;
-    const cat1 = { id: readerGroup };
-    const cat2 = { id: libraryType };
-    const cat3 = categories ? categories.map((cat) => ({ id: cat })) : [];
-    const cats = [cat1, cat2, ...cat3];
+    const otherCats = categories ? categories.map((cat) => cat) : [];
+    const categoryIds = [readerGroup, libraryType, ...otherCats];
     const [cover] = coverlist;
-    const varData = { categories: cats, ...rest };
+    const varData = { categoryIds, ...rest };
     const variables = { data: varData, cover };
 
     return await createBook({
@@ -72,6 +73,23 @@ export const useGQLCreateBook = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.createBook) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil mengubah data buku", color: "success" },
+      });
+    }
+  }, [data?.createBook]);
+
+  useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "danger" },
+      });
+    }
+  }, [error]);
   return {
     createBook: GQLCreateBook,
     data: data?.createBook,
@@ -86,6 +104,7 @@ type TGQLCategoryArgs = {
   group: string;
 };
 export const useGQLUpdateBook = () => {
+  const { dispatch } = useContext(AdminNavCtx);
   const [updateBook, { data, error, loading }] = useMutation<TGQLUpdateBook>(
     UPDATE_BOOK,
     {
@@ -94,11 +113,11 @@ export const useGQLUpdateBook = () => {
   );
   const GQLUpdateBook = async (values: TFormUpdateBook) => {
     const { readerGroup, libraryType, categories, ...rest } = values;
-    const cat1 = { id: readerGroup };
-    const cat2 = { id: libraryType };
-    const cat3 = categories?.map((cat) => ({ id: cat }));
-    const cats = [cat1, cat2, ...cat3];
-    const variables = { data: { categories: cats, ...rest } };
+
+    const otherCats = categories ? categories.map((cat) => cat) : [];
+    const categoryIds = [readerGroup, libraryType, ...otherCats];
+    const varData = { categoryIds, ...rest };
+    const variables = { data: varData };
     return await updateBook({
       variables,
       refetchQueries: [
@@ -107,6 +126,23 @@ export const useGQLUpdateBook = () => {
       awaitRefetchQueries: true,
     });
   };
+  useEffect(() => {
+    if (data?.updateBook) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: "Berhasil mengubah data buku", color: "success" },
+      });
+    }
+  }, [data?.updateBook]);
+
+  useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { message: error.message, color: "danger" },
+      });
+    }
+  }, [error]);
   return {
     updateBook: GQLUpdateBook,
     data: data?.updateBook,

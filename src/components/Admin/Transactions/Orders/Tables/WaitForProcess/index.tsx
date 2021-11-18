@@ -5,7 +5,7 @@ import { useGQLOrderListsUsers } from "../../useGQLOrders";
 import Table from "../../../../../otherComps/Table";
 
 const WaitForProcess = () => {
-  const { data } = useGQLOrderListsUsers();
+  const { data, loading } = useGQLOrderListsUsers();
 
   return (
     <El.Main>
@@ -17,6 +17,7 @@ const WaitForProcess = () => {
             val.transactionStatus === "settlement" &&
             val.shippingStatus !== "inShipping"
         )}
+        isLoading={loading}
       />
     </El.Main>
   );

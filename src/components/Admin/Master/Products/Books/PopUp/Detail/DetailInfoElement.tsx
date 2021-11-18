@@ -2,75 +2,138 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   display: flex;
-  gap: 1.5rem;
-  max-width: 80vmax;
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    flex-wrap: wrap;
-    gap: 1rem;
+  gap: 24px;
+  width: 100%;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    flex-direction: column;
   }
 `;
 export const Section = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 8px;
 `;
 
-export const TextWrapper = styled.div`
+export const BookInfo = styled.div`
   display: flex;
+  font-family: "Poppins", sans-serif;
   flex-direction: column;
-`;
-export const Label = styled.h1`
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 1;
-  overflow: hidden;
-  font-family: "Roboto", sans-serif;
-  font-size: 0.8rem;
-  font-weight: 500;
-  color: ${({ theme }) => theme.input.label};
-
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    font-size: 0.8rem;
+  gap: 10px;
+  .title-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.7rem;
+  .title {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 1;
+    font-size: 24px;
+    font-weight: 700;
+    color: ${({ theme }) => theme.color[2]};
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 22px;
+    }
+  }
+  .author {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    line-height: 1;
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[2]};
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+  }
+  .label {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[2]};
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 10px;
+    }
+  }
+  .value {
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: ${({ theme }) => theme.color[1]};
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+  }
+  .price {
+    overflow: hidden;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: ${({ theme }) => theme.color[3]};
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+  }
+  .description {
+    max-height: 120px;
+    overflow-y: auto;
+    color: ${({ theme }) => theme.color[1]};
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      border-radius: 10px;
+      background: ${({ theme }) => theme.scrollbar.v1.thumb};
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+    }
   }
   transition: 0.4s all ease;
 `;
-export const Value = styled.h1`
-  overflow: hidden;
-  font-family: "Roboto", sans-serif;
-  font-size: 1.1rem;
-  font-weight: 300;
-  max-height: 10rem;
-  overflow-y: auto;
-  color: ${({ theme }) => theme.input.label};
-
-  ::-webkit-scrollbar {
-    width: 10px;
+export const DetailWrapper = styled.div`
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  .detail-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
-
-  ::-webkit-scrollbar-track {
-    background: ${({ theme }) => theme.scrollbar.v1.track};
-    border-radius: 10px;
+  .item-wrapper {
+    display: flex;
+    flex-direction: column;
   }
-
-  ::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: ${({ theme }) => theme.scrollbar.v1.thumb};
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
-  }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    font-size: 1rem;
-  }
-  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    font-size: 0.9rem;
-  }
-  transition: 0.4s all ease;
 `;
+
 export const Category = styled.div`
   font-family: "Poppins", sans-serif;
   font-size: 0.8rem;
@@ -98,6 +161,6 @@ export const CoverWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  height: 15rem;
   width: 10rem;
+  aspect-ratio: 7.6/11;
 `;

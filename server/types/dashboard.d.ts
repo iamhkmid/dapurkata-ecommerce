@@ -1,5 +1,12 @@
 type TGQLDashboardGraph = { labels: string[]; data: number[] };
 
+export type TOnlineUsers = {
+  id: string;
+  firstName: string;
+  lastName: string;
+  role: string;
+};
+
 export type TGQLDashboardQuery = {
   totalOrders: number;
   totalIncome: number;
@@ -15,11 +22,6 @@ export type TGQLDashboardQuery = {
     transactionStatus: string;
     transactionTime: Date;
   }[];
-  onlineUsers: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    role: string;
-  }[];
+  onlineUsers: TOnlineUsers[];
   graph: TGQLDashboardGraph;
 };

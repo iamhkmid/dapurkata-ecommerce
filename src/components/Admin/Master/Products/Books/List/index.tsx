@@ -8,7 +8,7 @@ const List = () => {
 
   return (
     <El.Container>
-      <Table columns={columns} data={dataGBooks} />
+      <Table columns={columns} data={dataGBooks} isLoading={loadGBooks} />
     </El.Container>
   );
 };

@@ -1,4 +1,4 @@
-import * as El from "./DetailELement";
+import * as El from "./DetailElement";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { useContext, useEffect } from "react";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
@@ -6,6 +6,7 @@ import DetailInfo from "./DetailInfo";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
 import { useGQLGetBook } from "../../useGQLBook";
 import PopUpHeaderAdmin from "../../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
+import LoadingBookDetail from "./LoadingBookDetail";
 
 const Detail = ({ id }) => {
   const { dispatch } = useContext(AdminNavCtx);
@@ -20,10 +21,10 @@ const Detail = ({ id }) => {
       <El.DetailBody>
         {loadGBook && (
           <El.LoadingWrapper>
-            <LoadingWrapper />
+            <LoadingBookDetail />
           </El.LoadingWrapper>
         )}
-        {dataGBook && <DetailInfo data={dataGBook} />}
+        {!loadGBook && dataGBook && <DetailInfo data={dataGBook} />}
       </El.DetailBody>
     </El.Main>
   );

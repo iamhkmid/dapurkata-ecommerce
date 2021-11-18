@@ -26,8 +26,12 @@ export type TGQLDashboardQuery = {
     totalIncome: number;
     totalUsers: number;
     totalProducts: number;
-    lastOrders: TLastOrders[];
-    onlineUsers: onlineUsers[];
+    lastOrders: TDashboardLastOrders[];
+    onlineUsers: TDashboardOnlineUsers[];
     graph: TDashboardGraph;
   };
+};
+
+export type TGQLOnlineUserSubs = {
+  onlineUsers: TDashboardOnlineUsers[];
 };

@@ -5,19 +5,6 @@ export const CREATE_BOOK = gql`
     createBook(data: $data, cover: $cover, otherImgs: $otherImgs) {
       id
       title
-      price
-      stock
-      Category {
-        id
-        name
-        group
-      }
-      Author {
-        id
-        name
-      }
-      createdAt
-      updatedAt
     }
   }
 `;

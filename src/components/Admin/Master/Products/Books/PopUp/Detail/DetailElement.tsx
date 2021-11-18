@@ -4,36 +4,31 @@ import { motion } from "framer-motion";
 export const Main = styled(motion.div)`
   font-family: "Poppins", sans-serif;
   display: flex;
-  min-width: 80%;
   width: 90%;
-  min-height: 70%;
   height: 90%;
+  min-width: 90%;
+  max-width: 90%;
+  min-height: 90%;
+  max-height: 90%;
 
   background: ${({ theme }) => theme.background[2]};
   box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
-  overflow: hidden;
   flex-direction: column;
   position: relative;
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    height: 100%;
-    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
   }
 `;
 
-export const Text1 = styled.h1`
-  font-family: "Roboto", sans-serif;
-  font-size: 1.2rem;
-  padding: 0.2rem 1rem;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color[1]};
-`;
-
 export const DetailBody = styled.div`
-  position: relative;
   display: flex;
   flex-direction: column;
+  width: 100%;
   height: 100%;
   margin-top: 2rem;
   padding: 1rem 2rem 2rem 2rem;
@@ -67,7 +62,6 @@ export const LoadingWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  min-width: 80vw;
-  min-height: 50vh;
-  position: relative;
+  width: 100%;
+  height: 100%;
 `;

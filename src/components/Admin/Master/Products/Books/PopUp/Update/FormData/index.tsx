@@ -56,8 +56,11 @@ const FormData = ({ bookId }) => {
       setValue("description", dataGFI.description);
       setValue("edition", dataGFI.edition);
       setValue("series", dataGFI.series);
+      setValue("condition", dataGFI.condition);
+      setValue("coverType", dataGFI.coverType);
+      setValue("discount", dataGFI.discount);
       setValue("numberOfPages", dataGFI.numberOfPages);
-      setValue("lenght", dataGFI.lenght);
+      setValue("length", dataGFI.length);
       setValue("width", dataGFI.width);
       setValue("weight", dataGFI.weight);
       setValue("releaseYear", dataGFI.releaseYear);
@@ -86,7 +89,6 @@ const FormData = ({ bookId }) => {
   }, [dataGFI, dataForm]);
   return (
     <El.Main>
-      <FormMessage message={error?.message} color="danger" />
       <El.Form onSubmit={handleSubmit(onSubmit)}>
         <El.FormInput>
           <El.InputGroup>
@@ -101,21 +103,68 @@ const FormData = ({ bookId }) => {
               isLoading={loadGFI}
               message={errors.title ? errors.title.message : null}
             />
-            <FormsControl
-              control="select"
-              name="authorId"
-              register={register}
-              label="Kepengarangan"
-              options={dataForm?.authors.map((author) => ({
-                id: author.id,
-                value: author.name,
-              }))}
-              error={errors.authorId ? true : false}
-              disabled={loading || loadGFI}
-              isLoading={loadForm || loadGFI}
-              message={errors.authorId ? "Required" : null}
-              clearError={clearErrors}
-            />
+            <El.SpanGroup>
+              <FormsControl
+                control="select"
+                name="coverType"
+                register={register}
+                label="Tipe Cover"
+                options={[
+                  { id: "HARD COVER", value: "Hard Cover" },
+                  { id: "SOFT COVER", value: "Soft Cover" },
+                ]}
+                error={errors.coverType ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadGFI}
+                message={errors.coverType ? "Required" : null}
+                clearError={clearErrors}
+              />
+              <FormsControl
+                control="select"
+                name="condition"
+                register={register}
+                label="Kondisi"
+                options={[
+                  { id: "NEW", value: "Baru" },
+                  { id: "PRELOVED", value: "Preloved" },
+                ]}
+                error={errors.condition ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadGFI}
+                message={errors.condition ? "Required" : null}
+                clearError={clearErrors}
+              />
+            </El.SpanGroup>
+            <El.SpanGroup>
+              <FormsControl
+                control="select"
+                name="authorId"
+                register={register}
+                label="Kepengarangan"
+                options={dataForm?.authors.map((author) => ({
+                  id: author.id,
+                  value: author.name,
+                }))}
+                error={errors.authorId ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadForm || loadGFI}
+                message={errors.authorId ? "Required" : null}
+                clearError={clearErrors}
+              />
+              <FormsControl
+                control="input"
+                type="number"
+                name="numberOfPages"
+                register={register}
+                label="Jumlah Halaman"
+                error={errors.numberOfPages ? true : false}
+                disabled={loading || loadGFI}
+                isLoading={loadGFI}
+                message={
+                  errors.numberOfPages ? errors.numberOfPages.message : null
+                }
+              />
+            </El.SpanGroup>
             <FormsControl
               control="textarea"
               name="description"
@@ -156,20 +205,20 @@ const FormData = ({ bookId }) => {
               <FormsControl
                 control="input"
                 type="number"
-                name="lenght"
+                name="length"
                 register={register}
-                label="Panjang"
-                error={errors.lenght ? true : false}
+                label="Panjang (cm)"
+                error={errors.length ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
-                message={errors.lenght ? errors.lenght.message : null}
+                message={errors.length ? errors.length.message : null}
               />
               <FormsControl
                 control="input"
                 type="number"
                 name="width"
                 register={register}
-                label="Lebar"
+                label="Lebar (cm)"
                 error={errors.width ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
@@ -180,7 +229,7 @@ const FormData = ({ bookId }) => {
                 type="number"
                 name="weight"
                 register={register}
-                label="Berat"
+                label="Berat (gram)"
                 error={errors.weight ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
@@ -304,7 +353,7 @@ const FormData = ({ bookId }) => {
                 type="number"
                 name="price"
                 register={register}
-                label="Harga"
+                label="Harga (Rp)"
                 error={errors.price ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
@@ -313,15 +362,13 @@ const FormData = ({ bookId }) => {
               <FormsControl
                 control="input"
                 type="number"
-                name="numberOfPages"
+                name="discount"
                 register={register}
-                label="Halaman"
-                error={errors.numberOfPages ? true : false}
+                label="Diskon (%)"
+                error={errors.discount ? true : false}
                 disabled={loading || loadGFI}
                 isLoading={loadGFI}
-                message={
-                  errors.numberOfPages ? errors.numberOfPages.message : null
-                }
+                message={errors.discount ? errors.discount.message : null}
               />
             </El.SpanGroupGrid3>
             <FormsControl
