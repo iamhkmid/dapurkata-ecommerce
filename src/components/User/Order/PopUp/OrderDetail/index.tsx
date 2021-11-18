@@ -10,6 +10,7 @@ import {
 } from "../../../../../services/getStatus";
 import { TGQLOrderDetaiBylUserQuery } from "../../../../../types/transaction";
 import Button from "../../../../otherComps/Buttons/Button";
+import LoadingPopup from "../../../../otherComps/Loading/LoadingPopup";
 import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
 import * as El from "./OrderDetailElement";
 
@@ -33,7 +34,8 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
       exit={{ opacity: 0 }}
     >
       <PopUpHeader title="Pesanan" />
-      {data?.order && (
+      {loading && <LoadingPopup />}
+      {!loading && data?.order && (
         <El.Section>
           <div>
             {data.order.transactionStatus !== "expire" && (

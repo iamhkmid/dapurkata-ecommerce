@@ -12,17 +12,21 @@ export const Main = styled(motion.div)`
   position: relative;
   max-width: 80%;
   min-width: 80%;
-  min-height: 95%;
-  max-height: 95%;
+  width: 80%;
+  min-height: 90%;
+  max-height: 90%;
+  height: 90%;
   font-size: 1rem;
   margin: 0.2rem;
   overflow: hidden;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    min-width: 90%;
     max-width: 90%;
+    min-width: 90%;
+    width: 90%;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     min-height: max-content;
+    height: 80%;
     width: 100%;
     max-width: 100%;
   }

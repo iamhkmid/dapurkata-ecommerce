@@ -10,18 +10,23 @@ export const Main = styled(motion.div)`
   box-shadow: ${({ theme }) => theme.boxShadow};
   flex-direction: column;
   position: relative;
-  max-width: 50%;
-  min-height: 90%;
-  max-height: 95%;
+  max-width: 80%;
   min-width: 80%;
+  width: 80%;
+  min-height: 90%;
+  max-height: 90%;
+  height: 90%;
   font-size: 1rem;
   overflow: hidden;
   @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
-    min-width: 90%;
     max-width: 90%;
+    min-width: 90%;
+    width: 90%;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    min-width: 100%;
+    min-height: 80%;
+    max-height: 100%;
+    width: 100%;
     max-width: 100%;
   }
   transition: 0.4s all ease;

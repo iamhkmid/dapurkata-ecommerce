@@ -14,6 +14,7 @@ import TransactionStatus from "./TransactionStatus";
 import { useQuery, useSubscription } from "@apollo/client";
 import { ORDER_INFO_SUBSCRIPTION } from "../../../../../graphql/transaction/subscription";
 import { PAYMENT_INFO } from "../../../../../graphql/transaction/queries";
+import LoadingPopup from "../../../../otherComps/Loading/LoadingPopup";
 
 type TProps = {
   orderId: string;
@@ -53,7 +54,8 @@ const OrderPaymentInfo: FC<TProps> = ({ orderId }) => {
       exit={{ opacity: 0 }}
     >
       <PopUpHeader title="Info Pembayaran" />
-      {data?.order && (
+      {loading && <LoadingPopup />}
+      {!loading && data?.order && (
         <El.PaymentInfo>
           <div>
             <El.Payment>
