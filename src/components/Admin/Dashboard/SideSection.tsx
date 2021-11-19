@@ -65,7 +65,7 @@ const SideSection: FC<TProps> = (props) => {
                 onClick={() =>
                   dispatch({
                     type: "SHOW_POPUP",
-                    value: { name: "USER_DETAIL", value: val.id },
+                    value: { name: "USER_DETAIL", userId: val.id },
                   })
                 }
               >

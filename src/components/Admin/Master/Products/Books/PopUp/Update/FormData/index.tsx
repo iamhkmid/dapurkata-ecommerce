@@ -43,7 +43,7 @@ const FormData = ({ bookId }) => {
       .then(({ data }) => {
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "BOOK_DETAIL", value: data.updateBook.id },
+          value: { name: "BOOK_DETAIL", bookId: data.updateBook.id },
         });
       })
       .catch(() => {});
@@ -406,7 +406,7 @@ const FormData = ({ bookId }) => {
             name="Batalkan"
             type="button"
             disabled={loading || loadGFI}
-            onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+            onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
           />
         </El.SubmitWrapper>
       </El.Form>

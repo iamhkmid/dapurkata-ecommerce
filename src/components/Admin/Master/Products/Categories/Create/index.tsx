@@ -39,7 +39,10 @@ const Create = () => {
         reset();
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "CATEGORY_DETAIL", value: data.createCategory.id },
+          value: {
+            name: "CATEGORY_DETAIL",
+            categoryId: data.createCategory.id,
+          },
         });
       })
       .catch(() => {});

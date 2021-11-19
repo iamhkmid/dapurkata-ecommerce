@@ -42,7 +42,10 @@ export const columns = [
             onClick={() => {
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "PUBLISHER_DETAIL", value: d.row.values.id },
+                value: {
+                  name: "PUBLISHER_DETAIL",
+                  publisherId: d.row.values.id,
+                },
               });
             }}
           />
@@ -51,7 +54,10 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "PUBLISHER_UPDATE", value: d.row.values.id },
+                value: {
+                  name: "PUBLISHER_UPDATE",
+                  publisherId: d.row.values.id,
+                },
               })
             }
           />
@@ -60,7 +66,10 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "PUBLISHER_DELETE", value: d.row.values.id },
+                value: {
+                  name: "PUBLISHER_DELETE",
+                  publisherId: d.row.values.id,
+                },
               })
             }
           />

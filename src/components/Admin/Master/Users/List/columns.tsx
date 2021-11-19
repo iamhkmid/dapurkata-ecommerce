@@ -59,7 +59,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "USER_DETAIL", value: d.row.values.id },
+                value: { name: "USER_DETAIL", userId: d.row.values.id },
               })
             }
           />
@@ -68,7 +68,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "USER_UPDATE", value: d.row.values.id },
+                value: { name: "USER_UPDATE", userId: d.row.values.id },
               })
             }
           />
@@ -77,7 +77,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "USER_DELETE", value: d.row.values.id },
+                value: { name: "USER_DELETE", userId: d.row.values.id },
               })
             }
           />

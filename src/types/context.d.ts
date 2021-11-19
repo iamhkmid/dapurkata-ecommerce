@@ -128,28 +128,25 @@ type TMessage = {
 
 // ADMIN NAV CONTEXT
 type TAdminPopUpVal =
-  | "BOOK_UPDATE"
-  | "BOOK_DELETE"
-  | "BOOK_DETAIL"
-  | "CATEGORY_UPDATE"
-  | "CATEGORY_DELETE"
-  | "CATEGORY_DETAIL"
-  | "AUTHOR_UPDATE"
-  | "AUTHOR_DELETE"
-  | "AUTHOR_DETAIL"
-  | "PUBLISHER_UPDATE"
-  | "PUBLISHER_DELETE"
-  | "PUBLISHER_DETAIL"
-  | "USER_DETAIL"
-  | "USER_DELETE"
-  | "USER_UPDATE";
+  | { name: "BOOK_UPDATE"; bookId: string }
+  | { name: "BOOK_DELETE"; bookId: string }
+  | { name: "BOOK_DETAIL"; bookId: string }
+  | { name: "CATEGORY_UPDATE"; categoryId: string }
+  | { name: "CATEGORY_DELETE"; categoryId: string }
+  | { name: "CATEGORY_DETAIL"; categoryId: string }
+  | { name: "AUTHOR_UPDATE"; authorId: string }
+  | { name: "AUTHOR_DELETE"; authorId: string }
+  | { name: "AUTHOR_DETAIL"; authorId: string }
+  | { name: "PUBLISHER_UPDATE"; publisherId: string }
+  | { name: "PUBLISHER_DELETE"; publisherId: string }
+  | { name: "PUBLISHER_DETAIL"; publisherId: string }
+  | { name: "USER_DETAIL"; userId: string }
+  | { name: "USER_DELETE"; userId: string }
+  | { name: "USER_UPDATE"; userId: string };
 
 type TAdminPopUp = {
-  name: TAdminPopUpVal;
-  value?: string;
-  onClose?: TAdminPopUpVal;
-  onCloseValue?: string;
-};
+  backTo: TAdminPopUp;
+} & TAdminPopUpVal;
 export type TAdminNavState = {
   sidebar: boolean;
   popup: TAdminPopUp;
@@ -159,8 +156,9 @@ type TAdminNavAction =
   | { type: "OPEN_SIDEBAR" }
   | { type: "CLOSE_SIDEBAR" }
   | { type: "SIDEBAR_TOGGLER" }
-  | { type: "SHOW_POPUP"; value: TAdminPopUp }
-  | { type: "CLOSE_POPUP" }
+  | { type: "SHOW_POPUP"; value: TAdminPopUpVal }
+  | { type: "CLOSE_CURRENT_POPUP" }
+  | { type: "CLOSE_ALL_POPUP" }
   | {
       type: "SHOW_GLOBAL_MESSAGE";
       value: {

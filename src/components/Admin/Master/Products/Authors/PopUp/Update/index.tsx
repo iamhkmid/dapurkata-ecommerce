@@ -38,7 +38,7 @@ const Update = ({ id }) => {
     await updateAuthor({ authorId: id, ...values }).then(({ data }) => {
       dispatch({
         type: "SHOW_POPUP",
-        value: { name: "AUTHOR_DETAIL", value: data.updateAuthor.id },
+        value: { name: "AUTHOR_DETAIL", authorId: data.updateAuthor.id },
       });
     });
   };
@@ -74,7 +74,7 @@ const Update = ({ id }) => {
               name="Batalkan"
               type="button"
               disabled={loadUpdate}
-              onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+              onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
             />
           </El.SubmitWrapper>
         </El.Form>

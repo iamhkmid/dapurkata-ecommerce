@@ -39,7 +39,10 @@ const Update = ({ id }) => {
       .then(({ data }) =>
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "CATEGORY_DETAIL", value: data.updateCategory.id },
+          value: {
+            name: "CATEGORY_DETAIL",
+            categoryId: data.updateCategory.id,
+          },
         })
       )
       .catch(() => {});
@@ -94,7 +97,7 @@ const Update = ({ id }) => {
               name="Batalkan"
               type="button"
               disabled={loadUpdate}
-              onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+              onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
             />
           </El.SubmitWrapper>
         </El.Form>

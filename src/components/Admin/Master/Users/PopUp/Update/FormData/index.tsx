@@ -132,7 +132,7 @@ const FormData = ({ userId }) => {
             name="Batalkan"
             type="button"
             disabled={loadingInit}
-            onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+            onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
           />
         </El.SubmitWrapper>
       </El.Form>

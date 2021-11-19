@@ -95,7 +95,7 @@ const Delete = ({ userId }) => {
               <Button
                 name="Batalkan"
                 type="button"
-                onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+                onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
               />
             </El.ButtonWrapper>
           </El.Form>

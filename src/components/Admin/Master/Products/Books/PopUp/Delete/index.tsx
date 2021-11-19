@@ -40,14 +40,14 @@ const Delete = ({ id }) => {
               color="danger"
               onClick={() => {
                 deleteBook({ bookId: id })
-                  .then(() => dispatch({ type: "CLOSE_POPUP" }))
+                  .then(() => dispatch({ type: "CLOSE_ALL_POPUP" }))
                   .catch(() => {});
               }}
             />
             <Button
               name="Batalkan"
               type="button"
-              onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+              onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
             />
           </El.ButtonWrapper>
         </El.Content>

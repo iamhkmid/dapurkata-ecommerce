@@ -9,6 +9,7 @@ import * as El from "./PopUpHeaderElement";
 
 type TPopUpHeader = {
   title?: string;
+  closePopup?: "ALL" | "CURRENT";
   withSideMenu?: {
     setShowSideMenu: (p: boolean) => void;
     showSideMenu: boolean;
@@ -17,7 +18,7 @@ type TPopUpHeader = {
 };
 
 const PopUpHeaderAdmin: FC<TPopUpHeader> = (props) => {
-  const { title, withSideMenu: ws, themeToggle } = props;
+  const { title, withSideMenu: ws, themeToggle, closePopup } = props;
   const { dispatch } = useContext(AdminNavCtx);
   const { width } = useWindowSize();
   useEffect(() => {
@@ -42,7 +43,14 @@ const PopUpHeaderAdmin: FC<TPopUpHeader> = (props) => {
         )}
         <El.Title>{title}</El.Title>
       </El.Left>
-      <El.CloseBtn onClick={() => dispatch({ type: "CLOSE_POPUP" })}>
+      <El.CloseBtn
+        onClick={() =>
+          dispatch({
+            type:
+              closePopup === "ALL" ? "CLOSE_ALL_POPUP" : "CLOSE_CURRENT_POPUP",
+          })
+        }
+      >
         {IconsControl("close-outline")}
       </El.CloseBtn>
     </El.Main>

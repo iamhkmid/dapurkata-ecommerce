@@ -31,7 +31,10 @@ const Create = () => {
         reset();
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "PUBLISHER_DETAIL", value: data.createPublisher.id },
+          value: {
+            name: "PUBLISHER_DETAIL",
+            publisherId: data.createPublisher.id,
+          },
         });
       })
       .catch(() => {});

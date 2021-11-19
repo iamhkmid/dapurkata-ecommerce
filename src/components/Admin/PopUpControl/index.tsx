@@ -43,34 +43,40 @@ const PopUpControl = () => {
         >
           <Backround />
           <GlobalMessageAdmin />
-          {popup.name === "AUTHOR_DELETE" && <AuthorDelete id={popup.value} />}
-          {popup.name === "AUTHOR_DETAIL" && <AuthorDetail id={popup.value} />}
-          {popup.name === "AUTHOR_UPDATE" && <AuthorUpdate id={popup.value} />}
-          {popup?.name === "BOOK_DELETE" && <BookDelete id={popup.value} />}
-          {popup?.name === "BOOK_DETAIL" && <BookDetail id={popup.value} />}
-          {popup?.name === "BOOK_UPDATE" && <BookUpadate id={popup.value} />}
+          {popup.name === "AUTHOR_DELETE" && (
+            <AuthorDelete id={popup.authorId} />
+          )}
+          {popup.name === "AUTHOR_DETAIL" && (
+            <AuthorDetail id={popup.authorId} />
+          )}
+          {popup.name === "AUTHOR_UPDATE" && (
+            <AuthorUpdate id={popup.authorId} />
+          )}
+          {popup?.name === "BOOK_DELETE" && <BookDelete id={popup.bookId} />}
+          {popup?.name === "BOOK_DETAIL" && <BookDetail id={popup.bookId} />}
+          {popup?.name === "BOOK_UPDATE" && <BookUpadate id={popup.bookId} />}
           {popup.name === "CATEGORY_DELETE" && (
-            <CategoryDelete id={popup.value} />
+            <CategoryDelete id={popup.categoryId} />
           )}
           {popup.name === "CATEGORY_DETAIL" && (
-            <CategoryDetail id={popup.value} />
+            <CategoryDetail id={popup.categoryId} />
           )}
           {popup.name === "CATEGORY_UPDATE" && (
-            <CategoryUpdate id={popup.value} />
+            <CategoryUpdate id={popup.categoryId} />
           )}
           {popup.name === "PUBLISHER_DELETE" && (
-            <PublisherDelete id={popup.value} />
+            <PublisherDelete id={popup.publisherId} />
           )}
           {popup.name === "PUBLISHER_DETAIL" && (
-            <PublisherDetail id={popup.value} />
+            <PublisherDetail id={popup.publisherId} />
           )}
           {popup.name === "PUBLISHER_UPDATE" && (
-            <PublisherUpdate id={popup.value} />
+            <PublisherUpdate id={popup.publisherId} />
           )}
 
-          {popup.name === "USER_DELETE" && <UserDelete userId={popup.value} />}
-          {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.value} />}
-          {popup.name === "USER_DETAIL" && <UserDetail userId={popup.value} />}
+          {popup.name === "USER_DELETE" && <UserDelete userId={popup.userId} />}
+          {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.userId} />}
+          {popup.name === "USER_DETAIL" && <UserDetail userId={popup.userId} />}
         </Main>
       )}
     </AnimatePresence>

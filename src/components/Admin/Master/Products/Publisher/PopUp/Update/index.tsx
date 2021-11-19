@@ -42,7 +42,10 @@ const Update = ({ id }) => {
     await updatePublisher({ publisherId: id, ...values }).then(({ data }) => {
       dispatch({
         type: "SHOW_POPUP",
-        value: { name: "PUBLISHER_DETAIL", value: data.updatePublisher.id },
+        value: {
+          name: "PUBLISHER_DETAIL",
+          publisherId: data.updatePublisher.id,
+        },
       });
     });
   };
@@ -78,7 +81,7 @@ const Update = ({ id }) => {
               name="Batalkan"
               type="button"
               disabled={loadUpdate}
-              onClick={() => dispatch({ type: "CLOSE_POPUP" })}
+              onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
             />
           </El.SubmitWrapper>
         </El.Form>

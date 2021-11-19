@@ -56,7 +56,7 @@ export const reducer: TUserNavRdcr = (state, action) => {
 
 export const initialValue: TUserNavState = {
   menu: null,
-  popup: { name: null, value: null, backTo: null },
+  popup: { name: null, backTo: null },
   globalMessage: { color: null, message: null, isShowed: false },
   selectedNavMenu: null,
 };

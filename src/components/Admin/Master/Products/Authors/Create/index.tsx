@@ -31,7 +31,7 @@ const Create = () => {
         reset();
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "AUTHOR_DETAIL", value: data.createAuthor.id },
+          value: { name: "AUTHOR_DETAIL", authorId: data.createAuthor.id },
         });
       })
       .catch(() => {});

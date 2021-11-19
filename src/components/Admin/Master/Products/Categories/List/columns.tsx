@@ -48,7 +48,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "CATEGORY_DETAIL", value: d.row.values.id },
+                value: { name: "CATEGORY_DETAIL", categoryId: d.row.values.id },
               })
             }
           />
@@ -57,7 +57,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "CATEGORY_UPDATE", value: d.row.values.id },
+                value: { name: "CATEGORY_UPDATE", categoryId: d.row.values.id },
               })
             }
           />
@@ -66,7 +66,7 @@ export const columns = [
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "CATEGORY_DELETE", value: d.row.values.id },
+                value: { name: "CATEGORY_DELETE", categoryId: d.row.values.id },
               })
             }
           />

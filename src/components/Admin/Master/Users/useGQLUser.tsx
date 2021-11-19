@@ -74,7 +74,7 @@ export const useGQLDeleteUser = () => {
   };
   useEffect(() => {
     if (!!data?.deleteUser) {
-      dispatch({ type: "CLOSE_POPUP" });
+      dispatch({ type: "CLOSE_ALL_POPUP" });
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: { message: "Berhasil menghapus data", color: "success" },
@@ -139,7 +139,7 @@ export const useGQLUpdateUser = () => {
     if (data?.updateUser)
       dispatch({
         type: "SHOW_POPUP",
-        value: { name: "USER_DETAIL", value: data.updateUser.id },
+        value: { name: "USER_DETAIL", userId: data.updateUser.id },
       });
   }, [data?.updateUser]);
   return {
