@@ -47,12 +47,12 @@ const Create = () => {
             type="text"
             name="name"
             register={register}
-            label="Name"
+            label="Nama"
             error={errors.name ? true : false}
             message={errors.name ? errors.name.message : null}
           />
           <El.SubmitWrapper>
-            <Button type="submit" name="Add" disabled={false} />
+            <Button type="submit" name="Simpan" disabled={false} />
           </El.SubmitWrapper>
         </El.Form>
       </El.FormContainer>

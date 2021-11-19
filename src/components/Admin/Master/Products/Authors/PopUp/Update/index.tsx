@@ -62,16 +62,16 @@ const Update = ({ id }) => {
             type="text"
             name="name"
             register={register}
-            label="Name"
+            label="Nama"
             error={errors.name ? true : false}
             disabled={loadUpdate}
             isLoading={loadInit}
             message={errors.name ? errors.name.message : null}
           />
           <El.SubmitWrapper>
-            <Button type="submit" name="Edit" disabled={false} />
+            <Button type="submit" name="Ubah" disabled={false} />
             <Button
-              name="Cancel"
+              name="Batalkan"
               type="button"
               disabled={loadUpdate}
               onClick={() => dispatch({ type: "CLOSE_POPUP" })}

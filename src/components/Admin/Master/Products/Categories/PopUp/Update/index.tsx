@@ -65,7 +65,7 @@ const Update = ({ id }) => {
             type="text"
             name="name"
             register={register}
-            label="Name"
+            label="Nama"
             error={errors.name ? true : false}
             disabled={loadUpdate}
             isLoading={loadInit}
@@ -75,7 +75,7 @@ const Update = ({ id }) => {
             control="select"
             name="group"
             register={register}
-            label="Group"
+            label="Kelompok"
             options={formCategory.group}
             error={errors.group ? true : false}
             message={errors.group ? "Required" : null}
@@ -86,12 +86,12 @@ const Update = ({ id }) => {
           <El.SubmitWrapper>
             <Button
               type="submit"
-              name="Edit"
+              name="Ubah"
               isLoading={loadUpdate}
               disabled={loadInit}
             />
             <Button
-              name="Cancel"
+              name="Batalkan"
               type="button"
               disabled={loadUpdate}
               onClick={() => dispatch({ type: "CLOSE_POPUP" })}

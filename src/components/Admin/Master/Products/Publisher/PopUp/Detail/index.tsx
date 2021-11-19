@@ -26,7 +26,7 @@ const Detail = ({ id }) => {
                 <td>{data.id}</td>
               </tr>
               <tr>
-                <td>Name</td>
+                <td>Nama</td>
                 <td>{data.name}</td>
               </tr>
               <tr>

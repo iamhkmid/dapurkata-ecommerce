@@ -16,7 +16,7 @@ export const IconsControl = (name: string) => {
           <path d="M6.4 20a9 9 0 1 1 11.2 0z" />
         </svg>
       );
-    case "Products":
+    case "Produk":
       return (
         <svg
           viewBox="0 0 24 24"
@@ -31,7 +31,7 @@ export const IconsControl = (name: string) => {
           <line x1="12" y1="12" x2="4" y2="7.5" />
         </svg>
       );
-    case "Users":
+    case "Pengguna":
       return (
         <svg
           viewBox="0 0 24 24"
@@ -46,7 +46,7 @@ export const IconsControl = (name: string) => {
           <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
         </svg>
       );
-    case "Orders":
+    case "Pesanan":
       return (
         <svg
           viewBox="0 0 24 24"

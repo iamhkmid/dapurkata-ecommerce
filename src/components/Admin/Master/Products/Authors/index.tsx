@@ -5,7 +5,7 @@ import List from "./List";
 import * as El from "./AuthorsElement";
 
 const Authors = () => {
-  const navItem = ["Create", "Author list"];
+  const navItem = ["Tambah", "Daftar Kepengarangan"];
   const [navState, setNavState] = useState(1);
 
   return (

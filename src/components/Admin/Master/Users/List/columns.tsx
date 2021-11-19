@@ -22,7 +22,7 @@ export const columns = [
     accessor: "username",
   },
   {
-    Header: "Name",
+    Header: "Nama",
     Cell: (d) => {
       return `${d.row.original.firstName} ${d.row.original.lastName || ""}`;
     },

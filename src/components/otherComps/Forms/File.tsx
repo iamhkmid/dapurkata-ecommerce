@@ -34,7 +34,7 @@ const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
     <El.InputContainer>
       <El.Label>{label}</El.Label>
       <El.InputWrapper className={error && "error"}>
-        <El.StyledInput htmlFor={name}>Choose file</El.StyledInput>
+        <El.StyledInput htmlFor={name}>Pilih file</El.StyledInput>
         <El.HiddenInput
           id={name}
           ref={(ref) => register(ref)}
@@ -48,7 +48,7 @@ const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
         ) : currURL ? (
           <El.ImagePreview src={currURL} />
         ) : (
-          <El.NoImage>No File</El.NoImage>
+          <El.NoImage>Tidak ada file</El.NoImage>
         )}
         {fileName ? (
           <El.FileName>{fileName}</El.FileName>

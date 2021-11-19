@@ -25,7 +25,7 @@ type TItem = {
 };
 export const Item = styled.div<TItem>`
   font-family: "Roboto", sans-serif;
-  font-size: 0.9rem;
+  font-size: 14px;
   position: relative;
   display: flex;
   align-items: center;
@@ -59,6 +59,9 @@ export const Item = styled.div<TItem>`
   :hover {
     background: ${({ theme }) => theme.button.hover.sidebar.background};
     color: ${({ theme }) => theme.button.focus.sidebar.color};
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 13px;
   }
   transition: 0.4s all ease;
 `;

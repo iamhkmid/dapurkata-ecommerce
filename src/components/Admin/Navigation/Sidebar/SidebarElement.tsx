@@ -86,10 +86,13 @@ export const ItemGroup = styled.div`
 `;
 
 export const GroupName = styled.h1`
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 500;
   padding: 0 1rem;
   margin-bottom: 0.5rem;
   color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 13px;
+  }
   transition: 0.4s all ease;
 `;

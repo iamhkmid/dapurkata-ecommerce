@@ -48,7 +48,7 @@ type TGQLCreateRecipient = {
 };
 
 type TGQLDelRecipient = {
-  deleteRecipient: TRecipient;
+  deleteRecipient: { message: String };
 };
 
 type TGQLUpdateRecipient = {

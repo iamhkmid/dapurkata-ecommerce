@@ -40,7 +40,7 @@ const Delete = ({ id }) => {
           )}
           <El.ButtonWrapper>
             <Button
-              name="Delete"
+              name="Hapus"
               type="button"
               color="danger"
               onClick={() => {
@@ -50,7 +50,7 @@ const Delete = ({ id }) => {
               }}
             />
             <Button
-              name="Cancel"
+              name="Batalkan"
               type="button"
               onClick={() => dispatch({ type: "CLOSE_POPUP" })}
             />

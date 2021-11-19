@@ -6,7 +6,7 @@ import List from "./List";
 import * as El from "./BooksElement";
 
 const Books = () => {
-  const navItem = ["Create", "Book list"];
+  const navItem = ["Tambah", "Daftar Buku"];
   const [navState, setNavState] = useState(1);
 
   return (

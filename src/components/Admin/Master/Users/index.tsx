@@ -5,7 +5,7 @@ import List from "./List";
 import * as El from "./UsersElement";
 
 const Users = () => {
-  const navItem = ["Create", "Users list"];
+  const navItem = ["Tambah", "Daftar Pengguna"];
   const [navState, setNavState] = useState(1);
 
   return (

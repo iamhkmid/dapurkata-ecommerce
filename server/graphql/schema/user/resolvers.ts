@@ -12,6 +12,7 @@ import { checkUser, hashPassword, saveUserPic } from "./utils";
 import bcrypt from "bcrypt";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";
+import { TWishlistBook } from "../../../types/wishlist";
 
 export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
@@ -152,4 +153,33 @@ export const User: TUser = {
         },
       })
     ).Recipient,
+  Wishlist: async ({ id }, _, { db }) => {
+    const wishlist = await db.wishlist.findUnique({
+      where: { userId: id },
+      include: {
+        Book: {
+          select: {
+            id: true,
+            title: true,
+            BookPicture: { where: { type: { contains: "COVER" } } },
+            Author: { select: { id: true, name: true } },
+          },
+        },
+      },
+    });
+    const { Book, ...resWishlist } = wishlist;
+    const books = Book.reduce(
+      (acc, curr) => [
+        ...acc,
+        {
+          id: curr.id,
+          title: curr.title,
+          coverURL: curr.BookPicture[0]?.url || null,
+          Author: curr.Author,
+        },
+      ],
+      [] as TWishlistBook[]
+    );
+    return { ...resWishlist, Book: books };
+  },
 };

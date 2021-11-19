@@ -129,7 +129,7 @@ const FormData = ({ userId }) => {
             disabled={loadingInit}
           />
           <Button
-            name="Cancel"
+            name="Batalkan"
             type="button"
             disabled={loadingInit}
             onClick={() => dispatch({ type: "CLOSE_POPUP" })}

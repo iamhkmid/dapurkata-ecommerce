@@ -22,8 +22,8 @@ export const columns = [
       return <NumberColumn>{1 + parseInt(row.cell.row.id)}</NumberColumn>;
     },
   },
-  { Header: "Name", accessor: "name" },
-  { Header: "Group", accessor: "group" },
+  { Header: "Nama", accessor: "name" },
+  { Header: "Kelompok", accessor: "group" },
   {
     Header: "Created At",
     accessor: "createdAt",

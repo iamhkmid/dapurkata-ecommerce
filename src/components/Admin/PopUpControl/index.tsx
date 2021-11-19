@@ -15,33 +15,9 @@ import PublisherUpdate from "../Master/Products/Publisher/PopUp/Update";
 import PublisherDetail from "../Master/Products/Publisher/PopUp/Detail";
 import UserDelete from "../Master/Users/PopUp/Delete";
 import UserUpdate from "../Master/Users/PopUp/Update";
+import UserDetail from "../Master/Users/PopUp/Detail";
 import styled from "styled-components";
 import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
-
-export const Main = styled(motion.div)`
-  display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  z-index: 100;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem 0.3rem;
-`;
-
-export const Backround = styled.div`
-  display: flex;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  z-index: -1;
-  background: ${({ theme }) => theme.popup};
-  backdrop-filter: blur(4px);
-  transition: 0.4s all ease;
-  transition-property: backdrop-filter;
-`;
 
 const PopUpControl = () => {
   const {
@@ -94,6 +70,7 @@ const PopUpControl = () => {
 
           {popup.name === "USER_DELETE" && <UserDelete userId={popup.value} />}
           {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.value} />}
+          {popup.name === "USER_DETAIL" && <UserDetail userId={popup.value} />}
         </Main>
       )}
     </AnimatePresence>
@@ -101,3 +78,28 @@ const PopUpControl = () => {
 };
 
 export default PopUpControl;
+
+export const Main = styled(motion.div)`
+  display: flex;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 0.3rem;
+`;
+
+export const Backround = styled.div`
+  display: flex;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
+  background: ${({ theme }) => theme.popup};
+  backdrop-filter: blur(4px);
+  transition: 0.4s all ease;
+  transition-property: backdrop-filter;
+`;

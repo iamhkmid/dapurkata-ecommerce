@@ -32,7 +32,7 @@ const Delete = ({ id }) => {
                 <h1 className="value">{dataInit.id}</h1>
               </El.TextGroup>
               <El.TextGroup>
-                <h1 className="key">Name</h1>
+                <h1 className="key">Nama</h1>
                 <h1 className="separator">:</h1>
                 <h1 className="value">{dataInit.name}</h1>
               </El.TextGroup>
@@ -40,7 +40,7 @@ const Delete = ({ id }) => {
           )}
           <El.ButtonWrapper>
             <Button
-              name="Delete"
+              name="Hapus"
               type="button"
               color="danger"
               onClick={() => {
@@ -50,7 +50,7 @@ const Delete = ({ id }) => {
               }}
             />
             <Button
-              name="Cancel"
+              name="Batalkan"
               type="button"
               onClick={() => dispatch({ type: "CLOSE_POPUP" })}
             />

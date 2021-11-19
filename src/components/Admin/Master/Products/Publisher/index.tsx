@@ -5,7 +5,7 @@ import List from "./List";
 import * as El from "./PublisherElement";
 
 const Publisher = () => {
-  const navItem = ["Create", "Publisher list"];
+  const navItem = ["Tambah", "Daftar Penerbit"];
   const [navState, setNavState] = useState(1);
 
   return (

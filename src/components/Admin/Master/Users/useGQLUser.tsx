@@ -81,6 +81,14 @@ export const useGQLDeleteUser = () => {
       });
     }
   }, [data?.deleteUser]);
+  useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { color: "danger", message: error.message },
+      });
+    }
+  }, [error]);
   return {
     deleteUser: GQLDeleteUser,
     data: data?.deleteUser,

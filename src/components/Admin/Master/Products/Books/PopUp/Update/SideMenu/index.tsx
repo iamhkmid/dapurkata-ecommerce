@@ -2,7 +2,7 @@ import { useState } from "react";
 import * as El from "./SideMenuElement";
 
 const Sidebar = ({ navState, setNavState, showSideMenu }) => {
-  const sidebar = ["Data", "Images"];
+  const sidebar = ["Data", "Gambar"];
   return (
     <El.SideMenu active={showSideMenu}>
       <El.Menu>

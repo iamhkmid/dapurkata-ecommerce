@@ -52,7 +52,7 @@ const ButtonElement = styled.button<TButtonElement>`
     height: 0;
     aspect-ratio: 1/1;
     left: 0.5rem;
-    border-radius: ${({ theme }) => theme.borderRadius};
+    border-radius: 100%;
     background: ${({ theme }) => theme.button.focus.base.border};
     transition: 0.4s all ease;
   }
@@ -61,7 +61,7 @@ const ButtonElement = styled.button<TButtonElement>`
     css`
       padding-left: 1.5rem;
       ::after {
-        height: 0.5rem;
+        height: 10px;
       }
       color: ${({ theme }) => theme.button.hover.base.color};
       border: 1px solid ${({ theme }) => theme.button.focus.base.border};

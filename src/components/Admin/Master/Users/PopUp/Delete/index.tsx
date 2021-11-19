@@ -45,7 +45,6 @@ const Delete = ({ userId }) => {
     >
       <PopUpHeaderAdmin title="Hapus data" />
       <El.Body>
-        <ShowMessage message={error?.message} color="danger" />
         <El.Content>
           <El.Text1>KONFIRMASI HAPUS DATA</El.Text1>
           {dataInit && (
@@ -88,13 +87,13 @@ const Delete = ({ userId }) => {
             <El.ButtonWrapper>
               <Button
                 type="submit"
-                name="Delete"
+                name="Hapus"
                 color="danger"
                 isLoading={loading}
                 disabled={!isDirty || !isValid || loading}
               />
               <Button
-                name="Cancel"
+                name="Batalkan"
                 type="button"
                 onClick={() => dispatch({ type: "CLOSE_POPUP" })}
               />

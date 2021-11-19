@@ -68,6 +68,7 @@ const typeDefs = gql`
     pictureDir: String
     Recipient: [Recipient]
     userPicture: String
+    Wishlist: Wishlist
     ShoppingCart: [ShoppingCart]
     createdAt: Date
     updatedAt: Date

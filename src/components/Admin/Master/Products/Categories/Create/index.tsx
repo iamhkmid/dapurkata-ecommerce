@@ -56,7 +56,7 @@ const Create = () => {
               type="text"
               name="name"
               register={register}
-              label="Name"
+              label="Nama"
               error={errors.name ? true : false}
               message={errors.name ? errors.name.message : null}
             />
@@ -64,7 +64,7 @@ const Create = () => {
               control="select"
               name="group"
               register={register}
-              label="Group"
+              label="Kelompok"
               options={formCategory.group}
               error={errors.group ? true : false}
               message={errors.group ? "Required" : null}
@@ -72,7 +72,7 @@ const Create = () => {
             />
           </El.SpanGroup>
           <El.SubmitWrapper>
-            <Button type="submit" name="Add" disabled={false} />
+            <Button type="submit" name="Simpan" disabled={false} />
           </El.SubmitWrapper>
         </El.Form>
       </El.FormContainer>

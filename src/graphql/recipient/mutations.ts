@@ -47,20 +47,7 @@ export const UPDATE_RECIPIENT = gql`
 export const DELETE_RECIPIENT = gql`
   mutation ($recipientId: ID!) {
     deleteRecipient(recipientId: $recipientId) {
-      id
-      firstName
-      lastName
-      phone
-      City {
-        id
-        name
-        postalCode
-        Province {
-          id
-          name
-        }
-      }
-      address
+      message
     }
   }
 `;

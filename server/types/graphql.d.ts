@@ -304,6 +304,11 @@ export type TUser = {
     args: any,
     context: TCtx
   ) => Promise<TGQLRecipient[]>;
+  Wishlist: (
+    parent: TGQLUser,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLWishlist>;
 };
 
 export type TAuthQuery = {

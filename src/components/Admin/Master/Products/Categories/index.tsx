@@ -5,7 +5,7 @@ import List from "./List";
 import * as El from "./CategoriesElement";
 
 const Categories = () => {
-  const navItem = ["Create", "Category list"];
+  const navItem = ["Tambah", "Daftar Kategori"];
   const [navState, setNavState] = useState(1);
 
   return (

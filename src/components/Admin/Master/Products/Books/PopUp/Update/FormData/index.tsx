@@ -397,13 +397,13 @@ const FormData = ({ bookId }) => {
         <El.SubmitWrapper>
           <Button
             type="submit"
-            name="Simpan"
+            name="Ubah"
             color="success"
             isLoading={loading}
             disabled={loading || loadGFI}
           />
           <Button
-            name="Cancel"
+            name="Batalkan"
             type="button"
             disabled={loading || loadGFI}
             onClick={() => dispatch({ type: "CLOSE_POPUP" })}

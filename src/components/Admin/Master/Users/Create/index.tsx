@@ -131,7 +131,7 @@ const Create = () => {
         <El.SubmitWrapper>
           <Button
             type="submit"
-            name="Save"
+            name="Simpan"
             isLoading={loading}
             disabled={!isDirty || !isValid || loading}
           />

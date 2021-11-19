@@ -17,7 +17,7 @@ export const columns = [
       return <NumberColumn>{1 + parseInt(row.cell.row.id)}</NumberColumn>;
     },
   },
-  { Header: () => <DefaultColumn>Name</DefaultColumn>, accessor: "name" },
+  { Header: () => <DefaultColumn>Nama</DefaultColumn>, accessor: "name" },
   {
     Header: "Created At",
     accessor: "createdAt",

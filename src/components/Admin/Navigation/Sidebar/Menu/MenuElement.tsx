@@ -17,7 +17,7 @@ export const Item = styled.li<TNavItem>`
   align-items: center;
   position: relative;
   text-align: left;
-  font-size: 0.9rem;
+  font-size: 14px;
   font-weight: 400;
   align-items: center;
   text-decoration: none;
@@ -62,6 +62,9 @@ export const Item = styled.li<TNavItem>`
         stroke: ${({ theme }) => theme.button.focus.sidebar.color};
       }
     `};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 13px;
+  }
   transition: 0.4s all ease;
 `;
 

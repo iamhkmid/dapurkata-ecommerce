@@ -1,8 +1,9 @@
 import moment from "moment";
 import "moment/locale/id";
-import { FC } from "react";
+import { FC, useContext } from "react";
 import NumberFormat from "react-number-format";
 import styled, { keyframes } from "styled-components";
+import { AdminNavCtx } from "../../../contexts/AdminNavCtx";
 import { getTransactionStatus } from "../../../services/getStatus";
 import {
   TDashboardLastOrders,
@@ -17,6 +18,7 @@ type TProps = {
 
 const SideSection: FC<TProps> = (props) => {
   const { lastOrders, onlineUsers, isLoading } = props;
+  const { dispatch } = useContext(AdminNavCtx);
   return (
     <Main>
       <Section>
@@ -58,7 +60,15 @@ const SideSection: FC<TProps> = (props) => {
           {isLoading && <LoadingOnlineUser />}
           {!isLoading &&
             onlineUsers.map((val) => (
-              <ItemOnlineUser key={val.id}>
+              <ItemOnlineUser
+                key={val.id}
+                onClick={() =>
+                  dispatch({
+                    type: "SHOW_POPUP",
+                    value: { name: "USER_DETAIL", value: val.id },
+                  })
+                }
+              >
                 <h1 className="name">{`${val.firstName} ${
                   val.lastName || ""
                 }`}</h1>
