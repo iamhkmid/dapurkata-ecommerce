@@ -1,3 +1,4 @@
+import { capitalize } from "lodash";
 import { useRouter } from "next/router";
 import { FC, useContext, useEffect } from "react";
 import NumberFormat from "react-number-format";
@@ -23,7 +24,6 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
   const { wishlist } = useContext(WishlistCtx);
   const { dispatch } = useContext(UserNavCtx);
 
-  useEffect(() => {}, [query["book"]]);
   return (
     <El.Main>
       {isLoading && <BookCardsLoading />}
@@ -97,7 +97,7 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
                       {book.discount > 0 && (
                         <div className="discount">{`${book.discount}% OFF`}</div>
                       )}
-                      <div className="text">{book.coverType}</div>
+                      <div className="text">{capitalize(book.coverType)}</div>
                       {!!wishlist?.Book.find((val) => val.id === book.id) && (
                         <div className="wishlist">{IconsControl("HEART")}</div>
                       )}

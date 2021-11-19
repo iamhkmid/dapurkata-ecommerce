@@ -203,6 +203,7 @@ export const BookInfo = styled.div`
       font-weight: 600;
       border-radius: 2px;
       padding: 1px 5px;
+      text-transform: capitalize;
       min-width: max-content;
       background: ${({ theme }) => theme.button.success.background};
       color: ${({ theme }) => theme.button.success.color};
@@ -214,9 +215,9 @@ export const BookInfo = styled.div`
     .text {
       font-size: 11px;
       font-weight: 600;
-      text-transform: capitalize;
       border-radius: 2px;
       min-width: max-content;
+      text-transform: capitalize;
       padding: 1px 5px;
       background: ${({ theme }) => theme.button.primary.background};
       color: ${({ theme }) => theme.button.primary.color};
