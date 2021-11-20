@@ -29,8 +29,8 @@ const SideSection: FC<TProps> = (props) => {
             lastOrders.map((val) => (
               <ItemLastOrder key={val.id} status={val.transactionStatus}>
                 <div className="info-wrapper">
-                  <h1 className="name">{`${val.User.firstName} ${
-                    val.User.lastName || ""
+                  <h1 className="name">{`${val.CustomerDetails.firstName} ${
+                    val.CustomerDetails.lastName || ""
                   }`}</h1>
                   <h1 className="price">
                     <NumberFormat
@@ -65,7 +65,7 @@ const SideSection: FC<TProps> = (props) => {
                 onClick={() =>
                   dispatch({
                     type: "SHOW_POPUP",
-                    value: { name: "USER_DETAIL", userId: val.id },
+                    value: { name: "USER_UPDATE", userId: val.id },
                   })
                 }
               >

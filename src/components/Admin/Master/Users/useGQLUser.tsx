@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { AdminNavCtx } from "../../../../contexts/AdminNavCtx";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import {
+  CHANGE_ROLE,
   CREATE_USER,
   DELETE_USER,
   UPDATE_USER,
@@ -11,12 +12,17 @@ import {
 import {
   INIT_DATA_UPDATE_USER,
   USERS_ADMIN_LIST,
+  USER_CHANGE_ROLE_DATA,
   USER_DEL_DATA,
   USER_DETAIL_BY_ADMIN,
 } from "../../../../graphql/user/queries";
+import { ONLINE_USER_QUERY } from "../../../../graphql/dashboard/queries";
+import { TGQLOnlineUserQuery } from "../../../../types/dashboard";
 import {
   TFormCreateUser,
   TFormUpdateUser,
+  TGQLChangeRole,
+  TGQLDataChangeRole,
   TGQLDataDelUser,
   TGQLUpdateUser,
   TGQLUserAdminList,
@@ -42,6 +48,7 @@ export const useGQLUsersAL = () => {
     USERS_ADMIN_LIST,
     {
       errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
     }
   );
   const newData = data?.users || [];
@@ -167,4 +174,72 @@ export const useGQLUpdateUser = () => {
     error,
     loading,
   };
+};
+
+export const useGQLOnlineUserQuery = () => {
+  const { data, error, loading, subscribeToMore } =
+    useQuery<TGQLOnlineUserQuery>(ONLINE_USER_QUERY, {
+      errorPolicy: "all",
+      fetchPolicy: "network-only",
+    });
+  return {
+    data: data?.dashboard?.onlineUsers || [],
+    error,
+    loading,
+    subscribeToMore,
+  };
+};
+
+export const useGQLChangeRole = () => {
+  const { dispatch } = useContext(AdminNavCtx);
+  const [changeRole, { data, error, loading }] = useMutation<TGQLChangeRole>(
+    CHANGE_ROLE,
+    {
+      errorPolicy: "all",
+      fetchPolicy: "network-only",
+      awaitRefetchQueries: true,
+    }
+  );
+  type TGQLchangeRole = {
+    userId: string;
+    password: string;
+    role: string;
+  };
+  useEffect(() => {
+    if (error) {
+      dispatch({
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: { color: "danger", message: error.message },
+      });
+    }
+  }, [error]);
+  const GQLchangeRole = async (variables: TGQLchangeRole) => {
+    return await changeRole({
+      variables,
+      refetchQueries: [
+        {
+          query: USER_DETAIL_BY_ADMIN,
+          variables: { userId: variables.userId },
+        },
+      ],
+    });
+  };
+  return {
+    changeRole: GQLchangeRole,
+    data: data?.changeRole,
+    error,
+    loading,
+  };
+};
+
+export const useGQLUserChangeRoleData = (values: { userId: string }) => {
+  const { data, error, loading } = useQuery<TGQLDataChangeRole>(
+    USER_CHANGE_ROLE_DATA,
+    {
+      variables: values,
+      errorPolicy: "all",
+    }
+  );
+
+  return { data: data?.user, error, loading };
 };

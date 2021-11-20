@@ -48,3 +48,11 @@ export const UPDATE_USER_BY_USER = gql`
     }
   }
 `;
+
+export const CHANGE_ROLE = gql`
+  mutation ($userId: ID!, $password: String!, $role: EnumRole!) {
+    changeRole(userId: $userId, password: $password, role: $role) {
+      id
+    }
+  }
+`;

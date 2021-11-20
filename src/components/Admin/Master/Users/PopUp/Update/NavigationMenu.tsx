@@ -1,60 +1,74 @@
 import { FC, useContext, useState } from "react";
 import styled, { css } from "styled-components";
 import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
-import FormUpdateUser from "./FormUpdateUser";
-type TActionDetail = {
+import UpdateData from "./Navigation/UpdateData";
+import Button from "../../../../../otherComps/Buttons/Button";
+import ChangeRole from "./Navigation/ChangeRole";
+type TNavigation = {
   userId: string;
 };
-const ActionDetail: FC<TActionDetail> = ({ userId }) => {
+const NavigationMenu: FC<TNavigation> = ({ userId }) => {
   const { dispatch } = useContext(AdminNavCtx);
   const [nav, setNav] = useState("CHANGE_DATA");
   return (
     <Main>
       <div className="button-wrapper">
-        <Button
+        <ButtonNav
           type="button"
           active={nav === "CHANGE_DATA"}
           onClick={() => setNav("CHANGE_DATA")}
         >
           Ubah Data
-        </Button>
-        <Button
+        </ButtonNav>
+        <ButtonNav
           type="button"
           active={nav === "CHANGE_ROLE"}
           onClick={() => setNav("CHANGE_ROLE")}
         >
           Ubah Role
-        </Button>
-        <Button
+        </ButtonNav>
+        <ButtonNav
           type="button"
           active={nav === "WISHLIST"}
           onClick={() => setNav("WISHLIST")}
         >
           Wishlist
-        </Button>
-        <Button
+        </ButtonNav>
+        <ButtonNav
           type="button"
           active={nav === "SHOPPINGCART"}
           onClick={() => setNav("SHOPPINGCART")}
         >
           Keranjang
-        </Button>
-        <Button
+        </ButtonNav>
+        <ButtonNav
           type="button"
           active={nav === "RECIPIENT"}
           onClick={() => setNav("RECIPIENT")}
         >
           Daftar Alamat
-        </Button>
+        </ButtonNav>
+        <Button
+          type="button"
+          name="Hapus"
+          color="danger"
+          onClick={() =>
+            dispatch({
+              type: "SHOW_POPUP",
+              value: { name: "USER_DELETE", userId },
+            })
+          }
+        />
       </div>
       <div className="content-workspace">
-        {nav === "CHANGE_DATA" && <FormUpdateUser userId={userId} />}
+        {nav === "CHANGE_DATA" && <UpdateData userId={userId} />}
+        {nav === "CHANGE_ROLE" && <ChangeRole userId={userId} />}
       </div>
     </Main>
   );
 };
 
-export default ActionDetail;
+export default NavigationMenu;
 
 const Main = styled.div`
   display: flex;
@@ -67,6 +81,14 @@ const Main = styled.div`
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    > button :nth-child(6) {
+      font-size: 14px;
+      padding: 5px 10px;
+      min-height: 16px;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 12px;
+      }
+    }
   }
   .content-workspace {
     display: flex;
@@ -75,10 +97,10 @@ const Main = styled.div`
     border: 1px solid ${({ theme }) => theme.border[2]};
   }
 `;
-type TButton = {
+type TButtonNav = {
   active?: boolean;
 };
-const Button = styled.button<TButton>`
+const ButtonNav = styled.button<TButtonNav>`
   font-family: "Poppins", sans-serif;
   display: flex;
   border-radius: ${({ theme }) => theme.button.borderRadius};

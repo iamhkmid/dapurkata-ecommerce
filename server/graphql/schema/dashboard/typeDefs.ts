@@ -31,11 +31,11 @@ const typeDefs = gql`
   type dashboardLastOrders {
     id: String
     grossAmount: Int
-    User: dashboardUser
+    CustomerDetails: dashboardCustomerDetails
     transactionStatus: String
     transactionTime: Date
   }
-  type dashboardUser {
+  type dashboardCustomerDetails {
     firstName: String
     lastName: String
   }

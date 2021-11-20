@@ -1,14 +1,14 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { validationSchema } from "../../Update/validationScema";
+import { validationSchemaUpdateUser } from "./validationScema";
 import { useContext, useEffect, useRef } from "react";
-import * as El from "./FormUpdateUserElement";
 import FormsControl from "../../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import { useGQLInitData, useGQLUpdateUser } from "../../../useGQLUser";
-import FormMessage from "../../../../../../otherComps/ShowMessage";
 import { TFormUpdateUser } from "../../../../../../../types/user";
+import styled from "styled-components";
+import { motion } from "framer-motion";
 
 const FormUpdateUser = ({ userId }) => {
   const {
@@ -24,7 +24,7 @@ const FormUpdateUser = ({ userId }) => {
     reValidateMode: "onChange",
     defaultValues: {},
     shouldFocusError: true,
-    resolver: yupResolver(validationSchema),
+    resolver: yupResolver(validationSchemaUpdateUser),
   });
 
   const { isDirty, isValid, errors } = formState;
@@ -56,10 +56,10 @@ const FormUpdateUser = ({ userId }) => {
     }
   }, [dataInit]);
   return (
-    <El.Main>
-      <El.Form onSubmit={handleSubmit(onSubmit)}>
-        <El.FormInput>
-          <El.InputGroup>
+    <Main>
+      <Form onSubmit={handleSubmit(onSubmit)}>
+        <FormInput>
+          <InputGroup>
             <FormsControl
               control="input"
               type="text"
@@ -93,8 +93,8 @@ const FormUpdateUser = ({ userId }) => {
               isLoading={loadingInit}
               message={errors.lastName ? errors.lastName.message : null}
             />
-          </El.InputGroup>
-          <El.InputGroup>
+          </InputGroup>
+          <InputGroup>
             <FormsControl
               control="input"
               type="text"
@@ -117,9 +117,9 @@ const FormUpdateUser = ({ userId }) => {
               isLoading={loadingInit}
               message={errors.phone ? errors.phone.message : null}
             />
-          </El.InputGroup>
-        </El.FormInput>
-        <El.SubmitWrapper>
+          </InputGroup>
+        </FormInput>
+        <SubmitWrapper>
           <Button
             type="submit"
             name="Simpan"
@@ -127,10 +127,59 @@ const FormUpdateUser = ({ userId }) => {
             isLoading={loadingUpdate}
             disabled={loadingInit}
           />
-        </El.SubmitWrapper>
-      </El.Form>
-    </El.Main>
+        </SubmitWrapper>
+      </Form>
+    </Main>
   );
 };
 
 export default FormUpdateUser;
+
+const Main = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  height: max-content;
+  width: 100%;
+  transition: 0.4s all ease;
+`;
+
+const InputGroup = styled(motion.div)`
+  display: flex;
+  width: 100%;
+  gap: 1rem;
+  flex-direction: column;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    padding: 0;
+  }
+`;
+
+const Form = styled.form`
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+`;
+const FormInput = styled.div`
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    flex-direction: column;
+  }
+`;
+
+const SubmitWrapper = styled.div`
+  display: flex;
+  height: 2rem;
+  padding: 1.5rem 0;
+  gap: 0.5rem;
+  width: max-content;
+  > button {
+    width: 100%;
+  }
+  justify-content: flex-end;
+  align-items: center;
+`;

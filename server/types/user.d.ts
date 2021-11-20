@@ -41,7 +41,11 @@ export type TArgsUpdateUser = {
   userId: string;
   data: TUpdateUserData;
 };
-
+export type TArgsChangeRole = {
+  userId: string;
+  role: string;
+  password: string;
+};
 export type TArgsChangePassword = {
   data: { oldPassword: string; newPassword: string };
 };

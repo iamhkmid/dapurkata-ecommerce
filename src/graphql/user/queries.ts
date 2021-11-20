@@ -83,3 +83,13 @@ export const NOTIFICATION = gql`
     }
   }
 `;
+
+export const USER_CHANGE_ROLE_DATA = gql`
+  query user($userId: ID!) {
+    user(userId: $userId) {
+      id
+      username
+      role
+    }
+  }
+`;

@@ -43,7 +43,7 @@ const Delete = ({ userId }) => {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeaderAdmin title="Hapus data" />
+      <PopUpHeaderAdmin title="Hapus data" closePopup="CURRENT" />
       <El.Body>
         <El.Content>
           <El.Text1>KONFIRMASI HAPUS DATA</El.Text1>
@@ -95,7 +95,7 @@ const Delete = ({ userId }) => {
               <Button
                 name="Batalkan"
                 type="button"
-                onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
+                onClick={() => dispatch({ type: "CLOSE_CURRENT_POPUP" })}
               />
             </El.ButtonWrapper>
           </El.Form>

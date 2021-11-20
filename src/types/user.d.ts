@@ -77,13 +77,23 @@ export type TGQLDataDelUser = {
     role: string;
   };
 };
-
+export type TGQLDataChangeRole = {
+  user: {
+    id: string;
+    role: string;
+    username: string;
+  };
+};
 export type TFormUpdateUser = {
   username: string;
   email: string;
   phone: string;
   firstName: string;
   lastName: string;
+};
+export type TFormChangeRole = {
+  password: string;
+  role: string;
 };
 
 export type TUpdateUserVal = {
@@ -121,4 +131,10 @@ export type TGQLNotification = {
 
 export type TGQLNotificationSubs = {
   notification: TNotification;
+};
+
+export type TGQLChangeRole = {
+  changeRole: {
+    id: string;
+  };
 };

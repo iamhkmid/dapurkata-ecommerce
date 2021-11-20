@@ -1,9 +1,9 @@
 import Moment from "moment";
 import { useContext } from "react";
 import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
-
+import Button from "../../../../otherComps/Buttons/Button";
 import RowBtn from "../../../../otherComps/Buttons/RowBtn";
-import * as El from "./ListELement";
+import * as El from "./ListElement";
 export const columns = [
   {
     Header: "id",
@@ -54,17 +54,9 @@ export const columns = [
       const { dispatch } = useContext(AdminNavCtx);
       return (
         <El.ActionColumn>
-          <RowBtn
-            type="detail"
-            onClick={() =>
-              dispatch({
-                type: "SHOW_POPUP",
-                value: { name: "USER_DETAIL", userId: d.row.values.id },
-              })
-            }
-          />
-          <RowBtn
-            type="edit"
+          <Button
+            type="button"
+            name="Ubah"
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",

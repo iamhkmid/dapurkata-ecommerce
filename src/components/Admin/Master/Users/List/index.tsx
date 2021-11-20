@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import Table from "../../../../otherComps/Table";
-import * as El from "./ListELement";
+import * as El from "./ListElement";
 import { columns } from "./columns";
 import { useGQLUsersAL } from "../useGQLUser";
 

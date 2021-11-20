@@ -21,8 +21,16 @@ export const ActionColumn = styled.div`
   justify-content: center;
   gap: 0.5rem;
   width: 100%;
+  > button :nth-child(1) {
+    min-height: 16px;
+    padding: 3px 10px;
+    font-size: 14px;
+  }
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     padding: 0;
+    > button :nth-child(1) {
+      font-size: 12px;
+    }
   }
 `;

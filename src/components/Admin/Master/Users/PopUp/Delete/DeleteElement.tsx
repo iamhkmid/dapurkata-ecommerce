@@ -86,17 +86,23 @@ export const Text1 = styled.h1`
 export const Form = styled.form`
   font-family: "Roboto", sans-serif;
   display: flex;
-  gap: 1rem;
+  gap: 10px;
   flex-direction: column;
 
   .confirm-info {
-    font-size: 0.9rem;
+    font-size: 14px;
     color: ${({ theme }) => theme.color[2]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
   }
   .username {
     display: inline;
-    font-size: 0.9rem;
+    font-size: 14px;
     font-weight: 600;
     color: ${({ theme }) => theme.color[1]};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 12px;
+    }
   }
 `;

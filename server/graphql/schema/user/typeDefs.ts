@@ -11,6 +11,8 @@ const typeDefs = gql`
     createUser(data: cUserData!, userPic: Upload): User @auth(requires: ADMIN)
     updateUser(userId: ID!, data: uUserData!): User @auth(requires: AUTH)
     deleteUser(userId: ID!, username: String!): User @auth(requires: ADMIN)
+    changeRole(userId: ID!, role: EnumRole!, password: String!): User
+      @auth(requires: ADMIN)
     changePassword(data: cPData!): changePassword @auth(requires: AUTH)
   }
 

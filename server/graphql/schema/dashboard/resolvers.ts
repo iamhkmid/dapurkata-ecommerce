@@ -26,7 +26,7 @@ export const Query: TDashboardQuery = {
       select: {
         id: true,
         grossAmount: true,
-        User: {
+        CustomerDetails: {
           select: {
             firstName: true,
             lastName: true,

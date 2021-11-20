@@ -1,15 +1,27 @@
 import moment from "moment";
 import "moment/locale/id";
-import { FC } from "react";
-import styled from "styled-components";
+import { FC, useEffect, useState } from "react";
+import styled, { css } from "styled-components";
 import ImageResponsive from "../../../../../otherComps/ImageResponsive";
-import { useGQLUserDetail } from "../../useGQLUser";
+import { useGQLOnlineUserQuery, useGQLUserDetail } from "../../useGQLUser";
 
 type TProfileInfo = {
   userId: string;
 };
 const ProfileInfo: FC<TProfileInfo> = ({ userId }) => {
   const { data, error, loading } = useGQLUserDetail({ userId });
+  const [online, setOnline] = useState(false);
+  const {
+    data: onlineUsers,
+    loading: loadingOnlineUser,
+    subscribeToMore,
+  } = useGQLOnlineUserQuery();
+  useEffect(() => {
+    if (onlineUsers) {
+      const isOnline = !!onlineUsers.find((val) => val.id === userId);
+      setOnline(isOnline);
+    }
+  }, [onlineUsers]);
   return (
     <Main>
       {!loading && data && (
@@ -30,6 +42,10 @@ const ProfileInfo: FC<TProfileInfo> = ({ userId }) => {
                 data.lastName || ""
               }`}</h1>
               <h1 className="big-role">{data.role}</h1>
+
+              <OnlineStatus isOnline={online}>
+                {online ? "Online" : "Offline"}
+              </OnlineStatus>
             </div>
           </div>
           <div className="info-wrapper">
@@ -86,11 +102,37 @@ const ProfileInfo: FC<TProfileInfo> = ({ userId }) => {
 
 export default ProfileInfo;
 
+type TOnlineStatus = {
+  isOnline: boolean;
+};
+const OnlineStatus = styled.div<TOnlineStatus>`
+  width: fit-content;
+  padding: 2px 10px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+  ${({ isOnline }) =>
+    isOnline
+      ? css`
+          background: ${({ theme }) => theme.button.primary.background};
+          color: ${({ theme }) => theme.button.primary.color};
+        `
+      : css`
+          background: ${({ theme }) => theme.button.warning.background};
+          color: ${({ theme }) => theme.button.warning.color};
+        `}
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 10px;
+  }
+`;
+
 const Main = styled.div`
   display: flex;
   gap: 16px;
   max-height: 500px;
-  overflow: auto;
+  width: 350px;
+  overflow-y: auto;
   ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -129,6 +171,7 @@ const Main = styled.div`
     flex-direction: column;
     gap: 16px;
     width: 100%;
+    margin-right: 5px;
   }
   .info-wrapper {
     display: flex;
@@ -184,6 +227,9 @@ const Main = styled.div`
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       font-size: 14px;
     }
+  }
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.md}) {
+    width: 100%;
   }
 `;
 export const PhotoWrapper = styled.div`

@@ -64,6 +64,7 @@ import {
 } from "./transaction";
 import {
   TArgsChangePassword,
+  TArgsChangeRole,
   TArgsCreateUser,
   TArgsUpdateUser,
   TGQLArgsUser,
@@ -278,6 +279,11 @@ export type TUserMutation = {
   deleteUser: (
     parent: any,
     args: { userId: string; username: string },
+    context: TCtx
+  ) => Promise<TGQLUser>;
+  changeRole: (
+    parent: any,
+    args: TArgsChangeRole,
     context: TCtx
   ) => Promise<TGQLUser>;
   changePassword: (

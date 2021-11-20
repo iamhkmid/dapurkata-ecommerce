@@ -88,12 +88,29 @@ export const Mutation: TUserMutation = {
   },
   deleteUser: async (_, { userId, username }, { db }) => {
     const findUser = await db.user.findUnique({ where: { id: userId } });
-    if (!findUser) throw new ApolloError("User not found");
+    if (!findUser) throw new ApolloError("User tidak ditemukan");
     if (findUser.username === username) {
       return await db.user.delete({ where: { id: userId } });
     } else {
-      throw new ApolloError("Invalid username");
+      throw new ApolloError("Username salah");
     }
+  },
+  changeRole: async (_, args, { db, user }) => {
+    const { userId, role, password } = args;
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { password: true },
+    });
+    const checkPw = await bcrypt.compare(password, findUser.password);
+    if (!checkPw) throw new AuthenticationError("Password salah");
+
+    const updateUser = await db.user.update({
+      where: { id: userId },
+      data: {
+        role,
+      },
+    });
+    return updateUser;
   },
   changePassword: async (_, { data }, { db, user }) => {
     const { newPassword, oldPassword } = data;

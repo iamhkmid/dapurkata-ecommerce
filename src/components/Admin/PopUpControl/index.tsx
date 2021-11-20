@@ -15,7 +15,6 @@ import PublisherUpdate from "../Master/Products/Publisher/PopUp/Update";
 import PublisherDetail from "../Master/Products/Publisher/PopUp/Detail";
 import UserDelete from "../Master/Users/PopUp/Delete";
 import UserUpdate from "../Master/Users/PopUp/Update";
-import UserDetail from "../Master/Users/PopUp/Detail";
 import styled from "styled-components";
 import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
 
@@ -75,9 +74,8 @@ const PopUpControl = () => {
           )}
 
           {popup.name === "USER_DELETE" && <UserDelete userId={popup.userId} />}
-          {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.userId} />}
-          {popup.name === "USER_DETAIL" && (
-            <UserDetail userId={popup.userId} nested={popup.nested} />
+          {popup.name === "USER_UPDATE" && (
+            <UserUpdate userId={popup.userId} nested={popup.nested} />
           )}
         </Main>
       )}

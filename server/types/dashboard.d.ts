@@ -15,7 +15,7 @@ export type TGQLDashboardQuery = {
   lastOrders: {
     id: string;
     grossAmount: number;
-    User: {
+    CustomerDetails: {
       firstName: string;
       lastName: string;
     };
