@@ -75,6 +75,23 @@ export const TableWrapper = styled.div`
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+  overflow-x: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: ${({ theme }) => theme.scrollbar.v1.thumb};
+    border-radius: ${({ theme }) => theme.input.borderRadius};
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+  }
   transition: 0.4s all ease;
 `;
 

@@ -1,8 +1,8 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller } from "react-hook-form";
-import { validationSchema } from "../validationScema";
+import { validationSchema } from "../../Update/validationScema";
 import { useContext, useEffect, useRef } from "react";
-import * as El from "./FormDataElement";
+import * as El from "./FormUpdateUserElement";
 import FormsControl from "../../../../../../otherComps/Forms/FormsControl";
 import Button from "../../../../../../otherComps/Buttons/Button";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
@@ -10,7 +10,7 @@ import { useGQLInitData, useGQLUpdateUser } from "../../../useGQLUser";
 import FormMessage from "../../../../../../otherComps/ShowMessage";
 import { TFormUpdateUser } from "../../../../../../../types/user";
 
-const FormData = ({ userId }) => {
+const FormUpdateUser = ({ userId }) => {
   const {
     register,
     handleSubmit,
@@ -57,7 +57,6 @@ const FormData = ({ userId }) => {
   }, [dataInit]);
   return (
     <El.Main>
-      <FormMessage message={errorUpdate?.message} color="danger" />
       <El.Form onSubmit={handleSubmit(onSubmit)}>
         <El.FormInput>
           <El.InputGroup>
@@ -112,7 +111,7 @@ const FormData = ({ userId }) => {
               type="text"
               name="phone"
               register={register}
-              label="Email"
+              label="No Handphone"
               error={errors.phone ? true : false}
               disabled={loadingUpdate}
               isLoading={loadingInit}
@@ -124,15 +123,9 @@ const FormData = ({ userId }) => {
           <Button
             type="submit"
             name="Simpan"
-            color="success"
+            color="primary"
             isLoading={loadingUpdate}
             disabled={loadingInit}
-          />
-          <Button
-            name="Batalkan"
-            type="button"
-            disabled={loadingInit}
-            onClick={() => dispatch({ type: "CLOSE_ALL_POPUP" })}
           />
         </El.SubmitWrapper>
       </El.Form>
@@ -140,4 +133,4 @@ const FormData = ({ userId }) => {
   );
 };
 
-export default FormData;
+export default FormUpdateUser;

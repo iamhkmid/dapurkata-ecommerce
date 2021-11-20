@@ -12,7 +12,6 @@ export const Main = styled.div`
   align-items: center;
   justify-content: space-between;
   box-shadow: ${({ theme }) => theme.boxShadow};
-  transition: 0.4s all ease;
 `;
 
 export const Title = styled.h1`

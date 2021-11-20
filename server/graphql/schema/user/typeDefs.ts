@@ -62,7 +62,6 @@ const typeDefs = gql`
     lastName: String
     username: String
     email: String
-    password: String
     role: EnumRole
     phone: String
     pictureDir: String

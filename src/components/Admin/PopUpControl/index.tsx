@@ -76,7 +76,9 @@ const PopUpControl = () => {
 
           {popup.name === "USER_DELETE" && <UserDelete userId={popup.userId} />}
           {popup.name === "USER_UPDATE" && <UserUpdate userId={popup.userId} />}
-          {popup.name === "USER_DETAIL" && <UserDetail userId={popup.userId} />}
+          {popup.name === "USER_DETAIL" && (
+            <UserDetail userId={popup.userId} nested={popup.nested} />
+          )}
         </Main>
       )}
     </AnimatePresence>

@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import PopUpHeaderAdmin from "../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
-import FormData from "./FormData";
+import FormData from "../Detail/FormUpdateUser";
 import SideMenu from "./SideMenu";
 import * as El from "./UpdateElement";
 

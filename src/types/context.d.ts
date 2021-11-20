@@ -127,7 +127,9 @@ type TMessage = {
 };
 
 // ADMIN NAV CONTEXT
-type TAdminPopUpVal =
+type TAdminPopUpVal = {
+  nested?: boolean;
+} & (
   | { name: "BOOK_UPDATE"; bookId: string }
   | { name: "BOOK_DELETE"; bookId: string }
   | { name: "BOOK_DETAIL"; bookId: string }
@@ -142,7 +144,8 @@ type TAdminPopUpVal =
   | { name: "PUBLISHER_DETAIL"; publisherId: string }
   | { name: "USER_DETAIL"; userId: string }
   | { name: "USER_DELETE"; userId: string }
-  | { name: "USER_UPDATE"; userId: string };
+  | { name: "USER_UPDATE"; userId: string }
+);
 
 type TAdminPopUp = {
   backTo: TAdminPopUp;

@@ -1,5 +1,22 @@
 import { gql } from "@apollo/client";
 
+export const USER_DETAIL_BY_ADMIN = gql`
+  query ($userId: ID!) {
+    user(userId: $userId) {
+      id
+      firstName
+      lastName
+      username
+      email
+      role
+      phone
+      userPicture
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
 export const USERS_ADMIN_LIST = gql`
   query {
     users {

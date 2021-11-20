@@ -12,6 +12,7 @@ import {
   INIT_DATA_UPDATE_USER,
   USERS_ADMIN_LIST,
   USER_DEL_DATA,
+  USER_DETAIL_BY_ADMIN,
 } from "../../../../graphql/user/queries";
 import {
   TFormCreateUser,
@@ -19,9 +20,22 @@ import {
   TGQLDataDelUser,
   TGQLUpdateUser,
   TGQLUserAdminList,
+  TGQLUserDetailByAdmin,
   TInitDataUpdateUser,
   TUpdateUserVal,
 } from "../../../../types/user";
+
+type TUserDetailByAdmin = {
+  userId: string;
+};
+export const useGQLUserDetail = (props: TUserDetailByAdmin) => {
+  const { userId } = props;
+  const { data, error, loading } = useQuery<TGQLUserDetailByAdmin>(
+    USER_DETAIL_BY_ADMIN,
+    { variables: { userId }, errorPolicy: "all" }
+  );
+  return { data: data?.user, error, loading };
+};
 
 export const useGQLUsersAL = () => {
   const { data, error, loading } = useQuery<TGQLUserAdminList>(
@@ -127,19 +141,24 @@ export const useGQLUpdateUser = () => {
     UPDATE_USER,
     {
       errorPolicy: "all",
+      awaitRefetchQueries: true,
     }
   );
   const GQLUpdateUser = async (values: TUpdateUserVal) => {
     const { userId, ...rest } = values;
     return await updateUser({
       variables: { userId, data: { ...rest } },
+      refetchQueries: [{ query: USER_DETAIL_BY_ADMIN, variables: { userId } }],
     });
   };
   useEffect(() => {
     if (data?.updateUser)
       dispatch({
-        type: "SHOW_POPUP",
-        value: { name: "USER_DETAIL", userId: data.updateUser.id },
+        type: "SHOW_GLOBAL_MESSAGE",
+        value: {
+          color: "success",
+          message: "Berhasil ubah data pengguna",
+        },
       });
   }, [data?.updateUser]);
   return {

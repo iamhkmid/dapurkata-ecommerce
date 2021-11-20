@@ -20,6 +20,21 @@ export type TAuthUser = {
   userPicture: string;
 };
 
+export type TGQLUserDetailByAdmin = {
+  user: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    username: string;
+    email: string;
+    role: string;
+    phone: string;
+    userPicture: string;
+    createdAt: number;
+    updatedAt: number;
+  };
+};
+
 export type TGQLUserAdminList = {
   users: {
     id: string;
