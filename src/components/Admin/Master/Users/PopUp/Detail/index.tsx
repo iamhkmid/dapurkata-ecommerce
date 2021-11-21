@@ -1,7 +1,7 @@
 import { FC, useContext } from "react";
 import PopUpHeaderAdmin from "../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 import Navigation from "./NavigationMenu";
-import * as El from "./UpdateElement";
+import * as El from "./DetailElement";
 import ProfileInfo from "./ProfileInfo";
 
 type TUserDetail = {

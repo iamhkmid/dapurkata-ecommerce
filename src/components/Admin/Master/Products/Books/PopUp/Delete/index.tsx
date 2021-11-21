@@ -1,14 +1,18 @@
 import * as El from "./DeleteELement";
 import Button from "../../../../../../otherComps/Buttons/Button";
-import { useContext, useEffect } from "react";
+import { FC, useContext, useEffect } from "react";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import { useGQLDeleteBook, useGQLGetBookDel } from "../../useGQLBook";
 import FormMessage from "../../../../../../otherComps/ShowMessage";
 import PopUpHeaderAdmin from "../../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 
-const Delete = ({ id }) => {
+type TProps = {
+  bookId: string;
+};
+
+const Delete: FC<TProps> = ({ bookId }) => {
   const { dispatch } = useContext(AdminNavCtx);
-  const { dataGBD, errorGBD, loadGBD } = useGQLGetBookDel({ bookId: id });
+  const { dataGBD, errorGBD, loadGBD } = useGQLGetBookDel({ bookId });
   const { deleteBook, data, loading, error } = useGQLDeleteBook();
   return (
     <El.Main
@@ -39,7 +43,7 @@ const Delete = ({ id }) => {
               type="button"
               color="danger"
               onClick={() => {
-                deleteBook({ bookId: id })
+                deleteBook({ bookId })
                   .then(() => dispatch({ type: "CLOSE_ALL_POPUP" }))
                   .catch(() => {});
               }}

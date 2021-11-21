@@ -4,8 +4,10 @@ import { TGetBook } from "../../../../../../../types/book";
 import * as El from "./DetailInfoElement";
 import ImageResponsive from "../../../../../../otherComps/ImageResponsive";
 import NumberFormat from "react-number-format";
+import { FC } from "react";
 
-const DetailInfo = ({ data }: { data: TGetBook }) => {
+type TProps = { data: TGetBook };
+const DetailInfo: FC<TProps> = ({ data }) => {
   const coverData = data.BookPicture.find((img) => img.type === "COVER");
   return (
     <El.Container>

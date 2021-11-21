@@ -14,7 +14,7 @@ import PublisherDelete from "../Master/Products/Publisher/PopUp/Delete";
 import PublisherUpdate from "../Master/Products/Publisher/PopUp/Update";
 import PublisherDetail from "../Master/Products/Publisher/PopUp/Detail";
 import UserDelete from "../Master/Users/PopUp/Delete";
-import UserUpdate from "../Master/Users/PopUp/Update";
+import UserUpdate from "../Master/Users/PopUp/Detail";
 import styled from "styled-components";
 import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
 
@@ -51,8 +51,12 @@ const PopUpControl = () => {
           {popup.name === "AUTHOR_UPDATE" && (
             <AuthorUpdate id={popup.authorId} />
           )}
-          {popup?.name === "BOOK_DELETE" && <BookDelete id={popup.bookId} />}
-          {popup?.name === "BOOK_DETAIL" && <BookDetail id={popup.bookId} />}
+          {popup?.name === "BOOK_DELETE" && (
+            <BookDelete bookId={popup.bookId} />
+          )}
+          {popup?.name === "BOOK_DETAIL" && (
+            <BookDetail bookId={popup.bookId} nested={popup.nested} />
+          )}
           {popup?.name === "BOOK_UPDATE" && <BookUpadate id={popup.bookId} />}
           {popup.name === "CATEGORY_DELETE" && (
             <CategoryDelete id={popup.categoryId} />

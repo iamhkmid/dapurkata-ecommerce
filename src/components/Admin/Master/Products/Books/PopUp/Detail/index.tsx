@@ -1,6 +1,6 @@
 import * as El from "./DetailElement";
 import Button from "../../../../../../otherComps/Buttons/Button";
-import { useContext, useEffect } from "react";
+import { FC, useContext, useEffect } from "react";
 import { AdminNavCtx } from "../../../../../../../contexts/AdminNavCtx";
 import DetailInfo from "./DetailInfo";
 import LoadingWrapper from "../../../../../../otherComps/Loading/LoadingWrapper";
@@ -8,16 +8,23 @@ import { useGQLGetBook } from "../../useGQLBook";
 import PopUpHeaderAdmin from "../../../../../../otherComps/PopUpHeader/PopUpHeaderAdmin";
 import LoadingBookDetail from "./LoadingBookDetail";
 
-const Detail = ({ id }) => {
+type TProps = {
+  bookId: string;
+  nested: boolean;
+};
+const Detail: FC<TProps> = ({ bookId, nested }) => {
   const { dispatch } = useContext(AdminNavCtx);
-  const { dataGBook, errorGBook, loadGBook } = useGQLGetBook({ bookId: id });
+  const { dataGBook, errorGBook, loadGBook } = useGQLGetBook({ bookId });
   return (
     <El.Main
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
     >
-      <PopUpHeaderAdmin title="Detail" />
+      <PopUpHeaderAdmin
+        title="Detail"
+        closePopup={nested ? "CURRENT" : "ALL"}
+      />
       <El.DetailBody>
         {loadGBook && (
           <El.LoadingWrapper>

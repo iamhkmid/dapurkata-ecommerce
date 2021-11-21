@@ -43,7 +43,11 @@ const FormData = ({ bookId }) => {
       .then(({ data }) => {
         dispatch({
           type: "SHOW_POPUP",
-          value: { name: "BOOK_DETAIL", bookId: data.updateBook.id },
+          value: {
+            name: "BOOK_DETAIL",
+            bookId: data.updateBook.id,
+            nested: false,
+          },
         });
       })
       .catch(() => {});
