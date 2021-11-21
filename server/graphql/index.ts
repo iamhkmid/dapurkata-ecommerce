@@ -3,12 +3,9 @@ import { SubscriptionServer } from "subscriptions-transport-ws";
 import { execute, subscribe } from "graphql";
 import schema from "./schema";
 import context from "./context";
-import jwt, { decode } from "jsonwebtoken";
-import { db } from "./services/db";
-import { checkRole } from "./schema/directives/resolves/authDirective";
+import jwt from "jsonwebtoken";
 import cache from "./services/nodeCache";
 import pubsub from "./services/pubsub";
-import { TOnlineUsers } from "../types/dashboard";
 
 const graphql = async ({ app, httpServer }) => {
   const apolloServer = new ApolloServer({

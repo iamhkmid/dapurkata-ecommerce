@@ -128,6 +128,68 @@ export const OrderDetail = styled.div`
   }
 `;
 
+export const CourierService = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  .title {
+    font-size: 1.1rem;
+    padding: 0.2rem 1rem;
+    width: fit-content;
+    border-radius: ${({ theme }) => theme.borderRadius};
+    font-weight: 700;
+    background: ${({ theme }) => theme.button.list.background};
+    color: ${({ theme }) => theme.button.list.color};
+    @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+      font-size: 1rem;
+    }
+  }
+  .info-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  .val-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding-left: 1rem;
+    .name {
+      position: relative;
+      line-height: 1.2;
+      ::before {
+        display: flex;
+        position: absolute;
+        content: "";
+        left: -1rem;
+        top: 50%;
+        transform: translateY(-50%);
+        min-width: 0.6rem;
+        min-height: 0.6rem;
+        border-radius: 100%;
+        background: ${({ theme }) => theme.button.primary.background};
+      }
+      font-size: 0.9rem;
+      font-weight: 600;
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 0.8rem;
+      }
+    }
+    .value {
+      font-size: 0.9rem;
+      line-height: 1.2;
+      color: ${({ theme }) => theme.color[2]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 0.8rem;
+      }
+    }
+    .gross-amount {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: ${({ theme }) => theme.color[3]};
+    }
+  }
+`;
+
 export const Recipient = styled.div`
   display: flex;
   flex-direction: column;
@@ -263,7 +325,7 @@ export const ItemDetail = styled.div`
           left: 0;
           bottom: 0;
           width: 100%;
-          border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+          border-bottom: 1px solid ${({ theme }) => theme.input.border};
         }
       }
     }
@@ -272,7 +334,7 @@ export const ItemDetail = styled.div`
         font-size: 0.9rem;
         font-weight: 500;
         padding: 0.8rem 0.5rem;
-        border-bottom: 1px solid ${({ theme }) => theme.border[2]};
+        border-bottom: 1px solid ${({ theme }) => theme.input.border};
         .name {
           min-width: 15rem;
         }

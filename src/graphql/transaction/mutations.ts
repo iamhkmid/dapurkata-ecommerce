@@ -22,6 +22,7 @@ export const ORDER = gql`
       transactionStatus
       expirationTime
       fraudStatus
+
       PaymentInfo {
         name
         value

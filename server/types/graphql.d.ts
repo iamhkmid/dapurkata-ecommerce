@@ -53,7 +53,8 @@ import {
   TDBPaymentType,
   TGQLArgsOrder,
   TGQLArgsPaymentType,
-  TGQLCustomerDetails,
+  TGQLCourierDetail,
+  TGQLCustomerDetail,
   TGQLHowToPay,
   TGQLItemDetail,
   TGQLOrder,
@@ -61,6 +62,7 @@ import {
   TGQLPaymentInfo,
   TGQLPaymentService,
   TGQLPaymentType,
+  TGQLUserOrder,
 } from "./transaction";
 import {
   TArgsChangePassword,
@@ -91,7 +93,7 @@ import {
   TGQLFooterPhone,
   TGQLFooterSocialMedia,
 } from "./footerInfo";
-import { TGQLDashboardQuery } from "./dashboard";
+import { TGQLDashboardQuery, TGQLOnlineUsers } from "./dashboard";
 import { TGQLAddWishlist, TGQLDeleteWishlist, TGQLWishlist } from "./wishlist";
 import { TGQLNotification } from "./notification";
 
@@ -319,6 +321,7 @@ export type TUser = {
     args: null,
     context: TCtx
   ) => Promise<TGQLWishlist>;
+  Order: (parent: TGQLUser, args: null, context: TCtx) => Promise<TGQLOrder[]>;
 };
 
 export type TAuthQuery = {
@@ -488,8 +491,13 @@ export type TOrder = {
     args: null,
     context: TCtx
   ) => Promise<TGQLPaymentService>;
+  CourierDetail: (
+    parent: TGQLOrder,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLCourierDetail>;
   User: (parent: TGQLOrder, args: null, context: TCtx) => Promise<TGQLUser>;
-  ItemDetails: (
+  ItemDetail: (
     parent: TGQLOrder,
     args: null,
     context: TCtx
@@ -499,11 +507,11 @@ export type TOrder = {
     args: null,
     context: TCtx
   ) => Promise<TGQLPaymentInfo[]>;
-  CustomerDetails: (
+  CustomerDetail: (
     parent: TGQLOrder,
     args: null,
     context: TCtx
-  ) => Promise<TGQLCustomerDetails>;
+  ) => Promise<TGQLCustomerDetail>;
 };
 
 export type TOrderPaymentInfoMutation = {
@@ -571,6 +579,11 @@ export type TDashboardQuery = {
     args: null,
     context: TCtx
   ) => Promise<TGQLDashboardQuery>;
+  onlineUsers: (
+    parent: any,
+    args: null,
+    context: TCtx
+  ) => Promise<TGQLOnlineUsers[]>;
 };
 
 export type TDashboardSubcription = {

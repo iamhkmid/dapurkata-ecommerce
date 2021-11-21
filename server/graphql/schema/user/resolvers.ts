@@ -241,4 +241,13 @@ export const User: TUser = {
     );
     return { ...resWishlist, Book: books };
   },
+  Order: async ({ id }, _, { db }) => {
+    const findUser = await db.user.findUnique({
+      where: { id },
+      select: {
+        Order: true,
+      },
+    });
+    return findUser.Order;
+  },
 };

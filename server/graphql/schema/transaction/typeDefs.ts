@@ -65,6 +65,7 @@ const typeDefs = gql`
     id: ID
     PaymentServiceId: String
     PaymentService: PaymentService
+    CourierDetail: CourierDetail
     userId: String
     User: User
     grossAmount: Int
@@ -75,9 +76,19 @@ const typeDefs = gql`
     receiptNumber: String
     expirationTime: Date
     fraudStatus: String
-    ItemDetails: [ItemDetail]
+    ItemDetail: [ItemDetail]
     PaymentInfo: [PaymentInfo]
-    CustomerDetails: CustomerDetails
+    CustomerDetail: CustomerDetail
+    createdAt: Date
+    updatedAt: Date
+  }
+
+  type CourierDetail {
+    id: ID
+    service: String
+    description: String
+    cost: Int
+    Courier: Courier
     createdAt: Date
     updatedAt: Date
   }
@@ -115,7 +126,7 @@ const typeDefs = gql`
     updatedAt: Date
   }
 
-  type CustomerDetails {
+  type CustomerDetail {
     id: ID
     firstName: String
     lastName: String
@@ -137,7 +148,7 @@ const typeDefs = gql`
     city: String
     postalCode: String
     countryCode: String
-    customerDetailsId: String
+    customerDetailId: String
     createdAt: Date
     updatedAt: Date
   }

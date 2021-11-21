@@ -1,24 +1,58 @@
+import { useQuery } from "@apollo/client";
 import moment from "moment";
 import "moment/locale/id";
-import { FC, useContext } from "react";
+import { FC, useContext, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import styled, { keyframes } from "styled-components";
 import { AdminNavCtx } from "../../../contexts/AdminNavCtx";
+import { ONLINE_USERS } from "../../../graphql/dashboard/queries";
+import { ONLINE_USERS_SUBS } from "../../../graphql/dashboard/subscriptions";
 import { getTransactionStatus } from "../../../services/getStatus";
 import {
   TDashboardLastOrders,
   TDashboardOnlineUsers,
+  TGQLOnlineUsersQuery,
+  TGQLOnlineUserSubs,
 } from "../../../types/dashboard";
 
 type TProps = {
   isLoading: boolean;
   lastOrders: TDashboardLastOrders[];
-  onlineUsers: TDashboardOnlineUsers[];
 };
 
 const SideSection: FC<TProps> = (props) => {
-  const { lastOrders, onlineUsers, isLoading } = props;
+  const { lastOrders, isLoading } = props;
   const { dispatch } = useContext(AdminNavCtx);
+
+  const {
+    data: dataOU,
+    error: errorOU,
+    loading: loadingOU,
+    subscribeToMore,
+  } = useQuery<TGQLOnlineUsersQuery>(ONLINE_USERS, {
+    fetchPolicy: "cache-and-network",
+    errorPolicy: "all",
+  });
+
+  const subscribeDashboard = () => {
+    subscribeToMore<TGQLOnlineUserSubs>({
+      document: ONLINE_USERS_SUBS,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data?.onlineUsers) return prev;
+        const newOnlineUsers = subscriptionData.data.onlineUsers;
+        return {
+          onlineUsers: newOnlineUsers,
+        } as TGQLOnlineUsersQuery;
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (dataOU) {
+      subscribeDashboard();
+    }
+  }, [dataOU]);
+
   return (
     <Main>
       <Section>
@@ -29,8 +63,8 @@ const SideSection: FC<TProps> = (props) => {
             lastOrders.map((val) => (
               <ItemLastOrder key={val.id} status={val.transactionStatus}>
                 <div className="info-wrapper">
-                  <h1 className="name">{`${val.CustomerDetails.firstName} ${
-                    val.CustomerDetails.lastName || ""
+                  <h1 className="name">{`${val.CustomerDetail.firstName} ${
+                    val.CustomerDetail.lastName || ""
                   }`}</h1>
                   <h1 className="price">
                     <NumberFormat
@@ -57,15 +91,15 @@ const SideSection: FC<TProps> = (props) => {
       <Section>
         <h1 className="title">Online</h1>
         <ItemWrapperOnlineUser>
-          {isLoading && <LoadingOnlineUser />}
-          {!isLoading &&
-            onlineUsers.map((val) => (
+          {loadingOU && <LoadingOnlineUser />}
+          {!loadingOU &&
+            dataOU?.onlineUsers?.map((val) => (
               <ItemOnlineUser
                 key={val.id}
                 onClick={() =>
                   dispatch({
                     type: "SHOW_POPUP",
-                    value: { name: "USER_UPDATE", userId: val.id },
+                    value: { name: "USER_DETAIL", userId: val.id },
                   })
                 }
               >

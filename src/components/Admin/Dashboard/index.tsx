@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
-import { DASHBOARD } from "../../../graphql/dashboard/queries";
-import { ONLINE_USER } from "../../../graphql/dashboard/subscriptions";
+import { DASHBOARD, ONLINE_USERS } from "../../../graphql/dashboard/queries";
 import {
   TGQLDashboardQuery,
+  TGQLOnlineUsersQuery,
   TGQLOnlineUserSubs,
 } from "../../../types/dashboard";
 import IconsControl from "../../IconsControl";
@@ -13,30 +13,10 @@ import Graph from "./Graph";
 import SideSection from "./SideSection";
 
 const Dashboard = () => {
-  const { data, error, loading, subscribeToMore } =
-    useQuery<TGQLDashboardQuery>(DASHBOARD, {
-      fetchPolicy: "cache-and-network",
-      errorPolicy: "all",
-    });
-
-  const subscribeDashboard = () => {
-    subscribeToMore<TGQLOnlineUserSubs>({
-      document: ONLINE_USER,
-      updateQuery: (prev, { subscriptionData }) => {
-        if (!subscriptionData.data?.onlineUsers) return prev;
-        const newOnlineUsers = subscriptionData.data.onlineUsers;
-        return {
-          dashboard: { ...data?.dashboard, onlineUsers: newOnlineUsers },
-        } as TGQLDashboardQuery;
-      },
-    });
-  };
-
-  useEffect(() => {
-    if (data) {
-      subscribeDashboard();
-    }
-  }, [data]);
+  const { data, error, loading } = useQuery<TGQLDashboardQuery>(DASHBOARD, {
+    fetchPolicy: "cache-and-network",
+    errorPolicy: "all",
+  });
 
   return (
     <El.Main>
@@ -59,7 +39,6 @@ const Dashboard = () => {
         <SideSection
           isLoading={loading}
           lastOrders={data?.dashboard?.lastOrders || []}
-          onlineUsers={data?.dashboard?.onlineUsers || []}
         />
       </El.Section>
     </El.Main>

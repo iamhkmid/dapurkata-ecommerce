@@ -10,23 +10,27 @@ export const DASHBOARD = gql`
       lastOrders {
         id
         grossAmount
-        CustomerDetails {
+        CustomerDetail {
           firstName
           lastName
         }
         transactionStatus
         transactionTime
       }
-      onlineUsers {
-        id
-        firstName
-        lastName
-        role
-      }
       graph {
         labels
         data
       }
+    }
+  }
+`;
+export const ONLINE_USERS = gql`
+  query {
+    onlineUsers {
+      id
+      firstName
+      lastName
+      role
     }
   }
 `;

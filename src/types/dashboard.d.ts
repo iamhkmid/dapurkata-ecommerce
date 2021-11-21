@@ -1,7 +1,7 @@
 type TDashboardLastOrders = {
   id: string;
   grossAmount: number;
-  CustomerDetails: {
+  CustomerDetail: {
     firstName: string;
     lastName: string;
   };
@@ -27,9 +27,12 @@ export type TGQLDashboardQuery = {
     totalUsers: number;
     totalProducts: number;
     lastOrders: TDashboardLastOrders[];
-    onlineUsers: TDashboardOnlineUsers[];
     graph: TDashboardGraph;
   };
+};
+
+export type TGQLOnlineUsersQuery = {
+  onlineUsers: TDashboardOnlineUsers[];
 };
 
 export type TGQLOnlineUserSubs = {

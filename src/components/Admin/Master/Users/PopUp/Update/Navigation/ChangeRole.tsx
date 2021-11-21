@@ -12,10 +12,10 @@ import {
 } from "../../../useGQLUser";
 import { validationSchemaChangeRole } from "./validationScema";
 
-type TChangeRole = {
+type TProps = {
   userId: string;
 };
-const ChangeRole: FC<TChangeRole> = ({ userId }) => {
+const ChangeRole: FC<TProps> = ({ userId }) => {
   const {
     register,
     handleSubmit,

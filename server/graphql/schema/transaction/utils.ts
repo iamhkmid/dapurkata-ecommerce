@@ -24,7 +24,12 @@ export const courierCost = async (props: TPropsCCost) => {
   const cost = costs.costs.find((val) => val.service === service);
   if (!cost) throw new ApolloError("Courier service not found");
 
-  return cost.cost[0].value;
+  return {
+    cost: cost.cost[0].value,
+    code: courier,
+    service: cost.service,
+    description: cost.description,
+  };
 };
 
 export const sCartWeight = (props: TPropsSCWeight) => {

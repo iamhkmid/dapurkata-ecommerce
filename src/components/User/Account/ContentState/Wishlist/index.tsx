@@ -28,7 +28,7 @@ const Wishlist = () => {
   }, [loadingDW]);
   return (
     <El.Main>
-      {wishlist?.Book?.length === 0 && (
+      {(!wishlist || wishlist?.Book?.length === 0) && (
         <div className="empty-list">Wishlist Kosong</div>
       )}
       {wishlist?.Book.map((val) => (

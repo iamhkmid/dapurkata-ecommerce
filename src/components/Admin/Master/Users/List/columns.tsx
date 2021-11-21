@@ -56,11 +56,11 @@ export const columns = [
         <El.ActionColumn>
           <Button
             type="button"
-            name="Ubah"
+            name="DETAIL"
             onClick={() =>
               dispatch({
                 type: "SHOW_POPUP",
-                value: { name: "USER_UPDATE", userId: d.row.values.id },
+                value: { name: "USER_DETAIL", userId: d.row.values.id },
               })
             }
           />

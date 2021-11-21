@@ -109,7 +109,7 @@ export type TShippingAddress = {
   country_code: string;
 };
 
-export type TCustomerDetails = {
+export type TCustomerDetail = {
   first_name: string;
   last_name?: string;
   email: string;
@@ -154,6 +154,22 @@ export type TBuyNowItems = (p: TPBuyNowItems) => {
   gross_amount: number;
 };
 
+export type TGQLCourierDetail = {
+  id: string;
+  service: string;
+  description: string;
+  cost: number;
+  Courier: {
+    code: string;
+    name: string;
+    isEnabled: boolean;
+    createdAt: Date;
+    updatedAt: Date;
+  };
+  createdAt: Date;
+  updatedAt: Date;
+};
+
 export type TGQLOrder = {
   id: string;
   paymentServiceId: string;
@@ -183,7 +199,40 @@ export type TGQLOrder = {
   fraudStatus: string;
   ItemDetails?: TGQLItemDetail[];
   PaymentInfo?: TGQLPaymentInfo[];
-  CustomerDetails?: TGQLCustomerDetails;
+  CustomerDetail?: TGQLCustomerDetail;
+  CourierService?: TGQLCourierService;
+  createdAt: Date;
+  updatedAt: Date;
+};
+export type TGQLUserOrder = {
+  id: string;
+  paymentServiceId: string;
+  PaymentService?: {
+    id: string;
+    name: string;
+    isEnabled: boolean;
+    icon: string;
+    description: string;
+    PaymentType?: {
+      id: string;
+      name: string;
+      icon: string;
+      isEnabled: boolean;
+      description: string;
+    };
+  };
+  grossAmount: number;
+  currency: string;
+  transactionTime: Date;
+  expirationTime: Date;
+  transactionStatus: string;
+  shippingStatus: string;
+  receiptNumber?: string;
+  fraudStatus: string;
+  ItemDetails?: TGQLItemDetail[];
+  PaymentInfo?: TGQLPaymentInfo[];
+  CustomerDetail?: TGQLCustomerDetail;
+  CourierService?: TGQLCourierService;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -198,7 +247,7 @@ type TGQLItemDetail = {
   orderId: string;
 };
 
-type TGQLCustomerDetails = {
+type TGQLCustomerDetail = {
   id: string;
   firstName: string;
   lastName?: string;
@@ -220,7 +269,7 @@ type TGQLShippingAddress = {
   city: string;
   postalCode: string;
   countryCode: string;
-  customerDetailsId: string;
+  customerDetailId: string;
   createdAt: Date;
   updatedAt: Date;
 };

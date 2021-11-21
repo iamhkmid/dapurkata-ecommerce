@@ -70,7 +70,6 @@ export const TableElement = styled.table`
 export const TableWrapper = styled.div`
   background: ${({ theme }) => theme.background[2]};
   border-radius: ${({ theme }) => theme.borderRadius};
-  box-shadow: ${({ theme }) => theme.boxShadow};
   padding: 0.5rem;
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */

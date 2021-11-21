@@ -25,6 +25,7 @@ export const ActionColumn = styled.div`
     min-height: 16px;
     padding: 3px 10px;
     font-size: 14px;
+    font-weight: 400;
   }
 
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {

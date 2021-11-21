@@ -89,13 +89,13 @@ export const ORDER_DETAIL = gql`
       receiptNumber
       expirationTime
       fraudStatus
-      ItemDetails {
+      ItemDetail {
         id
         name
         price
         quantity
       }
-      CustomerDetails {
+      CustomerDetail {
         id
         firstName
         lastName
@@ -112,7 +112,16 @@ export const ORDER_DETAIL = gql`
           city
           postalCode
           countryCode
-          customerDetailsId
+          customerDetailId
+        }
+      }
+      CourierDetail {
+        service
+        description
+        cost
+        Courier {
+          code
+          name
         }
       }
       PaymentService {
@@ -145,10 +154,19 @@ export const ORDER_LIST_ADMIN = gql`
       transactionStatus
       shippingStatus
       fraudStatus
-      CustomerDetails {
+      CustomerDetail {
         id
         firstName
         lastName
+      }
+      CourierService {
+        service
+        description
+        cost
+        Courier {
+          code
+          name
+        }
       }
       PaymentService {
         id

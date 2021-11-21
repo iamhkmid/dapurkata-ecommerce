@@ -71,6 +71,7 @@ const typeDefs = gql`
     userPicture: String
     Wishlist: Wishlist
     ShoppingCart: [ShoppingCart]
+    Order: [Order]
     createdAt: Date
     updatedAt: Date
   }

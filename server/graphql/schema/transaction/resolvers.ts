@@ -108,10 +108,17 @@ export const Mutation: TTransactionMutation = {
       currId: user.id,
     });
     type TBookStocks = { bookId: string; stock: number }[];
+    type TCourierService = {
+      code: string;
+      service: string;
+      cost: number;
+      description: string;
+    };
     const orderId = cuid();
     let item_details: TItemDetails[];
     let gross_amount: number;
     let bookStocks: TBookStocks;
+    let courier: TCourierService;
 
     if (data.orderType === "shoppingcart") {
       const sCart = await db.shoppingCart.findMany({
@@ -139,7 +146,7 @@ export const Mutation: TTransactionMutation = {
       );
 
       const weight = sCartWeight({ shoppingCart: sCart });
-      const cost = await courierCost({
+      const checkCost = await courierCost({
         api,
         courier: data.courierCode,
         service: data.courierService,
@@ -151,9 +158,10 @@ export const Mutation: TTransactionMutation = {
         courier: {
           code: data.courierCode,
           service: data.courierService,
-          cost,
+          cost: checkCost.cost,
         },
       });
+      courier = checkCost;
       item_details = items.item_details;
       gross_amount = items.gross_amount;
     } else if (data.orderType === "buy-now") {
@@ -173,7 +181,7 @@ export const Mutation: TTransactionMutation = {
         book,
         amount: data.amount,
       });
-      const cost = await courierCost({
+      const checkCost = await courierCost({
         api,
         courier: data.courierCode,
         service: data.courierService,
@@ -186,9 +194,10 @@ export const Mutation: TTransactionMutation = {
         courier: {
           code: data.courierCode,
           service: data.courierService,
-          cost,
+          cost: checkCost.cost,
         },
       });
+      courier = checkCost;
       item_details = Items.item_details;
       gross_amount = Items.gross_amount;
     } else {
@@ -237,7 +246,7 @@ export const Mutation: TTransactionMutation = {
         expirationTime,
         ItemDetails: { create: item_details },
         User: { connect: { id: user.id } },
-        CustomerDetails: {
+        CustomerDetail: {
           create: {
             firstName: recipient.User.firstName,
             lastName: recipient.User.lastName || undefined,
@@ -259,12 +268,21 @@ export const Mutation: TTransactionMutation = {
         },
         PaymentInfo: { create: charge.paymentInfo },
         PaymentService: { connect: { id: charge.paymentServiceId } },
+        CourierDetail: {
+          create: {
+            service: courier.service,
+            description: courier.description,
+            cost: courier.cost,
+            Courier: { connect: { code: "jne" } },
+          },
+        },
       },
       include: {
         ItemDetails: true,
         PaymentService: { include: { PaymentType: true } },
       },
     });
+
     try {
       if (order) {
         // reset shoppingcart
@@ -340,6 +358,13 @@ export const Order: TOrder = {
     });
     return findOrder.PaymentService;
   },
+  CourierDetail: async ({ id }, _, { db }) => {
+    const findOrder = await db.order.findUnique({
+      where: { id },
+      select: { CourierDetail: { include: { Courier: true } } },
+    });
+    return findOrder.CourierDetail;
+  },
   User: async ({ id }, _, { db }) => {
     const findOrder = await db.order.findUnique({
       where: { id },
@@ -347,19 +372,19 @@ export const Order: TOrder = {
     });
     return findOrder.User;
   },
-  ItemDetails: async ({ id }, _, { db }) => {
+  ItemDetail: async ({ id }, _, { db }) => {
     const findOrder = await db.order.findUnique({
       where: { id },
       select: { ItemDetails: true },
     });
     return findOrder.ItemDetails;
   },
-  CustomerDetails: async ({ id }, _, { db }) => {
+  CustomerDetail: async ({ id }, _, { db }) => {
     const findOrder = await db.order.findUnique({
       where: { id },
-      select: { CustomerDetails: { include: { ShippingAddress: true } } },
+      select: { CustomerDetail: { include: { ShippingAddress: true } } },
     });
-    return findOrder.CustomerDetails;
+    return findOrder.CustomerDetail;
   },
   PaymentInfo: async ({ id }, _, { db }) => {
     const findOrder = await db.order.findUnique({

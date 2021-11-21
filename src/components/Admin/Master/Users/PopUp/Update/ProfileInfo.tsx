@@ -2,6 +2,11 @@ import moment from "moment";
 import "moment/locale/id";
 import { FC, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
+import { ONLINE_USERS_SUBS } from "../../../../../../graphql/dashboard/subscriptions";
+import {
+  TGQLOnlineUsersQuery,
+  TGQLOnlineUserSubs,
+} from "../../../../../../types/dashboard";
 import ImageResponsive from "../../../../../otherComps/ImageResponsive";
 import LoadingPopup from "../../../../../otherComps/Loading/LoadingPopup";
 import { useGQLOnlineUserQuery, useGQLUserDetail } from "../../useGQLUser";
@@ -23,6 +28,26 @@ const ProfileInfo: FC<TProfileInfo> = ({ userId }) => {
       setOnline(isOnline);
     }
   }, [onlineUsers]);
+
+  const subscribeDashboard = () => {
+    subscribeToMore<TGQLOnlineUserSubs>({
+      document: ONLINE_USERS_SUBS,
+      updateQuery: (prev, { subscriptionData }) => {
+        if (!subscriptionData.data?.onlineUsers) return prev;
+        const newOnlineUsers = subscriptionData.data.onlineUsers;
+        return {
+          onlineUsers: newOnlineUsers,
+        } as TGQLOnlineUsersQuery;
+      },
+    });
+  };
+
+  useEffect(() => {
+    if (onlineUsers) {
+      subscribeDashboard();
+    }
+  }, [onlineUsers]);
+
   return (
     <Main>
       {loading && <LoadingPopup />}
@@ -133,7 +158,7 @@ const Main = styled.div`
   display: flex;
   gap: 16px;
   max-height: 500px;
-  width: 350px;
+  min-width: 250px;
   min-height: 500px;
   overflow-y: auto;
   ::-webkit-scrollbar {

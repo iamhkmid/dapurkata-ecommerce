@@ -106,6 +106,43 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                 </div>
               </div>
             </El.OrderDetail>
+
+            <El.CourierService>
+              <h1 className="title">LAYANAN KURIR</h1>
+              <div className="info-wrapper">
+                <div className="val-wrapper">
+                  <div className="name">Kurir</div>
+                  <div className="value">
+                    {data.order.CourierDetail?.Courier?.name || ""}
+                  </div>
+                </div>
+                <div className="val-wrapper">
+                  <div className="name">Layanan</div>
+                  <div className="value">
+                    {data.order.CourierDetail?.service || ""}
+                  </div>
+                </div>
+                <div className="val-wrapper">
+                  <div className="name">Deskripsi</div>
+                  <div className="value">
+                    {data.order.CourierDetail?.description || ""}
+                  </div>
+                </div>
+                <div className="val-wrapper">
+                  <h1 className="name">Biaya Kirim</h1>
+                  <h1 className="gross-amount">
+                    <NumberFormat
+                      prefix="Rp"
+                      value={data.order.CourierDetail.cost}
+                      displayType={"text"}
+                      thousandSeparator={"."}
+                      decimalSeparator={","}
+                    />
+                  </h1>
+                </div>
+              </div>
+            </El.CourierService>
+
             <El.ItemDetail>
               <h1 className="title">ITEM</h1>
               <div className="val-wrapper">
@@ -119,7 +156,7 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {data.order.ItemDetails.map((val, index) => {
+                    {data.order.ItemDetail.map((val, index) => {
                       return (
                         <tr key={val.id}>
                           <td>{index + 1}</td>
@@ -150,37 +187,37 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                 <div className="val-wrapper">
                   <div className="name">Nama Depan</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.firstName}
+                    {data.order.CustomerDetail.ShippingAddress.firstName}
                   </div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Nama Belakang</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.lastName || ""}
+                    {data.order.CustomerDetail.ShippingAddress.lastName || ""}
                   </div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Email</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.email}
+                    {data.order.CustomerDetail.ShippingAddress.email}
                   </div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Phone</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.phone}
+                    {data.order.CustomerDetail.ShippingAddress.phone}
                   </div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Kota/Kabupaten</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.city}
+                    {data.order.CustomerDetail.ShippingAddress.city}
                   </div>
                 </div>
                 <div className="val-wrapper">
                   <div className="name">Alamat</div>
                   <div className="value">
-                    {data.order.CustomerDetails.ShippingAddress.address}
+                    {data.order.CustomerDetail.ShippingAddress.address}
                   </div>
                 </div>
               </div>

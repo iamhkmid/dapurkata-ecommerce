@@ -18,8 +18,14 @@ import {
   USER_SHOPPINGCART_BY_ADMIN,
   USER_WISHLIST_BY_ADMIN,
 } from "../../../../graphql/user/queries";
-import { ONLINE_USER_QUERY } from "../../../../graphql/dashboard/queries";
-import { TGQLOnlineUserQuery } from "../../../../types/dashboard";
+import {
+  ONLINE_USERS,
+  ONLINE_USER_QUERY,
+} from "../../../../graphql/dashboard/queries";
+import {
+  TGQLOnlineUserQuery,
+  TGQLOnlineUsersQuery,
+} from "../../../../types/dashboard";
 import {
   TFormCreateUser,
   TFormUpdateUser,
@@ -186,12 +192,12 @@ export const useGQLUpdateUser = () => {
 
 export const useGQLOnlineUserQuery = () => {
   const { data, error, loading, subscribeToMore } =
-    useQuery<TGQLOnlineUserQuery>(ONLINE_USER_QUERY, {
+    useQuery<TGQLOnlineUsersQuery>(ONLINE_USERS, {
       errorPolicy: "all",
       fetchPolicy: "network-only",
     });
   return {
-    data: data?.dashboard?.onlineUsers || [],
+    data: data?.onlineUsers || [],
     error,
     loading,
     subscribeToMore,

@@ -29,7 +29,7 @@ export type TOrderListsUsers = {
         name: string;
       };
     };
-    CustomerDetails: {
+    CustomerDetail: {
       id: string;
       firstName: string;
       lastName: string;
@@ -78,7 +78,7 @@ type TItemDetail = {
   quantity: number;
 };
 
-type TCustomerDetails = {
+type TCustomerDetail = {
   id: string;
   firstName: string;
   lastName: string;
@@ -98,7 +98,17 @@ type TShippingAddress = {
   city: string;
   postalCode: string;
   countryCode: string;
-  customerDetailsId: string;
+  customerDetailId: string;
+};
+
+export type TCourierDetail = {
+  service: string;
+  description: string;
+  cost: number;
+  Courier: {
+    code: string;
+    name: string;
+  };
 };
 export type TGQLPaymentService = {
   id: string;
@@ -163,8 +173,9 @@ export type TGQLOrderDetaiBylUserQuery = {
         description: string;
       };
     };
-    ItemDetails?: TItemDetail[];
-    CustomerDetails: TCustomerDetails;
+    ItemDetail?: TItemDetail[];
+    CustomerDetail: TCustomerDetail;
+    CourierDetail: TCourierDetail;
     grossAmount: number;
     currency: string;
     transactionTime: number;
@@ -191,8 +202,8 @@ export type TGQLOrderDetailByAdminQuery = {
         description: string;
       };
     };
-    ItemDetails?: TItemDetail[];
-    CustomerDetails: TCustomerDetails;
+    ItemDetail?: TItemDetail[];
+    CustomerDetail: TCustomerDetail;
     grossAmount: number;
     currency: string;
     transactionTime: number;

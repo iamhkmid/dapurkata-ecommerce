@@ -7,6 +7,7 @@ import ChangeRole from "./Navigation/ChangeRole";
 import { useGQLUserDetail } from "../../useGQLUser";
 import Wishlist from "./Navigation/Wishlist";
 import Shoppingcart from "./Navigation/Shoppingcart";
+import Orders from "./Navigation/Orders";
 type TNavigation = {
   userId: string;
 };
@@ -15,7 +16,11 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
   const { data, error, loading } = useGQLUserDetail({ userId });
 
   useEffect(() => {
-    if (data?.role === "ADMIN" && adminNav.userDetailNav !== "CHANGE_DATA") {
+    if (
+      data?.role === "ADMIN" &&
+      adminNav.userDetailNav !== "CHANGE_DATA" &&
+      adminNav.userDetailNav !== "CHANGE_ROLE"
+    ) {
       dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "CHANGE_DATA" });
     }
   }, [data]);
@@ -106,6 +111,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         {adminNav.userDetailNav === "SHOPPINGCART" && (
           <Shoppingcart userId={userId} />
         )}
+        {adminNav.userDetailNav === "ORDER" && <Orders userId={userId} />}
       </div>
     </Main>
   );

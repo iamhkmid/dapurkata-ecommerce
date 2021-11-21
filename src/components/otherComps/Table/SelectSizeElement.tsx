@@ -42,7 +42,7 @@ export const DropdownContainer = styled.div`
   transition: 0.3s all ease;
 `;
 export const Dropdown = styled.div`
-  box-shadow: 0px 0px 20px -10px ${({ theme }) => theme.shadow};
+  box-shadow: ${({ theme }) => theme.boxShadow};
   position: relative;
   cursor: pointer;
   max-height: 9rem;
@@ -110,7 +110,6 @@ export const InputWrapper = styled.div`
   color: ${({ theme }) => theme.input.color};
   background: ${({ theme }) => theme.input.base.background};
   border: 1px solid ${({ theme }) => theme.input.border};
-  box-shadow: ${({ theme }) => theme.boxShadow};
   border-radius: ${({ theme }) => theme.borderRadius};
   width: 4.5rem;
   :focus {

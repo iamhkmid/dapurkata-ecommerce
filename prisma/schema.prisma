@@ -109,14 +109,29 @@ model ShoppingCart {
 }
 
 model Courier {
-  code      String   @id @default(cuid()) @map("courier_code")
-  name      String
-  isEnabled Boolean  @map("is_enabled")
-  Order     Order[]
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  code          String          @id @default(cuid()) @map("courier_code")
+  name          String
+  isEnabled     Boolean         @map("is_enabled")
+  CourierDetail CourierDetail[]
+  createdAt     DateTime        @default(now()) @map("created_at")
+  updatedAt     DateTime        @updatedAt @map("updated_at")
 
   @@map("courier")
+}
+
+model CourierDetail {
+  id          String   @id @default(cuid()) @map("courier_detail_id")
+  service     String
+  description String
+  cost        Int
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+  courierCode String?  @map("courier_code")
+  Courier     Courier? @relation(fields: [courierCode], references: [code], onDelete: SetNull)
+  orderId     String   @unique @map("order_id")
+  Order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+
+  @@map("courier_detail")
 }
 
 model PaymentService {
@@ -149,26 +164,25 @@ model PaymentType {
 }
 
 model Order {
-  id                String           @id @default(cuid()) @map("order_id")
-  userId            String?          @map("user_id")
-  User              User?            @relation(fields: [userId], references: [id], onDelete: SetNull)
-  grossAmount       Int              @map("gross_amount")
+  id                String          @id @default(cuid()) @map("order_id")
+  userId            String?         @map("user_id")
+  User              User?           @relation(fields: [userId], references: [id], onDelete: SetNull)
+  grossAmount       Int             @map("gross_amount")
   currency          String
-  transactionTime   DateTime         @map("transaction_time")
-  transactionStatus String           @map("transaction_status")
-  shippingStatus    String           @map("shipping_status")
-  receiptNumber     String?          @map("receipt_number")
-  expirationTime    DateTime         @map("expiration_time")
-  fraudStatus       String           @map("fraud_status")
+  transactionTime   DateTime        @map("transaction_time")
+  transactionStatus String          @map("transaction_status")
+  shippingStatus    String          @map("shipping_status")
+  receiptNumber     String?         @map("receipt_number")
+  expirationTime    DateTime        @map("expiration_time")
+  fraudStatus       String          @map("fraud_status")
   ItemDetails       ItemDetail[]
-  createdAt         DateTime         @default(now()) @map("created_at")
-  updatedAt         DateTime         @updatedAt @map("updated_at")
+  createdAt         DateTime        @default(now()) @map("created_at")
+  updatedAt         DateTime        @updatedAt @map("updated_at")
   PaymentInfo       PaymentInfo[]
-  CustomerDetails   CustomerDetails?
-  paymentServiceId  String?          @map("payment_service_id")
-  PaymentService    PaymentService?  @relation(fields: [paymentServiceId], references: [id], onDelete: SetNull)
-  courierCode       String?          @map("courier_code")
-  Courier           Courier?         @relation(fields: [courierCode], references: [code], onDelete: SetNull)
+  CustomerDetail    CustomerDetail?
+  paymentServiceId  String?         @map("payment_service_id")
+  PaymentService    PaymentService? @relation(fields: [paymentServiceId], references: [id], onDelete: SetNull)
+  CourierDetail     CourierDetail?
 
   @@map("order")
 }
@@ -199,7 +213,7 @@ model ItemDetail {
   @@map("item_detail")
 }
 
-model CustomerDetails {
+model CustomerDetail {
   id              String           @id @default(cuid()) @map("customer_details_id")
   firstName       String           @map("first_name")
   lastName        String?          @map("last_name")
@@ -211,24 +225,24 @@ model CustomerDetails {
   createdAt       DateTime         @default(now()) @map("created_at")
   updatedAt       DateTime         @updatedAt @map("updated_at")
 
-  @@map("customer_details")
+  @@map("customer_detail")
 }
 
 model ShippingAddress {
-  id                String          @id @default(cuid()) @map("shipping_address_id")
-  firstName         String          @map("first_name")
-  lastName          String          @map("last_name")
-  email             String
-  phone             String
+  id               String         @id @default(cuid()) @map("shipping_address_id")
+  firstName        String         @map("first_name")
+  lastName         String         @map("last_name")
+  email            String
+  phone            String
   // address      String     @db.VarChar(1000)
-  address           String
-  city              String
-  postalCode        String          @map("postal_code")
-  countryCode       String          @map("country_code")
-  createdAt         DateTime        @default(now()) @map("created_at")
-  updatedAt         DateTime        @updatedAt @map("updated_at")
-  customerDetailsId String          @unique @map("customer_details_id")
-  CustomerDetails   CustomerDetails @relation(fields: [customerDetailsId], references: [id], onDelete: Cascade)
+  address          String
+  city             String
+  postalCode       String         @map("postal_code")
+  countryCode      String         @map("country_code")
+  createdAt        DateTime       @default(now()) @map("created_at")
+  updatedAt        DateTime       @updatedAt @map("updated_at")
+  customerDetailId String         @unique @map("customer_detail_id")
+  CustomerDetail   CustomerDetail @relation(fields: [customerDetailId], references: [id], onDelete: Cascade)
 
   @@map("shipping_address")
 }

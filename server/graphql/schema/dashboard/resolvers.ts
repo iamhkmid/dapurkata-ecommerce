@@ -1,5 +1,5 @@
 import { withFilter } from "graphql-subscriptions";
-import { TGQLDashboardGraph } from "../../../types/dashboard";
+import { TGQLDashboardGraph, TGQLOnlineUsers } from "../../../types/dashboard";
 import { TDashboardQuery, TDashboardSubcription } from "../../../types/graphql";
 import pubsub from "../../services/pubsub";
 
@@ -26,7 +26,7 @@ export const Query: TDashboardQuery = {
       select: {
         id: true,
         grossAmount: true,
-        CustomerDetails: {
+        CustomerDetail: {
           select: {
             firstName: true,
             lastName: true,
@@ -36,7 +36,6 @@ export const Query: TDashboardQuery = {
         transactionTime: true,
       },
     });
-    const onlineUsers = cache.get("online-user") as [];
     const successOrders = await db.order.findMany({
       where: {
         transactionStatus: "settlement",
@@ -86,9 +85,12 @@ export const Query: TDashboardQuery = {
       totalProducts,
       totalUsers,
       lastOrders,
-      onlineUsers,
       graph,
     };
+  },
+  onlineUsers: async (_, __, { db, cache }) => {
+    const onlineUsers = cache.get("online-user") as TGQLOnlineUsers[];
+    return onlineUsers;
   },
 };
 

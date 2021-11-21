@@ -3,6 +3,7 @@ import { gql } from "apollo-server-express";
 const typeDefs = gql`
   type Query {
     dashboard: Dashboard @auth(requires: ADMIN)
+    onlineUsers: [onlineUsers]
   }
 
   type Subscription {
@@ -15,7 +16,6 @@ const typeDefs = gql`
     totalUsers: Int
     totalProducts: Int
     lastOrders: [dashboardLastOrders]
-    onlineUsers: [onlineUsers]
     graph: dashboardGraph
   }
   type dashboardGraph {
@@ -31,11 +31,11 @@ const typeDefs = gql`
   type dashboardLastOrders {
     id: String
     grossAmount: Int
-    CustomerDetails: dashboardCustomerDetails
+    CustomerDetail: dashboardCustomerDetail
     transactionStatus: String
     transactionTime: Date
   }
-  type dashboardCustomerDetails {
+  type dashboardCustomerDetail {
     firstName: String
     lastName: String
   }

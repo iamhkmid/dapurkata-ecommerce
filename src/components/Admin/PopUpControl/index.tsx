@@ -74,7 +74,7 @@ const PopUpControl = () => {
           )}
 
           {popup.name === "USER_DELETE" && <UserDelete userId={popup.userId} />}
-          {popup.name === "USER_UPDATE" && (
+          {popup.name === "USER_DETAIL" && (
             <UserUpdate userId={popup.userId} nested={popup.nested} />
           )}
         </Main>
