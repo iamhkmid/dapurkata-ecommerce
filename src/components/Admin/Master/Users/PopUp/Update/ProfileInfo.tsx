@@ -134,6 +134,7 @@ const Main = styled.div`
   gap: 16px;
   max-height: 500px;
   width: 350px;
+  min-height: 500px;
   overflow-y: auto;
   ::-webkit-scrollbar {
     width: 10px;
