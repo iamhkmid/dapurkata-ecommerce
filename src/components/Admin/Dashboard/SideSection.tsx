@@ -91,24 +91,23 @@ const SideSection: FC<TProps> = (props) => {
       <Section>
         <h1 className="title">Online</h1>
         <ItemWrapperOnlineUser>
-          {loadingOU && <LoadingOnlineUser />}
-          {!loadingOU &&
-            dataOU?.onlineUsers?.map((val) => (
-              <ItemOnlineUser
-                key={val.id}
-                onClick={() =>
-                  dispatch({
-                    type: "SHOW_POPUP",
-                    value: { name: "USER_DETAIL", userId: val.id },
-                  })
-                }
-              >
-                <h1 className="name">{`${val.firstName} ${
-                  val.lastName || ""
-                }`}</h1>
-                <h1 className="role">{`> ${val.role}`}</h1>
-              </ItemOnlineUser>
-            ))}
+          {loadingOU && !dataOU?.onlineUsers && <LoadingOnlineUser />}
+          {dataOU?.onlineUsers?.map((val) => (
+            <ItemOnlineUser
+              key={val.id}
+              onClick={() =>
+                dispatch({
+                  type: "SHOW_POPUP",
+                  value: { name: "USER_DETAIL", userId: val.id },
+                })
+              }
+            >
+              <h1 className="name">{`${val.firstName} ${
+                val.lastName || ""
+              }`}</h1>
+              <h1 className="role">{`> ${val.role}`}</h1>
+            </ItemOnlineUser>
+          ))}
         </ItemWrapperOnlineUser>
       </Section>
     </Main>

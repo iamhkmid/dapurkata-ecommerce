@@ -38,9 +38,3 @@ export type TGQLOnlineUsersQuery = {
 export type TGQLOnlineUserSubs = {
   onlineUsers: TDashboardOnlineUsers[];
 };
-
-export type TGQLOnlineUserQuery = {
-  dashboard: {
-    onlineUsers: TDashboardOnlineUsers[];
-  };
-};

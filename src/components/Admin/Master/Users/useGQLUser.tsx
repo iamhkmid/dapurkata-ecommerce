@@ -22,10 +22,7 @@ import {
   ONLINE_USERS,
   ONLINE_USER_QUERY,
 } from "../../../../graphql/dashboard/queries";
-import {
-  TGQLOnlineUserQuery,
-  TGQLOnlineUsersQuery,
-} from "../../../../types/dashboard";
+import { TGQLOnlineUsersQuery } from "../../../../types/dashboard";
 import {
   TFormCreateUser,
   TFormUpdateUser,
