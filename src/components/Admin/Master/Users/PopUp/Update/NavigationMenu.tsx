@@ -4,17 +4,20 @@ import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import UpdateData from "./Navigation/UpdateData";
 import Button from "../../../../../otherComps/Buttons/Button";
 import ChangeRole from "./Navigation/ChangeRole";
+import { useGQLUserDetail } from "../../useGQLUser";
 type TNavigation = {
   userId: string;
 };
 const NavigationMenu: FC<TNavigation> = ({ userId }) => {
   const { dispatch } = useContext(AdminNavCtx);
+  const { data, error, loading } = useGQLUserDetail({ userId });
   const [nav, setNav] = useState("CHANGE_DATA");
   return (
     <Main>
       <div className="button-wrapper">
         <ButtonNav
           type="button"
+          disabled={loading}
           active={nav === "CHANGE_DATA"}
           onClick={() => setNav("CHANGE_DATA")}
         >
@@ -22,6 +25,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         </ButtonNav>
         <ButtonNav
           type="button"
+          disabled={loading}
           active={nav === "CHANGE_ROLE"}
           onClick={() => setNav("CHANGE_ROLE")}
         >
@@ -29,6 +33,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         </ButtonNav>
         <ButtonNav
           type="button"
+          disabled={loading || data.role === "ADMIN"}
           active={nav === "WISHLIST"}
           onClick={() => setNav("WISHLIST")}
         >
@@ -36,6 +41,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         </ButtonNav>
         <ButtonNav
           type="button"
+          disabled={loading || data.role === "ADMIN"}
           active={nav === "SHOPPINGCART"}
           onClick={() => setNav("SHOPPINGCART")}
         >
@@ -43,6 +49,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         </ButtonNav>
         <ButtonNav
           type="button"
+          disabled={loading || data.role === "ADMIN"}
           active={nav === "RECIPIENT"}
           onClick={() => setNav("RECIPIENT")}
         >
@@ -51,6 +58,7 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         <Button
           type="button"
           name="Hapus"
+          disabled={loading}
           color="danger"
           onClick={() =>
             dispatch({
