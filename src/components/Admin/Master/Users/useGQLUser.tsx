@@ -38,7 +38,11 @@ export const useGQLUserDetail = (props: TUserDetailByAdmin) => {
   const { userId } = props;
   const { data, error, loading } = useQuery<TGQLUserDetailByAdmin>(
     USER_DETAIL_BY_ADMIN,
-    { variables: { userId }, errorPolicy: "all" }
+    {
+      variables: { userId },
+      errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
+    }
   );
   return { data: data?.user, error, loading };
 };

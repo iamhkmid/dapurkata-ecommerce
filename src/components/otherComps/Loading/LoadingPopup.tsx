@@ -14,11 +14,11 @@ const Main = styled.div`
     align-items: center;
     justify-content: center;
     gap: 5px;
-  }
-  > h1 {
-    font-size: 14px;
-    color: ${({ theme }) => theme.color[8]};
-    font-weight: 500;
+    > h1 {
+      font-size: 14px;
+      color: ${({ theme }) => theme.color[8]};
+      font-weight: 500;
+    }
   }
 `;
 const Loading = styled.div`

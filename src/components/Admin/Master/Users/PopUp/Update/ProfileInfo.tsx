@@ -3,6 +3,7 @@ import "moment/locale/id";
 import { FC, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import ImageResponsive from "../../../../../otherComps/ImageResponsive";
+import LoadingPopup from "../../../../../otherComps/Loading/LoadingPopup";
 import { useGQLOnlineUserQuery, useGQLUserDetail } from "../../useGQLUser";
 
 type TProfileInfo = {
@@ -24,6 +25,7 @@ const ProfileInfo: FC<TProfileInfo> = ({ userId }) => {
   }, [onlineUsers]);
   return (
     <Main>
+      {loading && <LoadingPopup />}
       {!loading && data && (
         <div className="profil-wrapper">
           <div className="info-wrapper">
