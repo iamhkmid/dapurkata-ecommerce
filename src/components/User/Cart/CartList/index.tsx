@@ -41,9 +41,6 @@ const CartList = () => {
             </thead>
             <tbody>
               {shoppingCart.data.map((val) => {
-                const cover = val.Book.BookPicture.find(
-                  (img) => img.type === "COVER"
-                );
                 return (
                   <tr key={val.id}>
                     <td>
@@ -51,7 +48,7 @@ const CartList = () => {
                         <El.CoverWrapper>
                           <div>
                             <ImageFixed
-                              src={cover?.url}
+                              src={val.Book.coverURL}
                               alt={val.Book.title}
                               height={75}
                               width={50}

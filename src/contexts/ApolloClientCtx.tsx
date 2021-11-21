@@ -42,6 +42,11 @@ export const client = new ApolloClient({
               return incoming;
             },
           },
+          dashboard: {
+            merge(existing, incoming) {
+              return incoming;
+            },
+          },
           authors: {
             merge(existing, incoming) {
               return incoming;

@@ -116,14 +116,11 @@ const OrderSummary = () => {
                 <El.TableName>KERANJANG</El.TableName>
                 <El.CartInfo>
                   {shoppingCart.data.map((val, i) => {
-                    const cover = val.Book.BookPicture.find(
-                      (img) => img.type === "COVER"
-                    );
                     return (
                       <El.ItemWrapper key={val.id}>
                         <El.CoverWrapper>
                           <ImageResponsive
-                            src={cover?.url}
+                            src={val.Book?.coverURL}
                             alt={val.Book?.title}
                             height={70}
                             width={46}

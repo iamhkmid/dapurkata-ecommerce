@@ -15,6 +15,8 @@ import {
   USER_CHANGE_ROLE_DATA,
   USER_DEL_DATA,
   USER_DETAIL_BY_ADMIN,
+  USER_SHOPPINGCART_BY_ADMIN,
+  USER_WISHLIST_BY_ADMIN,
 } from "../../../../graphql/user/queries";
 import { ONLINE_USER_QUERY } from "../../../../graphql/dashboard/queries";
 import { TGQLOnlineUserQuery } from "../../../../types/dashboard";
@@ -27,6 +29,8 @@ import {
   TGQLUpdateUser,
   TGQLUserAdminList,
   TGQLUserDetailByAdmin,
+  TGQLUserShoppingcartByAdmin,
+  TGQLUserWishlistByAdmin,
   TInitDataUpdateUser,
   TUpdateUserVal,
 } from "../../../../types/user";
@@ -246,4 +250,30 @@ export const useGQLUserChangeRoleData = (values: { userId: string }) => {
   );
 
   return { data: data?.user, error, loading };
+};
+
+export const useGQLWishlist = (props: TUserDetailByAdmin) => {
+  const { userId } = props;
+  const { data, error, loading } = useQuery<TGQLUserWishlistByAdmin>(
+    USER_WISHLIST_BY_ADMIN,
+    {
+      variables: { userId },
+      errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
+    }
+  );
+  return { data: data?.user?.Wishlist?.Book || [], error, loading };
+};
+
+export const useGQLShoppingcart = (props: TUserDetailByAdmin) => {
+  const { userId } = props;
+  const { data, error, loading } = useQuery<TGQLUserShoppingcartByAdmin>(
+    USER_SHOPPINGCART_BY_ADMIN,
+    {
+      variables: { userId },
+      errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
+    }
+  );
+  return { data: data?.user?.ShoppingCart || [], error, loading };
 };

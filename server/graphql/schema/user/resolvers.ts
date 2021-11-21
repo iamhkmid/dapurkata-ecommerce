@@ -13,6 +13,8 @@ import bcrypt from "bcrypt";
 import { withFilter } from "graphql-subscriptions";
 import pubsub from "../../services/pubsub";
 import { TWishlistBook } from "../../../types/wishlist";
+import { TGQLUserShoppingcartByAdmin } from "../../../types/user";
+import { TGQLSCart } from "../../../types/shoppingCart";
 
 export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
@@ -154,13 +156,53 @@ export const Subscription: TUserSubcription = {
 };
 
 export const User: TUser = {
-  ShoppingCart: async ({ id }, _, { db }) =>
-    (
-      await db.user.findUnique({
-        where: { id },
-        select: { ShoppingCart: true },
-      })
-    ).ShoppingCart,
+  ShoppingCart: async ({ id }, _, { db }) => {
+    const findUser = await db.user.findUnique({
+      where: { id },
+      select: {
+        ShoppingCart: {
+          include: {
+            Book: {
+              select: {
+                id: true,
+                title: true,
+                price: true,
+                weight: true,
+                discount: true,
+                Author: { select: { id: true, name: true } },
+                BookPicture: true,
+              },
+            },
+          },
+        },
+      },
+    });
+    const shoppingcart = findUser.ShoppingCart.reduce((acc, curr) => {
+      const { Book, ...rest } = curr;
+      const coverURL = Book.BookPicture.find(
+        (val) => val.type === "COVER"
+      )?.url;
+      return [
+        ...acc,
+        {
+          id: rest.id,
+          amount: rest.amount,
+          Book: {
+            id: Book.id,
+            title: Book.title,
+            price: Book.price,
+            weight: Book.weight,
+            discount: Book.discount,
+            Author: { id: Book.Author.id, name: Book.Author.name },
+            coverURL,
+          },
+          createdAt: rest.createdAt,
+          updatedAt: rest.updatedAt,
+        },
+      ];
+    }, [] as TGQLSCart[]);
+    return shoppingcart;
+  },
   Recipient: async ({ id }, _, { db }) =>
     (
       await db.user.findUnique({

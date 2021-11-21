@@ -17,6 +17,48 @@ export const USER_DETAIL_BY_ADMIN = gql`
   }
 `;
 
+export const USER_WISHLIST_BY_ADMIN = gql`
+  query ($userId: ID!) {
+    user(userId: $userId) {
+      Wishlist {
+        id
+        userId
+        createdAt
+        updatedAt
+        Book {
+          id
+          title
+          coverURL
+          Author {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const USER_SHOPPINGCART_BY_ADMIN = gql`
+  query ($userId: ID!) {
+    user(userId: $userId) {
+      ShoppingCart {
+        id
+        amount
+        Book {
+          id
+          title
+          coverURL
+          Author {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+`;
+
 export const USERS_ADMIN_LIST = gql`
   query {
     users {

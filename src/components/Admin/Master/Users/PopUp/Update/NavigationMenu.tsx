@@ -1,57 +1,84 @@
-import { FC, useContext, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import styled, { css } from "styled-components";
 import { AdminNavCtx } from "../../../../../../contexts/AdminNavCtx";
 import UpdateData from "./Navigation/UpdateData";
 import Button from "../../../../../otherComps/Buttons/Button";
 import ChangeRole from "./Navigation/ChangeRole";
 import { useGQLUserDetail } from "../../useGQLUser";
+import Wishlist from "./Navigation/Wishlist";
+import Shoppingcart from "./Navigation/Shoppingcart";
 type TNavigation = {
   userId: string;
 };
 const NavigationMenu: FC<TNavigation> = ({ userId }) => {
-  const { dispatch } = useContext(AdminNavCtx);
+  const { adminNav, dispatch } = useContext(AdminNavCtx);
   const { data, error, loading } = useGQLUserDetail({ userId });
-  const [nav, setNav] = useState("CHANGE_DATA");
+
+  useEffect(() => {
+    if (data?.role === "ADMIN" && adminNav.userDetailNav !== "CHANGE_DATA") {
+      dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "CHANGE_DATA" });
+    }
+  }, [data]);
   return (
     <Main>
       <div className="button-wrapper">
         <ButtonNav
           type="button"
           disabled={loading}
-          active={nav === "CHANGE_DATA"}
-          onClick={() => setNav("CHANGE_DATA")}
+          active={adminNav.userDetailNav === "CHANGE_DATA"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "CHANGE_DATA" })
+          }
         >
           Ubah Data
         </ButtonNav>
         <ButtonNav
           type="button"
           disabled={loading}
-          active={nav === "CHANGE_ROLE"}
-          onClick={() => setNav("CHANGE_ROLE")}
+          active={adminNav.userDetailNav === "CHANGE_ROLE"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "CHANGE_ROLE" })
+          }
         >
           Ubah Role
         </ButtonNav>
         <ButtonNav
           type="button"
           disabled={loading || data.role === "ADMIN"}
-          active={nav === "WISHLIST"}
-          onClick={() => setNav("WISHLIST")}
+          active={adminNav.userDetailNav === "WISHLIST"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "WISHLIST" })
+          }
         >
           Wishlist
         </ButtonNav>
         <ButtonNav
           type="button"
           disabled={loading || data.role === "ADMIN"}
-          active={nav === "SHOPPINGCART"}
-          onClick={() => setNav("SHOPPINGCART")}
+          active={adminNav.userDetailNav === "SHOPPINGCART"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "SHOPPINGCART" })
+          }
         >
           Keranjang
         </ButtonNav>
         <ButtonNav
           type="button"
           disabled={loading || data.role === "ADMIN"}
-          active={nav === "RECIPIENT"}
-          onClick={() => setNav("RECIPIENT")}
+          active={adminNav.userDetailNav === "ORDER"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "ORDER" })
+          }
+        >
+          Pesanan
+        </ButtonNav>
+        <ButtonNav
+          type="button"
+          disabled={loading || data.role === "ADMIN"}
+          active={adminNav.userDetailNav === "RECIPIENT"}
+          onClick={() =>
+            dispatch({ type: "CHANGE_USER_DETAIL_NAV", value: "RECIPIENT" })
+          }
         >
           Daftar Alamat
         </ButtonNav>
@@ -69,8 +96,16 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         />
       </div>
       <div className="content-workspace">
-        {nav === "CHANGE_DATA" && <UpdateData userId={userId} />}
-        {nav === "CHANGE_ROLE" && <ChangeRole userId={userId} />}
+        {adminNav.userDetailNav === "CHANGE_DATA" && (
+          <UpdateData userId={userId} />
+        )}
+        {adminNav.userDetailNav === "CHANGE_ROLE" && (
+          <ChangeRole userId={userId} />
+        )}
+        {adminNav.userDetailNav === "WISHLIST" && <Wishlist userId={userId} />}
+        {adminNav.userDetailNav === "SHOPPINGCART" && (
+          <Shoppingcart userId={userId} />
+        )}
       </div>
     </Main>
   );
@@ -82,14 +117,31 @@ const Main = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-  gap: 16px;
+  gap: 8px;
   .button-wrapper {
     gap: 8px;
-    width: fit-content;
     display: flex;
-    flex-wrap: wrap;
     width: 100%;
-    > button :nth-child(6) {
+    max-width: 100%;
+    padding-bottom: 10px;
+    overflow: auto;
+    ::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: ${({ theme }) => theme.scrollbar.v1.thumb};
+      border-radius: ${({ theme }) => theme.input.borderRadius};
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: ${({ theme }) => theme.scrollbar.v1.hover.thumb};
+    }
+    > button :nth-child(7) {
       font-size: 14px;
       padding: 5px 10px;
       min-height: 16px;
@@ -117,12 +169,13 @@ const ButtonNav = styled.button<TButtonNav>`
   justify-content: center;
   position: relative;
   font-weight: 500;
-  height: 2.2rem;
+  min-height: 16px;
+  min-width: max-content;
   width: max-content;
   font-size: 14px;
   padding: 5px 10px;
   min-height: 16px;
-  padding: 0.2rem 1rem;
+  padding: 6px 16px;
   border: 1px solid transparent;
   outline: none;
   gap: 0.2rem;
@@ -161,7 +214,7 @@ const ButtonNav = styled.button<TButtonNav>`
   ${({ active }) =>
     active &&
     css`
-      padding-left: 1.5rem;
+      padding-left: 24px;
       ::after {
         height: 10px;
       }

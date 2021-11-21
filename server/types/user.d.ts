@@ -97,3 +97,17 @@ export type TGQLUserNotification = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type TGQLUserShoppingcartByAdmin = {
+  id: string;
+  amount: number;
+  Book: {
+    id: string;
+    title: string;
+    Author: {
+      id: string;
+      name: string;
+    };
+    coverURL: string;
+  };
+};

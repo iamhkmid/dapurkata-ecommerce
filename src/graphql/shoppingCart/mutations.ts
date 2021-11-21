@@ -9,14 +9,16 @@ export const CREATE_SHOPPING_CART = gql`
         id
         title
         price
+        weight
+        discount
         Author {
+          id
           name
         }
-        BookPicture {
-          url
-          type
-        }
+        coverURL
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -30,14 +32,16 @@ export const EDIT_SHOPPING_CART = gql`
         id
         title
         price
+        weight
+        discount
         Author {
+          id
           name
         }
-        BookPicture {
-          url
-          type
-        }
+        coverURL
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -46,14 +50,7 @@ export const DELETE_SHOPPING_CART = gql`
   mutation ($cartId: ID!) {
     deleteShoppingCart(cartId: $cartId) {
       id
-      User {
-        id
-      }
-      Book {
-        id
-        title
-      }
-      amount
+      message
     }
   }
 `;

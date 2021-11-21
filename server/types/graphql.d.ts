@@ -70,11 +70,15 @@ import {
   TGQLArgsUser,
   TGQLUser,
   TGQLUserNotification,
+  TGQLUserShoppingcartByAdmin,
 } from "./user";
 import {
   TArgsCreateSChart,
   TArgsUpdateSChart,
+  TGQLCreateSCart,
+  TGQLDeleteSCart,
   TGQLSCart,
+  TGQLUpdateSCart,
 } from "./shoppingCart";
 import {
   TArgsCreatePublisher,
@@ -402,7 +406,7 @@ export type TSChartMutation = {
     parent: any,
     args: { cartId: string },
     context: TCtx
-  ) => Promise<TGQLSCart>;
+  ) => Promise<TGQLDeleteSCart>;
 };
 
 export type TRecipientQuery = {

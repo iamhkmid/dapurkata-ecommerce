@@ -15,7 +15,7 @@ import SideSection from "./SideSection";
 const Dashboard = () => {
   const { data, error, loading, subscribeToMore } =
     useQuery<TGQLDashboardQuery>(DASHBOARD, {
-      fetchPolicy: "network-only",
+      fetchPolicy: "cache-and-network",
       errorPolicy: "all",
     });
 
@@ -25,11 +25,9 @@ const Dashboard = () => {
       updateQuery: (prev, { subscriptionData }) => {
         if (!subscriptionData.data?.onlineUsers) return prev;
         const newOnlineUsers = subscriptionData.data.onlineUsers;
-        return Object.assign({}, prev, {
-          dashboard: {
-            onlineUsers: newOnlineUsers,
-          },
-        } as TGQLDashboardQuery);
+        return {
+          dashboard: { ...data?.dashboard, onlineUsers: newOnlineUsers },
+        } as TGQLDashboardQuery;
       },
     });
   };

@@ -1,24 +1,24 @@
 import { gql } from "@apollo/client";
 
 export const SHOPPINGCART = gql`
-  query ($userId: String!) {
-    shoppingCart(userId: $userId) {
+  query {
+    shoppingCart {
       id
       amount
       Book {
         id
         title
         price
-        discount
         weight
+        discount
         Author {
+          id
           name
         }
-        BookPicture {
-          url
-          type
-        }
+        coverURL
       }
+      createdAt
+      updatedAt
     }
   }
 `;

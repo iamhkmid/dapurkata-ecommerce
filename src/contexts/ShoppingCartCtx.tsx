@@ -14,7 +14,6 @@ const ShoppingCartCtxProvider: FC<ReactNode> = ({ children }) => {
 
   const { data, error, loading } = useQuery<TGQLShoppingCart>(SHOPPINGCART, {
     skip: !user,
-    variables: { userId: user?.id },
     errorPolicy: "all",
   });
 

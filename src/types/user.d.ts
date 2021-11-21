@@ -35,6 +35,42 @@ export type TGQLUserDetailByAdmin = {
   };
 };
 
+export type TGQLUserWishlistByAdmin = {
+  user: {
+    Wishlist: {
+      id: string;
+      userId: string;
+      createdAt: number;
+      updatedAt: number;
+      Book: {
+        id: string;
+        title: string;
+        coverURL: string;
+        Author: {
+          id: string;
+          name: string;
+        };
+      }[];
+    };
+  };
+};
+export type TGQLUserShoppingcartByAdmin = {
+  user: {
+    ShoppingCart: {
+      id: string;
+      Book: {
+        id: string;
+        title: string;
+        Author: {
+          id: string;
+          name: string;
+        };
+        coverURL: string;
+      };
+      amount: number;
+    }[];
+  };
+};
 export type TGQLUserAdminList = {
   users: {
     id: string;

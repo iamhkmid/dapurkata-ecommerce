@@ -127,6 +127,13 @@ type TMessage = {
 };
 
 // ADMIN NAV CONTEXT
+type TUserDetailNav =
+  | "CHANGE_DATA"
+  | "CHANGE_ROLE"
+  | "WISHLIST"
+  | "SHOPPINGCART"
+  | "ORDER"
+  | "RECIPIENT";
 type TAdminPopUpVal = {
   nested?: boolean;
 } & (
@@ -154,8 +161,10 @@ export type TAdminNavState = {
   sidebar: boolean;
   popup: TAdminPopUp;
   globalMessage: TMessage;
+  userDetailNav: TUserDetailNav;
 };
 type TAdminNavAction =
+  | { type: "CHANGE_USER_DETAIL_NAV"; value: TUserDetailNav }
   | { type: "OPEN_SIDEBAR" }
   | { type: "CLOSE_SIDEBAR" }
   | { type: "SIDEBAR_TOGGLER" }

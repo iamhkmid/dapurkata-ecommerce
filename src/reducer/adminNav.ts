@@ -2,6 +2,8 @@ import { TAdminNavRdcr, TAdminNavState } from "../types/context";
 
 export const reducer: TAdminNavRdcr = (state, action) => {
   switch (action.type) {
+    case "CHANGE_USER_DETAIL_NAV":
+      return { ...state, userDetailNav: action.value };
     case "OPEN_SIDEBAR":
       return { ...state, sidebar: true };
     case "CLOSE_SIDEBAR":
@@ -63,4 +65,5 @@ export const initialValue: TAdminNavState = {
     backTo: null,
   },
   globalMessage: { color: null, message: null, isShowed: false },
+  userDetailNav: "CHANGE_DATA",
 };

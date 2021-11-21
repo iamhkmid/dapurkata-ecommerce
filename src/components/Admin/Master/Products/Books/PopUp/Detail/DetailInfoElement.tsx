@@ -161,6 +161,6 @@ export const CoverWrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: 10rem;
+  width: 160px;
   aspect-ratio: 7.6/11;
 `;
