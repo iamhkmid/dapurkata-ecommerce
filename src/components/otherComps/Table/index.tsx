@@ -72,55 +72,57 @@ const Table: FC<TProps> = ({ columns, data, isLoading }) => {
         <SearchInput filter={globalFilter} setFilter={setGlobalFilter} />
       </El.TableHeader>
       <El.TableWrapper ref={tableRef}>
-        <El.TableElement {...getTableProps()}>
-          <thead>
-            {headerGroups.map((headerGroups) => (
-              <tr {...headerGroups.getFooterGroupProps()}>
-                {headerGroups.headers.map((column) => (
-                  <th
-                    {...column.getHeaderProps([
-                      column.getSortByToggleProps(),
-                      {
-                        className: column.className,
-                      },
-                    ])}
-                  >
-                    <El.ThWrapper>
-                      {column.render("Header")}
+        <div>
+          <El.TableElement {...getTableProps()}>
+            <thead>
+              {headerGroups.map((headerGroups) => (
+                <tr {...headerGroups.getFooterGroupProps()}>
+                  {headerGroups.headers.map((column) => (
+                    <th
+                      {...column.getHeaderProps([
+                        column.getSortByToggleProps(),
+                        {
+                          className: column.className,
+                        },
+                      ])}
+                    >
+                      <El.ThWrapper>
+                        {column.render("Header")}
 
-                      <El.ThIcon
-                        isShowed={column.isSorted}
-                        rotare={column.isSortedDesc}
-                      >
-                        {IconsControl("chevron-up-outline")}
-                      </El.ThIcon>
-                    </El.ThWrapper>
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          {!isLoading && (
-            <tbody {...getTableProps()}>
-              {page.map((row, index) => {
-                prepareRow(row);
-                return (
-                  <tr {...row.getRowProps()}>
-                    {row.cells.map((cell) => (
-                      <td {...cell.getCellProps()}>
-                        <El.TdWrapper>{cell.render("Cell")}</El.TdWrapper>
-                      </td>
-                    ))}
-                  </tr>
-                );
-              })}
-            </tbody>
+                        <El.ThIcon
+                          isShowed={column.isSorted}
+                          rotare={column.isSortedDesc}
+                        >
+                          {IconsControl("chevron-up-outline")}
+                        </El.ThIcon>
+                      </El.ThWrapper>
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </thead>
+            {!isLoading && (
+              <tbody {...getTableProps()}>
+                {page.map((row, index) => {
+                  prepareRow(row);
+                  return (
+                    <tr {...row.getRowProps()}>
+                      {row.cells.map((cell) => (
+                        <td {...cell.getCellProps()}>
+                          <El.TdWrapper>{cell.render("Cell")}</El.TdWrapper>
+                        </td>
+                      ))}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            )}
+          </El.TableElement>
+          {isLoading && <LoadingTable />}
+          {!isLoading && mData.length === 0 && (
+            <El.EmptyData>Data Kosong</El.EmptyData>
           )}
-        </El.TableElement>
-        {isLoading && <LoadingTable />}
-        {!isLoading && mData.length === 0 && (
-          <El.EmptyData>Data Kosong</El.EmptyData>
-        )}
+        </div>
       </El.TableWrapper>
       <El.TableFooter>
         <Pagination paginationProps={paginationProps} />

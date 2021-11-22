@@ -52,11 +52,11 @@ const Loading = styled.div`
       transparent;
   }
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-    width: 50px;
-    height: 50px;
+    width: 14px;
+    height: 14px;
     > div {
-      width: 50px;
-      height: 50px;
+      width: 14px;
+      height: 14px;
     }
   }
   > div:nth-child(1) {

@@ -147,35 +147,25 @@ export const ORDER_LIST_ADMIN = gql`
   query {
     ordersListUsers {
       id
-      grossAmount
-      currency
-      expirationTime
       transactionTime
       transactionStatus
       shippingStatus
-      fraudStatus
       CustomerDetail {
         id
         firstName
         lastName
       }
-      CourierService {
-        service
-        description
-        cost
-        Courier {
-          code
-          name
-        }
-      }
-      PaymentService {
-        id
-        name
-        PaymentType {
-          id
-          name
-        }
-      }
+    }
+  }
+`;
+
+export const ORDER_LIST_USER_BY_ADMIN = gql`
+  query ($userId: ID!) {
+    ordersListUsers(userId: $userId) {
+      id
+      transactionTime
+      transactionStatus
+      shippingStatus
     }
   }
 `;

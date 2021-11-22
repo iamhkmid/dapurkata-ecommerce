@@ -52,6 +52,7 @@ const Shoppingcart: FC<TProps> = ({ userId }) => {
                   <h1 className="author">{val.Book.Author.name}</h1>
                 </div>
               </InfoWrapper>
+              <Amount>{`x ${val.amount}`}</Amount>
             </ItemWrapper>
           ))}
       </Scroll>
@@ -117,6 +118,7 @@ const ItemWrapper = styled.div`
   padding: 0.5rem;
   gap: 0.5rem;
   border-radius: 5px;
+  gap: 16px;
   :hover {
     background: ${({ theme }) => theme.button.section.background};
   }
@@ -148,7 +150,6 @@ const CoverWrapper = styled.div`
 
 const InfoWrapper = styled.div`
   display: flex;
-  width: 100%;
   gap: 10px;
   justify-content: space-between;
   .info {
@@ -182,5 +183,17 @@ const InfoWrapper = styled.div`
       font-size: 10px;
     }
     transition: 0.4s all ease;
+  }
+`;
+
+const Amount = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  font-size: 14px;
+  font-weight: 600;
+  color: ${({ theme }) => theme.color[2]};
+  @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+    font-size: 12px;
   }
 `;

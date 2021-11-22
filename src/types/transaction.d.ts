@@ -21,26 +21,23 @@ export type TOrderListsUser = {
 export type TOrderListsUsers = {
   ordersListUsers: {
     id: string;
-    PaymentService: {
-      id: string;
-      name: string;
-      PaymentType: {
-        id: string;
-        name: string;
-      };
-    };
     CustomerDetail: {
       id: string;
       firstName: string;
       lastName: string;
     };
-    grossAmount: number;
-    currency: string;
     transactionTime: number;
-    expirationTime: number;
     transactionStatus: string;
     shippingStatus: string;
-    fraudStatus: string;
+  }[];
+};
+
+export type TOrderListUserByAdmin = {
+  ordersListUsers: {
+    id: string;
+    transactionTime: number;
+    transactionStatus: string;
+    shippingStatus: string;
   }[];
 };
 type TOrderPaymentInfo = {

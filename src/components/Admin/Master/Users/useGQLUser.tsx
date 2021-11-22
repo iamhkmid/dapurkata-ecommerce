@@ -37,6 +37,11 @@ import {
   TInitDataUpdateUser,
   TUpdateUserVal,
 } from "../../../../types/user";
+import {
+  TOrderListsUser,
+  TOrderListUserByAdmin,
+} from "../../../../types/transaction";
+import { ORDER_LIST_USER_BY_ADMIN } from "../../../../graphql/transaction/queries";
 
 type TUserDetailByAdmin = {
   userId: string;
@@ -279,4 +284,20 @@ export const useGQLShoppingcart = (props: TUserDetailByAdmin) => {
     }
   );
   return { data: data?.user?.ShoppingCart || [], error, loading };
+};
+
+type TGQLOrderListsUser = {
+  userId: string;
+};
+export const useGQLOrderListsUser = ({ userId }: TGQLOrderListsUser) => {
+  const { data, error, loading } = useQuery<TOrderListUserByAdmin>(
+    ORDER_LIST_USER_BY_ADMIN,
+    {
+      variables: { userId },
+      errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
+    }
+  );
+  const newData = data?.ordersListUsers || [];
+  return { data: newData, error, loading };
 };
