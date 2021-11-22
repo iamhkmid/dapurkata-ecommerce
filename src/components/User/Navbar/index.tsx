@@ -31,7 +31,7 @@ const Navbar: FC = ({ children }) => {
     if (process.browser) {
       if (pathname !== "/") {
         setShowColor(true);
-      } else if (y > 48) {
+      } else if (y > 64) {
         setShowColor(true);
       } else {
         setShowColor(false);
