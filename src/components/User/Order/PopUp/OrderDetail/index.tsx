@@ -35,7 +35,7 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
     >
       <PopUpHeader title="Pesanan" />
       {loading && <LoadingPopup />}
-      {!loading && data?.order && (
+      {!loading && !!data?.order && (
         <El.Section>
           <div>
             {data.order.transactionStatus !== "expire" && (
