@@ -27,7 +27,7 @@ export const columns = [
   {
     Header: "Nama",
     accessor: (d) =>
-      `${d.CustomerDetail.firstName} ${d.CustomerDetail.lastName || ""}`,
+      `${d.CustomerDetail.firstName || ""} ${d.CustomerDetail.lastName || ""}`,
   },
   {
     Header: "Status Pembayaran",
