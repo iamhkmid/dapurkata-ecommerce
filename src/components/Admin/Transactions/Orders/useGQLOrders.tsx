@@ -7,6 +7,7 @@ export const useGQLOrderListsUsers = () => {
     ORDER_LIST_ADMIN,
     {
       errorPolicy: "all",
+      fetchPolicy: "cache-and-network",
     }
   );
   const newData = data?.ordersListUsers || [];

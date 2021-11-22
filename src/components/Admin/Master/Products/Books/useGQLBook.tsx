@@ -28,6 +28,7 @@ import { TFormCreateBook, TFormUpdateBook } from "../../../../../types/Forms";
 export const useGQLGetBooks = () => {
   const { data, error, loading } = useQuery<TGQLBooks>(GET_BOOKS, {
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
   return {
     dataGBooks: data?.books || [],
@@ -40,6 +41,7 @@ export const useGQLGetBook = (values: { bookId: string }) => {
   const { data, error, loading } = useQuery<TGQLGetBook>(GET_BOOK, {
     variables: values,
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
 
   return { dataGBook: data?.book, errorGBook: error, loadGBook: loading };

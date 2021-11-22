@@ -22,6 +22,7 @@ import {
 export const useGQLCategories = () => {
   const { data, error, loading } = useQuery<TGQLCategories>(CATEGORIES, {
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
   const newData = data ? data.categories : [];
   return { data: newData, error, loading };
@@ -31,6 +32,7 @@ export const useGQLCategory = (values: { categoryId: string }) => {
   const { data, error, loading } = useQuery<TGQLCategory>(CATEGORY, {
     variables: values,
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
   return { data: data?.category, error, loading };
 };

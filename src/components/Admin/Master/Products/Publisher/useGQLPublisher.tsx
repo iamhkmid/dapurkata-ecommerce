@@ -21,6 +21,7 @@ import {
 export const useGQLPublishers = () => {
   const { data, error, loading } = useQuery<TGQLPublishers>(PUBLISHERS, {
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
   const newData = data?.publishers || [];
   return { data: newData, error, loading };
@@ -30,6 +31,7 @@ export const useGQLPublisher = (values: { publisherId: string }) => {
   const { data, error, loading } = useQuery<TGQLPublisher>(PUBLISHER, {
     variables: values,
     errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
   });
   return { data: data && data.publisher, error, loading };
 };
