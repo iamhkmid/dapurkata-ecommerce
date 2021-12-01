@@ -1,6 +1,6 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
-import { useContext, useEffect, useState } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
 import { OrderCtx } from "../../../../contexts/OrderCtx";
@@ -8,20 +8,20 @@ import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import { ORDER } from "../../../../graphql/transaction/mutations";
 import Button from "../../../otherComps/Buttons/Button";
 import ImageResponsive from "../../../otherComps/ImageResponsive";
+import LoadingPopup2 from "../../../otherComps/Loading/LoadingPopup2";
 import Loading from "./Loading";
 import * as El from "./OrderSummaryElement";
 import { useGQLOrder } from "./useGQL";
 
-const OrderSummary = () => {
+type TProps = {
+  isEmpty: boolean;
+  isLoading: boolean;
+};
+
+const OrderSummary: FC<TProps> = ({ isEmpty, isLoading }) => {
   const { order } = useContext(OrderCtx);
   const { shoppingCart } = useContext(ShoppingCartCtx);
   const [amountPrice, setAmountPrice] = useState(0);
-  const isBuyNow =
-    order.order.type === "buy-now" &&
-    !!order.order.book &&
-    !!order.order.amount;
-  const isSCart =
-    order.order.type === "shoppingcart" && shoppingCart.data.length > 0;
 
   const { makeAnOrder, data, error, loading } = useGQLOrder();
   const orderHandler = () => {
@@ -61,8 +61,9 @@ const OrderSummary = () => {
 
   return (
     <El.Main>
-      {!isBuyNow && !isSCart && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}
-      {(isBuyNow || isSCart) && (
+      {isLoading && <LoadingPopup2 />}
+      {isEmpty && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}
+      {!isEmpty && !isLoading && (
         <>
           <El.Detail>
             {order.order.type === "buy-now" && (

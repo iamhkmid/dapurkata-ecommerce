@@ -17,6 +17,7 @@ import UserDelete from "../Master/Users/PopUp/Delete";
 import UserUpdate from "../Master/Users/PopUp/Detail";
 import styled from "styled-components";
 import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
+import OrderDetail from "../Transactions/Popup/OrderDetail";
 
 const PopUpControl = () => {
   const {
@@ -76,10 +77,12 @@ const PopUpControl = () => {
           {popup.name === "PUBLISHER_UPDATE" && (
             <PublisherUpdate id={popup.publisherId} />
           )}
-
           {popup.name === "USER_DELETE" && <UserDelete userId={popup.userId} />}
           {popup.name === "USER_DETAIL" && (
             <UserUpdate userId={popup.userId} nested={popup.nested} />
+          )}
+          {popup.name === "ORDER_DETAIL" && (
+            <OrderDetail orderId={popup.orderId} />
           )}
         </Main>
       )}

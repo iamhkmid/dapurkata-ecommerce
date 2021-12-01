@@ -1,4 +1,4 @@
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 import * as El from "./OrderElement";
 import { useGQLGetBook, useGQLGetRecipients } from "./useGQL";
 import OrderSummary from "./OrderSummary";
@@ -13,6 +13,8 @@ const Order: FC = () => {
   const { query } = useRouter();
   const { order, dispatch } = useContext(OrderCtx);
   const { shoppingCart } = useContext(ShoppingCartCtx);
+  const [isEmpty, setIsEmpty] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const { data, error, loading } = useGQLGetBook({
     bookId:
       (query.type as string) === "buy-now" && (query["book-id"] as string),
@@ -39,7 +41,18 @@ const Order: FC = () => {
       type: "SET_ORDER_LOADING",
       value: loading,
     });
-  }, [loading]);
+    setIsLoading(loading || shoppingCart.loading || order.recipient.loading);
+  }, [loading, shoppingCart.loading]);
+
+  useEffect(() => {
+    const isBuyNow =
+      order.order.type === "buy-now" &&
+      !!order.order.book &&
+      !!order.order.amount;
+    const emptyCart =
+      order.order.type === "shoppingcart" && shoppingCart.data.length === 0;
+    setIsEmpty(!isBuyNow && emptyCart && !shoppingCart.loading);
+  }, [order.order.type, shoppingCart.data, shoppingCart.loading]);
 
   return (
     <El.Main>
@@ -47,13 +60,13 @@ const Order: FC = () => {
         <El.SectionHead>
           <El.SectionName>{"Pengiriman & Pembayaran"}</El.SectionName>
         </El.SectionHead>
-        <Delevery />
+        <Delevery isEmpty={isEmpty} isLoading={isLoading} />
       </El.Delivery>
       <El.OrderSummary>
         <El.SectionHead>
           <El.SectionName>Ringkasan Pemesanan</El.SectionName>
         </El.SectionHead>
-        <OrderSummary />
+        <OrderSummary isEmpty={isEmpty} isLoading={isLoading} />
       </El.OrderSummary>
     </El.Main>
   );

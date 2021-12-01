@@ -7,6 +7,7 @@ import ShippingMethod from "./ShippingMethod";
 import * as El from "./DeleveryElement";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import Payment from "./Payment";
+import LoadingPopup2 from "../../../otherComps/Loading/LoadingPopup2";
 
 type TContent = {
   name: string;
@@ -38,28 +39,20 @@ const Content: FC<TContent> = (Props) => {
   );
 };
 
-const Delevery = () => {
+type TProps = {
+  isEmpty: boolean;
+  isLoading: boolean;
+};
+
+const Delevery: FC<TProps> = ({ isEmpty, isLoading }) => {
   const { order } = useContext(OrderCtx);
   const { shoppingCart } = useContext(ShoppingCartCtx);
 
-  const isBuyNow =
-    order.order.type === "buy-now" &&
-    !!order.order.book &&
-    !!order.order.amount &&
-    !order.order.loading;
-  const isSCart =
-    order.order.type === "shoppingcart" &&
-    !order.order.loading &&
-    shoppingCart.data.length > 0;
-  const isEmpty =
-    (order.order.type === "shoppingcart" && shoppingCart.data.length === 0) ||
-    (order.order.type === "buy-now" &&
-      (!order.order.book || !order.order.amount));
-
   return (
     <El.Main>
+      {isLoading && <LoadingPopup2 />}
       {isEmpty && <El.EmptyCart>Keranjang Kosong</El.EmptyCart>}
-      {(isBuyNow || isSCart) && (
+      {!isEmpty && !isLoading && (
         <div>
           <Content
             name="Tujuan Pengiriman"

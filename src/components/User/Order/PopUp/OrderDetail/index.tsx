@@ -28,11 +28,7 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
   );
 
   return (
-    <El.Main
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <El.Main>
       <PopUpHeader title="Pesanan" />
       {loading && <LoadingPopup />}
       {!loading && !!data?.order && (
@@ -166,7 +162,6 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                           <td>
                             <NumberFormat
                               prefix="Rp"
-                              suffix=",00"
                               value={val.price}
                               displayType={"text"}
                               thousandSeparator={"."}
