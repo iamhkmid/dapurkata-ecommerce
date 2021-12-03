@@ -50,9 +50,11 @@ import {
   TGQLRecipient,
 } from "./recipient";
 import {
+  TArgsChangeShippingStatus,
   TDBPaymentType,
   TGQLArgsOrder,
   TGQLArgsPaymentType,
+  TGQLChangeShippingStatus,
   TGQLCourierDetail,
   TGQLCustomerDetail,
   TGQLHowToPay,
@@ -477,6 +479,11 @@ export type TTransactionMutation = {
     args: TGQLArgsOrder,
     context: TCtx
   ) => Promise<TGQLOrderPaymentInfo>;
+  changeShippingStatus: (
+    parent: any,
+    args: TArgsChangeShippingStatus,
+    context: TCtx
+  ) => Promise<TGQLChangeShippingStatus>;
 };
 
 export type TTransactionSubcription = {

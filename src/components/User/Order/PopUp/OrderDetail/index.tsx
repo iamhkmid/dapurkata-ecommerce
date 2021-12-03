@@ -8,7 +8,7 @@ import {
   getTransactionStatus,
   getShippingStatus,
 } from "../../../../../services/getStatus";
-import { TGQLOrderDetaiBylUserQuery } from "../../../../../types/transaction";
+import { TGQLOrderDetailByUserQuery } from "../../../../../types/transaction";
 import Button from "../../../../otherComps/Buttons/Button";
 import LoadingPopup from "../../../../otherComps/Loading/LoadingPopup";
 import PopUpHeader from "../../../../otherComps/PopUpHeader/PopUpHeaderUser";
@@ -19,7 +19,7 @@ type TProps = {
 };
 const OrderDetail: FC<TProps> = ({ orderId }) => {
   const { userNav, dispatch } = useContext(UserNavCtx);
-  const { data, loading, error } = useQuery<TGQLOrderDetaiBylUserQuery>(
+  const { data, loading, error } = useQuery<TGQLOrderDetailByUserQuery>(
     ORDER_DETAIL,
     {
       fetchPolicy: "network-only",

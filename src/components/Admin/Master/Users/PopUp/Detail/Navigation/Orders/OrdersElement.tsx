@@ -8,8 +8,6 @@ export const Main = styled.div`
   padding: 16px;
   gap: 16px;
   border-radius: ${({ theme }) => theme.borderRadius};
-  box-shadow: ${({ theme }) => theme.boxShadow};
-  background: ${({ theme }) => theme.background[2]};
   .title {
     font-size: 20px;
     font-weight: 600;

@@ -61,7 +61,16 @@ const SideSection: FC<TProps> = (props) => {
           {isLoading && <LoadingLastOrder />}
           {!isLoading &&
             lastOrders.map((val) => (
-              <ItemLastOrder key={val.id} status={val.transactionStatus}>
+              <ItemLastOrder
+                key={val.id}
+                status={val.transactionStatus}
+                onClick={() =>
+                  dispatch({
+                    type: "SHOW_POPUP",
+                    value: { name: "ORDER_DETAIL", orderId: val.id },
+                  })
+                }
+              >
                 <div className="info-wrapper">
                   <h1 className="name">{`${val.CustomerDetail.firstName} ${
                     val.CustomerDetail.lastName || ""

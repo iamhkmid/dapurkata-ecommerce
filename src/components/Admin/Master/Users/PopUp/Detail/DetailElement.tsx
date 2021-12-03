@@ -20,6 +20,7 @@ export const Main = styled(motion.div)`
     width: 100%;
   }
   transition: 0.4s all ease;
+  transition-property: background;
 `;
 
 export const ContentWrapper = styled.div`

@@ -11,7 +11,11 @@ type TUserDetail = {
 
 const BookDetail: FC<TUserDetail> = ({ userId, nested }) => {
   return (
-    <El.Main>
+    <El.Main
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <PopUpHeaderAdmin
         title="Detail Pengguna"
         closePopup={nested ? "CURRENT" : "ALL"}

@@ -30,3 +30,11 @@ export const ORDER = gql`
     }
   }
 `;
+
+export const CHANGE_SHIPPING_STATUS = gql`
+  mutation ($orderId: ID!, $data: changeShippingStatusData!) {
+    changeShippingStatus(orderId: $orderId, data: $data) {
+      message
+    }
+  }
+`;

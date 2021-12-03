@@ -101,29 +101,32 @@ export const OrderDetail = styled.div`
         left: -1rem;
         top: 50%;
         transform: translateY(-50%);
-        min-width: 0.6rem;
-        min-height: 0.6rem;
+        min-width: 8px;
+        min-height: 8px;
         border-radius: 100%;
         background: ${({ theme }) => theme.button.primary.background};
       }
-      font-size: 0.9rem;
+      font-size: 14px;
       font-weight: 600;
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
     .value {
-      font-size: 0.9rem;
+      font-size: 14px;
       line-height: 1.2;
       color: ${({ theme }) => theme.color[2]};
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
     .gross-amount {
-      font-size: 1.1rem;
+      font-size: 18px;
       font-weight: 600;
       color: ${({ theme }) => theme.color[3]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 16px;
+      }
     }
   }
 `;
@@ -163,29 +166,32 @@ export const CourierService = styled.div`
         left: -1rem;
         top: 50%;
         transform: translateY(-50%);
-        min-width: 0.6rem;
-        min-height: 0.6rem;
+        min-width: 8px;
+        min-height: 8px;
         border-radius: 100%;
         background: ${({ theme }) => theme.button.primary.background};
       }
-      font-size: 0.9rem;
+      font-size: 14px;
       font-weight: 600;
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
     .value {
-      font-size: 0.9rem;
+      font-size: 14px;
       line-height: 1.2;
       color: ${({ theme }) => theme.color[2]};
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
     .gross-amount {
-      font-size: 1.1rem;
+      font-size: 18px;
       font-weight: 600;
       color: ${({ theme }) => theme.color[3]};
+      @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
+        font-size: 16px;
+      }
     }
   }
 `;
@@ -225,23 +231,23 @@ export const Recipient = styled.div`
         left: -1rem;
         top: 50%;
         transform: translateY(-50%);
-        min-width: 0.6rem;
-        min-height: 0.6rem;
+        min-width: 8px;
+        min-height: 8px;
         border-radius: 100%;
         background: ${({ theme }) => theme.button.primary.background};
       }
-      font-size: 0.9rem;
+      font-size: 14px;
       font-weight: 600;
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
     .value {
-      font-size: 0.9rem;
+      font-size: 14px;
       line-height: 1.2;
       color: ${({ theme }) => theme.color[2]};
       @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
-        font-size: 0.8rem;
+        font-size: 13px;
       }
     }
   }
@@ -314,10 +320,10 @@ export const ItemDetail = styled.div`
     }
     > thead {
       th {
-        font-size: 0.85rem;
+        font-size: 14px;
         font-weight: 500;
         text-align: start;
-        padding: 0.2rem 0.5rem;
+        padding: 2px 5px;
         max-height: 2rem;
         ::before {
           content: "";
@@ -331,25 +337,25 @@ export const ItemDetail = styled.div`
     }
     > tbody {
       td {
-        font-size: 0.9rem;
+        font-size: 14px;
         font-weight: 500;
-        padding: 0.8rem 0.5rem;
+        padding: 5px 5px;
         border-bottom: 1px solid ${({ theme }) => theme.input.border};
-        .name {
-          min-width: 15rem;
+        .item-name {
+          font-size: 14px;
         }
       }
     }
     @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
       > thead {
         th {
-          font-size: 0.8rem;
+          font-size: 13px;
         }
       }
       > tbody {
         td {
-          font-size: 0.8rem;
-          padding: 0.8rem 0.5rem;
+          font-size: 13px;
+          padding: 5px 5px;
         }
       }
     }

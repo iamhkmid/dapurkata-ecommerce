@@ -69,7 +69,16 @@ export type TGQLArgsOrder = {
     payment: TPaymentBT | TPaymentStore;
   };
 };
-
+type TArgsChangeShippingStatus = {
+  orderId: string;
+  data: {
+    shippingStatus: string;
+    receiptNumber: string;
+  };
+};
+type TGQLChangeShippingStatus = {
+  message: string;
+};
 export type TGQLArgsPaymentType = { isEnabled: boolean };
 
 export type TPropsCCost = {

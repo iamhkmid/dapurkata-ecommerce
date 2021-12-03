@@ -155,7 +155,35 @@ export type TGQLPaymentInfoQuery = {
   };
 };
 
-export type TGQLOrderDetaiBylUserQuery = {
+export type TGQLOrderDetailByUserQuery = {
+  order: {
+    id: string;
+    PaymentService: {
+      id: string;
+      name: string;
+      icon: string;
+      description: string;
+      PaymentType?: {
+        id: string;
+        name: string;
+        icon: string;
+        description: string;
+      };
+    };
+    ItemDetail?: TItemDetail[];
+    CustomerDetail: TCustomerDetail;
+    CourierDetail: TCourierDetail;
+    grossAmount: number;
+    currency: string;
+    transactionTime: number;
+    expirationTime: number;
+    transactionStatus: string;
+    shippingStatus: string;
+    receiptNumber?: string;
+    fraudStatus: string;
+  };
+};
+export type TGQLOrderDetailByAdminQuery = {
   order: {
     id: string;
     PaymentService: {
@@ -209,5 +237,23 @@ export type TGQLOrderDetailByAdminQuery = {
     shippingStatus: string;
     receiptNumber?: string;
     fraudStatus: string;
+  };
+};
+
+export type TFormChangeSS = {
+  shippingStatus: string;
+  receiptNumber: string;
+};
+
+export type TGQLOrderDetailInit = {
+  order: {
+    id: string;
+    shippingStatus: string;
+    receiptNumber: string;
+  };
+};
+export type TGQLChangeShippingStatus = {
+  changeShippingStatus: {
+    message: string;
   };
 };

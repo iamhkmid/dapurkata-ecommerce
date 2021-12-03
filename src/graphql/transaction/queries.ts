@@ -169,3 +169,81 @@ export const ORDER_LIST_USER_BY_ADMIN = gql`
     }
   }
 `;
+
+export const ORDER_DETAIL_BY_ADMIN = gql`
+  query ($orderId: ID!) {
+    order(orderId: $orderId) {
+      id
+      PaymentServiceId
+      userId
+      grossAmount
+      currency
+      transactionTime
+      transactionStatus
+      shippingStatus
+      receiptNumber
+      expirationTime
+      fraudStatus
+      ItemDetail {
+        id
+        name
+        price
+        quantity
+      }
+      CustomerDetail {
+        id
+        firstName
+        lastName
+        email
+        phone
+        orderId
+        ShippingAddress {
+          id
+          firstName
+          lastName
+          email
+          phone
+          address
+          city
+          postalCode
+          countryCode
+          customerDetailId
+        }
+      }
+      CourierDetail {
+        service
+        description
+        cost
+        Courier {
+          code
+          name
+        }
+      }
+      PaymentService {
+        id
+        name
+        icon
+        PaymentType {
+          id
+          name
+        }
+      }
+      PaymentInfo {
+        name
+        value
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+
+export const ORDER_DETAIL_INIT = gql`
+  query ($orderId: ID!) {
+    order(orderId: $orderId) {
+      id
+      shippingStatus
+      receiptNumber
+    }
+  }
+`;

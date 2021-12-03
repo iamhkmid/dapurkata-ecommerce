@@ -56,7 +56,16 @@ export const columns = [
       const { dispatch } = useContext(AdminNavCtx);
       return (
         <El.ActionColumn>
-          <Button name="DETAIL" type="button" />
+          <Button
+            name="DETAIL"
+            type="button"
+            onClick={() =>
+              dispatch({
+                type: "SHOW_POPUP",
+                value: { name: "ORDER_DETAIL", orderId: d.row.values.id },
+              })
+            }
+          />
         </El.ActionColumn>
       );
     },

@@ -11,10 +11,28 @@ const typeDefs = gql`
 
   type Mutation {
     order(data: OrderInput!): OrderPaymentInfo @auth(requires: USER)
+    changeShippingStatus(
+      orderId: ID!
+      data: changeShippingStatusData!
+    ): ChangeShippingStatus @auth(requires: ADMIN)
   }
 
   type Subscription {
     orderInfo(orderId: ID!): OrderInfoSubscription
+  }
+
+  type ChangeShippingStatus {
+    message: String
+  }
+
+  input changeShippingStatusData {
+    shippingStatus: enumShippingStatus
+    receiptNumber: String
+  }
+  enum enumShippingStatus {
+    unProcessed
+    inProcess
+    inShipping
   }
 
   enum orderFilter {

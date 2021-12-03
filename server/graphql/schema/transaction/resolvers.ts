@@ -330,6 +330,22 @@ export const Mutation: TTransactionMutation = {
     }
     return order;
   },
+  changeShippingStatus: async (_, { orderId, data }, { db }) => {
+    const order = await db.order.findUnique({
+      where: { id: orderId },
+      select: { transactionStatus: true },
+    });
+    if (order.transactionStatus !== "settlement")
+      throw new ApolloError("Pesanan Belum dibayar");
+    await db.order.update({
+      where: { id: orderId },
+      data: {
+        shippingStatus: data.shippingStatus,
+        receiptNumber: data.receiptNumber,
+      },
+    });
+    return { message: "Berhasil ubah status pengiriman" };
+  },
 };
 
 export const Subscription: TTransactionSubcription = {
