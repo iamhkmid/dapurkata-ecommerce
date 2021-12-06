@@ -1,7 +1,7 @@
 import { yupResolver } from "@hookform/resolvers/yup";
-import { FC, useContext, useEffect } from "react";
+import { FC, useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { AdminNavCtx } from "../../../../../contexts/AdminNavCtx";
 import { TFormChangeSS } from "../../../../../types/transaction";
 import Button from "../../../../otherComps/Buttons/Button";
@@ -16,11 +16,13 @@ type TProps = {
   orderId: string;
 };
 const FormChangeShippingStatus: FC<TProps> = ({ orderId }) => {
+  const [showInput, setShowInput] = useState(false);
   const {
     register,
     handleSubmit,
+    getValues,
+    watch,
     formState,
-    setError,
     setValue,
     clearErrors,
     reset,
@@ -58,11 +60,16 @@ const FormChangeShippingStatus: FC<TProps> = ({ orderId }) => {
       setValue("receiptNumber", dataInit.receiptNumber);
     }
   }, [dataInit]);
+
+  useEffect(() => {
+    setShowInput(getValues("shippingStatus") === "inShipping");
+  }, [watch]);
+
   return (
     <Main>
       <h1 className="title">KONFIRMASI PENGIRIMAN</h1>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <FormInput>
+        <FormInput isShow={showInput}>
           <FormsControl
             control="select"
             name="shippingStatus"
@@ -79,16 +86,20 @@ const FormChangeShippingStatus: FC<TProps> = ({ orderId }) => {
             message={errors.shippingStatus ? "Required" : null}
             clearError={clearErrors}
           />
-          <FormsControl
-            control="input"
-            type="text"
-            name="receiptNumber"
-            register={register}
-            label="Kode Resi"
-            error={errors.receiptNumber ? true : false}
-            disabled={loading}
-            message={errors.receiptNumber ? errors.receiptNumber.message : null}
-          />
+          <InputShowHide isShow={showInput}>
+            <FormsControl
+              control="input"
+              type="text"
+              name="receiptNumber"
+              register={register}
+              label="Kode Resi"
+              error={errors.receiptNumber ? true : false}
+              disabled={loading}
+              message={
+                errors.receiptNumber ? errors.receiptNumber.message : null
+              }
+            />
+          </InputShowHide>
         </FormInput>
         <SubmitWrapper>
           <Button
@@ -138,6 +149,21 @@ const Main = styled.div`
   }
 `;
 
+type TInputShowHide = {
+  isShow: boolean;
+};
+const InputShowHide = styled.div<TInputShowHide>`
+  display: flex;
+  max-height: 0;
+  overflow: hidden;
+  ${({ isShow }) =>
+    isShow &&
+    css`
+      max-height: 150px;
+    `}
+  transition: 0.4s all ease;
+  transition-property: max-height;
+`;
 const Form = styled.form`
   font-family: "Roboto", sans-serif;
   display: flex;
@@ -145,10 +171,14 @@ const Form = styled.form`
   flex-direction: column;
   max-width: 300px;
 `;
-const FormInput = styled.div`
+const FormInput = styled.div<TInputShowHide>`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  ${({ isShow }) =>
+    isShow &&
+    css`
+      gap: 1rem;
+    `}
   .confirm-wrapper {
     display: flex;
     flex-direction: column;
@@ -173,6 +203,7 @@ const FormInput = styled.div`
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     flex-direction: column;
   }
+  transition: 0.4s gap ease;
 `;
 
 const SubmitWrapper = styled.div`

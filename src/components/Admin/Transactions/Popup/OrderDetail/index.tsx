@@ -147,7 +147,7 @@ const OrderDetail: FC<TProps> = ({ orderId }) => {
                     </h1>
                   </div>
                   <div className="info-wrapper">
-                    <div className="name">Kota</div>
+                    <div className="name">Kabupaten/Kota</div>
                     <h1 className="value">
                       {data.CustomerDetail.ShippingAddress.city}
                     </h1>
