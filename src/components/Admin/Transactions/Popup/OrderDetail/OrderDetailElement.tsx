@@ -273,6 +273,9 @@ export const ItemDetail = styled.div`
         td {
           font-size: 13px;
           padding: 5px 5px;
+          .item-name {
+            font-size: 13px;
+          }
         }
       }
     }

@@ -42,7 +42,7 @@ const Order: FC = () => {
       value: loading,
     });
     setIsLoading(loading || shoppingCart.loading || order.recipient.loading);
-  }, [loading, shoppingCart.loading]);
+  }, [loading, shoppingCart.loading, order.recipient.loading]);
 
   useEffect(() => {
     const isBuyNow =
