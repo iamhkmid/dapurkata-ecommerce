@@ -42,6 +42,11 @@ import {
   TOrderListUserByAdmin,
 } from "../../../../types/transaction";
 import { ORDER_LIST_USER_BY_ADMIN } from "../../../../graphql/transaction/queries";
+import { TAddressListByAdmin, TRecipients } from "../../../../types/recipient";
+import {
+  ADDRESS_LIST_BY_ADMIN,
+  RECIPIENTS,
+} from "../../../../graphql/recipient/queries";
 
 type TUserDetailByAdmin = {
   userId: string;
@@ -300,4 +305,24 @@ export const useGQLOrderListsUser = ({ userId }: TGQLOrderListsUser) => {
   );
   const newData = data?.ordersListUsers || [];
   return { data: newData, error, loading };
+};
+
+type TuseGQLRecipients = {
+  userId: string;
+};
+export const useGQLRecipients = (props: TuseGQLRecipients) => {
+  const { data, loading, error } = useQuery<TAddressListByAdmin>(
+    ADDRESS_LIST_BY_ADMIN,
+    {
+      errorPolicy: "all",
+      fetchPolicy: "network-only",
+      variables: { userId: props.userId },
+    }
+  );
+
+  return {
+    data: data?.recipients,
+    loading,
+    error,
+  };
 };

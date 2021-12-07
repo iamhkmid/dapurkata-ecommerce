@@ -68,3 +68,12 @@ type TUpdateRcptDefVal = {
 type TRecipients = {
   recipients: TRecipient[];
 };
+
+type TAddressListByAdmin = {
+  recipients: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    address: string;
+  }[];
+};

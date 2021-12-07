@@ -22,6 +22,17 @@ export const RECIPIENTS = gql`
   }
 `;
 
+export const ADDRESS_LIST_BY_ADMIN = gql`
+  query ($userId: ID!) {
+    recipients(userId: $userId) {
+      id
+      firstName
+      lastName
+      address
+    }
+  }
+`;
+
 export const RECIPIENT = gql`
   query ($recipientId: ID!) {
     recipient(recipientId: $recipientId) {

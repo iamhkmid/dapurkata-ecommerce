@@ -8,6 +8,7 @@ import { useGQLUserDetail } from "../../useGQLUser";
 import Wishlist from "./Navigation/Wishlist";
 import Shoppingcart from "./Navigation/Shoppingcart";
 import Orders from "./Navigation/Orders";
+import AddressList from "./Navigation/AddressList";
 type TNavigation = {
   userId: string;
 };
@@ -110,6 +111,9 @@ const NavigationMenu: FC<TNavigation> = ({ userId }) => {
         {adminNav.userDetailNav === "WISHLIST" && <Wishlist userId={userId} />}
         {adminNav.userDetailNav === "SHOPPINGCART" && (
           <Shoppingcart userId={userId} />
+        )}
+        {adminNav.userDetailNav === "RECIPIENT" && (
+          <AddressList userId={userId} />
         )}
         {adminNav.userDetailNav === "ORDER" && <Orders userId={userId} />}
       </div>
