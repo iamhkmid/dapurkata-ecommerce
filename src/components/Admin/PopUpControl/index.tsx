@@ -18,6 +18,7 @@ import UserUpdate from "../Master/Users/PopUp/Detail";
 import styled from "styled-components";
 import GlobalMessageAdmin from "../../otherComps/GlobalMessage/GlobalMessageAdmin";
 import OrderDetail from "../Transactions/Popup/OrderDetail";
+import AddressDetail from "../Master/Users/PopUp/AddressDetail";
 
 const PopUpControl = () => {
   const {
@@ -83,6 +84,9 @@ const PopUpControl = () => {
           )}
           {popup.name === "ORDER_DETAIL" && (
             <OrderDetail orderId={popup.orderId} />
+          )}
+          {popup.name === "ADDRESS_DETAIL" && (
+            <AddressDetail recipientId={popup.recipientId} />
           )}
         </Main>
       )}

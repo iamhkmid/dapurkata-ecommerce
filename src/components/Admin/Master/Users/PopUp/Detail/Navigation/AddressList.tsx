@@ -20,7 +20,15 @@ const AddressList: FC<TProps> = ({ userId }) => {
       <Scroll>
         {!loading &&
           data?.map((val) => (
-            <ItemWrapper key={val.id} onClick={() => {}}>
+            <ItemWrapper
+              key={val.id}
+              onClick={() =>
+                dispatch({
+                  type: "SHOW_POPUP",
+                  value: { name: "ADDRESS_DETAIL", recipientId: val.id },
+                })
+              }
+            >
               <InfoWrapper>
                 <div className="info">
                   <h1 className="name">{`${val.firstName} ${

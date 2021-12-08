@@ -42,9 +42,14 @@ import {
   TOrderListUserByAdmin,
 } from "../../../../types/transaction";
 import { ORDER_LIST_USER_BY_ADMIN } from "../../../../graphql/transaction/queries";
-import { TAddressListByAdmin, TRecipients } from "../../../../types/recipient";
+import {
+  TAddressListByAdmin,
+  TGQLRecipient,
+  TRecipients,
+} from "../../../../types/recipient";
 import {
   ADDRESS_LIST_BY_ADMIN,
+  RECIPIENT,
   RECIPIENTS,
 } from "../../../../graphql/recipient/queries";
 
@@ -325,4 +330,16 @@ export const useGQLRecipients = (props: TuseGQLRecipients) => {
     loading,
     error,
   };
+};
+type TGetRecipient = {
+  recipientId: string;
+};
+export const useGQLRecipient = (props: TGetRecipient) => {
+  const { recipientId } = props;
+  const { data, error, loading } = useQuery<TGQLRecipient>(RECIPIENT, {
+    variables: { recipientId },
+    errorPolicy: "all",
+    fetchPolicy: "cache-and-network",
+  });
+  return { data: data?.recipient, error, loading };
 };

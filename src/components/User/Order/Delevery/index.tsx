@@ -1,11 +1,9 @@
 import { FC, useContext, useEffect, useState } from "react";
-import { AuthContext } from "../../../../contexts/AuthCtx";
 import { OrderCtx } from "../../../../contexts/OrderCtx";
 import IconsControl from "../../../IconsControl";
 import Destination from "./Destination";
 import ShippingMethod from "./ShippingMethod";
 import * as El from "./DeleveryElement";
-import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 import Payment from "./Payment";
 import LoadingPopup2 from "../../../otherComps/Loading/LoadingPopup2";
 
@@ -46,7 +44,6 @@ type TProps = {
 
 const Delevery: FC<TProps> = ({ isEmpty, isLoading }) => {
   const { order } = useContext(OrderCtx);
-  const { shoppingCart } = useContext(ShoppingCartCtx);
 
   return (
     <El.Main>

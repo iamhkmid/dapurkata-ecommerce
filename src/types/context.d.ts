@@ -153,6 +153,7 @@ type TAdminPopUpVal = {
   | { name: "USER_DELETE"; userId: string }
   | { name: "USER_UPDATE"; userId: string }
   | { name: "ORDER_DETAIL"; orderId: string }
+  | { name: "ADDRESS_DETAIL"; recipientId: string }
 );
 
 type TAdminPopUp = {
