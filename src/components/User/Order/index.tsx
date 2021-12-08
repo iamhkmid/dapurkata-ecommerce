@@ -41,7 +41,7 @@ const Order: FC = () => {
       type: "SET_ORDER_LOADING",
       value: loading,
     });
-    setIsLoading(loading || shoppingCart.loading || order.recipient.loading);
+    setIsLoading(loading || order.recipient.loading);
   }, [loading, shoppingCart.loading, order.recipient.loading]);
 
   useEffect(() => {
