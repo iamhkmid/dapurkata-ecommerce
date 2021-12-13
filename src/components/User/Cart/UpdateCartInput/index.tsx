@@ -1,14 +1,8 @@
-import { useMutation } from "@apollo/client";
 import { FC, useContext, useEffect, useRef, useState } from "react";
-import { SIGNIN } from "../../../../graphql/auth/mutations";
-import { EDIT_SHOPPING_CART } from "../../../../graphql/shoppingCart/mutations";
-import { AuthContext } from "../../../../contexts/AuthCtx";
 import { useGQLUpdateSCart } from "./useGQL";
-import { client } from "../../../../contexts/ApolloClientCtx";
 import IconsControl from "../../../IconsControl";
 import * as El from "./UpdateCartInputElement";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
-import ShowMessage from "../../../otherComps/ShowMessage";
 import { ShoppingCartCtx } from "../../../../contexts/ShoppingCartCtx";
 
 type TUpdateCart = {
