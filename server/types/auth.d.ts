@@ -7,18 +7,20 @@ export type TGQLArgsSignin = {
   rememberMe: Boolean;
 };
 
+export type TGQLSigninUser = {
+  id: string;
+  username: string;
+  email: string;
+  role: string;
+  phone: string;
+  firstName: string;
+  lastName?: string;
+  userPicture: string;
+};
+
 export type TGQLSignin = {
   jwt: string;
-  user: {
-    id: string;
-    username: string;
-    email: string;
-    role: string;
-    phone: string;
-    firstName: string;
-    lastName?: string;
-    userPicture: string;
-  };
+  user: TGQLSigninUser;
 };
 
 export type TGQLRegister = {

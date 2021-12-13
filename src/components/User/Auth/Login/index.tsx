@@ -6,14 +6,15 @@ import { TGQLFormSignin } from "../../../../types/auth";
 import FormsControl from "../../../otherComps/Forms/FormsControl";
 import Button from "../../../otherComps/Buttons/Button";
 import ButtonLink from "../../../otherComps/Buttons/ButtonLink";
-import * as El from "./SignInElement";
+import * as El from "./LoginElement";
 import { useSignIn } from "../../../../hooks/useGQLAuth";
 import { UserNavCtx } from "../../../../contexts/UserNavCtx";
 import IconsControl from "../../../IconsControl";
 import { useRouter } from "next/router";
 import { useGQLGoogleOauth2Verify } from "./useGQL";
 import Loading2 from "../../../otherComps/Loading/Loading2";
-const SignIn = () => {
+
+const Login = () => {
   const { dispatch } = useContext(UserNavCtx);
   const { query, push } = useRouter();
   const htmlElRef = useRef<{ focus: () => void }>();
@@ -127,7 +128,7 @@ const SignIn = () => {
               name="Buat Akun Baru"
               disabled={loading || loadingGOV}
               color="section"
-              onClick={() => push("/auth/signup")}
+              onClick={() => push("/auth/register")}
             />
             <Button
               type="button"
@@ -160,4 +161,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default Login;

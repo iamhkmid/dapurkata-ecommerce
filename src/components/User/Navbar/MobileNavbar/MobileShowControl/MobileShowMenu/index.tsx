@@ -83,7 +83,7 @@ const MobileShowMenu = () => {
         )}
         {!user && (
           <El.NoAccount>
-            <El.NLink href="/auth/signin">
+            <El.NLink href="/auth/login">
               <El.Anchor
                 onClick={() => {
                   dispatch({ type: "CLOSE_MENU" });

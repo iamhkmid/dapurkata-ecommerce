@@ -34,16 +34,18 @@ const Create = () => {
 
   const { dataForm, errorForm, loadForm } = useGQLGetFormBook();
   const onSubmit = async (values: TFormCreateBook) => {
-    createBook(values)
-      .then(({ data }) => {
-        reset();
-        dispatch({
-          type: "SHOW_POPUP",
-          value: { name: "BOOK_DETAIL", bookId: data.createBook.id },
-        });
-      })
-      .catch(() => {});
+    await createBook(values);
   };
+
+  useEffect(() => {
+    if (data) {
+      reset();
+      dispatch({
+        type: "SHOW_POPUP",
+        value: { name: "BOOK_DETAIL", bookId: data.id },
+      });
+    }
+  }, [data]);
 
   return (
     <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>

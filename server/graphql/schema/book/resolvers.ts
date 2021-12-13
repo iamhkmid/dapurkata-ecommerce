@@ -57,7 +57,7 @@ export const Query: TBookQuery = {
 };
 
 export const Mutation: TBookMutation = {
-  createBook: async (_, { data, cover, bookPics }, { db }) => {
+  createBook: async (_, { data, cover, bookPics }, { db, cache }) => {
     await validateSchema({ type: "CREATE_BOOK", data });
     const { pictureDir } = await makeDirFile({
       dirLoc: "/server/static/uploads/books",
@@ -107,6 +107,7 @@ export const Mutation: TBookMutation = {
     };
 
     try {
+      cache.del("books_with_filter");
       return await db.book.create({ data: newData });
     } catch (error) {
       await removeDir(pictureDir);
@@ -114,7 +115,7 @@ export const Mutation: TBookMutation = {
     }
   },
 
-  updateBook: async (_, { data }, { db }) => {
+  updateBook: async (_, { data }, { db, cache }) => {
     let slug: string = undefined;
     if (!!data.title && !!data.authorId) {
       const author = await db.author.findUnique({
@@ -153,15 +154,17 @@ export const Mutation: TBookMutation = {
         connect: data.publisherId ? { id: data.publisherId } : undefined,
       },
     };
+    cache.del("books_with_filter");
     return await db.book.update({
       where: { id: data.bookId },
       data: newData,
     });
   },
 
-  deleteBook: async (_, { bookId }, { db }) => {
+  deleteBook: async (_, { bookId }, { db, cache }) => {
     const book = await db.book.delete({ where: { id: bookId } });
     await removeDir(book.pictureDir);
+    cache.del("books_with_filter");
     return book;
   },
 };

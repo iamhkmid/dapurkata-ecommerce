@@ -68,7 +68,7 @@ export const useGQLCreateBook = () => {
     const [cover] = coverlist;
     const varData = { categoryIds, ...rest };
     const variables = { data: varData, cover };
-
+    console.log(values);
     return await createBook({
       variables,
       refetchQueries: [{ query: GET_BOOKS }],
@@ -79,7 +79,7 @@ export const useGQLCreateBook = () => {
     if (data?.createBook) {
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
-        value: { message: "Berhasil mengubah data buku", color: "success" },
+        value: { message: "Berhasil menambah data buku", color: "success" },
       });
     }
   }, [data?.createBook]);

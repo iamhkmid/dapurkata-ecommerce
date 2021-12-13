@@ -11,5 +11,5 @@ export const navbarMenu = [
 
 export const signinBtn = {
   name: "Masuk",
-  link: ["/auth/signin", "/auth/signup"],
+  link: ["/auth/login", "/auth/register"],
 };

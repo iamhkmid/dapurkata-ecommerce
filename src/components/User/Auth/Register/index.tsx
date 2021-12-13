@@ -8,12 +8,12 @@ import Button from "../../../otherComps/Buttons/Button";
 import ButtonLink from "../../../otherComps/Buttons/ButtonLink";
 import ThemeContextProvider from "../../../../contexts/ThemeCtx";
 import LoadingWrapper from "../../../otherComps/Loading/LoadingWrapper";
-import * as El from "./SignUpElement";
+import * as El from "./RegisterElement";
 import { DateSingleInput } from "@datepicker-react/styled";
 import ShowMessage from "../../../otherComps/ShowMessage";
 import { useGQLCreateUser } from "./useGQL";
 
-const SignUp = () => {
+const Register = () => {
   const htmlElRef = useRef(null);
   const setFocus = () => {
     htmlElRef.current && htmlElRef.current.focus();
@@ -138,11 +138,11 @@ const SignUp = () => {
               isLoading={loading}
               disabled={!isDirty || !isValid || loading}
             />
-            <ButtonLink name="Masuk" link="/auth/signin" />
+            <ButtonLink name="Masuk" link="/auth/login" />
           </El.SubmitWrapper>
         </El.Form>
       </El.Container>
     </El.Main>
   );
 };
-export default SignUp;
+export default Register;

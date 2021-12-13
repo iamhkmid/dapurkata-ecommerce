@@ -331,7 +331,7 @@ export type TAuthQuery = {
 };
 
 export type TAuthMutation = {
-  signin: (
+  login: (
     parent: any,
     args: TGQLArgsSignin,
     context: TCtx

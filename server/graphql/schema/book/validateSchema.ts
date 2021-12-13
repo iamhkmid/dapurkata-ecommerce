@@ -26,7 +26,7 @@ const validateSchema: TValidateSchema = async ({ data, type }) => {
           .string()
           .required("Required")
           .matches(
-            /^20((0[5-9])|([2-9][0-9]))$/,
+            /^20((0[5-9])|([1-9][0-9]))$/,
             "Release Year minimum is 2005"
           ),
         numberOfPages: yup

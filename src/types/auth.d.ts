@@ -11,7 +11,7 @@ export type TUser = {
   userPicture: string;
 };
 export type TGqlSignin = {
-  signin: { jwt: string; user: TUser };
+  login: { jwt: string; user: TUser };
 };
 
 export type TGQLGoogleOauth2Verify = {

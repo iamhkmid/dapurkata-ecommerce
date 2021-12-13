@@ -14,9 +14,15 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcrypt";
 import { checkUser, hashPassword, saveUserPic } from "../user/utils";
 import { makeDirFile, removeDir } from "../../utils/uploadFIle";
-import { TAxiosGoogleUser, TCacheConfirmCode } from "../../../types/auth";
+import {
+  TAxiosGoogleUser,
+  TCacheConfirmCode,
+  TGQLSigninUser,
+} from "../../../types/auth";
 import axios, { AxiosResponse } from "axios";
 import cuid from "cuid";
+import { string } from "yup/lib/locale";
+import { TGQLUser, TUser } from "../../../types/user";
 
 export const Query: TAuthQuery = {
   checkUser: async (_, __, { db, req }) => {
@@ -42,7 +48,7 @@ export const Query: TAuthQuery = {
 };
 
 export const Mutation: TAuthMutation = {
-  signin: async (_, args, { db, mail }) => {
+  login: async (_, args, { db, mail }) => {
     const { username, password, rememberMe } = args;
     const findUser = await db.user.findUnique({
       where: { username },
@@ -65,59 +71,43 @@ export const Mutation: TAuthMutation = {
     return { jwt: token, user: findUser };
   },
   googleOauth2Verify: async (_, { code }, { db, mail }) => {
-    const { access_token, id_token } = await getGoogleOauth2Tokens({
-      code,
-    });
-
-    const googleUser = await axios
-      .get<TAxiosGoogleUser>(
-        `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`,
-        {
-          headers: {
-            Authorization: `Bearer ${id_token}`,
-          },
-        }
-      )
-      .then((res) => res.data)
-      .catch((error) => {
-        throw new ApolloError("Gagal masuk dengan Google Account");
+    let user: TGQLSigninUser, googleUser: AxiosResponse<TAxiosGoogleUser>;
+    const { access_token, id_token } = await getGoogleOauth2Tokens({ code });
+    const apiURL = `https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=${access_token}`;
+    const headers = { Authorization: `Bearer ${id_token}` };
+    try {
+      googleUser = await axios.get<TAxiosGoogleUser>(apiURL, { headers });
+      user = await db.user.findUnique({
+        where: { email: googleUser.data.email },
       });
-    const user = await db.user.findUnique({
-      where: { email: googleUser.email },
-    });
-    if (!!user) {
-      const token = createToken({
-        id: user.id,
-        role: user.role,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
-      return { jwt: token, user };
-    } else {
+    } catch (error) {
+      throw new ApolloError("Gagal masuk dengan Google Account");
+    }
+    if (!user) {
       const { pictureDir } = await makeDirFile({
         dirLoc: "/server/static/uploads/profile",
       });
-      const user = await db.user.create({
+      user = await db.user.create({
         data: {
-          firstName: googleUser.given_name,
-          lastName: googleUser.family_name || undefined,
-          email: googleUser.email,
+          firstName: googleUser.data.given_name,
+          lastName: googleUser.data.family_name || undefined,
+          email: googleUser.data.email,
           username: `user${cuid()}`,
           password: await hashPassword(cuid()),
           role: "USER",
-          userPicture: googleUser.picture || undefined,
+          userPicture: googleUser.data.picture || undefined,
           pictureDir,
           isActive: true,
         },
       });
-      const token = createToken({
-        id: user.id,
-        role: user.role,
-        firstName: user.firstName,
-        lastName: user.lastName,
-      });
-      return { jwt: token, user };
     }
+    const token = createToken({
+      id: user.id,
+      role: user.role,
+      firstName: user.firstName,
+      lastName: user.lastName,
+    });
+    return { jwt: token, user };
   },
   register: async (_, { data, userPic }, { mail, cache, db }) => {
     const check = await checkUser(data);

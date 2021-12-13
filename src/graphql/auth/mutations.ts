@@ -1,8 +1,8 @@
 import { gql } from "@apollo/client";
 
-export const SIGNIN = gql`
+export const LOGIN = gql`
   mutation ($username: String!, $password: String!, $rememberMe: Boolean!) {
-    signin(username: $username, password: $password, rememberMe: $rememberMe) {
+    login(username: $username, password: $password, rememberMe: $rememberMe) {
       jwt
       user {
         id

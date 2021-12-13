@@ -16,7 +16,7 @@ export const getGoogleAuthURL = () => {
 
   const rootUrl = "https://accounts.google.com/o/oauth2/v2/auth";
   const options = {
-    redirect_uri: `${BACKEND_URL}/auth/signin`,
+    redirect_uri: `${BACKEND_URL}/auth/login`,
     client_id: GOOGLE_CLIENT_ID,
     access_type: "offline",
     response_type: "code",

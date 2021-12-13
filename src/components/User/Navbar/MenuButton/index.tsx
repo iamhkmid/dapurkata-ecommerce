@@ -72,7 +72,7 @@ const MenuButton = () => {
           <El.Anchor
             active={signinBtn.link.includes(pathname)}
             onMouseEnter={() =>
-              dispatch({ type: "CHANGE_NAV_MENU", menu: "/auth/signin" })
+              dispatch({ type: "CHANGE_NAV_MENU", menu: "/auth/login" })
             }
             onMouseLeave={() => {
               dispatch({ type: "CHANGE_NAV_MENU", menu: asPath });

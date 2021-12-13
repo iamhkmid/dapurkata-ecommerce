@@ -86,7 +86,7 @@ export const getGoogleOauth2Tokens: TGetToken = (props) => {
     code,
     clientId: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    redirectUri: `${BACKEND_URL}/auth/signin`,
+    redirectUri: `${BACKEND_URL}/auth/login`,
     grant_type: "authorization_code",
   };
 

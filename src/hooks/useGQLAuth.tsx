@@ -1,7 +1,7 @@
 import { useMutation } from "@apollo/client";
 import Router from "next/router";
 import { useContext, useEffect } from "react";
-import { SIGNIN } from "../graphql/auth/mutations";
+import { LOGIN } from "../graphql/auth/mutations";
 import { TGQLFormSignin, TGqlSignin } from "../types/auth";
 import { AuthContext } from "../contexts/AuthCtx";
 import { ApolloClientCtx, client } from "../contexts/ApolloClientCtx";
@@ -12,19 +12,19 @@ import { OrderCtx } from "../contexts/OrderCtx";
 export const useSignIn = () => {
   const [rememberMe, setRememberMe] = useState<boolean>(false);
   const { isLoggin, setIsLoggin } = useContext(ApolloClientCtx);
-  const [signin, { error, data, loading }] = useMutation<TGqlSignin>(SIGNIN, {
+  const [login, { error, data, loading }] = useMutation<TGqlSignin>(LOGIN, {
     errorPolicy: "all",
   });
 
   const { setUser, setLoading } = useContext(AuthContext);
   useEffect(() => {
-    if (data && data.signin) {
+    if (data && data.login) {
       if (rememberMe) {
-        localStorage.setItem("authToken", data.signin.jwt);
+        localStorage.setItem("authToken", data.login.jwt);
       } else {
-        sessionStorage.setItem("authToken", data.signin.jwt);
+        sessionStorage.setItem("authToken", data.login.jwt);
       }
-      setUser(data.signin.user);
+      setUser(data.login.user);
       setIsLoggin(true);
     }
     setLoading(loading);
@@ -33,7 +33,7 @@ export const useSignIn = () => {
   const signIn = async (values: TGQLFormSignin) => {
     try {
       setRememberMe(values.rememberMe);
-      await signin({ variables: { ...values } });
+      await login({ variables: { ...values } });
     } catch (error) {}
   };
 
@@ -52,7 +52,7 @@ export const useLogOut = () => {
     sessionStorage.removeItem("authToken");
     sc?.dispatch({ type: "CLEAR_SCART" });
     order?.dispatch({ type: "CLEAR_ORDER" });
-    Router.replace("/auth/signin");
+    Router.replace("/auth/login");
     setUser(null);
   };
   return { logOut };

@@ -326,7 +326,7 @@ export const Mutation: TTransactionMutation = {
           });
       }
     } catch (err) {
-      console.log(err);
+      throw new ApolloError("Error update data pesanan");
     }
     return order;
   },
