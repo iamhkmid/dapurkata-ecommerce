@@ -50,7 +50,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
   type TwishlistHandler = { bookId: string };
   const wishlistHandler = ({ bookId }: TwishlistHandler) => {
     if (!user) {
-      push(`/auth/signin?next=${pathname}`);
+      push(`/auth/login?next=${pathname}`);
       dispatch({ type: "CLOSE_POPUP" });
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
@@ -69,7 +69,7 @@ const BookDetail: FC<TBookDetail> = ({ bookId }) => {
   const buyNowHandler = (props: TbuyNowHandler) => {
     const { amount, bookId, stock } = props;
     if (!user) {
-      push(`/auth/signin?next=${pathname}`);
+      push(`/auth/login?next=${pathname}`);
       dispatch({ type: "CLOSE_POPUP" });
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",

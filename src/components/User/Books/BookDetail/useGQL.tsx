@@ -48,7 +48,7 @@ export const useGQLCreateSC = () => {
   };
   const createSC = async ({ bookId, amount }: TCreateSC) => {
     if (!user) {
-      push(`/auth/signin?next=${pathname}`);
+      push(`/auth/login?next=${pathname}`);
       dispatchUserNav({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
