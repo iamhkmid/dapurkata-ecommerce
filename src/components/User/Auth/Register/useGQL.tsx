@@ -23,7 +23,7 @@ export const useGQLCreateUser = () => {
   };
   useEffect(() => {
     if (data?.register) {
-      Router.replace("/auth/signin");
+      Router.replace("/auth/login");
       dispatch({
         type: "SHOW_GLOBAL_MESSAGE",
         value: {
