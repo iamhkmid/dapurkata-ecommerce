@@ -345,7 +345,7 @@ const Create = () => {
               name="cover"
               register={register}
               label="Cover (opsi)"
-              accept="image/*"
+              accept="image/jpeg, image/png"
               error={errors.cover ? true : false}
               disabled={loading}
               message={errors.cover ? errors.cover.message : null}
