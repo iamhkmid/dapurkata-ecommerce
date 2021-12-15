@@ -42,6 +42,7 @@ const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
           type="file"
           onChange={onChange}
           accept={accept}
+          autoComplete={name.includes("password") ? "new-password" : "off"}
         />
         {file ? (
           <El.ImagePreview src={file} />

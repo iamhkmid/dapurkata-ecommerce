@@ -12,7 +12,7 @@ import graphql from "./graphql";
 import { graphqlUploadExpress } from "graphql-upload";
 import checkFile from "./middleware/checkFile";
 import useragent from "express-useragent";
-import passport from "passport";
+import rateLimit from "express-rate-limit";
 
 const PORT = parseInt(process.env.PORT || "3000");
 const dev = process.env.NODE_ENV !== "production";
@@ -20,6 +20,16 @@ const corsOptions = { credentials: true, origin: process.env.CLIENT_URL };
 const gqlUploadOptions = { maxFiles: 3 };
 const nextApp = next({ dev, quiet: false });
 const handle = nextApp.getRequestHandler();
+
+const apiRequestLimiter = rateLimit({
+  windowMs: 1000, // 1 minute
+  max: 100, // limit each IP to 2 requests per windowMs
+  handler: function (req, res /*next*/) {
+    return res.status(429).json({
+      error: "You sent too many requests. Please wait a while then try again",
+    });
+  },
+});
 
 const main = async () => {
   await nextApp.prepare();
@@ -40,8 +50,13 @@ const main = async () => {
   app.use(cors(corsOptions));
   app.use(express.urlencoded({ extended: true }));
   app.use(useragent.express());
-  app.use(passport.initialize());
+  app.use(apiRequestLimiter);
 
+  app.use(
+    "/uploads",
+    checkFile,
+    express.static(path.join(process.cwd(), "/server/static/uploads"))
+  );
   app.use("/auth", authRoute);
   app.use("/graphql", graphqlUploadExpress(gqlUploadOptions));
   app.use("/altair", altairRoute);
