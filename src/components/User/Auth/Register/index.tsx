@@ -95,6 +95,7 @@ const Register = () => {
                 name="password"
                 register={register}
                 label="Password"
+                autoComplete="off"
                 error={errors.password ? true : false}
                 disabled={loading}
                 message={errors.password ? errors.password.message : null}
@@ -105,6 +106,7 @@ const Register = () => {
                 name="confirmPassword"
                 register={register}
                 label="Konfirmasi Password"
+                autoComplete="off"
                 error={errors.confirmPassword ? true : false}
                 disabled={loading}
                 message={

@@ -6,6 +6,7 @@ export type TInput = {
   withIcon?: boolean;
   placeholder?: string;
   register?: (ref: HTMLInputElement) => void;
+  autoComplete?: string;
 };
 export type TSelect = {
   control: "select";
