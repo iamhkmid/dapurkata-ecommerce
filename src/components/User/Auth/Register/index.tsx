@@ -129,6 +129,7 @@ const Register = () => {
                 register={register}
                 ref={htmlElRef[5]}
                 label="Foto Profil"
+                accept="image/*"
                 error={errors.userPic ? true : false}
                 disabled={loading}
                 message={errors.userPic ? errors.userPic.message : null}

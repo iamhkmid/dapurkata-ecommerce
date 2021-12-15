@@ -12,7 +12,7 @@ import TextError from "./TextMessage";
 type props = TFile & TForm;
 const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
   const htmlRef = useRef(null);
-  const { label, name, error, message, register, currURL } = props;
+  const { label, name, error, message, register, currURL, accept } = props;
   const [file, setFile] = useState(null);
   const [fileName, setFileName] = useState(null);
 
@@ -41,7 +41,7 @@ const File = forwardRef<{ reset?: () => void }, props>((props, ref) => {
           name={name}
           type="file"
           onChange={onChange}
-          autoComplete={name.includes("password") ? "new-password" : "off"}
+          accept={accept}
         />
         {file ? (
           <El.ImagePreview src={file} />

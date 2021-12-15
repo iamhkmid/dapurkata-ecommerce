@@ -22,6 +22,7 @@ export type TSelectMultiple = {
 export type TFile = {
   control: "file";
   currURL?: string;
+  accept: string;
   register: (ref: HTMLInputElement) => void;
 };
 export type TTextarea = {
