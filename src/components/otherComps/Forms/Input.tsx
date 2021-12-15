@@ -50,7 +50,7 @@ const Input = forwardRef<{ focus?: () => void }, props>((props, ref) => {
           placeholder={placeholder}
           isLoading={isLoading}
           withIcon={withIcon}
-          autoComplete={name.includes("password") ? "new-password" : "off"}
+          autoComplete={name.includes("password") ? "off" : "on"}
           {...rest}
         />
         {withIcon && (name === "username" || name.includes("password")) && (
