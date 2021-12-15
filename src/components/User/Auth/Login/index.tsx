@@ -67,7 +67,11 @@ const Login = () => {
     <El.Main>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <El.CompTittle>Login</El.CompTittle>
-        <El.Form onSubmit={handleSubmit(onSubmit)}>
+        <El.Form
+          onSubmit={handleSubmit(onSubmit)}
+          method="POST"
+          autoComplete="off"
+        >
           <FormsControl
             control="input"
             type="text"

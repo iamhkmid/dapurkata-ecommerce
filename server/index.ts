@@ -35,7 +35,6 @@ const main = async () => {
 
   app.use(
     "/uploads",
-    checkFile,
     express.static(path.join(process.cwd(), "/server/static/uploads"))
   );
   // app.use(express.static(path.join(__dirname, "../public")));

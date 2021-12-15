@@ -41,7 +41,11 @@ const Register = () => {
     <El.Main initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
       <El.Container initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <El.CompTittle>Buat akun baru</El.CompTittle>
-        <El.Form onSubmit={handleSubmit(onSubmit)}>
+        <El.Form
+          onSubmit={handleSubmit(onSubmit)}
+          method="POST"
+          autoComplete="off"
+        >
           <El.FormWrapper>
             <El.InputGroup>
               <FormsControl

@@ -7,7 +7,7 @@ const checkFile = (req: Request, res: Response, next: NextFunction) => {
     path.join(process.cwd(), `/server/static/uploads${req.path}`),
     (error) => {
       if (error) {
-        res.status(400).json({ message: "File not found" }).end;
+        res.status(404).json({ message: "File not found" }).end;
       } else {
         next();
       }
