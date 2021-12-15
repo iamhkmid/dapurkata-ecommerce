@@ -33,10 +33,6 @@ const main = async () => {
     });
   }
 
-  app.use(
-    "/uploads",
-    express.static(path.join(process.cwd(), "/server/static/uploads"))
-  );
   // app.use(express.static(path.join(__dirname, "../public")));
   // app.use("/_next", express.static(path.join(__dirname, "../.next")));
   app.use(cookieParser());
