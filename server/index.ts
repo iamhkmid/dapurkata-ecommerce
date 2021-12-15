@@ -52,7 +52,14 @@ const main = async () => {
   app.use(useragent.express());
   app.use(apiRequestLimiter);
 
-  app.use(express.static(path.join(process.cwd(), "/server/static")));
+  app.use(
+    "/uploads",
+    express.static(path.join(process.cwd(), "/server/static/uploads"), {
+      fallthrough: true,
+      index: false,
+      redirect: false,
+    })
+  );
   app.use("/auth", authRoute);
   app.use("/graphql", graphqlUploadExpress(gqlUploadOptions));
   app.use("/altair", altairRoute);
