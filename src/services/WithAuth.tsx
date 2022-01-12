@@ -44,7 +44,7 @@ export const WithAuth: FC = ({ children }) => {
             redirect("/");
           }
         } else if (!user && !isMounted.current && isReqAuth && !isAuthPath) {
-          replace(`/auth/signin?next=${pathname}`);
+          replace(`/auth/login?next=${pathname}`);
         }
       }
     };
