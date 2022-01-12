@@ -137,7 +137,6 @@ export const Mutation: TAuthMutation = {
         userPicture: profilePicInfo?.url || undefined,
       },
     });
-
     const expr = 300000; /* 5 minutes*/
     const reqInterval = 90000; /* 1.5 minute*/
     const expirationTime = new Date(new Date().getTime() + expr);
@@ -159,7 +158,6 @@ export const Mutation: TAuthMutation = {
     } catch (err) {
       throw new ApolloError("Error sending email on server");
     }
-
     return {
       email,
       type: "ACTIVATE_ACCOUNT",

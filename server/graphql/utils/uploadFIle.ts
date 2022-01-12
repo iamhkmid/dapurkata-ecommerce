@@ -4,14 +4,12 @@ import util from "util";
 
 export const makeDirFile = async ({ dirLoc }) => {
   const fsMkdir = util.promisify(fs.mkdir);
-  const folderName = changeStr(`${new Date().getTime()}`);
-  const pictureDir = `${dirLoc}/${folderName}/`;
-  const dir = path.join(process.cwd(), pictureDir);
+  const dir = path.join(process.cwd(), dirLoc);
   if (!fs.existsSync(dir))
     await fsMkdir(dir, { recursive: true }).catch((err) => {
       throw new Error("Failed make directory");
     });
-  return { pictureDir };
+  return { pictureDir: dirLoc };
 };
 
 export const removeDir = async (pictureDir) => {

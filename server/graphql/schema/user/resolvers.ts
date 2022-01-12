@@ -15,6 +15,8 @@ import pubsub from "../../services/pubsub";
 import { TWishlistBook } from "../../../types/wishlist";
 import { TGQLUserShoppingcartByAdmin } from "../../../types/user";
 import { TGQLSCart } from "../../../types/shoppingCart";
+import fs from "fs";
+import path from "path";
 
 export const Query: TUserQuery = {
   user: async (_, { userId }, { user, db }) => {
@@ -81,7 +83,7 @@ export const Mutation: TUserMutation = {
       username,
       email,
       phone: phone || undefined,
-      isActive: isActive || undefined,
+      isActive: isActive && user.role === "ADMIN" ? isActive : undefined,
     };
     return await db.user.update({
       where: { id: userId },
@@ -141,6 +143,59 @@ export const Mutation: TUserMutation = {
         throw new ApolloError("Failed to save data");
       }
     }
+  },
+  changeUserPic: async (_, { userPic }, { db, user }) => {
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { id: true, username: true, pictureDir: true, userPicture: true },
+    });
+    const { pictureDir } = await makeDirFile({
+      dirLoc: `/server/static/uploads/profile/${findUser.username}/`,
+    });
+    const filePath = path.join(
+      process.cwd(),
+      `${pictureDir}${findUser.userPicture}`
+    );
+    try {
+      fs.unlinkSync(filePath);
+    } catch (error) {}
+    const profilePicInfo =
+      userPic &&
+      (await saveUserPic({ pictureDir, userPic }).catch((err) => {
+        throw err;
+      }));
+    await db.user.update({
+      where: { id: user.id },
+      data: { pictureDir, userPicture: profilePicInfo?.url || undefined },
+    });
+    return { message: "Berhasil ubah foto" };
+  },
+  deleteUserPic: async (_, __, { db, user }) => {
+    const findUser = await db.user.findUnique({
+      where: { id: user.id },
+      select: { id: true, pictureDir: true, userPicture: true },
+    });
+    const filePath = path.join(
+      process.cwd(),
+      `${findUser.pictureDir}${findUser.userPicture}`
+    );
+    fs.unlink(filePath, async (err) => {
+      if (err && err.code == "ENOENT") {
+        // file not found
+        await db.user.update({
+          where: { id: user.id },
+          data: { userPicture: null },
+        });
+      } else if (err) {
+        throw new ApolloError("Something went wrong. Please try again later.");
+      } else {
+        await db.user.update({
+          where: { id: user.id },
+          data: { userPicture: null },
+        });
+      }
+    });
+    return { message: "Berhasil hapus foto" };
   },
 };
 

@@ -299,6 +299,16 @@ export type TUserMutation = {
     args: TArgsChangePassword,
     context: TCtx
   ) => Promise<{ message: string }>;
+  changeUserPic: (
+    parent: any,
+    args: { userPic: any },
+    context: TCtx
+  ) => Promise<{ message: string }>;
+  deleteUserPic: (
+    parent: any,
+    args: any,
+    context: TCtx
+  ) => Promise<{ message: string }>;
 };
 
 export type TUserSubcription = {

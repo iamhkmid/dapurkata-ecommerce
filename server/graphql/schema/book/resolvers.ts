@@ -59,8 +59,9 @@ export const Query: TBookQuery = {
 export const Mutation: TBookMutation = {
   createBook: async (_, { data, cover, bookPics }, { db, cache }) => {
     await validateSchema({ type: "CREATE_BOOK", data });
+    const folderName = changeStr(`${new Date().getTime()}`);
     const { pictureDir } = await makeDirFile({
-      dirLoc: "/server/static/uploads/books",
+      dirLoc: `/server/static/uploads/books/${folderName}/`,
     });
     const author = await db.author.findUnique({
       where: { id: data.authorId },

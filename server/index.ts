@@ -17,7 +17,7 @@ import rateLimit from "express-rate-limit";
 const PORT = parseInt(process.env.PORT || "3000");
 const dev = process.env.NODE_ENV !== "production";
 const corsOptions = { credentials: true, origin: process.env.CLIENT_URL };
-const gqlUploadOptions = { maxFiles: 3 };
+const gqlUploadOptions = { maxFileSize: 10000000, maxFiles: 3 };
 const nextApp = next({ dev, quiet: false });
 const handle = nextApp.getRequestHandler();
 

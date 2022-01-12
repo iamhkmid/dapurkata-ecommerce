@@ -86,6 +86,7 @@ export const PhotoWrapper = styled.div`
   width: 90px;
   aspect-ratio: 1/1;
   overflow: hidden;
+  position: relative;
   border: 1px solid ${({ theme }) => theme.button.primary.background};
   @media screen and (max-width: ${({ theme: { screen } }) => screen.sm}) {
     width: 80px;

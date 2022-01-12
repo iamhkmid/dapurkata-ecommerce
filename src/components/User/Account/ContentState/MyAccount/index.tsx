@@ -8,9 +8,15 @@ import { TFormMyAccount } from "../../../../../types/user";
 import Button from "../../../../otherComps/Buttons/Button";
 import FormsControl from "../../../../otherComps/Forms/FormsControl";
 import ImageResponsive from "../../../../otherComps/ImageResponsive";
-import ShowMessage from "../../../../otherComps/ShowMessage";
+import LoadingProfile from "../../../../otherComps/Loading/LoadingProfile";
 import * as El from "./MyAccountElement";
-import { useGQLInitData, useGQLUpdateUser } from "./useGQL";
+import PhotoProfile from "./PhotoProfile";
+import {
+  useGQLChangeUserPic,
+  useGQLDeleteUserPic,
+  useGQLInitData,
+  useGQLUpdateUser,
+} from "./useGQL";
 import { validationSchema } from "./validationScema";
 
 const MyAccount = () => {
@@ -32,6 +38,8 @@ const MyAccount = () => {
   const { isDirty, isValid, errors } = formState;
 
   const { updateUser, data, error, loading } = useGQLUpdateUser();
+  const { changeUserPic, loading: loadCUP } = useGQLChangeUserPic();
+  const { deleteUserPic, loading: loadDUP } = useGQLDeleteUserPic();
 
   const onSubmit = async (values: TFormMyAccount) => {
     setMessage(null);
@@ -66,20 +74,7 @@ const MyAccount = () => {
       exit={{ opacity: 0 }}
     >
       <El.Head>
-        <El.PhotoWrapper>
-          <ImageResponsive
-            src={dataInit?.userPicture}
-            alt="Profile Pic"
-            height={90}
-            width={90}
-            defaultIcon="person"
-            quality={75}
-          />
-        </El.PhotoWrapper>
-        <El.ButtonWrapper>
-          <Button type="button" name="upload" color="section" />
-          <Button type="button" name="Hapus" color="danger" />
-        </El.ButtonWrapper>
+        <PhotoProfile userPicture={dataInit?.userPicture} />
       </El.Head>
       <El.FormWrapper>
         <El.Form onSubmit={handleSubmit(onSubmit)}>

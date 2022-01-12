@@ -1,3 +1,4 @@
+import { TPaymentInfo } from "../../src/types/order";
 import {
   TAPIParamsBTBCA,
   TAPIParamsBTBNI,

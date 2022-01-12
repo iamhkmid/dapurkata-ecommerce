@@ -13,11 +13,20 @@ const typeDefs = gql`
     deleteUser(userId: ID!, username: String!): User @auth(requires: ADMIN)
     changeRole(userId: ID!, role: EnumRole!, password: String!): User
       @auth(requires: ADMIN)
-    changePassword(data: cPData!): changePassword @auth(requires: AUTH)
+    changePassword(data: cPData!): ChangePassword @auth(requires: AUTH)
+    changeUserPic(userPic: Upload!): ChangeUserPic @auth(requires: AUTH)
+    deleteUserPic: DeleteUserPic @auth(requires: AUTH)
   }
 
   type Subscription {
     notification: Notification
+  }
+
+  type ChangeUserPic {
+    message: String
+  }
+  type DeleteUserPic {
+    message: String
   }
 
   type Notification {
@@ -35,7 +44,7 @@ const typeDefs = gql`
     newPassword: String!
   }
 
-  type changePassword {
+  type ChangePassword {
     message: String
   }
 

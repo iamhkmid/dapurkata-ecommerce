@@ -181,7 +181,6 @@ export type TGQLCourierDetail = {
 
 export type TGQLOrder = {
   id: string;
-  paymentServiceId: string;
   PaymentService?: {
     id: string;
     name: string;
@@ -196,6 +195,7 @@ export type TGQLOrder = {
       description: string;
     };
   };
+  paymentServiceId: string;
   userId: string;
   User?: TGQLUser;
   grossAmount: number;

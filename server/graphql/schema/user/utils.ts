@@ -14,7 +14,7 @@ export const saveUserPic = async (options: TSaveUserPic) => {
     const { pathFile } = await saveImg({ pictureDir, file: userPic });
     return { url: pathFile.split("static")[1] };
   } else {
-    return null;
+    return { url: undefined };
   }
 };
 

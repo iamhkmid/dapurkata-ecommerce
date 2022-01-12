@@ -35,7 +35,23 @@ export const DELETE_USER = gql`
 
 export const CHANGE_PASSWORD = gql`
   mutation ($data: cPData!) {
-    changePassword(data: $data) {
+    ChangePassword(data: $data) {
+      message
+    }
+  }
+`;
+
+export const CHANGE_USER_PIC = gql`
+  mutation ($userPic: Upload!) {
+    changeUserPic(userPic: $userPic) {
+      message
+    }
+  }
+`;
+
+export const DELETE_USER_PIC = gql`
+  mutation {
+    deleteUserPic {
       message
     }
   }
