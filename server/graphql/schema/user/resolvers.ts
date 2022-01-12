@@ -154,7 +154,7 @@ export const Mutation: TUserMutation = {
     });
     const filePath = path.join(
       process.cwd(),
-      `${pictureDir}${findUser.userPicture}`
+      `/server/static/${findUser.userPicture}`
     );
     try {
       fs.unlinkSync(filePath);
@@ -177,7 +177,7 @@ export const Mutation: TUserMutation = {
     });
     const filePath = path.join(
       process.cwd(),
-      `${findUser.pictureDir}${findUser.userPicture}`
+      `/server/static/${findUser.userPicture}`
     );
     fs.unlink(filePath, async (err) => {
       if (err && err.code == "ENOENT") {
