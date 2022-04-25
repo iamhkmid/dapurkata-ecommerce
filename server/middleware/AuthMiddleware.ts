@@ -4,7 +4,9 @@ import { db } from "../graphql/services/db";
 
 const requireAuth = (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.AuthToken;
-  console.log("Nopal Ganteng")
+  console.log("Nopal Ganteng Banget")
+  console.log("25 April 2022")
+  console.log("Test")
   const usePrisma = async (decoded) => {
     try {
       const user = await db.user.findUnique({
