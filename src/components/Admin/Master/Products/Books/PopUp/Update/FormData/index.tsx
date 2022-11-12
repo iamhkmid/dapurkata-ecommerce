@@ -112,10 +112,10 @@ const FormData = ({ bookId }) => {
                 control="select"
                 name="coverType"
                 register={register}
-                label="Tipe Cover"
+                label="Tipe Cetakan"
                 options={[
                   { id: "HARD COVER", value: "Hard Cover" },
-                  { id: "SOFT COVER", value: "Soft Cover" },
+                  { id: "EBOOK", value: "Ebook" },
                 ]}
                 error={errors.coverType ? true : false}
                 disabled={loading || loadGFI}

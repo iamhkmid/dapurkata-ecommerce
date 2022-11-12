@@ -65,7 +65,7 @@ const validateSchema: TValidateSchema = async ({ data, type }) => {
         coverType: yup
           .string()
           .required("Required")
-          .matches(/^(SOFT COVER|HARD COVER)$/),
+          .matches(/^(EBOOK|HARD COVER)$/),
         discount: yup
           .string()
           .matches(/^[0-9][0-9]?$|^100$/, "Discount range must be 1-100"),
