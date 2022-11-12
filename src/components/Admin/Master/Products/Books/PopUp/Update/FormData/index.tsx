@@ -115,7 +115,7 @@ const FormData = ({ bookId }) => {
                 label="Tipe Cover"
                 options={[
                   { id: "HARD COVER", value: "Hard Cover" },
-                  { id: "SOFT COVER", value: "Soft Cover" },
+                  { id: "EBOOK", value: "Ebook" },
                 ]}
                 error={errors.coverType ? true : false}
                 disabled={loading || loadGFI}
