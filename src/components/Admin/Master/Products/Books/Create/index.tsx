@@ -70,7 +70,7 @@ const Create = () => {
                 label="Tipe Cover"
                 options={[
                   { id: "HARD COVER", value: "Hard Cover" },
-                  { id: "EBOOK", value: "EBOOK" },
+                  { id: "SOFT COVER", value: "Soft Cover" },
                 ]}
                 error={errors.coverType ? true : false}
                 disabled={loading}

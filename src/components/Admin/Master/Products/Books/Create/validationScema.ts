@@ -51,8 +51,8 @@ export const validationSchema = yup.object({
     .string()
     .required("Required")
     .matches(
-      /^(EBOOK|HARD COVER)$/,
-      "Cover Type must be EBOOK or HARD COVER"
+      /^(SOFT COVER|HARD COVER)$/,
+      "Cover Type must be SOFT COVER or HARD COVER"
     ),
   discount: yup
     .number()
