@@ -7,7 +7,7 @@
     "build:server": "tsc --project tsconfig.server.json",
     "build:next": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
     "build": "npm run build:next && npm run build:server",
-    "start": "cross-env NODE_ENV=production node .next/express -p $PORT",
+    "start": "NODE_ENV=production node .next/express -p $PORT",
     "heroku-postbuild": "npm run build",
     "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\""
   },
