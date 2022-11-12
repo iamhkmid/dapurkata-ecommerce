@@ -10,23 +10,23 @@ export const book = async () => {
   const { tereLiye, alviSyahrin, anselWatra, author13 } = await author();
   const nebula = await prisma.book.create({
     data: {
-      title: `Nebula`,
+      title: `Narrative Inquiry For Teacher Education: Learning from the past stories for today and future`,
       description:
-        "SELENA dan NEBULA adalah buku ke-8 dan ke-9 yang menceritakan siapa orangtua Raib dalam serial petualangan dunia paralel. Dua buku ini sebaiknya dibaca berurutan.Kedua buku ini juga bercerita tentang Akademi Bayangan Tingkat Tinggi, sekolah terbaik di seluruh Klan Bulan. Tentang persahabatan tiga mahasiswa, yang diam-diam memiliki rencana bertualang ke tempat-tempat jauh. Tapi petualangan itu berakhir buruk, saat persahabatan mereka diuji dengan rasa suka, egoisme, dan pengkhianatan. Ada banyak karakter baru, tempat-tempat baru, juga sejarah dunia paralel yang diungkap. Di dua buku ini kalian akan berkenalan dengan salah satu karakter paling kuat di dunia paralel sejauh ini. Tapi itu jika kalian bisa menebaknya. Dua buku ini bukan akhir. Justru awal terbukanya kembali portal menuju Klan Aldebaran.",
+        "Teachers nowadays are engaging in research. They are upgrading the teacher identity value by being teacher researchers. Teachers might have recognized lots of methods for conducting research. Narrative inquiry is one considerable research design that allows researchers explore and study the lived experiences of human being. This is the book that teacher researchers might need, not limited to pre-service teachers, in-service teachers, novice teachers, or experienced teachers. It provides insightful direction for teachers in conducting research, whether they are researching other people or their own experience. .",
       condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 20,
-      releaseYear: "2020",
-      numberOfPages: 116,
+      coverType: "Ebook",
+      discount: 0,
+      releaseYear: "2022",
+      numberOfPages: 182,
       length: 20,
       width: 15,
       weight: 320,
       price: 85000,
       stock: 43,
-      language: "Indonesia",
-      isbn: "9786020639536",
-      slug: "nebula-tere-liye",
-      pictureDir: "/uploads/books/nebula/",
+      language: "Ingrris",
+      isbn: "0",
+      slug: "1",
+      pictureDir: "/uploads/books/1/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
       },
@@ -40,48 +40,7 @@ export const book = async () => {
         create: [
           {
             type: "COVER",
-            url: "/uploads/books/nebula/nebula.jpg",
-          },
-        ],
-      },
-    },
-  });
-
-  const selena = await prisma.book.create({
-    data: {
-      title: `Selena`,
-      description:
-        "SELENA dan NEBULA adalah buku ke-8 dan ke-9 yang menceritakan siapa orangtua Raib dalam serial petualangan dunia paralel. Dua buku ini sebaiknya dibaca berurutan. Kedua buku ini juga bercerita tentang Akademi Bayangan Tingkat Tinggi, sekolah terbaik di seluruh Klan Bulan. Tentang persahabatan tiga mahasiswa, yang diam-diam memiliki rencana bertualang ke tempat-tempat jauh. Tapi petualangan itu berakhir buruk, saat persahabatan mereka diuji dengan rasa suka, egoisme, dan pengkhianatan. Ada banyak karakter baru, tempat-tempat baru, juga sejarah dunia paralel yang diungkap. Di dua buku ini kalian akan berkenalan dengan salah satu karakter paling kuat di dunia paralel sejauh ini. Tapi itu jika kalian bisa menebaknya. Dua buku ini bukan akhir. Justru awal terbukanya kembali portal menuju Klan Aldebaran.",
-
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2016",
-      numberOfPages: 116,
-      discount: 17,
-      length: 20,
-      width: 12,
-      weight: 350,
-      price: 85000,
-      stock: 0,
-      language: "Indonesia",
-      isbn: "9786020639512",
-      slug: "selena-tere-liye",
-      pictureDir: "/uploads/books/selena/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: tereLiye.id },
-      },
-      Publisher: {
-        connect: { id: gramedia.id },
-      },
-      BookPicture: {
-        create: [
-          {
-            type: "COVER",
-            url: "/uploads/books/selena/selena.jpg",
+            url: "/uploads/books/1/1.jpg",
           },
         ],
       },
@@ -90,40 +49,37 @@ export const book = async () => {
 
   const jikaKitaTak = await prisma.book.create({
     data: {
-      title: `Jika Kita Tak Pernah Jadi Apa-Apa`,
+      title: `TEACHING AND LEARNING ACADEMIC WRITING WITH ARTIFICIAL INTELLIGENCE (AI) SUPPORT `,
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-
-      series: "1",
+        "Academic Writing is essential for students. However, how to learn and teach Academic Writing effectively needs to be further researched. Along with the rapid development of educational technology, teaching and learning for academic writing supported by technology also develops simultaneously. One of technologies adopted to support academic writing is artificial intelligence (AI) technology embedded in writing-assisted programs such as Project Essay Grade (PEG), Intelligent Essay Assessor by Pearson, Criterion by Educational Testing Service, My Access! by Vantage, Write & Improve by Cambridge English, Write to Learn by Pearson, Grammarly, Scribo by Literatu, and so on. .",
       condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 12,
-      releaseYear: "2019",
-      numberOfPages: 116,
+      coverType: "Ebook",
+      discount: 0,
+      releaseYear: "2022",
+      numberOfPages: 106,
       length: 20,
-      width: 12,
-      weight: 235,
-      price: 93000,
-      stock: 43,
-      language: "Indonesia",
-      isbn: "9789797809485",
-      slug: "Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin",
-      pictureDir:
-        "/uploads/books/Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin/",
+      width: 15,
+      weight: 320,
+      price: 95000,
+      stock: 50,
+      language: "Ingrris",
+      isbn: "0",
+      slug: "2",
+      pictureDir: "/uploads/books/2/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
       },
       Author: {
-        connect: { id: alviSyahrin.id },
+        connect: { id: tereLiye.id },
       },
       Publisher: {
-        connect: { id: gagasmedia.id },
+        connect: { id: gramedia.id },
       },
       BookPicture: {
         create: [
           {
             type: "COVER",
-            url: "/uploads/books/Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin/Jika-Kita-Tak-Pernah-Jadi-Apa-apa-Alvi-Syahrin.jpg",
+            url: "/uploads/books/2/2.jpg",
           },
         ],
       },
@@ -131,39 +87,37 @@ export const book = async () => {
   });
   const concertoAl = await prisma.book.create({
     data: {
-      title: `Concerto Al Malioboro`,
+      title: `SASTRA SIBER (CYBER LITERATURE) Eksistensi dan Pemanfaatannya dalam Pembelajaran Sastra`,
       description:
-        "Lima anak muda menuntut ilmu di sebuah universitas swasta di Yogyakarta. Mereka seangkatan dan mengambil jurusan yang sama. Mereka adalah Kardiv asal Surabaya, Wawan asal Kediri, Astrid dan Vera sama-sama orang Solo, serta Widya yang asli Yogyakarta. Persahabatan mereka berawal ketika mereka berlima tergabung dalam sebuah kelompok tugas di salah satu kelas yang mereka ambil pada semester pertama.",
-
-      series: "1",
+        "eksistensi sastra terus dinamis selaras dengan dinamika budaya masyarakat. Ia bertumbuh kembang, tergantung juga pada media yang tersedia di lingkungan masyarakat. Pada masa lalu, kegiatan bersastra sudah berlangsung. Saat itu, keberadaan media masih sangat terbatas. Akibatnya, sastra dilahirkan dalam bentuk lisan sehingga dikenal dengan sastra lisan. Begitu adanya, lalu, sastra lisan disebarluaskan dan diteruskan kepada regenerasi dengan mengandalkan lisan penutur, termasuk pendongeng. Sejauh perluasan publikasinya, sastra lisan diterapkan saat upacara- upacara adat dan/atau kala perayaan tradisi di daerah tertentu. .",
       condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 10,
-      releaseYear: "2012",
-      numberOfPages: 156,
-      length: 42,
-      width: 12,
-      weight: 235,
-      price: 75000,
-      stock: 41,
+      coverType: "Ebook",
+      discount: 0,
+      releaseYear: "2022",
+      numberOfPages: 351,
+      length: 20,
+      width: 15,
+      weight: 320,
+      price: 10000,
+      stock: 50,
       language: "Indonesia",
-      isbn: "9789797809485",
-      slug: "concerto-al-malioboro-ansel-watra",
-      pictureDir: "/uploads/books/concerto-al-malioboro/",
+      isbn: "0",
+      slug: "3",
+      pictureDir: "/uploads/books/3/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
       },
       Author: {
-        connect: { id: anselWatra.id },
+        connect: { id: tereLiye.id },
       },
       Publisher: {
-        connect: { id: andiPublisher.id },
+        connect: { id: gramedia.id },
       },
       BookPicture: {
         create: [
           {
             type: "COVER",
-            url: "/uploads/books/concerto-al-malioboro/concerto-al-malioboro.jpg",
+            url: "/uploads/books/3/3.jpg",
           },
         ],
       },
@@ -171,436 +125,47 @@ export const book = async () => {
   });
   const insecurityIsMy = await prisma.book.create({
     data: {
-      title: `Insecurity Is My Middle Name`,
+      title: `Konvergensi Teori di Era Teknologi Digital: Penyatuan Ranah Komunikasi Massa dan Interpersonal`,
       description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
+        "Perkembangan teknologi komunikasi terutama komunikasi digital, membawa perubahan yang signifikan dalam teori dan riset komunikasi. Pembagian teori komunikasi antara interpersonal dan media massa yang dianggap sebagai sesuatu yang diyaniki para ilmuwan komunikasi sebagai pembagian yang jelas dan alami dari keilmuan Komunikasi, diera digital teknologi sudah mencair satu sama lain, kabur batasan diantara keduanya bahkan menyatu atau konvergen.",
       condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 10,
-      releaseYear: "2021",
-      numberOfPages: 200,
-      length: 42,
-      weight: 235,
-      price: 50000,
-      stock: 43,
+      coverType: "Ebook",
+      discount: 0,
+      releaseYear: "2022",
+      numberOfPages: 178,
+      length: 20,
       width: 15,
+      weight: 320,
+      price: 88000,
+      stock: 50,
       language: "Indonesia",
-      isbn: "9786239700201",
-      slug: "insecurity-is-my-middle-name-alvi-syahrin",
-      pictureDir: "/uploads/books/insecurity-is-my-middle-name/",
+      isbn: "0",
+      slug: "4",
+      pictureDir: "/uploads/books/4/",
       Category: {
         connect: [{ id: cat3.id }, { id: cat4.id }],
       },
       Author: {
-        connect: { id: alviSyahrin.id },
+        connect: { id: tereLiye.id },
       },
       Publisher: {
-        connect: { id: alviArdhi.id },
+        connect: { id: gramedia.id },
       },
       BookPicture: {
         create: [
           {
             type: "COVER",
-            url: "/uploads/books/insecurity-is-my-middle-name/insecurity-is-my-middle-name.jpg",
+            url: "/uploads/books/4/4.jpg",
           },
         ],
       },
     },
   });
-  const book1 = await prisma.book.create({
-    data: {
-      title: `Example book1`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 10,
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 0,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example1",
-      pictureDir: "/uploads/books/Example1/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book2 = await prisma.book.create({
-    data: {
-      title: `Example book2`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 10,
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example2",
-      pictureDir: "/uploads/books/Example2/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book3 = await prisma.book.create({
-    data: {
-      title: `Example book3`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 0,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example3",
-      pictureDir: "/uploads/books/Example3/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book4 = await prisma.book.create({
-    data: {
-      title: `Example book4`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      discount: 10,
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example4",
-      pictureDir: "/uploads/books/Example4/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book5 = await prisma.book.create({
-    data: {
-      title: `Example book5`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example5",
-      pictureDir: "/uploads/books/Example5/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book6 = await prisma.book.create({
-    data: {
-      title: `Example book6`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example6",
-      pictureDir: "/uploads/books/Example6/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book7 = await prisma.book.create({
-    data: {
-      title: `Example book7`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example7",
-      pictureDir: "/uploads/books/Example7/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book8 = await prisma.book.create({
-    data: {
-      title: `Example book8`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example8",
-      pictureDir: "/uploads/books/Example8/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book9 = await prisma.book.create({
-    data: {
-      title: `Example book9`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example9",
-      pictureDir: "/uploads/books/Example9/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book10 = await prisma.book.create({
-    data: {
-      title: `Example book10`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example10",
-      pictureDir: "/uploads/books/Example10/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book11 = await prisma.book.create({
-    data: {
-      title: `Example book11`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example11",
-      pictureDir: "/uploads/books/Example11/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
-  const book12 = await prisma.book.create({
-    data: {
-      title: `Example book12`,
-      description:
-        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      edition: "Example",
-      series: "1",
-      condition: "NEW",
-      coverType: "HARD COVER",
-      releaseYear: "2019",
-      numberOfPages: 200,
-      length: 42,
-      weight: 300,
-      price: 50000,
-      stock: 43,
-      width: 15,
-      language: "Indonesia",
-      isbn: "123456789",
-      slug: "author13-example12",
-      pictureDir: "/uploads/books/Example12/",
-      Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
-      },
-      Author: {
-        connect: { id: author13.id },
-      },
-      Publisher: {
-        connect: { id: publisher1.id },
-      },
-    },
-  });
+  
   console.log({
     nebula,
-    selena,
     jikaKitaTak,
     concertoAl,
     insecurityIsMy,
-    book1,
-    book2,
-    book3,
-    book4,
-    book5,
-    book6,
-    book7,
-    book8,
-    book9,
-    book10,
-    book11,
-    book12,
   });
 };

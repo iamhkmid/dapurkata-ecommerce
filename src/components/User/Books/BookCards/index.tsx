@@ -1,5 +1,5 @@
 import { capitalize } from "lodash";
-import { useRouter } from "next/router";
+import Router, { useRouter } from "next/router";
 import { FC, useContext, useEffect } from "react";
 import NumberFormat from "react-number-format";
 import { AuthContext } from "../../../../contexts/AuthCtx";
@@ -44,11 +44,11 @@ const BookCards: FC<TProps> = ({ data, isLoading }) => {
             return (
               <El.Card
                 key={book.id}
-                onClick={() =>
-                  dispatch({
-                    type: "SHOW_POPUP",
-                    value: { name: "BOOK_DETAIL", bookId: book.id },
-                  })
+                onClick={() =>Router.push(`/books/${book.id}`)
+                  // dispatch({
+                  //   type: "SHOW_POPUP",
+                  //   value: { name: "BOOK_DETAIL", bookId: book.id },
+                  // })
                 }
               >
                 <El.CoverWrapper>
