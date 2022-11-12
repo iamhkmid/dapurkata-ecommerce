@@ -1,6 +1,5 @@
 import { FC } from "react";
 import styled from "styled-components";
-import styles from "./Spinner.module.css";
 const Main = styled.main`
   display: flex;
   font-family: "Poppin", sans-serif;
