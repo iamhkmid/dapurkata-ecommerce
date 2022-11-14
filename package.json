@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "cross-env NODE_OPTIONS='--openssl-legacy-provider' NODE_ENV=development nodemon",
     "build:server": "tsc --project tsconfig.server.json",
-    "build:next": "next build",
+    "build:next": "cross-env NODE_OPTIONS='--openssl-legacy-provider' next build",
     "build": "npm run build:next && npm run build:server",
     "start": "NODE_ENV=production node .next/express -p $PORT",
     "heroku-postbuild": "npm run build",

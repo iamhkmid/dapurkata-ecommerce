@@ -13,8 +13,8 @@ export const publisher = async () => {
   const andiPublisher = await prisma.publisher.create({
     data: { name: "Andi Publisher" },
   });
-  const publisher1 = await prisma.publisher.create({
-    data: { name: "Example publisher1" },
+  const dapurkata = await prisma.publisher.create({
+    data: { name: "Penerbit DapurKata" },
   });
   const publisher2 = await prisma.publisher.create({
     data: { name: "Example publisher2" },
@@ -58,7 +58,7 @@ export const publisher = async () => {
     gramedia,
     gagasmedia,
     andiPublisher,
-    publisher1,
+    dapurkata,
     publisher2,
     publisher3,
     publisher4,
@@ -77,7 +77,7 @@ export const publisher = async () => {
     gramedia,
     gagasmedia,
     andiPublisher,
-    publisher1,
+    dapurkata,
     publisher2,
     publisher3,
     publisher4,

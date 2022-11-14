@@ -4,11 +4,12 @@ import { category } from "./category";
 import { publisher } from "./publisher";
 
 export const book = async () => {
-  const { cat1, cat2, cat3, cat4 } = await category();
-  const { alviArdhi, gramedia, andiPublisher, gagasmedia, publisher1 } =
+  const { cat1, cat2, cat3, cat5 } = await category();
+  const { alviArdhi, gramedia, andiPublisher, gagasmedia, dapurkata } =
     await publisher();
   const { tereLiye, alviSyahrin, anselWatra, author13 } = await author();
-  const nebula = await prisma.book.create({
+
+  const book1 = await prisma.book.create({
     data: {
       title: `Narrative Inquiry For Teacher Education: Learning from the past stories for today and future`,
       description:
@@ -17,24 +18,24 @@ export const book = async () => {
       coverType: "Ebook",
       discount: 0,
       releaseYear: "2022",
-      numberOfPages: 182,
+      numberOfPages: 192,
       length: 20,
       width: 15,
       weight: 320,
-      price: 85000,
-      stock: 43,
+      price: 50000,
+      stock: 100,
       language: "Ingrris",
       isbn: "0",
       slug: "1",
       pictureDir: "/uploads/books/1/",
       Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
+        connect: [{ id: cat3.id }, { id: cat5.id }],
       },
       Author: {
-        connect: { id: tereLiye.id },
+        create: { name: "Dr. Nur Arifah Drajati, M.Pd." },
       },
       Publisher: {
-        connect: { id: gramedia.id },
+        connect: { id: dapurkata.id },
       },
       BookPicture: {
         create: [
@@ -47,7 +48,7 @@ export const book = async () => {
     },
   });
 
-  const jikaKitaTak = await prisma.book.create({
+  const book2 = await prisma.book.create({
     data: {
       title: `TEACHING AND LEARNING ACADEMIC WRITING WITH ARTIFICIAL INTELLIGENCE (AI) SUPPORT `,
       description:
@@ -56,24 +57,24 @@ export const book = async () => {
       coverType: "Ebook",
       discount: 0,
       releaseYear: "2022",
-      numberOfPages: 106,
+      numberOfPages: 116,
       length: 20,
       width: 15,
       weight: 320,
-      price: 95000,
-      stock: 50,
+      price: 50000,
+      stock: 100,
       language: "Ingrris",
       isbn: "0",
       slug: "2",
       pictureDir: "/uploads/books/2/",
       Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
+        connect: [{ id: cat3.id }, { id: cat5.id }],
       },
       Author: {
-        connect: { id: tereLiye.id },
+        create: { name: "Nur Arifah Drajati, Anis Handayani" },
       },
       Publisher: {
-        connect: { id: gramedia.id },
+        connect: { id: dapurkata.id },
       },
       BookPicture: {
         create: [
@@ -85,7 +86,8 @@ export const book = async () => {
       },
     },
   });
-  const concertoAl = await prisma.book.create({
+
+  const book3 = await prisma.book.create({
     data: {
       title: `SASTRA SIBER (CYBER LITERATURE) Eksistensi dan Pemanfaatannya dalam Pembelajaran Sastra`,
       description:
@@ -94,24 +96,24 @@ export const book = async () => {
       coverType: "Ebook",
       discount: 0,
       releaseYear: "2022",
-      numberOfPages: 351,
+      numberOfPages: 361,
       length: 20,
       width: 15,
       weight: 320,
-      price: 10000,
-      stock: 50,
+      price: 50000,
+      stock: 100,
       language: "Indonesia",
       isbn: "0",
       slug: "3",
       pictureDir: "/uploads/books/3/",
       Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
+        connect: [{ id: cat3.id }, { id: cat5.id }],
       },
       Author: {
-        connect: { id: tereLiye.id },
+        create: { name: "Prof. Dr. Sarwiji Suwandi, M.Pd., Dr. Sugit Zulianto, M.Pd., Chafit Ulya, S.Pd., M.Pd." },
       },
       Publisher: {
-        connect: { id: gramedia.id },
+        connect: { id: dapurkata.id },
       },
       BookPicture: {
         create: [
@@ -123,7 +125,7 @@ export const book = async () => {
       },
     },
   });
-  const insecurityIsMy = await prisma.book.create({
+  const book4 = await prisma.book.create({
     data: {
       title: `Konvergensi Teori di Era Teknologi Digital: Penyatuan Ranah Komunikasi Massa dan Interpersonal`,
       description:
@@ -132,24 +134,24 @@ export const book = async () => {
       coverType: "Ebook",
       discount: 0,
       releaseYear: "2022",
-      numberOfPages: 178,
+      numberOfPages: 188,
       length: 20,
       width: 15,
       weight: 320,
-      price: 88000,
-      stock: 50,
+      price: 50000,
+      stock: 100,
       language: "Indonesia",
       isbn: "0",
       slug: "4",
       pictureDir: "/uploads/books/4/",
       Category: {
-        connect: [{ id: cat3.id }, { id: cat4.id }],
+        connect: [{ id: cat3.id }, { id: cat5.id }],
       },
       Author: {
-        connect: { id: tereLiye.id },
+        create: { name: "Dra. Prahastiwi Utari, M.Si., Ph.D." },
       },
       Publisher: {
-        connect: { id: gramedia.id },
+        connect: { id: dapurkata.id },
       },
       BookPicture: {
         create: [
@@ -161,11 +163,51 @@ export const book = async () => {
       },
     },
   });
-  
+
+  const book5 = await prisma.book.create({
+    data: {
+      title: "Self Management bagi Anak Tunanetra",
+      description: "Anak berkebutuhan khusus  juga merupakan Warga Negara Indonesia yang memiliki hak dan kewajiban yang sama. seusuai Undang-Undang yang berlaku. Namun hingga saat ini kualitas layanan pendidikan khusus  dan disability awareness masih belum berkembangan dengan baik.  Jumlah komunitasnya yang relatif kecil menyebabkan kurang mendapatkan perhatian baik dari segi impementasi atas segala kebijakan yang ada. Mulai dari layanan pendidikan yang bermutu, kesempatan dalam bekerja, dan berprestasi.",
+      condition: "NEW",
+      coverType: "Ebook",
+      discount: 0,
+      releaseYear: "2022",
+      numberOfPages: 96,
+      length: 20,
+      width: 15,
+      weight: 320,
+      price: 50000,
+      stock: 100,
+      language: "Indonesia",
+      isbn: "0",
+      slug: "5",
+      pictureDir: "/uploads/books/5/",
+      Category: {
+        connect: [{ id: cat3.id }, { id: cat5.id }],
+      },
+      Author: {
+        create: { name: "Mohammad Anwar, Supriyadi, Donni Prakosha" },
+      },
+      Publisher: {
+        connect: { id: dapurkata.id },
+      },
+      BookPicture: {
+        create: [
+          {
+            type: "COVER",
+            url: "/uploads/books/5/5.jpg",
+          },
+        ],
+      },
+    }
+  }
+  );
+
   console.log({
-    nebula,
-    jikaKitaTak,
-    concertoAl,
-    insecurityIsMy,
+    book1,
+    book2,
+    book3,
+    book4,
+    book5,
   });
 };
