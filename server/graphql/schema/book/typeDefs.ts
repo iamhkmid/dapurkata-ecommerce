@@ -30,8 +30,8 @@ const typeDefs = gql`
     condition: String!
     discount: Int
     coverType: String!
-    length: Int!
-    width: Int!
+    length: Float!
+    width: Float!
     weight: Int!
     stock: Int!
     price: Int!
@@ -53,8 +53,8 @@ const typeDefs = gql`
     condition: String
     discount: Int
     coverType: String
-    length: Int
-    width: Int
+    length: Float
+    width: Float
     weight: Int
     stock: Int
     price: Int
@@ -94,8 +94,8 @@ const typeDefs = gql`
     releaseYear: String
     numberOfPages: Int
     length: Int
-    width: Int
-    weight: Int
+    width: Float
+    weight: Float
     stock: Int
     price: Int
     condition: String
